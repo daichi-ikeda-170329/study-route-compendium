@@ -28,7 +28,7 @@
 | 全科目共通 | `guides/` | — | — | 1 | — |
 | 合計 | — | 1,052 | 42 | 13 | — |
 
-公開ページ数は 1,129（`sitemap.xml` の URL 数と一致する）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
+公開ページ数は 1,134（`sitemap.xml` の URL 数と一致する）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
 
 ## ディレクトリ構成
 
@@ -37,6 +37,7 @@
 | `index.html` | ポータル。5 科目への入口・FAQ・法定表記 | 手で編集 |
 | `<科目>/index.html` | 科目トップ（単一 HTML の SPA） | 手で編集 |
 | `<科目>/books/index.html` | 参考書一覧（役割別・難易度順） | 生成 |
+| `<科目>/osusume/index.html` | 参考書おすすめ（ルート採用回数順） | 生成 |
 | `<科目>/books/<id>/index.html` | 参考書 1 冊の詳細ページ | 生成 |
 | `<科目>/routes/index.html` | 志望レベル一覧 | 生成 |
 | `<科目>/routes/<tier>/index.html` | 志望レベル別ルート | 生成 |
@@ -50,6 +51,7 @@
 | `robots.txt` | クローラー設定 | 手で編集 |
 | `.nojekyll` | GitHub Pages の Jekyll 処理を無効化 | — |
 | `build/` | 生成スクリプト | 手で編集 |
+| `build/data/authors.json` | 著者名（openBD 由来・実在確認済み 227 冊分） | 生成（再取得時のみ） |
 
 科目トップの内部構造は 5 科目で共通で、次の要素を同じクラス名で持つ。
 
@@ -65,6 +67,7 @@
 ```bash
 node build/generate-books.mjs      # 参考書の詳細ページ 1,052 件
 node build/generate-index.mjs      # 参考書一覧 5 件
+node build/generate-picks.mjs      # 参考書おすすめ 5 件
 node build/generate-routes.mjs     # 志望校別ルート 47 件
 node build/generate-articles.mjs   # 解説記事 19 件（記事 13 + 一覧 6）
 node build/generate-sitemap.mjs    # sitemap.xml（最後に実行する）
@@ -166,8 +169,8 @@ done
 sed -i '' 's/amazonTag: ""/amazonTag: "xxxxx-22"/' index.html
 
 node build/generate-books.mjs && node build/generate-index.mjs \
-  && node build/generate-routes.mjs && node build/generate-articles.mjs \
-  && node build/generate-sitemap.mjs
+  && node build/generate-picks.mjs && node build/generate-routes.mjs \
+  && node build/generate-articles.mjs && node build/generate-sitemap.mjs
 ```
 
 反映後、次の 3 点を確認する。
@@ -193,6 +196,20 @@ git push
 3. この README の収録数テーブル
 4. ポータル `index.html` の科目カードとヒーローの冊数
 5. `assets/ogp*.png`（冊数を画像内に焼き込んでいるため、`build/` 外の生成手順で作り直す）
+
+## 書名と著者名の決め方
+
+検索されたときに見つかる形を `build/lib/booktitle.mjs` が決める。`title` / `h1` / パンくずはここを通す。
+
+`BOOKS[].name` は図鑑で使う短い呼び名で、たいていはそのまま検索語になる（「速読英単語 入門編」「英文法ポラリス1」）。ただし一部は編集上の内部略称で、誰も検索しない形になっている（「河合 黒本」「東書『公共』」）。`name` の文字が `official` に 75% 未満しか含まれない本を略称とみなし、そのときだけ `official` を整えて使う。現在 28 冊が該当する。
+
+著者名は `build/data/authors.json` から引く。openBD API に各書の ISBN を投げて取得したもので、227 冊分ある。openBD に著者記載が無い本は、openBD 由来で実在を確認できた人名が `official` に現れる場合にのみ付けた。出版社名・団体名（塾・社・出版・書店・編集部 など）は著者から除外している。
+
+**推測で著者名を補わない。** 判明しない 825 冊は未収録のままにし、生成側は著者欄そのものを出さない。大学受験参考書は編集部名義が多く、書誌データベースに個人著者が載らないものが実際に多数ある。
+
+`official` が「著者名の◯◯」という形を取っている本だけ、`title` と `h1` を著者名込みにする（「関正生の英文法ポラリス1」）。36 冊が該当する。書名にすでに著者名が入っている本には付けない。
+
+著者データを取り直すときは openBD へ再照会する。`authors.json` の `_provenance` に取得日と手順を書いてある。
 
 ## インデックス通知
 

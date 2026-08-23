@@ -1,0 +1,1053 @@
+{
+ "_provenance": {
+  "source": "openBD API (https://api.openbd.jp/v1/get) の summary.author および ONIX DescriptiveDetail.Contributor",
+  "fetched": "2026-08-23",
+  "method": "各書の isbn13 で openBD を照会して人名を取得。openBD に著者記載が無い本は、openBD 由来で実在を確認できた人名が official（正式名称）に現れる場合にのみ付与した。出版社名・団体名（塾・社・出版・書店・編集部 等）は著者から除外している。",
+  "policy": "推測で著者名を補わない。判明しない本は未収録のままにする（生成側は著者欄を出さない）。",
+  "coverage": "227 / 1052 冊"
+ },
+ "authors": {
+  "english/cho-polaris0": [
+   "関正生"
+  ],
+  "english/cho-polaris1": [
+   "関正生"
+  ],
+  "english/cho-polaris2": [
+   "関正生"
+  ],
+  "english/cho-polaris3": [
+   "関正生"
+  ],
+  "english/chobun-platinum": [
+   "関正生"
+  ],
+  "english/duo30": [
+   "鈴木",
+   "陽一"
+  ],
+  "english/eisaku-platinum": [
+   "関正生"
+  ],
+  "english/eisaku-polaris1": [
+   "関正生"
+  ],
+  "english/eisaku-polaris2": [
+   "関正生"
+  ],
+  "english/eisaku-training": [
+   "フクダ",
+   "渡辺寿郎",
+   "渡辺寿郎フクダ"
+  ],
+  "english/essentials-max": [
+   "桑原雅弘",
+   "関正生",
+   "関正生桑原雅弘"
+  ],
+  "english/essentials100": [
+   "関正生"
+  ],
+  "english/final-polaris": [
+   "関正生"
+  ],
+  "english/gijutsu100": [
+   "杉野隆",
+   "杉野隆桑原信淑",
+   "桑原信淑"
+  ],
+  "english/gokaku-hosoku": [
+   "木村達哉"
+  ],
+  "english/hijii-dokkai-hisshu": [
+   "肘井学"
+  ],
+  "english/hijii-dokkai-nankan": [
+   "肘井学"
+  ],
+  "english/hijii-sakubun": [
+   "肘井学"
+  ],
+  "english/hijii-tango": [
+   "肘井学"
+  ],
+  "english/hijii-zero": [
+   "肘井学"
+  ],
+  "english/hijii-zero-chobun": [
+   "肘井学"
+  ],
+  "english/hijii-zero-lis": [
+   "肘井学"
+  ],
+  "english/hijii-zero-next": [
+   "肘井学"
+  ],
+  "english/hinshutsu-polaris": [
+   "関正生"
+  ],
+  "english/hitotsubashi20": [
+   "黒下俊和"
+  ],
+  "english/kaishaku-polaris1": [
+   "関正生"
+  ],
+  "english/kaishaku-polaris2": [
+   "関正生"
+  ],
+  "english/keio-eigo": [
+   "古田淳哉"
+  ],
+  "english/kihon-kokoda": [
+   "きょうじ"
+  ],
+  "english/kihon300sen": [
+   "飯田康夫"
+  ],
+  "english/kimutatsu-basic": [
+   "木村達哉"
+  ],
+  "english/kimutatsu-shidai": [
+   "木村達哉"
+  ],
+  "english/kimutatsu-todai": [
+   "木村達哉"
+  ],
+  "english/linga": [
+   "中澤幸夫",
+   "小原弘行",
+   "日永田伸一郎",
+   "木村哲也",
+   "松木尚一"
+  ],
+  "english/lis-1month": [
+   "森田鉄也"
+  ],
+  "english/lis-platinum": [
+   "関正生"
+  ],
+  "english/manten-kotsu": [
+   "竹岡広信"
+  ],
+  "english/nextstage": [
+   "瓜生豊",
+   "瓜生豊篠田重晃",
+   "篠田重晃"
+  ],
+  "english/polaris-b0": [
+   "関正生"
+  ],
+  "english/polaris-b1": [
+   "関正生"
+  ],
+  "english/polaris-b2": [
+   "関正生"
+  ],
+  "english/polaris-b3": [
+   "関正生"
+  ],
+  "english/porepore": [
+   "きょうじ"
+  ],
+  "english/r-1month": [
+   "斉藤健一",
+   "森田鉄也",
+   "監修斉藤健一"
+  ],
+  "english/rankjun2300": [
+   "田中茂範",
+   "田中茂範阿部一",
+   "阿部一"
+  ],
+  "english/rules1": [
+   "関正生"
+  ],
+  "english/rules2": [
+   "関正生"
+  ],
+  "english/rules3": [
+   "関正生"
+  ],
+  "english/rules4": [
+   "関正生"
+  ],
+  "english/sokudoku-jukugo": [
+   "史朗",
+   "岡田",
+   "温井",
+   "賢三",
+   "賢三温井"
+  ],
+  "english/sokutan-hisshu": [
+   "風早"
+  ],
+  "english/sokutan-jokyu": [
+   "風早寛"
+  ],
+  "english/sokutan-nyumon": [
+   "風早寛"
+  ],
+  "english/solution0": [
+   "肘井学"
+  ],
+  "english/solution1": [
+   "肘井学"
+  ],
+  "english/solution2": [
+   "肘井学"
+  ],
+  "english/solution3": [
+   "肘井学"
+  ],
+  "english/takeoka-omoshiro": [
+   "竹岡広信"
+  ],
+  "english/todai-lis20": [
+   "武知千津子"
+  ],
+  "english/todai-yoyaku": [
+   "竹岡広信"
+  ],
+  "english/todai25": [
+   "竹岡広信"
+  ],
+  "english/toshizu": [
+   "中尾",
+   "全人",
+   "全人中尾",
+   "玉置",
+   "篠田",
+   "重晃",
+   "重晃玉置"
+  ],
+  "english/waseda-eigo": [
+   "武知千津子"
+  ],
+  "english/yumetan": [
+   "木村達哉"
+  ],
+  "japanese/bunpo-10drill": [
+   "菅野三恵"
+  ],
+  "japanese/dojo-kiso": [
+   "編集"
+  ],
+  "japanese/dokkai-fukameru-tango": [
+   "川野一幸",
+   "晴山亨",
+   "立川芳雄",
+   "菊川智子"
+  ],
+  "japanese/dokkai-tango-training": [
+   "大野優"
+  ],
+  "japanese/funaguchi-zero": [
+   "船口"
+  ],
+  "japanese/hayaoboe": [
+   "田中雄二"
+  ],
+  "japanese/hinshutsu-juyogo700": [
+   "伊原勇一"
+  ],
+  "japanese/hitotsubashi-kokugo": [
+   "田中淳一"
+  ],
+  "japanese/jissen-hyojun-kanbun": [
+   "松井光彦"
+  ],
+  "japanese/jitsuyobun": [
+   "長谷川晃"
+  ],
+  "japanese/jokyu2": [
+   "川野一幸",
+   "晴山亨",
+   "立川芳雄",
+   "菊川智子",
+   "著川野一幸",
+   "著立川芳雄",
+   "著菊川智子"
+  ],
+  "japanese/kaishaku-jissen": [
+   "関谷浩"
+  ],
+  "japanese/kanbun-gorogo": [
+   "編集"
+  ],
+  "japanese/kobun-dokkai-gorogo": [
+   "編集"
+  ],
+  "japanese/kobun-gorogo": [
+   "編集"
+  ],
+  "japanese/kotoba-chikara": [
+   "牧野"
+  ],
+  "japanese/miwa-kyoshitsu": [
+   "三羽邦美"
+  ],
+  "japanese/nitoryu634": [
+   "和田",
+   "純一"
+  ],
+  "japanese/platinum-rule": [
+   "柳生好之"
+  ],
+  "japanese/polaris-g1": [
+   "柳生好之"
+  ],
+  "japanese/polaris-g2": [
+   "柳生好之"
+  ],
+  "japanese/polaris-g3": [
+   "柳生好之"
+  ],
+  "japanese/rules1": [
+   "柳生好之"
+  ],
+  "japanese/rules2": [
+   "柳生好之"
+  ],
+  "japanese/rules3": [
+   "柳生好之"
+  ],
+  "japanese/rules4": [
+   "柳生好之"
+  ],
+  "japanese/seidoku-kihon": [
+   "編集"
+  ],
+  "japanese/seidoku-toppa": [
+   "編集"
+  ],
+  "japanese/smart-step-g": [
+   "編集",
+   "羽場雅希"
+  ],
+  "japanese/stepup-trial": [
+   "井上摩梨",
+   "山崎瑛二",
+   "弓丘はづき",
+   "武田博幸",
+   "河内さやか",
+   "鞆森祥悟"
+  ],
+  "japanese/stepup10": [
+   "るり子",
+   "るり子藤堂",
+   "健一",
+   "健一寺田",
+   "光順",
+   "寺田",
+   "藤堂",
+   "高橋"
+  ],
+  "japanese/tadoku-training": [
+   "佐藤総一郎"
+  ],
+  "japanese/tetsuryoku-koten": [
+   "鉄緑会国語科"
+  ],
+  "japanese/todai-gendai-premium": [
+   "古川大悟",
+   "松本孝子",
+   "編集",
+   "編集松本孝子"
+  ],
+  "japanese/todai-gendai25": [
+   "桑原聡"
+  ],
+  "japanese/todai-koten25": [
+   "栁田縁"
+  ],
+  "japanese/tokuten-g": [
+   "三石稔憲",
+   "天羽康隆",
+   "小池政幸",
+   "梅澤眞由起",
+   "石原開"
+  ],
+  "japanese/tokuten-kan": [
+   "三森一彦",
+   "吉野大作",
+   "天野成之"
+  ],
+  "japanese/tomii-dokkai": [
+   "健二",
+   "富井"
+  ],
+  "japanese/waseda-kokugo": [
+   "笹岡信裕"
+  ],
+  "math/aka": [
+   "加藤",
+   "文元"
+  ],
+  "math/bunyabetsu-hoteishiki": [
+   "池田洋介"
+  ],
+  "math/canpass": [
+   "桑田孝泰古梶裕之"
+  ],
+  "math/chokiso70": [
+   "河合正人"
+  ],
+  "math/haikan": [
+   "米村明芳杉山義明"
+  ],
+  "math/haiscore": [
+   "編集"
+  ],
+  "math/hosono": [
+   "真宏",
+   "細野"
+  ],
+  "math/ichimonittou": [
+   "志田晶"
+  ],
+  "math/levelup": [
+   "近藤義治"
+  ],
+  "math/ronshou": [
+   "数学",
+   "福田",
+   "邦彦"
+  ],
+  "math/shida": [
+   "志田晶"
+  ],
+  "math/tarinai-seisu": [
+   "鳥山昌純"
+  ],
+  "math/tetsuryokukai": [
+   "鉄緑会数学科"
+  ],
+  "math/ukaru-kakuritsu": [
+   "広瀬和之"
+  ],
+  "math/ukaru-keisan": [
+   "広瀬和之"
+  ],
+  "math/ukaru-keisan3": [
+   "広瀬和之"
+  ],
+  "science/bluebacks-chigaku-kyokasho": [
+   "健男",
+   "左巻",
+   "杵島",
+   "松本",
+   "正洋",
+   "直記",
+   "直記左巻"
+  ],
+  "science/chart-shin-seibutsu": [
+   "いづみ",
+   "本川",
+   "達雄",
+   "達雄鷲谷",
+   "鷲谷"
+  ],
+  "science/chart-shinkagaku": [
+   "善夫",
+   "敬本間",
+   "本間",
+   "辰巳"
+  ],
+  "science/chokuzen-30days-kiso": [
+   "伊藤和修"
+  ],
+  "science/essence-netsu": [
+   "浜島清利"
+  ],
+  "science/essence-rikigaku": [
+   "浜島清利"
+  ],
+  "science/genten-muki": [
+   "正明",
+   "石川"
+  ],
+  "science/genten-riron": [
+   "正明",
+   "石川"
+  ],
+  "science/hamashima-jikkyo1": [
+   "浜島清利"
+  ],
+  "science/hamashima-jikkyo2": [
+   "浜島清利"
+  ],
+  "science/ichimon-chigaku-kiso": [
+   "青木秀紀"
+  ],
+  "science/jikkyo-chukei-chigaku-kiso": [
+   "安藤雅彦"
+  ],
+  "science/jokyu-seiko": [
+   "橋爪健作",
+   "鎌田真彰",
+   "鎌田真彰橋爪健作"
+  ],
+  "science/juyo-koshiki": [
+   "合田哲也"
+  ],
+  "science/kagakudai-butsuri-20": [
+   "岡西利尚"
+  ],
+  "science/kamata-mondai": [
+   "土田薫",
+   "鎌田真彰",
+   "鎌田真彰土田薫"
+  ],
+  "science/kango-omnia-kiso": [
+   "大渕将克",
+   "橋本崇樹",
+   "橋本崇樹大渕将克"
+  ],
+  "science/kiso-ichimon-itto": [
+   "田部眞哉"
+  ],
+  "science/koredake-chigaku-kiso": [
+   "青木秀紀"
+  ],
+  "science/korekakedake-kiso": [
+   "大森"
+  ],
+  "science/kyodai-nyushi-shokai-seibutsu": [
+   "駿台予備学校"
+  ],
+  "science/manten-no-kotsu-kiso": [
+   "鈴川茂"
+  ],
+  "science/mark-kiso-chigaku-kiso": [
+   "安藤雅彦"
+  ],
+  "science/okano-mukiyuki": [
+   "岡野雅司"
+  ],
+  "science/omiya-riron": [
+   "大宮"
+  ],
+  "science/omori-41ko-kiso": [
+   "大森徹"
+  ],
+  "science/omori-iden": [
+   "大森徹"
+  ],
+  "science/omori-jikken-kosatsu": [
+   "大森徹"
+  ],
+  "science/omori-keisan-graph": [
+   "大森徹"
+  ],
+  "science/omori-kijutsu-ronjutsu": [
+   "大森徹"
+  ],
+  "science/omori-kogi-note-126": [
+   "大森徹"
+  ],
+  "science/omori-nyushi-kogi": [
+   "大森徹"
+  ],
+  "science/omori-saikyo-172": [
+   "大森徹"
+  ],
+  "science/omori-saikyo-kogi-126": [
+   "大森徹"
+  ],
+  "science/omoshiro-ichimonitto-kagaku": [
+   "西章嘉"
+  ],
+  "science/omoshiro-kyotest": [
+   "大渕一彦"
+  ],
+  "science/photoscience-zuroku": [
+   "ほか",
+   "中野",
+   "公毅",
+   "和田",
+   "園池",
+   "坂井",
+   "実中野",
+   "嶋田",
+   "建雄",
+   "成川",
+   "正和",
+   "正和坂井",
+   "湯本",
+   "田村",
+   "貴和",
+   "賢太郎"
+  ],
+  "science/ryomon-kagaku": [
+   "中道淳一",
+   "中道淳一柿澤壽",
+   "柿澤壽"
+  ],
+  "science/ryomon-kaze": [
+   "浜島清利"
+  ],
+  "science/seibutsu-ryomon": [
+   "伊藤和修"
+  ],
+  "science/seisen-mondaishu-kyogakusha": [
+   "伊藤和修"
+  ],
+  "science/suzuki-hadou": [
+   "鈴木誠治"
+  ],
+  "science/suzuki-rikigaku": [
+   "鈴木誠治"
+  ],
+  "science/tamechika-note-hyojun": [
+   "為近和彦"
+  ],
+  "science/tamechika-note-jokyu": [
+   "為近和彦"
+  ],
+  "science/tanki-koryaku-seibutsu": [
+   "佐野恵美子",
+   "佐野芳史",
+   "布施敏昭",
+   "指田敦史",
+   "橋本大樹",
+   "河崎健吾"
+  ],
+  "science/tetsuryokukai-todai": [
+   "鉄緑会化学科"
+  ],
+  "science/todai-25": [
+   "小原悠介"
+  ],
+  "science/todai-seibutsu-25": [
+   "大森茂"
+  ],
+  "science/wasureta-seibutsu": [
+   "大森"
+  ],
+  "science/yogo-kanzen-seiha": [
+   "大島えみし",
+   "汐津美文"
+  ],
+  "science/yuki-kozo-hisshu50": [
+   "西村淳矢"
+  ],
+  "social/aramaki-mitorizu-3": [
+   "荒巻",
+   "豊志"
+  ],
+  "social/chiri-complete": [
+   "編集"
+  ],
+  "social/chiri-kosatsu80": [
+   "中村太洋",
+   "中村太洋松山直弘",
+   "松山直弘"
+  ],
+  "social/chiri-nakamura-jikan": [
+   "中村太洋"
+  ],
+  "social/chiri-omoshiro-ichimonto": [
+   "森雄介"
+  ],
+  "social/chiri-shin-hyojun-kogi": [
+   "中土居宏樹"
+  ],
+  "social/chiri-shinsho-atlas": [
+   "編集"
+  ],
+  "social/chiri-shiryo-kenkyu": [
+   "編集"
+  ],
+  "social/chiri-tangen-training": [
+   "松本聡"
+  ],
+  "social/chiri-target1400": [
+   "松本聡"
+  ],
+  "social/chiri-todai25": [
+   "年代雅夫"
+  ],
+  "social/chiri-toshin-ichimonto": [
+   "山岡信幸"
+  ],
+  "social/chiri-yamaoka-kyoshitsu1": [
+   "山岡信幸"
+  ],
+  "social/chiri-zukai-chizu-shiryo": [
+   "編集"
+  ],
+  "social/chosoku-nihonshi": [
+   "睦泰",
+   "竹内"
+  ],
+  "social/collab-mondaishu-jokyu": [
+   "石川晶康"
+  ],
+  "social/collab-mondaishu-kiso": [
+   "石川晶康"
+  ],
+  "social/hatakeyama-sokai-kogi": [
+   "畠山創"
+  ],
+  "social/hatakeyama-sokai-mondai": [
+   "畠山創"
+  ],
+  "social/historia-nihonshi": [
+   "佐藤四郎",
+   "佐藤四郎舩倉淳",
+   "舩倉淳"
+  ],
+  "social/historia-sekaishi": [
+   "市川賢司",
+   "平尾雅規",
+   "平尾雅規市川賢司"
+  ],
+  "social/hitotsubashi-nihonshi-20": [
+   "鈴木和裕"
+  ],
+  "social/ichidoyondara-sekaishi": [
+   "圭一"
+  ],
+  "social/jikkyo-nihonshi-1": [
+   "石川晶康"
+  ],
+  "social/jikkyo-nihonshi-2": [
+   "石川晶康"
+  ],
+  "social/jikkyo-nihonshi-3": [
+   "石川晶康"
+  ],
+  "social/jikkyo-nihonshi-4": [
+   "石川晶康"
+  ],
+  "social/jikkyo-nihonshi-theme": [
+   "石川晶康"
+  ],
+  "social/kageyama-omoshiro-seikei": [
+   "蔭山克秀"
+  ],
+  "social/kanaya-bunkashi": [
+   "金谷俊一郎"
+  ],
+  "social/kanaya-nagare-1": [
+   "金谷俊一郎"
+  ],
+  "social/kanaya-nagare-2": [
+   "金谷俊一郎"
+  ],
+  "social/kangaeru-nihonshi-ronjutsu": [
+   "桑山弘",
+   "溝田正弘",
+   "石川晶康",
+   "神原一郎",
+   "著溝田正弘",
+   "著石川晶康",
+   "著神原一郎"
+  ],
+  "social/live-kokyo-teikoku": [
+   "編集"
+  ],
+  "social/mayowazu-tokeru-sekaishi": [
+   "伊藤敏"
+  ],
+  "social/rinri-hatakeyama-kougi": [
+   "畠山創"
+  ],
+  "social/rinri-hatakeyama-mondai": [
+   "畠山創"
+  ],
+  "social/rinri-hatakeyama-tanki": [
+   "畠山創"
+  ],
+  "social/rinri-koredake": [
+   "清水雅博"
+  ],
+  "social/rinri-manga": [
+   "沖元友佳",
+   "相澤理",
+   "相澤理沖元友佳"
+  ],
+  "social/rinri-target1500": [
+   "金城透"
+  ],
+  "social/ronjutsu-renshucho-new": [
+   "中谷"
+  ],
+  "social/shidai-koryaku-seikei": [
+   "昼神洋史",
+   "金城透",
+   "金城透昼神洋史"
+  ],
+  "social/shimizu-kokyo-teinei": [
+   "清水雅博"
+  ],
+  "social/speedmaster-38": [
+   "黒河潤二"
+  ],
+  "social/speedmaster-kokyo": [
+   "佐藤恵律",
+   "吉田真大",
+   "松永啓佑",
+   "藤井剛"
+  ],
+  "social/taipa-text-kokyoseikei": [
+   "昼神洋史"
+  ],
+  "social/tapestry-sekaishi": [
+   "編集"
+  ],
+  "social/target1400-kokyoseikei": [
+   "金城透"
+  ],
+  "social/todai-nihonshi-25": [
+   "塚原哲也"
+  ],
+  "social/toshin-ichimonitto-kyotest": [
+   "金谷俊一郎"
+  ],
+  "social/waseda-keio-nihonshi": [
+   "前田秀幸"
+  ],
+  "social/yamakawa-seikei-kenkyu": [
+   "藤井剛"
+  ],
+  "social/yamakawa-zuroku-sekaishi": [
+   "木村",
+   "澤野",
+   "理木村",
+   "靖二"
+  ],
+  "social/zusetsu-nihonshi-tsuran": [
+   "編集"
+  ]
+ },
+ "source_of": {
+  "english/cho-polaris0": "official照合",
+  "english/cho-polaris1": "openBD",
+  "english/cho-polaris2": "openBD",
+  "english/cho-polaris3": "openBD",
+  "english/chobun-platinum": "official照合",
+  "english/duo30": "openBD",
+  "english/eisaku-platinum": "official照合",
+  "english/eisaku-polaris1": "official照合",
+  "english/eisaku-polaris2": "official照合",
+  "english/eisaku-training": "openBD",
+  "english/essentials-max": "openBD",
+  "english/essentials100": "official照合",
+  "english/final-polaris": "official照合",
+  "english/gijutsu100": "openBD",
+  "english/gokaku-hosoku": "openBD",
+  "english/hijii-dokkai-hisshu": "official照合",
+  "english/hijii-dokkai-nankan": "official照合",
+  "english/hijii-sakubun": "official照合",
+  "english/hijii-tango": "official照合",
+  "english/hijii-zero": "official照合",
+  "english/hijii-zero-chobun": "openBD",
+  "english/hijii-zero-lis": "official照合",
+  "english/hijii-zero-next": "official照合",
+  "english/hinshutsu-polaris": "official照合",
+  "english/hitotsubashi20": "openBD",
+  "english/kaishaku-polaris1": "official照合",
+  "english/kaishaku-polaris2": "official照合",
+  "english/keio-eigo": "openBD",
+  "english/kihon-kokoda": "openBD",
+  "english/kihon300sen": "openBD",
+  "english/kimutatsu-basic": "openBD",
+  "english/kimutatsu-shidai": "openBD",
+  "english/kimutatsu-todai": "openBD",
+  "english/linga": "openBD",
+  "english/lis-1month": "openBD",
+  "english/lis-platinum": "official照合",
+  "english/manten-kotsu": "openBD",
+  "english/nextstage": "openBD",
+  "english/polaris-b0": "official照合",
+  "english/polaris-b1": "official照合",
+  "english/polaris-b2": "official照合",
+  "english/polaris-b3": "official照合",
+  "english/porepore": "openBD",
+  "english/r-1month": "openBD",
+  "english/rankjun2300": "openBD",
+  "english/rules1": "official照合",
+  "english/rules2": "official照合",
+  "english/rules3": "official照合",
+  "english/rules4": "official照合",
+  "english/sokudoku-jukugo": "openBD",
+  "english/sokutan-hisshu": "openBD",
+  "english/sokutan-jokyu": "openBD",
+  "english/sokutan-nyumon": "openBD",
+  "english/solution0": "openBD",
+  "english/solution1": "openBD",
+  "english/solution2": "openBD",
+  "english/solution3": "openBD",
+  "english/takeoka-omoshiro": "official照合",
+  "english/todai-lis20": "openBD",
+  "english/todai-yoyaku": "openBD",
+  "english/todai25": "openBD",
+  "english/toshizu": "openBD",
+  "english/waseda-eigo": "openBD",
+  "english/yumetan": "openBD",
+  "japanese/bunpo-10drill": "openBD",
+  "japanese/dojo-kiso": "openBD",
+  "japanese/dokkai-fukameru-tango": "openBD",
+  "japanese/dokkai-tango-training": "openBD",
+  "japanese/funaguchi-zero": "openBD",
+  "japanese/hayaoboe": "openBD",
+  "japanese/hinshutsu-juyogo700": "openBD",
+  "japanese/hitotsubashi-kokugo": "openBD",
+  "japanese/jissen-hyojun-kanbun": "openBD",
+  "japanese/jitsuyobun": "openBD",
+  "japanese/jokyu2": "openBD",
+  "japanese/kaishaku-jissen": "openBD",
+  "japanese/kanbun-gorogo": "openBD",
+  "japanese/kobun-dokkai-gorogo": "openBD",
+  "japanese/kobun-gorogo": "openBD",
+  "japanese/kotoba-chikara": "openBD",
+  "japanese/miwa-kyoshitsu": "openBD",
+  "japanese/nitoryu634": "openBD",
+  "japanese/platinum-rule": "openBD",
+  "japanese/polaris-g1": "official照合",
+  "japanese/polaris-g2": "official照合",
+  "japanese/polaris-g3": "official照合",
+  "japanese/rules1": "official照合",
+  "japanese/rules2": "openBD",
+  "japanese/rules3": "official照合",
+  "japanese/rules4": "official照合",
+  "japanese/seidoku-kihon": "openBD",
+  "japanese/seidoku-toppa": "openBD",
+  "japanese/smart-step-g": "openBD",
+  "japanese/stepup-trial": "openBD",
+  "japanese/stepup10": "openBD",
+  "japanese/tadoku-training": "openBD",
+  "japanese/tetsuryoku-koten": "openBD",
+  "japanese/todai-gendai-premium": "openBD",
+  "japanese/todai-gendai25": "openBD",
+  "japanese/todai-koten25": "openBD",
+  "japanese/tokuten-g": "openBD",
+  "japanese/tokuten-kan": "openBD",
+  "japanese/tomii-dokkai": "openBD",
+  "japanese/waseda-kokugo": "openBD",
+  "math/aka": "openBD",
+  "math/bunyabetsu-hoteishiki": "openBD",
+  "math/canpass": "openBD",
+  "math/chokiso70": "openBD",
+  "math/haikan": "openBD",
+  "math/haiscore": "openBD",
+  "math/hosono": "openBD",
+  "math/ichimonittou": "openBD",
+  "math/levelup": "openBD",
+  "math/ronshou": "openBD",
+  "math/shida": "official照合",
+  "math/tarinai-seisu": "openBD",
+  "math/tetsuryokukai": "openBD",
+  "math/ukaru-kakuritsu": "openBD",
+  "math/ukaru-keisan": "openBD",
+  "math/ukaru-keisan3": "openBD",
+  "science/bluebacks-chigaku-kyokasho": "openBD",
+  "science/chart-shin-seibutsu": "openBD",
+  "science/chart-shinkagaku": "openBD",
+  "science/chokuzen-30days-kiso": "openBD",
+  "science/essence-netsu": "openBD",
+  "science/essence-rikigaku": "openBD",
+  "science/genten-muki": "openBD",
+  "science/genten-riron": "openBD",
+  "science/hamashima-jikkyo1": "official照合",
+  "science/hamashima-jikkyo2": "official照合",
+  "science/ichimon-chigaku-kiso": "openBD",
+  "science/jikkyo-chukei-chigaku-kiso": "official照合",
+  "science/jokyu-seiko": "openBD",
+  "science/juyo-koshiki": "openBD",
+  "science/kagakudai-butsuri-20": "openBD",
+  "science/kamata-mondai": "openBD",
+  "science/kango-omnia-kiso": "openBD",
+  "science/kiso-ichimon-itto": "openBD",
+  "science/koredake-chigaku-kiso": "openBD",
+  "science/korekakedake-kiso": "openBD",
+  "science/kyodai-nyushi-shokai-seibutsu": "openBD",
+  "science/manten-no-kotsu-kiso": "openBD",
+  "science/mark-kiso-chigaku-kiso": "openBD",
+  "science/okano-mukiyuki": "openBD",
+  "science/omiya-riron": "openBD",
+  "science/omori-41ko-kiso": "official照合",
+  "science/omori-iden": "openBD",
+  "science/omori-jikken-kosatsu": "openBD",
+  "science/omori-keisan-graph": "openBD",
+  "science/omori-kijutsu-ronjutsu": "official照合",
+  "science/omori-kogi-note-126": "openBD",
+  "science/omori-nyushi-kogi": "official照合",
+  "science/omori-saikyo-172": "official照合",
+  "science/omori-saikyo-kogi-126": "official照合",
+  "science/omoshiro-ichimonitto-kagaku": "openBD",
+  "science/omoshiro-kyotest": "openBD",
+  "science/photoscience-zuroku": "openBD",
+  "science/ryomon-kagaku": "openBD",
+  "science/ryomon-kaze": "openBD",
+  "science/seibutsu-ryomon": "openBD",
+  "science/seisen-mondaishu-kyogakusha": "openBD",
+  "science/suzuki-hadou": "openBD",
+  "science/suzuki-rikigaku": "openBD",
+  "science/tamechika-note-hyojun": "openBD",
+  "science/tamechika-note-jokyu": "openBD",
+  "science/tanki-koryaku-seibutsu": "openBD",
+  "science/tetsuryokukai-todai": "openBD",
+  "science/todai-25": "openBD",
+  "science/todai-seibutsu-25": "openBD",
+  "science/wasureta-seibutsu": "openBD",
+  "science/yogo-kanzen-seiha": "openBD",
+  "science/yuki-kozo-hisshu50": "openBD",
+  "social/aramaki-mitorizu-3": "openBD",
+  "social/chiri-complete": "openBD",
+  "social/chiri-kosatsu80": "openBD",
+  "social/chiri-nakamura-jikan": "openBD",
+  "social/chiri-omoshiro-ichimonto": "openBD",
+  "social/chiri-shin-hyojun-kogi": "openBD",
+  "social/chiri-shinsho-atlas": "openBD",
+  "social/chiri-shiryo-kenkyu": "openBD",
+  "social/chiri-tangen-training": "openBD",
+  "social/chiri-target1400": "openBD",
+  "social/chiri-todai25": "openBD",
+  "social/chiri-toshin-ichimonto": "openBD",
+  "social/chiri-yamaoka-kyoshitsu1": "openBD",
+  "social/chiri-zukai-chizu-shiryo": "openBD",
+  "social/chosoku-nihonshi": "openBD",
+  "social/collab-mondaishu-jokyu": "openBD",
+  "social/collab-mondaishu-kiso": "openBD",
+  "social/hatakeyama-sokai-kogi": "openBD",
+  "social/hatakeyama-sokai-mondai": "openBD",
+  "social/historia-nihonshi": "openBD",
+  "social/historia-sekaishi": "openBD",
+  "social/hitotsubashi-nihonshi-20": "openBD",
+  "social/ichidoyondara-sekaishi": "openBD",
+  "social/jikkyo-nihonshi-1": "official照合",
+  "social/jikkyo-nihonshi-2": "official照合",
+  "social/jikkyo-nihonshi-3": "official照合",
+  "social/jikkyo-nihonshi-4": "official照合",
+  "social/jikkyo-nihonshi-theme": "official照合",
+  "social/kageyama-omoshiro-seikei": "openBD",
+  "social/kanaya-bunkashi": "openBD",
+  "social/kanaya-nagare-1": "openBD",
+  "social/kanaya-nagare-2": "openBD",
+  "social/kangaeru-nihonshi-ronjutsu": "openBD",
+  "social/live-kokyo-teikoku": "openBD",
+  "social/mayowazu-tokeru-sekaishi": "openBD",
+  "social/rinri-hatakeyama-kougi": "openBD",
+  "social/rinri-hatakeyama-mondai": "openBD",
+  "social/rinri-hatakeyama-tanki": "openBD",
+  "social/rinri-koredake": "openBD",
+  "social/rinri-manga": "openBD",
+  "social/rinri-target1500": "openBD",
+  "social/ronjutsu-renshucho-new": "openBD",
+  "social/shidai-koryaku-seikei": "openBD",
+  "social/shimizu-kokyo-teinei": "openBD",
+  "social/speedmaster-38": "openBD",
+  "social/speedmaster-kokyo": "openBD",
+  "social/taipa-text-kokyoseikei": "openBD",
+  "social/tapestry-sekaishi": "openBD",
+  "social/target1400-kokyoseikei": "openBD",
+  "social/todai-nihonshi-25": "openBD",
+  "social/toshin-ichimonitto-kyotest": "openBD",
+  "social/waseda-keio-nihonshi": "openBD",
+  "social/yamakawa-seikei-kenkyu": "openBD",
+  "social/yamakawa-zuroku-sekaishi": "openBD",
+  "social/zusetsu-nihonshi-tsuran": "openBD"
+ }
+}

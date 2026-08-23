@@ -19,9 +19,10 @@ const urls = [
 for (const s of SUBJECTS) {
   urls.push({ loc: `${ORIGIN}/${s.dir}/`, priority: '0.9', changefreq: 'weekly' });
 
-  const listing = path.join(ROOT, s.dir, 'books', 'index.html');
-  if (fs.existsSync(listing)) {
-    urls.push({ loc: `${ORIGIN}/${s.dir}/books/`, priority: '0.8', changefreq: 'weekly' });
+  for (const [sub, priority] of [['books', '0.8'], ['osusume', '0.8']]) {
+    if (fs.existsSync(path.join(ROOT, s.dir, sub, 'index.html'))) {
+      urls.push({ loc: `${ORIGIN}/${s.dir}/${sub}/`, priority, changefreq: 'weekly' });
+    }
   }
 
   for (const [sub, priority] of [['guides', '0.8'], ['routes', '0.8']]) {

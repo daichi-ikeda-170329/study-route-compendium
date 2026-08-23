@@ -12,6 +12,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
+import { authorsOf, searchName, withAuthor } from './lib/booktitle.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -169,23 +170,34 @@ function renderBook(book, ctx) {
 
   const fieldName = subLabel ? `${sub.ja}（${subLabel}）` : sub.ja;
 
-  // 同じ書名の本が科目内に複数ある（日本史版と世界史版など）と title が衝突し、
-  // 検索結果で区別できなくなる。そのときだけ分野名を添えて一意にする。
-  const sameName = books.filter(b => b.name === book.name).length > 1;
-  const titleName = sameName && subLabel ? `${book.name}（${subLabel}）` : book.name;
+  // 検索されるときの書名。内部略称の本は正式名称由来に、著者名が
+  // 書名の一部として通っている本（「関正生の英文法ポラリス」など）は著者名込みにする。
+  const authors = authorsOf(sub.dir, book.id);
+  const pageName = searchName(book, sub.dir);
+  const searchTitle = withAuthor(book, sub.dir);
+
+  // 同じ書名の本が科目内に複数ある（日本史版と世界史版、河合と駿台の同名問題集など）と
+  // title が衝突し、検索結果で区別できなくなる。分野で分かれるなら分野名を、
+  // それでも同じなら出版社を添えて一意にする。
+  const collisions = books.filter(b => withAuthor(b, sub.dir) === searchTitle);
+  const sameSub = collisions.filter(b => (SUB_LABELS[b.sub] || '') === subLabel).length;
+  const titleName = collisions.length === 1 ? searchTitle
+    : subLabel && sameSub === 1 ? `${searchTitle}（${subLabel}）`
+      : `${searchTitle}（${book.pub}）`;
 
   // 書名が長い本は副題を削る。検索結果は全角 30 字ほどで切られるので、
   // 副題を並べると書名の後ろが読めないまま尻切れになる。
   const titleTail = titleName.length > 20 ? '｜レベルと使い方' : 'のレベルと使い方｜難易度・対象・次に進む本';
   const title = `${titleName}${titleTail} - ${sub.full}`;
+  const by = authors.length ? `${authors.join('・')}／` : '';
   const desc = clip(
-    `${book.name}（${book.pub}）は${st.label}に位置づけられる${fieldName}の参考書。${dp.band}（難易度${book.diff}/10）、到達目安は${book.hensachi}。` +
+    `${pageName}（${by}${book.pub}）は${st.label}に位置づけられる${fieldName}の参考書。${dp.band}（難易度${book.diff}/10）、到達目安は${book.hensachi}。` +
     `${book.bestFor}に向いています。強みと注意点、同じレベルの他の選択肢、次に進む参考書までまとめました。`, 158);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
     { name: sub.full, url: `/${sub.dir}/`, absUrl: `${ORIGIN}/${sub.dir}/` },
-    { name: book.name, url, absUrl: url },
+    { name: pageName, url, absUrl: url },
   ];
 
   const ld = {
@@ -198,6 +210,10 @@ function renderBook(book, ctx) {
         name: book.official || book.name,
         alternateName: book.name,
         ...(book.isbn13 ? { isbn: book.isbn13 } : {}),
+        // 著者は openBD で実在を確認できた本にだけ載せる（build/data/authors.json）
+        ...(authors.length
+          ? { author: authors.map(name => ({ '@type': 'Person', name })) }
+          : {}),
         publisher: { '@type': 'Organization', name: book.pub },
         ...(book.year ? { datePublished: String(book.year) } : {}),
         inLanguage: 'ja',
@@ -220,6 +236,7 @@ function renderBook(book, ctx) {
     `<i class="${i < book.diff ? 'on' : ''}"></i>`).join('');
 
   const spec = [
+    ...(authors.length ? [['著者', esc(authors.join('・'))]] : []),
     ['出版社', esc(book.pub)],
     ['出版年', book.year ? `${book.year} 年` : '—'],
     ['対象範囲', esc(book.subjects || '—')],
@@ -261,8 +278,8 @@ ${header(sub)}
       </div>
       <div>
         <span class="bk-tag"><i></i>${esc(st.label)}${subLabel ? ` — ${esc(subLabel)}` : ''}</span>
-        <h1 class="bk-name">${esc(book.name)}</h1>
-        <p class="bk-official">${esc(book.official || book.name)}／${esc(book.pub)}${book.year ? `（${book.year} 年）` : ''}</p>
+        <h1 class="bk-name">${esc(searchTitle)}</h1>
+        <p class="bk-official">${esc(book.official || book.name)}／${by ? `${esc(authors.join('・'))}／` : ''}${esc(book.pub)}${book.year ? `（${book.year} 年）` : ''}</p>
         <p class="bk-desc">${esc(book.desc)}</p>
         <div class="bk-meter">
           <div class="bk-meter__t"><span>難易度</span><b>${book.diff} <small style="font-size:11px;color:var(--muted)">/ 10</small></b></div>

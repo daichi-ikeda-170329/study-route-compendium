@@ -117,6 +117,7 @@ ${header(sub)}
     <div class="eyebrow">Catalog index</div>
     <h1 class="sec" style="font-size:29px">${esc(sub.ja)}の参考書一覧　${n}冊</h1>
     <p class="sec-lead">${esc(sub.full)}に収録している${esc(sub.ja)}の参考書${n}冊を、役割別・難易度順に並べた索引です。各冊のページで、レベル・到達目安・向いている人・強みと注意点・次に進む本を確認できます。対象は${esc(sub.fields)}。</p>
+    <p class="sec-lead">${n}冊は多すぎるという場合は、志望校ルートで実際に本線として選んだ本だけを集めた<a href="/${sub.dir}/osusume/">${esc(sub.ja)}の参考書おすすめ</a>から見てください。</p>
     <div class="stnav">
 ${nav}
     </div>
@@ -129,7 +130,7 @@ ${sections}
     <p>${n}冊を上から順に検討する必要はありません。志望校と今の学力を入れると、この中を通る道だけが残ります。</p>
     <div class="cta__btns">
       <a class="p" href="/${sub.dir}/">${esc(sub.ja)}のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="g" href="/">全科目を見る</a>
+      <a class="g" href="/${sub.dir}/osusume/">おすすめだけ見る</a>
     </div>
   </div>
 </main>
