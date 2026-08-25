@@ -974,7 +974,12 @@ gtag('config', 'G-DQ5WFXEFMX');
   </button>
 </nav>
 
+<script src="/assets/js/share.js"></script>
 <script>
+/* 診断結果の共有・保存（assets/js/share.js）。
+   スクリプトを読めなかった場合でも診断が壊れないよう、何もしない実装で代替する。 */
+var RTShare = (typeof RTShare !== "undefined" && RTShare) || {setup(){}, beforeQuiz:()=>"", beforeResult:()=>"", afterResult:()=>""};
+
 
 /* ============================================================
    ★★★ 設定 — 公開前にここだけ書き換えてください ★★★
@@ -4330,6 +4335,7 @@ function renderQuiz(){
   const q = steps[quizState.step];
   const prog = steps.map((_,i)=>`<span class="qp-seg${i<quizState.step?" done":i===quizState.step?" cur":""}"></span>`).join("");
   document.getElementById("quizShell").innerHTML = `
+    ${RTShare.beforeQuiz(quizState.step)}
     <div class="quiz-progress">${prog}</div>
     <div class="quiz-step">
       <div class="quiz-q">${q.q}</div>
@@ -4382,6 +4388,7 @@ function renderQuizResult(){
     ? `<div class="note-card" style="margin-top:12px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 16h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><p><b>科目未定の方へ:</b>まず志望校で<b>選べる科目</b>を確認してください(私大は地理・公民が使えないことが多く、慶應は地理が全学部で不可)。そのうえで、暗記が苦にならないなら日本史、横の繋がりの整理が得意なら世界史、暗記量を最小にしたいなら地理か公民が向きます。ここでは代表的な組み合わせを表示しています。</p></div>`
     : "";
   document.getElementById("quizShell").innerHTML = `
+    ${RTShare.beforeResult()}
     <div class="quiz-progress">${activeQuizSteps().map(()=>`<span class="qp-seg done"></span>`).join("")}</div>
     <div class="quiz-step">
       <div class="result-hero">
@@ -4408,6 +4415,7 @@ function renderQuizResult(){
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
+      ${RTShare.afterResult({tier:t.name, variant:subjTxt, policy:polLabel})}
     </div>`;
 }
 function applyQuiz(tier,picks,policy,level,course){
@@ -4562,6 +4570,16 @@ renderHome();
 renderGuide();
 renderFooter();
 
+/* 共有 URL に回答が載っていれば、ここで結果画面を復元する */
+RTShare.setup({
+  quiz: QUIZ,
+  subject: "social",
+  subjectLabel: "社会",
+  state: quizState,
+  showResult: ()=>{ quizState.step = activeQuizSteps().length; go("quiz"); renderQuiz(); },
+  renderQuiz: ()=>renderQuiz(),
+  restart: ()=>{ startQuiz(); go("quiz"); }
+});
 </script>
 <script type="application/ld+json">
 {

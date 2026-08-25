@@ -931,7 +931,12 @@ gtag('config', 'G-DQ5WFXEFMX');
   </button>
 </nav>
 
+<script src="/assets/js/share.js"></script>
 <script>
+/* 診断結果の共有・保存（assets/js/share.js）。
+   スクリプトを読めなかった場合でも診断が壊れないよう、何もしない実装で代替する。 */
+var RTShare = (typeof RTShare !== "undefined" && RTShare) || {setup(){}, beforeQuiz:()=>"", beforeResult:()=>"", afterResult:()=>""};
+
 
 /* ============================================================
    ★★★ 設定 — 公開前にここだけ書き換えてください ★★★
@@ -3450,6 +3455,7 @@ function renderQuiz(){
   const q = steps[quizState.step];
   const prog = steps.map((_,i)=>`<span class="qp-seg${i<quizState.step?" done":i===quizState.step?" cur":""}"></span>`).join("");
   document.getElementById("quizShell").innerHTML = `
+    ${RTShare.beforeQuiz(quizState.step)}
     <div class="quiz-progress">${prog}</div>
     <div class="quiz-step">
       <div class="quiz-q">${q.q}</div>
@@ -3490,6 +3496,7 @@ function renderQuizResult(){
   const bound = [0,2,3][level];
   const books = seq.filter(s=>!(s.lvl<bound && s.lvl<4));
   document.getElementById("quizShell").innerHTML = `
+    ${RTShare.beforeResult()}
     <div class="quiz-progress">${activeQuizSteps().map(()=>`<span class="qp-seg done"></span>`).join("")}</div>
     <div class="quiz-step">
       <div class="result-hero">
@@ -3512,6 +3519,7 @@ function renderQuizResult(){
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
+      ${RTShare.afterResult({tier:t.name, variant:bunri==="bun"?"国公立二次型":"私立個別型", policy:polLabel})}
     </div>`;
 }
 function applyQuiz(tier,bunri,policy,level){
@@ -3661,6 +3669,17 @@ renderRoute();
 renderHome();
 renderGuide();
 renderFooter();
+
+/* 共有 URL に回答が載っていれば、ここで結果画面を復元する */
+RTShare.setup({
+  quiz: QUIZ,
+  subject: "english",
+  subjectLabel: "英語",
+  state: quizState,
+  showResult: ()=>{ quizState.step = activeQuizSteps().length; go("quiz"); renderQuiz(); },
+  renderQuiz: ()=>renderQuiz(),
+  restart: ()=>{ startQuiz(); go("quiz"); }
+});
 </script>
 <script type="application/ld+json">
 {
