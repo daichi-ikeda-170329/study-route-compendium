@@ -297,7 +297,8 @@
     ".rt-saved__item:first-of-type{border-top:0}",
     ".rt-saved__open{flex:1;text-align:left;background:none;border:0;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.5}",
     ".rt-saved__open small{display:block;font-size:11px;font-weight:600;color:var(--muted-2);letter-spacing:.04em}",
-    ".rt-saved__del{flex:0 0 auto;padding:6px 10px;font-size:11.5px;font-weight:700;color:var(--muted);background:var(--surface-3);border:1px solid var(--line);border-radius:4px;cursor:pointer}"
+    ".rt-saved__del{flex:0 0 auto;min-height:44px;padding:6px 14px;font-size:11.5px;font-weight:700;color:var(--muted);background:var(--surface-3);border:1px solid var(--line);border-radius:4px;cursor:pointer}",
+    ".rt-saved__open{min-height:44px}"
   ].join("\n");
 
   function injectStyle() {
@@ -532,6 +533,27 @@
     CFG.showResult();
   }
 
+  /**
+   * 一覧の削除ボタンから呼ぶ。開くボタンのすぐ隣にあるので、押し間違いを確認で受け止める。
+   * 内部都合の削除（復元できない項目の後始末）は removeSaved を直接呼び、確認を出さない。
+   */
+  function requestRemove(id) {
+    if (!CFG) return;
+    var items = loadStore().items;
+    var target = null;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].id === id) { target = items[i]; break; }
+    }
+    if (!target) return;
+    var ok = false;
+    try {
+      ok = global.confirm("保存した「" + target.label + "」を削除しますか？");
+    } catch (e) {
+      ok = true; /* 確認を出せない環境では、押した操作をそのまま実行する */
+    }
+    if (ok) removeSaved(id);
+  }
+
   function removeSaved(id) {
     if (!CFG) return;
     var store = loadStore();
@@ -555,7 +577,7 @@
         var act = el.getAttribute("data-rt-act");
         var id = el.getAttribute("data-rt-id");
         if (act === "open") openSaved(id);
-        else if (act === "remove") removeSaved(id);
+        else if (act === "remove") requestRemove(id);
       });
     } catch (e) { /* クリックを受け取れない環境では保存一覧が操作できないだけ */ }
   }
@@ -636,6 +658,7 @@
     saveRoute: saveRoute,
     openSaved: openSaved,
     removeSaved: removeSaved,
+    requestRemove: requestRemove,
     restart: restart,
 
     /* テスト専用。ブラウザからは使わない（test/share.test.mjs が localStorage 周りを検証するために参照する） */
