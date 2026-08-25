@@ -324,6 +324,11 @@
       html += '<div class="rt-notice rt-notice--warn"><p>リンクの読み込みに失敗したため、最初から診断できます。</p></div>';
     }
     html += savedListHTML();
+    /* 最初の質問まで戻ったら、共有リンク由来の表示状態は役目を終える。
+       ここで落としておくと、ページ側から startQuiz() が直接呼ばれた場合でも
+       「共有されたルートを表示しています」が自分の結果に残らない。 */
+    restored = false;
+    linkFailed = false;
     return html;
   }
 

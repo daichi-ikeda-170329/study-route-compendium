@@ -1,12 +1,13 @@
 /**
  * 診断結果共有機能のテスト。
  *
- *   node --test test/
+ *   node --test test/share.test.mjs
  *
  * 外部依存は追加していない（Node 標準の node:test のみ）。
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import { loadShare, loadQuiz, allAnswerCombos, fakeStorage, SUBJECTS } from './helpers.mjs';
 
 const RTShare = loadShare();
@@ -324,4 +325,51 @@ test('保存できたデータは同じ内容で読み戻せる', () => {
   const item = { id: 'r1', savedAt: '2026-08-26T00:00:00.000Z', subjectId: 'math', answers: '2.1.0.1.3', label: '数学：共通テスト対策' };
   assert.equal(S.__test.saveStore({ schemaVersion: 1, items: [item] }), true);
   assert.deepEqual(S.__test.loadStore().items, [item]);
+});
+
+/* ============================================================
+   スキーマの取り違えを防ぐ
+   ============================================================ */
+
+/**
+ * 各科目の QUIZ の「形」を固定する。
+ *
+ * 共有 URL のトークンは選択肢の並び順そのものなので、質問や選択肢を並べ替えると、
+ * 過去に共有された URL が別の回答として復元される。要素数が変われば長さの検証で弾けるが、
+ * 並べ替えは弾けない。ほかのテストは実際の QUIZ から組み合わせを作るため、
+ * 並べ替えても全部通ってしまう。ここだけは値を固定して、変更に必ず気づけるようにする。
+ */
+const QUIZ_FINGERPRINTS = {
+  english:  '8f4d818a2b8185f7',
+  japanese: '22effa6ade60dcfd',
+  math:     '8f4d818a2b8185f7',   /* english と同じ構造なので指紋も一致する */
+  science:  'b2612fadae5d5918',
+  social:   '34d3b95877fc7d10',
+};
+
+function fingerprint(quiz) {
+  const shape = JSON.stringify(quiz.map(q => [
+    q.key,
+    q.opts.map(o => o.v),
+    q.cond ? String(q.cond).replace(/\s+/g, '') : null,
+  ]));
+  return crypto.createHash('sha256').update(shape).digest('hex').slice(0, 16);
+}
+
+test('QUIZ の構造が変わっていない（変えたなら SCHEMA_VERSION の判断が要る）', () => {
+  for (const subject of SUBJECTS) {
+    const actual = fingerprint(QUIZZES[subject]);
+    assert.equal(actual, QUIZ_FINGERPRINTS[subject],
+      `${subject} の QUIZ の構造が変わっている。\n`
+      + `  質問・選択肢の「追加・削除・並べ替え」か cond の変更をしたなら、\n`
+      + `  assets/js/share.js の SCHEMA_VERSION を上げ、旧バージョンの扱いを決めること。\n`
+      + `  表示文言だけを直したのであればバージョンは据え置きでよい。\n`
+      + `  いずれの場合も、判断したうえで QUIZ_FINGERPRINTS の値を ${actual} に更新する。`);
+  }
+});
+
+test('指紋は選択肢の並べ替えを検出する', () => {
+  const quiz = QUIZZES.english;
+  const swapped = quiz.map((q, i) => (i === 1 ? { ...q, opts: [q.opts[1], q.opts[0], ...q.opts.slice(2)] } : q));
+  assert.notEqual(fingerprint(swapped), fingerprint(quiz));
 });
