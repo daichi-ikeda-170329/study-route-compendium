@@ -41,6 +41,13 @@
   /** 保存項目に許可する科目 ID。未知の科目 ID を持つ項目は読み込み時に捨てる */
   var SUBJECTS = ["english", "japanese", "math", "science", "social"];
 
+  /**
+   * 保存項目 ID の書式。newId() が作るのは英数字だけなので、それ以外は受け付けない。
+   * ID は HTML 属性値として書き出されるため、記号を許すと属性やスクリプトの文脈を
+   * 抜け出す余地が生まれる。ここで文字種を絞って、その余地自体をなくしておく。
+   */
+  var ID_RE = /^[A-Za-z0-9_-]{1,40}$/;
+
   /* ============================================================
      純粋関数 — encode / decode
      DOM・location・localStorage に依存しない。test/share.test.mjs の対象。
@@ -206,7 +213,7 @@
   /** 保存項目として妥当か。1 つでも型が合わなければその項目だけ捨てる */
   function validItem(it) {
     return !!it && typeof it === "object"
-      && typeof it.id === "string" && it.id.length > 0 && it.id.length <= 40
+      && typeof it.id === "string" && ID_RE.test(it.id)
       && typeof it.savedAt === "string" && it.savedAt.length <= 40
       && typeof it.subjectId === "string" && SUBJECTS.indexOf(it.subjectId) >= 0
       && typeof it.answers === "string" && TOKENS_RE.test(it.answers)
@@ -393,10 +400,12 @@
     if (items.length === 0) return "";
     var rows = items.map(function (it) {
       var date = it.savedAt.slice(0, 10);
+      /* ID は onclick の中ではなく data 属性に置く。
+         属性値の中で JavaScript の文字列を閉じられる余地をなくすため。 */
       return '<div class="rt-saved__item">'
-        + '<button type="button" class="rt-saved__open" onclick="RTShare.openSaved(\'' + esc(it.id) + '\')">'
+        + '<button type="button" class="rt-saved__open" data-rt-act="open" data-rt-id="' + esc(it.id) + '">'
         + esc(it.label) + '<small>' + esc(date) + ' に保存</small></button>'
-        + '<button type="button" class="rt-saved__del" onclick="RTShare.removeSaved(\'' + esc(it.id) + '\')">削除</button>'
+        + '<button type="button" class="rt-saved__del" data-rt-act="remove" data-rt-id="' + esc(it.id) + '">削除</button>'
         + '</div>';
     }).join("");
     return '<div class="rt-saved"><div class="rt-saved__head">SAVED — 保存したルート（' + items.length + '件）</div>' + rows + '</div>';
@@ -531,6 +540,26 @@
     if (CFG.state.started && CFG.state.step === 0) CFG.renderQuiz();
   }
 
+  /**
+   * 保存一覧のボタンは動的に描き直されるので、document 側で 1 度だけ受ける。
+   * 押された要素から ID を読むため、ID を onclick の文字列に埋め込まずに済む。
+   */
+  var delegated = false;
+  function wireDelegation() {
+    if (delegated) return;
+    delegated = true;
+    try {
+      global.document.addEventListener("click", function (e) {
+        var el = e.target && e.target.closest ? e.target.closest("[data-rt-act]") : null;
+        if (!el) return;
+        var act = el.getAttribute("data-rt-act");
+        var id = el.getAttribute("data-rt-id");
+        if (act === "open") openSaved(id);
+        else if (act === "remove") removeSaved(id);
+      });
+    } catch (e) { /* クリックを受け取れない環境では保存一覧が操作できないだけ */ }
+  }
+
   /** 共有 URL のパラメータを消してから、自分の診断をやり直す */
   function restart() {
     if (!CFG) return;
@@ -564,6 +593,7 @@
     if (!cfg || !Array.isArray(cfg.quiz) || SUBJECTS.indexOf(cfg.subject) < 0) return;
     CFG = cfg;
     injectStyle();
+    wireDelegation();
 
     var search = "";
     try { search = global.location.search; } catch (e) { return; }

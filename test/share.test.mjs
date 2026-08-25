@@ -266,6 +266,47 @@ test('型の合わない保存項目だけが捨てられ、正しい項目は�
   assert.deepEqual(store.items[0], good);
 });
 
+test('HTML 属性やスクリプトの文脈を抜け出せる id を持つ項目は読み込まない', () => {
+  const base = { savedAt: '2026-08-26T00:00:00.000Z', subjectId: 'english', answers: '1.3.0.2.2', label: 'ラベル' };
+  const S = loadShare({ localStorage: fakeStorage() });
+  const badIds = [
+    "a');window.x=1;//",      /* onclick の文字列を閉じる細工 */
+    'a"><img src=x onerror=alert(1)>',
+    "a'",
+    'a"',
+    'a>',
+    'a<',
+    'a&',
+    'a b',
+    'a\n',
+    '../../etc/passwd',
+    'a'.repeat(41),
+    '',
+  ];
+  for (const id of badIds) {
+    assert.equal(S.__test.validItem({ ...base, id }), false, `id=${JSON.stringify(id)} が通ってしまった`);
+  }
+  for (const id of ['r1', 'rmt8xd96os36l5n', 'A-b_9', 'x'.repeat(40)]) {
+    assert.equal(S.__test.validItem({ ...base, id }), true, `id=${id} が弾かれた`);
+  }
+});
+
+test('保存一覧の HTML は id を onclick に埋め込まない', () => {
+  const S = loadShare({ localStorage: fakeStorage() });
+  const item = { id: 'r1abc', savedAt: '2026-08-26T00:00:00.000Z', subjectId: 'english', answers: '1.3.0.2.2', label: 'ラベル' };
+  S.__test.saveStore({ schemaVersion: 1, items: [item] });
+  /* setup を通さないと CFG が無く一覧を作れないので、最小の QUIZ で用意する */
+  S.setup({
+    quiz: [{ key: 'a', opts: [{ v: 'x' }, { v: 'y' }] }],
+    subject: 'english', subjectLabel: '英語',
+    state: { ans: { a: 'x' } },
+    showResult() {}, renderQuiz() {}, restart() {},
+  });
+  const html = S.beforeQuiz(0);
+  assert.ok(html.includes('data-rt-id="r1abc"'), 'data 属性に id が入っていない');
+  assert.ok(!/onclick=/.test(html), '保存一覧に onclick が残っている');
+});
+
 test('保存項目の answers は共有 URL と同じ検証を通る', () => {
   const S = loadShare({ localStorage: fakeStorage() });
   const quiz = QUIZZES.english;
