@@ -931,7 +931,12 @@ gtag('config', 'G-DQ5WFXEFMX');
   </button>
 </nav>
 
+<script src="/assets/js/share.js"></script>
 <script>
+/* 診断結果の共有・保存（assets/js/share.js）。
+   スクリプトを読めなかった場合でも診断が壊れないよう、何もしない実装で代替する。 */
+var RTShare = (typeof RTShare !== "undefined" && RTShare) || {setup(){}, beforeQuiz:()=>"", beforeResult:()=>"", afterResult:()=>"", restart(){ startQuiz(); go("quiz"); }};
+
 
 /* ============================================================
    ★★★ 設定 — 公開前にここだけ書き換えてください ★★★
@@ -2359,6 +2364,9 @@ ${CONFIG.contact?`<h5>お問い合わせ</h5><p>${CONFIG.contact}</p>`:`<h5>お�
 privacy:{title:"プライバシーポリシー",body:()=>`
 <h5>個人情報の取り扱い</h5>
 <p>本サイトは静的なウェブページとして提供されており、氏名・住所・メールアドレス等の個人情報を入力するフォームを設置していません。ルート作成のために入力された志望校名・偏差値・学習済み参考書などの情報は、お使いのブラウザ内でのみ処理され、サーバーへ送信・保存されることはありません。</p>
+<h5>診断結果の保存と共有について</h5>
+<p>3分診断の結果は、結果画面の「この結果を保存」を押したときにかぎり、お使いのブラウザのローカルストレージ（端末内の保存領域）に記録されます。保存されるのは診断の回答と、そこから作られた表示用の見出しだけで、氏名などの個人を特定できる情報は含まれません。この情報が外部へ送信されることはなく、当サイトの運営者が取得・閲覧することもできません。保存した内容は診断画面の一覧からいつでも削除でき、ブラウザの閲覧データを消去した場合にも失われます。ブラウザの設定やプライベートブラウズによりローカルストレージが使えない場合は、保存ボタンを表示しません。この判定のため、診断の画面を開いた時点で確認用の値をローカルストレージに一度書き込み、すぐに削除します。この値に診断の内容や個人を特定できる情報は含まれません。</p>
+<p>診断結果の共有リンクに含まれるのも診断の回答だけです。リンクを開いた方の画面では、その回答をもとに結果があらためて計算されます。</p>
 ${AFF ? `<h5>クッキー(Cookie)および類似技術について</h5>
 <p>本サイトは${AFF_PROGRAMS}に参加しています。これらのプログラムの提供事業者(第三者)は、広告の配信および成果の計測のために、クッキー、ピクセルタグ、その他の類似技術を使用して、本サイトを訪問された方の情報を取得する場合があります。</p>
 <p>これらの第三者は、本サイトおよび他のウェブサイトへのアクセス情報にもとづいて、利用者の興味・関心に応じた広告を表示することがあります。この際に取得される情報に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
@@ -3450,6 +3458,7 @@ function renderQuiz(){
   const q = steps[quizState.step];
   const prog = steps.map((_,i)=>`<span class="qp-seg${i<quizState.step?" done":i===quizState.step?" cur":""}"></span>`).join("");
   document.getElementById("quizShell").innerHTML = `
+    ${RTShare.beforeQuiz(quizState.step)}
     <div class="quiz-progress">${prog}</div>
     <div class="quiz-step">
       <div class="quiz-q">${q.q}</div>
@@ -3490,6 +3499,7 @@ function renderQuizResult(){
   const bound = [0,2,3][level];
   const books = seq.filter(s=>!(s.lvl<bound && s.lvl<4));
   document.getElementById("quizShell").innerHTML = `
+    ${RTShare.beforeResult()}
     <div class="quiz-progress">${activeQuizSteps().map(()=>`<span class="qp-seg done"></span>`).join("")}</div>
     <div class="quiz-step">
       <div class="result-hero">
@@ -3506,12 +3516,13 @@ function renderQuizResult(){
           </button>`;}).join("")}
       </div>
       <div class="quiz-nav">
-        <button class="btn btn-back" onclick="startQuiz()">やり直す</button>
+        <button class="btn btn-back" onclick="RTShare.restart()">やり直す</button>
         <button class="btn btn-primary" onclick="applyQuiz('${tier}','${bunri}','${policy}',${level})">
           ルート全体を見る
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
+      ${RTShare.afterResult({tier:t.name, variant:bunri==="bun"?"国公立二次型":"私立個別型", policy:polLabel})}
     </div>`;
 }
 function applyQuiz(tier,bunri,policy,level){
@@ -3661,6 +3672,17 @@ renderRoute();
 renderHome();
 renderGuide();
 renderFooter();
+
+/* 共有 URL に回答が載っていれば、ここで結果画面を復元する */
+RTShare.setup({
+  quiz: QUIZ,
+  subject: "english",
+  subjectLabel: "英語",
+  state: quizState,
+  showResult: ()=>{ quizState.step = activeQuizSteps().length; go("quiz"); renderQuiz(); },
+  renderQuiz: ()=>renderQuiz(),
+  restart: ()=>{ startQuiz(); go("quiz"); }
+});
 </script>
 <script type="application/ld+json">
 {
