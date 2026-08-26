@@ -3468,11 +3468,16 @@ function renderQuizResult(){
   const t = TIERS.find(x=>x.id===tier);
   const polLabel = policy==="omni" ? "王道じっくり型" : "時短・精選型";
   const bound = [0,2,3][level];
+  /* 現在地が高いと、その科目のルートが丸ごとスキップ対象になって空になることがある。
+     その場合は「次にやることが無い」のではなく「仕上げに進む段階」なので、
+     ルートの最後に置いてある過去問を代わりに提示する。 */
+  const fin = ROUTES[tier].final || [];
   const firsts = subjSel.map(k=>{
     const seq = ROUTES[tier][k][policy].filter(s=>!(s.lvl<bound && s.lvl<4));
-    return {k, seq, first: seq[0]};
+    return {k, seq, first: seq[0], done: seq.length===0, fin: seq.length ? null : fin[0]};
   });
-  const totalBooks = firsts.reduce((n,f)=>n+f.seq.length,0) + (ROUTES[tier].final||[]).length;
+  const allDone = firsts.every(f=>f.done);
+  const totalBooks = firsts.reduce((n,f)=>n+f.seq.length,0) + fin.length;
   const subjTxt = subjSel.map(k=>SUBJ[k].label).join("・");
   document.getElementById("quizShell").innerHTML = `
     ${RTShare.beforeResult()}
@@ -3481,17 +3486,36 @@ function renderQuizResult(){
       <div class="result-hero">
         <div class="rh-label">DIAGNOSIS COMPLETE — あなたにおすすめのルート</div>
         <h3>${t.name}<br><span style="font-size:16px;opacity:.85">${subjTxt} × ${polLabel}</span></h3>
-        <p>メイン教材 ${totalBooks} 冊(${subjSel.length}科目+仕上げ)。${policy==="omni"?"講義系で型を作り、段差の小さい演習書を積み上げる王道の道筋です。":"精選された教材で最短距離を取る、巻き返しに強い道筋です。"}現在の学力に合わせて${level>0?"習得済みの段階はスキップ表示になります。":"導入から丁寧に始めます。"}</p>
+        <p>${allDone
+          ? `選んだ現在地では、このレベルの教材はひととおり終えている段階です。ここからは志望校の過去問演習を主軸にして、出題形式に合わせた仕上げに進んでください。`
+          : `メイン教材 ${totalBooks} 冊(${subjSel.length}科目+仕上げ)。${policy==="omni"?"講義系で型を作り、段差の小さい演習書を積み上げる王道の道筋です。":"精選された教材で最短距離を取る、巻き返しに強い道筋です。"}現在の学力に合わせて${level>0?"習得済みの段階はスキップ表示になります。":"導入から丁寧に始めます。"}`}</p>
       </div>
       <div class="opt-list" style="margin-top:14px">
-        ${firsts.map(f=>{
-          if(!f.first) return "";
-          const b=bookById(f.first.id); const st=STAGES[b.stage];
-          return `<button class="opt" onclick="openModal('${b.id}')">
-            <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:${SUBJ[f.k].color};color:#fff">${SUBJ[f.k].short}</span>
-            <span class="opt__txt"><b>${b.name}</b><span>${SUBJ[f.k].label}の1冊目 ・ ${st.label} ・ ${b.hours}</span></span>
-          </button>`;}).join("")}
-        <div style="text-align:center;color:var(--muted);font-size:12px;font-weight:600">… 各科目の続きと仕上げの過去問はルート画面で</div>
+        ${allDone
+          ? (fin.map(s=>{
+              const b=bookById(s.id); if(!b) return "";
+              const st=STAGES[b.stage];
+              return `<button class="opt" onclick="openModal('${b.id}')">
+                <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:var(--ink);color:#fff">仕</span>
+                <span class="opt__txt"><b>${b.name}</b><span>${subjTxt}の仕上げ ・ ${st.label} ・ ${b.hours}</span></span>
+              </button>`;}).join("")
+             || `<div class="opt" style="pointer-events:none;background:var(--surface-2)">
+                <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:var(--ink);color:#fff">仕</span>
+                <span class="opt__txt"><b>過去問演習の段階です</b><span>${subjTxt}のルートは完了。志望校の過去問に進んでください</span></span>
+              </div>`)
+          : firsts.map(f=>{
+              const pick = f.first || f.fin;
+              const b = pick ? bookById(pick.id) : null;
+              if(!b) return `<div class="opt" style="pointer-events:none;background:var(--surface-2)">
+                <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:${SUBJ[f.k].color};color:#fff">${SUBJ[f.k].short}</span>
+                <span class="opt__txt"><b>${SUBJ[f.k].label}は仕上げ段階です</b><span>このレベルの教材は完了。過去問演習に進んでください</span></span>
+              </div>`;
+              const st=STAGES[b.stage];
+              return `<button class="opt" onclick="openModal('${b.id}')">
+                <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:${SUBJ[f.k].color};color:#fff">${SUBJ[f.k].short}</span>
+                <span class="opt__txt"><b>${b.name}</b><span>${f.done?`${SUBJ[f.k].label}は仕上げ段階`:`${SUBJ[f.k].label}の1冊目`} ・ ${st.label} ・ ${b.hours}</span></span>
+              </button>`;}).join("")}
+        <div style="text-align:center;color:var(--muted);font-size:12px;font-weight:600">${allDone?"… 過去問の詳細と併用できる教材はルート画面で":"… 各科目の続きと仕上げの過去問はルート画面で"}</div>
       </div>
       <div class="quiz-nav">
         <button class="btn btn-back" onclick="RTShare.restart()">やり直す</button>
