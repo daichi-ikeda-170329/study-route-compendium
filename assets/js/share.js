@@ -19,6 +19,13 @@
      スキーマ定義
      ============================================================ */
 
+  /**
+   * 公式 X アカウントのハンドル（@ を除く）。共有ボタンの via= に使う。
+   * build/lib/extract.mjs の X_HANDLE と手書き HTML にも同じ値がある。
+   * 変えるときは `rg route_taizen` で全箇所を出す。
+   */
+  var X_HANDLE = "route_taizen";
+
   /** 共有 URL のスキーマバージョン。質問構成を変えたら必ず上げる（README の運用ルール参照） */
   var SCHEMA_VERSION = 1;
   var PARAM_VERSION = "v";
@@ -418,7 +425,8 @@
    */
   function shareBox(opts) {
     var xURL = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(opts.tweet)
-      + "&url=" + encodeURIComponent(opts.url);
+      + "&url=" + encodeURIComponent(opts.url)
+      + "&via=" + X_HANDLE;
 
     var canNative = false;
     try { canNative = typeof global.navigator.share === "function"; } catch (e) { canNative = false; }

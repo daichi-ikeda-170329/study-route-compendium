@@ -3,7 +3,7 @@
  */
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SUBJECTS, ORIGIN, esc, affiliateEnabled } from './extract.mjs';
+import { SUBJECTS, ORIGIN, X_HANDLE, esc, affiliateEnabled } from './extract.mjs';
 
 /**
  * アフィリエイト ID が設定されているか。未設定のうちは広告表記を出さない
@@ -36,6 +36,7 @@ export function head(o) {
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@${X_HANDLE}">
 <meta name="twitter:title" content="${esc(o.ogTitle || o.title)}">
 <meta name="twitter:description" content="${esc(o.desc)}">
 <meta name="twitter:image" content="${img}">
@@ -140,7 +141,7 @@ export function portalHeader() {
  * @param {object} o url: 共有する URL / text: X に載せる本文 / head: 帯の見出し
  */
 export function shareBar(o) {
-  const x = `https://twitter.com/intent/tweet?text=${encodeURIComponent(o.text)}&url=${encodeURIComponent(o.url)}`;
+  const x = `https://twitter.com/intent/tweet?text=${encodeURIComponent(o.text)}&url=${encodeURIComponent(o.url)}&via=${X_HANDLE}`;
   return `<div class="sharebar">
     <span class="sharebar__t">${esc(o.head)}</span>
     <a class="sharebar__b" href="${esc(x)}" target="_blank" rel="noopener noreferrer">
@@ -204,6 +205,7 @@ ${curDir ? `      <a href="/${curDir}/">参考書図鑑</a>
       <a href="/#catalog">参考書から探す</a>
       <a href="/guides/">参考書の選び方</a>`}
       <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/${X_HANDLE}" target="_blank" rel="noopener noreferrer me">X @${X_HANDLE}</a>
     </div>
     <div class="foot-legal">
       <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>

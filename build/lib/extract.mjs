@@ -101,6 +101,13 @@ export const SUBJECTS = [
 
 export const ORIGIN = 'https://route-taizen.com';
 
+/**
+ * 公式 X アカウントのハンドル（@ を除く）。
+ * 共有ボタンの via= と twitter:site メタに使う。手書き HTML（ポータル・科目トップ 5 枚・404）と
+ * assets/js/share.js にも同じ値を書いてあるので、変えるときは `rg route_taizen` で全箇所を出す。
+ */
+export const X_HANDLE = 'route_taizen';
+
 /** 分野コード（BOOKS[].sub）の表示名。科目をまたいで衝突しないので 1 つの辞書で足りる */
 export const SUB_LABELS = {
   gendai: '現代文', kobun: '古文', koten: '古文', kanbun: '漢文', sogo: '総合',

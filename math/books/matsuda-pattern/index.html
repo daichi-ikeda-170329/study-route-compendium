@@ -19,6 +19,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
 <meta name="twitter:title" content="解法のパターン30のレベルと使い方｜難易度・対象・次に進む本 - 数学ルート大全">
 <meta name="twitter:description" content="解法のパターン30（技術評論社）は分野別に位置づけられる数学の参考書。入試標準レベル（難易度6/10）、到達目安は55〜68。整数・確率などを短期で底上げしたい人に向いています。強みと注意点、同じレベルの他の選択肢、次に進む参考書までまとめました。">
 <meta name="twitter:image" content="https://route-taizen.com/assets/ogp-math.png">
@@ -295,15 +296,31 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="eyebrow">Where to buy</div>
       <h2 class="sec">購入する</h2>
       <div class="buy">
-        <a class="az" href="https://www.amazon.co.jp/dp/4774176575/ref=nosim" target="_blank" rel="nofollow noopener">
+        <a class="az" href="https://www.amazon.co.jp/dp/4774176575/ref=nosim" target="_blank" rel="nofollow noopener" data-rt-buy="amazon" data-rt-bid="matsuda-pattern" data-rt-sub="math">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
           Amazon で見る
         </a>
-        <a class="rk" href="https://hb.afl.rakuten.co.jp/hgc/56ba2770.50b55cf7.56ba2771.68ff96bc/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F9784774176574%2F&amp;m=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F9784774176574%2F" target="_blank" rel="nofollow sponsored noopener">
+        <a class="rk" href="https://hb.afl.rakuten.co.jp/hgc/56ba2770.50b55cf7.56ba2771.68ff96bc/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F9784774176574%2F&amp;m=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F9784774176574%2F" target="_blank" rel="nofollow sponsored noopener" data-rt-buy="rakuten" data-rt-bid="matsuda-pattern" data-rt-sub="math">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
           楽天ブックスで見る
         </a>
       </div>
+      <script>
+      /* 購入リンクのクリックを GA4 に送る。どの本が実際に踏まれたかを書籍単位で見るため。
+         GA4 の拡張計測（外部リンククリック）でも URL は取れるが、書籍 id と科目は取れない。
+         計測の失敗でリンクの遷移を止めないよう、全体を try で囲う。 */
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest ? e.target.closest("[data-rt-buy]") : null;
+        if (!a) return;
+        try {
+          if (typeof gtag === "function") gtag("event", "book_buy_click", {
+            store: a.getAttribute("data-rt-buy"),
+            book_id: a.getAttribute("data-rt-bid"),
+            subject: a.getAttribute("data-rt-sub")
+          });
+        } catch (err) { /* 計測の失敗で購入導線を止めない */ }
+      });
+      </script>
       <p class="buy__note">楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
     </section>
 
@@ -350,6 +367,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="/math/routes/">志望校別ルート</a>
       <a href="/math/guides/">参考書の選び方</a>
       <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
     <div class="foot-legal">
       <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
