@@ -46,6 +46,7 @@ export function head(o) {
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/js/search.js" defer></script>
 ${analytics()}`;
 }
 
@@ -93,13 +94,81 @@ export function header(sub) {
       <div class="logo__mark">${sub.mark}</div>
       <div class="logo__txt"><b>${sub.full}</b><span>${sub.en} ROUTE</span></div>
     </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
     <div class="hdr-cta">
-      <a href="/${sub.dir}/">参考書図鑑</a>
+      <a href="/${sub.dir}/#catalog">参考書図鑑</a>
       <a href="/">全科目</a>
-      <a class="primary" href="/${sub.dir}/">ルートを作る</a>
+      <a class="primary" href="/${sub.dir}/#route">ルートを作る</a>
     </div>
   </div>
 </header>`;
+}
+
+/** 科目に属さないページ（全科目共通の記事など）のヘッダー */
+export function portalHeader() {
+  return `<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/">
+      <div class="logo__mark">全</div>
+      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
+  </div>
+</header>`;
+}
+
+/**
+ * ページをそのまま共有する帯。X への投稿とリンクのコピーだけを置く。
+ *
+ * 生成ページは静的なので、共有するものは「今見ている URL」で決まりきっている。
+ * 科目トップの共有（assets/js/share.js）が回答や設定を URL に載せるのとは別物なので、
+ * ここでは共通スクリプトを読まず、この帯ぶんの短い処理をページに直接置く。
+ *
+ * @param {object} o url: 共有する URL / text: X に載せる本文 / head: 帯の見出し
+ */
+export function shareBar(o) {
+  const x = `https://twitter.com/intent/tweet?text=${encodeURIComponent(o.text)}&url=${encodeURIComponent(o.url)}`;
+  return `<div class="sharebar">
+    <span class="sharebar__t">${esc(o.head)}</span>
+    <a class="sharebar__b" href="${esc(x)}" target="_blank" rel="noopener noreferrer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>
+      Xで共有</a>
+    <button class="sharebar__b" type="button" data-rt-copy="${esc(o.url)}">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9h10v10H9zM5 15H4V4h11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      リンクをコピー</button>
+    <span class="sharebar__msg" role="status"></span>
+  </div>
+  <script>
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-rt-copy]") : null;
+    if (!b) return;
+    var msg = b.parentNode.querySelector(".sharebar__msg");
+    var show = function (t) {
+      if (!msg) return;
+      msg.textContent = t;
+      setTimeout(function () { msg.textContent = ""; }, 2000);
+    };
+    try {
+      navigator.clipboard.writeText(b.dataset.rtCopy).then(
+        function () { show("コピーしました"); },
+        function () { show("コピーできませんでした"); }
+      );
+    } catch (err) { show("コピーできませんでした"); }
+  });
+  </` + `script>`;
 }
 
 /** パンくず（表示用）。JSON-LD 側は各ページで別に組む */

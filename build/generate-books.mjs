@@ -13,6 +13,7 @@ import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { authorsOf, searchName, withAuthor } from './lib/booktitle.mjs';
+import { coverSrcs } from './lib/cover.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -83,29 +84,6 @@ function pickNext(book, books, stages, exclude, max = 6) {
 
   const kind = sameRole.length && later.length ? 'mixed' : later.length ? 'later' : 'same';
   return { list: [...sameRole, ...later].slice(0, max), kind };
-}
-
-/** 書影の URL 候補。Amazon が提供する商品画像 URL を参照する（保存・加工はしない） */
-/**
- * 書影の候補 URL を優先順に返す。
- *
- * Amazon は画像を持たない ISBN に対して 43 バイトほどの 1x1 画像を
- * HTTP 200 で返すことがある。この場合 onerror は発火しないので、
- * 表示側で naturalWidth を見て次の候補へ送る（科目ページと同じ方式）。
- */
-function coverSrcs(b) {
-  const key = b.isbn10 || b.asin;
-  const list = [];
-  if (b.cover) list.push(b.cover);
-  if (key) {
-    list.push(`https://images-fe.ssl-images-amazon.com/images/P/${key}.09.LZZZZZZZ.jpg`);
-    list.push(`https://images-na.ssl-images-amazon.com/images/P/${key}.09.LZZZZZZZ.jpg`);
-  }
-  if (b.isbn13) {
-    list.push(`https://ndlsearch.ndl.go.jp/thumbnail/${b.isbn13}.jpg`);
-    list.push(`https://cover.openbd.jp/${b.isbn13}.jpg`);
-  }
-  return list;
 }
 
 function amazonUrl(b, tag) {

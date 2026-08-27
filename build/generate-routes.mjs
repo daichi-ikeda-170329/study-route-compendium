@@ -13,7 +13,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
-import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
+import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
+import { coverBox } from './lib/cover.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -90,13 +91,15 @@ function normalize(routes, tiers) {
 
 const trackLabel = (k) => TRACK_LABELS[k] || k;
 
-function stepList(steps, bookById, sub) {
+function stepList(steps, bookById, sub, stages) {
   return steps.map((s, i) => {
     const b = bookById.get(s.id);
     if (!b) return '';
+    const st = stages[b.stage] || {};
     const alts = (s.alts || []).map(id => bookById.get(id)).filter(Boolean);
     return `        <li class="rstep">
           <span class="rstep__no">${String(i + 1).padStart(2, '0')}</span>
+          <a class="rstep__cov" href="/${sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || sub.color })}</a>
           <div class="rstep__body">
             <span class="rstep__role">${esc(s.role || '')}</span>
             <a class="rstep__name" href="/${sub.dir}/books/${b.id}/">${esc(b.name)}</a>
@@ -108,11 +111,15 @@ function stepList(steps, bookById, sub) {
   }).filter(Boolean).join('\n');
 }
 
-function sideList(steps, bookById, sub) {
+function sideList(steps, bookById, sub, stages) {
   return steps.map(s => {
     const b = bookById.get(s.id);
     if (!b) return '';
-    return `          <li><a href="/${sub.dir}/books/${b.id}/">${esc(b.name)}</a>${s.note ? `<span>${esc(s.note)}</span>` : ''}</li>`;
+    const st = stages[b.stage] || {};
+    return `          <li>
+            <a class="rside__cov" href="/${sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || sub.color })}</a>
+            <div><a class="rside__name" href="/${sub.dir}/books/${b.id}/">${esc(b.name)}</a>${s.note ? `<span>${esc(s.note)}</span>` : ''}</div>
+          </li>`;
   }).filter(Boolean).join('\n');
 }
 
@@ -147,7 +154,7 @@ function render(sub, d, tier, norm, counts) {
         <h3 class="rpol__t"><b>${p.label}</b><span>${(seq[p.key] || []).length}冊</span></h3>
         <p class="rpol__n">${p.note}</p>
         <ol class="rsteps">
-${stepList(seq[p.key], bookById, sub)}
+${stepList(seq[p.key], bookById, sub, d.stages)}
         </ol>
       </div>`).join('\n');
 
@@ -164,14 +171,14 @@ ${bodies}
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-${sideList(para, bookById, sub)}
+${sideList(para, bookById, sub, d.stages)}
         </ul>
       </div>` : ''}
       ${final.length ? `<div class="rside">
         <h3>最後の仕上げ</h3>
         <p>直前期に取り組む総仕上げです。上のルートを終えてから着手します。</p>
         <ul>
-${sideList(final, bookById, sub)}
+${sideList(final, bookById, sub, d.stages)}
         </ul>
       </div>` : ''}
     </section>`;
@@ -223,10 +230,12 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp-${sub.dir}.png` })}
 .rpol__t span{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:600}
 .rpol__n{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.75}
 .rsteps{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:0}
-.rstep{display:flex;gap:13px;padding:13px 0;border-top:1px dashed var(--line)}
+.rstep{display:flex;gap:12px;padding:14px 0;border-top:1px dashed var(--line)}
 .rstep:first-child{border-top:none;padding-top:4px}
 .rstep__no{font-family:var(--mono);font-size:11px;color:var(--muted-2);font-weight:600;padding-top:3px;flex:none;width:20px}
-.rstep__body{min-width:0}
+/* 書影は書名リンクの隣に置く飾り。読み上げ・タブ移動では書名リンクだけを通す */
+.rstep__cov{flex:none;display:block;--cw:52px}
+.rstep__body{min-width:0;flex:1}
 .rstep__role{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--sc);padding:2px 7px;border-radius:2px;letter-spacing:.04em;margin-bottom:5px}
 /* 指でタップできる高さを確保する（当たり判定だけ広げ、見た目は変えない） */
 .rstep__name{display:block;font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.45;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px;transition:.15s;padding:4px 0}
@@ -238,9 +247,11 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp-${sub.dir}.png` })}
 .rside{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:18px 20px;margin-top:14px}
 .rside h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-bottom:7px}
 .rside p{font-size:12.5px;color:var(--muted);line-height:1.8}
-.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:8px}
-.rside li{font-size:13px;line-height:1.7}
-.rside li a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
+.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:12px}
+.rside li{display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.7}
+.rside li>div{min-width:0}
+.rside__cov{flex:none;display:block;--cw:40px}
+.rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .unis span{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
@@ -267,6 +278,11 @@ ${header(sub)}
     ${trackKeys.length > 1 ? `<div class="tnav">
 ${trackKeys.map(tk => `      <a href="#track-${tk}">${esc(trackLabel(tk))}のルート</a>`).join('\n')}
     </div>` : ''}
+    ${shareBar({
+      url,
+      head: 'SHARE — このルートを共有する',
+      text: `【ルート大全】${tier.name}の${sub.ja}参考書ルート（${used.size}冊）\n#ルート大全 #大学受験`,
+    })}
   </div>
 
 ${sections}

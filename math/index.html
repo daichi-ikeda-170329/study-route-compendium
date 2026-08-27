@@ -30,6 +30,7 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link rel="preconnect" href="https://images-na.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/assets/js/search.js" defer></script>
 <style>
 :root{
   --paper:#F6F4EF; --surface:#FFFFFF; --surface-2:#FAF9F6; --surface-3:#F1EFE8;
@@ -144,10 +145,6 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .rp-card__no em{font-style:normal;color:var(--tc,var(--indigo));font-weight:600}
 .rp-card h4{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
 .rp-card p{font-size:11.5px;color:var(--muted);min-height:32px;line-height:1.55}
-.rp-mini{display:flex;align-items:center;gap:4px;margin-top:12px}
-.rp-dot{width:7px;height:7px;border-radius:50%;flex:none}
-.rp-line{flex:1;height:1.5px;background:var(--line-d)}
-.rp-arrow{color:var(--muted-2);margin-left:6px;font-size:14px}
 .guide-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
 @media(min-width:760px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
 .guide-card{background:var(--surface);border:1px solid var(--line);padding:22px 20px;box-shadow:var(--sh-s);position:relative}
@@ -588,6 +585,13 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="logo__mark">数</div>
       <div class="logo__txt"><b>数学ルート大全</b><span>MATH ROUTE COMPENDIUM</span></div>
     </div>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
     <nav class="nav-desktop" id="navDesktop">
       <button data-view="home" class="active" onclick="go('home')">ホーム</button>
       <button data-view="catalog" onclick="go('catalog')">参考書図鑑</button>
@@ -819,6 +823,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       </div>
 
       <div id="routeOutput"></div>
+      <div id="routeShare"></div>
     </div>
   </section>
 
@@ -2477,13 +2482,31 @@ function renderVerdict(){
     <b>この情報をルートに反映しました。</b>${S.done.size?`登録した${S.done.size}冊は<b style="color:var(--ok)">習得済み</b>として表示し、`:""}現在地より下の段階は「スキップ可」として薄く表示しています。${S.henAdj!=null&&tgt&&S.henAdj>=tgt?"すでに目標水準に届いているので、過去問演習と弱点分野の補強を主軸にしてください。":"「▶ ここから」と表示された1冊から着手してください。"}`;
 }
 
+/* 画面はハッシュで指し示せる（/<科目>/#catalog など）。ポータルや外部からの直リンクの宛先になる。
+   履歴には積まない（replaceState）。この SPA は「戻る」を画面遷移として扱っていないため、
+   pushState にすると戻るたびに 1 画面ずつ遡ることになり、サイトを離れられなくなる。 */
+const VIEWS = ["home","catalog","route","quiz","guide"];
 function go(view){
   S.view = view;
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v.id==="view-"+view));
   document.querySelectorAll("#navDesktop button, #tabbar button").forEach(b=>b.classList.toggle("active", b.dataset.view===view));
   window.scrollTo({top:0});
   if(view==="quiz" && !quizState.started) startQuiz();
+  syncHash(view);
 }
+function syncHash(view){
+  try{
+    const want = view==="home" ? "" : "#"+view;
+    if(location.hash === want) return;
+    history.replaceState(null, "", location.pathname + location.search + want);
+  }catch(e){ /* history に触れない環境では URL が追従しないだけ */ }
+}
+/** ハッシュが指す画面へ移る。未知のハッシュは無視して現在の画面のままにする */
+function applyHash(){
+  const v = (location.hash || "").slice(1);
+  if(VIEWS.indexOf(v) >= 0 && v !== S.view) go(v);
+}
+window.addEventListener("hashchange", applyHash);
 
 /* ============================================================
    COVERS — 実表紙画像(Amazon→openBD)+自動フォールバック
@@ -2778,7 +2801,21 @@ function wireSeg(id, key, cb){
     if(cb) cb();
   });
 }
+/**
+ * ルート画面を描き直す。
+ * 共有ブロックは、実際にルートが引けたとき（.climb が出たとき）だけ添える。
+ * 志望レベルを選ぶ前や講師未選択の案内だけのときは、共有するものが無い。
+ */
 function renderRoute(){
+  renderRouteBody();
+  const box = document.getElementById("routeShare");
+  if(!box) return;
+  box.innerHTML = document.querySelector("#routeOutput .climb") ? RTShare.routeBlock() : "";
+}
+/**
+ * ルート本体を描く。共有ブロックの出し入れは renderRoute() が受け持つ。
+ */
+function renderRouteBody(){
   const out = document.getElementById("routeOutput");
   if(S.mode==="uni" && !S.uni){ out.innerHTML=""; return; }
   if(!S.tier){
@@ -2893,11 +2930,9 @@ function renderHome(){
   document.getElementById("homeRoutes").innerHTML = TIERS.map(t=>{
     const g = ROUTES[t.id].ri || ROUTES[t.id].bun;
     const seq = g.quick || g.omni;
-    const dots = seq.slice(0,5).map(s=>`<span class="rp-dot" style="background:${STAGES[bookById(s.id).stage].color}"></span><span class="rp-line"></span>`).join("").replace(/<span class="rp-line"><\/span>$/,"");
     return `<div class="rp-card" style="--tc:${t.color}" role="button" tabindex="0" onclick="selectTier('${t.id}');go('route')">
       <div class="rp-card__no"><span>ROUTE ${t.no}</span><em>${seq.length} STEPS</em></div>
       <h4>${t.name}</h4><p>${t.sub} — ${t.goal}</p>
-      <div class="rp-mini">${dots}<span class="rp-arrow">→</span></div>
     </div>`;
   }).join("");
   const disc = `<b>ご利用にあたって:</b>本アプリの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。2025年入試からの新課程(数学C新設・「整数の性質」の扱い変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
@@ -3132,6 +3167,36 @@ renderHome();
 renderGuide();
 renderFooter();
 
+/* ハッシュ付きで開かれていれば、その画面から始める（共有 URL の復元より先に評価する。
+   ?v=1&a=... が付いていれば下の setup が診断結果へ上書きする） */
+applyHash();
+
+/* ============================================================
+   ルート画面の共有
+   共有 URL に載せるのはルートの形を決める設定だけ（?rv=1&r=…）。
+   模試の偏差値・学部名・既習の参考書といった入力は載せない。
+   検証はこのページ側で行う。トークンが指す志望レベル・トラックが
+   実在しなければ復元せず、普通のトップページとして開く。
+   ============================================================ */
+const LEVELS = ["0","1","2","3"];
+const POLICIES_OK = ["omni","quick"];
+
+/** 受験タイプ・学習方針・現在地のセグメントを S に合わせる */
+function syncRouteSegs(){
+  document.querySelectorAll("#segBunri button").forEach(b=>b.classList.toggle("on", b.dataset.v===S.bunri));
+  document.querySelectorAll("#segPolicy button").forEach(b=>b.classList.toggle("on", b.dataset.v===S.policy));
+  document.querySelectorAll("#segLevel button").forEach(b=>b.classList.toggle("on", +b.dataset.v===S.level));
+}
+/** 共有 URL で指定された大学を UNIS から引き当てて、志望校モードにする */
+function applySharedUni(name){
+  const u = UNIS.find(x=>x.n===name);
+  if(!u) return false;
+  S.uni=u; S.fac=""; S.mode="uni";
+  document.getElementById("uniInput").value = u.n;
+  syncMode(); applyUni();
+  return true;
+}
+
 /* 共有 URL に回答が載っていれば、ここで結果画面を復元する */
 RTShare.setup({
   quiz: QUIZ,
@@ -3140,7 +3205,34 @@ RTShare.setup({
   state: quizState,
   showResult: ()=>{ quizState.step = activeQuizSteps().length; go("quiz"); renderQuiz(); },
   renderQuiz: ()=>renderQuiz(),
-  restart: ()=>{ startQuiz(); go("quiz"); }
+  restart: ()=>{ startQuiz(); go("quiz"); },
+  route: {
+    /* トークンは [種類, 志望レベル, 受験タイプ, 学習方針, 現在地] の 5 個 */
+    encode: ()=>{
+      const t = TIERS.find(x=>x.id===S.tier);
+      if(!t) return null;
+      const uni = (S.mode==="uni" && S.uni) ? S.uni.n : null;
+      return {
+        tokens:["t", t.id, S.bunri, S.policy, String(S.level)],
+        uni: uni,
+        label: [uni || t.name,
+                S.bunri==="bun" ? "国公立二次型" : "私立個別型",
+                S.policy==="omni" ? "王道網羅型" : "時短・精選型"].join(" / ")
+      };
+    },
+    apply: (tk, uni)=>{
+      if(tk.length!==5 || tk[0]!=="t") return false;
+      const level = LEVELS.indexOf(tk[4]);
+      if(level<0) return false;
+      if(!TIERS.some(x=>x.id===tk[1]) || !ROUTES[tk[1]] || !ROUTES[tk[1]][tk[2]]) return false;
+      if(POLICIES_OK.indexOf(tk[3])<0) return false;
+      S.level = level; S.autoLevel = null; S.bunri = tk[2]; S.policy = tk[3];
+      syncRouteSegs();
+      if(uni && applySharedUni(uni)) return true;
+      selectTier(tk[1]); return true;
+    },
+    show: ()=>go("route")
+  }
 });
 </script>
 <script type="application/ld+json">

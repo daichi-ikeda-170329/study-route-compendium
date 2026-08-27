@@ -29,6 +29,7 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
 <script>
@@ -76,10 +77,17 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="logo__mark">社</div>
       <div class="logo__txt"><b>社会ルート大全</b><span>SOCIAL STUDIES ROUTE</span></div>
     </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
     <div class="hdr-cta">
-      <a href="/social/">参考書図鑑</a>
+      <a href="/social/#catalog">参考書図鑑</a>
       <a href="/">全科目</a>
-      <a class="primary" href="/social/">ルートを作る</a>
+      <a class="primary" href="/social/#route">ルートを作る</a>
     </div>
   </div>
 </header>

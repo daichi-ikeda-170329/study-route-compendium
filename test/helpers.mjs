@@ -77,3 +77,68 @@ export function allAnswerCombos(quiz) {
   })(0, {});
   return out;
 }
+
+/**
+ * 科目ページを vm 上で走らせ、RTShare.setup に渡された設定と、ページの
+ * トップレベル定数・関数（TIERS / S / selectTier など）を取り出す。
+ *
+ * loadQuiz と違い RTShare を差し替えて渡すので、ページ末尾の setup 呼び出しまで
+ * 到達する。ルート共有の encode / apply を実際に動かして確かめるために使う。
+ */
+export function loadPage(dir) {
+  const src = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+  const scripts = [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
+
+  const captured = {};
+  const noop = () => '';
+  const fakeShare = {
+    setup(cfg) { captured.cfg = cfg; },
+    beforeQuiz: noop, beforeResult: noop, afterResult: noop, routeBlock: noop,
+    restart() {}, copyLink() {}, shareNative() {}, saveRoute() {},
+    openSaved() {}, removeSaved() {}, requestRemove() {}, trackShareX() {},
+  };
+
+  /**
+   * loadQuiz の stub より少しだけ賢い DOM 代替。
+   *  - well-known シンボルには undefined を返す。Proxy が Symbol.match を返すと
+   *    String.prototype.includes が「正規表現を渡された」と誤認して落ちる。
+   *  - value は空文字にする。検索欄の入力値として読まれるため。
+   */
+  const domStub = () => new Proxy(function () {}, {
+    get: (t, k) => {
+      if (k === Symbol.toPrimitive) return () => '';
+      if (typeof k === 'symbol') return undefined;
+      if (k === 'value' || k === 'textContent' || k === 'innerHTML') return '';
+      return domStub();
+    },
+    set: () => true,
+    apply: () => domStub(),
+    construct: () => domStub(),
+  });
+
+  const ctx = {
+    console: { log() {}, warn() {}, error() {} },
+    document: domStub(), window: domStub(), localStorage: domStub(), navigator: domStub(),
+    location: domStub(), history: domStub(),
+    dataLayer: [],
+    URL, URLSearchParams,
+    setTimeout() {}, setInterval() {}, addEventListener() {}, requestAnimationFrame() {},
+    RTShare: fakeShare,
+  };
+  ctx.globalThis = ctx;
+  vm.createContext(ctx);
+
+  /* トップレベルの const / function は vm の外から見えないので globalThis に移す */
+  const wanted = ['BOOKS', 'UNIS', 'TIERS', 'ROUTES', 'STAGES', 'SENSEIS', 'SUBJ', 'SUBJ_KEYS', 'S'];
+  const constRe = new RegExp(`\\bconst (${wanted.join('|')})\\s*=`, 'g');
+  const fnRe = /^function (selectTier|selectSensei|setSubj|toggleSubj|setCourse|setMode|go)\(/gm;
+
+  for (const code of scripts) {
+    const patched = code
+      .replace(constRe, 'globalThis.$1 =')
+      .replace(fnRe, 'globalThis.$1 = function $1(');
+    try { vm.runInContext(patched, ctx, { timeout: 30000 }); } catch (e) { if (process.env.RT_DEBUG) console.error(dir, e); }
+  }
+  if (!captured.cfg) throw new Error(`${dir}: RTShare.setup に到達しなかった`);
+  return { ctx, cfg: captured.cfg };
+}

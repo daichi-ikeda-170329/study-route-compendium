@@ -29,6 +29,7 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
 <script>
@@ -53,10 +54,12 @@ gtag('config', 'G-DQ5WFXEFMX');
 .rpol__t span{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:600}
 .rpol__n{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.75}
 .rsteps{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:0}
-.rstep{display:flex;gap:13px;padding:13px 0;border-top:1px dashed var(--line)}
+.rstep{display:flex;gap:12px;padding:14px 0;border-top:1px dashed var(--line)}
 .rstep:first-child{border-top:none;padding-top:4px}
 .rstep__no{font-family:var(--mono);font-size:11px;color:var(--muted-2);font-weight:600;padding-top:3px;flex:none;width:20px}
-.rstep__body{min-width:0}
+/* 書影は書名リンクの隣に置く飾り。読み上げ・タブ移動では書名リンクだけを通す */
+.rstep__cov{flex:none;display:block;--cw:52px}
+.rstep__body{min-width:0;flex:1}
 .rstep__role{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--sc);padding:2px 7px;border-radius:2px;letter-spacing:.04em;margin-bottom:5px}
 /* 指でタップできる高さを確保する（当たり判定だけ広げ、見た目は変えない） */
 .rstep__name{display:block;font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.45;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px;transition:.15s;padding:4px 0}
@@ -68,9 +71,11 @@ gtag('config', 'G-DQ5WFXEFMX');
 .rside{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:18px 20px;margin-top:14px}
 .rside h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-bottom:7px}
 .rside p{font-size:12.5px;color:var(--muted);line-height:1.8}
-.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:8px}
-.rside li{font-size:13px;line-height:1.7}
-.rside li a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
+.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:12px}
+.rside li{display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.7}
+.rside li>div{min-width:0}
+.rside__cov{flex:none;display:block;--cw:40px}
+.rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .unis span{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
@@ -100,10 +105,17 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="logo__mark">英</div>
       <div class="logo__txt"><b>英語ルート大全</b><span>ENGLISH ROUTE</span></div>
     </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
     <div class="hdr-cta">
-      <a href="/english/">参考書図鑑</a>
+      <a href="/english/#catalog">参考書図鑑</a>
       <a href="/">全科目</a>
-      <a class="primary" href="/english/">ルートを作る</a>
+      <a class="primary" href="/english/#route">ルートを作る</a>
     </div>
   </div>
 </header>
@@ -129,6 +141,34 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="#track-bun">文系のルート</a>
       <a href="#track-ri">理系のルート</a>
     </div>
+    <div class="sharebar">
+    <span class="sharebar__t">SHARE — このルートを共有する</span>
+    <a class="sharebar__b" href="https://twitter.com/intent/tweet?text=%E3%80%90%E3%83%AB%E3%83%BC%E3%83%88%E5%A4%A7%E5%85%A8%E3%80%91MARCH%E3%83%BB%E9%96%A2%E9%96%A2%E5%90%8C%E7%AB%8B%E3%81%AE%E8%8B%B1%E8%AA%9E%E5%8F%82%E8%80%83%E6%9B%B8%E3%83%AB%E3%83%BC%E3%83%88%EF%BC%8819%E5%86%8A%EF%BC%89%0A%23%E3%83%AB%E3%83%BC%E3%83%88%E5%A4%A7%E5%85%A8%20%23%E5%A4%A7%E5%AD%A6%E5%8F%97%E9%A8%93&amp;url=https%3A%2F%2Froute-taizen.com%2Fenglish%2Froutes%2Fmarch%2F" target="_blank" rel="noopener noreferrer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>
+      Xで共有</a>
+    <button class="sharebar__b" type="button" data-rt-copy="https://route-taizen.com/english/routes/march/">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9h10v10H9zM5 15H4V4h11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      リンクをコピー</button>
+    <span class="sharebar__msg" role="status"></span>
+  </div>
+  <script>
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-rt-copy]") : null;
+    if (!b) return;
+    var msg = b.parentNode.querySelector(".sharebar__msg");
+    var show = function (t) {
+      if (!msg) return;
+      msg.textContent = t;
+      setTimeout(function () { msg.textContent = ""; }, 2000);
+    };
+    try {
+      navigator.clipboard.writeText(b.dataset.rtCopy).then(
+        function () { show("コピーしました"); },
+        function () { show("コピーできませんでした"); }
+      );
+    } catch (err) { show("コピーできませんでした"); }
+  });
+  </script>
   </div>
 
     <section class="block" id="track-bun">
@@ -141,6 +181,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/english/books/oiwa/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>大岩のいちばんはじめの英文法</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890855896.jpg|https://cover.openbd.jp/9784890855896.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入</span>
             <a class="rstep__name" href="/english/books/oiwa/">大岩のいちばんはじめの英文法</a>
@@ -151,6 +192,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/english/books/nextstage/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>Next Stage 英文法・語法問題</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342431180.jpg|https://cover.openbd.jp/9784342431180.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">文法網羅</span>
             <a class="rstep__name" href="/english/books/nextstage/">Next Stage 英文法・語法問題</a>
@@ -161,6 +203,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/english/books/gijutsu70/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>入門英文解釈の技術70</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342210134.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342210134.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342210134.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342210136.jpg|https://cover.openbd.jp/9784342210136.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解釈</span>
             <a class="rstep__name" href="/english/books/gijutsu70/">入門英文解釈の技術70</a>
@@ -171,6 +214,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/english/books/rules2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>The Rules 英語長文問題集2</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010348567.jpg|https://cover.openbd.jp/9784010348567.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">長文</span>
             <a class="rstep__name" href="/english/books/rules2/">The Rules 英語長文問題集2</a>
@@ -181,6 +225,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/english/books/yatte300/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>やっておきたい英語長文300</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227456.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227456.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227456.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227457.jpg|https://cover.openbd.jp/9784777227457.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">記述演習</span>
             <a class="rstep__name" href="/english/books/yatte300/">やっておきたい英語長文300</a>
@@ -191,6 +236,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/english/books/haitore-wabun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>英作文ハイパートレーニング 和文英訳編</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342207785.jpg|https://cover.openbd.jp/9784342207785.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">英作文</span>
             <a class="rstep__name" href="/english/books/haitore-wabun/">英作文ハイパートレーニング 和文英訳編</a>
@@ -201,6 +247,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">07</span>
+          <a class="rstep__cov" href="/english/books/akahon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>大学赤本シリーズ(志望校の過去問)</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273943.jpg|https://cover.openbd.jp/9784325273943.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問</span>
             <a class="rstep__name" href="/english/books/akahon/">大学赤本シリーズ(志望校の過去問)</a>
@@ -217,6 +264,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/english/books/hijii-zero/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>肘井学のゼロから英文法</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046061515.jpg|https://cover.openbd.jp/9784046061515.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入</span>
             <a class="rstep__name" href="/english/books/hijii-zero/">肘井学のゼロから英文法</a>
@@ -227,6 +275,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/english/books/polaris-b1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>英文法ポラリス1</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046019263.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046019263.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046019263.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046019264.jpg|https://cover.openbd.jp/9784046019264.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">文法</span>
             <a class="rstep__name" href="/english/books/polaris-b1/">英文法ポラリス1</a>
@@ -237,6 +286,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/english/books/hijii-dokkai-hisshu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>読解のための英文法(必修編)</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046050564.jpg|https://cover.openbd.jp/9784046050564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解釈</span>
             <a class="rstep__name" href="/english/books/hijii-dokkai-hisshu/">読解のための英文法(必修編)</a>
@@ -247,6 +297,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/english/books/rules2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>The Rules 英語長文問題集2</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010348567.jpg|https://cover.openbd.jp/9784010348567.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">長文</span>
             <a class="rstep__name" href="/english/books/rules2/">The Rules 英語長文問題集2</a>
@@ -257,6 +308,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/english/books/kijutsu-tr/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>英語長文プラス 記述式トレーニング</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010349700.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010349700.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349700.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010349700.jpg|https://cover.openbd.jp/9784010349700.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">記述演習</span>
             <a class="rstep__name" href="/english/books/kijutsu-tr/">英語長文プラス 記述式トレーニング</a>
@@ -267,6 +319,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/english/books/akahon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>大学赤本シリーズ(志望校の過去問)</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273943.jpg|https://cover.openbd.jp/9784325273943.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問</span>
             <a class="rstep__name" href="/english/books/akahon/">大学赤本シリーズ(志望校の過去問)</a>
@@ -282,8 +335,14 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/english/books/sistan/">システム英単語</a><span>単語1冊を10周。ミニマルフレーズで即戦力に</span></li>
-          <li><a href="/english/books/sokudoku-jukugo/">速読英熟語</a><span>熟語+音読素材として毎日</span></li>
+          <li>
+            <a class="rside__cov" href="/english/books/sistan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796111379.jpg|https://cover.openbd.jp/9784796111379.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/english/books/sistan/">システム英単語</a><span>単語1冊を10周。ミニマルフレーズで即戦力に</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/english/books/sokudoku-jukugo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>速読英熟語</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865315875.jpg|https://cover.openbd.jp/9784865315875.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/english/books/sokudoku-jukugo/">速読英熟語</a><span>熟語+音読素材として毎日</span></div>
+          </li>
         </ul>
       </div>
       
@@ -299,6 +358,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/english/books/oiwa/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>大岩のいちばんはじめの英文法</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890855896.jpg|https://cover.openbd.jp/9784890855896.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入</span>
             <a class="rstep__name" href="/english/books/oiwa/">大岩のいちばんはじめの英文法</a>
@@ -309,6 +369,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/english/books/vintage/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>Vintage 英文法・語法</b><em>いいずな書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4864603758.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4864603758.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4864603758.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784864603751.jpg|https://cover.openbd.jp/9784864603751.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">文法網羅</span>
             <a class="rstep__name" href="/english/books/vintage/">Vintage 英文法・語法</a>
@@ -319,6 +380,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/english/books/hijii-dokkai-hisshu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>読解のための英文法(必修編)</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046050564.jpg|https://cover.openbd.jp/9784046050564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解釈</span>
             <a class="rstep__name" href="/english/books/hijii-dokkai-hisshu/">読解のための英文法(必修編)</a>
@@ -329,6 +391,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/english/books/essentials100/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>The Essentials 英語長文 必修英文100</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401035027X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401035027X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035027X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010350270.jpg|https://cover.openbd.jp/9784010350270.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解釈→長文</span>
             <a class="rstep__name" href="/english/books/essentials100/">The Essentials 英語長文 必修英文100</a>
@@ -339,6 +402,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/english/books/rules3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>The Rules 英語長文問題集3</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010348577.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010348577.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348577.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010348574.jpg|https://cover.openbd.jp/9784010348574.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">長文</span>
             <a class="rstep__name" href="/english/books/rules3/">The Rules 英語長文問題集3</a>
@@ -349,6 +413,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/english/books/cho-polaris2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>英語長文ポラリス2</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404608040X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404608040X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404608040X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046080400.jpg|https://cover.openbd.jp/9784046080400.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">長文演習</span>
             <a class="rstep__name" href="/english/books/cho-polaris2/">英語長文ポラリス2</a>
@@ -359,6 +424,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">07</span>
+          <a class="rstep__cov" href="/english/books/akahon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>大学赤本シリーズ(志望校の過去問)</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273943.jpg|https://cover.openbd.jp/9784325273943.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問</span>
             <a class="rstep__name" href="/english/books/akahon/">大学赤本シリーズ(志望校の過去問)</a>
@@ -375,6 +441,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/english/books/hijii-zero/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>肘井学のゼロから英文法</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046061515.jpg|https://cover.openbd.jp/9784046061515.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入</span>
             <a class="rstep__name" href="/english/books/hijii-zero/">肘井学のゼロから英文法</a>
@@ -385,6 +452,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/english/books/polaris-b1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>英文法ポラリス1</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046019263.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046019263.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046019263.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046019264.jpg|https://cover.openbd.jp/9784046019264.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">文法</span>
             <a class="rstep__name" href="/english/books/polaris-b1/">英文法ポラリス1</a>
@@ -395,6 +463,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/english/books/hijii-dokkai-hisshu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>読解のための英文法(必修編)</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046050564.jpg|https://cover.openbd.jp/9784046050564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解釈</span>
             <a class="rstep__name" href="/english/books/hijii-dokkai-hisshu/">読解のための英文法(必修編)</a>
@@ -405,6 +474,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/english/books/solution2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>英語長文ソリューション2</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761231807.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761231807.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231807.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761231804.jpg|https://cover.openbd.jp/9784761231804.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">長文</span>
             <a class="rstep__name" href="/english/books/solution2/">英語長文ソリューション2</a>
@@ -415,6 +485,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/english/books/cho-polaris2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>英語長文ポラリス2</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404608040X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404608040X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404608040X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046080400.jpg|https://cover.openbd.jp/9784046080400.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">長文演習</span>
             <a class="rstep__name" href="/english/books/cho-polaris2/">英語長文ポラリス2</a>
@@ -425,6 +496,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/english/books/akahon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>大学赤本シリーズ(志望校の過去問)</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273948.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273943.jpg|https://cover.openbd.jp/9784325273943.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問</span>
             <a class="rstep__name" href="/english/books/akahon/">大学赤本シリーズ(志望校の過去問)</a>
@@ -440,9 +512,18 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/english/books/sistan/">システム英単語</a><span>単語1冊を10周</span></li>
-          <li><a href="/english/books/sokudoku-jukugo/">速読英熟語</a><span>熟語+速読の土台づくり</span></li>
-          <li><a href="/english/books/hinshutsu-polaris/">英語頻出問題ポラリス</a><span>会話・語彙・発音の知識問題を補強</span></li>
+          <li>
+            <a class="rside__cov" href="/english/books/sistan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796111379.jpg|https://cover.openbd.jp/9784796111379.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/english/books/sistan/">システム英単語</a><span>単語1冊を10周</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/english/books/sokudoku-jukugo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>速読英熟語</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865315875.jpg|https://cover.openbd.jp/9784865315875.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/english/books/sokudoku-jukugo/">速読英熟語</a><span>熟語+速読の土台づくり</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/english/books/hinshutsu-polaris/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>英語頻出問題ポラリス</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046023902.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046023902.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046023902.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046023902.jpg|https://cover.openbd.jp/9784046023902.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/english/books/hinshutsu-polaris/">英語頻出問題ポラリス</a><span>会話・語彙・発音の知識問題を補強</span></div>
+          </li>
         </ul>
       </div>
       

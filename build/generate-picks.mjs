@@ -12,6 +12,7 @@ import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { searchName } from './lib/booktitle.mjs';
+import { coverBox } from './lib/cover.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -65,6 +66,7 @@ function card(b, sub, stages, t, rank) {
   const bars = Array.from({ length: 10 }, (_, i) => `<i class="${i < b.diff ? 'on' : ''}"></i>`).join('');
   return `      <a class="pcard" href="/${sub.dir}/books/${b.id}/" style="--bc:${st.color || sub.color}">
         <span class="pcard__rank">${rank}</span>
+        <span class="pcard__cov">${coverBox(b, { color: st.color || sub.color })}</span>
         <div class="pcard__body">
           <div class="pcard__top"><span class="pcard__stage">${esc(st.short || '')}</span><span>${esc(b.pub)}</span></div>
           <b>${esc(searchName(b, sub.dir))}</b>
@@ -148,6 +150,7 @@ h2.sec .cnt{font-family:var(--mono);font-size:12px;color:var(--muted);font-weigh
 .pcard{display:flex;gap:14px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--bc);padding:14px 16px;transition:.15s;box-shadow:var(--sh-s)}
 .pcard:hover{transform:translateY(-2px);box-shadow:var(--sh-m)}
 .pcard__rank{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--bc);min-width:26px;padding-top:2px}
+.pcard__cov{flex:none;display:block;--cw:58px}
 .pcard__body{flex:1;min-width:0}
 .pcard__top{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted);font-weight:600}
 .pcard__stage{color:var(--bc)}
@@ -160,7 +163,7 @@ h2.sec .cnt{font-family:var(--mono);font-size:12px;color:var(--muted);font-weigh
 .pcard__diff i.on{background:var(--bc)}
 .pcard__tiers{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
 .pcard__tiers i{font-style:normal;font-size:10.5px;color:var(--muted-2);border:1px solid var(--line);padding:2px 7px}
-@media(max-width:520px){.pcard{padding:12px 13px;gap:10px}.pcard b{font-size:15px}}
+@media(max-width:520px){.pcard{padding:12px 13px;gap:10px}.pcard b{font-size:15px}.pcard__cov{--cw:48px}}
 </style>
 </head>
 <body>

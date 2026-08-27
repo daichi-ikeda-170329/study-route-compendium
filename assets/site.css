@@ -93,6 +93,23 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:21px;letter-spacing:.0
 .prose li{font-size:14px;line-height:1.9;color:var(--ink-2);position:relative;padding-left:18px}
 .prose li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:var(--muted-2)}
 
+/* ---------- 共有バー ---------- */
+.sharebar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-top:20px;padding:13px 16px;background:var(--surface-2);border:1px solid var(--line);box-shadow:var(--sh-s)}
+.sharebar__t{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--muted);margin-right:4px}
+.sharebar__b{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:8px 14px;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line-d);border-radius:4px;cursor:pointer;transition:.15s}
+.sharebar__b:hover{color:var(--ink);border-color:var(--ink-2);transform:translateY(-1px)}
+.sharebar__msg{font-size:11.5px;font-weight:700;color:var(--ok,#2F8659)}
+
+/* ---------- 小さな書影（一覧・ルート・おすすめ） ---------- */
+/* 幅は --cw で呼び出し側が決める。高さは 5:7 で自動。
+   書籍ヒーローの .bk-cover と同じ考え方で、画像が読めなければ
+   下に敷いた代替表示（書名と出版社）がそのまま見える。 */
+.rt-cov{position:relative;display:block;flex:none;width:var(--cw,54px);aspect-ratio:5/7;border-radius:3px;overflow:hidden;background:var(--surface-3);box-shadow:var(--sh-s)}
+.rt-cov img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;background:var(--surface-3)}
+.rt-cov__ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:6px 5px;color:#fff;background:var(--cc,var(--sc))}
+.rt-cov__ph b{font-family:var(--serif);font-size:8.5px;font-weight:800;line-height:1.32;letter-spacing:.02em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical}
+.rt-cov__ph em{font-family:var(--mono);font-size:6.5px;font-style:normal;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 /* ---------- 書籍ヒーロー ---------- */
 .bk-hero{display:grid;grid-template-columns:1fr;gap:26px;margin-top:22px}
 @media(min-width:760px){.bk-hero{grid-template-columns:186px minmax(0,1fr);gap:32px}}

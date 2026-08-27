@@ -29,6 +29,7 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
 <script>
@@ -53,10 +54,12 @@ gtag('config', 'G-DQ5WFXEFMX');
 .rpol__t span{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:600}
 .rpol__n{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.75}
 .rsteps{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:0}
-.rstep{display:flex;gap:13px;padding:13px 0;border-top:1px dashed var(--line)}
+.rstep{display:flex;gap:12px;padding:14px 0;border-top:1px dashed var(--line)}
 .rstep:first-child{border-top:none;padding-top:4px}
 .rstep__no{font-family:var(--mono);font-size:11px;color:var(--muted-2);font-weight:600;padding-top:3px;flex:none;width:20px}
-.rstep__body{min-width:0}
+/* 書影は書名リンクの隣に置く飾り。読み上げ・タブ移動では書名リンクだけを通す */
+.rstep__cov{flex:none;display:block;--cw:52px}
+.rstep__body{min-width:0;flex:1}
 .rstep__role{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--sc);padding:2px 7px;border-radius:2px;letter-spacing:.04em;margin-bottom:5px}
 /* 指でタップできる高さを確保する（当たり判定だけ広げ、見た目は変えない） */
 .rstep__name{display:block;font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.45;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px;transition:.15s;padding:4px 0}
@@ -68,9 +71,11 @@ gtag('config', 'G-DQ5WFXEFMX');
 .rside{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:18px 20px;margin-top:14px}
 .rside h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-bottom:7px}
 .rside p{font-size:12.5px;color:var(--muted);line-height:1.8}
-.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:8px}
-.rside li{font-size:13px;line-height:1.7}
-.rside li a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
+.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:12px}
+.rside li{display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.7}
+.rside li>div{min-width:0}
+.rside__cov{flex:none;display:block;--cw:40px}
+.rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .unis span{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
@@ -100,10 +105,17 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="logo__mark">数</div>
       <div class="logo__txt"><b>数学ルート大全</b><span>MATHEMATICS ROUTE</span></div>
     </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
     <div class="hdr-cta">
-      <a href="/math/">参考書図鑑</a>
+      <a href="/math/#catalog">参考書図鑑</a>
       <a href="/">全科目</a>
-      <a class="primary" href="/math/">ルートを作る</a>
+      <a class="primary" href="/math/#route">ルートを作る</a>
     </div>
   </div>
 </header>
@@ -129,6 +141,34 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="#track-bun">文系のルート</a>
       <a href="#track-ri">理系のルート</a>
     </div>
+    <div class="sharebar">
+    <span class="sharebar__t">SHARE — このルートを共有する</span>
+    <a class="sharebar__b" href="https://twitter.com/intent/tweet?text=%E3%80%90%E3%83%AB%E3%83%BC%E3%83%88%E5%A4%A7%E5%85%A8%E3%80%91%E6%9D%B1%E5%A4%A7%E3%83%BB%E4%BA%AC%E5%A4%A7%E3%83%BB%E4%B8%80%E6%A9%8B%E3%83%BB%E7%A7%91%E5%AD%A6%E5%A4%A7%E3%81%AE%E6%95%B0%E5%AD%A6%E5%8F%82%E8%80%83%E6%9B%B8%E3%83%AB%E3%83%BC%E3%83%88%EF%BC%8817%E5%86%8A%EF%BC%89%0A%23%E3%83%AB%E3%83%BC%E3%83%88%E5%A4%A7%E5%85%A8%20%23%E5%A4%A7%E5%AD%A6%E5%8F%97%E9%A8%93&amp;url=https%3A%2F%2Froute-taizen.com%2Fmath%2Froutes%2Ftop%2F" target="_blank" rel="noopener noreferrer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>
+      Xで共有</a>
+    <button class="sharebar__b" type="button" data-rt-copy="https://route-taizen.com/math/routes/top/">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9h10v10H9zM5 15H4V4h11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      リンクをコピー</button>
+    <span class="sharebar__msg" role="status"></span>
+  </div>
+  <script>
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-rt-copy]") : null;
+    if (!b) return;
+    var msg = b.parentNode.querySelector(".sharebar__msg");
+    var show = function (t) {
+      if (!msg) return;
+      msg.textContent = t;
+      setTimeout(function () { msg.textContent = ""; }, 2000);
+    };
+    try {
+      navigator.clipboard.writeText(b.dataset.rtCopy).then(
+        function () { show("コピーしました"); },
+        function () { show("コピーできませんでした"); }
+      );
+    } catch (err) { show("コピーできませんでした"); }
+  });
+  </script>
   </div>
 
     <section class="block" id="track-bun">
@@ -141,6 +181,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/math/books/ao/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>青チャート</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410105784.jpg|https://cover.openbd.jp/9784410105784.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">網羅</span>
             <a class="rstep__name" href="/math/books/ao/">青チャート</a>
@@ -151,6 +192,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/math/books/taio11/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>1対1対応の演習</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4887422636.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4887422636.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887422636.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784887422636.jpg|https://cover.openbd.jp/9784887422636.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解法強化</span>
             <a class="rstep__name" href="/math/books/taio11/">1対1対応の演習</a>
@@ -161,6 +203,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/math/books/bunkei-platica/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>文系数学の良問プラチカ</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227200.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227200.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227200.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227204.jpg|https://cover.openbd.jp/9784777227204.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">応用演習</span>
             <a class="rstep__name" href="/math/books/bunkei-platica/">文系数学の良問プラチカ</a>
@@ -171,6 +214,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/math/books/todai-bun25/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>東大の文系数学25カ年</b><em>教学社</em></span><img src="https://m.media-amazon.com/images/I/41RVjJmPiGL._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41RVjJmPiGL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325272976.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325272976.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325272977.jpg|https://cover.openbd.jp/9784325272977.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問研究</span>
             <a class="rstep__name" href="/math/books/todai-bun25/">東大の文系数学25カ年</a>
@@ -187,6 +231,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/math/books/kisomon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>基礎問題精講</b><em>旺文社</em></span><img src="https://m.media-amazon.com/images/I/41pe36vQ+7L._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41pe36vQ+7L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349182.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349182.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010349182.jpg|https://cover.openbd.jp/9784010349182.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎網羅</span>
             <a class="rstep__name" href="/math/books/kisomon/">基礎問題精講</a>
@@ -197,6 +242,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/math/books/bunkei-juyo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>文系の数学 重要事項完全習得編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777228669.jpg|https://cover.openbd.jp/9784777228669.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">標準演習</span>
             <a class="rstep__name" href="/math/books/bunkei-juyo/">文系の数学 重要事項完全習得編</a>
@@ -207,6 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/math/books/bunkei-jissen/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>文系の数学 実戦力向上編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231461.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231461.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231461.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231461.jpg|https://cover.openbd.jp/9784777231461.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">応用演習</span>
             <a class="rstep__name" href="/math/books/bunkei-jissen/">文系の数学 実戦力向上編</a>
@@ -217,6 +264,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/math/books/bunkei-platica/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>文系数学の良問プラチカ</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227200.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227200.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227200.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227204.jpg|https://cover.openbd.jp/9784777227204.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">応用演習</span>
             <a class="rstep__name" href="/math/books/bunkei-platica/">文系数学の良問プラチカ</a>
@@ -227,6 +275,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/math/books/todai-bun25/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>東大の文系数学25カ年</b><em>教学社</em></span><img src="https://m.media-amazon.com/images/I/41RVjJmPiGL._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41RVjJmPiGL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325272976.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325272976.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325272977.jpg|https://cover.openbd.jp/9784325272977.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問研究</span>
             <a class="rstep__name" href="/math/books/todai-bun25/">東大の文系数学25カ年</a>
@@ -242,8 +291,14 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/math/books/ukaru-keisan/">合格る計算 数学I・A・II・B・C</a><span>計算基盤の維持</span></li>
-          <li><a href="/math/books/master-seisu/">マスター・オブ・整数</a><span>整数頻出校(京大・一橋)は分野強化</span></li>
+          <li>
+            <a class="rside__cov" href="/math/books/ukaru-keisan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>合格る計算 数学I・A・II・B・C</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578243434.jpg|https://cover.openbd.jp/9784578243434.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/math/books/ukaru-keisan/">合格る計算 数学I・A・II・B・C</a><span>計算基盤の維持</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/math/books/master-seisu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>マスター・オブ・整数</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784887420175.jpg|https://cover.openbd.jp/9784887420175.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/math/books/master-seisu/">マスター・オブ・整数</a><span>整数頻出校(京大・一橋)は分野強化</span></div>
+          </li>
         </ul>
       </div>
       
@@ -259,6 +314,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/math/books/ao/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>青チャート</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410105784.jpg|https://cover.openbd.jp/9784410105784.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">網羅</span>
             <a class="rstep__name" href="/math/books/ao/">青チャート</a>
@@ -269,6 +325,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/math/books/taio11/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>1対1対応の演習</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4887422636.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4887422636.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887422636.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784887422636.jpg|https://cover.openbd.jp/9784887422636.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解法強化</span>
             <a class="rstep__name" href="/math/books/taio11/">1対1対応の演習</a>
@@ -279,6 +336,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/math/books/sta-en/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>新数学スタンダード演習</b><em>東京出版</em></span><img src="https://m.media-amazon.com/images/I/616HRupyrGL._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/616HRupyrGL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/B0GK6S4JPF.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/B0GK6S4JPF.09.LZZZZZZZ.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">演習量確保</span>
             <a class="rstep__name" href="/math/books/sta-en/">新数学スタンダード演習</a>
@@ -289,6 +347,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/math/books/haikan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>ハイレベル数学の完全攻略</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796113584.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796113584.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113584.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796113588.jpg|https://cover.openbd.jp/9784796113588.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">最難関仕上げ</span>
             <a class="rstep__name" href="/math/books/haikan/">ハイレベル数学の完全攻略</a>
@@ -299,6 +358,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/math/books/todai-ri25/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>東大の理系数学25カ年</b><em>教学社</em></span><img src="https://m.media-amazon.com/images/I/41RjCTu5M+L._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41RjCTu5M+L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325272984.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325272984.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325272984.jpg|https://cover.openbd.jp/9784325272984.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問研究</span>
             <a class="rstep__name" href="/math/books/todai-ri25/">東大の理系数学25カ年</a>
@@ -315,6 +375,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/math/books/kisomon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>基礎問題精講</b><em>旺文社</em></span><img src="https://m.media-amazon.com/images/I/41pe36vQ+7L._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41pe36vQ+7L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349182.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349182.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010349182.jpg|https://cover.openbd.jp/9784010349182.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎網羅</span>
             <a class="rstep__name" href="/math/books/kisomon/">基礎問題精講</a>
@@ -325,6 +386,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/math/books/hyomon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>標準問題精講</b><em>旺文社</em></span><img src="https://m.media-amazon.com/images/I/41HCVlMP5CL._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41HCVlMP5CL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349212.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349212.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010349212.jpg|https://cover.openbd.jp/9784010349212.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">標準演習</span>
             <a class="rstep__name" href="/math/books/hyomon/">標準問題精講</a>
@@ -335,6 +397,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/math/books/haikan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>ハイレベル数学の完全攻略</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796113584.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796113584.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113584.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796113588.jpg|https://cover.openbd.jp/9784796113588.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">最難関仕上げ</span>
             <a class="rstep__name" href="/math/books/haikan/">ハイレベル数学の完全攻略</a>
@@ -345,6 +408,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/math/books/todai-ri25/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>東大の理系数学25カ年</b><em>教学社</em></span><img src="https://m.media-amazon.com/images/I/41RjCTu5M+L._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41RjCTu5M+L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325272984.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325272984.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325272984.jpg|https://cover.openbd.jp/9784325272984.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問研究</span>
             <a class="rstep__name" href="/math/books/todai-ri25/">東大の理系数学25カ年</a>
@@ -360,10 +424,22 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/math/books/ukaru-keisan3/">合格る計算 数学III・C</a><span>数III計算を極める</span></li>
-          <li><a href="/math/books/hatto-kakuritsu/">ハッとめざめる確率</a><span>確率は最難関頻出。苦手なら必須</span></li>
-          <li><a href="/math/books/kiso-gokui/">微積分/基礎の極意</a><span>微積を得点源にする分野強化</span></li>
-          <li><a href="/math/books/shinzui/">数学の真髄 -論理・写像-</a><span>論理・写像で思考の土台を強化</span></li>
+          <li>
+            <a class="rside__cov" href="/math/books/ukaru-keisan3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>合格る計算 数学III・C</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578243441.jpg|https://cover.openbd.jp/9784578243441.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/math/books/ukaru-keisan3/">合格る計算 数学III・C</a><span>数III計算を極める</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/math/books/hatto-kakuritsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>ハッとめざめる確率</b><em>東京出版</em></span><img src="https://m.media-amazon.com/images/I/61CX2DG2AvL._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/61CX2DG2AvL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887420447.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420447.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784887420441.jpg|https://cover.openbd.jp/9784887420441.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/math/books/hatto-kakuritsu/">ハッとめざめる確率</a><span>確率は最難関頻出。苦手なら必須</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/math/books/kiso-gokui/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>微積分/基礎の極意</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784887420298.jpg|https://cover.openbd.jp/9784887420298.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/math/books/kiso-gokui/">微積分/基礎の極意</a><span>微積を得点源にする分野強化</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/math/books/shinzui/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>数学の真髄 -論理・写像-</b><em>ナガセ(東進)</em></span><img src="https://m.media-amazon.com/images/I/21t+22v2rkL._SL500_.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/21t+22v2rkL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890859055.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859055.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859054.jpg|https://cover.openbd.jp/9784890859054.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/math/books/shinzui/">数学の真髄 -論理・写像-</a><span>論理・写像で思考の土台を強化</span></div>
+          </li>
         </ul>
       </div>
       

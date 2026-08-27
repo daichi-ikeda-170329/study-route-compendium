@@ -29,6 +29,7 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
 <script>
@@ -53,10 +54,12 @@ gtag('config', 'G-DQ5WFXEFMX');
 .rpol__t span{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:600}
 .rpol__n{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.75}
 .rsteps{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:0}
-.rstep{display:flex;gap:13px;padding:13px 0;border-top:1px dashed var(--line)}
+.rstep{display:flex;gap:12px;padding:14px 0;border-top:1px dashed var(--line)}
 .rstep:first-child{border-top:none;padding-top:4px}
 .rstep__no{font-family:var(--mono);font-size:11px;color:var(--muted-2);font-weight:600;padding-top:3px;flex:none;width:20px}
-.rstep__body{min-width:0}
+/* 書影は書名リンクの隣に置く飾り。読み上げ・タブ移動では書名リンクだけを通す */
+.rstep__cov{flex:none;display:block;--cw:52px}
+.rstep__body{min-width:0;flex:1}
 .rstep__role{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--sc);padding:2px 7px;border-radius:2px;letter-spacing:.04em;margin-bottom:5px}
 /* 指でタップできる高さを確保する（当たり判定だけ広げ、見た目は変えない） */
 .rstep__name{display:block;font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.45;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px;transition:.15s;padding:4px 0}
@@ -68,9 +71,11 @@ gtag('config', 'G-DQ5WFXEFMX');
 .rside{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:18px 20px;margin-top:14px}
 .rside h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-bottom:7px}
 .rside p{font-size:12.5px;color:var(--muted);line-height:1.8}
-.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:8px}
-.rside li{font-size:13px;line-height:1.7}
-.rside li a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
+.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:12px}
+.rside li{display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.7}
+.rside li>div{min-width:0}
+.rside__cov{flex:none;display:block;--cw:40px}
+.rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .unis span{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
@@ -100,10 +105,17 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="logo__mark">理</div>
       <div class="logo__txt"><b>理科ルート大全</b><span>SCIENCE ROUTE</span></div>
     </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
     <div class="hdr-cta">
-      <a href="/science/">参考書図鑑</a>
+      <a href="/science/#catalog">参考書図鑑</a>
       <a href="/">全科目</a>
-      <a class="primary" href="/science/">ルートを作る</a>
+      <a class="primary" href="/science/#route">ルートを作る</a>
     </div>
   </div>
 </header>
@@ -131,6 +143,34 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="#track-seibutsu">生物のルート</a>
       <a href="#track-chigaku">地学のルート</a>
     </div>
+    <div class="sharebar">
+    <span class="sharebar__t">SHARE — このルートを共有する</span>
+    <a class="sharebar__b" href="https://twitter.com/intent/tweet?text=%E3%80%90%E3%83%AB%E3%83%BC%E3%83%88%E5%A4%A7%E5%85%A8%E3%80%91MARCH%E3%83%BB%E9%96%A2%E9%96%A2%E5%90%8C%E7%AB%8B%E3%81%AE%E7%90%86%E7%A7%91%E5%8F%82%E8%80%83%E6%9B%B8%E3%83%AB%E3%83%BC%E3%83%88%EF%BC%8842%E5%86%8A%EF%BC%89%0A%23%E3%83%AB%E3%83%BC%E3%83%88%E5%A4%A7%E5%85%A8%20%23%E5%A4%A7%E5%AD%A6%E5%8F%97%E9%A8%93&amp;url=https%3A%2F%2Froute-taizen.com%2Fscience%2Froutes%2Fmarch%2F" target="_blank" rel="noopener noreferrer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>
+      Xで共有</a>
+    <button class="sharebar__b" type="button" data-rt-copy="https://route-taizen.com/science/routes/march/">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9h10v10H9zM5 15H4V4h11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      リンクをコピー</button>
+    <span class="sharebar__msg" role="status"></span>
+  </div>
+  <script>
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-rt-copy]") : null;
+    if (!b) return;
+    var msg = b.parentNode.querySelector(".sharebar__msg");
+    var show = function (t) {
+      if (!msg) return;
+      msg.textContent = t;
+      setTimeout(function () { msg.textContent = ""; }, 2000);
+    };
+    try {
+      navigator.clipboard.writeText(b.dataset.rtCopy).then(
+        function () { show("コピーしました"); },
+        function () { show("コピーできませんでした"); }
+      );
+    } catch (err) { show("コピーできませんでした"); }
+  });
+  </script>
   </div>
 
     <section class="block" id="track-butsuri">
@@ -143,6 +183,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/science/books/uchu-rikigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>宇宙一わかりやすい高校物理 力学・波動</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056467.jpg|https://cover.openbd.jp/9784053056467.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入講義</span>
             <a class="rstep__name" href="/science/books/uchu-rikigaku/">宇宙一わかりやすい高校物理 力学・波動</a>
@@ -153,6 +194,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/science/books/uchu-denjiki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>宇宙一わかりやすい高校物理 電磁気・熱・原子</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056454.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056454.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056454.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056450.jpg|https://cover.openbd.jp/9784053056450.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入講義</span>
             <a class="rstep__name" href="/science/books/uchu-denjiki/">宇宙一わかりやすい高校物理 電磁気・熱・原子</a>
@@ -163,6 +205,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/science/books/lead-light-butsuri/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート 物理</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410260872.jpg|https://cover.openbd.jp/9784410260872.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎演習</span>
             <a class="rstep__name" href="/science/books/lead-light-butsuri/">リードLightノート 物理</a>
@@ -173,6 +216,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/science/books/essence-rikigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>物理のエッセンス 力学・波動</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227235.jpg|https://cover.openbd.jp/9784777227235.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解法習得</span>
             <a class="rstep__name" href="/science/books/essence-rikigaku/">物理のエッセンス 力学・波動</a>
@@ -183,6 +227,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/science/books/essence-netsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>物理のエッセンス 熱・電磁気・原子</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227243.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227243.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227243.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227242.jpg|https://cover.openbd.jp/9784777227242.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解法習得</span>
             <a class="rstep__name" href="/science/books/essence-netsu/">物理のエッセンス 熱・電磁気・原子</a>
@@ -193,6 +238,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/science/books/ryomon-kaze/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>良問の風</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227259.jpg|https://cover.openbd.jp/9784777227259.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試標準</span>
             <a class="rstep__name" href="/science/books/ryomon-kaze/">良問の風</a>
@@ -203,6 +249,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">07</span>
+          <a class="rstep__cov" href="/science/books/juyo-mondaishu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>物理重要問題集</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410143166.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410143166.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410143166.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410143168.jpg|https://cover.openbd.jp/9784410143168.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試演習</span>
             <a class="rstep__name" href="/science/books/juyo-mondaishu/">物理重要問題集</a>
@@ -219,6 +266,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/science/books/hitotsu-tokikata/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>高校物理の解き方をひとつひとつわかりやすく。</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/405305706X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/405305706X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405305706X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053057068.jpg|https://cover.openbd.jp/9784053057068.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入講義</span>
             <a class="rstep__name" href="/science/books/hitotsu-tokikata/">高校物理の解き方をひとつひとつわかりやすく。</a>
@@ -229,6 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/science/books/urushibara-meikai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>漆原の物理 明快解法講座</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354410.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354410.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354410.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010354414.jpg|https://cover.openbd.jp/9784010354414.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">解法習得</span>
             <a class="rstep__name" href="/science/books/urushibara-meikai/">漆原の物理 明快解法講座</a>
@@ -239,6 +288,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/science/books/ryomon-kaze/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>良問の風</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227259.jpg|https://cover.openbd.jp/9784777227259.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試標準</span>
             <a class="rstep__name" href="/science/books/ryomon-kaze/">良問の風</a>
@@ -249,6 +299,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/science/books/juyo-mondaishu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>物理重要問題集</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410143166.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410143166.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410143166.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410143168.jpg|https://cover.openbd.jp/9784410143168.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試演習</span>
             <a class="rstep__name" href="/science/books/juyo-mondaishu/">物理重要問題集</a>
@@ -264,9 +315,18 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/science/books/juyo-koshiki/">物理重要公式が面白いほど使える本</a><span>公式の導出をたどり、条件を外れた場面で使わないよう確認する</span></li>
-          <li><a href="/science/books/ichimon-ittou/">物理 一問一答 完全版</a><span>原子・熱の知識問題を毎日回し、私大の小問での失点をなくす</span></li>
-          <li><a href="/science/books/seminar-butsuri/">セミナー物理基礎+物理</a><span>苦手分野が出たら該当章の基本問題だけを解き、土台を作り直す</span></li>
+          <li>
+            <a class="rside__cov" href="/science/books/juyo-koshiki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>物理重要公式が面白いほど使える本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046056363.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046056363.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046056363.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046056368.jpg|https://cover.openbd.jp/9784046056368.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/juyo-koshiki/">物理重要公式が面白いほど使える本</a><span>公式の導出をたどり、条件を外れた場面で使わないよう確認する</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/science/books/ichimon-ittou/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>物理 一問一答 完全版</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890858019.jpg|https://cover.openbd.jp/9784890858019.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/ichimon-ittou/">物理 一問一答 完全版</a><span>原子・熱の知識問題を毎日回し、私大の小問での失点をなくす</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/science/books/seminar-butsuri/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>セミナー物理基礎+物理</b><em>第一学習社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4804047662.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4804047662.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047662.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804047669.jpg|https://cover.openbd.jp/9784804047669.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/seminar-butsuri/">セミナー物理基礎+物理</a><span>苦手分野が出たら該当章の基本問題だけを解き、土台を作り直す</span></div>
+          </li>
         </ul>
       </div>
       
@@ -282,6 +342,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/science/books/kamata-riron/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>鎌田の理論化学の講義</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352957.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352957.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352957.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352953.jpg|https://cover.openbd.jp/9784010352953.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">理論講義</span>
             <a class="rstep__name" href="/science/books/kamata-riron/">鎌田の理論化学の講義</a>
@@ -292,6 +353,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/science/books/fukuma-muki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>福間の無機化学の講義</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352965.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352965.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352965.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352960.jpg|https://cover.openbd.jp/9784010352960.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">無機講義</span>
             <a class="rstep__name" href="/science/books/fukuma-muki/">福間の無機化学の講義</a>
@@ -302,6 +364,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/science/books/kamata-yuki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>鎌田の有機化学の講義</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352973.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352973.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352973.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352977.jpg|https://cover.openbd.jp/9784010352977.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">有機講義</span>
             <a class="rstep__name" href="/science/books/kamata-yuki/">鎌田の有機化学の講義</a>
@@ -312,6 +375,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/science/books/seminar-kagaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>セミナー化学基礎+化学</b><em>第一学習社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4804047735.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4804047735.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047735.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804047737.jpg|https://cover.openbd.jp/9784804047737.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">網羅演習</span>
             <a class="rstep__name" href="/science/books/seminar-kagaku/">セミナー化学基礎+化学</a>
@@ -322,6 +386,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/science/books/kiso-seiko/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>化学 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352564.jpg|https://cover.openbd.jp/9784010352564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試基礎</span>
             <a class="rstep__name" href="/science/books/kiso-seiko/">化学 基礎問題精講</a>
@@ -332,6 +397,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/science/books/juyo-mondai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>化学重要問題集</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410143360.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410143360.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410143360.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410143366.jpg|https://cover.openbd.jp/9784410143366.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試標準</span>
             <a class="rstep__name" href="/science/books/juyo-mondai/">化学重要問題集</a>
@@ -342,6 +408,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">07</span>
+          <a class="rstep__cov" href="/science/books/yuki-kozo-hisshu50/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>化学 有機構造決定の必修解法50</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243060.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243060.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243060.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578243069.jpg|https://cover.openbd.jp/9784578243069.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">構造決定</span>
             <a class="rstep__name" href="/science/books/yuki-kozo-hisshu50/">化学 有機構造決定の必修解法50</a>
@@ -358,6 +425,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/science/books/hashizume-riron/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>橋爪のゼロから劇的にわかる理論化学の授業</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010343753.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010343753.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010343753.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010343753.jpg|https://cover.openbd.jp/9784010343753.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">理論導入</span>
             <a class="rstep__name" href="/science/books/hashizume-riron/">橋爪のゼロから劇的にわかる理論化学の授業</a>
@@ -368,6 +436,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/science/books/hashizume-mukiyuki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>橋爪のゼロから劇的にわかる無機・有機化学の授業</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010343761.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010343761.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010343761.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010343760.jpg|https://cover.openbd.jp/9784010343760.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">無機有機</span>
             <a class="rstep__name" href="/science/books/hashizume-mukiyuki/">橋爪のゼロから劇的にわかる無機・有機化学の授業</a>
@@ -378,6 +447,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/science/books/kiso-seiko/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>化学 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352564.jpg|https://cover.openbd.jp/9784010352564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎演習</span>
             <a class="rstep__name" href="/science/books/kiso-seiko/">化学 基礎問題精講</a>
@@ -388,6 +458,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/science/books/juyo-mondai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>化学重要問題集</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410143360.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410143360.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410143360.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410143366.jpg|https://cover.openbd.jp/9784410143366.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試標準</span>
             <a class="rstep__name" href="/science/books/juyo-mondai/">化学重要問題集</a>
@@ -403,9 +474,18 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/science/books/ichimonitto-kagaku/">化学一問一答【完全版】</a><span>無機と有機の知識を毎日十五分回し、講義本の内容を維持する。</span></li>
-          <li><a href="/science/books/photoscience/">フォトサイエンス化学図録</a><span>実験装置と沈殿の色を図で確認し、正誤問題の失点を防ぐ。</span></li>
-          <li><a href="/science/books/keisan-hisshu120/">化学計算問題の必修解法120</a><span>理論の計算を週二回まとめて解き、処理速度を落とさない。</span></li>
+          <li>
+            <a class="rside__cov" href="/science/books/ichimonitto-kagaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>化学一問一答【完全版】</b><em>ナガセ</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859497.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859497.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859497.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859498.jpg|https://cover.openbd.jp/9784890859498.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/ichimonitto-kagaku/">化学一問一答【完全版】</a><span>無機と有機の知識を毎日十五分回し、講義本の内容を維持する。</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/science/books/photoscience/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>フォトサイエンス化学図録</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410273922.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410273922.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410273922.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410273926.jpg|https://cover.openbd.jp/9784410273926.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/photoscience/">フォトサイエンス化学図録</a><span>実験装置と沈殿の色を図で確認し、正誤問題の失点を防ぐ。</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/science/books/keisan-hisshu120/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>化学計算問題の必修解法120</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243079.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243079.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243079.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578243076.jpg|https://cover.openbd.jp/9784578243076.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/keisan-hisshu120/">化学計算問題の必修解法120</a><span>理論の計算を週二回まとめて解き、処理速度を落とさない。</span></div>
+          </li>
         </ul>
       </div>
       
@@ -421,6 +501,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/science/books/yamakawa-omoshiroi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>山川喜輝の生物が面白いほどわかる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052292.jpg|https://cover.openbd.jp/9784046052292.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入講義</span>
             <a class="rstep__name" href="/science/books/yamakawa-omoshiroi/">山川喜輝の生物が面白いほどわかる本</a>
@@ -431,6 +512,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/science/books/seminar-seibutsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>セミナー生物基礎+生物</b><em>第一学習社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4804047778.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4804047778.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047778.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804047775.jpg|https://cover.openbd.jp/9784804047775.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">網羅演習</span>
             <a class="rstep__name" href="/science/books/seminar-seibutsu/">セミナー生物基礎+生物</a>
@@ -441,6 +523,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/science/books/kiso-mondai-seiko/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>生物 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352571.jpg|https://cover.openbd.jp/9784010352571.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試標準</span>
             <a class="rstep__name" href="/science/books/kiso-mondai-seiko/">生物 基礎問題精講</a>
@@ -451,6 +534,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/science/books/s-zen-level-3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル問題集 生物 3 私大標準・国公立大</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353899.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353899.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353899.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353899.jpg|https://cover.openbd.jp/9784010353899.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">私大標準</span>
             <a class="rstep__name" href="/science/books/s-zen-level-3/">全レベル問題集 生物 3 私大標準・国公立大</a>
@@ -461,6 +545,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/science/books/juyo-mondaishu-seibutsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>生物 重要問題集</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/441014216X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/441014216X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/441014216X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410142161.jpg|https://cover.openbd.jp/9784410142161.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">応用演習</span>
             <a class="rstep__name" href="/science/books/juyo-mondaishu-seibutsu/">生物 重要問題集</a>
@@ -471,6 +556,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/science/books/sekaiichi-jikken-kosatsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>世界一わかりやすい 生物[実験・考察問題]の特別講座</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046054697.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046054697.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046054697.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046054692.jpg|https://cover.openbd.jp/9784046054692.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">考察対策</span>
             <a class="rstep__name" href="/science/books/sekaiichi-jikken-kosatsu/">世界一わかりやすい 生物[実験・考察問題]の特別講座</a>
@@ -487,6 +573,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/science/books/yokuwakaru-kiso-seibutsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>よくわかる高校生物基礎+生物</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056658.jpg|https://cover.openbd.jp/9784053056658.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">速習講義</span>
             <a class="rstep__name" href="/science/books/yokuwakaru-kiso-seibutsu/">よくわかる高校生物基礎+生物</a>
@@ -497,6 +584,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/science/books/kiso-mondai-seiko/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>生物 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352571.jpg|https://cover.openbd.jp/9784010352571.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試標準</span>
             <a class="rstep__name" href="/science/books/kiso-mondai-seiko/">生物 基礎問題精講</a>
@@ -507,6 +595,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/science/books/s-zen-level-3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル問題集 生物 3 私大標準・国公立大</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353899.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353899.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353899.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353899.jpg|https://cover.openbd.jp/9784010353899.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">私大標準</span>
             <a class="rstep__name" href="/science/books/s-zen-level-3/">全レベル問題集 生物 3 私大標準・国公立大</a>
@@ -517,6 +606,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/science/books/juyo-mondaishu-seibutsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>生物 重要問題集</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/441014216X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/441014216X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/441014216X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410142161.jpg|https://cover.openbd.jp/9784410142161.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">応用演習</span>
             <a class="rstep__name" href="/science/books/juyo-mondaishu-seibutsu/">生物 重要問題集</a>
@@ -532,10 +622,22 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/science/books/tabe-ichimon-itto/">生物 一問一答 完全版</a><span>演習した分野だけ一問一答で追い、知識を入試レベルまで引き上げる。</span></li>
-          <li><a href="/science/books/photoscience-zuroku/">フォトサイエンス生物図録</a><span>実験装置やグラフは必ず図録で確認し、図ごと記憶に残すようにする。</span></li>
-          <li><a href="/science/books/omori-iden/">大森徹の生物 遺伝問題の解法</a><span>私大頻出の遺伝計算を型で覚え、初見でも手が止まらない状態にする。</span></li>
-          <li><a href="/science/books/nyushi-chishiki-kanzen-seiri/">入試知識の完全整理 生物基礎・生物</a><span>分野をまたぐ知識を表で整理し、紛らわしい用語の区別を固めておく。</span></li>
+          <li>
+            <a class="rside__cov" href="/science/books/tabe-ichimon-itto/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>生物 一問一答 完全版</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859012.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859012.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859012.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859016.jpg|https://cover.openbd.jp/9784890859016.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/tabe-ichimon-itto/">生物 一問一答 完全版</a><span>演習した分野だけ一問一答で追い、知識を入試レベルまで引き上げる。</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/science/books/photoscience-zuroku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>フォトサイエンス生物図録</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410281682.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410281682.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410281682.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410281686.jpg|https://cover.openbd.jp/9784410281686.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/photoscience-zuroku/">フォトサイエンス生物図録</a><span>実験装置やグラフは必ず図録で確認し、図ごと記憶に残すようにする。</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/science/books/omori-iden/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>大森徹の生物 遺伝問題の解法</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401035464X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401035464X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035464X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010354643.jpg|https://cover.openbd.jp/9784010354643.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/omori-iden/">大森徹の生物 遺伝問題の解法</a><span>私大頻出の遺伝計算を型で覚え、初見でも手が止まらない状態にする。</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/science/books/nyushi-chishiki-kanzen-seiri/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>入試知識の完全整理 生物基礎・生物</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060869.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060869.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060869.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053060860.jpg|https://cover.openbd.jp/9784053060860.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/nyushi-chishiki-kanzen-seiri/">入試知識の完全整理 生物基礎・生物</a><span>分野をまたぐ知識を表で整理し、紛らわしい用語の区別を固めておく。</span></div>
+          </li>
         </ul>
       </div>
       
@@ -551,6 +653,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/science/books/mouichido-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>もういちど読む数研の高校地学</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410139592.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410139592.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410139592.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410139598.jpg|https://cover.openbd.jp/9784410139598.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入読本</span>
             <a class="rstep__name" href="/science/books/mouichido-chigaku/">もういちど読む数研の高校地学</a>
@@ -561,6 +664,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/science/books/hitoride-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ひとりで学べる地学</b><em>清水書院</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4389201409.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4389201409.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4389201409.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784389201401.jpg|https://cover.openbd.jp/9784389201401.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">講義通読</span>
             <a class="rstep__name" href="/science/books/hitoride-chigaku/">ひとりで学べる地学</a>
@@ -571,6 +675,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/science/books/sensor-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>センサー地学</b><em>啓林館</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4402235170.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4402235170.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402235170.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784402235178.jpg|https://cover.openbd.jp/9784402235178.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">傍用演習</span>
             <a class="rstep__name" href="/science/books/sensor-chigaku/">センサー地学</a>
@@ -581,6 +686,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/science/books/tanki-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>短期攻略 共通テスト 地学</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796123563.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796123563.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796123563.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796123563.jpg|https://cover.openbd.jp/9784796123563.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">共テ演習</span>
             <a class="rstep__name" href="/science/books/tanki-chigaku/">短期攻略 共通テスト 地学</a>
@@ -591,6 +697,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/science/books/kawai-kako-review-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>共通テスト過去問レビュー 地学基礎・地学</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231096.jpg|https://cover.openbd.jp/9784777231096.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問</span>
             <a class="rstep__name" href="/science/books/kawai-kako-review-chigaku/">共通テスト過去問レビュー 地学基礎・地学</a>
@@ -607,6 +714,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/science/books/hitoride-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ひとりで学べる地学</b><em>清水書院</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4389201409.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4389201409.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4389201409.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784389201401.jpg|https://cover.openbd.jp/9784389201401.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">講義通読</span>
             <a class="rstep__name" href="/science/books/hitoride-chigaku/">ひとりで学べる地学</a>
@@ -617,6 +725,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/science/books/tanki-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>短期攻略 共通テスト 地学</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796123563.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796123563.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796123563.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796123563.jpg|https://cover.openbd.jp/9784796123563.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">共テ演習</span>
             <a class="rstep__name" href="/science/books/tanki-chigaku/">短期攻略 共通テスト 地学</a>
@@ -627,6 +736,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/science/books/kawai-kako-review-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>共通テスト過去問レビュー 地学基礎・地学</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231096.jpg|https://cover.openbd.jp/9784777231096.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">過去問</span>
             <a class="rstep__name" href="/science/books/kawai-kako-review-chigaku/">共通テスト過去問レビュー 地学基礎・地学</a>
@@ -642,8 +752,14 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/science/books/square-zusetsu-chigaku/">スクエア最新図説地学</a><span>問題で出た図や断面図を図説で確認し、周辺の知識ごと吸収する。</span></li>
-          <li><a href="/science/books/keirin-kyokasho-chigaku/">高等学校 地学 (啓林館 教科書)</a><span>曖昧な用語は教科書の定義に戻って読み、自分の言葉で言い直す。</span></li>
+          <li>
+            <a class="rside__cov" href="/science/books/square-zusetsu-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>スクエア最新図説地学</b><em>第一学習社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/480404745X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/480404745X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/480404745X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804047454.jpg|https://cover.openbd.jp/9784804047454.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/square-zusetsu-chigaku/">スクエア最新図説地学</a><span>問題で出た図や断面図を図説で確認し、周辺の知識ごと吸収する。</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/science/books/keirin-kyokasho-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>高等学校 地学 (啓林館 教科書)</b><em>啓林館</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4402030064.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4402030064.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402030064.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784402030063.jpg|https://cover.openbd.jp/9784402030063.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/science/books/keirin-kyokasho-chigaku/">高等学校 地学 (啓林館 教科書)</a><span>曖昧な用語は教科書の定義に戻って読み、自分の言葉で言い直す。</span></div>
+          </li>
         </ul>
       </div>
       

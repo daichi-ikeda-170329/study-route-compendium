@@ -33,6 +33,26 @@
    */
   var TOKENS_RE = /^(0|[1-9][0-9]?)(\.(0|[1-9][0-9]?))*$/;
 
+  /**
+   * ルート画面の共有 URL のスキーマ。
+   *   ?rv=1&r=<トークン列>[&ru=<大学名>]
+   *
+   * 診断（v / a）が「回答」を載せるのに対し、こちらは「ルート画面の設定」を載せる。
+   * トークンの意味は科目ごとに違う（理科は使う科目、社会は受験タイプを持つ）ので、
+   * 組み立てと検証は科目ページ側の route.encode / route.apply が行い、
+   * ここは「英数字と - _ だけ・8 個まで」という書式だけを保証する。
+   *
+   * 大学名（ru）だけは日本語を許す。UNIS に安定した ID が無く、配列の位置で指すと
+   * 収録校を 1 校足しただけで別の大学を指してしまうため、名前で持って
+   * 科目ページ側が UNIS と突き合わせる。一致しなければ志望レベルのルートへ落とす。
+   */
+  var ROUTE_VERSION = 1;
+  var PARAM_ROUTE_VERSION = "rv";
+  var PARAM_ROUTE = "r";
+  var PARAM_ROUTE_UNI = "ru";
+  var ROUTE_TOKENS_RE = /^[A-Za-z0-9_-]{1,24}(\.[A-Za-z0-9_-]{1,24}){0,7}$/;
+  var ROUTE_UNI_MAX = 60;
+
   /** localStorage のキーとスキーマ */
   var STORE_KEY = "rt_saved_routes";
   var STORE_VERSION = 1;
@@ -270,6 +290,12 @@
   var restored = false;
   /** URL は付いていたが検証に通らなかったか */
   var linkFailed = false;
+  /**
+   * ルートの共有 URL から復元して表示しているときの、その URL が表していた設定。
+   * 利用者が条件を変えたら値がずれるので、「共有されたルートを表示しています」の
+   * 注記を出し続けるかどうかをこれで判定する。
+   */
+  var restoredRouteKey = null;
 
   function pageBase() {
     try {
@@ -367,8 +393,32 @@
       label: label
     };
 
-    var text = "【ルート大全で診断】\n" + label + "のルートが出ました\n#ルート大全 #大学受験";
-    var xURL = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url);
+    return shareBox({
+      head: "SHARE &amp; SAVE — この結果を共有・保存する",
+      url: url,
+      label: label,
+      tweet: "【ルート大全で診断】\n" + label + "のルートが出ました\n#ルート大全 #大学受験",
+      save: true,
+      note: "共有リンクに含まれるのは回答だけです。開いた人には、そのときの最新の診断ロジックで同じルートが表示されます。"
+        + (storageOK() ? "保存はこの端末の中だけで行われ、外部には送信されません。" : "")
+    });
+  }
+
+  /**
+   * 共有ブロックの共通の見た目。
+   *
+   * 共有対象（URL と表示名）はブロックの data 属性に持たせる。診断結果とルート画面に
+   * 同時に出るため、どちらを押したかはボタンからブロックをたどって決める。
+   *   opts.head  見出し
+   *   opts.url   共有 URL
+   *   opts.label 表示名（X の本文と端末の共有シートに使う）
+   *   opts.tweet X に載せる本文
+   *   opts.save  「この結果を保存」を出すか（診断結果だけ）
+   *   opts.note  下に出す注記
+   */
+  function shareBox(opts) {
+    var xURL = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(opts.tweet)
+      + "&url=" + encodeURIComponent(opts.url);
 
     var canNative = false;
     try { canNative = typeof global.navigator.share === "function"; } catch (e) { canNative = false; }
@@ -380,23 +430,66 @@
       + '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>'
       + 'Xで共有</a>';
     if (canNative) {
-      btns += '<button type="button" class="btn btn-ghost" onclick="RTShare.shareNative()">'
+      btns += '<button type="button" class="btn btn-ghost" onclick="RTShare.shareNative(this)">'
         + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v13M8 7l4-4 4 4M5 14v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
         + '共有</button>';
     }
-    if (storageOK()) {
+    if (opts.save && storageOK()) {
       btns += '<button type="button" class="btn btn-ghost" onclick="RTShare.saveRoute(this)">'
         + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM8 3v6h7M8 20v-6h8v6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'
         + 'この結果を保存</button>';
     }
 
-    return '<div class="rt-share" id="rtShare">'
-      + '<div class="rt-share__head">SHARE &amp; SAVE — この結果を共有・保存する</div>'
+    return '<div class="rt-share" data-rt-url="' + esc(opts.url) + '" data-rt-label="' + esc(opts.label) + '">'
+      + '<div class="rt-share__head">' + opts.head + '</div>'
       + '<div class="rt-share__btns">' + btns + '</div>'
-      + '<div id="rtShareMsg"></div>'
-      + '<p class="rt-share__note">共有リンクに含まれるのは回答だけです。開いた人には、そのときの最新の診断ロジックで同じルートが表示されます。'
-      + (storageOK() ? '保存はこの端末の中だけで行われ、外部には送信されません。' : '')
-      + '</p></div>';
+      + '<div class="rt-share__msg"></div>'
+      + '<p class="rt-share__note">' + esc(opts.note) + '</p></div>';
+  }
+
+  /**
+   * ルート画面の末尾に差し込む共有ブロック。renderRoute() から呼ぶ。
+   *
+   * 共有できる状態でなければ空文字を返す（志望レベルを選ぶ前など）。
+   * 保存ボタンは出さない。保存の対象は診断の回答であって、ルート画面の設定ではない。
+   */
+  function routeBlock() {
+    if (!CFG || !CFG.route || typeof CFG.route.encode !== "function") return "";
+    var st;
+    try { st = CFG.route.encode(); } catch (e) { return ""; }
+    if (!st || !Array.isArray(st.tokens) || !st.tokens.length) return "";
+
+    var tokens = st.tokens.join(SEP);
+    if (!ROUTE_TOKENS_RE.test(tokens)) return "";
+
+    var url = pageBase() + "?" + PARAM_ROUTE_VERSION + "=" + ROUTE_VERSION
+      + "&" + PARAM_ROUTE + "=" + tokens;
+    if (st.uni && String(st.uni).length <= ROUTE_UNI_MAX) {
+      url += "&" + PARAM_ROUTE_UNI + "=" + encodeURIComponent(String(st.uni));
+    }
+    var label = CFG.subjectLabel + "：" + String(st.label || "");
+
+    var key = tokens + "|" + (st.uni || "");
+    var notice = "";
+    if (restoredRouteKey !== null) {
+      if (restoredRouteKey === key) {
+        notice = '<div class="rt-notice"><p>共有されたルートを表示しています。条件を変えると、あなた自身のルートに切り替わります。</p></div>';
+      } else {
+        /* 条件が変わった時点で、URL に残った共有パラメータは今の画面と食い違う。
+           ここで落としておくと、その URL をコピーしても古い設定が付いてこない。 */
+        restoredRouteKey = null;
+        clearRouteParams();
+      }
+    }
+
+    return notice + shareBox({
+      head: "SHARE — このルートを共有する",
+      url: url,
+      label: label,
+      tweet: "【ルート大全】\n" + label + "のルートで進めます\n#ルート大全 #大学受験",
+      save: false,
+      note: "共有リンクに含まれるのは志望レベル・型・方針・現在地だけです。模試の偏差値や既習の参考書は含まれません。"
+    });
   }
 
   /** 保存済みルートの一覧。現在の科目の分だけを出す */
@@ -419,42 +512,65 @@
 
   /* ---------- 操作 ---------- */
 
-  function msg(text, tone) {
+  /**
+   * 押されたボタンが属する共有ブロック。
+   * 診断結果とルート画面に同時に共有ブロックが出るため、
+   * 「今どちらを操作したか」はボタンからたどって決める（id で 1 つに決め打ちしない）。
+   */
+  function blockOf(btn) {
     try {
-      var el = global.document.getElementById("rtShareMsg");
+      return btn && btn.closest ? btn.closest(".rt-share") : null;
+    } catch (e) { return null; }
+  }
+
+  /** 共有ブロックが持っている共有対象（URL と表示名）。属性から読む */
+  function targetOf(btn) {
+    var box = blockOf(btn);
+    if (!box) return null;
+    var url = box.getAttribute("data-rt-url");
+    if (!url) return null;
+    return { box: box, url: url, label: box.getAttribute("data-rt-label") || "" };
+  }
+
+  function msgHost(box) {
+    return box ? box.querySelector(".rt-share__msg") : null;
+  }
+
+  function msg(box, text, tone) {
+    try {
+      var el = msgHost(box);
       if (!el) return;
       el.innerHTML = '<p class="rt-share__note" style="color:' + (tone === "warn" ? "var(--gold)" : "var(--ok)") + ';font-weight:700">' + esc(text) + '</p>';
       global.setTimeout(function () {
-        var cur = global.document.getElementById("rtShareMsg");
-        if (cur) cur.innerHTML = "";
+        if (el) el.innerHTML = "";
       }, 2000);
     } catch (e) { /* 表示できなくても操作自体は完了している */ }
   }
 
   /** クリップボードが使えない環境向けに、選択済みのテキストボックスを出す */
-  function copyFallback(url) {
+  function copyFallback(box, url) {
     try {
-      var host = global.document.getElementById("rtShareMsg");
+      var host = msgHost(box);
       if (!host) return;
-      host.innerHTML = '<input class="rt-share__box" id="rtShareBox" readonly value="' + esc(url) + '">'
+      host.innerHTML = '<input class="rt-share__box" readonly value="' + esc(url) + '">'
         + '<p class="rt-share__note">お使いの環境では自動コピーができません。上のリンクを選択してコピーしてください。</p>';
-      var box = global.document.getElementById("rtShareBox");
-      box.focus();
-      box.select();
+      var input = host.querySelector(".rt-share__box");
+      input.focus();
+      input.select();
     } catch (e) { /* ここまで来たら打つ手はない */ }
   }
 
-  function copyLink() {
-    if (!CURRENT) return;
-    var url = CURRENT.url;
-    var done = function () { msg("コピーしました"); track("share_copy", { subject: CFG.subject }); };
+  function copyLink(btn) {
+    var t = targetOf(btn);
+    if (!t) return;
+    var done = function () { msg(t.box, "コピーしました"); track("share_copy", { subject: CFG.subject }); };
     try {
       if (global.navigator.clipboard && global.navigator.clipboard.writeText) {
-        global.navigator.clipboard.writeText(url).then(done, function () { copyFallback(url); });
+        global.navigator.clipboard.writeText(t.url).then(done, function () { copyFallback(t.box, t.url); });
         return;
       }
     } catch (e) { /* 下のフォールバックへ */ }
-    copyFallback(url);
+    copyFallback(t.box, t.url);
   }
 
   function trackShareX() {
@@ -462,22 +578,24 @@
     track("share_x", { subject: CFG.subject });
   }
 
-  function shareNative() {
-    if (!CURRENT) return;
+  function shareNative(btn) {
+    var t = targetOf(btn);
+    if (!t) return;
     try {
       global.navigator.share({
-        title: "ルート大全 — " + CURRENT.label,
-        text: CURRENT.label + "のルートが出ました",
-        url: CURRENT.url
+        title: "ルート大全 — " + t.label,
+        text: t.label + "のルートが出ました",
+        url: t.url
       }).then(function () {
         track("share_native", { subject: CFG.subject });
       }, function () { /* 利用者がキャンセルした場合。何もしない */ });
     } catch (e) { /* 共有シートを開けない環境 */ }
   }
 
-  function saveRoute() {
+  function saveRoute(btn) {
     if (!CFG || !CURRENT || !CURRENT.tokens) return;
     if (!storageOK()) return;
+    var box = blockOf(btn);
     var store = loadStore();
 
     /* 同じ回答をすでに保存していれば、増やさずに保存日時だけ更新する */
@@ -488,8 +606,8 @@
     if (same >= 0) {
       store.items[same].savedAt = new Date().toISOString();
       store.items[same].label = CURRENT.label;
-      if (!saveStore(store)) { msg("保存できませんでした", "warn"); return; }
-      msg("保存しました（既存の項目を更新）");
+      if (!saveStore(store)) { msg(box, "保存できませんでした", "warn"); return; }
+      msg(box, "保存しました（既存の項目を更新）");
       track("route_save", { subject: CFG.subject, updated: true });
       return;
     }
@@ -512,8 +630,8 @@
       answers: CURRENT.tokens,
       label: CURRENT.label
     });
-    if (!saveStore(store)) { msg("保存できませんでした", "warn"); return; }
-    msg("保存しました");
+    if (!saveStore(store)) { msg(box, "保存できませんでした", "warn"); return; }
+    msg(box, "保存しました");
     track("route_save", { subject: CFG.subject, updated: false });
   }
 
@@ -606,6 +724,17 @@
     } catch (e) { /* replaceState が使えない環境では URL がそのまま残るだけ */ }
   }
 
+  /** ルート共有のパラメータだけを取り除く。画面を指すハッシュ（#route）は残す */
+  function clearRouteParams() {
+    try {
+      var u = new URL(global.location.href);
+      u.searchParams.delete(PARAM_ROUTE_VERSION);
+      u.searchParams.delete(PARAM_ROUTE);
+      u.searchParams.delete(PARAM_ROUTE_UNI);
+      global.history.replaceState(null, "", u.pathname + u.search + u.hash);
+    } catch (e) { /* URL を組み直せない環境では、そのまま残しておく */ }
+  }
+
   /**
    * 科目ページから 1 度だけ呼ぶ。
    *   quiz         その科目の QUIZ 配列
@@ -615,6 +744,10 @@
    *   showResult() 結果画面を表示する
    *   renderQuiz() 質問画面を描き直す
    *   restart()    診断を最初からやり直す
+   *   route        ルート画面の共有（省略可）
+   *     encode()          今のルートを {tokens, uni, label} にする。共有できないときは null
+   *     apply(tokens,uni) 検証して適用する。適用できたら true
+   *     show()            ルート画面を表示する
    */
   function setup(cfg) {
     if (!cfg || !Array.isArray(cfg.quiz) || SUBJECTS.indexOf(cfg.subject) < 0) return;
@@ -628,6 +761,11 @@
 
     var params;
     try { params = new URLSearchParams(search); } catch (e) { return; }
+
+    if (params.has(PARAM_ROUTE_VERSION) || params.has(PARAM_ROUTE)) {
+      restoreRoute(cfg, params);
+      return;
+    }
     /* 共有リンク以外のパラメータ（広告のクリック ID など）で注記を出さないよう、v か a があるときだけ扱う */
     if (!params.has(PARAM_VERSION) && !params.has(PARAM_ANSWERS)) return;
 
@@ -646,6 +784,38 @@
     track("shared_link_open", { subject: cfg.subject });
   }
 
+  /**
+   * ルートの共有 URL を検証して復元する。
+   *
+   * 書式（rv・r の形）はここで見て、意味（その志望レベルが実在するか等）は
+   * 科目ページの route.apply が見る。どちらかが通らなければ部分的に復元せず、
+   * パラメータを落として普通のトップページとして開く。
+   */
+  function restoreRoute(cfg, params) {
+    var bail = function (reason) {
+      clearRouteParams();
+      track("shared_route_invalid", { subject: cfg.subject, reason: reason });
+    };
+    if (!cfg.route || typeof cfg.route.apply !== "function") return bail("route-unsupported");
+    if (params.get(PARAM_ROUTE_VERSION) !== String(ROUTE_VERSION)) return bail("version");
+
+    var raw = params.get(PARAM_ROUTE) || "";
+    if (!ROUTE_TOKENS_RE.test(raw)) return bail("tokens-format");
+
+    var uni = params.get(PARAM_ROUTE_UNI) || "";
+    if (uni.length > ROUTE_UNI_MAX) return bail("uni-too-long");
+
+    /* apply の中でルート画面が描き直され、その場で routeBlock() が呼ばれる。
+       注記を出すかどうかの判定材料はそれより前に置いておく必要がある。 */
+    restoredRouteKey = raw + "|" + uni;
+    var ok = false;
+    try { ok = cfg.route.apply(raw.split(SEP), uni) === true; } catch (e) { ok = false; }
+    if (!ok) { restoredRouteKey = null; return bail("route-rejected"); }
+
+    try { cfg.route.show(); } catch (e) { /* 表示に失敗しても状態は適用済み */ }
+    track("shared_route_open", { subject: cfg.subject });
+  }
+
   var RTShare = {
     SCHEMA_VERSION: SCHEMA_VERSION,
     STORE_LIMIT: STORE_LIMIT,
@@ -657,6 +827,7 @@
     beforeQuiz: beforeQuiz,
     beforeResult: beforeResult,
     afterResult: afterResult,
+    routeBlock: routeBlock,
     copyLink: copyLink,
     trackShareX: trackShareX,
     shareNative: shareNative,

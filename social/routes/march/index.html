@@ -29,6 +29,7 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
 <script>
@@ -53,10 +54,12 @@ gtag('config', 'G-DQ5WFXEFMX');
 .rpol__t span{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:600}
 .rpol__n{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.75}
 .rsteps{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:0}
-.rstep{display:flex;gap:13px;padding:13px 0;border-top:1px dashed var(--line)}
+.rstep{display:flex;gap:12px;padding:14px 0;border-top:1px dashed var(--line)}
 .rstep:first-child{border-top:none;padding-top:4px}
 .rstep__no{font-family:var(--mono);font-size:11px;color:var(--muted-2);font-weight:600;padding-top:3px;flex:none;width:20px}
-.rstep__body{min-width:0}
+/* 書影は書名リンクの隣に置く飾り。読み上げ・タブ移動では書名リンクだけを通す */
+.rstep__cov{flex:none;display:block;--cw:52px}
+.rstep__body{min-width:0;flex:1}
 .rstep__role{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--sc);padding:2px 7px;border-radius:2px;letter-spacing:.04em;margin-bottom:5px}
 /* 指でタップできる高さを確保する（当たり判定だけ広げ、見た目は変えない） */
 .rstep__name{display:block;font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.45;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px;transition:.15s;padding:4px 0}
@@ -68,9 +71,11 @@ gtag('config', 'G-DQ5WFXEFMX');
 .rside{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:18px 20px;margin-top:14px}
 .rside h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-bottom:7px}
 .rside p{font-size:12.5px;color:var(--muted);line-height:1.8}
-.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:8px}
-.rside li{font-size:13px;line-height:1.7}
-.rside li a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
+.rside ul{list-style:none;margin-top:11px;display:flex;flex-direction:column;gap:12px}
+.rside li{display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.7}
+.rside li>div{min-width:0}
+.rside__cov{flex:none;display:block;--cw:40px}
+.rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .unis span{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
@@ -100,10 +105,17 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="logo__mark">社</div>
       <div class="logo__txt"><b>社会ルート大全</b><span>SOCIAL STUDIES ROUTE</span></div>
     </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
     <div class="hdr-cta">
-      <a href="/social/">参考書図鑑</a>
+      <a href="/social/#catalog">参考書図鑑</a>
       <a href="/">全科目</a>
-      <a class="primary" href="/social/">ルートを作る</a>
+      <a class="primary" href="/social/#route">ルートを作る</a>
     </div>
   </div>
 </header>
@@ -133,6 +145,34 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="#track-seikei">政治・経済のルート</a>
       <a href="#track-rinri">倫理のルート</a>
     </div>
+    <div class="sharebar">
+    <span class="sharebar__t">SHARE — このルートを共有する</span>
+    <a class="sharebar__b" href="https://twitter.com/intent/tweet?text=%E3%80%90%E3%83%AB%E3%83%BC%E3%83%88%E5%A4%A7%E5%85%A8%E3%80%91MARCH%E3%83%BB%E9%96%A2%E9%96%A2%E5%90%8C%E7%AB%8B%E3%81%AE%E7%A4%BE%E4%BC%9A%E5%8F%82%E8%80%83%E6%9B%B8%E3%83%AB%E3%83%BC%E3%83%88%EF%BC%8880%E5%86%8A%EF%BC%89%0A%23%E3%83%AB%E3%83%BC%E3%83%88%E5%A4%A7%E5%85%A8%20%23%E5%A4%A7%E5%AD%A6%E5%8F%97%E9%A8%93&amp;url=https%3A%2F%2Froute-taizen.com%2Fsocial%2Froutes%2Fmarch%2F" target="_blank" rel="noopener noreferrer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>
+      Xで共有</a>
+    <button class="sharebar__b" type="button" data-rt-copy="https://route-taizen.com/social/routes/march/">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9h10v10H9zM5 15H4V4h11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      リンクをコピー</button>
+    <span class="sharebar__msg" role="status"></span>
+  </div>
+  <script>
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-rt-copy]") : null;
+    if (!b) return;
+    var msg = b.parentNode.querySelector(".sharebar__msg");
+    var show = function (t) {
+      if (!msg) return;
+      msg.textContent = t;
+      setTimeout(function () { msg.textContent = ""; }, 2000);
+    };
+    try {
+      navigator.clipboard.writeText(b.dataset.rtCopy).then(
+        function () { show("コピーしました"); },
+        function () { show("コピーできませんでした"); }
+      );
+    } catch (err) { show("コピーできませんでした"); }
+  });
+  </script>
   </div>
 
     <section class="block" id="track-nihonshi">
@@ -145,6 +185,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/jikkyo-nihonshi-1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継①</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688326.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688326.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688326.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688327.jpg|https://cover.openbd.jp/9784875688327.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義(古代)</span>
             <a class="rstep__name" href="/social/books/jikkyo-nihonshi-1/">実況中継①</a>
@@ -155,6 +196,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/jikkyo-nihonshi-2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継②</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688334.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688334.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688334.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688334.jpg|https://cover.openbd.jp/9784875688334.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義(中世近世)</span>
             <a class="rstep__name" href="/social/books/jikkyo-nihonshi-2/">実況中継②</a>
@@ -165,6 +207,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/jikkyo-nihonshi-3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継③</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688342.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688342.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688342.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688341.jpg|https://cover.openbd.jp/9784875688341.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義(近世近代)</span>
             <a class="rstep__name" href="/social/books/jikkyo-nihonshi-3/">実況中継③</a>
@@ -175,6 +218,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/jikkyo-nihonshi-4/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継④</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688350.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688350.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688350.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688358.jpg|https://cover.openbd.jp/9784875688358.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義(近現代)</span>
             <a class="rstep__name" href="/social/books/jikkyo-nihonshi-4/">実況中継④</a>
@@ -185,6 +229,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/social/books/shosetsu-nihonshi-kyokasho/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>詳説日本史</b><em>山川出版社</em></span><img src="https://www.gakusan.com/bookimage/9784634701212.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784634701212.jpg|https://images-fe.ssl-images-amazon.com/images/P/4634701219.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634701219.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634701212.jpg|https://cover.openbd.jp/9784634701212.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">教科書精読</span>
             <a class="rstep__name" href="/social/books/shosetsu-nihonshi-kyokasho/">詳説日本史</a>
@@ -195,6 +240,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/social/books/kiso-mondai-seiko-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>日本史基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010347023.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010347023.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010347023.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010347027.jpg|https://cover.openbd.jp/9784010347027.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎演習</span>
             <a class="rstep__name" href="/social/books/kiso-mondai-seiko-nihonshi/">日本史基礎問題精講</a>
@@ -205,6 +251,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">07</span>
+          <a class="rstep__cov" href="/social/books/historia-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>HISTORIA</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061148.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061148.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061148.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053061140.jpg|https://cover.openbd.jp/9784053061140.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">標準演習</span>
             <a class="rstep__name" href="/social/books/historia-nihonshi/">HISTORIA</a>
@@ -221,6 +268,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/kanaya-nagare-2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>金谷②中世近世</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859756.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859756.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859756.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859757.jpg|https://cover.openbd.jp/9784890859757.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義</span>
             <a class="rstep__name" href="/social/books/kanaya-nagare-2/">金谷②中世近世</a>
@@ -231,6 +279,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/speedmaster-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>スピマス日本史</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/463401226X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/463401226X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463401226X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634012264.jpg|https://cover.openbd.jp/9784634012264.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎演習</span>
             <a class="rstep__name" href="/social/books/speedmaster-nihonshi/">スピマス日本史</a>
@@ -241,6 +290,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/zenlevel-nihonshi-3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル③私大標準</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353651.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353651.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353651.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353653.jpg|https://cover.openbd.jp/9784010353653.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">私大標準演習</span>
             <a class="rstep__name" href="/social/books/zenlevel-nihonshi-3/">全レベル③私大標準</a>
@@ -251,6 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/speedmaster-bunkashi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>スピマス文化史</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634012278.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634012278.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634012278.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634012271.jpg|https://cover.openbd.jp/9784634012271.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">文化史集中</span>
             <a class="rstep__name" href="/social/books/speedmaster-bunkashi/">スピマス文化史</a>
@@ -266,18 +317,36 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/social/books/yamakawa-ichimonitto-nihonshi/">山川一問一答</a><span>教科書対応の一問一答で到達点を明確にする</span></li>
-          <li><a href="/social/books/yougoshu-nihonshi/">日本史用語集</a><span>未知の語は頻度を確認し覚えるか捨てるか決める</span></li>
-          <li><a href="/social/books/shosetsu-nihonshi-zuroku/">詳説日本史図録</a><span>文化史の写真・統計は毎回図録で確認する</span></li>
-          <li><a href="/social/books/ganso-nendai-anki/">元祖 年代暗記法</a><span>同年出来事・年代整序に備えて年号を持ち歩く</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/yamakawa-ichimonitto-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>山川一問一答</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634012243.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634012243.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634012243.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634012240.jpg|https://cover.openbd.jp/9784634012240.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/yamakawa-ichimonitto-nihonshi/">山川一問一答</a><span>教科書対応の一問一答で到達点を明確にする</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/yougoshu-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>日本史用語集</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634013061.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634013061.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634013061.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634013063.jpg|https://cover.openbd.jp/9784634013063.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/yougoshu-nihonshi/">日本史用語集</a><span>未知の語は頻度を確認し覚えるか捨てるか決める</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/shosetsu-nihonshi-zuroku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>詳説日本史図録</b><em>山川出版社</em></span><img src="https://www.gakusan.com/bookimage/9784634025318.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784634025318.jpg|https://images-fe.ssl-images-amazon.com/images/P/4634025310.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634025310.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634025318.jpg|https://cover.openbd.jp/9784634025318.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/shosetsu-nihonshi-zuroku/">詳説日本史図録</a><span>文化史の写真・統計は毎回図録で確認する</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/ganso-nendai-anki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>元祖 年代暗記法</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010344199.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010344199.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010344199.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010344194.jpg|https://cover.openbd.jp/9784010344194.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/ganso-nendai-anki/">元祖 年代暗記法</a><span>同年出来事・年代整序に備えて年号を持ち歩く</span></div>
+          </li>
         </ul>
       </div>
       <div class="rside">
         <h3>最後の仕上げ</h3>
         <p>直前期に取り組む総仕上げです。上のルートを終えてから着手します。</p>
         <ul>
-          <li><a href="/social/books/zenkoku-nyushi-seikai-nihonshi/">全国入試問題正解</a><span>併願校と同傾向の他大学問題で演習量を積む</span></li>
-          <li><a href="/social/books/kyotest-kakomon-kenkyu-nihonshi/">共テ過去問研究</a><span>共通テスト利用も併用するため形式を仕上げる</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/zenkoku-nyushi-seikai-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>全国入試問題正解</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010367741.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010367741.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010367741.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010367742.jpg|https://cover.openbd.jp/9784010367742.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/zenkoku-nyushi-seikai-nihonshi/">全国入試問題正解</a><span>併願校と同傾向の他大学問題で演習量を積む</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/kyotest-kakomon-kenkyu-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>共テ過去問研究</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273409.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273409.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273409.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273400.jpg|https://cover.openbd.jp/9784325273400.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/kyotest-kakomon-kenkyu-nihonshi/">共テ過去問研究</a><span>共通テスト利用も併用するため形式を仕上げる</span></div>
+          </li>
         </ul>
       </div>
     </section>
@@ -292,6 +361,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/jikkyo-sekaishi-1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継①</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688365.jpg|https://cover.openbd.jp/9784875688365.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義①</span>
             <a class="rstep__name" href="/social/books/jikkyo-sekaishi-1/">実況中継①</a>
@@ -302,6 +372,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/jikkyo-sekaishi-2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継②</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688377.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688377.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688377.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688372.jpg|https://cover.openbd.jp/9784875688372.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義②</span>
             <a class="rstep__name" href="/social/books/jikkyo-sekaishi-2/">実況中継②</a>
@@ -312,6 +383,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/jikkyo-sekaishi-3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継③</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688385.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688385.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688385.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688389.jpg|https://cover.openbd.jp/9784875688389.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義③</span>
             <a class="rstep__name" href="/social/books/jikkyo-sekaishi-3/">実況中継③</a>
@@ -322,6 +394,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/jikkyo-sekaishi-4/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継④</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688393.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688393.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688393.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688396.jpg|https://cover.openbd.jp/9784875688396.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義④</span>
             <a class="rstep__name" href="/social/books/jikkyo-sekaishi-4/">実況中継④</a>
@@ -332,6 +405,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/social/books/speedmaster-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>スピードマスター</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634032260.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634032260.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634032260.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634032262.jpg|https://cover.openbd.jp/9784634032262.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎演習</span>
             <a class="rstep__name" href="/social/books/speedmaster-sekaishi/">スピードマスター</a>
@@ -342,6 +416,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/social/books/master-mondaishu-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>世界史マスター問題集</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634032279.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634032279.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634032279.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634032279.jpg|https://cover.openbd.jp/9784634032279.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">標準演習</span>
             <a class="rstep__name" href="/social/books/master-mondaishu-sekaishi/">世界史マスター問題集</a>
@@ -352,6 +427,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">07</span>
+          <a class="rstep__cov" href="/social/books/historia-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>HISTORIA 世界史</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061156.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061156.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061156.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053061157.jpg|https://cover.openbd.jp/9784053061157.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試演習</span>
             <a class="rstep__name" href="/social/books/historia-sekaishi/">HISTORIA 世界史</a>
@@ -368,6 +444,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/panorama-sekaishi-kodai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>パノラマ世界史①</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053042590.jpg|https://cover.openbd.jp/9784053042590.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義(前半)</span>
             <a class="rstep__name" href="/social/books/panorama-sekaishi-kodai/">パノラマ世界史①</a>
@@ -378,6 +455,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/panorama-sekaishi-kingendai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>パノラマ世界史②</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053043658.jpg|https://cover.openbd.jp/9784053043658.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通史講義(後半)</span>
             <a class="rstep__name" href="/social/books/panorama-sekaishi-kingendai/">パノラマ世界史②</a>
@@ -388,6 +466,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/kiso-mondai-seiko-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>世界史基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010347031.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010347031.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010347031.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010347034.jpg|https://cover.openbd.jp/9784010347034.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎演習</span>
             <a class="rstep__name" href="/social/books/kiso-mondai-seiko-sekaishi/">世界史基礎問題精講</a>
@@ -398,6 +477,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/zenlevel-sekaishi-3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル③ 私大標準</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353708.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353708.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353708.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353707.jpg|https://cover.openbd.jp/9784010353707.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">私大形式</span>
             <a class="rstep__name" href="/social/books/zenlevel-sekaishi-3/">全レベル③ 私大標準</a>
@@ -413,18 +493,36 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/social/books/toshin-ichimonto-sekaishi/">東進 一問一答</a><span>星2までに範囲を切ってMARCH語彙を固める</span></li>
-          <li><a href="/social/books/jidai-nagare-sekaishi/">時代と流れで覚える</a><span>地図・年表と紐づけて用語を定着させる</span></li>
-          <li><a href="/social/books/yamakawa-zuroku-sekaishi/">詳説世界史図録</a><span>文化史の作品を写真で押さえる</span></li>
-          <li><a href="/social/books/ganso-nendai-sekaishi/">元祖 年代暗記法</a><span>年代整序・同年出来事の失点を潰す</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/toshin-ichimonto-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>東進 一問一答</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859640.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859640.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859640.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859641.jpg|https://cover.openbd.jp/9784890859641.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/toshin-ichimonto-sekaishi/">東進 一問一答</a><span>星2までに範囲を切ってMARCH語彙を固める</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/jidai-nagare-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>時代と流れで覚える</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578241645.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578241645.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578241645.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578241645.jpg|https://cover.openbd.jp/9784578241645.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/jidai-nagare-sekaishi/">時代と流れで覚える</a><span>地図・年表と紐づけて用語を定着させる</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/yamakawa-zuroku-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>詳説世界史図録</b><em>山川出版社</em></span><img src="https://www.gakusan.com/bookimage/9784634045156.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784634045156.jpg|https://images-fe.ssl-images-amazon.com/images/P/463404515X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463404515X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634045156.jpg|https://cover.openbd.jp/9784634045156.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/yamakawa-zuroku-sekaishi/">詳説世界史図録</a><span>文化史の作品を写真で押さえる</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/ganso-nendai-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>元祖 年代暗記法</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010344202.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010344202.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010344202.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010344200.jpg|https://cover.openbd.jp/9784010344200.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/ganso-nendai-sekaishi/">元祖 年代暗記法</a><span>年代整序・同年出来事の失点を潰す</span></div>
+          </li>
         </ul>
       </div>
       <div class="rside">
         <h3>最後の仕上げ</h3>
         <p>直前期に取り組む総仕上げです。上のルートを終えてから着手します。</p>
         <ul>
-          <li><a href="/social/books/mayowazu-tokeru-sekaishi/">迷わず解ける世界史</a><span>頻出テーマを難度3段階で最終確認する</span></li>
-          <li><a href="/social/books/kyotest-kakomon-kenkyu-sekaishi/">共テ過去問研究</a><span>共テ利用と一般の両にらみで実物を解く</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/mayowazu-tokeru-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>迷わず解ける世界史</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/432526700X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/432526700X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/432526700X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325267003.jpg|https://cover.openbd.jp/9784325267003.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/mayowazu-tokeru-sekaishi/">迷わず解ける世界史</a><span>頻出テーマを難度3段階で最終確認する</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/kyotest-kakomon-kenkyu-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>共テ過去問研究</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273417.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273417.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273417.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273417.jpg|https://cover.openbd.jp/9784325273417.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/kyotest-kakomon-kenkyu-sekaishi/">共テ過去問研究</a><span>共テ利用と一般の両にらみで実物を解く</span></div>
+          </li>
         </ul>
       </div>
     </section>
@@ -439,6 +537,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/chiri-murase-keito/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>村瀬 系統地理</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053047560.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053047560.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053047560.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053047564.jpg|https://cover.openbd.jp/9784053047564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">系統地理の導入</span>
             <a class="rstep__name" href="/social/books/chiri-murase-keito/">村瀬 系統地理</a>
@@ -449,6 +548,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/chiri-murase-chishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>村瀬 地誌</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053047552.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053047552.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053047552.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053047557.jpg|https://cover.openbd.jp/9784053047557.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">地誌の導入</span>
             <a class="rstep__name" href="/social/books/chiri-murase-chishi/">村瀬 地誌</a>
@@ -459,6 +559,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/chiri-hajimeru/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>はじめる地理</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860669967.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860669967.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860669967.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860669966.jpg|https://cover.openbd.jp/9784860669966.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎演習</span>
             <a class="rstep__name" href="/social/books/chiri-hajimeru/">はじめる地理</a>
@@ -469,6 +570,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/chiri-jitsuryoku-yosei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>実力養成問題集</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634054213.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634054213.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634054213.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634054219.jpg|https://cover.openbd.jp/9784634054219.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">入試標準演習</span>
             <a class="rstep__name" href="/social/books/chiri-jitsuryoku-yosei/">実力養成問題集</a>
@@ -479,6 +581,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/social/books/chiri-100dai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>実力をつける100題</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860666860.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860666860.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860666860.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860666866.jpg|https://cover.openbd.jp/9784860666866.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">上位私大の演習</span>
             <a class="rstep__name" href="/social/books/chiri-100dai/">実力をつける100題</a>
@@ -495,6 +598,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/chiri-kimeru/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>きめる!共テ地理</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053059135.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053059135.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059135.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053059130.jpg|https://cover.openbd.jp/9784053059130.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">総合講義</span>
             <a class="rstep__name" href="/social/books/chiri-kimeru/">きめる!共テ地理</a>
@@ -505,6 +609,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/chiri-shuchu-kogi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>地理 集中講義</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401035285X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401035285X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035285X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352854.jpg|https://cover.openbd.jp/9784010352854.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">要点の高速整理</span>
             <a class="rstep__name" href="/social/books/chiri-shuchu-kogi/">地理 集中講義</a>
@@ -515,6 +620,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/chiri-mark-kiso/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>マーク式基礎</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227340.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227340.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227340.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227341.jpg|https://cover.openbd.jp/9784777227341.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">形式演習</span>
             <a class="rstep__name" href="/social/books/chiri-mark-kiso/">マーク式基礎</a>
@@ -525,6 +631,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/chiri-henomichi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共テへの道 地理</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634054469.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634054469.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634054469.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634054462.jpg|https://cover.openbd.jp/9784634054462.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">共テ併願対策</span>
             <a class="rstep__name" href="/social/books/chiri-henomichi/">共テへの道 地理</a>
@@ -540,18 +647,36 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/social/books/chiri-shinsho-atlas/">新詳高等地図</a><span>地図帳なしで地理を伸ばすのは不可能</span></li>
-          <li><a href="/social/books/chiri-toshin-ichimonto/">地理一問一答</a><span>私大が問う細かい地名・資源を頻出度別に埋める</span></li>
-          <li><a href="/social/books/chiri-complete/">地理資料COMPLETE</a><span>図と統計を突き合わせる習慣をつける</span></li>
-          <li><a href="/social/books/chiri-yamakawa-yogo/">地理用語集</a><span>記述で使う概念語の定義を確定させる</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/chiri-shinsho-atlas/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>新詳高等地図</b><em>帝国書院</em></span><img src="https://www.gakusan.com/bookimage/9784807167999.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784807167999.jpg|https://images-fe.ssl-images-amazon.com/images/P/4807167995.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4807167995.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784807167999.jpg|https://cover.openbd.jp/9784807167999.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/chiri-shinsho-atlas/">新詳高等地図</a><span>地図帳なしで地理を伸ばすのは不可能</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/chiri-toshin-ichimonto/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>地理一問一答</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859721.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859721.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859721.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859726.jpg|https://cover.openbd.jp/9784890859726.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/chiri-toshin-ichimonto/">地理一問一答</a><span>私大が問う細かい地名・資源を頻出度別に埋める</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/chiri-complete/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>地理資料COMPLETE</b><em>帝国書院</em></span><img src="https://www.gakusan.com/bookimage/9784807167951.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784807167951.jpg|https://images-fe.ssl-images-amazon.com/images/P/4807167952.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4807167952.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784807167951.jpg|https://cover.openbd.jp/9784807167951.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/chiri-complete/">地理資料COMPLETE</a><span>図と統計を突き合わせる習慣をつける</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/chiri-yamakawa-yogo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>地理用語集</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634054396.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634054396.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634054396.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634054394.jpg|https://cover.openbd.jp/9784634054394.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/chiri-yamakawa-yogo/">地理用語集</a><span>記述で使う概念語の定義を確定させる</span></div>
+          </li>
         </ul>
       </div>
       <div class="rside">
         <h3>最後の仕上げ</h3>
         <p>直前期に取り組む総仕上げです。上のルートを終えてから着手します。</p>
         <ul>
-          <li><a href="/social/books/chiri-100dai/">実力をつける100題</a><span>上位私大レベルの仕上げ演習</span></li>
-          <li><a href="/social/books/chiri-kakomon-kenkyu/">共テ過去問研究</a><span>共テ利用を併願の主戦力にする</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/chiri-100dai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>実力をつける100題</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860666860.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860666860.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860666860.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860666866.jpg|https://cover.openbd.jp/9784860666866.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/chiri-100dai/">実力をつける100題</a><span>上位私大レベルの仕上げ演習</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/chiri-kakomon-kenkyu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>共テ過去問研究</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273425.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273425.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273425.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273424.jpg|https://cover.openbd.jp/9784325273424.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/chiri-kakomon-kenkyu/">共テ過去問研究</a><span>共テ利用を併願の主戦力にする</span></div>
+          </li>
         </ul>
       </div>
     </section>
@@ -566,6 +691,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/kageyama-kt-kokyo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山の共テ公共</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053059984.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053059984.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059984.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053059987.jpg|https://cover.openbd.jp/9784053059987.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">公共の要点整理</span>
             <a class="rstep__name" href="/social/books/kageyama-kt-kokyo/">蔭山の共テ公共</a>
@@ -576,6 +702,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/kyokasho-kokyo-jikkyo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>実教『詳述公共』</b><em>実教出版</em></span><img src="https://baseec-img-mng.akamaized.net/images/item/origin/a2321e7e046d7ff832e573b00fe25701.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=1280,type=normal" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://baseec-img-mng.akamaized.net/images/item/origin/a2321e7e046d7ff832e573b00fe25701.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=1280,type=normal|https://images-fe.ssl-images-amazon.com/images/P/4407204818.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407204818.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407204810.jpg|https://cover.openbd.jp/9784407204810.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">詳しめの教科書</span>
             <a class="rstep__name" href="/social/books/kyokasho-kokyo-jikkyo/">実教『詳述公共』</a>
@@ -586,6 +713,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/speedmaster-kokyo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>スピマス公共</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634055295.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634055295.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634055295.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634055292.jpg|https://cover.openbd.jp/9784634055292.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">基礎演習</span>
             <a class="rstep__name" href="/social/books/speedmaster-kokyo/">スピマス公共</a>
@@ -596,6 +724,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/shuchu-kogi-kokyoseikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>集中講義 政経</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352861.jpg|https://cover.openbd.jp/9784010352861.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">公共政経の一体演習</span>
             <a class="rstep__name" href="/social/books/shuchu-kogi-kokyoseikei/">集中講義 政経</a>
@@ -606,6 +735,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/social/books/kyotest-michi-kokyoseikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共テへの道</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634050358.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634050358.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634050358.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634050358.jpg|https://cover.openbd.jp/9784634050358.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">テーマ別過去問</span>
             <a class="rstep__name" href="/social/books/kyotest-michi-kokyoseikei/">共テへの道</a>
@@ -622,6 +752,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/kageyama-kt-kokyo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山の共テ公共</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053059984.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053059984.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059984.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053059987.jpg|https://cover.openbd.jp/9784053059987.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">公共の短期完成</span>
             <a class="rstep__name" href="/social/books/kageyama-kt-kokyo/">蔭山の共テ公共</a>
@@ -632,6 +763,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/taipa-text-kokyoseikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>タイパテキスト</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231488.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231488.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231488.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231485.jpg|https://cover.openbd.jp/9784777231485.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">共テ解法技術</span>
             <a class="rstep__name" href="/social/books/taipa-text-kokyoseikei/">タイパテキスト</a>
@@ -642,6 +774,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/kurobon-kokyoseikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>黒本 総合問題集</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231011.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231011.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231011.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231010.jpg|https://cover.openbd.jp/9784777231010.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">実戦演習</span>
             <a class="rstep__name" href="/social/books/kurobon-kokyoseikei/">黒本 総合問題集</a>
@@ -657,17 +790,32 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/social/books/yamakawa-yogo-kokyo/">山川公共用語集</a><span>公共固有の思想語彙を引く</span></li>
-          <li><a href="/social/books/yamakawa-ichimon-kokyo/">山川一問一答公共</a><span>★重要度で優先順位を付けて周回</span></li>
-          <li><a href="/social/books/zusetsu-seikei-hamajima/">最新図説政経</a><span>共テの統計・資料問題の出典を毎日見る</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/yamakawa-yogo-kokyo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>山川公共用語集</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634055260.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634055260.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634055260.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634055261.jpg|https://cover.openbd.jp/9784634055261.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/yamakawa-yogo-kokyo/">山川公共用語集</a><span>公共固有の思想語彙を引く</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/yamakawa-ichimon-kokyo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>山川一問一答公共</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634055287.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634055287.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634055287.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634055285.jpg|https://cover.openbd.jp/9784634055285.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/yamakawa-ichimon-kokyo/">山川一問一答公共</a><span>★重要度で優先順位を付けて周回</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/zusetsu-seikei-hamajima/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>最新図説政経</b><em>浜島書店</em></span><img src="https://www.hamajima.co.jp/books/sh/detail/121500/cover?size=1000" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.hamajima.co.jp/books/sh/detail/121500/cover?size=1000|https://images-fe.ssl-images-amazon.com/images/P/4834320405.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4834320405.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784834320404.jpg|https://cover.openbd.jp/9784834320404.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/zusetsu-seikei-hamajima/">最新図説政経</a><span>共テの統計・資料問題の出典を毎日見る</span></div>
+          </li>
         </ul>
       </div>
       <div class="rside">
         <h3>最後の仕上げ</h3>
         <p>直前期に取り組む総仕上げです。上のルートを終えてから着手します。</p>
         <ul>
-          <li><a href="/social/books/akahon-kt-kokyoseikei/">共テ赤本 政経</a><span>共テ利用の得点源にするため10回分を必ず消化</span></li>
-          <li><a href="/social/books/kurobon-kokyoseikei/">黒本 総合問題集</a><span>過去問後の実戦演習で8割超を固める</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/akahon-kt-kokyoseikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>共テ赤本 政経</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273441.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273441.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273441.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273448.jpg|https://cover.openbd.jp/9784325273448.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/akahon-kt-kokyoseikei/">共テ赤本 政経</a><span>共テ利用の得点源にするため10回分を必ず消化</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/kurobon-kokyoseikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>黒本 総合問題集</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231011.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231011.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231011.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231010.jpg|https://cover.openbd.jp/9784777231010.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/kurobon-kokyoseikei/">黒本 総合問題集</a><span>過去問後の実戦演習で8割超を固める</span></div>
+          </li>
         </ul>
       </div>
     </section>
@@ -682,6 +830,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/kageyama-omoshiro-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山面白いほど</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046077035.jpg|https://cover.openbd.jp/9784046077035.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">網羅講義</span>
             <a class="rstep__name" href="/social/books/kageyama-omoshiro-seikei/">蔭山面白いほど</a>
@@ -692,6 +841,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/kyokasho-seikei-tosho/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>東書『政治・経済』</b><em>東京書籍</em></span><img src="https://www.aomoritosyo.co.jp/images/shop/kyokasho/523701/main.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.aomoritosyo.co.jp/images/shop/kyokasho/523701/main.jpg|https://images-fe.ssl-images-amazon.com/images/P/4487166039.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4487166039.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784487166039.jpg|https://cover.openbd.jp/9784487166039.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">教科書で正誤基準</span>
             <a class="rstep__name" href="/social/books/kyokasho-seikei-tosho/">東書『政治・経済』</a>
@@ -702,6 +852,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/markshiki-kiso-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>マーク式基礎政経</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227375.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227375.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227375.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227372.jpg|https://cover.openbd.jp/9784777227372.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">マーク演習</span>
             <a class="rstep__name" href="/social/books/markshiki-kiso-seikei/">マーク式基礎政経</a>
@@ -712,6 +863,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/hatakeyama-sokai-mondai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>爽快問題集</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865315853.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865315853.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865315853.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865315851.jpg|https://cover.openbd.jp/9784865315851.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">形式別演習</span>
             <a class="rstep__name" href="/social/books/hatakeyama-sokai-mondai/">爽快問題集</a>
@@ -722,6 +874,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/social/books/shidai-koryaku-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>私大攻略の政経</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477723018X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477723018X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477723018X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777230181.jpg|https://cover.openbd.jp/9784777230181.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">私大標準演習</span>
             <a class="rstep__name" href="/social/books/shidai-koryaku-seikei/">私大攻略の政経</a>
@@ -732,6 +885,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">06</span>
+          <a class="rstep__cov" href="/social/books/toshin-ichimon-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>東進政経一問一答</b><em>東進ブックス</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859578.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859578.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859578.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859573.jpg|https://cover.openbd.jp/9784890859573.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">知識量の底上げ</span>
             <a class="rstep__name" href="/social/books/toshin-ichimon-seikei/">東進政経一問一答</a>
@@ -748,6 +902,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/kageyama-omoshiro-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山面白いほど</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046077035.jpg|https://cover.openbd.jp/9784046077035.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">網羅講義</span>
             <a class="rstep__name" href="/social/books/kageyama-omoshiro-seikei/">蔭山面白いほど</a>
@@ -758,6 +913,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/shidai-koryaku-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>私大攻略の政経</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477723018X.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477723018X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477723018X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777230181.jpg|https://cover.openbd.jp/9784777230181.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">私大演習</span>
             <a class="rstep__name" href="/social/books/shidai-koryaku-seikei/">私大攻略の政経</a>
@@ -768,6 +924,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/meiji-seikei-akahon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>明治政経 赤本</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325277293.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325277293.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325277293.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325277293.jpg|https://cover.openbd.jp/9784325277293.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">大学別過去問</span>
             <a class="rstep__name" href="/social/books/meiji-seikei-akahon/">明治政経 赤本</a>
@@ -783,17 +940,32 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/social/books/yamakawa-yogo-seikei/">山川政経用語集</a><span>頻度1〜2の語まで踏み込んでMARCH水準に対応</span></li>
-          <li><a href="/social/books/toshin-ichimon-seikei/">東進政経一問一答</a><span>★3→★2の順で毎日回し語彙量を積む</span></li>
-          <li><a href="/social/books/zusetsu-seikei-hamajima/">最新図説政経</a><span>統計・法制度の図で知識の抜けを可視化</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/yamakawa-yogo-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>山川政経用語集</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634051141.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634051141.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634051141.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634051140.jpg|https://cover.openbd.jp/9784634051140.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/yamakawa-yogo-seikei/">山川政経用語集</a><span>頻度1〜2の語まで踏み込んでMARCH水準に対応</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/toshin-ichimon-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>東進政経一問一答</b><em>東進ブックス</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859578.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859578.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859578.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859573.jpg|https://cover.openbd.jp/9784890859573.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/toshin-ichimon-seikei/">東進政経一問一答</a><span>★3→★2の順で毎日回し語彙量を積む</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/zusetsu-seikei-hamajima/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>最新図説政経</b><em>浜島書店</em></span><img src="https://www.hamajima.co.jp/books/sh/detail/121500/cover?size=1000" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.hamajima.co.jp/books/sh/detail/121500/cover?size=1000|https://images-fe.ssl-images-amazon.com/images/P/4834320405.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4834320405.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784834320404.jpg|https://cover.openbd.jp/9784834320404.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/zusetsu-seikei-hamajima/">最新図説政経</a><span>統計・法制度の図で知識の抜けを可視化</span></div>
+          </li>
         </ul>
       </div>
       <div class="rside">
         <h3>最後の仕上げ</h3>
         <p>直前期に取り組む総仕上げです。上のルートを終えてから着手します。</p>
         <ul>
-          <li><a href="/social/books/meiji-seikei-akahon/">明治政経 赤本</a><span>明治政経は政経選択が可能で語彙・時事の要求が高い</span></li>
-          <li><a href="/social/books/zenkoku-seikai-seikei/">全国入試問題正解</a><span>併願校分の演習量を横断的に確保する</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/meiji-seikei-akahon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>明治政経 赤本</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325277293.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325277293.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325277293.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325277293.jpg|https://cover.openbd.jp/9784325277293.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/meiji-seikei-akahon/">明治政経 赤本</a><span>明治政経は政経選択が可能で語彙・時事の要求が高い</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/zenkoku-seikai-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>全国入試問題正解</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010367776.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010367776.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010367776.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010367773.jpg|https://cover.openbd.jp/9784010367773.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/zenkoku-seikai-seikei/">全国入試問題正解</a><span>併願校分の演習量を横断的に確保する</span></div>
+          </li>
         </ul>
       </div>
     </section>
@@ -808,6 +980,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/rinri-kageyama/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山の共テ倫理</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053059798.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053059798.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059798.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053059796.jpg|https://cover.openbd.jp/9784053059796.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">導入講義</span>
             <a class="rstep__name" href="/social/books/rinri-kageyama/">蔭山の共テ倫理</a>
@@ -818,6 +991,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/rinri-omoshiro/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>公共倫理 面白いほど</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046067691.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046067691.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046067691.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046067692.jpg|https://cover.openbd.jp/9784046067692.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">通読講義</span>
             <a class="rstep__name" href="/social/books/rinri-omoshiro/">公共倫理 面白いほど</a>
@@ -828,6 +1002,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/rinri-mark-kiso/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>マーク式基礎倫理</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227367.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227367.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227367.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227365.jpg|https://cover.openbd.jp/9784777227365.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">マーク演習</span>
             <a class="rstep__name" href="/social/books/rinri-mark-kiso/">マーク式基礎倫理</a>
@@ -838,6 +1013,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">04</span>
+          <a class="rstep__cov" href="/social/books/rinri-michi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共テへの道</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634052334.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634052334.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634052334.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634052338.jpg|https://cover.openbd.jp/9784634052338.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">分野別過去問</span>
             <a class="rstep__name" href="/social/books/rinri-michi/">共テへの道</a>
@@ -848,6 +1024,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">05</span>
+          <a class="rstep__cov" href="/social/books/rinri-master/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>完全MASTER倫理+公共</b><em>清水書院</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4389219227.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4389219227.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4389219227.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784389219222.jpg|https://cover.openbd.jp/9784389219222.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">仕上げ演習</span>
             <a class="rstep__name" href="/social/books/rinri-master/">完全MASTER倫理+公共</a>
@@ -864,6 +1041,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <ol class="rsteps">
         <li class="rstep">
           <span class="rstep__no">01</span>
+          <a class="rstep__cov" href="/social/books/rinri-shuchu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>公共倫理 集中講義</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352876.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352876.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352876.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352878.jpg|https://cover.openbd.jp/9784010352878.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">時短通読</span>
             <a class="rstep__name" href="/social/books/rinri-shuchu/">公共倫理 集中講義</a>
@@ -874,6 +1052,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">02</span>
+          <a class="rstep__cov" href="/social/books/rinri-koredake/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>これだけ!公共倫理</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578242501.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578242501.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578242501.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578242505.jpg|https://cover.openbd.jp/9784578242505.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">講義＋演習</span>
             <a class="rstep__name" href="/social/books/rinri-koredake/">これだけ!公共倫理</a>
@@ -884,6 +1063,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         </li>
         <li class="rstep">
           <span class="rstep__no">03</span>
+          <a class="rstep__cov" href="/social/books/rinri-michi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共テへの道</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634052334.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634052334.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634052334.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634052338.jpg|https://cover.openbd.jp/9784634052338.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
           <div class="rstep__body">
             <span class="rstep__role">分野別過去問</span>
             <a class="rstep__name" href="/social/books/rinri-michi/">共テへの道</a>
@@ -899,17 +1079,32 @@ gtag('config', 'G-DQ5WFXEFMX');
         <h3>並行して進める本</h3>
         <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
         <ul>
-          <li><a href="/social/books/rinri-yamakawa-ichimonto/">山川一問一答倫理</a><span>語句の抜けを毎日つぶす</span></li>
-          <li><a href="/social/books/rinri-yamakawa-yogo/">倫理用語集</a><span>8割超は用語集の細部で決まる</span></li>
-          <li><a href="/social/books/rinri-theoria/">テオーリア</a><span>原典と年表で思想史の流れを補強</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/rinri-yamakawa-ichimonto/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>山川一問一答倫理</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634052288.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634052288.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634052288.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634052284.jpg|https://cover.openbd.jp/9784634052284.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/rinri-yamakawa-ichimonto/">山川一問一答倫理</a><span>語句の抜けを毎日つぶす</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/rinri-yamakawa-yogo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>倫理用語集</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634052083.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634052083.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634052083.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634052086.jpg|https://cover.openbd.jp/9784634052086.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/rinri-yamakawa-yogo/">倫理用語集</a><span>8割超は用語集の細部で決まる</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/rinri-theoria/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>テオーリア</b><em>第一学習社</em></span><img src="https://www.gakusan.com/bookimage/9784804054254.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784804054254.jpg|https://images-fe.ssl-images-amazon.com/images/P/4804054251.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804054251.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804054254.jpg|https://cover.openbd.jp/9784804054254.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/rinri-theoria/">テオーリア</a><span>原典と年表で思想史の流れを補強</span></div>
+          </li>
         </ul>
       </div>
       <div class="rside">
         <h3>最後の仕上げ</h3>
         <p>直前期に取り組む総仕上げです。上のルートを終えてから着手します。</p>
         <ul>
-          <li><a href="/social/books/rinri-akahon/">共テ過去問研究</a><span>過去問の反復が最も得点効率が高い</span></li>
-          <li><a href="/social/books/rinri-kawai-sougou/">黒本 総合問題集</a><span>本番相当の難度で自己採点の目安を作る</span></li>
+          <li>
+            <a class="rside__cov" href="/social/books/rinri-akahon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>共テ過去問研究</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273433.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273433.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273433.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273431.jpg|https://cover.openbd.jp/9784325273431.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/rinri-akahon/">共テ過去問研究</a><span>過去問の反復が最も得点効率が高い</span></div>
+          </li>
+          <li>
+            <a class="rside__cov" href="/social/books/rinri-kawai-sougou/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>黒本 総合問題集</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231003.09.LZZZZZZZ.jpg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231003.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231003.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231003.jpg|https://cover.openbd.jp/9784777231003.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div><a class="rside__name" href="/social/books/rinri-kawai-sougou/">黒本 総合問題集</a><span>本番相当の難度で自己採点の目安を作る</span></div>
+          </li>
         </ul>
       </div>
     </section>

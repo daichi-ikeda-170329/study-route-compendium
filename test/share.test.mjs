@@ -8,10 +8,106 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
-import { loadShare, loadQuiz, allAnswerCombos, fakeStorage, SUBJECTS } from './helpers.mjs';
+import { loadShare, loadQuiz, loadPage, allAnswerCombos, fakeStorage, SUBJECTS } from './helpers.mjs';
 
 const RTShare = loadShare();
 const QUIZZES = Object.fromEntries(SUBJECTS.map(s => [s, loadQuiz(s)]));
+
+/* ============================================================
+   ルート画面の共有（?rv=1&r=…）
+   トークンの組み立てと検証は科目ページ側にある。ページを vm 上で走らせて確かめる。
+   ============================================================ */
+
+/** share.js が受け付けるトークン列の書式。restoreRoute の ROUTE_TOKENS_RE と同じ */
+const ROUTE_TOKENS_RE = /^[A-Za-z0-9_-]{1,24}(\.[A-Za-z0-9_-]{1,24}){0,7}$/;
+
+const PAGES = Object.fromEntries(SUBJECTS.map(s => [s, loadPage(s)]));
+
+test('全科目に route の共有設定がある', () => {
+  for (const subject of SUBJECTS) {
+    const { cfg } = PAGES[subject];
+    assert.equal(typeof cfg.route?.encode, 'function', `${subject}: encode が無い`);
+    assert.equal(typeof cfg.route?.apply, 'function', `${subject}: apply が無い`);
+    assert.equal(typeof cfg.route?.show, 'function', `${subject}: show が無い`);
+  }
+});
+
+test('志望レベルを選ぶ前は共有できない', () => {
+  for (const subject of SUBJECTS) {
+    const { ctx, cfg } = loadPage(subject);
+    ctx.S.tier = null;
+    ctx.S.mode = 'tier';
+    if ('sensei' in ctx.S) ctx.S.sensei = null;
+    assert.equal(cfg.route.encode(), null, `${subject}: 志望レベル未選択でも共有 URL を作った`);
+  }
+});
+
+test('全科目・全志望レベルで encode→apply→encode が同じトークンに戻る', () => {
+  for (const subject of SUBJECTS) {
+    const { ctx, cfg } = PAGES[subject];
+    for (const t of ctx.TIERS) {
+      ctx.selectTier(t.id);
+      const st = cfg.route.encode();
+      assert.ok(st && Array.isArray(st.tokens) && st.tokens.length,
+        `${subject}/${t.id}: encode がトークンを返さない`);
+      const joined = st.tokens.join('.');
+      assert.match(joined, ROUTE_TOKENS_RE, `${subject}/${t.id}: トークンの書式が share.js の検証を通らない`);
+      assert.equal(cfg.route.apply(st.tokens, st.uni || ''), true,
+        `${subject}/${t.id}: 自分が作ったトークンを apply が拒んだ (${joined})`);
+      assert.deepEqual(cfg.route.encode().tokens, st.tokens,
+        `${subject}/${t.id}: apply 後の encode が元と一致しない`);
+    }
+  }
+});
+
+test('講師ルートも往復する（英語のみ）', () => {
+  const { ctx, cfg } = loadPage('english');
+  for (const s of ctx.SENSEIS) {
+    ctx.selectSensei(s.id);
+    const st = cfg.route.encode();
+    assert.ok(st && st.tokens[0] === 's', `english/${s.id}: 講師ルートを encode できない`);
+    assert.match(st.tokens.join('.'), ROUTE_TOKENS_RE);
+    assert.equal(cfg.route.apply(st.tokens, ''), true, `english/${s.id}: apply が拒んだ`);
+    assert.deepEqual(cfg.route.encode().tokens, st.tokens);
+  }
+});
+
+test('実在しない値のトークンは受け付けない', () => {
+  for (const subject of SUBJECTS) {
+    const { ctx, cfg } = PAGES[subject];
+    ctx.selectTier(ctx.TIERS[0].id);
+    const good = cfg.route.encode().tokens;
+
+    const bad = [
+      [],                                                  // 空
+      good.slice(0, good.length - 1),                      // 個数が足りない
+      good.concat('0'),                                    // 個数が多い
+      ['z'].concat(good.slice(1)),                         // 種類が違う
+      [good[0], 'no-such-tier'].concat(good.slice(2)),     // 志望レベルが実在しない
+      good.slice(0, good.length - 1).concat('9'),          // 現在地が範囲外
+    ];
+    for (const tk of bad) {
+      assert.equal(cfg.route.apply(tk, ''), false,
+        `${subject}: 不正なトークンを受け入れた ${JSON.stringify(tk)}`);
+    }
+  }
+});
+
+test('共有 URL の大学名は UNIS と一致するときだけ使う', () => {
+  for (const subject of SUBJECTS) {
+    const { ctx, cfg } = loadPage(subject);
+    ctx.selectTier(ctx.TIERS[0].id);
+    const tokens = cfg.route.encode().tokens;
+
+    assert.equal(cfg.route.apply(tokens, '架空大学'), true, `${subject}: 未知の大学名で apply が失敗した`);
+    assert.equal(ctx.S.mode, 'tier', `${subject}: 未知の大学名で志望校モードに入った`);
+
+    const uni = ctx.UNIS[0];
+    assert.equal(cfg.route.apply(tokens, uni.n), true, `${subject}: 実在する大学名で apply が失敗した`);
+    assert.equal(ctx.S.mode, 'uni', `${subject}: 実在する大学名なのに志望校モードにならない`);
+    assert.equal(ctx.S.uni.n, uni.n, `${subject}: 別の大学が選ばれた`);
+  }
+});
 
 /* ============================================================
    ラウンドトリップ — 全科目・到達しうる全パターン

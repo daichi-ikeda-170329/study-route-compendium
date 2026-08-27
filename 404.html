@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&family=Shippori+Mincho+B1:wght@700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="/assets/js/search.js" defer></script>
 <style>
 :root{
   --paper:#F6F4EF;--surface:#FFFFFF;--surface-3:#F1EFE8;
@@ -57,7 +58,16 @@ gtag('config', 'G-DQ5WFXEFMX');
 <div class="wrap">
   <div class="code">404 — NOT FOUND</div>
   <h1>お探しのページは<br>見つかりませんでした</h1>
-  <p class="lead">URLが変更されたか、削除された可能性があります。下の科目から探し直してみてください。</p>
+  <p class="lead">URLが変更されたか、削除された可能性があります。参考書名で検索するか、下の科目から探し直してみてください。</p>
+  <div style="max-width:420px;margin:0 auto 26px;text-align:left">
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+  </div>
   <div class="links">
     <a href="/english/" style="--c:#B5432A"><span class="m">英</span><b>英語</b></a>
     <a href="/japanese/" style="--c:#8A6D2F"><span class="m">国</span><b>国語</b></a>

@@ -45,7 +45,9 @@
 | `guides/<slug>/index.html` | 科目に属さない解説記事 | 生成 |
 | `404.html` | 404 ページ | 手で編集 |
 | `assets/site.css` | 生成ページ共通のスタイル | 手で編集 |
-| `assets/js/share.js` | 3分診断の結果共有・保存。5 科目の科目トップから読み込む | 手で編集 |
+| `assets/js/share.js` | 3分診断の結果共有・保存と、ルート画面の共有。5 科目の科目トップから読み込む | 手で編集 |
+| `assets/js/search.js` | 全ページ共通の参考書検索。ヘッダーの検索ボックスを動かす | 手で編集 |
+| `assets/js/book-index.js` | 検索が引く 1,052 冊の索引 | 生成 |
 | `assets/ogp*.png` | OGP 画像。冊数を画像内に焼き込んでいる | 再生成が必要 |
 | `favicon.svg` | ファビコン | 手で編集 |
 | `sitemap.xml` | サイトマップ | 生成 |
@@ -53,7 +55,7 @@
 | `.nojekyll` | GitHub Pages の Jekyll 処理を無効化 | — |
 | `build/` | 生成スクリプト | 手で編集 |
 | `build/data/authors.json` | 著者名（openBD 由来・実在確認済み 227 冊分） | 生成（再取得時のみ） |
-| `test/` | `assets/js/share.js` のテスト。`node --test` で実行する | 手で編集 |
+| `test/` | 共有・保存のテスト（`assets/js/share.js` と、科目トップのルート共有）。`node --test` で実行する | 手で編集 |
 | `docs/` | 機能ごとの実装計画と調査記録 | 手で編集 |
 
 科目トップの内部構造は 5 科目で共通で、次の要素を同じクラス名で持つ。
@@ -61,6 +63,7 @@
 - `.pr-bar` — アフィリエイト広告の明示（景品表示法のステマ規制対応）
 - `.xbar` — 科目切り替えバー。全ページ相互リンクの起点
 - `.view` — ホーム / 図鑑 / ルート / 診断 / 学習ガイドの各画面
+- `.rt-search` — 全ページ共通の参考書検索。ヘッダーの中に置く
 - `.cat-index` — 生成ページ（一覧・ルート）への導線バナー
 - `.foot-subjects` — フッターの他科目リンク
 - `LEGAL` — 運営者情報・プライバシーポリシー・免責事項・広告についてのモーダル
@@ -73,6 +76,7 @@ node build/generate-index.mjs      # 参考書一覧 5 件
 node build/generate-picks.mjs      # 参考書おすすめ 5 件
 node build/generate-routes.mjs     # 志望校別ルート 47 件
 node build/generate-articles.mjs   # 解説記事 19 件（記事 13 + 一覧 6）
+node build/generate-search.mjs     # 検索の索引 assets/js/book-index.js
 node build/generate-sitemap.mjs    # sitemap.xml（最後に実行する）
 ```
 
@@ -90,6 +94,7 @@ node build/generate-books.mjs math ao
 |---|---|
 | `build/lib/extract.mjs` | 科目 HTML の `<script>` を vm 上で実行し、`BOOKS` / `ROUTES` / `TIERS` / `STAGES` / `UNIS` を回収する。id の重複や URL に使えない id はここで検出して停止する |
 | `build/lib/parts.mjs` | `<head>`・ヘッダー・フッター・パンくず・JSON-LD の共通パーツ |
+| `build/lib/cover.mjs` | 書影の候補 URL と、一覧・ルートに並べる小さな書影のマークアップ |
 | `build/content/articles.mjs` | 解説記事の本文 |
 
 `ROUTES` の階層は科目によって 3 通りある。理科だけ「トラック → 志望レベル」の順で、他科目とは逆になっている。`generate-routes.mjs` の `normalize()` で吸収しているので、新しい科目を追加するときはここを確認する。
@@ -101,6 +106,31 @@ node build/generate-books.mjs math ao
 - 難易度・問題数・想定学習時間・到達目安は本文に書かず、`bookTable` ブロックで `BOOKS` から引く。記事とデータがずれるのを構造的に防ぐため
 - 本文中の `[[id]]` または `[[id|表示名]]` はその書籍の個別ページへのリンクになる。id が `BOOKS` に無ければビルドが止まる
 - 記事を追加したら、ポータル `index.html` の「参考書の選び方を読む」セクションにも手でリンクを足す
+
+### 画面を URL で指す
+
+科目トップは単一 HTML の SPA だが、5 つの画面はそれぞれハッシュで指せる。ポータルや外部からの直リンクの宛先になるので、画面を増やしたら `VIEWS` に足す。
+
+| ハッシュ | 画面 |
+|---|---|
+| （なし） | ホーム |
+| `#catalog` | 参考書図鑑 |
+| `#route` | 参考書ルート |
+| `#quiz` | 3分診断 |
+| `#guide` | 学習ガイド |
+
+`go()` が `replaceState` で URL を書き換える。履歴には積まない。この SPA は「戻る」を画面遷移として扱っていないため、`pushState` にすると戻るたびに 1 画面ずつ遡ることになり、サイトを離れられなくなる。
+
+## 参考書検索（全ページ共通）
+
+すべてのページのヘッダーに検索ボックスがある（`#rtSearch`）。5 科目 1,052 冊を横断して探し、選ぶとその参考書の詳細ページ（`/<科目>/books/<id>/`）へ移動する。
+
+- 処理は `assets/js/search.js`。見た目の CSS もこのファイルから差し込む。手書き HTML（ポータル・科目トップ・404）は `site.css` を読まないため、共通の置き場がここしかない
+- 索引は `assets/js/book-index.js`（`build/generate-search.mjs` が生成）。**最初に検索欄へ触れた時点で読み込む**。全ページに置く常設 UI なので、使わない人に 30KB 超を配らないため
+- 突き合わせるのは書名・正式名・出版社・収録範囲・分野・役割。あだ名（「ネクステ」など）は索引に入っていない
+- マークアップは 7 か所に同じものを置いてある（`build/lib/parts.mjs` の `header()` と `portalHeader()`、ポータル `index.html`、科目トップ 5 枚、`404.html`）。直すときは `rg 'id="rtSearch"'` で全箇所を出す
+
+`BOOKS` を編集したら `generate-search.mjs` を流し直す。流し忘れると、検索結果に古い書名が残るか、追加した本が出てこない。
 
 ## ローカル確認
 
@@ -128,11 +158,19 @@ print(sorted(set(bad)) or 'リンク切れなし')
 "
 ```
 
-## 診断結果の共有・保存
+## 共有・保存
 
-3分診断の結果は URL で共有でき、端末に保存できる。処理は `assets/js/share.js` の 1 ファイルにまとまっていて、5 科目の科目トップから `<script src>` で読み込む。科目ごとの分岐は持たず、その科目の `QUIZ` 配列を入力に動く。
+共有できる画面は 3 つある。
 
-### 共有 URL のスキーマ
+| 画面 | 共有するもの | 実装 |
+|---|---|---|
+| 3分診断の結果 | 回答（`?v=1&a=…`）。開いた側で結果を計算し直す | `assets/js/share.js` の `afterResult()` |
+| 科目トップのルート画面 | ルートの形を決める設定（`?rv=1&r=…`） | `assets/js/share.js` の `routeBlock()` |
+| 志望校別ルートの生成ページ | そのページの URL そのもの | `build/lib/parts.mjs` の `shareBar()` |
+
+診断とルートの処理は `assets/js/share.js` の 1 ファイルにまとまっていて、5 科目の科目トップから `<script src>` で読み込む。診断側は科目ごとの分岐を持たず、その科目の `QUIZ` 配列を入力に動く。
+
+### 診断結果の共有 URL のスキーマ
 
 ```
 https://route-taizen.com/<科目>/?v=1&a=1.3.0.2.2
@@ -168,6 +206,37 @@ URL に載せるのは**結果ではなく回答**で、開いた側は現行の
 
 `v` を上げるときは、旧バージョンの扱い（変換して表示するか、診断のやり直しへ誘導するか）をその時点で決める。現状、未対応の `v` はすべて診断開始画面へフォールバックする。
 
+### ルート画面の共有 URL のスキーマ
+
+```
+https://route-taizen.com/<科目>/?rv=1&r=t.march.bun.omni.1&ru=明治大学
+```
+
+| パラメータ | 意味 | 検証 |
+|---|---|---|
+| `rv` | スキーマバージョン | `1` のみ許可 |
+| `r` | ルートの設定を表すトークン列。ドット区切り | 英数字と `-` `_` だけ・1 トークン 24 文字まで・8 個まで（`share.js`）／意味は科目ページ（`share.js` は科目ごとの持ち物を知らない） |
+| `ru` | 志望校名（任意） | 60 文字まで。`UNIS` の `n` と完全一致したときだけ使う |
+
+トークンの並びは科目によって違う。科目ページの `RTShare.setup({ route: … })` にある `encode` / `apply` が正本。
+
+| 科目 | トークン |
+|---|---|
+| 英語 | 種類（`t` 志望レベル / `s` 講師）・志望レベル or 講師 id・受験タイプ・学習方針・現在地 |
+| 数学 | `t`・志望レベル・受験タイプ・学習方針・現在地 |
+| 国語 | `t`・志望レベル・表示する分野・学習方針・現在地 |
+| 理科 | `t`・志望レベル・使う科目（`1010` のような 4 桁）・学習方針・現在地・基礎科目か |
+| 社会 | `t`・志望レベル・選択科目（6 桁）・受験タイプ・学習方針・現在地 |
+
+**書式の検証は `share.js`、意味の検証は科目ページ**という分担になっている。志望レベルやトラックが実在するかは、そのデータを持っているページ側でしか判断できないため。どちらかが通らなければ部分的に復元せず、パラメータを落として普通のトップページとして開く。
+
+載せないものが 2 つある。
+
+- **模試の偏差値・学部名・既習の参考書** — 共有相手には関係がなく、他人の学習状況を URL に載せる必要もない
+- **志望校を配列の位置で指すこと** — `UNIS` に安定した ID が無い。位置で指すと収録校を 1 校足しただけで別の大学を指してしまうので、名前で持って開いた側で突き合わせる。一致しなければ志望レベルのルートへ落とす
+
+ルート画面には保存ボタンを置いていない。保存の対象は診断の回答であって、ルート画面の設定ではない。
+
 ### 保存データ
 
 localStorage のキーは `rt_saved_routes`。全科目あわせて 10 件まで保存でき、超過時は最古の削除を確認したうえで入れ替える。
@@ -181,6 +250,8 @@ node --test test/share.test.mjs
 ```
 
 Node 標準の `node:test` だけで動く（依存の追加なし）。科目ページから `QUIZ` を取り出し、到達しうる回答の組み合わせをすべて列挙して往復を確認する。あわせて不正な URL を 30 ケース以上、壊れた保存データの読み込みも検証する。`QUIZ` を書き換えたら必ず流す。
+
+ルート共有の `encode` / `apply` は科目ページ側にあるので、`test/helpers.mjs` の `loadPage()` が科目 HTML を vm 上で走らせ、`RTShare` を差し替えて設定を受け取る。全科目・全志望レベルで `encode → apply → encode` が同じトークンに戻ること、実在しない値のトークンを拒むこと、大学名が `UNIS` と一致したときだけ志望校モードになることを確かめている。**科目トップのルート画面まわりを触ったら必ず流す。**
 
 ## アフィリエイト ID の設定
 
@@ -227,7 +298,8 @@ sed -i '' 's/amazonTag: ""/amazonTag: "xxxxx-22"/' index.html
 
 node build/generate-books.mjs && node build/generate-index.mjs \
   && node build/generate-picks.mjs && node build/generate-routes.mjs \
-  && node build/generate-articles.mjs && node build/generate-sitemap.mjs
+  && node build/generate-articles.mjs && node build/generate-search.mjs \
+  && node build/generate-sitemap.mjs
 ```
 
 反映後、次の 3 点を確認する。
@@ -254,7 +326,7 @@ git push
 4. ポータル `index.html` の科目カードとヒーローの冊数
 5. `assets/ogp*.png`（冊数を画像内に焼き込んでいるため、`build/` 外の生成手順で作り直す）
 
-診断の質問（`QUIZ`）を変えたときは、あわせて `assets/js/share.js` の `SCHEMA_VERSION` を上げるか判断し、`node --test test/share.test.mjs` を流す。判断の基準は「診断結果の共有・保存」の節に書いた。
+診断の質問（`QUIZ`）を変えたときは、あわせて `assets/js/share.js` の `SCHEMA_VERSION` を上げるか判断し、`node --test test/share.test.mjs` を流す。判断の基準は「[共有・保存](#共有保存)」の節に書いた。科目トップのルート画面（志望レベル・トラック・方針・現在地の持ち方）を触ったときも同じテストを流す。
 
 ## 書名と著者名の決め方
 

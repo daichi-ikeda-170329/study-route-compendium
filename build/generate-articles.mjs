@@ -12,7 +12,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
-import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
+import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { ARTICLES } from './content/articles.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -183,15 +183,7 @@ table.cmp td{color:var(--ink-2)}
 
 ${topBars(a.subject || '')}
 
-${sub ? header(sub) : `<header class="app-header">
-  <div class="app-header__in">
-    <a class="logo" href="/">
-      <div class="logo__mark">全</div>
-      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
-    </a>
-    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
-  </div>
-</header>`}
+${sub ? header(sub) : portalHeader()}
 
 <main class="wrap">
   ${crumbs(crumbItems)}
@@ -293,15 +285,7 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp${sub ? `-${sub.dir}` :
 
 ${topBars(dir || '')}
 
-${sub ? header(sub) : `<header class="app-header">
-  <div class="app-header__in">
-    <a class="logo" href="/">
-      <div class="logo__mark">全</div>
-      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
-    </a>
-    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
-  </div>
-</header>`}
+${sub ? header(sub) : portalHeader()}
 
 <main class="wrap">
   ${crumbs(crumbItems)}
