@@ -1,0 +1,54 @@
+# X の投稿案を毎月生成してコミットする（docs/x-account-plan.md の 7 節）。
+#
+# 生成するのは A 型（図鑑カード）と E 型（エンタメ）だけで、どちらも BOOKS から
+# 機械的に組み立てられる。判断が要る B・C・D 型は空欄のまま出るので、月に一度
+# Claude に書いてもらう。
+#
+# 手で動かしたいときは Actions タブから「Run workflow」で月を指定できる。
+name: X 投稿案の生成
+
+on:
+  schedule:
+    # 毎月 1 日 00:00 UTC（日本時間 09:00）。翌月分を作る
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    inputs:
+      month:
+        description: '生成する月（YYYY-MM）。空なら翌月'
+        required: false
+        type: string
+
+# 生成物をコミットして push するため書き込みが要る
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # 依存パッケージは無く、標準ライブラリだけで動く
+          node-version: '22'
+
+      - name: 投稿案を生成する
+        # 入力は env 経由で渡す。run: に ${{ }} を直接埋めると、入力値が
+        # シェルコマンドとして解釈される（GitHub Actions のスクリプトインジェクション）
+        env:
+          MONTH: ${{ inputs.month }}
+        run: node build/gen-x-posts.mjs $MONTH
+
+      - name: 変更をコミットする
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain docs/x-posts)" ]; then
+            echo "生成物に変更が無いのでコミットしない"
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/x-posts
+          git commit -m 'chore: X の投稿案を生成（自動）'
+          git push

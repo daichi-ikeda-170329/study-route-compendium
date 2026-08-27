@@ -15,6 +15,7 @@
  * 使い方
  *   node build/gen-x-posts.mjs            # 翌月分
  *   node build/gen-x-posts.mjs 2026-09    # 月を指定
+ *   node build/gen-x-posts.mjs 2026-09 --force   # 既にあっても作り直す
  *
  * 出力は docs/x-posts/YYYY-MM.md。既に出した本は docs/x-posts/used.json に記録し、
  * 翌月以降に重複して出さない。
@@ -367,7 +368,20 @@ function schedule(y, m, count) {
 }
 
 function main() {
-  const { y, m } = targetMonth(process.argv[2]);
+  const args = process.argv.slice(2);
+  const force = args.includes('--force');
+  const { y, m } = targetMonth(args.find(a => a !== '--force'));
+  const mm = String(m).padStart(2, '0');
+  const outFile = path.join(OUT_DIR, `${y}-${mm}.md`);
+
+  // 同じ月を作り直すと、前回出した本が used.json で「既出」になっているため
+  // 別の本に入れ替わる。GitHub Actions のリトライや手動再実行で内容が黙って
+  // 変わるのを避けるため、既にあるときは作らない。作り直すなら --force を付ける。
+  if (fs.existsSync(outFile) && !force) {
+    console.log(`${path.relative(ROOT, outFile)} は既にある。作り直すなら --force を付ける`);
+    return;
+  }
+
   const data = {};
   for (const s of SUBJECTS) data[s.dir] = extractSubject(ROOT, s.dir);
 
@@ -418,7 +432,6 @@ function main() {
   }
   rows.sort((a, b) => dates.indexOf(a.date) - dates.indexOf(b.date));
 
-  const mm = String(m).padStart(2, '0');
   const md = [];
   md.push(`# X 投稿案 ${y}-${mm}`);
   md.push('');
@@ -480,7 +493,6 @@ function main() {
   md.push('');
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
-  const outFile = path.join(OUT_DIR, `${y}-${mm}.md`);
   fs.writeFileSync(outFile, md.join('\n'), 'utf8');
 
   for (const k of newlyUsed) used.add(k);

@@ -82,6 +82,9 @@ node build/generate-search.mjs     # 検索の索引 assets/js/book-index.js
 node build/generate-sitemap.mjs    # sitemap.xml（最後に実行する）
 ```
 
+`build/gen-x-posts.mjs` は X の投稿案を作るもので、サイトの生成物とは無関係。
+上の一括再生成には含めない（「X アカウント」の節を参照）。
+
 科目トップの `BOOKS` や `ROUTES` を編集したら、`generate-sitemap.mjs` を含めて全部を流し直す。生成物はリポジトリにコミットする（GitHub Pages はビルドを実行しないため）。
 
 `generate-books.mjs` は科目名と id を引数に取れる。1 件だけ確認したいときに使う。
@@ -365,6 +368,38 @@ node build/generate-books.mjs && node build/generate-index.mjs \
 - 書籍詳細ページの「Amazon で見る」に `rel="nofollow sponsored noopener"` が付いている
 - フッターに「Amazon のアソシエイトとして、〜は適格販売により収入を得ています。」が出ている
 - 「広告について」から「Amazon へのリンクはアフィリエイトタグを含まない通常のリンク」の但し書きが消えている
+
+## X アカウント
+
+公式アカウントは `@route_taizen`。運用設計の正本は [docs/x-account-plan.md](docs/x-account-plan.md)。
+
+ハンドルは `build/lib/extract.mjs` の `X_HANDLE` に持たせてある。ただし
+`assets/js/share.js` と手書き HTML（ポータル・科目トップ 5 枚）にも同じ値が
+書いてあるので、**変えるときは `rg route_taizen` で全箇所を出してから直す。**
+
+| 置き場 | 用途 |
+|---|---|
+| `build/lib/extract.mjs` の `X_HANDLE` | 生成ページの `twitter:site`・共有ボタンの `via=`・フッターの導線 |
+| `assets/js/share.js` の `X_HANDLE` | 診断結果とルート画面の共有ボタンの `via=` |
+| 手書き HTML 6 枚 | `twitter:site` メタとフッターの導線（404 は `twitter:card` を持たないので対象外） |
+
+### 投稿案の生成
+
+```bash
+node build/gen-x-posts.mjs            # 翌月分
+node build/gen-x-posts.mjs 2026-09    # 月を指定
+```
+
+出力は `docs/x-posts/YYYY-MM.md`。図鑑カード（A 型）とデータから出る事実（E 型）を
+`BOOKS` から組み立て、判断が要る 3 種類は空欄で出す。空欄を埋めるときに渡すのは
+**ファイル末尾の「候補データ」だけでよい**（科目トップの HTML は読ませない）。
+
+`.github/workflows/x-posts.yml` が毎月 1 日に実行してコミットする。同じ月が既に
+あれば作り直さない。作り直すには `--force` を付ける。**`--force` は前回出した本を
+別の本に入れ替える**（既出の記録が `docs/x-posts/used.json` に残っているため）。
+
+`BOOKS` の `diff` は **1〜10 の 10 段階**である。投稿でも `build/lib/cards.mjs` と
+同じ 10 段階で書く。5 段階の星に丸めると、サイトを開いた読者が見る数字と食い違う。
 
 ## 更新手順
 
