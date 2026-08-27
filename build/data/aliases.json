@@ -1,0 +1,199 @@
+{
+  "_provenance": {
+    "purpose": "検索でよく使われる呼び名（略称・別表記）から参考書を引けるようにするための辞書",
+    "rule": "実際にその呼び名が使われていると確認できるものだけを載せる。推測で増やさない。載っていない本は正式な書名・出版社・分野で引ける",
+    "key": "<科目ディレクトリ>:<BOOKS の id>。build/generate-search.mjs が実在を検証し、合わない key があればビルドを止める",
+    "note": "書名にそのまま含まれる呼び名（「ポレポレ」「鉄壁」「青チャート」など）は書けなくてよい。索引が書名から引くため",
+    "updated": "2026-08-27"
+  },
+  "aliases": {
+    "english:nextstage": [
+      "ネクステ",
+      "ネクステージ",
+      "ネクストステージ"
+    ],
+    "english:vintage": [
+      "ヴィンテージ",
+      "ビンテージ"
+    ],
+    "english:sistan": [
+      "シス単"
+    ],
+    "english:sistan-basic": [
+      "シス単ベーシック",
+      "シス単Basic"
+    ],
+    "english:sokutan-nyumon": [
+      "速単入門"
+    ],
+    "english:sokutan-hisshu": [
+      "速単",
+      "速単必修"
+    ],
+    "english:sokutan-jokyu": [
+      "速単上級"
+    ],
+    "english:leap": [
+      "リープ"
+    ],
+    "english:leap-basic": [
+      "リープベーシック"
+    ],
+    "english:yatte300": [
+      "やておき300",
+      "やっておき300"
+    ],
+    "english:yatte500": [
+      "やておき500",
+      "やっておき500"
+    ],
+    "english:yatte700": [
+      "やておき700",
+      "やっておき700"
+    ],
+    "english:yatte1000": [
+      "やておき1000",
+      "やっておき1000"
+    ],
+    "english:rules1": [
+      "ルールズ1",
+      "ザルールズ"
+    ],
+    "english:rules2": [
+      "ルールズ2",
+      "ザルールズ"
+    ],
+    "english:rules3": [
+      "ルールズ3",
+      "ザルールズ"
+    ],
+    "english:rules4": [
+      "ルールズ4",
+      "ザルールズ"
+    ],
+    "english:final-polaris": [
+      "ファイナルポラリス"
+    ],
+    "japanese:yama": [
+      "ヤマヤマ"
+    ],
+    "japanese:jokyu1": [
+      "上級現代文1"
+    ],
+    "japanese:jokyu2": [
+      "上級現代文2"
+    ],
+    "japanese:rules1": [
+      "現代文ルールズ1",
+      "ザルールズ"
+    ],
+    "japanese:rules2": [
+      "現代文ルールズ2",
+      "ザルールズ"
+    ],
+    "japanese:rules3": [
+      "現代文ルールズ3",
+      "ザルールズ"
+    ],
+    "japanese:rules4": [
+      "現代文ルールズ4",
+      "ザルールズ"
+    ],
+    "math:shiro": [
+      "白チャ"
+    ],
+    "math:ki": [
+      "黄チャ"
+    ],
+    "math:ao": [
+      "青チャ"
+    ],
+    "math:aka": [
+      "赤チャ"
+    ],
+    "math:midori-chart": [
+      "緑チャ"
+    ],
+    "math:fg": [
+      "フォーカスゴールド",
+      "フォーカス",
+      "FG"
+    ],
+    "math:taio11": [
+      "一対一",
+      "一対一対応"
+    ],
+    "math:hyomon": [
+      "標問"
+    ],
+    "math:juyo-mondai": [
+      "重問"
+    ],
+    "math:bunkei-platica": [
+      "文系プラチカ"
+    ],
+    "math:rikei-platica": [
+      "理系プラチカ"
+    ],
+    "math:rikei-platica3": [
+      "理系プラチカ3"
+    ],
+    "science:kosei-hyojun": [
+      "標問"
+    ],
+    "science:hyojun-seiko": [
+      "標問"
+    ],
+    "science:hyojun-mondai-seiko": [
+      "標問"
+    ],
+    "science:juyo-mondaishu": [
+      "重問"
+    ],
+    "science:juyo-mondai": [
+      "重問"
+    ],
+    "science:juyo-mondaishu-seibutsu": [
+      "重問"
+    ],
+    "japanese:tomii-bunpo": [
+      "はじてい"
+    ],
+    "japanese:tomii-dokkai": [
+      "はじてい"
+    ],
+    "japanese:terashi": [
+      "はじてい"
+    ],
+    "math:okita": [
+      "はじてい"
+    ],
+    "science:hashimoto-kiso": [
+      "はじてい"
+    ],
+    "science:hashimoto-rikigaku": [
+      "はじてい"
+    ],
+    "science:hashimoto-denjiki": [
+      "はじてい"
+    ],
+    "science:hashimoto-netsu": [
+      "はじてい"
+    ],
+    "science:kishi-kagakukiso-hajime": [
+      "はじてい"
+    ],
+    "science:kishi-riron-hajime": [
+      "はじてい"
+    ],
+    "science:tabe-kiso-hajimete": [
+      "はじてい"
+    ],
+    "science:aoki-hajitei-chigaku": [
+      "はじてい"
+    ],
+    "social:shimizu-kokyo-teinei": [
+      "はじてい"
+    ]
+  }
+}

@@ -284,6 +284,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 /* 診断結果の書籍リストで、通し番号や科目バッジを入れる枠。
    設問の選択肢からは汎用の線画アイコンを外したので、ここだけで使う。 */
 .opt__ic{width:42px;height:42px;border-radius:8px;flex:none;display:grid;place-items:center;background:var(--surface-3);color:var(--ink-2)}
+/* 診断結果に並ぶ 1 冊目の書影。図鑑・ルートと同じ .bcov を小さくして使う */
+.opt__cov{flex:none;width:38px}
+.opt__cov .bcov{width:38px}
+.opt__cov .fb-pub,.opt__cov .fb-band{display:none}
+.opt__cov .fb-title{font-size:6.5px;line-height:1.2}
 .opt__txt{min-width:0}
 .opt__txt b{font-weight:800;font-size:15px;display:block;line-height:1.35}
 .opt__txt span{font-size:12px;color:var(--muted);display:block;margin-top:2px}
@@ -980,10 +985,13 @@ gtag('config', 'G-DQ5WFXEFMX');
 </nav>
 
 <script src="/assets/js/share.js"></script>
+<script src="/assets/js/pace.js"></script>
 <script>
 /* 診断結果の共有・保存（assets/js/share.js）。
    スクリプトを読めなかった場合でも診断が壊れないよう、何もしない実装で代替する。 */
-var RTShare = (typeof RTShare !== "undefined" && RTShare) || {setup(){}, beforeQuiz:()=>"", beforeResult:()=>"", afterResult:()=>"", restart(){ startQuiz(); go("quiz"); }};
+var RTShare = (typeof RTShare !== "undefined" && RTShare) || {setup(){}, beforeQuiz:()=>"", beforeResult:()=>"", afterResult:()=>"", routeBlock:()=>"", restart(){ startQuiz(); go("quiz"); }};
+/* ルートの進めるペース（assets/js/pace.js）。同じく、読めなくてもルートは出す */
+var RTPace = (typeof RTPace !== "undefined" && RTPace) || {setup(){}, apply(){}};
 
 
 /* ============================================================
@@ -4205,7 +4213,7 @@ function nodeHTML(s, i, st0, startIdx, b, extraCls){
   const altHtml = s.alts && s.alts.length ? `<div class="cn-info__alt"><b>代替:</b> ${s.alts.map(a=>{
     const ab=bookById(a); return ab?`<button onclick="event.stopPropagation();openModal('${a}')">${ab.name}</button>`:"";
   }).filter(Boolean).join(" / ")}</div>` : "";
-  return `<div class="climb-node${cls}${extraCls||""}">
+  return `<div class="climb-node${cls}${extraCls||""}" data-h="${b.h}">
     <div class="cn-marker"><div class="cn-step">${st0==="done"?"✓":i+1}</div><div class="cn-lvl">${LVL_NAME[s.lvl]}</div></div>
     <div class="cn-card" onclick="openModal('${b.id}')">
       ${badge}
@@ -4230,6 +4238,7 @@ function nodeHTML(s, i, st0, startIdx, b, extraCls){
  */
 function renderRoute(){
   renderRouteBody();
+  RTPace.apply();
   const box = document.getElementById("routeShare");
   if(!box) return;
   box.innerHTML = document.querySelector("#routeOutput .climb") ? RTShare.routeBlock() : "";
@@ -4457,6 +4466,7 @@ function renderQuizResult(){
           const st=STAGES[b.stage];
           return `<button class="opt" onclick="openModal('${b.id}')">
             <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:${SUBJ[f.k].color};color:#fff">${SUBJ[f.k].short}</span>
+            <span class="opt__cov">${coverHTML(b)}</span>
             <span class="opt__txt"><b>${b.name}</b><span>${f.done?`${SUBJ[f.k].label}は仕上げ段階`:`${SUBJ[f.k].label}の1冊目`} ・ ${st.label} ・ ${b.hours}</span></span>
           </button>`;}).join("")}
         <div style="text-align:center;color:var(--muted);font-size:12px;font-weight:600">${allDone?"… 併用できる教材と各科目の詳細はルート画面で":"… 各科目の続きと並行教材・過去問はルート画面で"}</div>
@@ -4655,6 +4665,8 @@ function applySharedUni(name){
 }
 
 /* 共有 URL に回答が載っていれば、ここで結果画面を復元する */
+RTPace.setup({ today: ()=>new Date() });
+
 RTShare.setup({
   quiz: QUIZ,
   subject: "social",

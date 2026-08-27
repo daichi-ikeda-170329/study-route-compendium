@@ -124,6 +124,8 @@ export function loadPage(dir) {
     URL, URLSearchParams,
     setTimeout() {}, setInterval() {}, addEventListener() {}, requestAnimationFrame() {},
     RTShare: fakeShare,
+    /* ペース表示は DOM を読むだけなので、テストでは何もしない差し替えで足りる */
+    RTPace: { setup() {}, apply() {} },
   };
   ctx.globalThis = ctx;
   vm.createContext(ctx);

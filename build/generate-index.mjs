@@ -9,19 +9,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
+import { bookCards } from './lib/cards.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-
-function bookRow(b, sub, stages) {
-  const st = stages[b.stage] || {};
-  const bars = Array.from({ length: 10 }, (_, i) => `<i class="${i < b.diff ? 'on' : ''}"></i>`).join('');
-  return `      <a class="bcard" href="/${sub.dir}/books/${b.id}/" style="--bc:${st.color || sub.color}">
-        <div class="bcard__top"><span class="bcard__stage">${esc(st.short || '')}</span><span>${esc(b.pub)}</span></div>
-        <b>${esc(b.name)}</b>
-        <p>${esc(clip(b.desc, 74))}</p>
-        <div class="bcard__foot"><span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}／${esc(b.hensachi || '—')}</span></div>
-      </a>`;
-}
 
 function render(sub, d, counts) {
   const url = `${ORIGIN}/${sub.dir}/books/`;
@@ -51,9 +41,7 @@ function render(sub, d, counts) {
         }))
       : [{ label: '', list }];
 
-    const body = groups.map(g => `${g.label ? `      <h3 class="grp">${esc(g.label)}<span>${g.list.length}冊</span></h3>\n` : ''}      <div class="bcards">
-${g.list.map(b => bookRow(b, sub, d.stages)).join('\n')}
-      </div>`).join('\n');
+    const body = groups.map(g => `${g.label ? `      <h3 class="grp">${esc(g.label)}<span>${g.list.length}冊</span></h3>\n` : ''}${bookCards(g.list, sub, d.stages)}`).join('\n');
 
     return `    <section class="block" id="stage-${key}">
       <div class="eyebrow" style="color:${st.color}"><span style="display:none"></span>${esc(st.short)}</div>

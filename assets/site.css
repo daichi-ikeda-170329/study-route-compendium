@@ -67,6 +67,9 @@ img{display:block;max-width:100%}
 
 /* ---------- レイアウト ---------- */
 .wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+/* 本文を読ませるページ（参考書 1 冊・解説記事）は少し狭くする。
+   1 行の長さを日本語として適切に保つと、幅 1000px では右側が大きく空いてしまう */
+.wrap--read{max-width:920px}
 .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:2px 7px;font-size:11.5px;color:var(--muted);padding:14px 0 0;font-family:var(--mono);letter-spacing:.02em}
 /* 指でタップできる高さを確保する（WCAG のターゲットサイズは 24px 以上）。
    行の見た目を変えずに当たり判定だけ広げるため、padding で稼ぐ。 */
@@ -78,16 +81,17 @@ img{display:block;max-width:100%}
 .eyebrow::before{content:"";width:24px;height:1.5px;background:var(--accent)}
 h2.sec{font-family:var(--serif);font-weight:800;font-size:21px;letter-spacing:.02em;margin-bottom:8px;line-height:1.35}
 @media(min-width:700px){h2.sec{font-size:25px}}
-.sec-lead{color:var(--muted);font-size:13px;max-width:64ch}
+.sec-lead{color:var(--muted);font-size:13px;max-width:42em}
 .block{margin-top:44px}
 
 /* ---------- 記事本文 ---------- */
-.prose p{font-size:14.5px;line-height:1.95;color:var(--ink-2);margin-top:14px;max-width:70ch}
+/* 1 行の長さは em で持つ。ch は半角「0」の幅なので、日本語だと 70ch = 全角 35 文字にしかならない */
+.prose p{font-size:14.5px;line-height:1.95;color:var(--ink-2);margin-top:14px;max-width:44em}
 .prose p:first-child{margin-top:0}
 .prose b,.prose strong{color:var(--ink);font-weight:700}
 .prose a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px;font-weight:700;padding:3px 0}
 .prose h3{font-family:var(--serif);font-weight:800;font-size:17.5px;letter-spacing:.03em;margin:32px 0 10px;line-height:1.45}
-.prose ul,.prose ol{margin:14px 0 0 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:11px;max-width:70ch}
+.prose ul,.prose ol{margin:14px 0 0 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:11px;max-width:44em}
 /* 行頭の点は絶対配置にする。flex にすると項目内の <b> が
    独立したフレックスアイテムになり、太字部分だけ不自然に折り返される。 */
 .prose li{font-size:14px;line-height:1.9;color:var(--ink-2);position:relative;padding-left:18px}
@@ -128,7 +132,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:21px;letter-spacing:.0
 h1.bk-name{font-family:var(--serif);font-weight:800;font-size:29px;line-height:1.35;letter-spacing:.02em;margin-top:14px}
 @media(min-width:760px){h1.bk-name{font-size:37px}}
 .bk-official{font-size:12.5px;color:var(--muted);margin-top:9px;line-height:1.7}
-.bk-desc{font-size:14.5px;color:var(--ink-2);line-height:1.95;margin-top:18px;max-width:64ch}
+.bk-desc{font-size:14.5px;color:var(--ink-2);line-height:1.95;margin-top:18px;max-width:40em}
 
 /* ---------- 難易度メーター ---------- */
 .bk-meter{margin-top:20px;max-width:420px}
@@ -178,10 +182,13 @@ h1.bk-name{font-family:var(--serif);font-weight:800;font-size:29px;line-height:1
 @media(min-width:900px){.bcards{grid-template-columns:repeat(3,1fr)}}
 .bcard{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--bc,var(--sc));padding:14px 15px 13px;transition:.16s;box-shadow:var(--sh-s);display:flex;flex-direction:column}
 .bcard:hover{transform:translateY(-3px);box-shadow:var(--sh-m);border-color:var(--line-d)}
-.bcard__top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--muted-2);letter-spacing:.08em;margin-bottom:8px}
+.bcard__head{display:flex;align-items:flex-start;gap:11px}
+.bcard__head .rt-cov{--cw:56px}
+.bcard__meta{min-width:0;flex:1}
+.bcard__top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--muted-2);letter-spacing:.08em;margin-bottom:6px}
 .bcard__stage{color:var(--bc,var(--sc));font-weight:600}
 .bcard b{font-size:14px;font-weight:700;letter-spacing:.02em;line-height:1.45;color:var(--ink)}
-.bcard p{font-size:11.8px;color:var(--muted);margin-top:7px;line-height:1.7;flex:1}
+.bcard p{font-size:11.8px;color:var(--muted);margin-top:10px;line-height:1.7;flex:1}
 .bcard__foot{display:flex;align-items:center;gap:8px;margin-top:11px;padding-top:9px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:10px;color:var(--muted)}
 .bcard__diff{display:flex;gap:2px}
 .bcard__diff i{width:9px;height:4px;border-radius:1px;background:var(--line)}

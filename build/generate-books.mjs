@@ -14,6 +14,7 @@ import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/e
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { authorsOf, searchName, withAuthor } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
+import { bookCards } from './lib/cards.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -106,21 +107,6 @@ function rakutenUrl(b, id) {
   const dest = `https://search.rakuten.co.jp/search/mall/${b.isbn13 || b.name}/`;
   const e = encodeURIComponent(dest);
   return `https://hb.afl.rakuten.co.jp/hgc/${id}/?pc=${e}&m=${e}`;
-}
-
-/* ============================================================
-   カード
-   ============================================================ */
-function bookCard(b, sub, stages) {
-  const st = stages[b.stage] || {};
-  const bars = Array.from({ length: 10 }, (_, i) =>
-    `<i class="${i < b.diff ? 'on' : ''}"></i>`).join('');
-  return `      <a class="bcard" href="/${sub.dir}/books/${b.id}/" style="--bc:${st.color || sub.color}">
-        <div class="bcard__top"><span class="bcard__stage">${esc(st.short || '')}</span><span>${esc(b.pub)}</span></div>
-        <b>${esc(b.name)}</b>
-        <p>${esc(clip(b.desc, 68))}</p>
-        <div class="bcard__foot"><span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}</span></div>
-      </a>`;
 }
 
 /* ============================================================
@@ -245,7 +231,7 @@ ${topBars(sub.dir)}
 
 ${header(sub)}
 
-<main class="wrap">
+<main class="wrap wrap--read">
   ${crumbs(crumbItems)}
 
   <article>
@@ -309,18 +295,14 @@ ${book.cons.map(c => `          <li>${esc(c)}</li>`).join('\n')}
       <div class="eyebrow">Alternatives</div>
       <h2 class="sec">同じ役割・同じレベルの参考書</h2>
       <p class="sec-lead">${esc(book.name)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。相性で選んで構いません。ここから 1 冊を選び切ることが大切で、複数を並行させる必要はありません。</p>
-      <div class="bcards">
-${alts.map(b => bookCard(b, sub, stages)).join('\n')}
-      </div>
+${bookCards(alts, sub, stages)}
     </section>` : ''}
 
     ${next.list.length ? `<section class="block">
       <div class="eyebrow">Next step</div>
       <h2 class="sec">この本のあとに進む参考書</h2>
       <p class="sec-lead">${esc(nextLead)}</p>
-      <div class="bcards">
-${next.list.map(b => bookCard(b, sub, stages)).join('\n')}
-      </div>
+${bookCards(next.list, sub, stages)}
     </section>` : ''}
 
     <section class="block">

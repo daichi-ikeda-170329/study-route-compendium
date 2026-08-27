@@ -1,13 +1,13 @@
 /**
  * 志望校レベル別の参考書ルートページ（/<科目>/routes/<tier>/）を生成する。
  *
- * ROUTES の形は科目によって 3 通りある。
- *   math / english : ROUTES[tier][トラック][policy]      トラック = bun / ri
- *   japanese       : ROUTES[tier][トラック][policy]      トラック = gendai / kobun / kanbun
- *   social         : ROUTES[tier][トラック][policy]      トラック = nihonshi / sekaishi / …
- *   science        : ROUTES[トラック][tier][policy]      ← 階層が逆
- * さらに para（並行して進める本）と final（最終仕上げ）が
- * tier 直下にぶら下がる。ここで 1 つの形に正規化してから描画する。
+ * ROUTES の形は 5 科目で共通で ROUTES[tier][トラック][policy]。トラックだけが科目で違う。
+ *   math / english : bun / ri
+ *   japanese       : gendai / kobun / kanbun
+ *   science        : butsuri / kagaku / seibutsu / chigaku
+ *   social         : nihonshi / sekaishi / …
+ * さらに para（並行して進める本）と final（最終仕上げ）が tier 直下にぶら下がる。
+ * トラックとして扱わないキーは NON_TRACK に並べてある。
  */
 import fs from 'fs';
 import path from 'path';
@@ -24,7 +24,9 @@ const POLICIES = [
   { key: 'omni',  label: '王道網羅型',   note: '時間に余裕があり、抜けを作らずに積み上げたい場合の並び。網羅系を軸に据えます。' },
   { key: 'quick', label: '時短・精選型', note: '残り時間が少ない、または他科目に時間を回したい場合の並び。冊数を絞って要点だけ通します。' },
 ];
-const NON_TRACK = new Set(['para', 'final']);
+/* トラックの名前として現れるが、ルートの並びそのものではないキー。
+   basic は理科基礎（文系・共テのみ）のルートで、科目トップだけで使う */
+const NON_TRACK = new Set(['para', 'final', 'basic']);
 /** トラックの表示順。ROUTES のキー順は科目によってばらつくのでここで固定する */
 const TRACK_ORDER = [
   'bun', 'ri',
@@ -40,50 +42,27 @@ const trackRank = (k) => {
 
 /**
  * ROUTES を { [tier]: { tracks: {track: {omni, quick}}, para: {track: []}, final: {track: []} } } に揃える。
+ *
+ * para / final は「トラック→配列」の辞書のことも、配列そのもののこともある。
+ * 配列のときは全トラック共通なので '*' に置き、描画側がトラック名で引けなければ '*' に落ちる。
  */
 function normalize(routes, tiers) {
   const tierIds = new Set(tiers.map(t => t.id));
-  const top = Object.keys(routes);
-  const isTierFirst = top.some(k => tierIds.has(k));
   const out = {};
 
-  const put = (tier, track, val) => {
-    if (!val) return;
-    out[tier] = out[tier] || { tracks: {}, para: {}, final: {} };
-    out[tier].tracks[track] = val;
-  };
-
-  if (isTierFirst) {
-    for (const tier of top) {
-      if (!tierIds.has(tier)) continue;
-      const node = routes[tier] || {};
-      out[tier] = out[tier] || { tracks: {}, para: {}, final: {} };
-      for (const key of Object.keys(node)) {
-        if (NON_TRACK.has(key)) continue;
-        put(tier, key, node[key]);
-      }
-      // para / final は「トラック→配列」の辞書のことも、配列そのもののこともある
-      for (const kind of ['para', 'final']) {
-        const v = node[kind];
-        if (!v) continue;
-        if (Array.isArray(v)) out[tier][kind]['*'] = v;
-        else for (const k of Object.keys(v)) if (Array.isArray(v[k])) out[tier][kind][k] = v[k];
-      }
+  for (const tier of Object.keys(routes)) {
+    if (!tierIds.has(tier)) continue;
+    const node = routes[tier] || {};
+    out[tier] = { tracks: {}, para: {}, final: {} };
+    for (const key of Object.keys(node)) {
+      if (NON_TRACK.has(key) || !node[key]) continue;
+      out[tier].tracks[key] = node[key];
     }
-  } else {
-    // science 形式: 第 1 階層がトラック
-    for (const track of top) {
-      const byTier = routes[track] || {};
-      for (const tier of Object.keys(byTier)) {
-        if (!tierIds.has(tier)) continue;
-        const node = byTier[tier] || {};
-        out[tier] = out[tier] || { tracks: {}, para: {}, final: {} };
-        const seq = {};
-        for (const p of POLICIES) if (Array.isArray(node[p.key])) seq[p.key] = node[p.key];
-        if (Object.keys(seq).length) out[tier].tracks[track] = seq;
-        if (Array.isArray(node.para)) out[tier].para[track] = node.para;
-        if (Array.isArray(node.final)) out[tier].final[track] = node.final;
-      }
+    for (const kind of ['para', 'final']) {
+      const v = node[kind];
+      if (!v) continue;
+      if (Array.isArray(v)) out[tier][kind]['*'] = v;
+      else for (const k of Object.keys(v)) if (Array.isArray(v[k])) out[tier][kind][k] = v[k];
     }
   }
   return out;

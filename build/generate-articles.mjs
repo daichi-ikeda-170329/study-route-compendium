@@ -13,6 +13,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
+import { bookCards } from './lib/cards.mjs';
 import { ARTICLES } from './content/articles.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -79,21 +80,9 @@ ${books.map(b => `            <tr><th scope="row">${bookLink(d, b.id)}</th>${col
   // 書籍カード
   if (bl.books) {
     const d = bl.dir || dir;
-    const stages = data[d].stages;
     const sub = SUBJECTS.find(s => s.dir === d);
-    return `      <div class="bcards" style="margin:20px 0">
-${bl.books.map(id => {
-      const b = lookup(d, id, 'books');
-      const st = stages[b.stage] || {};
-      const bars = Array.from({ length: 10 }, (_, i) => `<i class="${i < b.diff ? 'on' : ''}"></i>`).join('');
-      return `        <a class="bcard" href="/${d}/books/${b.id}/" style="--bc:${st.color || sub.color}">
-          <div class="bcard__top"><span class="bcard__stage">${esc(st.short || '')}</span><span>${esc(b.pub)}</span></div>
-          <b>${esc(b.name)}</b>
-          <p>${esc(clip(b.desc, 70))}</p>
-          <div class="bcard__foot"><span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}</span></div>
-        </a>`;
-    }).join('\n')}
-      </div>`;
+    const list = bl.books.map(id => lookup(d, id, 'books'));
+    return bookCards(list, sub, data[d].stages, 'margin:20px 0');
   }
   throw new Error(`未知のブロック: ${JSON.stringify(bl).slice(0, 100)}`);
 }
@@ -185,7 +174,7 @@ ${topBars(a.subject || '')}
 
 ${sub ? header(sub) : portalHeader()}
 
-<main class="wrap">
+<main class="wrap wrap--read">
   ${crumbs(crumbItems)}
 
   <article>
@@ -287,7 +276,7 @@ ${topBars(dir || '')}
 
 ${sub ? header(sub) : portalHeader()}
 
-<main class="wrap">
+<main class="wrap wrap--read">
   ${crumbs(crumbItems)}
 
   <div class="block" style="margin-top:26px">

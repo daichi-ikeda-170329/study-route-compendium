@@ -19,7 +19,7 @@
   var MAX_HITS = 12;
 
   var doc = global.document;
-  var root, input, pop, status;
+  var root, input, pop;
   var hits = [];
   var cur = -1;
   var lastQuery = "";
@@ -69,6 +69,27 @@
     } catch (e) { /* head に触れない環境では見た目だけ素になる */ }
   }
 
+  /**
+   * 検索の突き合わせに使う正規化。索引を作る側（build/generate-search.mjs）と
+   * ここの両方で同じ関数を通すので、書き方の違いで引けなくなることがない。
+   *
+   *   小文字化 → 全角英数を半角へ → カタカナをひらがなへ → 記号・空白・長音を落とす
+   *
+   * 「ポレポレ」「ぽれぽれ」「Next Stage」「nextstage」がどれも同じ形になる。
+   * 索引には正規化した形だけを持たせる（表記ごとに何通りも持たせるより軽い）。
+   */
+  function normalize(s) {
+    return String(s == null ? "" : s)
+      .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (c) {
+        return String.fromCharCode(c.charCodeAt(0) - 0xFEE0);
+      })
+      .toLowerCase()
+      .replace(/[ァ-ヶ]/g, function (c) {
+        return String.fromCharCode(c.charCodeAt(0) - 0x60);
+      })
+      .replace(/[\s　!-\/:-@\[-`{-~、。・「」『』（）〈〉【】〜ー―－‐]/g, "");
+  }
+
   function esc(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -110,13 +131,16 @@
     doc.head.appendChild(s);
   }
 
-  /** 突き合わせ用の文字列を 1 度だけ作る（書名 + 出版社 + 追加語） */
+  /**
+   * 突き合わせ用の文字列を 1 度だけ作る。
+   * 索引の 6 番目（追加語）はすでに正規化済みなので、書名と出版社だけここで通す。
+   */
   function haystacks() {
     if (hayCache) return hayCache;
     var books = global.RT_BOOK_INDEX.books;
     hayCache = new Array(books.length);
     for (var i = 0; i < books.length; i++) {
-      hayCache[i] = (books[i][2] + " " + books[i][3] + " " + books[i][5]).toLowerCase();
+      hayCache[i] = normalize(books[i][2]) + " " + normalize(books[i][3]) + " " + books[i][5];
     }
     return hayCache;
   }
@@ -127,7 +151,7 @@
    */
   function search(q) {
     if (indexState !== "ready") return [];
-    var terms = q.toLowerCase().split(/[\s　]+/).filter(Boolean);
+    var terms = String(q).split(/[\s　]+/).map(normalize).filter(Boolean);
     if (!terms.length) return [];
     var books = global.RT_BOOK_INDEX.books;
     var hay = haystacks();
@@ -138,7 +162,7 @@
         if (hay[i].indexOf(terms[j]) < 0) { ok = false; break; }
       }
       if (!ok) continue;
-      (books[i][2].toLowerCase().indexOf(terms[0]) === 0 ? head : rest).push(books[i]);
+      (normalize(books[i][2]).indexOf(terms[0]) === 0 ? head : rest).push(books[i]);
       if (head.length >= MAX_HITS) break;
     }
     return head.concat(rest).slice(0, MAX_HITS);
@@ -257,12 +281,19 @@
     });
   }
 
-  if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", wire);
-  else wire();
+  /* ブラウザ以外（索引を作るビルドや node --test）では DOM を触らない */
+  if (doc) {
+    if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", wire);
+    else wire();
+  }
 
-  /* テストと手動確認のために内部を出す。画面側からは使わない */
-  global.RTSearch = {
+  var RTSearch = {
+    /** 索引側と検索側を同じ形にそろえる正規化。build/generate-search.mjs もこれを使う */
+    normalize: normalize,
+    /* テストと手動確認のために内部を出す。画面側からは使わない */
     _search: search,
     _state: function () { return indexState; }
   };
+  global.RTSearch = RTSearch;
+  if (typeof module !== "undefined" && module.exports) module.exports = RTSearch;
 })(typeof window !== "undefined" ? window : globalThis);
