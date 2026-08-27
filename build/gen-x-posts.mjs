@@ -66,7 +66,7 @@ const LIGHT_RANGES = [
   [0x2032, 0x2037],
 ];
 
-function weightedLen(text) {
+export function weightedLen(text) {
   const urls = text.match(/https?:\/\/\S+/g) || [];
   const rest = text.replace(/https?:\/\/\S+/g, '');
   let n = urls.length * URL_WEIGHT;
@@ -506,4 +506,8 @@ function main() {
   console.log(`A 型の既出: ${used.size} 冊 / ${totalBooks} 冊`);
 }
 
-main();
+// 直接実行されたときだけ生成する。文字数の判定（weightedLen）を
+// 手書きの投稿の検算にも使えるよう、import しただけでは走らせない
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main();
+}
