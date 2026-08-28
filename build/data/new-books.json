@@ -1,0 +1,6 @@
+{
+  "note": "掲載を承認した新刊。build/apply-new-books.mjs が各科目 index.html の NEW BOOKS 区間へ注入する。設計は docs/new-books-plan.md。",
+  "note2": "評価（難易度・到達目安・強み・注意点・向いている人）が固まったら、ここから消して科目 HTML の BOOKS 配列本体へ provisional を外して移す。ここに残っている数が評価の残作業そのもの。",
+  "required": ["id", "subject", "name", "official", "pub", "year", "stage"],
+  "books": []
+}

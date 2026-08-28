@@ -189,6 +189,9 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .bc-diff{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);font-weight:600}
 .diff-dots{display:flex;gap:2.5px}
 .diff-dots i{width:5px;height:9px;border-radius:1.5px;background:var(--line)}
+/* 新刊（評価が未了）。docs/new-books-plan.md の 7 節 */
+.bc-prov{display:inline-block;background:var(--gold-soft);color:var(--gold);border-radius:2px;padding:1px 6px;font-size:10px;font-weight:700}
+.spec-prov{display:inline-block;background:var(--gold-soft);color:var(--gold);border-radius:2px;padding:2px 7px;font-size:11px;font-weight:700}
 .bc-hensachi{font-size:10.5px;color:var(--muted);font-weight:600}
 .bc-hensachi b{font-family:var(--mono);color:var(--ink-2);font-weight:600}
 
@@ -1070,7 +1073,25 @@ const SUBFILTER = {
   chigaku_k: {label:"地学基礎", match:b=>b.sub==="chigaku"  && !!b.basic},
   sogo:      {label:"全科目共通", match:b=>b.sub==="sogo", sep:true}
 };
+/* ============================================================
+   新刊（評価が未了の本）
+   ============================================================
+   現物を読んでいないので難易度・到達目安・強み・注意点・向いている人を持たない。
+   数字を作らず「評価準備中」と出す。生成側は build/lib/newbooks.mjs が同じ判定を
+   持っているので、文言を変えるときは両方を直す。設計は docs/new-books-plan.md。
+
+   diff を持たない本は 3 通りの壊れ方をする。
+     1. ${b.diff} の素の埋め込み        → 画面に undefined が出る
+     2. b.pros.map / b.subjects.split → TypeError で描画そのものが止まる
+     3. d<=2 ? … : 最難関 形の分類     → 比較が全部 false になり最難関に化ける
+   3 は静かに間違うので最も危ない。 */
+const PROV_LABEL = "新刊・評価準備中";
+function isProv(b){ return !!b && b.provisional === true; }
+/* 難易度順の並びで末尾へ落とす。diff の無い本を a.diff-b.diff に通すと NaN になり、
+   比較子が非対称になって並び順が実行ごとに変わる */
+function provLast(a,b){ return (isProv(a)?1:0) - (isProv(b)?1:0); }
 function diffColor(d){
+  if(d==null) return "var(--line)";   /* 新刊は難易度を持たない。色も付けない */
   if(d<=2) return "#2F8659";
   if(d<=4) return "#2E7D9A";
   if(d<=6) return "#24427C";
@@ -1156,6 +1177,10 @@ const QUIZ = [
      {v:"short",b:"高3の秋以降・既卒で時間がない",s:"精選型で最短ルートを取る",ic:"M10 2h4M12 14l3-3M12 22a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"}
    ]}
 ];
+
+/* NEW BOOKS — 自動生成。build/apply-new-books.mjs が書き換える。手で編集しない */
+/* /NEW BOOKS */
+
 
 /* ===== LEGAL — 法定表記・ポリシー ===== */
 const LEGAL = {
@@ -1423,8 +1448,11 @@ function rakutenURL(b){
 function coverHTML(b){
   const n = b.name.length;
   const cls = n>14 ? "xlong" : (n>9 ? "long" : "");
-  const fbStyle = `background:${b.fb.bg}${b.fb.light ? ";color:#1B2233;text-shadow:none" : ""}`;
-  const fb = `<div class="bcov-fb${b.fb.light ? " light" : ""}" style="${fbStyle}"><span class="fb-spine"></span><span class="fb-pub">${b.pub}</span><span class="fb-title ${cls}">${b.name}</span><span class="fb-band">${b.subjects}</span></div>`;
+  /* fb（書影が取れないときの代替色）は手で決める装飾。新刊はまだ持たないので既定色を当てる。
+     ここを素通りさせると b.fb.bg が TypeError になり、図鑑の描画そのものが止まる */
+  const fbc = b.fb || {bg:"linear-gradient(160deg,#8A8F9E,#5A6070)"};
+  const fbStyle = `background:${fbc.bg}${fbc.light ? ";color:#1B2233;text-shadow:none" : ""}`;
+  const fb = `<div class="bcov-fb${fbc.light ? " light" : ""}" style="${fbStyle}"><span class="fb-spine"></span><span class="fb-pub">${b.pub}</span><span class="fb-title ${cls}">${b.name}</span><span class="fb-band">${b.subjects || ""}</span></div>`;
   const srcs = coverSrcs(b);
   if(!srcs.length) return `<div class="bcov fb">${fb}</div>`;
   return `<div class="bcov"><img src="${srcs[0]}" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="${srcs.join("|")}" data-s="0" onload="covLoad(this)" onerror="covErr(this)">${fb}</div>`;
@@ -1471,23 +1499,23 @@ function renderCatalog(){
     }
     return true;
   });
-  if(sort==="diff-asc") list.sort((a,b)=>a.diff-b.diff);
-  else if(sort==="diff-desc") list.sort((a,b)=>b.diff-a.diff);
+  if(sort==="diff-asc") list.sort((a,b)=>provLast(a,b) || a.diff-b.diff);
+  else if(sort==="diff-desc") list.sort((a,b)=>provLast(a,b) || b.diff-a.diff);
   else if(sort==="year") list.sort((a,b)=>b.year-a.year);
   else list.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
   document.getElementById("catCount").textContent = list.length;
   document.getElementById("bookGrid").innerHTML = list.map(b=>{
     const st = STAGES[b.stage];
     const sc = SUBJ[b.sub] ? SUBJ[b.sub].color : "#3D4657";
-    const dots = Array.from({length:10},(_,i)=>`<i style="${i<b.diff?`background:${diffColor(b.diff)}`:""}"></i>`).join("");
+    const dots = isProv(b) ? "" : Array.from({length:10},(_,i)=>`<i style="${i<b.diff?`background:${diffColor(b.diff)}`:""}"></i>`).join("");
     return `<div class="book-card" role="button" tabindex="0" onclick="openModal('${b.id}')">
       <div class="book-card__cover">${coverHTML(b)}</div>
       <div class="book-card__body">
         <div class="bc-name">${b.name}</div>
         <div class="bc-pub">${b.pub}</div>
         <div class="bc-diff"><span class="diff-dots">${dots}</span></div>
-        <div class="bc-hensachi">目安 <b>${b.hensachi}</b></div>
-        <div class="bc-tags"><span class="tag tag-stage" style="background:${st.color}">${st.short}</span><span class="tag" style="background:${sc}1A;color:${sc}">${b.subjects}</span></div>
+        <div class="bc-hensachi">${isProv(b) ? `<span class="bc-prov">${PROV_LABEL}</span>` : `目安 <b>${b.hensachi}</b>`}</div>
+        <div class="bc-tags"><span class="tag tag-stage" style="background:${st.color}">${st.short}</span>${b.subjects ? `<span class="tag" style="background:${sc}1A;color:${sc}">${b.subjects}</span>` : ""}</div>
       </div>
     </div>`;
   }).join("");
@@ -1534,7 +1562,7 @@ function openModal(id){
   const ext = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4 10 14M9 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`;
   const detail = `<div class="mb-block"><h6>この参考書をもっと詳しく</h6>
     <a class="detail-btn" href="/science/books/${b.id}/">
-      <span>「${b.name}」の詳細ページ<small>レベル・向いている人・同じレベルの他の選択肢・次に進む本</small></span>
+      <span>「${b.name}」の詳細ページ<small>${isProv(b) ? "書誌情報と役割（評価は準備中）" : "レベル・向いている人・同じレベルの他の選択肢・次に進む本"}</small></span>
       <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a></div>`;
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
@@ -1559,19 +1587,19 @@ function openModal(id){
       <button class="modal__close" onclick="closeModal()" aria-label="閉じる"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     </div>
     <dl class="spec-grid">
-      <div class="spec"><dt>難易度</dt><dd>${b.diff}<small> /10</small><div class="diffbar"><i style="width:${b.diff*10}%;background:${diffColor(b.diff)}"></i></div></dd></div>
-      <div class="spec"><dt>対象・到達目安</dt><dd style="font-size:12.5px;line-height:1.4">${b.hensachi}</dd></div>
-      <div class="spec"><dt>分量</dt><dd style="font-size:12px;line-height:1.4">${b.problems}</dd></div>
-      <div class="spec"><dt>目安時間</dt><dd style="font-size:12.5px">${b.hours}</dd></div>
+      <div class="spec"><dt>難易度</dt><dd>${isProv(b) ? `<span class="spec-prov">${PROV_LABEL}</span>` : `${b.diff}<small> /10</small><div class="diffbar"><i style="width:${b.diff*10}%;background:${diffColor(b.diff)}"></i></div>`}</dd></div>
+      <div class="spec"><dt>対象・到達目安</dt><dd style="font-size:12.5px;line-height:1.4">${b.hensachi || "評価準備中"}</dd></div>
+      <div class="spec"><dt>分量</dt><dd style="font-size:12px;line-height:1.4">${b.problems || "—"}</dd></div>
+      <div class="spec"><dt>目安時間</dt><dd style="font-size:12.5px">${b.hours || "—"}</dd></div>
     </dl>
     <div class="modal__body">
-      <div class="mb-block"><h6>どんな本?</h6><p class="mb-desc">${b.desc}</p></div>
+      ${isProv(b) ? `<div class="mb-block"><h6>この本の評価について</h6><p class="mb-desc">${b.pub}から刊行された新刊です。現物の確認が済んでいないため、難易度・到達目安・強み・注意点・向いている人はまだ書いていません。このサイトの難易度は収録している全冊を同じ物差しで並べているので、確認しないまま数字を置くと物差し自体が狂います。推測では書きません。</p></div>` : `<div class="mb-block"><h6>どんな本?</h6><p class="mb-desc">${b.desc}</p></div>
       <div class="mb-block pc-cols">
-        <div class="pc-box pros"><h6>強み</h6><ul>${b.pros.map(p=>`<li>${p}</li>`).join("")}</ul></div>
-        <div class="pc-box cons"><h6>注意点</h6><ul>${b.cons.map(c=>`<li>${c}</li>`).join("")}</ul></div>
+        <div class="pc-box pros"><h6>強み</h6><ul>${(b.pros||[]).map(p=>`<li>${p}</li>`).join("")}</ul></div>
+        <div class="pc-box cons"><h6>注意点</h6><ul>${(b.cons||[]).map(c=>`<li>${c}</li>`).join("")}</ul></div>
       </div>
-      <div class="mb-block"><h6>こんな人に</h6><p class="mb-desc">${b.bestFor}</p></div>
-      <div class="mb-block"><h6>対象大学の目安</h6><div class="uni-tags">${(b.unis||[]).map(u=>`<span class="uni-tag">${u}</span>`).join("")}</div></div>
+      <div class="mb-block"><h6>こんな人に</h6><p class="mb-desc">${b.bestFor}</p></div>`}
+      ${(b.unis||[]).length ? `<div class="mb-block"><h6>対象大学の目安</h6><div class="uni-tags">${b.unis.map(u=>`<span class="uni-tag">${u}</span>`).join("")}</div></div>` : ""}
       ${(con.prev.length||con.next.length)?`<div class="mb-block"><h6>ルート上の接続</h6><div class="connect-row">${conRow(con.prev,"前に")}${conRow(con.next,"次に")}</div></div>`:""}
       ${detail}
       ${amazon}

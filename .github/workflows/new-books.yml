@@ -1,0 +1,67 @@
+# 新刊の候補を毎週集めてコミットする（docs/new-books-plan.md の 4 節）。
+#
+# 集めるだけで、サイトへの掲載はしない。**掲載するかどうかは池田さんが決める**
+# ためである（同 5 節）。出力を見て掲載する本を選び、
+# build/data/new-books.json に足す。
+#
+# 手で動かしたいときは Actions タブから「Run workflow」で日数を指定できる。
+name: 新刊候補の収集
+
+on:
+  schedule:
+    # 毎週月曜 00:00 UTC（日本時間 09:00）
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: '発売日をさかのぼる日数（空なら 45）'
+        required: false
+        type: string
+
+# 生成物をコミットして push するため書き込みが要る
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # 依存パッケージは無く、標準ライブラリ（fetch を含む）だけで動く
+          node-version: '22'
+
+      - name: 新刊候補を集める
+        # 入力は env 経由で渡す。run: に ${{ }} を直接埋めると、入力値が
+        # シェルコマンドとして解釈される（GitHub Actions のスクリプトインジェクション）
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+          DAYS: ${{ inputs.days }}
+        run: |
+          set -euo pipefail
+          if [ -z "${RAKUTEN_APP_ID:-}" ]; then
+            echo "RAKUTEN_APP_ID が未設定。リポジトリの Secrets に登録する"
+            echo "（docs/new-books-plan.md の 11 節）"
+            exit 1
+          fi
+          if [ -n "$DAYS" ]; then
+            node build/fetch-new-books.mjs --days "$DAYS"
+          else
+            node build/fetch-new-books.mjs
+          fi
+
+      - name: 変更をコミットする
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain docs/new-books)" ]; then
+            echo "候補に変更が無いのでコミットしない"
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/new-books
+          git commit -m 'chore: 新刊候補を収集（自動）'
+          git push

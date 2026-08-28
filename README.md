@@ -49,7 +49,7 @@
 | `assets/js/search.js` | 全ページ共通の参考書検索。ヘッダーの検索ボックスを動かす | 手で編集 |
 | `assets/js/book-index.js` | 検索が引く 1,052 冊の索引 | 生成 |
 | `assets/js/pace.js` | ルート画面の進めるペース（いつまでに何を終えるか） | 手で編集 |
-| `assets/ogp*.png` | OGP 画像。冊数を画像内に焼き込んでいる | 再生成が必要 |
+| `assets/ogp*.png` | OGP 画像。冊数を画像内に焼き込んでいる | **元の SVG も生成手順も無く、現状は更新できない**（「[更新手順](#更新手順)」を参照） |
 | `assets/x-icon.svg` / `.png` | X のプロフィール画像（400×400） | SVG を手で編集し PNG を書き出す |
 | `assets/x-header.svg` / `.png` | X のヘッダー画像（1500×500） | 同上 |
 | `favicon.svg` | ファビコン | 手で編集 |
@@ -61,7 +61,13 @@
 | `build/lib/ads.mjs` | Google AdSense の ID・広告枠。広告の出力はここ 1 か所で決まる | `apply-adsense.mjs` が書き換える |
 | `build/data/authors.json` | 著者名（openBD 由来・実在確認済み 227 冊分） | 生成（再取得時のみ） |
 | `build/data/aliases.json` | 参考書のあだ名（「ネクステ」など）。検索の索引に混ぜる | 手で編集 |
-| `test/` | 共有・保存のテスト（`assets/js/share.js` と、科目トップのルート共有）。`node --test` で実行する | 手で編集 |
+| `build/data/new-books.json` | 掲載を承認した新刊。ここに残っている数が「評価の残作業」 | 手で編集 |
+| `build/data/new-books-filter.json` | 新刊候補から大学受験以外を弾く除外語 | 手で編集 |
+| `build/data/rakuten-genres.json` | 楽天ブックスの学参系ジャンル ID（取得日つき） | 生成（`fetch-new-books.mjs --genres`） |
+| `build/data/count-state.json` | 前回書き込んだ冊数。置換対象を一意に決めるために持つ | 生成（`apply-count.mjs`） |
+| `test/` | 共有・保存・検索・ペース・新刊のテスト。`node --test` で実行する | 手で編集 |
+| `docs/new-books/` | 週次で集めた新刊候補と、一度出した ISBN の記録 | 生成（`fetch-new-books.mjs`） |
+| `docs/x-posts/` | X の投稿案。`YYYY-MM.md` が月次ぶん、`new/` が F 型（新刊速報） | 生成（`gen-x-posts.mjs` / `gen-x-newbook.mjs`） |
 | `docs/` | 機能ごとの実装計画と調査記録 | 手で編集 |
 
 科目トップの内部構造は 5 科目で共通で、次の要素を同じクラス名で持つ。
@@ -86,11 +92,21 @@ node build/generate-search.mjs     # 検索の索引 assets/js/book-index.js
 node build/generate-sitemap.mjs    # sitemap.xml（最後に実行する）
 ```
 
+参考書を足したときは、生成の**前**に注入、**後**に冊数の反映を挟む。
+
+```bash
+node build/apply-new-books.mjs    # 承認済みの新刊を科目 HTML に注入（生成の前）
+node build/apply-count.mjs        # 冊数の表記を実数に合わせる（生成の後）
+```
+
 `build/apply-adsense.mjs` は AdSense の ID を全ページへ反映するもので、生成物には触らない
 （「[Google AdSense](#google-adsense)」の節を参照）。
 
 `build/gen-x-posts.mjs` は X の投稿案を作るもので、サイトの生成物とは無関係。
 上の一括再生成には含めない（「X アカウント」の節を参照）。
+
+`build/fetch-new-books.mjs` と `build/gen-x-newbook.mjs` も同じく生成物とは無関係で、
+新刊の検知と速報投稿のためのもの（「新刊の掲載」の節を参照）。
 
 科目トップの `BOOKS` や `ROUTES` を編集したら、`generate-sitemap.mjs` を含めて全部を流し直す。生成物はリポジトリにコミットする（GitHub Pages はビルドを実行しないため）。
 
@@ -108,6 +124,7 @@ node build/generate-books.mjs math ao
 | `build/lib/parts.mjs` | `<head>`・ヘッダー・フッター・パンくず・JSON-LD の共通パーツ |
 | `build/lib/cover.mjs` | 書影の候補 URL と、一覧・ルートに並べる小さな書影のマークアップ |
 | `build/lib/cards.mjs` | 参考書 1 冊のカード（`.bcard`）。一覧・書籍ページ・解説記事で共有する |
+| `build/lib/newbooks.mjs` | 新刊（評価が未了の本）の判定と並び順。**サイト全体でこの判定だけを根拠にする** |
 | `build/content/articles.mjs` | 解説記事の本文 |
 
 `ROUTES` の階層は 5 科目で共通で `ROUTES[志望レベル][トラック][方針]`。トラックだけが科目で違う（英語・数学は `bun`/`ri`、国語は `gendai`/`kobun`/`kanbun`、理科は `butsuri`/`kagaku`/`seibutsu`/`chigaku`、社会は `nihonshi`/`sekaishi`/…）。
@@ -330,7 +347,7 @@ localStorage のキーは `rt_saved_routes`。全科目あわせて 10 件まで
 ## テスト
 
 ```bash
-node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs
+node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs
 ```
 
 Node 標準の `node:test` だけで動く（依存の追加なし）。
@@ -340,6 +357,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。
 | `test/share.test.mjs` | 診断結果の共有 URL の往復・不正な URL・保存データ・ルート共有の `encode`/`apply`・X の投稿画面に渡す `text=` の書式 | `QUIZ` を変えた / 科目トップのルート画面を触った / 共有の文面を変えた |
 | `test/search.test.mjs` | 索引の中身・正規化・あだ名で引けること・`aliases.json` の実在確認 | `BOOKS` を変えた / `aliases.json` を触った（先に `generate-search.mjs` を流す） |
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
+| `test/new-books.test.mjs` | 発売日パーサ・注入マーカーの往復・難易度を持たない本の描画・科目トップ 5 枚に分岐が入っていること | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った |
 
 診断は、科目ページから `QUIZ` を取り出し、到達しうる回答の組み合わせをすべて列挙して往復を確認する。あわせて不正な URL を 30 ケース以上、壊れた保存データの読み込みも検証する。
 
@@ -468,6 +486,50 @@ AdSense のポリシー違反になるため、ラベルで明確に分ける。
 - 承認後は、管理画面の「自動広告」を使うか、広告ユニットを作って `--in-article` / `--bottom` に渡すかを選ぶ。
   自動広告は全画面広告（ビネット）を差し込むことがあるので、入れる場合は管理画面で個別に切る
 
+## 新刊の掲載
+
+新しく発売された参考書と、サイトに載っていない既刊を随時足すための仕組み。
+設計と運用手順の正本は [docs/new-books-plan.md](docs/new-books-plan.md)。
+
+```bash
+node build/fetch-new-books.mjs           # 新刊候補を集める（週次で Actions が実行）
+node build/fetch-new-books.mjs --genres  # 学参系のジャンル ID を引き直す
+node build/apply-new-books.mjs           # 承認済みの新刊を科目 HTML に注入する
+node build/gen-x-newbook.mjs             # F 型（新刊速報）の投稿文を作る
+```
+
+検知には楽天ブックス書籍検索 API を使う。`RAKUTEN_APP_ID` と `RAKUTEN_ACCESS_KEY`
+が要る（`CONFIG.rakutenId` のアフィリエイト ID とは別物で、Rakuten Developers で
+無料取得する）。`.github/workflows/new-books.yml` が毎週月曜に実行して
+`docs/new-books/` にコミットする。**掲載するかどうかは自動化しない。**
+
+### 評価が未了の本の扱い
+
+**新刊は現物を読んでいないので、難易度・到達目安・強み・注意点・向いている人を
+書かない。** 推測で埋めると、既存 1,052 冊を並べている 10 段階の物差しが狂う。
+書名・出版社・ISBN・刊行年といった検証できる事実と、役割（`stage`）だけを入れ、
+`provisional: true` を立てて「新刊・評価準備中」と画面に明示する。
+
+判定の根拠は `provisional` の 1 か所だけにしてある。生成側は
+`build/lib/newbooks.mjs` の `isProvisional()`、科目トップは各 `index.html` の
+`isProv()` が持つ。**文言（「新刊・評価準備中」）は両方に書いてあるので、
+変えるときは `rg` で全箇所を出してから直す**（`X_HANDLE` と同じ注意）。
+
+`diff` を持たない本は 3 通りに壊れる。描画を触るときはこの 3 つを確かめる。
+
+| 壊れ方 | 症状 |
+|---|---|
+| `${b.diff}` の素の埋め込み | 画面に `undefined` が出る |
+| `b.pros.map()` / `b.subjects.split()` / `b.fb.bg` | **TypeError で描画そのものが止まる** |
+| `d<=2 ? … : 最難関` 形の分類 | 比較が全部 false になり、**静かに最難関へ化ける** |
+
+3 つ目が最も危ない。科目トップの `bookLv()`（英語のみ）と `diffColor()` が該当する。
+`test/new-books.test.mjs` が 5 科目すべてに分岐が入っていることを見張っている。
+
+評価が固まったら `build/data/new-books.json` から消し、科目 HTML の `BOOKS` 配列本体へ
+`provisional` を外した完全なエントリとして移す。**JSON に残っている数が評価の
+残作業そのものになる。**
+
 ## X アカウント
 
 公式アカウントは `@route_taizen`。運用設計の正本は [docs/x-account-plan.md](docs/x-account-plan.md)。
@@ -529,20 +591,26 @@ git push
 
 `main` への push で GitHub Pages が再ビルドされる。反映まで 1〜2 分かかる。
 
-参考書を追加・改訂したときは、次の 5 か所の整合を取る。
+参考書を追加・改訂したときは、次の整合を取る。**3 と 4 は `build/apply-count.mjs` が
+やる**ので、手で数えるのは 1 だけである。
 
-1. 該当科目の `BOOKS` 配列
+1. 該当科目の `BOOKS` 配列（新刊は `build/data/new-books.json`。「[新刊の掲載](#新刊の掲載)」を参照）
 2. `build/` の全スクリプトを再実行
-3. この README の収録数テーブル
-4. ポータル `index.html` の科目カードとヒーローの冊数
-5. `assets/ogp*.png`（冊数を画像内に焼き込んでいるため、`build/` 外の生成手順で作り直す）
+3. この README の収録数テーブル ← `apply-count.mjs`
+4. ポータル `index.html` の科目カードとヒーローの冊数 ← `apply-count.mjs`
+5. `assets/x-header.png`（X のヘッダー画像。SVG が正本なので「[画像を書き出す](#画像を書き出す)」の手順で作り直す）
+
+**`assets/ogp*.png` 6 枚は現状更新できない。** 冊数を画像内に焼き込んでいるが、
+元になる SVG も生成スクリプトもリポジトリに無い（`git log` で追うと初期コミットで
+PNG が直接追加されたきり）。冊数が数十ずれても表示は壊れないため据え置いており、
+SVG を起こし直す作業は別に切り出してある（`docs/new-books-plan.md` の 8 節）。
 
 診断の質問（`QUIZ`）を変えたときは、あわせて `assets/js/share.js` の `SCHEMA_VERSION` を上げるか判断する。判断の基準は「[共有・保存](#共有保存)」の節に書いた。
 
 push の前にテストを流す。何をどのタイミングで流すかは「[テスト](#テスト)」の表を見る。
 
 ```bash
-node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs
+node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs
 ```
 
 ## 書影

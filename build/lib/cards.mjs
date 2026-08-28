@@ -8,6 +8,7 @@
  */
 import { esc, clip } from './extract.mjs';
 import { coverBox } from './cover.mjs';
+import { isProvisional, PROVISIONAL_LABEL } from './newbooks.mjs';
 
 /**
  * @param {object} b      BOOKS の 1 冊
@@ -17,7 +18,15 @@ import { coverBox } from './cover.mjs';
 export function bookCard(b, sub, stages) {
   const st = stages[b.stage] || {};
   const color = st.color || sub.color;
-  const bars = Array.from({ length: 10 }, (_, i) => `<i class="${i < b.diff ? 'on' : ''}"></i>`).join('');
+
+  // 新刊は現物を読んでいないので難易度を持たない。バーは 0 本、数字は出さずに
+  // 「評価準備中」と書く。ここで `難易度 ${b.diff}` を通すと undefined が出る
+  const prov = isProvisional(b);
+  const bars = Array.from({ length: 10 }, (_, i) => `<i class="${!prov && i < b.diff ? 'on' : ''}"></i>`).join('');
+  const foot = prov
+    ? `<span class="bcard__prov">${esc(PROVISIONAL_LABEL)}</span>`
+    : `<span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}／${esc(b.hensachi || '—')}</span>`;
+
   return `      <a class="bcard" href="/${sub.dir}/books/${b.id}/" style="--bc:${color}">
         <div class="bcard__head">
           ${coverBox(b, { color })}
@@ -26,8 +35,8 @@ export function bookCard(b, sub, stages) {
             <b>${esc(b.name)}</b>
           </div>
         </div>
-        <p>${esc(clip(b.desc, 72))}</p>
-        <div class="bcard__foot"><span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}／${esc(b.hensachi || '—')}</span></div>
+        <p>${esc(clip(b.desc || `${b.pub} から刊行された新刊。評価は準備中です。`, 72))}</p>
+        <div class="bcard__foot">${foot}</div>
       </a>`;
 }
 

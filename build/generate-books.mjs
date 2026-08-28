@@ -16,6 +16,7 @@ import { authorsOf, searchName, withAuthor } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
+import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -46,8 +47,11 @@ function stageIndex(stages, key) {
 
 /** 同じ役割・近い難易度の本（横の選択肢） */
 function pickAlternatives(book, books, max = 6) {
+  // 難易度を持たない本は、近さを測れないので横にも縦にも並べない。
+  // NaN 比較で暗黙に空になるが、意図として明示しておく
+  if (isProvisional(book)) return [];
   return books
-    .filter(b => b.id !== book.id && b.stage === book.stage
+    .filter(b => !isProvisional(b) && b.id !== book.id && b.stage === book.stage
       && (book.sub ? b.sub === book.sub : true)
       && Math.abs(b.diff - book.diff) <= 1)
     .sort((a, b) => Math.abs(a.diff - book.diff) - Math.abs(b.diff - book.diff) || a.diff - b.diff)
@@ -60,9 +64,10 @@ function pickAlternatives(book, books, max = 6) {
  * 「同じレベルの選択肢」として既に出した本は、重複を避けるため除外する。
  */
 function pickNext(book, books, stages, exclude, max = 6) {
+  if (isProvisional(book)) return { list: [], kind: 'same' };
   const skip = new Set([book.id, ...exclude.map(b => b.id)]);
   const sameRole = books
-    .filter(b => !skip.has(b.id) && b.stage === book.stage
+    .filter(b => !isProvisional(b) && !skip.has(b.id) && b.stage === book.stage
       && (book.sub ? b.sub === book.sub : true) && b.diff > book.diff)
     .sort((a, b) => a.diff - b.diff)
     .slice(0, 3);
@@ -72,7 +77,7 @@ function pickNext(book, books, stages, exclude, max = 6) {
   const si = stageIndex(stages, book.stage);
   const byStage = new Map();
   books
-    .filter(b => !skip.has(b.id) && stageIndex(stages, b.stage) > si
+    .filter(b => !isProvisional(b) && !skip.has(b.id) && stageIndex(stages, b.stage) > si
       && (book.sub ? b.sub === book.sub : true) && b.diff >= book.diff)
     .sort((a, b) => a.diff - b.diff)
     .forEach(b => {
@@ -117,7 +122,12 @@ function renderBook(book, ctx) {
   const { sub, books, stages, counts, config } = ctx;
   const st = stages[book.stage] || { label: '', short: '', color: sub.color };
   const subLabel = book.sub ? (SUB_LABELS[book.sub] || '') : '';
-  const dp = diffPhrase(book.diff);
+
+  // 新刊は現物を読んでいないので難易度・到達目安・強み・注意点・向いている人を持たない。
+  // diffPhrase に undefined を通すと比較が全部 false になり「最難関レベル」に化けるので、
+  // 難易度に触る処理はすべてこのフラグで分岐する（docs/new-books-plan.md の 7 節）
+  const prov = isProvisional(book);
+  const dp = prov ? { band: '', text: '' } : diffPhrase(book.diff);
   const url = `${ORIGIN}/${sub.dir}/books/${book.id}/`;
   const alts = pickAlternatives(book, books);
   const next = pickNext(book, books, stages, alts);
@@ -152,12 +162,17 @@ function renderBook(book, ctx) {
 
   // 書名が長い本は副題を削る。検索結果は全角 30 字ほどで切られるので、
   // 副題を並べると書名の後ろが読めないまま尻切れになる。
-  const titleTail = titleName.length > 20 ? '｜レベルと使い方' : 'のレベルと使い方｜難易度・対象・次に進む本';
+  // 評価が未了の本に「難易度・対象・次に進む本」と書くと、ページに無いものを
+  // title で約束することになる。検索結果から来た読者の期待を外すので分ける
+  const titleTail = prov ? '｜新刊・書誌情報'
+    : titleName.length > 20 ? '｜レベルと使い方' : 'のレベルと使い方｜難易度・対象・次に進む本';
   const title = `${titleName}${titleTail} - ${sub.full}`;
   const by = authors.length ? `${authors.join('・')}／` : '';
-  const desc = clip(
-    `${pageName}（${by}${book.pub}）は${st.label}に位置づけられる${fieldName}の参考書。${dp.band}（難易度${book.diff}/10）、到達目安は${book.hensachi}。` +
-    `${book.bestFor}に向いています。強みと注意点、同じレベルの他の選択肢、次に進む参考書までまとめました。`, 158);
+  const desc = clip(prov
+    ? `${pageName}（${by}${book.pub}${book.year ? `／${book.year} 年` : ''}）は${st.label}に位置づけられる${fieldName}の参考書。` +
+      '刊行されたばかりのため、難易度と到達目安の評価は準備中です。書誌情報と、この本が置かれる役割をまとめました。'
+    : `${pageName}（${by}${book.pub}）は${st.label}に位置づけられる${fieldName}の参考書。${dp.band}（難易度${book.diff}/10）、到達目安は${book.hensachi}。` +
+      `${book.bestFor}に向いています。強みと注意点、同じレベルの他の選択肢、次に進む参考書までまとめました。`, 158);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -198,7 +213,7 @@ function renderBook(book, ctx) {
   };
 
   const meter = Array.from({ length: 10 }, (_, i) =>
-    `<i class="${i < book.diff ? 'on' : ''}"></i>`).join('');
+    `<i class="${!prov && i < book.diff ? 'on' : ''}"></i>`).join('');
 
   const spec = [
     ...(authors.length ? [['著者', esc(authors.join('・'))]] : []),
@@ -206,8 +221,8 @@ function renderBook(book, ctx) {
     ['出版年', book.year ? `${book.year} 年` : '—'],
     ['対象範囲', esc(book.subjects || '—')],
     ['役割', esc(st.label || '—')],
-    ['難易度', `${book.diff} / 10（${dp.band}）`],
-    ['到達目安', esc(book.hensachi || '—')],
+    ['難易度', prov ? `<span class="bk-prov">${esc(PROVISIONAL_LABEL)}</span>` : `${book.diff} / 10（${dp.band}）`],
+    ['到達目安', prov ? '評価準備中' : esc(book.hensachi || '—')],
     ['問題数・構成', esc(book.problems || '—')],
     ['想定学習時間', esc(book.hours || '—')],
     ['形式', esc(book.style || '—')],
@@ -245,11 +260,16 @@ ${header(sub)}
         <span class="bk-tag"><i></i>${esc(st.label)}${subLabel ? ` — ${esc(subLabel)}` : ''}</span>
         <h1 class="bk-name">${esc(searchTitle)}</h1>
         <p class="bk-official">${esc(book.official || book.name)}／${by ? `${esc(authors.join('・'))}／` : ''}${esc(book.pub)}${book.year ? `（${book.year} 年）` : ''}</p>
-        <p class="bk-desc">${esc(book.desc)}</p>
-        <div class="bk-meter">
+        <p class="bk-desc">${prov
+    ? `${esc(book.pub)}から刊行された新刊です。現物の確認が済んでいないため、難易度と到達目安の評価は準備中です。`
+    : esc(book.desc)}</p>
+        ${prov ? `<div class="bk-provbox">
+          <b>${esc(PROVISIONAL_LABEL)}</b>
+          <span>掲載しているのは書誌情報と役割だけです。難易度・到達目安・強み・注意点は、現物を確認してから追記します。推測では書きません。</span>
+        </div>` : `<div class="bk-meter">
           <div class="bk-meter__t"><span>難易度</span><b>${book.diff} <small style="font-size:11px;color:var(--muted)">/ 10</small></b></div>
           <div class="bk-meter__bar">${meter}</div>
-        </div>
+        </div>`}
       </div>
     </div>
 
@@ -263,7 +283,13 @@ ${spec}
       </div>
     </section>
 
-    <section class="block prose">
+    ${prov ? `<section class="block prose">
+      <div class="eyebrow">Status</div>
+      <h2 class="sec">この本の評価について</h2>
+      <p>${esc(book.name)}は${esc(st.label)}に位置づけられる${esc(fieldName)}の参考書です。${book.year ? `${book.year} 年の刊行で、` : ''}掲載したばかりのため、難易度・到達目安・強み・注意点・向いている人はまだ書いていません。</p>
+      <p>このサイトの難易度は 10 段階で、収録している ${sub.full}の参考書すべてを同じ物差しで並べています。現物を確認しないまま数字を置くと、その物差し自体が狂います。${esc(book.name)}についても、確認が済んでから追記します。</p>
+      <p>いま分かっているのは、下の基本情報に載せた書誌情報と、${esc(st.label)}という役割だけです。志望校から逆算した参考書ルートは、評価が済んだ本だけで組んでいます。${sub.full}の<a href="/${sub.dir}/" style="color:var(--indigo);font-weight:700">ルート画面</a>をご覧ください。</p>
+    </section>${adUnit('inArticle')}` : `<section class="block prose">
       <div class="eyebrow">Who is it for</div>
       <h2 class="sec">どんな人に向いているか</h2>
       <p><b>${esc(book.bestFor)}</b>に向いた一冊です。</p>
@@ -275,16 +301,16 @@ ${spec}
       <div class="pc good">
         <h3><i><svg viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>強み</h3>
         <ul>
-${book.pros.map(p => `          <li>${esc(p)}</li>`).join('\n')}
+${(book.pros || []).map(p => `          <li>${esc(p)}</li>`).join('\n')}
         </ul>
       </div>
       <div class="pc care">
         <h3><i><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5m0 3.5v.5" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke-width="1.9"/></svg></i>注意点</h3>
         <ul>
-${book.cons.map(c => `          <li>${esc(c)}</li>`).join('\n')}
+${(book.cons || []).map(c => `          <li>${esc(c)}</li>`).join('\n')}
         </ul>
       </div>
-    </div>
+    </div>`}
 
     ${book.unis && book.unis.length ? `<div class="note">
       <h3>この本が視野に入る志望校</h3>

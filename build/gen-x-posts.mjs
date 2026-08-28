@@ -26,6 +26,7 @@ import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, ORIGIN } from './lib/extract.mjs';
 import { tally } from './lib/tally.mjs';
 import { searchName } from './lib/booktitle.mjs';
+import { isProvisional } from './lib/newbooks.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR = path.join(ROOT, 'docs', 'x-posts');
@@ -57,8 +58,8 @@ const A_EXCLUDE_STYLES = ['過去問', '過去問研究', '過去問講義'];
  * ここを間違えると、コピペした投稿がその場で弾かれて手戻りになる。X の仕様では
  * 次のコードポイント範囲だけが重み 1 で、それ以外（日本語・全角記号・絵文字）は 2。
  */
-const X_LIMIT = 280;
-const URL_WEIGHT = 23;
+export const X_LIMIT = 280;
+export const URL_WEIGHT = 23;
 const LIGHT_RANGES = [
   [0x0000, 0x10ff],
   [0x2000, 0x200d],
@@ -82,7 +83,7 @@ export function weightedLen(text) {
    ============================================================ */
 
 /** 自分の投稿に貼る URL にだけ utm を付ける。ユーザーの共有由来（utm 無し）と切り分けるため */
-function trackedUrl(pathname, campaign) {
+export function trackedUrl(pathname, campaign) {
   return `${ORIGIN}${pathname}?utm_source=x&utm_medium=social&utm_campaign=${campaign}`;
 }
 
@@ -102,7 +103,7 @@ const diffLabel = d => `難易度 ${Number(d) || '—'}/${DIFF_MAX}`;
  * 上限に収まるまで、優先度の低い行から落とす。
  * 落とす順を固定しておかないと、月によって載る項目が変わって体裁が崩れる。
  */
-function fitLines(head, optional, tail) {
+export function fitLines(head, optional, tail) {
   for (let drop = 0; drop <= optional.length; drop++) {
     const kept = optional.slice(0, optional.length - drop).filter(Boolean);
     const body = [head, ...kept, tail].filter(Boolean).join('\n');
@@ -395,6 +396,9 @@ function main() {
     const t = tally(d.routes, d.tiers);
     for (const b of d.books) {
       if (A_EXCLUDE_STYLES.includes(b.style)) continue;
+      // 評価が未了の新刊は難易度も向いている人も書けないので図鑑カードにできない。
+      // 新刊は F 型（build/gen-x-newbook.mjs）が別に扱う
+      if (isProvisional(b)) continue;
       ranked.push({ b, sub: s, n: t.main.get(b.id) || 0 });
     }
   }

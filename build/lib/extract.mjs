@@ -20,9 +20,17 @@ const stub = () => new Proxy(function () {}, {
 /** 科目ページが持つトップレベル定数。const のままだと vm の外から読めないので globalThis に移す */
 const WANTED = ['BOOKS', 'UNIS', 'TIERS', 'ROUTES', 'GUIDES', 'STAGES', 'CONFIG'];
 
-export function extractSubject(rootDir, dir) {
+/**
+ * @param {string} rootDir リポジトリのルート
+ * @param {string} dir     科目ディレクトリ名
+ * @param {string} [srcOverride] ファイルの代わりに読む HTML。
+ *   build/apply-new-books.mjs が「新刊を注入する前の状態」を基準にするために使う。
+ *   ファイルをそのまま読むと、前回自分が注入した本まで既存書として数えてしまい、
+ *   2 回目の実行が id の衝突として落ちる。
+ */
+export function extractSubject(rootDir, dir, srcOverride = null) {
   const file = path.join(rootDir, dir, 'index.html');
-  const src = fs.readFileSync(file, 'utf8');
+  const src = srcOverride ?? fs.readFileSync(file, 'utf8');
   const scripts = [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)]
     .map(m => m[1]);
 
