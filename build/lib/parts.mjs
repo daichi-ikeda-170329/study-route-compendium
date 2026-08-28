@@ -138,10 +138,18 @@ export function portalHeader() {
  * 科目トップの共有（assets/js/share.js）が回答や設定を URL に載せるのとは別物なので、
  * ここでは共通スクリプトを読まず、この帯ぶんの短い処理をページに直接置く。
  *
- * @param {object} o url: 共有する URL / text: X に載せる本文 / head: 帯の見出し
+ * 押した人がそのまま投稿できる状態にしたいので、本文・共有 URL・ハッシュタグは
+ * すべて text= に入れて改行の位置まで固定する。intent の url= は本文の末尾に
+ * 半角スペースで連結されるため、ハッシュタグとリンクが同じ行に並んでしまう。
+ * 宛先も twitter.com/intent/tweet ではなく現行の x.com/intent/post を直接叩く。
+ * 転送を 1 回挟むと、スマホで X アプリが開くときに text= が落ちることがある。
+ * ここは assets/js/share.js の intentURL() と同じ組み立てにしてある。
+ *
+ * @param {object} o url: 共有する URL / text: X に載せる本文（URL とタグは足さない） / head: 帯の見出し
  */
 export function shareBar(o) {
-  const x = `https://twitter.com/intent/tweet?text=${encodeURIComponent(o.text)}&url=${encodeURIComponent(o.url)}&via=${X_HANDLE}`;
+  const text = `${o.text}\n\n${o.url}\n\n#ルート大全 #大学受験`;
+  const x = `https://x.com/intent/post?text=${encodeURIComponent(text)}&via=${X_HANDLE}`;
   return `<div class="sharebar">
     <span class="sharebar__t">${esc(o.head)}</span>
     <a class="sharebar__b" href="${esc(x)}" target="_blank" rel="noopener noreferrer">

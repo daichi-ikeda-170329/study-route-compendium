@@ -26,6 +26,34 @@
    */
   var X_HANDLE = "route_taizen";
 
+  /**
+   * X の投稿画面の URL。twitter.com/intent/tweet は x.com へ 301 で転送されるだけなので、
+   * 現行の x.com/intent/post を直接叩く。転送を 1 回挟むと、スマホで X アプリが
+   * 開くときに text= 等が落ちて「空の投稿画面が開く」ことがある。
+   */
+  var X_INTENT = "https://x.com/intent/post";
+
+  /** X に載せる本文の末尾に付けるハッシュタグ行 */
+  var X_TAGS = "#ルート大全 #大学受験";
+
+  /**
+   * X の投稿画面に渡す URL を組み立てる。
+   *
+   * 本文・共有 URL・ハッシュタグをすべて text= に入れて、改行の位置まで固定する。
+   * intent の url= は本文の末尾に半角スペースで連結されるため、ハッシュタグと
+   * リンクが同じ行に並んでしまう。押した人がそのまま投稿できる見た目にしたいので、
+   * 連結はこちらで行う。
+   *   本文
+   *   （空行）
+   *   共有 URL
+   *   （空行）
+   *   ハッシュタグ  ← この後ろに X が " via @route_taizen" を足す
+   */
+  function intentURL(body, url) {
+    var text = String(body) + "\n\n" + String(url) + "\n\n" + X_TAGS;
+    return X_INTENT + "?text=" + encodeURIComponent(text) + "&via=" + X_HANDLE;
+  }
+
   /** 共有 URL のスキーマバージョン。質問構成を変えたら必ず上げる（README の運用ルール参照） */
   var SCHEMA_VERSION = 1;
   var PARAM_VERSION = "v";
@@ -404,7 +432,7 @@
       head: "SHARE &amp; SAVE — この結果を共有・保存する",
       url: url,
       label: label,
-      tweet: "【ルート大全で診断】\n" + label + "のルートが出ました\n#ルート大全 #大学受験",
+      tweet: "【ルート大全で診断】\n" + label + "のルートが出ました",
       save: true,
       note: "共有リンクに含まれるのは回答だけです。開いた人には、そのときの最新の診断ロジックで同じルートが表示されます。"
         + (storageOK() ? "保存はこの端末の中だけで行われ、外部には送信されません。" : "")
@@ -419,14 +447,12 @@
    *   opts.head  見出し
    *   opts.url   共有 URL
    *   opts.label 表示名（X の本文と端末の共有シートに使う）
-   *   opts.tweet X に載せる本文
+   *   opts.tweet X に載せる本文（共有 URL とハッシュタグは intentURL が足すので入れない）
    *   opts.save  「この結果を保存」を出すか（診断結果だけ）
    *   opts.note  下に出す注記
    */
   function shareBox(opts) {
-    var xURL = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(opts.tweet)
-      + "&url=" + encodeURIComponent(opts.url)
-      + "&via=" + X_HANDLE;
+    var xURL = intentURL(opts.tweet, opts.url);
 
     var canNative = false;
     try { canNative = typeof global.navigator.share === "function"; } catch (e) { canNative = false; }
@@ -494,7 +520,7 @@
       head: "SHARE — このルートを共有する",
       url: url,
       label: label,
-      tweet: "【ルート大全】\n" + label + "のルートで進めます\n#ルート大全 #大学受験",
+      tweet: "【ルート大全】\n" + label + "のルートで進めます",
       save: false,
       note: "共有リンクに含まれるのは志望レベル・型・方針・現在地だけです。模試の偏差値や既習の参考書は含まれません。"
     });
@@ -847,6 +873,7 @@
 
     /* テスト専用。ブラウザからは使わない（test/share.test.mjs が localStorage 周りを検証するために参照する） */
     __test: {
+      intentURL: intentURL,
       loadStore: loadStore,
       saveStore: saveStore,
       validItem: validItem,

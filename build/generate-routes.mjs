@@ -260,7 +260,7 @@ ${trackKeys.map(tk => `      <a href="#track-${tk}">${esc(trackLabel(tk))}のル
     ${shareBar({
       url,
       head: 'SHARE — このルートを共有する',
-      text: `【ルート大全】${tier.name}の${sub.ja}参考書ルート（${used.size}冊）\n#ルート大全 #大学受験`,
+      text: `【ルート大全】${tier.name}の${sub.ja}参考書ルート（${used.size}冊）`,
     })}
   </div>
 

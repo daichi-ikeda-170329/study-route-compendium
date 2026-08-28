@@ -469,3 +469,55 @@ test('指紋は選択肢の並べ替えを検出する', () => {
   const swapped = quiz.map((q, i) => (i === 1 ? { ...q, opts: [q.opts[1], q.opts[0], ...q.opts.slice(2)] } : q));
   assert.notEqual(fingerprint(swapped), fingerprint(quiz));
 });
+
+/* ============================================================
+   X の投稿画面に渡す URL
+
+   「Xで共有」を押した人が、そのまま投稿を押すだけで済む状態にするための取り決め。
+   本文・共有 URL・ハッシュタグをすべて text= に入れて改行の位置まで固定する。
+   intent の url= は本文の末尾に半角スペースで連結され、ハッシュタグとリンクが
+   同じ行に並んでしまうので使わない。
+   ============================================================ */
+
+import { shareBar } from '../build/lib/parts.mjs';
+
+/** intent URL を分解する。生成ページ側は HTML 属性なので &amp; を戻してから読む */
+function parseIntent(href) {
+  const u = new URL(href.replace(/&amp;/g, '&'));
+  return { base: u.origin + u.pathname, params: u.searchParams };
+}
+
+test('科目トップの共有は x.com/intent/post に本文・URL・タグをまとめて渡す', () => {
+  const url = 'https://route-taizen.com/english/?rv=1&r=t.march.bun.omni.0';
+  const { base, params } = parseIntent(RTShare.__test.intentURL('【ルート大全】\n英語：MARCH のルートで進めます', url));
+
+  assert.equal(base, 'https://x.com/intent/post');
+  assert.equal(params.get('via'), 'route_taizen');
+  /* url= を併用すると本文の末尾に連結されて改行が崩れるので、付いていないこと自体が仕様 */
+  assert.equal(params.get('url'), null);
+  assert.equal(
+    params.get('text'),
+    '【ルート大全】\n英語：MARCH のルートで進めます\n\n' + url + '\n\n#ルート大全 #大学受験');
+});
+
+test('生成ページの共有帯も同じ組み立てになっている', () => {
+  const url = 'https://route-taizen.com/japanese/routes/top/';
+  const html = shareBar({ url, head: 'SHARE — このルートを共有する', text: '【ルート大全】東大・京大の国語参考書ルート（38冊）' });
+  const { base, params } = parseIntent(html.match(/href="(https:\/\/[^"]+)"/)[1]);
+
+  assert.equal(base, 'https://x.com/intent/post');
+  assert.equal(params.get('via'), 'route_taizen');
+  assert.equal(params.get('url'), null);
+  assert.equal(
+    params.get('text'),
+    '【ルート大全】東大・京大の国語参考書ルート（38冊）\n\n' + url + '\n\n#ルート大全 #大学受験');
+});
+
+test('共有される URL は診断・ルートの状態をそのまま含む', () => {
+  /* 本文に URL を埋め込むようになっても、共有 URL のパラメータが欠けたり
+     二重にエンコードされたりしていないことを確かめる */
+  const url = 'https://route-taizen.com/english/?v=1&a=2.1.0.1.1';
+  const { params } = parseIntent(RTShare.__test.intentURL('本文', url));
+  assert.ok(params.get('text').includes(url));
+  assert.equal(new URL(params.get('text').split('\n').find(l => l.startsWith('http'))).search, '?v=1&a=2.1.0.1.1');
+});

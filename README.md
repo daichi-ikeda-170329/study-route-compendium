@@ -212,6 +212,30 @@ print(sorted(set(bad)) or 'リンク切れなし')
 
 診断とルートの処理は `assets/js/share.js` の 1 ファイルにまとまっていて、5 科目の科目トップから `<script src>` で読み込む。診断側は科目ごとの分岐を持たず、その科目の `QUIZ` 配列を入力に動く。
 
+### X の投稿画面に渡すもの
+
+「Xで共有」は `https://x.com/intent/post` を開く。押した人が投稿ボタンを押すだけで済むように、**本文・共有 URL・ハッシュタグをすべて `text=` に入れて改行の位置まで固定する**。
+
+```
+【ルート大全】
+英語：MARCH・関関同立 / 国公立二次型 / 王道網羅型のルートで進めます
+
+https://route-taizen.com/english/?rv=1&r=t.march.bun.omni.0
+
+#ルート大全 #大学受験
+```
+
+intent の `url=` は使わない。`url=` を渡すと本文の末尾に半角スペースで連結されるため、ハッシュタグとリンクが同じ行に並ぶ。宛先も `twitter.com/intent/tweet` ではなく `x.com/intent/post` を直接指す（前者は 301 で後者に転送されるだけで、スマホで X アプリが開くときに転送を挟むと `text=` が落ちることがある）。
+
+組み立ては 2 か所にある。**片方だけ変えないこと**（`test/share.test.mjs` が両方の書式を突き合わせている）。
+
+| 場所 | 対象 |
+|---|---|
+| `assets/js/share.js` の `intentURL()` | 診断結果・科目トップのルート画面 |
+| `build/lib/parts.mjs` の `shareBar()` | 志望校別ルートの生成ページ |
+
+`shareBar()` を変えたら `node build/generate-routes.mjs` で 42 ページを作り直す。
+
 ### 診断結果の共有 URL のスキーマ
 
 ```
@@ -308,7 +332,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。
 
 | ファイル | 見ているもの | 流すべきとき |
 |---|---|---|
-| `test/share.test.mjs` | 診断結果の共有 URL の往復・不正な URL・保存データ・ルート共有の `encode`/`apply` | `QUIZ` を変えた / 科目トップのルート画面を触った |
+| `test/share.test.mjs` | 診断結果の共有 URL の往復・不正な URL・保存データ・ルート共有の `encode`/`apply`・X の投稿画面に渡す `text=` の書式 | `QUIZ` を変えた / 科目トップのルート画面を触った / 共有の文面を変えた |
 | `test/search.test.mjs` | 索引の中身・正規化・あだ名で引けること・`aliases.json` の実在確認 | `BOOKS` を変えた / `aliases.json` を触った（先に `generate-search.mjs` を流す） |
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
 
