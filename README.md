@@ -50,6 +50,8 @@
 | `assets/js/book-index.js` | 検索が引く 1,052 冊の索引 | 生成 |
 | `assets/js/pace.js` | ルート画面の進めるペース（いつまでに何を終えるか） | 手で編集 |
 | `assets/ogp*.png` | OGP 画像。冊数を画像内に焼き込んでいる | 再生成が必要 |
+| `assets/x-icon.svg` / `.png` | X のプロフィール画像（400×400） | SVG を手で編集し PNG を書き出す |
+| `assets/x-header.svg` / `.png` | X のヘッダー画像（1500×500） | 同上 |
 | `favicon.svg` | ファビコン | 手で編集 |
 | `sitemap.xml` | サイトマップ | 生成 |
 | `robots.txt` | クローラー設定 | 手で編集 |
@@ -382,6 +384,25 @@ node build/generate-books.mjs && node build/generate-index.mjs \
 | `build/lib/extract.mjs` の `X_HANDLE` | 生成ページの `twitter:site`・共有ボタンの `via=`・フッターの導線 |
 | `assets/js/share.js` の `X_HANDLE` | 診断結果とルート画面の共有ボタンの `via=` |
 | 手書き HTML 6 枚 | `twitter:site` メタとフッターの導線（404 は `twitter:card` を持たないので対象外） |
+
+### 画像を書き出す
+
+アイコンとヘッダーは SVG が正本で、PNG はそこから書き出す。SVG を直したら
+次を実行して PNG を作り直す（`sips` は SVG を扱えないため Chrome を使う）。
+
+```bash
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+for n in "x-icon 400 400" "x-header 1500 500"; do
+  set -- $n
+  printf '<!doctype html><meta charset=utf-8><style>html,body{margin:0}img{display:block;width:%spx;height:%spx}</style><img src="file://%s/assets/%s.svg">' \
+    "$2" "$3" "$(pwd)" "$1" > /tmp/wrap.html
+  "$CHROME" --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+    --window-size="$2","$3" --screenshot="$(pwd)/assets/$1.png" file:///tmp/wrap.html
+done
+```
+
+書き出したら見た目を必ず確認する。**アイコンは X が円形に切り抜き、ヘッダーは
+左下にアイコンが重なる。**どちらも切り抜き後の姿で見ないと判断できない。
 
 ### 投稿案の生成
 

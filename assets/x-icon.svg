@@ -1,0 +1,17 @@
+<!--
+  X のプロフィール画像（400x400）。
+
+  favicon.svg と OGP のバッジは「ネイビーの角丸 ＋ 白の明朝『全』＋ 角のオレンジ」で
+  できているが、X はアイコンを円形に切り抜くため角が存在しない。角のアクセントを
+  そのまま持ち込むと「全」に重なるか、切り取られるかのどちらかになる。
+
+  そこで角のアクセントは、円に合う縁のリングに置き換えてある。半径 186・太さ 12 で、
+  切り抜き半径 200 の内側に収まる。「全」は中央に据える（タイムラインでは 32px 程度まで
+  縮むため、中央の一文字が読めることを最優先にする）。
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#1B2233"/>
+  <circle cx="200" cy="200" r="186" fill="none" stroke="#B5432A" stroke-width="12"/>
+  <text x="200" y="280" text-anchor="middle" font-size="198" font-weight="800" fill="#FFFFFF"
+        font-family="Hiragino Mincho ProN, Yu Mincho, YuMincho, serif">全</text>
+</svg>

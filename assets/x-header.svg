@@ -1,0 +1,69 @@
+<!--
+  X のヘッダー画像（1500x500）。assets/ogp.png と同じ意匠で揃えてある。
+
+  X の表示には 3 つの制約がある。
+   - 左下にプロフィール画像が重なる（おおよそ x 0-310）。ここに要素を置かない
+   - 端末によって左右が切り取られる。要になる文字は中央寄りに置く
+   - 右端まで文字を伸ばすと切れる。最も長い行でも x=1150 で終わらせる
+
+  「全」のタイルは置いていない。プロフィール画面ではアイコン（同じ「全」）が
+  すぐ左下に出るため、ヘッダーにも置くと同じ字が 2 つ並ぶ。その場所には
+  代わりに収録科目を出す。何を扱うサイトかが一目で分かるほうが有効なため。
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" width="1500" height="500">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#1B2233" fill-opacity="0.07"/>
+    </pattern>
+  </defs>
+
+  <rect width="1500" height="500" fill="#F6F4EF"/>
+  <rect width="1500" height="500" fill="url(#dots)"/>
+
+  <rect x="0" y="0" width="1500" height="14" fill="#1B2233"/>
+  <rect x="1060" y="0" width="180" height="14" fill="#B5432A"/>
+
+  <g transform="translate(452, 0)">
+    <line x1="0" y1="118" x2="52" y2="118" stroke="#B5432A" stroke-width="4"/>
+    <text x="70" y="128" font-size="27" font-weight="700" fill="#B5432A" letter-spacing="4"
+          font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, sans-serif">大学受験　参考書ルート ＆ 図鑑</text>
+
+    <text x="-4" y="246" font-size="100" font-weight="800" fill="#1B2233" letter-spacing="6"
+          font-family="Hiragino Mincho ProN, Yu Mincho, YuMincho, serif">ルート大全</text>
+
+    <text x="2" y="304" font-size="32" font-weight="600" fill="#3A4256"
+          font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, sans-serif">参考書<tspan fill="#B5432A" font-weight="800">1,052冊</tspan>を図鑑化・ルート化</text>
+
+    <!-- 収録科目。OGP の科目チップと同じ作り（左に科目色の縦線を入れる） -->
+    <g font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, sans-serif" font-size="24" font-weight="700">
+      <g transform="translate(0, 340)">
+        <rect x="0" y="0" width="96" height="46" rx="6" fill="#FFFFFF" stroke="#DCD7CC"/>
+        <rect x="0" y="0" width="5" height="46" rx="2.5" fill="#B5432A"/>
+        <text x="52" y="31" text-anchor="middle" fill="#1B2233">英語</text>
+      </g>
+      <g transform="translate(110, 340)">
+        <rect x="0" y="0" width="96" height="46" rx="6" fill="#FFFFFF" stroke="#DCD7CC"/>
+        <rect x="0" y="0" width="5" height="46" rx="2.5" fill="#8A6D2F"/>
+        <text x="52" y="31" text-anchor="middle" fill="#1B2233">国語</text>
+      </g>
+      <g transform="translate(220, 340)">
+        <rect x="0" y="0" width="96" height="46" rx="6" fill="#FFFFFF" stroke="#DCD7CC"/>
+        <rect x="0" y="0" width="5" height="46" rx="2.5" fill="#24427C"/>
+        <text x="52" y="31" text-anchor="middle" fill="#1B2233">数学</text>
+      </g>
+      <g transform="translate(330, 340)">
+        <rect x="0" y="0" width="96" height="46" rx="6" fill="#FFFFFF" stroke="#DCD7CC"/>
+        <rect x="0" y="0" width="5" height="46" rx="2.5" fill="#2F6E4F"/>
+        <text x="52" y="31" text-anchor="middle" fill="#1B2233">理科</text>
+      </g>
+      <g transform="translate(440, 340)">
+        <rect x="0" y="0" width="96" height="46" rx="6" fill="#FFFFFF" stroke="#DCD7CC"/>
+        <rect x="0" y="0" width="5" height="46" rx="2.5" fill="#5B4E9E"/>
+        <text x="52" y="31" text-anchor="middle" fill="#1B2233">社会</text>
+      </g>
+    </g>
+
+    <text x="558" y="371" font-size="25" font-weight="600" fill="#6B7183" letter-spacing="2"
+          font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, sans-serif">登録不要・完全無料</text>
+  </g>
+</svg>
