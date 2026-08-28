@@ -14,6 +14,7 @@ import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './l
 import { searchName } from './lib/booktitle.mjs';
 import { tally } from './lib/tally.mjs';
 import { coverBox } from './lib/cover.mjs';
+import { adUnit } from './lib/ads.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -150,7 +151,7 @@ ${sections}
       <a class="p" href="/${sub.dir}/">${esc(sub.ja)}のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="g" href="/${sub.dir}/books/">全${d.books.length}冊の一覧</a>
     </div>
-  </div>
+  </div>${adUnit('bottom', '  ')}
 </main>
 
 ${footer(sub.dir, counts)}

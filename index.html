@@ -623,10 +623,18 @@ const CONFIG = {
      空のうちは広告表記を一切出さない（未参加の状態で参加者の表記を出さないため）。
      ID を入れると PR バー・広告表記・Amazon アソシエイトの必須表記が自動で戻る。 */
   amazonTag: "",
-  rakutenId: "56ba2770.50b55cf7.56ba2771.68ff96bc"
+  rakutenId: "56ba2770.50b55cf7.56ba2771.68ff96bc",
+
+  /* Google AdSense のパブリッシャーID（例 "ca-pub-1234567890123456"）。
+     手で入れない。`node build/apply-adsense.mjs <ID>` が全ページへまとめて書き込む。
+     空のあいだは広告も広告の表記も一切出さない。 */
+  adsenseId: ""
 };
 
 const AFF = Boolean(CONFIG.amazonTag || CONFIG.rakutenId);
+
+/* Google AdSense。ID が入るまで広告も広告の表記も出さない。 */
+const ADSENSE = Boolean(CONFIG.adsenseId);
 
 /* 実際に参加しているプログラムだけを名指しする。未参加のものを書かないため、
    法定表記の文言は ID の有無から組み立てる。 */
@@ -636,7 +644,7 @@ const AFF_PROGRAMS = [
 ].filter(Boolean).join("および");
 
 /* 表記は静的に置いてある。ID が未設定のときだけ取り除く（描画のズレを起こさないため） */
-if (!AFF) document.getElementById("prBar")?.remove();
+if (!AFF && !ADSENSE) document.getElementById("prBar")?.remove();
 
 const LEGAL = {
 about:{title:"運営者情報",body:()=>`
@@ -658,7 +666,11 @@ ${AFF ? `<h5>アフィリエイトプログラムについて</h5>
 <li>Cookie の利用は、ブラウザの設定によって無効にすることができます</li>
 </ul>` : `<h5>外部サイトへのリンクについて</h5>
 <p>当サイトには、オンライン書店など外部サイトへのリンクが含まれます。リンク先での情報の取り扱いについては、各サイトのプライバシーポリシーをご確認ください。</p>`}
-<h5>アクセス解析について</h5>
+${ADSENSE ? `<h5>Google AdSense による広告配信について</h5>
+<p>当サイトは、第三者配信の広告サービス「Google AdSense」を利用しています。Google をはじめとする第三者配信事業者は、Cookie を使用して、当サイトや他のウェブサイトへの過去のアクセス情報にもとづく広告を配信します。表示される広告に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
+<p>パーソナライズ広告（興味・関心に応じた広告）は、Google の<a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">広告設定</a>から無効にできます。<a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a> からは、参加している第三者配信事業者の Cookie をまとめて無効にできます。</p>
+<p>Google が広告配信のために取得する情報とその使われ方は、<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">「広告 - ポリシーと規約 - Google」</a>をご確認ください。</p>
+` : ``}<h5>アクセス解析について</h5>
 <p>当サイトでは、利用状況の把握と改善のために Google LLC が提供する「Google アナリティクス」を利用しています。Google アナリティクスは Cookie を使用して、氏名・住所などの個人を特定する情報を含まない形で、閲覧されたページや滞在時間などのアクセス情報を収集します。</p>
 <p>収集された情報は Google 社のプライバシーポリシーに基づいて管理されます。データの収集を望まない場合は、Google が提供する「Google アナリティクス オプトアウト アドオン」を利用するか、お使いのブラウザの設定で Cookie を無効にすることで停止できます。</p>
 `},
@@ -676,6 +688,7 @@ affiliate:{title:"広告について",body:()=>(AFF ? `
 <h5>広告の掲載について</h5><p>当サイトは現在、アフィリエイトプログラムを含む広告を掲載していません。参考書の販売サイトへのリンクは書誌情報を確認していただくための通常のリンクであり、リンク経由の購入によって当サイトが収益を得ることはありません。</p>
 <h5>掲載内容の中立性について</h5><p>参考書の評価・掲載順位・ルートへの採用は、出版社・書店からの依頼や対価にもとづくものではありません。当サイトが依頼・対価を受けて記事を作成することはありません。</p>
 `) + `
+${ADSENSE ? `<h5>第三者配信の広告について</h5><p>当サイトは Google LLC の広告配信サービス「Google AdSense」を利用しています。「広告」と表示している枠に出る広告の内容は Google 側で選ばれており、当サイトが個別に選定・推奨しているものではありません。広告が閲覧またはクリックされることで、当サイトに収益が発生することがあります。広告に用いられる Cookie の扱いと停止方法は「プライバシーポリシー」に記載しています。</p>` : ``}
 <h5>書影について</h5><p>掲載している書影は、Amazon が提供する商品画像URLを参照する形で表示しています。画像の保存・再配布・加工は行っていません。</p>
 `}
 };

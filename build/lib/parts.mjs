@@ -4,6 +4,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { SUBJECTS, ORIGIN, X_HANDLE, esc, affiliateEnabled } from './extract.mjs';
+import { ADSENSE, adsenseLoader } from './ads.mjs';
 
 /**
  * アフィリエイト ID が設定されているか。未設定のうちは広告表記を出さない
@@ -48,7 +49,7 @@ export function head(o) {
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/js/search.js" defer></script>
-${analytics()}`;
+${analytics()}${adsenseLoader() ? '\n' + adsenseLoader() : ''}`;
 }
 
 /**
@@ -68,14 +69,27 @@ gtag('config', '${id}');
 </` + `script>`;
 }
 
+/**
+ * ページ最上部の広告表記。掲載しているものだけを名指しする。
+ * アフィリエイトも AdSense も無い状態では出さない（未参加の表記を出さないため）。
+ */
+function prBarText() {
+  const aff = AFF
+    ? '<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。'
+    : '';
+  const ads = ADSENSE
+    ? `${AFF ? 'また、' : ''}<b>第三者配信の広告</b>（Google AdSense）を掲載しています。`
+    : '';
+  if (!aff && !ads) return '';
+  return `<div class="pr-bar">当サイトは${aff}${ads}</div>\n\n`;
+}
+
 /** 広告表示バー（ID 設定時のみ）+ 科目切り替えバー */
 export function topBars(curDir) {
   const links = SUBJECTS.map(s =>
     `      <a class="xl" href="/${s.dir}/"${s.dir === curDir ? ' aria-current="page"' : ''}>${s.ja}</a>`
   ).join('\n');
-  const pr = AFF
-    ? `<div class="pr-bar">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。</div>\n\n`
-    : '';
+  const pr = prBarText();
   return `${pr}<nav class="xbar" aria-label="科目切り替え">
   <div class="xbar__in">
     <a class="xbar__brand" href="/">

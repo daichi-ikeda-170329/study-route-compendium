@@ -15,6 +15,7 @@ import { extractSubject, SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { ARTICLES } from './content/articles.mjs';
+import { adUnit } from './lib/ads.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -194,7 +195,7 @@ ${sub ? header(sub) : portalHeader()}
       <ol>
 ${toc}
       </ol>
-    </nav>
+    </nav>${adUnit('inArticle')}
 
 ${body}
 
@@ -205,7 +206,7 @@ ${body}
         <a class="p" href="${sub ? `/${sub.dir}/` : '/#subjects'}">${esc(sub ? `${sub.ja}のルートを作る` : '科目を選んで始める')}<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="g" href="${sub ? `/${sub.dir}/books/` : '/#catalog'}">参考書一覧を見る</a>
       </div>
-    </div>
+    </div>${adUnit('bottom')}
   </article>
 </main>
 
@@ -288,7 +289,7 @@ ${sub ? header(sub) : portalHeader()}
     <div class="ggrid">
 ${cards}
     </div>
-  </div>
+  </div>${adUnit('bottom', '  ')}
 </main>
 
 ${footer(dir || '', counts)}

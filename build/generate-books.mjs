@@ -15,6 +15,7 @@ import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './l
 import { authorsOf, searchName, withAuthor } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
 import { bookCards } from './lib/cards.mjs';
+import { adUnit } from './lib/ads.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -268,7 +269,7 @@ ${spec}
       <p><b>${esc(book.bestFor)}</b>に向いた一冊です。</p>
       <p>${esc(book.name)}は${esc(st.label)}に位置づけられ、難易度は 10 段階中 ${book.diff}。${esc(dp.text)}にあたります。到達目安は「${esc(book.hensachi)}」です。${esc(paceSentence(book.hours))}</p>
       <p>参考書は「良い本かどうか」より「いま自分が手を出す段になっているか」で決まります。今の自分にとって難しすぎる本を選ぶと、解説を読んでも定着せずに時間だけが過ぎます。逆にやさしすぎる本は、達成感のわりに得点が伸びません。上の難易度表示と到達目安を、手持ちの模試の結果と照らして判断してください。</p>
-    </section>
+    </section>${adUnit('inArticle')}
 
     <div class="pc-grid">
       <div class="pc good">
@@ -344,7 +345,7 @@ ${bookCards(next.list, sub, stages)}
         <a class="p" href="/${sub.dir}/">${esc(sub.ja)}のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="g" href="/">全科目を見る</a>
       </div>
-    </div>
+    </div>${adUnit('bottom')}
   </article>
 </main>
 

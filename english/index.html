@@ -967,7 +967,12 @@ const CONFIG = {
 
   /* 楽天アフィリエイトID(例 "1a2b3c4d.5e6f7g8h.…")
      空文字のままだと楽天ボタンは表示されません */
-  rakutenId:  "56ba2770.50b55cf7.56ba2771.68ff96bc"
+  rakutenId:  "56ba2770.50b55cf7.56ba2771.68ff96bc",
+
+  /* Google AdSense のパブリッシャーID(例 "ca-pub-1234567890123456")
+     手で入れない。`node build/apply-adsense.mjs <ID>` が全ページへまとめて書き込む
+     空文字のあいだは広告も広告の表記も一切出さない */
+  adsenseId:  ""
 };
 
 /* アフィリエイト ID が未設定のうちは、広告表記を一切出さない（未参加の状態で
@@ -980,6 +985,9 @@ const AFF_AZ = Boolean(CONFIG.amazonTag);
 const AFF_RK = Boolean(CONFIG.rakutenId);
 const AFF    = AFF_AZ || AFF_RK;
 
+/* Google AdSense。ID が入るまで広告も広告の表記も出さない */
+const ADSENSE = Boolean(CONFIG.adsenseId);
+
 const AFF_PROGRAMS = [
   AFF_AZ ? "Amazonアソシエイト・プログラム" : null,
   AFF_RK ? "楽天アフィリエイト" : null
@@ -991,7 +999,7 @@ const AFF_STORES = [
   AFF_RK ? "楽天ブックス" : null
 ].filter(Boolean).join("・");
 /* 表記は静的に置いてある。ID が未設定のときだけ取り除く（描画のズレを起こさないため） */
-if (!AFF) document.getElementById("prBar")?.remove();
+if (!AFF && !ADSENSE) document.getElementById("prBar")?.remove();
 /* ============================================================
    DATA — 高校英語 参考書データベース(2026)
    ISBNは出版社/書店DBで確認した最新版。表紙は書店DBの画像を使用し、
@@ -2393,6 +2401,10 @@ ${CONFIG.rakutenId ? `<li>楽天における情報の取り扱いについては
 <li>広告配信事業者による行動ターゲティング広告は、一般社団法人日本インタラクティブ広告協会(JIAA)のオプトアウトページ等からも停止できます</li>
 </ul>` : `<h5>クッキー(Cookie)について</h5>
 <p>本サイトは、広告配信を目的としたクッキーを使用していません。アクセス解析のためのクッキーについては下記をご覧ください。</p>`}
+${ADSENSE ? `<h5>Google AdSense による広告配信について</h5>
+<p>本サイトは、第三者配信の広告サービス「Google AdSense」を利用しています。Google をはじめとする第三者配信事業者は、クッキー(Cookie)を使用して、本サイトや他のウェブサイトへの過去のアクセス情報にもとづく広告を配信します。これにより表示される広告に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
+<p>パーソナライズ広告(興味・関心に応じた広告)の表示は、Google の<a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">広告設定</a>から無効にできます。また、<a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a> では、参加している第三者配信事業者のクッキーをまとめて無効にできます。</p>
+<p>Google が広告配信のために取得する情報とその使われ方については、<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">「広告 - ポリシーと規約 - Google」</a>をご確認ください。</p>` : ``}
 <h5>アクセス解析について</h5>
 <p>当サイトでは、利用状況の把握と改善のために Google LLC が提供する「Google アナリティクス」を利用しています。Google アナリティクスは Cookie を使用して、氏名・住所などの個人を特定する情報を含まない形で、閲覧されたページや滞在時間などのアクセス情報を収集します。</p>
 <p>収集された情報は Google 社のプライバシーポリシーに基づいて管理されます。データの収集を望まない場合は、Google が提供する「Google アナリティクス オプトアウト アドオン」を利用するか、お使いのブラウザの設定で Cookie を無効にすることで停止できます。</p>
@@ -2420,6 +2432,9 @@ ${AFF ? `<h5>アフィリエイト・プログラムの利用</h5>
 ${CONFIG.amazonTag ? `<h5>Amazonアソシエイト・プログラムについて</h5>
 <p>${CONFIG.siteName}は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。</p>
 <p><b>Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</b></p>` : ""}
+${ADSENSE ? `<h5>第三者配信の広告について</h5>
+<p>本サイトは、Google LLC が提供する広告配信サービス「Google AdSense」を利用しています。ページ内に「広告」と表示している枠に配信される広告の内容は Google 側で選ばれており、本サイトが個別に選定・推奨しているものではありません。表示された広告が閲覧またはクリックされることで、本サイトに収益が発生することがあります。</p>
+<p>広告の表示に用いられるクッキーの扱いと、その停止方法は「プライバシーポリシー」に記載しています。</p>` : ``}
 <h5>掲載順序と広告の関係</h5>
 <p>本サイトにおける参考書の掲載順・ルートへの採否・評価コメントは、紹介料の有無や料率によって決定していません。学習上の有効性と、公開されている一般的な評価にもとづいて編集しています。</p>
 <h5>価格・在庫について</h5>

@@ -55,8 +55,10 @@
 | `favicon.svg` | ファビコン | 手で編集 |
 | `sitemap.xml` | サイトマップ | 生成 |
 | `robots.txt` | クローラー設定 | 手で編集 |
+| `ads.txt` | AdSense の販売者宣言。ID を設定したときだけ存在する | 生成（`apply-adsense.mjs`） |
 | `.nojekyll` | GitHub Pages の Jekyll 処理を無効化 | — |
 | `build/` | 生成スクリプト | 手で編集 |
+| `build/lib/ads.mjs` | Google AdSense の ID・広告枠。広告の出力はここ 1 か所で決まる | `apply-adsense.mjs` が書き換える |
 | `build/data/authors.json` | 著者名（openBD 由来・実在確認済み 227 冊分） | 生成（再取得時のみ） |
 | `build/data/aliases.json` | 参考書のあだ名（「ネクステ」など）。検索の索引に混ぜる | 手で編集 |
 | `test/` | 共有・保存のテスト（`assets/js/share.js` と、科目トップのルート共有）。`node --test` で実行する | 手で編集 |
@@ -83,6 +85,9 @@ node build/generate-articles.mjs   # 解説記事 19 件（記事 13 + 一覧 6�
 node build/generate-search.mjs     # 検索の索引 assets/js/book-index.js
 node build/generate-sitemap.mjs    # sitemap.xml（最後に実行する）
 ```
+
+`build/apply-adsense.mjs` は AdSense の ID を全ページへ反映するもので、生成物には触らない
+（「[Google AdSense](#google-adsense)」の節を参照）。
 
 `build/gen-x-posts.mjs` は X の投稿案を作るもので、サイトの生成物とは無関係。
 上の一括再生成には含めない（「X アカウント」の節を参照）。
@@ -395,6 +400,70 @@ node build/generate-books.mjs && node build/generate-index.mjs \
 - フッターに「Amazon のアソシエイトとして、〜は適格販売により収入を得ています。」が出ている
 - 「広告について」から「Amazon へのリンクはアフィリエイトタグを含まない通常のリンク」の但し書きが消えている
 
+## Google AdSense
+
+ページに Google の広告枠を置き、表示・クリックに応じて収益を得る仕組み。アフィリエイトと違って
+「読まれるだけ」で収益が立つ一方、単価は低い（一般に 1,000 表示あたり数十〜数百円）。
+参考書の紹介リンク（Amazon・楽天）とは併用できる。
+
+### 状態は ID 1 つで決まる
+
+アフィリエイト ID と同じ考え方で、**ID が入っていないあいだは広告も広告の表記も一切出力しない**。
+`build/lib/ads.mjs` の `ADSENSE_CLIENT` が空なら、生成されるページに AdSense 由来の記述は 1 文字も残らない。
+
+ID の置き場は 3 種類ある（生成側の定数・手書き HTML の `<head>`・手書き HTML の `CONFIG`）。
+手で書き換えると必ずどれかが取り残されるので、**書き換えは `build/apply-adsense.mjs` に集約する。**
+
+```bash
+node build/apply-adsense.mjs --check                    # いまの状態を全箇所ぶん表示する
+node build/apply-adsense.mjs ca-pub-1234567890123456    # 有効にする
+node build/apply-adsense.mjs --off                      # 取り消す（ads.txt も消える）
+
+# 広告ユニットを作ったあとにスロット ID を入れる
+node build/apply-adsense.mjs ca-pub-1234567890123456 \
+  --in-article=1234567890 --bottom=9876543210
+```
+
+実行したら**生成ページを全部流し直す**。`apply-adsense.mjs` は生成物に触らない。
+
+### ID の有無で自動的に変わるもの
+
+| 箇所 | 未設定 | 設定済み |
+|---|---|---|
+| 全ページの `<head>` | 何も入らない | AdSense のローダーを静的に出力 |
+| 本文中・本文末の広告枠 | 出さない | スロット ID がある枠だけ出す |
+| ページ最上部の PR バー | アフィリエイトの文だけ | 第三者配信広告の一文を追加 |
+| プライバシーポリシー | AdSense の節を出さない | Cookie・パーソナライズ広告の停止方法を明記 |
+| 「広告について」 | AdSense の節を出さない | 第三者配信であることを明記 |
+| `ads.txt` | 存在しない | `google.com, pub-…, DIRECT, f08c47fec0942fa0` |
+
+ローダーは JS で差し込まず、**HTML に静的に書き出す**。審査時の Google のクローラーは
+HTML そのものからこのタグを探すため、動的に足すと検出されないことがある。
+
+### 広告枠の位置
+
+`AD_SLOTS` の 2 種類だけを使う。増やすときは `build/lib/ads.mjs` に足して、各生成スクリプトから呼ぶ。
+
+| キー | 位置 | 入るページ |
+|---|---|---|
+| `inArticle` | 本文の途中 | 書籍詳細（「どんな人に向いているか」の直後）・解説記事（目次の直後） |
+| `bottom` | 本文の終わり | 書籍詳細・解説記事・記事一覧・参考書一覧・おすすめ・ルート一覧・ルート詳細 |
+
+科目トップ（SPA）とポータル・404 にはローダーだけを置き、手動の広告枠は置かない。
+枠には必ず「広告」のラベルを付ける（`.ad-slot__t`）。広告をコンテンツと誤認させる配置は
+AdSense のポリシー違反になるため、ラベルで明確に分ける。
+
+購入ボタンのすぐ上下には枠を置かない。誤クリックを誘う配置とみなされるおそれがあるため、
+書籍ページの `bottom` は「購入する」ではなくページ末尾の CTA の後ろに置いている。
+
+### 審査に出すときの注意
+
+- 申し込みの時点で `ca-pub-…` は発行される。**承認前にローダーを設置しておく必要がある**ので、
+  ID を受け取ったらすぐ `apply-adsense.mjs` で反映して本番へ push する
+- スロット ID（広告ユニット）は**承認後**でないと作れない。承認までは `AD_SLOTS` は空のままでよい
+- 承認後は、管理画面の「自動広告」を使うか、広告ユニットを作って `--in-article` / `--bottom` に渡すかを選ぶ。
+  自動広告は全画面広告（ビネット）を差し込むことがあるので、入れる場合は管理画面で個別に切る
+
 ## X アカウント
 
 公式アカウントは `@route_taizen`。運用設計の正本は [docs/x-account-plan.md](docs/x-account-plan.md)。
@@ -540,6 +609,7 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 | Cloudflare DNS | 有効 | 権威 DNS。`darwin` / `yolanda`.ns.cloudflare.com | Cloudflare ダッシュボード |
 | Google Search Console | 所有権確認メタ設置済み | インデックス登録・検索順位の把握 | ポータルと科目トップの `<head>` |
 | Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`） | アクセス解析 | 手書き HTML 7 件と `build/lib/parts.mjs` の `analytics()` |
+| Google AdSense | **未申請** | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
 | 楽天アフィリエイト | 導入済み | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.rakutenId` |
 | Amazon アソシエイト | **未申請** | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.amazonTag` |
 | IndexNow | 通知済み | Bing・Yahoo・DuckDuckGo・Yandex への即時インデックス通知 | サイト直下の `<キー>.txt` と `build/submit-indexnow.mjs` |
