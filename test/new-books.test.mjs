@@ -3,14 +3,15 @@
  *
  *   node --test test/new-books.test.mjs
  *
- * 設計は docs/new-books-plan.md。ここで守るのは 4 つ。
+ * 設計は docs/new-books-plan.md。ここで守るのは 5 つ。
  *
- *   1. 発売日パーサが、粒度の違う salesDate を取りこぼさない
- *   2. 注入のマーカー区間が往復する（書き換えても他所を壊さない）
- *   3. 難易度を持たない本を通しても描画が落ちず、undefined が出ない
- *   4. 科目トップ 5 枚に「評価準備中」の分岐が全部入っている
+ *   1. 注入のマーカー区間が往復する（書き換えても他所を壊さない）
+ *   2. 難易度を持たない本を通しても描画が落ちず、undefined が出ない
+ *   3. 科目トップ 5 枚に「評価準備中」の分岐が全部入っている
+ *   4. F 型（新刊速報）が難易度を書かず、X の文字数に収まる
+ *   5. 調査先の出版社名が、実際の収録データの表記と一致している
  *
- * 3 が最も重要である。新刊は diff・pros・cons・bestFor を持たないので、
+ * 2 が最も重要である。新刊は diff・pros・cons・bestFor を持たないので、
  * 分岐を 1 つ落とすだけで画面に undefined が出るか、TypeError で描画が止まる。
  */
 import test from 'node:test';
@@ -20,55 +21,13 @@ import path from 'node:path';
 import vm from 'vm';
 import { fileURLToPath } from 'node:url';
 
-import { parseSalesDate, isoWeek, excluded } from '../build/fetch-new-books.mjs';
 import { serializeBook, replaceBlock } from '../build/apply-new-books.mjs';
 import { isProvisional, provisionalLast, PROVISIONAL_LABEL, loadNewBooks } from '../build/lib/newbooks.mjs';
 import { bookCard } from '../build/lib/cards.mjs';
-import { SUBJECTS } from '../build/lib/extract.mjs';
+import { SUBJECTS, extractSubject } from '../build/lib/extract.mjs';
+import { postF, weightedLen, X_LIMIT } from '../build/gen-x-posts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-
-/* ============================================================
-   発売日
-   ============================================================ */
-
-test('salesDate は粒度が違っても解釈できる', () => {
-  const iso = s => parseSalesDate(s)?.toISOString().slice(0, 10);
-  assert.equal(iso('2026年08月28日'), '2026-08-28');
-  assert.equal(iso('2026年08月'), '2026-08-01');
-  assert.equal(iso('2026年'), '2026-01-01');
-  // 旬・頃・以降は捨てて月初として扱う。日が取れないだけで、月は使える情報
-  assert.equal(iso('2026年08月上旬'), '2026-08-01');
-  assert.equal(iso('2026年08月中旬'), '2026-08-01');
-  assert.equal(iso('2026年08月下旬'), '2026-08-01');
-  assert.equal(iso('2026年08月頃'), '2026-08-01');
-  assert.equal(iso('2026年08月以降'), '2026-08-01');
-  assert.equal(iso('2026年8月3日'), '2026-08-03');   // 0 埋めが無い形
-});
-
-test('解釈できない salesDate は null になる（捨てずに呼び出し側へ渡す）', () => {
-  for (const s of ['未定', '', '近日発売', null, undefined, 42]) {
-    assert.equal(parseSalesDate(s), null, `${s} は null のはず`);
-  }
-});
-
-test('月や日がありえない値なら null にする', () => {
-  assert.equal(parseSalesDate('2026年13月01日'), null);
-  assert.equal(parseSalesDate('2026年08月32日'), null);
-});
-
-test('ISO 週番号は年をまたいでも木曜基準で決まる', () => {
-  assert.deepEqual(isoWeek(new Date('2026-08-28T00:00:00Z')), { year: 2026, week: 35 });
-  // 2027-01-01 は金曜。ISO では前年の第 53 週に属する
-  assert.deepEqual(isoWeek(new Date('2027-01-01T00:00:00Z')), { year: 2026, week: 53 });
-});
-
-test('除外語は書名の部分一致で効く', () => {
-  const words = ['小学', '英検'];
-  assert.equal(excluded('小学生の漢字ドリル', words), true);
-  assert.equal(excluded('英検準1級 でる順パス単', words), true);
-  assert.equal(excluded('英単語ターゲット1900', words), false);
-});
 
 /* ============================================================
    注入
@@ -222,4 +181,68 @@ test('英語の現在地推定は、評価未了の本を最難関と誤判定�
   assert.equal(bookLv({ diff: 2 }), 0);
   assert.equal(bookLv({ diff: 5 }), 2);
   assert.equal(bookLv({ diff: 10 }), 3);
+});
+
+/* ============================================================
+   F 型（新刊速報）
+   ============================================================ */
+
+const EN_STAGES = extractSubject(ROOT, 'english').stages;
+
+test('F 型は難易度も向いている人も書かない', () => {
+  const p = postF({ ...PROV, subjects: '単語1500' }, SUB, EN_STAGES);
+  assert.ok(p, '投稿文が作れなかった');
+  assert.ok(!/難易度\s*\d/.test(p.text), `難易度の数字が入っている:\n${p.text}`);
+  assert.ok(!p.text.includes('向いている人'));
+  assert.ok(!p.text.includes('undefined'));
+  assert.ok(p.text.includes('評価はまだしていません'), '評価未了であることを書いていない');
+});
+
+test('F 型は書籍ページへ F 型の utm 付きで送る', () => {
+  const p = postF(PROV, SUB, EN_STAGES);
+  assert.ok(p.text.includes(`/${SUB.dir}/books/${PROV.id}/`));
+  assert.ok(p.text.includes('utm_campaign=rt_f_new'), 'utm が A 型などと混ざる');
+});
+
+test('F 型は X の文字数上限に収まる', () => {
+  const p = postF({ ...PROV, subjects: '単語1500・熟語300・文法400' }, SUB, EN_STAGES);
+  assert.ok(weightedLen(p.text) <= X_LIMIT, `${weightedLen(p.text)} / ${X_LIMIT} で超過`);
+});
+
+test('F 型は書名が長すぎれば null を返す（黙って壊れた投稿を作らない）', () => {
+  // 落とせる行を全部落としても収まらない場合。呼び出し側が報せる作りになっている
+  const p = postF({ ...PROV, name: 'あ'.repeat(200) }, SUB, EN_STAGES);
+  assert.equal(p, null);
+});
+
+test('F 型は subjects を持たない本でも壊れない', () => {
+  const p = postF(PROV, SUB, EN_STAGES);
+  assert.ok(p && !p.text.includes('undefined'));
+  assert.ok(!p.text.includes('収録：'), 'subjects が無いのに収録欄が出ている');
+});
+
+/* ============================================================
+   調査先の出版社
+   ============================================================ */
+
+test('調査先の出版社名は、実際の収録データの表記と一致している', () => {
+  // publishers.json の name は BOOKS[].pub と突き合わせるために使う。
+  // 表記がずれていると「未収録」の判定が狂い、既に載っている本を新刊として拾う
+  const file = path.join(ROOT, 'build', 'data', 'publishers.json');
+  const { publishers, searchQueries } = JSON.parse(fs.readFileSync(file, 'utf8'));
+  assert.ok(publishers.length >= 10, '調査先が少なすぎる');
+  assert.ok(searchQueries.length >= 1, '検索クエリが無い');
+
+  const pubs = new Set();
+  for (const s of SUBJECTS) {
+    for (const b of extractSubject(ROOT, s.dir).books) pubs.add(b.pub);
+  }
+  const unknown = publishers
+    .flatMap(p => [p.name, ...(p.aliases || [])])
+    .filter(n => !pubs.has(n));
+  assert.deepEqual(unknown, [], `収録データに存在しない出版社名: ${unknown.join(' / ')}`);
+
+  for (const p of publishers) {
+    assert.match(p.url, /^https:\/\//, `${p.name} の URL が https でない`);
+  }
 });

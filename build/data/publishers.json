@@ -1,0 +1,34 @@
+{
+  "note": "新刊を調べに行く先。月次の投稿文づくりのセッションで巡回する。手順は docs/new-books-plan.md の 4 節。",
+  "note2": "収録済みの本の出版社を冊数順に並べたもの。冊数はここに書かない（データが増えると古くなるため）。実数は月次ファイルの『新刊調査』節に毎回出る。",
+  "note3": "URL は改修で切れる。開けなかったらサイト内で「新刊」「新刊案内」「商品一覧」を探し、見つけた URL でここを直す。**切れたまま放置すると、その出版社だけ静かに調査から抜け落ちる。**",
+  "note4": "name は BOOKS[].pub と一致させてある（照合に使うため）。ナガセ系は BOOKS 側に表記ゆれが 3 通りあるので aliases に列挙した。",
+  "checkedAt": "2026-08-28",
+  "publishers": [
+    { "name": "旺文社",     "url": "https://www.obunsha.co.jp/" },
+    { "name": "KADOKAWA",   "url": "https://www.kadokawa.co.jp/" },
+    { "name": "河合出版",   "url": "https://www.kawai-publishing.jp/" },
+    { "name": "教学社",     "url": "https://www.kyogaku.co.jp/" },
+    { "name": "駿台文庫",   "url": "https://www.sundaibunko.jp/" },
+    { "name": "Gakken",     "url": "https://hon.gakken.jp/" },
+    { "name": "Z会",        "url": "https://www.zkai.co.jp/books/" },
+    { "name": "山川出版社", "url": "https://www.yamakawa.co.jp/" },
+    { "name": "数研出版",   "url": "https://www.chart.co.jp/" },
+    { "name": "文英堂",     "url": "https://www.bun-eido.co.jp/" },
+    { "name": "ナガセ(東進ブックス)", "url": "https://www.toshin.com/books/",
+      "aliases": ["ナガセ(東進)", "東進ブックス(ナガセ)", "ナガセ"] },
+    { "name": "桐原書店",   "url": "https://www.kirihara.co.jp/" },
+    { "name": "かんき出版", "url": "https://kanki-pub.co.jp/" },
+    { "name": "語学春秋社", "url": "https://www.goshun.com/" },
+    { "name": "東京出版",   "url": "https://www.tokyo-s.jp/" },
+    { "name": "代々木ライブラリー", "url": "https://www.yozemi.ac.jp/" },
+    { "name": "東京書籍",   "url": "https://www.tokyo-shoseki.co.jp/" },
+    { "name": "第一学習社", "url": "https://www.daiichi-g.co.jp/" },
+    { "name": "マセマ出版社", "url": "https://www.mathema.jp/" }
+  ],
+  "searchQueries": [
+    "大学受験 参考書 新刊 <年>",
+    "<出版社名> 新刊 参考書 <年>",
+    "共通テスト 対策 参考書 新刊 <年>"
+  ]
+}

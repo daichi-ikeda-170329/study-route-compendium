@@ -5,12 +5,17 @@
  * 2 つだけである。
  *
  *   A 図鑑カード — 1 冊を役割・難易度・量・ペースで紹介する定型
- *   E エンタメ   — 1,052 冊のデータから出る事実（最多の出版社、最長の学習時間など）
+ *   E エンタメ   — 収録データから出る事実（最多の出版社、最長の学習時間など）
+ *   F 新刊速報   — build/data/new-books.json に入った新刊。掲載済みのものだけ
  *
  * 残る B（ルート提示）・C（判断基準）・D（対決）は判断が要るので Claude が書く。
  * そのための材料も「候補データ」として同じファイルに出す。**科目トップの HTML は
  * 1 枚が大きく、5 枚読ませるとトークンを浪費するため、Claude に渡すのはこの候補
  * データだけにする。**
+ *
+ * 新刊の調査も同じ月次セッションで行う。手順は生成物の「新刊調査」節に出る
+ * （設計は docs/new-books-plan.md）。調査 → 掲載 → このスクリプトを --force で
+ * 流し直す、の順で回すと F 型が入った月次ファイルになる。
  *
  * 使い方
  *   node build/gen-x-posts.mjs            # 翌月分
@@ -23,20 +28,30 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS, ORIGIN } from './lib/extract.mjs';
+import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN } from './lib/extract.mjs';
 import { tally } from './lib/tally.mjs';
 import { searchName } from './lib/booktitle.mjs';
-import { isProvisional } from './lib/newbooks.mjs';
+import { isProvisional, loadNewBooks } from './lib/newbooks.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR = path.join(ROOT, 'docs', 'x-posts');
 const USED_FILE = path.join(OUT_DIR, 'used.json');
+const PUBLISHERS_FILE = path.join(ROOT, 'build', 'data', 'publishers.json');
 
-/** 1 か月に作る本数。合計 28 本＝4 週間ぶん */
+/**
+ * 1 か月に作る本数。合計 28 本＝4 週間ぶん。
+ *
+ * F（新刊速報）は月によって本数が変わる。掲載した新刊の数だけ A（図鑑カード）を
+ * 減らして合計 28 本を保つ。**F が A を押しのける**のは、新刊は鮮度が価値であり、
+ * 図鑑カードは翌月以降でも同じ価値を出せるためである。
+ */
 const PLAN = { A: 12, E: 4, B: 4, C: 4, D: 4 };
 
+/** F 型の上限。新刊が大量に出た月に、月次ファイルが新刊だらけになるのを防ぐ */
+const F_MAX = 4;
+
 /** 投稿の時間帯。受験生が X を見る時間（勉強を終えた夜）に寄せる */
-const SLOTS = { A: '22:00', E: '21:00', B: '22:30', C: '22:00', D: '21:30' };
+const SLOTS = { A: '22:00', E: '21:00', B: '22:30', C: '22:00', D: '21:30', F: '20:00' };
 
 /**
  * A 型（図鑑カード）に出さない style。
@@ -130,6 +145,40 @@ function postA(b, sub, adopt) {
 
   const text = fitLines(head, optional, tail);
   return text ? { type: 'A', text, note: `${sub.ja} / ${b.id}` } : null;
+}
+
+/* ============================================================
+   F 型：新刊速報
+   ============================================================ */
+
+/**
+ * 掲載したばかりの新刊 1 冊を知らせる。
+ *
+ * **難易度も向いている人も書かない。** 新刊は現物を読んでいないので、書けるのは
+ * 書名・出版社・刊行年・役割・書籍ページの URL だけである。ここで中身を語ると、
+ * サイト側で「評価準備中」と出していることと食い違う。
+ *
+ * @param {object} b      new-books.json の 1 件
+ * @param {object} sub    SUBJECTS の 1 科目
+ * @param {object} stages その科目の STAGES
+ */
+export function postF(b, sub, stages) {
+  const st = stages[b.stage] || {};
+  const url = trackedUrl(`/${sub.dir}/books/${b.id}/`, 'rt_f_new');
+  const field = b.sub ? (SUB_LABELS[b.sub] || '') : '';
+
+  const head = `【新刊】${b.name}（${b.pub}）`;
+  // 落としてよい順に後ろへ置く
+  const optional = [
+    `${sub.ja}${field ? `（${field}）` : ''}／${st.label || st.short || '—'}`,
+    b.year ? `${b.year}年 刊行` : null,
+    b.subjects ? `収録：${b.subjects}` : null,
+    '難易度の評価はまだしていません。現物を確認してから書きます。',
+  ].filter(Boolean);
+  const tail = `\n▼ 図鑑に追加しました\n${url}`;
+
+  const text = fitLines(head, optional, tail);
+  return text ? { type: 'F', text, note: `${sub.ja} / ${b.id}` } : null;
 }
 
 /* ============================================================
@@ -228,6 +277,102 @@ function postsE(data) {
   }
 
   return out;
+}
+
+/* ============================================================
+   新刊調査（月次セッションの最初にやること）
+   ============================================================ */
+
+/**
+ * 新刊を調べるための材料と手順。
+ *
+ * 検知は自動化していない。楽天ブックス書籍検索 API を使う案は、登録アプリごとに
+ * IP 許可制であることが分かった時点で捨てた（GitHub Actions は実行 IP が
+ * 7,000 以上のレンジから割り当てられ、登録しきれない）。代わりに、B・C・D 型を
+ * 書く月 1 回のセッションで Claude が調べる。設計は docs/new-books-plan.md。
+ *
+ * ここに出すのは「調べに行く先」と「いま何が収録されているか」だけにする。
+ * 1,052 冊を全部読ませるとトークンを浪費するため、判断に要る集計だけを渡す。
+ */
+function survey(data, publishers) {
+  const lines = [];
+  const all = SUBJECTS.flatMap(s => data[s.dir].books);
+
+  lines.push('## 新刊調査（Claude がやる）');
+  lines.push('');
+  lines.push('**B・C・D 型を書く前に、まずこれをやる。** 新刊が見つかったら F 型の枠が');
+  lines.push('増え、その分 A 型が減るので、順番を逆にすると作り直しになる。');
+  lines.push('');
+  lines.push('### 手順');
+  lines.push('');
+  lines.push('1. 下の出版社の新刊ページを見る。あわせて検索でも拾う（両方やる）');
+  lines.push('2. 見つけた本が下の「収録済みの出版社」の冊数に照らして未収録かを確かめる。');
+  lines.push('   判断がつかないものはサイトの検索（`assets/js/book-index.js`）で書名を引く');
+  lines.push('3. 掲載する本を `build/data/new-books.json` に足す。**必須は id・subject・');
+  lines.push('   name・official・pub・year・stage の 7 つ**');
+  lines.push('4. **難易度・到達目安・強み・注意点・向いている人は書かない。** 現物を');
+  lines.push('   読んでいないため。`provisional: true` を立てて「評価準備中」で出す');
+  lines.push('5. 再生成する');
+  lines.push('');
+  lines.push('```bash');
+  lines.push('node build/apply-new-books.mjs');
+  lines.push('node build/generate-books.mjs && node build/generate-index.mjs && node build/generate-picks.mjs');
+  lines.push('node build/generate-routes.mjs && node build/generate-articles.mjs && node build/generate-search.mjs');
+  lines.push('node build/apply-count.mjs');
+  lines.push('node build/generate-sitemap.mjs');
+  lines.push('node build/gen-x-posts.mjs <この月> --force   # F 型が入った状態で作り直す');
+  lines.push('```');
+  lines.push('');
+  lines.push('`--force` で作り直しても **A 型の中身は変わらない**（used.json の byMonth が');
+  lines.push('この月の分を覚えているため）。安心して流し直してよい。');
+  lines.push('');
+  lines.push('### 見つけても掲載しないもの');
+  lines.push('');
+  lines.push('- 大学受験以外（小中学・高校入試・英検などの資格・専門学校・大学院）');
+  lines.push('- 改訂版のうち、**同じ本が既に収録されているもの**（版が変わっただけなら既存の year を直す）');
+  lines.push('- 赤本・青本などの大学別過去問（毎年出るうえ、収録済みの枠で足りている）');
+  lines.push('- 学校専売で一般に買えないもの（書影も取れず、読者が入手できない）');
+  lines.push('');
+  lines.push('### 調べに行く先');
+  lines.push('');
+  for (const pub of publishers.publishers) {
+    lines.push(`- **${pub.name}** — ${pub.url}`);
+  }
+  lines.push('');
+  lines.push('**開けない URL があったら `build/data/publishers.json` を直す。**');
+  lines.push('放置すると、その出版社だけ静かに調査から抜け落ちる。');
+  lines.push('');
+  lines.push('検索でも拾う。');
+  lines.push('');
+  for (const q of publishers.searchQueries) lines.push(`- \`${q}\``);
+  lines.push('');
+
+  lines.push('### いま収録している出版社（冊数順・上位 20）');
+  lines.push('');
+  lines.push('未収録かどうかの当たりを付けるために出している。');
+  lines.push('**冊数が多い出版社ほど、新刊も拾えている可能性が高い。**');
+  lines.push('');
+  const byPub = new Map();
+  for (const b of all) byPub.set(b.pub, (byPub.get(b.pub) || 0) + 1);
+  const top = [...byPub].sort((a, b) => b[1] - a[1]).slice(0, 20);
+  lines.push(top.map(([n, c]) => `${n} ${c}`).join('｜'));
+  lines.push('');
+
+  lines.push('### 収録している刊行年の分布（新しい順・上位 6 年）');
+  lines.push('');
+  lines.push('**直近の年の冊数が少なければ、新刊を取りこぼしている。**');
+  lines.push('');
+  const byYear = new Map();
+  for (const b of all) if (Number(b.year) > 1900) byYear.set(b.year, (byYear.get(b.year) || 0) + 1);
+  const years = [...byYear].sort((a, b) => b[0] - a[0]).slice(0, 6);
+  lines.push('| 刊行年 | 冊数 |');
+  lines.push('|---|---|');
+  for (const [yy, c] of years) lines.push(`| ${yy} | ${c} |`);
+  lines.push('');
+  lines.push(`収録は全 ${all.length.toLocaleString('en-US')} 冊。`);
+  lines.push('');
+
+  return lines.join('\n');
 }
 
 /* ============================================================
@@ -333,11 +478,26 @@ function candidates(data) {
    組み立て
    ============================================================ */
 
+/**
+ * 既出の記録を読む。
+ *
+ * `used` は A 型で出した本、`newPosted` は F 型で出した新刊。
+ * `byMonth` はどの月に出したかで、**同じ月を作り直したときに内容が入れ替わるのを
+ * 防ぐために持つ**。これが無いと、--force で流し直すたびに A 型が別の本になり、
+ * 「新刊を調べてから月次ファイルを作り直す」という運用が成り立たない。
+ *
+ * byMonth を持たない古い形式のファイルも読める（初回は空として扱う）。
+ */
 function readUsed() {
   try {
-    return new Set(JSON.parse(fs.readFileSync(USED_FILE, 'utf8')).used || []);
+    const j = JSON.parse(fs.readFileSync(USED_FILE, 'utf8'));
+    return {
+      used: new Set(j.used || []),
+      newPosted: new Set(j.newPosted || []),
+      byMonth: j.byMonth || {},
+    };
   } catch {
-    return new Set();   // 初回は記録が無い
+    return { used: new Set(), newPosted: new Set(), byMonth: {} };   // 初回は記録が無い
   }
 }
 
@@ -386,7 +546,38 @@ function main() {
   const data = {};
   for (const s of SUBJECTS) data[s.dir] = extractSubject(ROOT, s.dir);
 
-  const used = readUsed();
+  const rec = readUsed();
+  const month = `${y}-${mm}`;
+
+  // この月に出した本は「既出」から外す。--force で作り直したときに、前回この月に
+  // 選ばれた本がそのまま選ばれ直すようにするため。これが無いと、新刊を調べてから
+  // 流し直すたびに A 型が総入れ替えになる
+  const mine = new Set(rec.byMonth[month] || []);
+  const used = new Set([...rec.used].filter(k => !mine.has(k)));
+  const newPosted = new Set([...rec.newPosted].filter(k => !mine.has(k)));
+
+  // F 型：掲載済みの新刊のうち、まだ投稿していないもの。
+  // 新刊の鮮度が価値なので、A 型より先に枠を取る
+  const stagesOf = new Map(SUBJECTS.map(s => [s.dir, data[s.dir].stages]));
+  const postsF = [];
+  const fKeys = [];
+  for (const b of loadNewBooks(ROOT)) {
+    if (postsF.length >= F_MAX) break;
+    const key = `${b.subject}:${b.id}`;
+    if (newPosted.has(key)) continue;
+    const sub = SUBJECTS.find(x => x.dir === b.subject);
+    if (!sub) throw new Error(`new-books.json: ${b.id} の subject が科目名でない — ${b.subject}`);
+    const p = postF(b, sub, stagesOf.get(sub.dir));
+    if (!p) {
+      // 書名が長すぎて、落とせる行を全部落としても収まらない場合。
+      // 黙って飛ばすと投稿が 1 本消えるので必ず報せる
+      console.error(`F 型が文字数に収まらない: ${key}（書名を短くするか手で書く）`);
+      continue;
+    }
+    postsF.push(p);
+    fKeys.push(key);
+  }
+  const planA = Math.max(0, PLAN.A - postsF.length);
 
   // A 型：ルート採用回数の多い順に、まだ出していない本から取る。
   // よく使われる本から先に出したほうが読者の関心に近い。
@@ -397,7 +588,7 @@ function main() {
     for (const b of d.books) {
       if (A_EXCLUDE_STYLES.includes(b.style)) continue;
       // 評価が未了の新刊は難易度も向いている人も書けないので図鑑カードにできない。
-      // 新刊は F 型（build/gen-x-newbook.mjs）が別に扱う
+      // 新刊は F 型が扱う
       if (isProvisional(b)) continue;
       ranked.push({ b, sub: s, n: t.main.get(b.id) || 0 });
     }
@@ -407,7 +598,7 @@ function main() {
   const postsA = [];
   const newlyUsed = [];
   for (const r of ranked) {
-    if (postsA.length >= PLAN.A) break;
+    if (postsA.length >= planA) break;
     const key = `${r.sub.dir}:${r.b.id}`;
     if (used.has(key)) continue;
     const p = postA(r.b, r.sub, r.n);
@@ -423,12 +614,14 @@ function main() {
   const postsEsel = Array.from({ length: Math.min(PLAN.E, eAll.length) },
     (_, k) => eAll[(eOffset + k) % eAll.length]);
 
-  // 日付を割り当てる。B・C・D は Claude が埋める枠として空で出す
+  // 日付を割り当てる。B・C・D は Claude が埋める枠として空で出す。
+  // **F 型は月初に置く。** 新刊は鮮度が価値なので、月末に回すと意味が薄れる
   const total = PLAN.A + PLAN.E + PLAN.B + PLAN.C + PLAN.D;
   const dates = schedule(y, m, total);
 
   const rows = [];
   let i = 0;
+  for (const p of postsF) rows.push({ date: dates[i++], type: 'F', post: p });
   for (const p of postsA) rows.push({ date: dates[i++], type: 'A', post: p });
   for (const p of postsEsel) rows.push({ date: dates[i++], type: 'E', post: p });
   for (const [type, n] of [['B', PLAN.B], ['C', PLAN.C], ['D', PLAN.D]]) {
@@ -451,6 +644,11 @@ function main() {
   md.push('');
   md.push('**B・C・D 型は空欄で出る。** 判断が要るので Claude に書いてもらう。その際は');
   md.push('このファイル末尾の「候補データ」だけを渡せばよい（科目トップの HTML は読ませない）。');
+  md.push('');
+  md.push('**あわせて新刊の調査も頼む。** 手順は次の節にある。**調査を先にやること。**');
+  md.push('新刊が見つかると F 型の枠が増え、その分 A 型が減るため、後からだと作り直しになる。');
+  md.push('');
+  md.push(survey(data, JSON.parse(fs.readFileSync(PUBLISHERS_FILE, 'utf8'))));
   md.push('');
   md.push('## カレンダー');
   md.push('');
@@ -476,6 +674,7 @@ function main() {
     }
   };
 
+  if (postsF.length) section('## F 型（新刊速報）', 'F');
   section('## A 型（図鑑カード）', 'A');
   section('## E 型（エンタメ）', 'E');
   md.push('## B・C・D 型（Claude が書く枠）');
@@ -500,13 +699,18 @@ function main() {
   fs.writeFileSync(outFile, md.join('\n'), 'utf8');
 
   for (const k of newlyUsed) used.add(k);
+  for (const k of fKeys) newPosted.add(k);
   fs.writeFileSync(USED_FILE, `${JSON.stringify({
     note: 'A 型で既に投稿案を作った本。翌月以降に重複して出さないための記録',
+    note2: 'newPosted は F 型（新刊速報）で出した新刊。byMonth はどの月に出したかで、'
+      + '同じ月を --force で作り直したときに内容が入れ替わるのを防ぐために持つ',
     used: [...used].sort(),
+    newPosted: [...newPosted].sort(),
+    byMonth: { ...rec.byMonth, [month]: [...newlyUsed, ...fKeys].sort() },
   }, null, 2)}\n`, 'utf8');
 
   const totalBooks = SUBJECTS.reduce((n, s) => n + data[s.dir].books.length, 0);
-  console.log(`${path.relative(ROOT, outFile)} を生成（A ${postsA.length} 本 / E ${postsEsel.length} 本 / 要執筆 ${PLAN.B + PLAN.C + PLAN.D} 本）`);
+  console.log(`${path.relative(ROOT, outFile)} を生成（F ${postsF.length} 本 / A ${postsA.length} 本 / E ${postsEsel.length} 本 / 要執筆 ${PLAN.B + PLAN.C + PLAN.D} 本）`);
   console.log(`A 型の既出: ${used.size} 冊 / ${totalBooks} 冊`);
 }
 

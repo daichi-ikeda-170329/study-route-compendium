@@ -62,12 +62,10 @@
 | `build/data/authors.json` | 著者名（openBD 由来・実在確認済み 227 冊分） | 生成（再取得時のみ） |
 | `build/data/aliases.json` | 参考書のあだ名（「ネクステ」など）。検索の索引に混ぜる | 手で編集 |
 | `build/data/new-books.json` | 掲載を承認した新刊。ここに残っている数が「評価の残作業」 | 手で編集 |
-| `build/data/new-books-filter.json` | 新刊候補から大学受験以外を弾く除外語 | 手で編集 |
-| `build/data/rakuten-genres.json` | 楽天ブックスの学参系ジャンル ID（取得日つき） | 生成（`fetch-new-books.mjs --genres`） |
+| `build/data/publishers.json` | 新刊を調べに行く出版社と URL。`name` は `BOOKS[].pub` と一致させる | 手で編集 |
 | `build/data/count-state.json` | 前回書き込んだ冊数。置換対象を一意に決めるために持つ | 生成（`apply-count.mjs`） |
 | `test/` | 共有・保存・検索・ペース・新刊のテスト。`node --test` で実行する | 手で編集 |
-| `docs/new-books/` | 週次で集めた新刊候補と、一度出した ISBN の記録 | 生成（`fetch-new-books.mjs`） |
-| `docs/x-posts/` | X の投稿案。`YYYY-MM.md` が月次ぶん、`new/` が F 型（新刊速報） | 生成（`gen-x-posts.mjs` / `gen-x-newbook.mjs`） |
+| `docs/x-posts/` | X の投稿案。`YYYY-MM.md` に新刊調査の手順・カレンダー・本文が全部入る | 生成（`gen-x-posts.mjs`） |
 | `docs/` | 機能ごとの実装計画と調査記録 | 手で編集 |
 
 科目トップの内部構造は 5 科目で共通で、次の要素を同じクラス名で持つ。
@@ -105,8 +103,8 @@ node build/apply-count.mjs        # 冊数の表記を実数に合わせる（�
 `build/gen-x-posts.mjs` は X の投稿案を作るもので、サイトの生成物とは無関係。
 上の一括再生成には含めない（「X アカウント」の節を参照）。
 
-`build/fetch-new-books.mjs` と `build/gen-x-newbook.mjs` も同じく生成物とは無関係で、
-新刊の検知と速報投稿のためのもの（「新刊の掲載」の節を参照）。
+`build/gen-x-posts.mjs` は新刊調査の手順と F 型（新刊速報）も同じファイルに出す
+（「新刊の掲載」の節を参照）。
 
 科目トップの `BOOKS` や `ROUTES` を編集したら、`generate-sitemap.mjs` を含めて全部を流し直す。生成物はリポジトリにコミットする（GitHub Pages はビルドを実行しないため）。
 
@@ -357,7 +355,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。
 | `test/share.test.mjs` | 診断結果の共有 URL の往復・不正な URL・保存データ・ルート共有の `encode`/`apply`・X の投稿画面に渡す `text=` の書式 | `QUIZ` を変えた / 科目トップのルート画面を触った / 共有の文面を変えた |
 | `test/search.test.mjs` | 索引の中身・正規化・あだ名で引けること・`aliases.json` の実在確認 | `BOOKS` を変えた / `aliases.json` を触った（先に `generate-search.mjs` を流す） |
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
-| `test/new-books.test.mjs` | 発売日パーサ・注入マーカーの往復・難易度を持たない本の描画・科目トップ 5 枚に分岐が入っていること | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った |
+| `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ 5 枚に分岐が入っていること・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った |
 
 診断は、科目ページから `QUIZ` を取り出し、到達しうる回答の組み合わせをすべて列挙して往復を確認する。あわせて不正な URL を 30 ケース以上、壊れた保存データの読み込みも検証する。
 
@@ -491,17 +489,23 @@ AdSense のポリシー違反になるため、ラベルで明確に分ける。
 新しく発売された参考書と、サイトに載っていない既刊を随時足すための仕組み。
 設計と運用手順の正本は [docs/new-books-plan.md](docs/new-books-plan.md)。
 
+**検知は自動化していない。月 1 回、X の投稿文を作るセッションで Claude が調べる。**
+手順は毎月の `docs/x-posts/YYYY-MM.md` の「新刊調査」節に出る（`gen-x-posts.mjs` の
+`survey()` が生成する）。調べに行く先は `build/data/publishers.json` が正本。
+
 ```bash
-node build/fetch-new-books.mjs           # 新刊候補を集める（週次で Actions が実行）
-node build/fetch-new-books.mjs --genres  # 学参系のジャンル ID を引き直す
-node build/apply-new-books.mjs           # 承認済みの新刊を科目 HTML に注入する
-node build/gen-x-newbook.mjs             # F 型（新刊速報）の投稿文を作る
+node build/apply-new-books.mjs               # 承認済みの新刊を科目 HTML に注入する
+node build/apply-count.mjs                   # 冊数の表記を実数に合わせる
+node build/gen-x-posts.mjs 2026-09 --force   # F 型が入った月次ファイルに作り直す
 ```
 
-検知には楽天ブックス書籍検索 API を使う。`RAKUTEN_APP_ID` と `RAKUTEN_ACCESS_KEY`
-が要る（`CONFIG.rakutenId` のアフィリエイト ID とは別物で、Rakuten Developers で
-無料取得する）。`.github/workflows/new-books.yml` が毎週月曜に実行して
-`docs/new-books/` にコミットする。**掲載するかどうかは自動化しない。**
+**調査を B・C・D 型より先にやること。** 新刊が見つかると F 型の枠が増え、その分
+A 型が減るため、後からだと作り直しになる。`--force` で作り直しても **A 型の中身は
+変わらない**（`used.json` の `byMonth` がその月の分を覚えている）。
+
+楽天ブックス書籍検索 API を週次で叩く案は実装まで進めたが捨てた。アプリ登録が
+**IP アドレスの許可制**で、GitHub Actions の実行 IP（7,000 以上のレンジ）を
+登録しきれないためである。経緯は [docs/new-books-plan.md](docs/new-books-plan.md) の 3 節。
 
 ### 評価が未了の本の扱い
 
@@ -570,13 +574,23 @@ node build/gen-x-posts.mjs            # 翌月分
 node build/gen-x-posts.mjs 2026-09    # 月を指定
 ```
 
-出力は `docs/x-posts/YYYY-MM.md`。図鑑カード（A 型）とデータから出る事実（E 型）を
-`BOOKS` から組み立て、判断が要る 3 種類は空欄で出す。空欄を埋めるときに渡すのは
-**ファイル末尾の「候補データ」だけでよい**（科目トップの HTML は読ませない）。
+出力は `docs/x-posts/YYYY-MM.md`。1 か月分がこのファイル 1 枚に収まる。
+
+| 中身 | 誰が作るか |
+|---|---|
+| 新刊調査の手順・調べに行く先・収録状況 | スクリプト（Claude が読んで作業する） |
+| A 図鑑カード / E エンタメ / F 新刊速報 | スクリプトが `BOOKS` と `new-books.json` から組み立てる |
+| B ルート提示 / C 判断基準 / D 対決 | 空欄。Claude が書く |
+
+空欄を埋めるときに渡すのは**このファイルだけでよい**（科目トップの HTML は読ませない）。
+判断に要る集計はファイル内に出してある。
 
 `.github/workflows/x-posts.yml` が毎月 1 日に実行してコミットする。同じ月が既に
-あれば作り直さない。作り直すには `--force` を付ける。**`--force` は前回出した本を
-別の本に入れ替える**（既出の記録が `docs/x-posts/used.json` に残っているため）。
+あれば作り直さない。作り直すには `--force` を付ける。
+
+**`--force` で作り直しても A・E 型の中身は変わらない。** `used.json` の `byMonth` が
+その月に選んだ本を覚えており、作り直すときはそれを「既出」から外して選び直すため。
+これがないと「新刊を調べてから月次ファイルを作り直す」という運用が成り立たない。
 
 `BOOKS` の `diff` は **1〜10 の 10 段階**である。投稿でも `build/lib/cards.mjs` と
 同じ 10 段階で書く。5 段階の星に丸めると、サイトを開いた読者が見る数字と食い違う。
