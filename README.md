@@ -432,13 +432,17 @@ node build/apply-adsense.mjs ca-pub-1234567890123456 \
 |---|---|---|
 | 全ページの `<head>` | 何も入らない | AdSense のローダーを静的に出力 |
 | 本文中・本文末の広告枠 | 出さない | スロット ID がある枠だけ出す |
-| ページ最上部の PR バー | アフィリエイトの文だけ | 第三者配信広告の一文を追加 |
+| ページ最上部の PR バー | アフィリエイトの文だけ | 第三者配信広告の一文を追加（手書き HTML の静的な PR バーも `apply-adsense.mjs` が書き換える） |
 | プライバシーポリシー | AdSense の節を出さない | Cookie・パーソナライズ広告の停止方法を明記 |
 | 「広告について」 | AdSense の節を出さない | 第三者配信であることを明記 |
 | `ads.txt` | 存在しない | `google.com, pub-…, DIRECT, f08c47fec0942fa0` |
 
 ローダーは JS で差し込まず、**HTML に静的に書き出す**。審査時の Google のクローラーは
 HTML そのものからこのタグを探すため、動的に足すと検出されないことがある。
+
+PR バーの文言は「掲載しています」ではなく**「掲載することがあります」**にしてある。
+審査の通過前や、広告ユニットを 1 つも置いていない状態では実際に広告が出ないため、
+断定すると事実に反する。ローダーの設置と実際の配信開始にはずれがある。
 
 ### 広告枠の位置
 
@@ -609,7 +613,7 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 | Cloudflare DNS | 有効 | 権威 DNS。`darwin` / `yolanda`.ns.cloudflare.com | Cloudflare ダッシュボード |
 | Google Search Console | 所有権確認メタ設置済み | インデックス登録・検索順位の把握 | ポータルと科目トップの `<head>` |
 | Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`） | アクセス解析 | 手書き HTML 7 件と `build/lib/parts.mjs` の `analytics()` |
-| Google AdSense | **未申請** | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
+| Google AdSense | ID 設置済み・**審査待ち**（`ca-pub-4704595822429716`） | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
 | 楽天アフィリエイト | 導入済み | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.rakutenId` |
 | Amazon アソシエイト | **未申請** | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.amazonTag` |
 | IndexNow | 通知済み | Bing・Yahoo・DuckDuckGo・Yandex への即時インデックス通知 | サイト直下の `<キー>.txt` と `build/submit-indexnow.mjs` |

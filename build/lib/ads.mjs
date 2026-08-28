@@ -9,7 +9,7 @@
  */
 
 /** AdSense のパブリッシャー ID（例 "ca-pub-1234567890123456"）。空なら広告を出さない */
-export const ADSENSE_CLIENT = '';
+export const ADSENSE_CLIENT = 'ca-pub-4704595822429716';
 
 /**
  * 手動で貼る広告ユニットのスロット ID。AdSense の管理画面で

@@ -78,7 +78,7 @@ function prBarText() {
     ? '<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。'
     : '';
   const ads = ADSENSE
-    ? `${AFF ? 'また、' : ''}<b>第三者配信の広告</b>（Google AdSense）を掲載しています。`
+    ? `${AFF ? 'また、' : ''}Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。`
     : '';
   if (!aff && !ads) return '';
   return `<div class="pr-bar">当サイトは${aff}${ads}</div>\n\n`;

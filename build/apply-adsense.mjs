@@ -36,6 +36,15 @@ const loaderBlock = id =>
   `<!-- Google AdSense -->\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${id}" crossorigin="anonymous"></script>\n`;
 const LOADER_RE = /<!-- Google AdSense -->\n<script async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=[^"]*" crossorigin="anonymous"><\/script>\n/g;
 
+/**
+ * 手書き HTML の PR バーに足す一文。生成ページ側（parts.mjs の prBarText）と同じ文言にする。
+ *
+ * 「掲載しています」ではなく「掲載することがあります」。審査の通過前や、
+ * 広告ユニットを 1 つも置いていない状態でも事実に反しないため。
+ */
+const PR_SENTENCE = 'また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。';
+const PR_BAR_RE = /(<div class="pr-bar" id="prBar">)([\s\S]*?)(<\/div>)/;
+
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
 
@@ -103,6 +112,12 @@ for (const h of HTML) {
     s = s.replace(GA_MARK, loaderBlock(id) + GA_MARK);
   }
   if (h.config) s = s.replace(/adsenseId:(\s*)"[^"]*"/, `adsenseId:$1"${off ? '' : id}"`);
+  if (PR_BAR_RE.test(s)) {
+    s = s.replace(PR_BAR_RE, (m, open, body, close) => {
+      const base = body.replace(PR_SENTENCE, '');
+      return open + (off ? base : base + PR_SENTENCE) + close;
+    });
+  }
   write(h.file, s);
   changed.push(h.file);
 }
