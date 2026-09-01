@@ -1,17 +1,47 @@
 {
   "note": "A 型で既に投稿案を作った本。翌月以降に重複して出さないための記録",
+  "note2": "newPosted は F 型（新刊速報）で出した新刊。byMonth はどの月に出したかで、同じ月を --force で作り直したときに内容が入れ替わるのを防ぐために持つ",
   "used": [
+    "english:gijutsu100k",
     "english:hijii-dokkai-hisshu",
     "english:hijii-zero",
+    "english:nextstage",
     "english:oiwa",
     "english:polaris-b1",
+    "english:sistan",
+    "english:tanki-kyote-e",
+    "math:ao",
     "math:kisomon",
     "science:hitoride-chigaku",
     "science:juyo-mondai",
+    "science:juyo-mondaishu-seibutsu",
     "science:kiso-mondai-seiko",
     "science:kiso-seiko",
+    "science:sensor-chigaku",
     "science:tanki-chigaku",
+    "social:aobon-kokyoseikei",
+    "social:chiri-henomichi",
     "social:kageyama-kt-kokyo",
-    "social:rinri-michi"
-  ]
+    "social:kurobon-kokyoseikei",
+    "social:kyotest-michi-kokyoseikei",
+    "social:rinri-michi",
+    "social:zusetsu-seikei-hamajima"
+  ],
+  "newPosted": [],
+  "byMonth": {
+    "2026-10": [
+      "english:gijutsu100k",
+      "english:nextstage",
+      "english:sistan",
+      "english:tanki-kyote-e",
+      "math:ao",
+      "science:juyo-mondaishu-seibutsu",
+      "science:sensor-chigaku",
+      "social:aobon-kokyoseikei",
+      "social:chiri-henomichi",
+      "social:kurobon-kokyoseikei",
+      "social:kyotest-michi-kokyoseikei",
+      "social:zusetsu-seikei-hamajima"
+    ]
+  }
 }
