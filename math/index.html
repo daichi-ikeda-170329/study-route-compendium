@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>数学の参考書ルート｜大学受験の数学参考書113冊を図鑑化 - 数学ルート大全</title>
+<title>数学の参考書ルート｜大学受験の数学参考書162冊を図鑑化 - 数学ルート大全</title>
 <meta name="google-site-verification" content="10bnNaPa-rqbt-UHQK1J_KTLT7k3HQb8xLFcHx5fSsw">
-<meta name="description" content="大学受験の数学参考書113冊を、導入・網羅・標準・応用・実戦の役割別／難易度別に整理した参考書図鑑。青チャート・Focus Gold・1対1対応の演習などの接続関係つき。教科書レベルから東大理三まで。2026年 新課程・数C対応・完全無料。">
+<meta name="description" content="大学受験の数学参考書162冊を、導入・網羅・標準・応用・実戦の役割別／難易度別に整理した参考書図鑑。青チャート・Focus Gold・1対1対応の演習などの接続関係つき。教科書レベルから東大理三まで。2026年 新課程・数C対応・完全無料。">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#F6F4EF">
 <meta name="format-detection" content="telephone=no">
@@ -13,16 +13,16 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ルート大全">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="数学ルート大全 — 大学受験の数学参考書113冊を図鑑化">
-<meta property="og:description" content="数学の参考書113冊を難易度・役割・接続関係で整理。志望校から逆算した参考書ルートが3分で作れます。">
+<meta property="og:title" content="数学ルート大全 — 大学受験の数学参考書162冊を図鑑化">
+<meta property="og:description" content="数学の参考書162冊を難易度・役割・接続関係で整理。志望校から逆算した参考書ルートが3分で作れます。">
 <meta property="og:url" content="https://route-taizen.com/math/">
 <meta property="og:image" content="https://route-taizen.com/assets/ogp-math.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@route_taizen">
-<meta name="twitter:title" content="数学ルート大全 — 大学受験の数学参考書113冊を図鑑化">
-<meta name="twitter:description" content="数学の参考書113冊を難易度・役割・接続関係で整理。志望校から逆算した参考書ルートが3分で作れます。">
+<meta name="twitter:title" content="数学ルート大全 — 大学受験の数学参考書162冊を図鑑化">
+<meta name="twitter:description" content="数学の参考書162冊を難易度・役割・接続関係で整理。志望校から逆算した参考書ルートが3分で作れます。">
 <meta name="twitter:image" content="https://route-taizen.com/assets/ogp-math.png">
 <link rel="icon" href="https://route-taizen.com/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="https://route-taizen.com/assets/apple-touch-icon.png">
@@ -174,6 +174,13 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cat-count b{color:var(--ink);font-family:var(--mono);font-size:14px}
 .sort-sel{border:1px solid var(--line-d);background:var(--surface);border-radius:4px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--ink);box-shadow:var(--sh-s)}
 .book-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cat-grp{grid-column:1/-1;display:flex;align-items:baseline;gap:11px;margin:30px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--gc,var(--ink));font-family:var(--serif);font-weight:800;font-size:18px;color:var(--ink);letter-spacing:.06em}
+.cat-grp:first-child{margin-top:4px}
+.cat-grp small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
+.cat-sec{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin:16px 0 2px;font-weight:900;font-size:14px;color:var(--ink);letter-spacing:.04em}
+.cat-sec::before{content:"";width:16px;height:2.5px;background:var(--sc,var(--accent));align-self:center}
+.cat-sec small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
+.cat-empty{grid-column:1/-1;padding:26px 4px;color:var(--muted);font-size:13px}
 @media(min-width:560px){.book-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:820px){.book-grid{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:1040px){.book-grid{grid-template-columns:repeat(5,1fr)}}
@@ -349,7 +356,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 /* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。見た目は変えない */
 .foot-links button{font-size:12px;font-weight:700;color:var(--ink-2);transition:.14s;display:inline-flex;align-items:center;min-height:26px}
 .foot-links button:hover{color:var(--accent)}
-.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:66ch;margin:0 auto}
+.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:0 auto}
 .foot-legal b{color:var(--ink-2);font-weight:700}
 .legal-body{padding:22px 24px 30px}
 .legal-body h5{font-family:var(--serif);font-weight:800;font-size:14.5px;margin:20px 0 8px;letter-spacing:.02em}
@@ -539,13 +546,14 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .foot-subjects__list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 @media(min-width:700px){.foot-subjects__list{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:1000px){.foot-subjects__list{grid-template-columns:repeat(7,1fr)}}
-.foot-subjects a{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);padding:10px 12px;transition:.16s;text-decoration:none;box-shadow:var(--sh-s)}
+.foot-subjects a{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);padding:10px 10px;transition:.16s;text-decoration:none;box-shadow:var(--sh-s)}
 .foot-subjects a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--line-d)}
 .foot-subjects a[aria-current="page"]{background:var(--surface-3);box-shadow:none;pointer-events:none}
 .fs-mark{width:26px;height:26px;flex:none;display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:13px;color:#fff;background:var(--fsc);border-radius:3px}
 .fs-txt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
-.fs-txt b{font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--ink)}
-.fs-txt span{font-family:var(--mono);font-size:9.5px;color:var(--muted-2);letter-spacing:.05em;margin-top:2px}
+/* 「小論文ルート大全」（8 字）が 1 行に収まる字幅。ここを広げると折り返す */
+.fs-txt b{font-size:11.5px;font-weight:700;letter-spacing:0;color:var(--ink);white-space:nowrap}
+.fs-txt span{font-family:var(--mono);font-size:9px;color:var(--muted-2);letter-spacing:.04em;margin-top:2px}
 
 /* ---------- 参考書の詳細ページへの導線 ---------- */
 .foot-links a{font-size:12px;font-weight:700;color:var(--ink-2);transition:.14s;text-decoration:none;display:inline-flex;align-items:center;min-height:26px}
@@ -637,7 +645,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="hero__main">
       <span class="hero__badge"><i></i>高校数学・大学受験 — 2026 新課程対応</span>
       <h1>志望校までの道を、<br><span class="hl">一冊ずつ<b>確かに</b>。</span></h1>
-      <p class="lead">教科書レベルから東大理三まで。定番から最新刊まで113冊を難易度・役割・接続で整理し、志望校と現在地に合わせた「何を・どの順で」を一本の道に描きます。</p>
+      <p class="lead">教科書レベルから東大理三まで。定番から最新刊まで162冊を難易度・役割・接続で整理し、志望校と現在地に合わせた「何を・どの順で」を一本の道に描きます。</p>
       <div class="hero__cta">
         <button class="btn btn-primary" onclick="go('quiz')">
           3分診断でルートを作る
@@ -691,11 +699,11 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div style="padding-top:22px">
       <div class="eyebrow">Catalog</div>
       <h2 class="sec">参考書図鑑</h2>
-      <p class="sec-lead">定番から最新刊まで113冊を収録。キーワード検索と条件で自分に合う一冊を探せます。カードを選ぶと詳細へ。</p>
+      <p class="sec-lead">定番から最新刊まで162冊を収録。キーワード検索と条件で自分に合う一冊を探せます。カードを選ぶと詳細へ。</p>
     </div>
     <a class="cat-index" href="/math/books/">
       <div class="cat-index__t">
-        <b>数学の参考書一覧 113冊（1冊ごとの詳細ページつき）</b>
+        <b>数学の参考書一覧 162冊（1冊ごとの詳細ページつき）</b>
         <small>レベル・到達目安・向いている人・強みと注意点・次に進む本を1冊ずつまとめています</small>
       </div>
       <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -717,6 +725,7 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="cat-meta">
       <div class="cat-count"><b id="catCount">0</b> 冊を表示中</div>
       <select class="sort-sel" id="sortSel" onchange="renderCatalog()">
+        <option value="field">分野別・難易度順</option>
         <option value="diff-asc">難易度:やさしい順</option>
         <option value="diff-desc">難易度:難しい順</option>
         <option value="name">書名順</option>
@@ -1027,6 +1036,33 @@ function isProv(b){ return !!b && b.provisional === true; }
 /* 難易度順の並びで末尾へ落とす。diff の無い本を a.diff-b.diff に通すと NaN になり、
    比較子が非対称になって並び順が実行ごとに変わる */
 function provLast(a,b){ return (isProv(a)?1:0) - (isProv(b)?1:0); }
+/* 難易度の並び順。diff（1〜10）が同じ本は目安偏差値（下限→上限→書名）で細かく並べる。
+   diff だけで並べると、同じ diff の中で「40〜55 → 〜48 → 35〜50」のように偏差値が
+   前後して、画面では難易度順に見えない。生成側は build/lib/rank.mjs が同じ処理を持つ。 */
+/* 目安偏差値の [下限, 上限]。「45〜60」「〜50(導入)」「68〜」「50〜75(3段階)」を拾う。
+   「共テ7割〜9割」「東大合格レベル」のように偏差値で書いていない本は [999,999] を
+   返し、同じ難易度の中では数値で書いてある本のうしろへまとめる（混ぜると、得点率の
+   数字が偏差値として並んでしまう）。 */
+function hRange(b){
+  const s = String((b && b.hensachi) || "");
+  const nums = (s.match(/\d{2}/g) || []).map(Number).filter(n => n >= 25 && n <= 85);
+  if(!nums.length) return [999, 999];
+  return [/^\s*[〜~]/.test(s) ? 0 : nums[0], nums[nums.length - 1]];
+}
+/* 評価未了（diff を持たない）本は常に末尾。昇順・降順のどちらでも末尾に置く */
+function byDiffAsc(a,b){
+  return provLast(a,b) || (a.diff||0)-(b.diff||0)
+    || hRange(a)[0]-hRange(b)[0] || hRange(a)[1]-hRange(b)[1]
+    || String(a.name).localeCompare(String(b.name),"ja");
+}
+/* 降順でも、評価未了の本と偏差値を書いていない本は末尾に置く
+   （[999,999] をそのまま降順に通すと先頭へ出てしまう） */
+function byDiffDesc(a,b){
+  const ra = hRange(a), rb = hRange(b), unknown = r => (r[0]===999 ? 1 : 0);
+  return provLast(a,b) || (b.diff||0)-(a.diff||0)
+    || unknown(ra)-unknown(rb) || rb[0]-ra[0] || rb[1]-ra[1]
+    || String(a.name).localeCompare(String(b.name),"ja");
+}
 function diffColor(d){
   if(d==null) return "var(--line)";   /* 新刊は難易度を持たない。色も付けない */
   if(d<=2) return "#2F8659";
@@ -1477,7 +1513,7 @@ BOOKS.push(
 {"id":"tanki-shuchu-zemi-sugaku-1a2bc","name":"2026 大学入試 短期集中ゼミ 数学I・A・II・B・C","official":"2026 大学入試 短期集中ゼミ 数学I・A・II・B・C","pub":"実教出版","isbn10":"4407365153","isbn13":"9784407365153","year":2025,"stage":"std","diff":5,"subjects":"IAIIBC","hensachi":"48〜58","problems":"短期間で入試頻出テーマを総整理する演習書（問題数要確認）","hours":"30〜50h","h":40,"style":"記述演習","bunri":"both","fb":{"bg":"linear-gradient(160deg,#E3B94E,#8C6A12)","light":true},"desc":"短期間で入試数学の頻出テーマを総復習できる演習書。受験直前期の総整理に向く。","pros":["コンパクトな構成で短期間で一周できる","頻出テーマに絞った効率的な演習","廉価で入手しやすい"],"cons":["網羅性は低く、初学者の基礎固めには不向き","難関大対策には別途応用問題集が必要"],"bestFor":"一通り学習を終え、短期間で入試頻出テーマを総復習したい受験生","unis":["共通テスト","日東駒専・産近甲龍","地方国公立"]},
 {"id":"tanki-shuchu-zemi-sugaku-3","name":"2026 大学入試 短期集中ゼミ 数学III","official":"2026 大学入試 短期集中ゼミ 数学III","pub":"実教出版","isbn10":"4407365161","isbn13":"9784407365160","year":2025,"stage":"std","diff":5,"subjects":"IIIC","hensachi":"48〜58","problems":"数学IIIに特化した短期総復習用の演習書（問題数要確認）","hours":"25〜40h","h":32,"style":"記述演習","bunri":"ri","fb":{"bg":"linear-gradient(160deg,#0E7C6B,#0A5347)"},"desc":"数学IIIに特化した短期集中ゼミシリーズの一冊。頻出テーマを短期間で総復習できる。","pros":["数学IIIに絞った効率的な構成","コンパクトで短期間に仕上げやすい","廉価で入手しやすい"],"cons":["網羅性は低く、初学者の基礎固めには不向き","難関大対策には別途応用問題集が必要"],"bestFor":"数学IIIの頻出テーマを短期間で総復習したい理系受験生","unis":["共通テスト","日東駒専・産近甲龍","地方国公立"]},
 {"id":"sugaku-short-program","name":"大学への数学 数学ショートプログラム","official":"大学への数学 数学ショートプログラム","pub":"東京出版","isbn10":"4887420102","isbn13":"9784887420106","stage":"std","diff":6,"subjects":"IAIIBC","hensachi":"50〜62","problems":"テーマ別の短期集中プログラム形式（問題数要確認）","hours":"40〜60h","h":50,"style":"記述演習","bunri":"both","fb":{"bg":"linear-gradient(160deg,#2BB5A0,#127065)"},"desc":"「大学への数学」ブランドによる、テーマ別に頻出解法を短期間で習得できる演習書。","pros":["テーマ別に整理されており弱点補強がしやすい","「大学への数学」らしい鋭い解説","コンパクトで反復しやすい"],"cons":["出版年・改訂状況の一次情報が限定的なため要確認","難関大対策には別途応用問題集が必要"],"bestFor":"網羅系問題集を終え、頻出テーマ・解法を効率よく整理したい受験生","unis":["地方国公立","MARCH・関関同立"]},
-{"id":"rikei-sugaku-no-kiwami","name":"理系数学の極","official":"理系数学の極","pub":"東京書籍","isbn10":"4487633648","isbn13":"9784487633647","year":2026,"stage":"adv","diff":8,"subjects":"IAIIBC / IIIC","hensachi":"62〜72","problems":"例題281問+演習問題281問+医学部対策問題51問＝計613問（本編664頁+演習編356頁、A5判）","hours":"200〜300h","h":250,"style":"網羅系","bunri":"both","fb":{"bg":"linear-gradient(160deg,#3D4657,#1B2233)"},"desc":"灘・開成の教諭が監修した最難関大理系向けの網羅型問題集。数I〜数IIICの厳選良問613問を例題→演習の対応構成で収録し、医学部対策問題も別枠で備える。","pros":["例題と演習問題が1対1で対応し、全分野を1冊で難関レベルまで引き上げられる","各例題に授業形式のヒント動画・解説動画が付き、独学でも詰まりにくい","医学部対策問題51問と別解・コラムで多角的なアプローチが身につく"],"cons":["613問・1,000頁超の大部で、1周に半年以上かかる想定（時間配分が必須）","2026年3月刊の新刊で入試での実績・レビューはまだ少ない"],"bestFor":"網羅系（青チャート・Focus Gold）を終え、難関大理系・医学部の入試レベルを1冊で仕上げたい理系受験生","unis":["旧帝(合格点型)","早慶上理","東大・京大・東京科学大","医学部医学科"]},
+{"id":"rikei-sugaku-no-kiwami","name":"理系数学の極","official":"理系数学の極","pub":"東京書籍","isbn10":"4487633648","isbn13":"9784487633647","year":2026,"cover":"https://image.rakuten.co.jp/neowing-r/cabinet/item_img_2179/neobk-3189709.jpg","stage":"adv","diff":8,"subjects":"IAIIBC / IIIC","hensachi":"62〜72","problems":"例題281問+演習問題281問+医学部対策問題51問＝計613問（本編664頁+演習編356頁、A5判）","hours":"200〜300h","h":250,"style":"網羅系","bunri":"both","fb":{"bg":"linear-gradient(160deg,#3D4657,#1B2233)"},"desc":"灘・開成の教諭が監修した最難関大理系向けの網羅型問題集。数I〜数IIICの厳選良問613問を例題→演習の対応構成で収録し、医学部対策問題も別枠で備える。","pros":["例題と演習問題が1対1で対応し、全分野を1冊で難関レベルまで引き上げられる","各例題に授業形式のヒント動画・解説動画が付き、独学でも詰まりにくい","医学部対策問題51問と別解・コラムで多角的なアプローチが身につく"],"cons":["613問・1,000頁超の大部で、1周に半年以上かかる想定（時間配分が必須）","2026年3月刊の新刊で入試での実績・レビューはまだ少ない"],"bestFor":"網羅系（青チャート・Focus Gold）を終え、難関大理系・医学部の入試レベルを1冊で仕上げたい理系受験生","unis":["旧帝(合格点型)","早慶上理","東大・京大・東京科学大","医学部医学科"]},
 {"id":"chart-igakubu-nyushi-sugaku","name":"医学部入試数学","official":"チャート式シリーズ 医学部入試数学","pub":"数研出版","isbn10":"4410142666","isbn13":"9784410142666","year":2023,"stage":"adv","diff":8,"subjects":"IAIIBC","hensachi":"62〜75","problems":"医学部入試頻出テーマ別の問題集（問題数要確認）","hours":"70〜100h","h":85,"style":"網羅系","bunri":"both","fb":{"bg":"linear-gradient(160deg,#3D4657,#1B2233)"},"desc":"医学部入試で頻出のテーマ・解法に特化したチャート式シリーズの一冊。学生間では「黒チャート」とも通称される。","pros":["医学部入試特有の頻出パターンを集中的に演習できる","チャート研究所編集で解説の粒度が安定している","私大医学部〜国公立医まで幅広く対応"],"cons":["「紫チャート（これだけ70題）」と通称が紛らわしいため区別が必要（本書は黒チャートと通称される）","基礎が固まっていないと消化不良になりやすい"],"bestFor":"医学部医学科を目指し数学を得点源にしたい受験生","unis":["医学部医学科","地方国公立医"]},
 {"id":"chart-sugaku-nanmonshu-100","name":"数学難問集100（新課程入試対応）","official":"チャート式シリーズ 数学難問集100（新課程入試対応）","pub":"数研出版","isbn10":"4410142828","isbn13":"9784410142826","year":2023,"stage":"adv","diff":9,"subjects":"IAIIBC","hensachi":"65〜78","problems":"難関大入試の難問100題を精選（構成要確認）","hours":"80〜120h","h":100,"style":"記述演習","bunri":"both","fb":{"bg":"linear-gradient(160deg,#2C3E7A,#141F4A)"},"desc":"難関大で出題される骨太な難問100題を厳選した問題集。学生間では「黒チャート」とも通称される。","pros":["難関大特有の骨太な問題を厳選","チャート式の丁寧な解説で難問でも理解しやすい","新課程入試（数学C含む）に対応"],"cons":["「医学部入試数学」と同じ黒チャート呼称のため混同注意","入試標準〜応用を終えていないと難易度が高すぎる"],"bestFor":"最難関大を目指し、応用問題集を終えてさらに実力を伸ばしたい受験生","unis":["東大・京大・東京科学大","旧帝(合格点型)"]},
 {"id":"jissen-sugaku-juyo-mondaishu-bunkei","name":"実戦 数学重要問題集 数学I・II・A・B・C〔ベクトル〕","official":"新課程 実戦 数学重要問題集 数学I・II・A・B・C〔ベクトル〕 文系","pub":"数研出版","isbn10":"4410142445","isbn13":"9784410142444","year":2023,"stage":"adv","diff":6,"subjects":"IAIIBC","hensachi":"52〜65","problems":"A問題（頻出標準）・B問題（応用）の2段階構成（問題数要確認）","hours":"70〜100h","h":85,"style":"記述演習","bunri":"bun","fb":{"bg":"linear-gradient(160deg,#F5A623,#C2571A)"},"desc":"既掲載「実戦 数学重要問題集(理系)」の文系版。頻出テーマの標準〜応用問題を1冊に集約した定番演習書。","pros":["理系版と並ぶ定評ある実戦問題集で頻出テーマを網羅","A問題・B問題の2段階で無理なく難度を上げられる","別冊解答が詳しい"],"cons":["理系版との重複テーマも多く、理系受験生が両方揃える必要はない","網羅系問題集を終えていないと難度が高く感じられる"],"bestFor":"網羅系問題集を終えた文系受験生","unis":["地方国公立","MARCH・関関同立","旧帝(合格点型)"]},
@@ -2631,6 +2667,11 @@ window.addEventListener("hashchange", applyHash);
    (Amazonアソシエイト・ヘルプ「Amazonが提供している商品画像URLを指定する形でご利用ください」に準拠。
     画像の保存・再アップロード・加工は行っていません) */
 function coverSrcs(b){
+  /* nocover: 商品画像がどこにも無いと確認できた本（未発売など）。
+     Amazon は画像を持たない ISBN に「書名だけを刷った自動生成画像」を返すことがあり、
+     これは 1x1 判定にも onerror にも掛からないので、候補を空にして代替表示へ落とす。
+     生成側は build/lib/cover.mjs が同じ分岐を持つ */
+  if(b.nocover) return [];
   const key = b.isbn10 || b.asin || "";
   const list = [];
   if(b.cover) list.push(b.cover);
@@ -2689,6 +2730,25 @@ function setFilter(k,v,btn){
   document.querySelectorAll(`.chip[data-k="${k}"]`).forEach(c=>c.classList.toggle("active", c.dataset.v===v));
   renderCatalog();
 }
+/* 絞り込みの結果が 0 件のときに出す。空文字だと前の結果が残って見える */
+const EMPTY_HTML = `<div class="cat-empty">条件に合う参考書がありません。絞り込みを緩めてください。</div>`;
+
+/* 図鑑・検索結果に並べる 1 枚のカード。セクション表示と通常表示で共有する */
+function bookCardHTML(b){
+  const st = STAGES[b.stage];
+  const dots = isProv(b) ? "" : Array.from({length:10},(_,i)=>`<i style="${i<b.diff?`background:${diffColor(b.diff)}`:""}"></i>`).join("");
+  return `<div class="book-card" role="button" tabindex="0" onclick="openModal('${b.id}')">
+    <div class="book-card__cover">${coverHTML(b)}</div>
+    <div class="book-card__body">
+      <div class="bc-name">${b.name}</div>
+      <div class="bc-pub">${b.pub}</div>
+      <div class="bc-diff"><span class="diff-dots">${dots}</span></div>
+      <div class="bc-hensachi">${isProv(b) ? `<span class="bc-prov">${PROV_LABEL}</span>` : `目安 <b>${b.hensachi}</b>`}</div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:${st.color}">${st.short}</span>${b.subjects ? `<span class="tag" style="background:var(--surface-3);color:var(--ink-2)">${b.subjects.split(" ")[0]}</span>` : ""}</div>
+    </div>
+  </div>`;
+}
+
 function renderCatalog(){
   const q = (document.getElementById("book-search").value||"").trim().toLowerCase();
   const sort = document.getElementById("sortSel").value;
@@ -2702,24 +2762,24 @@ function renderCatalog(){
     }
     return true;
   });
-  if(sort==="diff-asc") list.sort((a,b)=>provLast(a,b) || a.diff-b.diff);
-  else if(sort==="diff-desc") list.sort((a,b)=>provLast(a,b) || b.diff-a.diff);
-  else list.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
   document.getElementById("catCount").textContent = list.length;
-  document.getElementById("bookGrid").innerHTML = list.map(b=>{
-    const st = STAGES[b.stage];
-    const dots = isProv(b) ? "" : Array.from({length:10},(_,i)=>`<i style="${i<b.diff?`background:${diffColor(b.diff)}`:""}"></i>`).join("");
-    return `<div class="book-card" role="button" tabindex="0" onclick="openModal('${b.id}')">
-      <div class="book-card__cover">${coverHTML(b)}</div>
-      <div class="book-card__body">
-        <div class="bc-name">${b.name}</div>
-        <div class="bc-pub">${b.pub}</div>
-        <div class="bc-diff"><span class="diff-dots">${dots}</span></div>
-        <div class="bc-hensachi">${isProv(b) ? `<span class="bc-prov">${PROV_LABEL}</span>` : `目安 <b>${b.hensachi}</b>`}</div>
-        <div class="bc-tags"><span class="tag tag-stage" style="background:${st.color}">${st.short}</span>${b.subjects ? `<span class="tag" style="background:var(--surface-3);color:var(--ink-2)">${b.subjects.split(" ")[0]}</span>` : ""}</div>
-      </div>
-    </div>`;
-  }).join("");
+  const grid = document.getElementById("bookGrid");
+  if(sort==="field"){
+    /* 役割別×難易度順。共通テストと過去問はここで独立したまとまりになる */
+    let html = "";
+    for(const k in STAGES){
+      const g = list.filter(b=>b.stage===k).sort(byDiffAsc);
+      if(!g.length) continue;
+      html += `<div class="cat-sec" style="--sc:${STAGES[k].color}">${STAGES[k].label}<small>${g.length} BOOKS — やさしい順</small></div>`;
+      html += g.map(bookCardHTML).join("");
+    }
+    grid.innerHTML = html || EMPTY_HTML;
+    return;
+  }
+  if(sort==="diff-asc") list.sort(byDiffAsc);
+  else if(sort==="diff-desc") list.sort(byDiffDesc);
+  else list.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
+  grid.innerHTML = list.map(bookCardHTML).join("") || EMPTY_HTML;
 }
 
 /* ============================================================
@@ -3373,8 +3433,8 @@ RTShare.setup({
       "@type": "CollectionPage",
       "@id": "https://route-taizen.com/math/#webpage",
       "url": "https://route-taizen.com/math/",
-      "name": "数学ルート大全 — 大学受験の数学参考書113冊を図鑑化",
-      "description": "大学受験の数学参考書113冊を、導入・網羅・標準・応用・実戦の役割別／難易度別に整理した参考書図鑑。青チャート・Focus Gold・1対1対応の演習などの接続関係つき。教科書レベルから東大理三まで。2026年 新課程・数C対応・完全無料。",
+      "name": "数学ルート大全 — 大学受験の数学参考書162冊を図鑑化",
+      "description": "大学受験の数学参考書162冊を、導入・網羅・標準・応用・実戦の役割別／難易度別に整理した参考書図鑑。青チャート・Focus Gold・1対1対応の演習などの接続関係つき。教科書レベルから東大理三まで。2026年 新課程・数C対応・完全無料。",
       "isPartOf": {
         "@id": "https://route-taizen.com/#website"
       },

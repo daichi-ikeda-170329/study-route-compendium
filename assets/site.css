@@ -242,15 +242,16 @@ h1.bk-name{font-family:var(--serif);font-weight:800;font-size:29px;line-height:1
 @media(min-width:1000px){.foot-subjects__list{grid-template-columns:repeat(7,1fr)}}
 /* 生成ページのフッターには .foot-subjects のラッパーがない。
    セレクタは .foot-subjects__list を起点にする。 */
-.foot-subjects__list a{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);padding:10px 12px;transition:.16s;box-shadow:var(--sh-s)}
+.foot-subjects__list a{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);padding:10px 10px;transition:.16s;box-shadow:var(--sh-s)}
 .foot-subjects__list a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--line-d)}
 .foot-subjects__list a[aria-current="page"]{background:var(--surface-3);box-shadow:none;pointer-events:none}
 .fs-mark{width:26px;height:26px;flex:none;display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:13px;color:#fff;background:var(--fsc);border-radius:3px}
 .fs-txt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
-.fs-txt b{font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--ink)}
-.fs-txt span{font-family:var(--mono);font-size:9.5px;color:var(--muted-2);letter-spacing:.05em;margin-top:2px}
+/* 「小論文ルート大全」（8 字）が 1 行に収まる字幅。ここを広げると折り返す */
+.fs-txt b{font-size:11.5px;font-weight:700;letter-spacing:0;color:var(--ink);white-space:nowrap}
+.fs-txt span{font-family:var(--mono);font-size:9px;color:var(--muted-2);letter-spacing:.04em;margin-top:2px}
 .foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:22px}
 .foot-links a{font-size:12px;font-weight:700;color:var(--ink-2);transition:.15s;display:inline-flex;align-items:center;min-height:26px}
 .foot-links a:hover{color:var(--accent-deep)}
-.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:70ch;margin:20px auto 0;padding-top:18px;border-top:1px solid var(--line)}
+.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:20px auto 0;padding-top:18px;border-top:1px solid var(--line)}
 .foot-legal b{color:var(--ink-2);font-weight:700}

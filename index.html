@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大学受験の参考書ルート大全｜全科目1392冊を図鑑化・ルート化</title>
+<title>大学受験の参考書ルート大全｜全科目1390冊を図鑑化・ルート化</title>
 <meta name="google-site-verification" content="10bnNaPa-rqbt-UHQK1J_KTLT7k3HQb8xLFcHx5fSsw">
-<meta name="description" content="大学受験の参考書1392冊を英語・国語・数学・理科・社会・情報・小論文の全科目で難易度別・役割別に整理した参考書図鑑。志望校と現在地を選ぶだけで「何を・どの順で」やるかの参考書ルートが自動で出ます。2026年 新課程対応・完全無料。">
+<meta name="description" content="大学受験の参考書1390冊を英語・国語・数学・理科・社会・情報・小論文の全科目で難易度別・役割別に整理した参考書図鑑。志望校と現在地を選ぶだけで「何を・どの順で」やるかの参考書ルートが自動で出ます。2026年 新課程対応・完全無料。">
 <meta name="keywords" content="参考書ルート,大学受験,参考書,おすすめ,英語,国語,数学,理科,社会,新課程,2026">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#F6F4EF">
@@ -15,16 +15,16 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ルート大全">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="ルート大全 — 大学受験の参考書1392冊を図鑑化・ルート化">
-<meta property="og:description" content="英語・国語・数学・理科・社会・情報・小論文の参考書1392冊を難易度別・役割別に整理。志望校から逆算した参考書ルートが3分で作れます。2026年 新課程対応・完全無料。">
+<meta property="og:title" content="ルート大全 — 大学受験の参考書1390冊を図鑑化・ルート化">
+<meta property="og:description" content="英語・国語・数学・理科・社会・情報・小論文の参考書1390冊を難易度別・役割別に整理。志望校から逆算した参考書ルートが3分で作れます。2026年 新課程対応・完全無料。">
 <meta property="og:url" content="https://route-taizen.com/">
 <meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@route_taizen">
-<meta name="twitter:title" content="ルート大全 — 大学受験の参考書1392冊を図鑑化・ルート化">
-<meta name="twitter:description" content="英語・国語・数学・理科・社会・情報・小論文の参考書1392冊を難易度別・役割別に整理。志望校から逆算した参考書ルートが3分で作れます。">
+<meta name="twitter:title" content="ルート大全 — 大学受験の参考書1390冊を図鑑化・ルート化">
+<meta name="twitter:description" content="英語・国語・数学・理科・社会・情報・小論文の参考書1390冊を難易度別・役割別に整理。志望校から逆算した参考書ルートが3分で作れます。">
 <meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -83,20 +83,21 @@ img{display:block;max-width:100%}
 /* ---------- Header ---------- */
 .app-header{position:sticky;top:0;z-index:60;background:rgba(246,244,239,.9);backdrop-filter:saturate(1.3) blur(12px);border-bottom:1px solid var(--line)}
 .app-header::after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--indigo) 0 33%,var(--accent) 33% 40%,transparent 40%)}
-.app-header__in{max-width:1140px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:14px}
+.app-header__in{max-width:1140px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:12px}
 .logo{display:flex;align-items:center;gap:11px}
 .logo__mark{width:36px;height:36px;background:var(--ink);color:#fff;flex:none;display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:17px;border-radius:4px;position:relative}
 .logo__mark::after{content:"";position:absolute;right:-3px;bottom:-3px;width:10px;height:10px;background:var(--accent);border-radius:2px}
 .logo__txt{display:flex;flex-direction:column;line-height:1.1}
 .logo__txt b{font-family:var(--serif);font-weight:800;font-size:16.5px;letter-spacing:.05em}
 .logo__txt span{font-size:9.5px;color:var(--muted);font-family:var(--mono);letter-spacing:.14em;margin-top:2px}
-.nav-desktop{margin-left:auto;display:none;gap:2px;align-items:center}
+/* 検索ボックスと同じ行に収める。ここを広げると nav が 2 行目へ折り返す */
+.nav-desktop{margin-left:auto;display:none;gap:0;align-items:center}
 @media(min-width:900px){.nav-desktop{display:flex}}
-.nav-desktop a{padding:9px 15px;font-weight:700;font-size:13.5px;color:var(--muted);transition:.15s;position:relative;letter-spacing:.02em}
-.nav-desktop a::after{content:"";position:absolute;left:15px;right:15px;bottom:3px;height:2px;background:var(--accent);transform:scaleX(0);transition:.18s;transform-origin:left}
+.nav-desktop a{padding:9px 9px;font-weight:700;font-size:13px;color:var(--muted);transition:.15s;position:relative;letter-spacing:.02em}
+.nav-desktop a::after{content:"";position:absolute;left:9px;right:9px;bottom:3px;height:2px;background:var(--accent);transform:scaleX(0);transition:.18s;transform-origin:left}
 .nav-desktop a:hover{color:var(--ink)}
 .nav-desktop a:hover::after{transform:scaleX(1)}
-.hdr-tag{font-family:var(--mono);font-size:10px;color:var(--muted-2);border:1px solid var(--line);padding:3px 8px;border-radius:999px;margin-left:10px;display:none}
+.hdr-tag{font-family:var(--mono);font-size:9.5px;color:var(--muted-2);border:1px solid var(--line);padding:3px 7px;border-radius:999px;margin-left:8px;display:none}
 @media(min-width:1000px){.hdr-tag{display:block}}
 
 /* ---------- Layout ---------- */
@@ -225,7 +226,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .foot-col li a:hover,.foot-col li button:hover{color:var(--accent-deep)}
 .foot-brand b{font-family:var(--serif);font-weight:800;font-size:17px;letter-spacing:.06em;display:block;margin-bottom:9px}
 .foot-brand p{font-size:12px;color:var(--muted);line-height:1.85;max-width:38ch}
-.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:70ch;margin:28px auto 0;padding-top:20px;border-top:1px solid var(--line)}
+.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:28px auto 0;padding-top:20px;border-top:1px solid var(--line)}
 .foot-legal b{color:var(--ink-2);font-weight:700}
 
 /* ---------- Modal ---------- */
@@ -315,7 +316,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="hero__main">
         <span class="hero__badge"><i></i>大学受験 全科目 — 2026 新課程対応</span>
         <h1>参考書選びで、<br><span class="hl">もう<b>迷わない</b>。</span></h1>
-        <p class="lead">英語・国語・数学・理科・社会・情報・小論文の参考書<b>1,392冊</b>を、難易度・役割・接続関係で一冊ずつ整理しました。志望校と今の学力を選ぶだけで「何を・どの順で・いつまでに」やるかが一本の道になって出てきます。登録不要・完全無料。</p>
+        <p class="lead">英語・国語・数学・理科・社会・情報・小論文の参考書<b>1,390冊</b>を、難易度・役割・接続関係で一冊ずつ整理しました。志望校と今の学力を選ぶだけで「何を・どの順で・いつまでに」やるかが一本の道になって出てきます。登録不要・完全無料。</p>
         <div class="hero__cta">
           <a class="btn btn-primary" href="#subjects">
             科目を選んで始める
@@ -326,7 +327,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       </div>
     </div>
     <div class="stat-row">
-      <div class="stat"><b>1,392</b><span>収録参考書</span></div>
+      <div class="stat"><b>1,390</b><span>収録参考書</span></div>
       <div class="stat"><b>7<small>英・国・数・理・社・情・論</small></b><span>対応科目</span></div>
       <div class="stat"><b>181</b><span>収録大学</span></div>
     </div>
@@ -403,7 +404,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <p class="subj__desc">物理・化学・生物・地学の4科目を収録した最大の図鑑。共通テストのみの人から医学部・難関理系まで、必要な到達点から逆算してルートを引けます。</p>
         <div class="subj__tags"><span>物理</span><span>化学</span><span>生物</span><span>地学</span><span>共通テスト</span><span>医学部</span></div>
         <div class="subj__foot">
-          <span class="subj__count"><b>375</b>冊収録</span>
+          <span class="subj__count"><b>373</b>冊収録</span>
           <span class="subj__go">理科を見る<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
       </a>
@@ -471,7 +472,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <p class="subj__desc">すべての科目で同じ設計思想を使っています。難易度は共通の1〜5段階、役割は「導入 → 網羅 → 標準 → 応用 → 実戦」の5段階。科目をまたいでも読み方は変わりません。</p>
         <div class="subj__tags"><span>共通の難易度指標</span><span>共通の役割分類</span><span>接続関係つき</span></div>
         <div class="subj__foot">
-          <span class="subj__count"><b>1,392</b>冊収録</span>
+          <span class="subj__count"><b>1,390</b>冊収録</span>
         </div>
       </div>
 
@@ -501,7 +502,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="/english/#catalog" style="--ic:#B5432A"><span class="idx-mark">英</span><span class="idx-txt"><b>英語の参考書図鑑</b><small>252冊 — 単語・文法・解釈・長文・英作文</small></span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="/japanese/#catalog" style="--ic:#8A6D2F"><span class="idx-mark">国</span><span class="idx-txt"><b>国語の参考書図鑑</b><small>192冊 — 現代文・古文・漢文</small></span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="/math/#catalog" style="--ic:#24427C"><span class="idx-mark">数</span><span class="idx-txt"><b>数学の参考書図鑑</b><small>162冊 — 導入・網羅・標準・応用</small></span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a href="/science/#catalog" style="--ic:#2F6E4F"><span class="idx-mark">理</span><span class="idx-txt"><b>理科の参考書図鑑</b><small>375冊 — 物理・化学・生物・地学</small></span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="/science/#catalog" style="--ic:#2F6E4F"><span class="idx-mark">理</span><span class="idx-txt"><b>理科の参考書図鑑</b><small>373冊 — 物理・化学・生物・地学</small></span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="/social/#catalog" style="--ic:#5B4E9E"><span class="idx-mark">社</span><span class="idx-txt"><b>社会の参考書図鑑</b><small>293冊 — 日本史・世界史・地理・公民</small></span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="/joho/#catalog" style="--ic:#1F6E7A"><span class="idx-mark">情</span><span class="idx-txt"><b>情報の参考書図鑑</b><small>29冊 — 講義・一問一答・演習・共通テスト実戦</small></span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="/shoron/#catalog" style="--ic:#8E3B5E"><span class="idx-mark">論</span><span class="idx-txt"><b>小論文の参考書図鑑</b><small>89冊 — 書き方・型・ネタ・演習・学部別</small></span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -518,7 +519,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="feat">
         <div class="feat__no">FEATURE 01</div>
         <div class="feat__ic" aria-hidden="true">図</div>
-        <h3>1,392冊の参考書図鑑</h3>
+        <h3>1,390冊の参考書図鑑</h3>
         <p>1冊ごとに難易度・到達偏差値・問題数・想定学習時間・向いている人・向いていない人まで記載。「なんとなく評判がいい」ではなく、比較できる形で並べています。</p>
       </div>
       <div class="feat">
@@ -622,7 +623,7 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="foot-cols">
       <div class="foot-col foot-brand">
         <b>ルート大全</b>
-        <p>大学受験の参考書1,392冊を科目別・難易度別に整理し、志望校から逆算した参考書ルートを提示する無料サイトです。2026年 新課程対応。</p>
+        <p>大学受験の参考書1,390冊を科目別・難易度別に整理し、志望校から逆算した参考書ルートを提示する無料サイトです。2026年 新課程対応。</p>
       </div>
       <div class="foot-col">
         <h4>科目</h4>
@@ -794,7 +795,7 @@ document.getElementById("footLegal").innerHTML =
       "url": "https://route-taizen.com/",
       "name": "ルート大全",
       "alternateName": "大学受験 参考書ルート大全",
-      "description": "大学受験の参考書1392冊を英語・国語・数学・理科・社会・情報・小論文の全科目で難易度別・役割別に整理した参考書図鑑と、志望校から逆算する参考書ルート。",
+      "description": "大学受験の参考書1390冊を英語・国語・数学・理科・社会・情報・小論文の全科目で難易度別・役割別に整理した参考書図鑑と、志望校から逆算する参考書ルート。",
       "inLanguage": "ja",
       "publisher": { "@id": "https://route-taizen.com/#publisher" }
     },
@@ -808,7 +809,7 @@ document.getElementById("footLegal").innerHTML =
       "@type": "CollectionPage",
       "@id": "https://route-taizen.com/#webpage",
       "url": "https://route-taizen.com/",
-      "name": "ルート大全 — 大学受験の参考書1392冊を図鑑化・ルート化",
+      "name": "ルート大全 — 大学受験の参考書1390冊を図鑑化・ルート化",
       "isPartOf": { "@id": "https://route-taizen.com/#website" },
       "inLanguage": "ja",
       "about": { "@type": "Thing", "name": "大学受験の参考書選び" }

@@ -17,6 +17,7 @@ import { coverSrcs } from './lib/cover.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
+import { byDifficultyAsc } from './lib/rank.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -54,7 +55,7 @@ function pickAlternatives(book, books, max = 6) {
     .filter(b => !isProvisional(b) && b.id !== book.id && b.stage === book.stage
       && (book.sub ? b.sub === book.sub : true)
       && Math.abs(b.diff - book.diff) <= 1)
-    .sort((a, b) => Math.abs(a.diff - book.diff) - Math.abs(b.diff - book.diff) || a.diff - b.diff)
+    .sort((a, b) => Math.abs(a.diff - book.diff) - Math.abs(b.diff - book.diff) || byDifficultyAsc(a, b))
     .slice(0, max);
 }
 
@@ -69,7 +70,7 @@ function pickNext(book, books, stages, exclude, max = 6) {
   const sameRole = books
     .filter(b => !isProvisional(b) && !skip.has(b.id) && b.stage === book.stage
       && (book.sub ? b.sub === book.sub : true) && b.diff > book.diff)
-    .sort((a, b) => a.diff - b.diff)
+    .sort(byDifficultyAsc)
     .slice(0, 3);
 
   // 次の段階は、1 つの段階で枠を埋めきらないよう段階ごとに 2 冊までにする。
@@ -79,7 +80,7 @@ function pickNext(book, books, stages, exclude, max = 6) {
   books
     .filter(b => !isProvisional(b) && !skip.has(b.id) && stageIndex(stages, b.stage) > si
       && (book.sub ? b.sub === book.sub : true) && b.diff >= book.diff)
-    .sort((a, b) => a.diff - b.diff)
+    .sort(byDifficultyAsc)
     .forEach(b => {
       const arr = byStage.get(b.stage) || [];
       if (arr.length < 2) { arr.push(b); byStage.set(b.stage, arr); }

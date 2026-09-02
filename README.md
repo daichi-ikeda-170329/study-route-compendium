@@ -1,6 +1,6 @@
 # ルート大全
 
-大学受験の参考書 1,392 冊を科目別に図鑑化し、志望校から逆算した参考書ルートを提示する無料サイト。
+大学受験の参考書 1,390 冊を科目別に図鑑化し、志望校から逆算した参考書ルートを提示する無料サイト。
 
 公開 URL: https://route-taizen.com/
 リポジトリ: https://github.com/daichi-ikeda-170329/study-route-compendium
@@ -25,14 +25,14 @@
 | 英語 | `english/` | 252 | 9 | 4 | `#B5432A` |
 | 国語 | `japanese/` | 192 | 8 | 2 | `#8A6D2F` |
 | 数学 | `math/` | 162 | 9 | 2 | `#24427C` |
-| 理科 | `science/` | 375 | 8 | 2 | `#2F6E4F` |
+| 理科 | `science/` | 373 | 8 | 2 | `#2F6E4F` |
 | 社会 | `social/` | 293 | 8 | 2 | `#5B4E9E` |
 | 情報 | `joho/` | 29 | — | — | `#1F6E7A` |
 | 小論文 | `shoron/` | 89 | — | — | `#8E3B5E` |
 | 全科目共通 | `guides/` | — | — | 1 | — |
-| 合計 | — | 1,392 | 42 | 13 | — |
+| 合計 | — | 1,390 | 42 | 13 | — |
 
-公開ページ数は 1,478（`sitemap.xml` の URL 数と一致する）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
+公開ページ数は `sitemap.xml` の URL 数と一致する（`rg -c "<loc>" sitemap.xml` で数える。2026-09-03 時点で 1,476）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
 
 ## ディレクトリ構成
 
@@ -51,7 +51,7 @@
 | `assets/site.css` | 生成ページ共通のスタイル | 手で編集 |
 | `assets/js/share.js` | 3分診断の結果共有・保存と、ルート画面の共有。診断を持つ 5 科目の科目トップから読み込む | 手で編集 |
 | `assets/js/search.js` | 全ページ共通の参考書検索。ヘッダーの検索ボックスを動かす | 手で編集 |
-| `assets/js/book-index.js` | 検索が引く 1,392 冊の索引 | 生成 |
+| `assets/js/book-index.js` | 検索が引く 1,390 冊の索引 | 生成 |
 | `assets/js/pace.js` | ルート画面の進めるペース（いつまでに何を終えるか） | 手で編集 |
 | `assets/ogp*.png` | OGP 画像。冊数を画像内に焼き込んでいる | **元の SVG も生成手順も無く、現状は更新できない**（「[更新手順](#更新手順)」を参照） |
 | `assets/x-icon.svg` / `.png` | X のプロフィール画像（400×400） | SVG を手で編集し PNG を書き出す |
@@ -85,7 +85,7 @@
 ## ビルド
 
 ```bash
-node build/generate-books.mjs      # 参考書の詳細ページ 1,392 件
+node build/generate-books.mjs      # 参考書の詳細ページ 1,390 件
 node build/generate-index.mjs      # 参考書一覧 7 件
 node build/generate-picks.mjs      # 参考書おすすめ 5 件
 node build/generate-routes.mjs     # 志望校別ルート 47 件
@@ -127,6 +127,7 @@ node build/generate-books.mjs math ao
 | `build/lib/cover.mjs` | 書影の候補 URL と、一覧・ルートに並べる小さな書影のマークアップ |
 | `build/lib/cards.mjs` | 参考書 1 冊のカード（`.bcard`）。一覧・書籍ページ・解説記事で共有する |
 | `build/lib/newbooks.mjs` | 新刊（評価が未了の本）の判定と並び順。**サイト全体でこの判定だけを根拠にする** |
+| `build/lib/rank.mjs` | 難易度順の比較子。生成ページの並びはここ 1 か所で決まる（「[難易度順の並び](#難易度順の並び)」を参照） |
 | `build/content/articles.mjs` | 解説記事の本文 |
 
 `ROUTES` の階層は、ルートを持つ 5 科目で共通で `ROUTES[志望レベル][トラック][方針]`。トラックだけが科目で違う（英語・数学は `bun`/`ri`、国語は `gendai`/`kobun`/`kanbun`、理科は `butsuri`/`kagaku`/`seibutsu`/`chigaku`、社会は `nihonshi`/`sekaishi`/…）。
@@ -163,12 +164,12 @@ node build/generate-books.mjs math ao
 
 ## 参考書検索（全ページ共通）
 
-すべてのページのヘッダーに検索ボックスがある（`#rtSearch`）。7 科目 1,392 冊を横断して探し、選ぶとその参考書の詳細ページ（`/<科目>/books/<id>/`）へ移動する。
+すべてのページのヘッダーに検索ボックスがある（`#rtSearch`）。7 科目 1,390 冊を横断して探し、選ぶとその参考書の詳細ページ（`/<科目>/books/<id>/`）へ移動する。
 
 - 処理は `assets/js/search.js`。見た目の CSS もこのファイルから差し込む。手書き HTML（ポータル・科目トップ・404）は `site.css` を読まないため、共通の置き場がここしかない
 - 索引は `assets/js/book-index.js`（`build/generate-search.mjs` が生成）。**最初に検索欄へ触れた時点で読み込む**。全ページに置く常設 UI なので、使わない人に 30KB 超を配らないため
 - 突き合わせるのは書名・正式名・出版社・収録範囲・分野・役割・あだ名
-- マークアップは 9 か所に同じものを置いてある（`build/lib/parts.mjs` の `header()` と `portalHeader()`、ポータル `index.html`、科目トップ 7 枚、`404.html`）。直すときは `rg 'id="rtSearch"'` で全箇所を出す
+- マークアップは 11 か所に同じものを置いてある（`build/lib/parts.mjs` の `header()` と `portalHeader()`、ポータル `index.html`、科目トップ 7 枚、`404.html`）。直すときは `rg 'id="rtSearch"'` で全箇所を出す
 
 ### 書き方の違いを吸収する
 
@@ -359,7 +360,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。
 | `test/share.test.mjs` | 診断結果の共有 URL の往復・不正な URL・保存データ・ルート共有の `encode`/`apply`・X の投稿画面に渡す `text=` の書式 | `QUIZ` を変えた / 科目トップのルート画面を触った / 共有の文面を変えた |
 | `test/search.test.mjs` | 索引の中身・正規化・あだ名で引けること・`aliases.json` の実在確認 | `BOOKS` を変えた / `aliases.json` を触った（先に `generate-search.mjs` を流す） |
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
-| `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った |
+| `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・**難易度順の比較子（科目トップと `build/lib/rank.mjs` の両方を実際に動かす）**・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った / 並べ替えを触った |
 
 診断は、科目ページから `QUIZ` を取り出し、到達しうる回答の組み合わせをすべて列挙して往復を確認する。あわせて不正な URL を 30 ケース以上、壊れた保存データの読み込みも検証する。
 
@@ -514,7 +515,7 @@ A 型が減るため、後からだと作り直しになる。`--force` で作�
 ### 評価が未了の本の扱い
 
 **新刊は現物を読んでいないので、難易度・到達目安・強み・注意点・向いている人を
-書かない。** 推測で埋めると、既存 1,392 冊を並べている 10 段階の物差しが狂う。
+書かない。** 推測で埋めると、既存 1,390 冊を並べている 10 段階の物差しが狂う。
 書名・出版社・ISBN・刊行年といった検証できる事実と、役割（`stage`）だけを入れ、
 `provisional: true` を立てて「新刊・評価準備中」と画面に明示する。
 
@@ -550,7 +551,7 @@ A 型が減るため、後からだと作り直しになる。`--force` で作�
 |---|---|
 | `build/lib/extract.mjs` の `X_HANDLE` | 生成ページの `twitter:site`・共有ボタンの `via=`・フッターの導線 |
 | `assets/js/share.js` の `X_HANDLE` | 診断結果とルート画面の共有ボタンの `via=` |
-| 手書き HTML 6 枚 | `twitter:site` メタとフッターの導線（404 は `twitter:card` を持たないので対象外） |
+| 手書き HTML 8 枚（ポータル・科目トップ 7 枚） | `twitter:site` メタとフッターの導線（404 は `twitter:card` を持たないので対象外） |
 
 ### 画像を書き出す
 
@@ -609,19 +610,46 @@ git push
 
 `main` への push で GitHub Pages が再ビルドされる。反映まで 1〜2 分かかる。
 
-参考書を追加・改訂したときは、次の整合を取る。**3 と 4 は `build/apply-count.mjs` が
+参考書を追加・改訂したときは、次の整合を取る。**3〜5 は `build/apply-count.mjs` が
 やる**ので、手で数えるのは 1 だけである。
 
 1. 該当科目の `BOOKS` 配列（新刊は `build/data/new-books.json`。「[新刊の掲載](#新刊の掲載)」を参照）
 2. `build/` の全スクリプトを再実行
 3. この README の収録数テーブル ← `apply-count.mjs`
 4. ポータル `index.html` の科目カードとヒーローの冊数 ← `apply-count.mjs`
-5. `assets/x-header.png`（X のヘッダー画像。SVG が正本なので「[画像を書き出す](#画像を書き出す)」の手順で作り直す）
+5. 科目トップの title・meta・OG・JSON-LD・本文の冊数 ← `apply-count.mjs`
+6. `assets/x-header.png`（X のヘッダー画像。SVG が正本なので「[画像を書き出す](#画像を書き出す)」の手順で作り直す）
+
+**科目トップ（5）だけは前回値を見ずに毎回そろえる。** ポータルと README は
+`count-state.json` の前回値を手掛かりに置換できるが、科目トップは 9〜11 箇所に同じ
+数字が散っていて、state と実数が一致していると置換処理そのものが走らない。そのため
+2026-09 時点で 5 科目が古い冊数（英語 173・国語 152・数学 113・理科 347・社会 267）を
+表示したままになっていた。いまは文脈（「参考書◯冊」「最新刊まで◯冊」「参考書おすすめ ◯冊」）
+ごと拾って書き換えるので、何度流しても同じ結果になる。文面を変えるときは
+`apply-count.mjs` の `subjectTopRules()` も一緒に直す。
 
 **`assets/ogp*.png` 6 枚は現状更新できない。** 冊数を画像内に焼き込んでいるが、
 元になる SVG も生成スクリプトもリポジトリに無い（`git log` で追うと初期コミットで
 PNG が直接追加されたきり）。冊数が数十ずれても表示は壊れないため据え置いており、
 SVG を起こし直す作業は別に切り出してある（`docs/new-books-plan.md` の 8 節）。
+
+**参考書を削除したときは、生成済みの個別ページを手で消す。** 生成スクリプトは書き出すだけで消さないので、`BOOKS` から外しても `<科目>/books/<id>/` が残り、`sitemap.xml`（実ファイルを走査して作る）にも載り続ける。次で孤児を洗い出す。
+
+```bash
+node --input-type=module -e "
+import fs from 'fs'; import path from 'path';
+import {extractSubject, SUBJECTS} from './build/lib/extract.mjs';
+const bad = [];
+for (const s of SUBJECTS) {
+  const ids = new Set(extractSubject('.', s.dir).books.map(b => b.id));
+  const dir = path.join(s.dir, 'books');
+  for (const e of fs.readdirSync(dir, {withFileTypes: true}))
+    if (e.isDirectory() && !ids.has(e.name)) bad.push(dir + '/' + e.name);
+}
+console.log(bad.length ? bad : '孤児ページなし');"
+```
+
+消したあとに `generate-sitemap.mjs` を流し直す。
 
 診断の質問（`QUIZ`）を変えたときは、あわせて `assets/js/share.js` の `SCHEMA_VERSION` を上げるか判断する。判断の基準は「[共有・保存](#共有保存)」の節に書いた。
 
@@ -630,6 +658,52 @@ push の前にテストを流す。何をどのタイミングで流すかは「
 ```bash
 node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs
 ```
+
+## 参考書図鑑の分け方
+
+科目トップの図鑑は、並べ替えの既定を「まとまりごと × 難易度順」にしてある。過去問と共通テストは役割（`stage`）として独立しているので、この表示にすると参考書とは別のまとまりになる。
+
+| 科目 | まとまりの作り方 | 並べ替えの選択肢の名前 |
+|---|---|---|
+| 英語・数学・情報・小論文 | 役割（`STAGES`）ごとに 1 セクション | 分野別・難易度順 |
+| 国語・理科・社会 | 科目（現代文／物理／日本史 …）ごとに大見出し、その中を役割ごとに小見出し | 科目別・難易度順 |
+
+国語・理科・社会の科目の分け方は、各科目トップの `catGroups()` が持つ。**絞り込みチップの `SUBFILTER` とは別物**で、`SUBFILTER` は「古文」と「漢文」の両方に `koten` を出すなど重複を許すのに対し、`catGroups()` は 1 冊が 1 か所にだけ出るようにしてある。`catGroups()` のどれにも当たらない本は末尾の「その他」に出るので、そこに本が現れたら `catGroups()` へ足す。
+
+`catGroups()` は `SUBJ` の宣言より前に置いてあるため関数にしてある（`const` にすると初期化前アクセスで `BOOKS` の取り出しごと落ちる）。
+
+生成ページの参考書一覧（`/<科目>/books/`）は、以前から役割ごとのセクションに分かれている。こちらは役割が大見出し・分野が小見出しで、図鑑とは入れ子の向きが逆である。
+
+## 難易度順の並び
+
+図鑑・一覧・おすすめ・書籍ページの「次に進む本」は、すべて同じ規則で並べる。
+
+1. 評価が未了の新刊（`provisional`）は必ず末尾
+2. `diff`（1〜10）の昇順
+3. 目安偏差値の下限 → 上限
+4. 書名
+
+**`diff` だけで並べると難易度順に見えない。** 同じ `diff` の中に「40〜55」「〜48」「35〜50」が混ざり、画面上は偏差値が前後する。3 を足して初めて単調に並ぶ。
+
+目安偏差値は「共テ7割〜9割」「東大合格レベル」「全レベル」のように偏差値で書けない本がある。これらは偏差値の軸に乗せず、同じ `diff` の中で数値の本のうしろへまとめる（混ぜると得点率の「7」が偏差値として並び、偏差値 40 の本より前に出る）。降順のときも先頭へ出さない。該当する冊数は次で数える。
+
+```bash
+node --input-type=module -e "
+import {extractSubject,SUBJECTS} from './build/lib/extract.mjs';
+import {hensachiRange} from './build/lib/rank.mjs';
+let n = 0, t = 0;
+for (const s of SUBJECTS) for (const b of extractSubject('.', s.dir).books) { t++; if (hensachiRange(b)[0] === 999) n++; }
+console.log(n + ' / ' + t);"
+```
+
+実装は 2 か所にある。**科目トップは単一 HTML で import できない**ので同じものを書いてある。直すときは `rg 'function byDiffAsc'` で全箇所を出す。
+
+| 置き場 | 使う画面 |
+|---|---|
+| `build/lib/rank.mjs` の `byDifficultyAsc()` / `byDifficultyDesc()` / `hensachiRange()` | 生成ページ |
+| 科目トップの `byDiffAsc()` / `byDiffDesc()` / `hRange()` | 科目トップの図鑑 |
+
+`test/new-books.test.mjs` が両方を実際に動かして、同じ並びになることと評価未了の本が末尾に来ることを確かめている。
 
 ## 書影
 
@@ -644,7 +718,32 @@ node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new
 
 Amazon は画像を持たない ISBN に対して 43 バイトほどの 1x1 画像を HTTP 200 で返すことがある。この場合 `onerror` は発火しないので、表示側で `naturalWidth` を見て次の候補へ送っている。**この分岐を消すと、真っ白な書影が並ぶ。**
 
-学校専売の傍用問題集・図録・教科書は Amazon にも NDL にも openBD にも商品画像が無い。この種の本だけ、出版社が公式サイトで公開している商品画像 URL を `BOOKS[].cover` に持たせて最優先で参照する。現在は理科の 27 冊（セミナー・リードα・センサー・ニューグローバル・エクセル・スクエア図説・ニューステージ図表・啓林館の教科書）が該当し、他の 4 科目は 1 冊も使っていない。`cover` を足すときは URL を実際に開き、縦長の表紙画像であることを確かめる。出版社サイトの改修で URL が切れたら代替表示に落ちるので、書影が消えた報告があったらまずここを疑う。
+### `cover` — 出版社の商品画像を直接指す
+
+学校専売の傍用問題集・図録・検定教科書は、Amazon にも NDL にも openBD にも商品画像が無い。この種の本だけ、出版社が公式サイトで公開している商品画像 URL を `BOOKS[].cover` に持たせて最優先で参照する。現在 121 冊が該当する（内訳は下のコマンドで数える）。
+
+```bash
+node --input-type=module -e "
+import {extractSubject,SUBJECTS} from './build/lib/extract.mjs';
+for (const s of SUBJECTS) {
+  const b = extractSubject('.', s.dir).books;
+  console.log(s.ja, 'cover:' + b.filter(x=>x.cover).length, 'nocover:' + b.filter(x=>x.nocover).length);
+}"
+```
+
+`cover` を足すときは URL を実際に開き、**縦長の表紙画像であること・透かし（Sample など）が入っていないこと・斜めから撮った 3D 画像でないこと**を目で確かめる。出版社サイトの改修で URL が切れたら代替表示に落ちるので、書影が消えた報告があったらまずここを疑う。
+
+**東京書籍の教科書は `ten.tokyo-shoseki.co.jp/text/hs_current/…` を参照している。`hs_current` は「現行年度版」を指す可動パス**で、年度が替わると同じ URL の中身が新版に差し替わる。年度替わりには、表紙左上の教科書番号（「2 東書 日探701」など）が収録データと合っているかを確認する。
+
+### `nocover` — 商品画像がどこにも無い本
+
+**未発売の本は、Amazon が「書名だけを刷った自動生成画像」を返す。** 1x1 でも 404 でもないので `naturalWidth` の分岐にも `onerror` にも掛からず、そのまま書影として表示されてしまう。どこを探しても実物の表紙が無いと確認できた本には `nocover: true` を立て、候補を空にして代替表示（書名＋出版社）へ落とす。
+
+判定は `build/lib/cover.mjs` の `coverSrcs()` と科目トップの `coverSrcs()` の 2 か所にある（`rg 'nocover'` で全箇所を出す）。
+
+**現在 `nocover` を立てている本は無い。発売前の本はサイトに載せない方針にしたため**（2026-09-03 の判断）。旺文社「時間をかけたくない受験生のための共通テスト」の生物基礎・地学基礎は、発売が 2026-10-19 で書影がどこにも存在しなかったため収録を取り下げた。発売後に改めて足す。
+
+分岐そのものは残してある。**新刊（`provisional`）は発売直後に載せることがあり、そのとき書影がまだ出回っていない**ためで、そのときは推測の画像を出すより代替表示に落とすほうが正しい。「書名だけが書かれた画像が出ている」という報告が来たら、実物の表紙が本当に無いかを確かめたうえで `nocover` を立てる。
 
 ## 書名と著者名の決め方
 
@@ -698,7 +797,7 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 | 独自ドメイン | 有効（2026-08-22〜） | `route-taizen.com`。HTTPS 強制済み | Xserver で保有、DNS は Cloudflare |
 | Cloudflare DNS | 有効 | 権威 DNS。`darwin` / `yolanda`.ns.cloudflare.com | Cloudflare ダッシュボード |
 | Google Search Console | 所有権確認メタ設置済み | インデックス登録・検索順位の把握 | ポータルと科目トップの `<head>` |
-| Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`） | アクセス解析 | 手書き HTML 7 件と `build/lib/parts.mjs` の `analytics()` |
+| Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`） | アクセス解析 | 手書き HTML 9 件（ポータル・科目トップ 7 枚・404）と `build/lib/parts.mjs` の `analytics()` |
 | Google AdSense | ID 設置済み・**審査待ち**（`ca-pub-4704595822429716`） | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
 | 楽天アフィリエイト | 導入済み | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.rakutenId` |
 | Amazon アソシエイト | 導入済み（`routetaizen-22`） | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.amazonTag` |

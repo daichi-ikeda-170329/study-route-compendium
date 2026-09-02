@@ -173,6 +173,13 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cat-count b{color:var(--ink);font-family:var(--mono);font-size:14px}
 .sort-sel{border:1px solid var(--line-d);background:var(--surface);border-radius:4px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--ink);box-shadow:var(--sh-s)}
 .book-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cat-grp{grid-column:1/-1;display:flex;align-items:baseline;gap:11px;margin:30px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--gc,var(--ink));font-family:var(--serif);font-weight:800;font-size:18px;color:var(--ink);letter-spacing:.06em}
+.cat-grp:first-child{margin-top:4px}
+.cat-grp small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
+.cat-sec{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin:16px 0 2px;font-weight:900;font-size:14px;color:var(--ink);letter-spacing:.04em}
+.cat-sec::before{content:"";width:16px;height:2.5px;background:var(--sc,var(--accent));align-self:center}
+.cat-sec small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
+.cat-empty{grid-column:1/-1;padding:26px 4px;color:var(--muted);font-size:13px}
 @media(min-width:560px){.book-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:820px){.book-grid{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:1040px){.book-grid{grid-template-columns:repeat(5,1fr)}}
@@ -348,7 +355,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 /* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。見た目は変えない */
 .foot-links button{font-size:12px;font-weight:700;color:var(--ink-2);transition:.14s;display:inline-flex;align-items:center;min-height:26px}
 .foot-links button:hover{color:var(--accent)}
-.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:66ch;margin:0 auto}
+.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:0 auto}
 .foot-legal b{color:var(--ink-2);font-weight:700}
 .legal-body{padding:22px 24px 30px}
 .legal-body h5{font-family:var(--serif);font-weight:800;font-size:14.5px;margin:20px 0 8px;letter-spacing:.02em}
@@ -536,14 +543,16 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .foot-subjects{max-width:1140px;margin:0 auto 22px;padding:0 4px}
 .foot-subjects__t{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--muted-2);margin-bottom:11px;text-align:center;text-transform:uppercase}
 .foot-subjects__list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-@media(min-width:700px){.foot-subjects__list{grid-template-columns:repeat(5,1fr)}}
-.foot-subjects a{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);padding:10px 12px;transition:.16s;text-decoration:none;box-shadow:var(--sh-s)}
+@media(min-width:700px){.foot-subjects__list{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1000px){.foot-subjects__list{grid-template-columns:repeat(7,1fr)}}
+.foot-subjects a{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);padding:10px 10px;transition:.16s;text-decoration:none;box-shadow:var(--sh-s)}
 .foot-subjects a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--line-d)}
 .foot-subjects a[aria-current="page"]{background:var(--surface-3);box-shadow:none;pointer-events:none}
 .fs-mark{width:26px;height:26px;flex:none;display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:13px;color:#fff;background:var(--fsc);border-radius:3px}
 .fs-txt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
-.fs-txt b{font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--ink)}
-.fs-txt span{font-family:var(--mono);font-size:9.5px;color:var(--muted-2);letter-spacing:.05em;margin-top:2px}
+/* 「小論文ルート大全」（8 字）が 1 行に収まる字幅。ここを広げると折り返す */
+.fs-txt b{font-size:11.5px;font-weight:700;letter-spacing:0;color:var(--ink);white-space:nowrap}
+.fs-txt span{font-family:var(--mono);font-size:9px;color:var(--muted-2);letter-spacing:.04em;margin-top:2px}
 
 /* ---------- 参考書の詳細ページへの導線 ---------- */
 .foot-links a{font-size:12px;font-weight:700;color:var(--ink-2);transition:.14s;text-decoration:none;display:inline-flex;align-items:center;min-height:26px}
@@ -688,6 +697,7 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="cat-meta">
       <div class="cat-count"><b id="catCount">0</b> 冊を表示中</div>
       <select class="sort-sel" id="sortSel" onchange="renderCatalog()">
+        <option value="field">分野別・難易度順</option>
         <option value="diff-asc">難易度:やさしい順</option>
         <option value="diff-desc">難易度:難しい順</option>
         <option value="year">刊行年:新しい順</option>
@@ -698,8 +708,8 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="disclaimer" id="catDisclaimer"></div>
   </section>
 
-  <footer class="site-foot">
-  <div class="site-foot__in">
+  <div class="site-foot">
+  <div class="foot-subjects">
     <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
     <div class="foot-subjects__list" id="footSubjects"></div>
   </div>
@@ -814,6 +824,33 @@ function isProv(b){ return !!b && b.provisional === true; }
 /* 難易度順の並びで末尾へ落とす。diff の無い本を a.diff-b.diff に通すと NaN になり、
    比較子が非対称になって並び順が実行ごとに変わる */
 function provLast(a,b){ return (isProv(a)?1:0) - (isProv(b)?1:0); }
+/* 難易度の並び順。diff（1〜10）が同じ本は目安偏差値（下限→上限→書名）で細かく並べる。
+   diff だけで並べると、同じ diff の中で「40〜55 → 〜48 → 35〜50」のように偏差値が
+   前後して、画面では難易度順に見えない。生成側は build/lib/rank.mjs が同じ処理を持つ。 */
+/* 目安偏差値の [下限, 上限]。「45〜60」「〜50(導入)」「68〜」「50〜75(3段階)」を拾う。
+   「共テ7割〜9割」「東大合格レベル」のように偏差値で書いていない本は [999,999] を
+   返し、同じ難易度の中では数値で書いてある本のうしろへまとめる（混ぜると、得点率の
+   数字が偏差値として並んでしまう）。 */
+function hRange(b){
+  const s = String((b && b.hensachi) || "");
+  const nums = (s.match(/\d{2}/g) || []).map(Number).filter(n => n >= 25 && n <= 85);
+  if(!nums.length) return [999, 999];
+  return [/^\s*[〜~]/.test(s) ? 0 : nums[0], nums[nums.length - 1]];
+}
+/* 評価未了（diff を持たない）本は常に末尾。昇順・降順のどちらでも末尾に置く */
+function byDiffAsc(a,b){
+  return provLast(a,b) || (a.diff||0)-(b.diff||0)
+    || hRange(a)[0]-hRange(b)[0] || hRange(a)[1]-hRange(b)[1]
+    || String(a.name).localeCompare(String(b.name),"ja");
+}
+/* 降順でも、評価未了の本と偏差値を書いていない本は末尾に置く
+   （[999,999] をそのまま降順に通すと先頭へ出てしまう） */
+function byDiffDesc(a,b){
+  const ra = hRange(a), rb = hRange(b), unknown = r => (r[0]===999 ? 1 : 0);
+  return provLast(a,b) || (b.diff||0)-(a.diff||0)
+    || unknown(ra)-unknown(rb) || rb[0]-ra[0] || rb[1]-ra[1]
+    || String(a.name).localeCompare(String(b.name),"ja");
+}
 function diffColor(d){
   if(d==null) return "var(--line)";   /* 新刊は難易度を持たない。色も付けない */
   if(d<=2) return "#2F8659";
@@ -841,7 +878,7 @@ const BOOKS = [
 {"id":"info-mark-kiso","name":"マーク式基礎問題集 情報1","official":"マーク式基礎問題集 情報1","pub":"河合出版","isbn10":"4777227359","isbn13":"9784777227358","year":2024,"stage":"kyotest","diff":4,"subjects":"情報I","hensachi":"45〜62","problems":"マーク式問題集（要確認：総問題数）","hours":"20〜30h","h":25,"style":"マーク演習","fb":{"bg":"linear-gradient(160deg,#8A98A8,#3E4A59)"},"desc":"河合出版の定番「マーク式基礎問題集」シリーズの情報I版。基礎～共通テスト本試レベルのマーク演習に対応。","pros":["「マーク式基礎問題集」シリーズ共通の解きやすい難易度設計","分野別の構成で弱点補強がしやすい","他科目の同シリーズとの併用実績が豊富"],"cons":["本試験そのものではなくオリジナル問題中心","複数資料を横断する読解問題の演習は過去問で補う必要"],"bestFor":"共通テスト形式の演習に初めて取り組む受験生","unis":["共通テスト"]},
 {"id":"info-tanki-kouryaku","name":"短期攻略大学入学共通テスト 情報1","official":"短期攻略大学入学共通テスト 情報1","pub":"駿台文庫","isbn10":"4796124357","isbn13":"9784796124355","year":2026,"stage":"kyotest","diff":4,"subjects":"情報I","hensachi":"45〜62","problems":"講義+実戦問題（要確認：総問題数）","hours":"20〜30h","h":25,"style":"マーク演習","fb":{"bg":"linear-gradient(160deg,#E3B94E,#8C6A12)","light":true},"desc":"駿台文庫の「短期攻略」シリーズの情報I版。短期間で共通テスト対応力を仕上げる構成。","pros":["駿台講師陣による解説で本試験レベルの視点を養える","「短期攻略」シリーズ共通のコンパクトな構成","他科目の短期攻略との並行学習がしやすい"],"cons":["基礎解説は簡潔なため、講義本での事前学習が前提","難問対応ではなく本試レベルの得点力養成が主目的"],"bestFor":"短期間で共通テスト情報Iを仕上げたい受験生","unis":["共通テスト"]},
 {"id":"info-jissen-taisaku-obunsha","name":"情報1実戦対策問題集","official":"大学入学共通テスト情報1実戦対策問題集","pub":"旺文社","isbn10":"4010352620","isbn13":"9784010352625","year":2024,"stage":"kyotest","diff":4,"subjects":"情報I","hensachi":"45〜60","problems":"実戦形式問題集（要確認：総問題数）","hours":"20〜30h","h":25,"style":"マーク演習","fb":{"bg":"linear-gradient(160deg,#7FC8F8,#2A7AB8)"},"desc":"旺文社が刊行する共通テスト情報Iの実戦対策問題集。本試験形式に沿った演習ができる。","pros":["共通テストの出題形式・resource量に近い実戦的な構成","旺文社の解答解説の丁寧さに定評","他社の用語集ROOTSとの併用がしやすい"],"cons":["発売から改訂の有無を毎年要確認（共通テストの傾向変化が速い科目のため）","基礎知識が不十分だと解説だけでは補いきれない"],"bestFor":"共通テスト本試験レベルの形式に慣れたい受験生","unis":["共通テスト"]},
-{"id":"info-mogi-tokyohorei","name":"共通テスト情報1模擬問題集","official":"共通テスト情報1模擬問題集（2026年1月共通テスト）","pub":"東京法令出版","isbn10":"4809066819","isbn13":"9784809066818","year":2025,"stage":"kyotest","diff":4,"subjects":"情報I","hensachi":"42〜58","problems":"模擬問題集（要確認：総問題数、複数回分）","hours":"15〜25h","h":20,"style":"マーク演習","fb":{"bg":"linear-gradient(160deg,#8E6BD8,#4B2A91)"},"desc":"学校採用が多い東京法令出版の共通テスト情報I模擬問題集。安価で本試験形式の演習ができる。","pros":["他社実戦問題集より低価格","学校の副教材として広く採用されている実績","年度改訂が継続的に行われている"],"cons":["市販書店での流通が薄く学校専売に近い場合がある（要確認）","解説の詳しさは受験専門出版社の実戦問題集にやや劣る"],"bestFor":"学校配布・低価格で実戦演習をこなしたい受験生","unis":["共通テスト"],"cover":"https://shop.r10s.jp/book/cabinet/6818/9784809066818.gif"},
+{"id":"info-mogi-tokyohorei","name":"共通テスト情報1模擬問題集","official":"共通テスト情報1模擬問題集（2026年1月共通テスト）","pub":"東京法令出版","isbn10":"4809066819","isbn13":"9784809066818","year":2025,"stage":"kyotest","diff":4,"subjects":"情報I","hensachi":"42〜58","problems":"模擬問題集（要確認：総問題数、複数回分）","hours":"15〜25h","h":20,"style":"マーク演習","fb":{"bg":"linear-gradient(160deg,#8E6BD8,#4B2A91)"},"desc":"学校採用が多い東京法令出版の共通テスト情報I模擬問題集。安価で本試験形式の演習ができる。","pros":["他社実戦問題集より低価格","学校の副教材として広く採用されている実績","年度改訂が継続的に行われている"],"cons":["市販書店での流通が薄く学校専売に近い場合がある（要確認）","解説の詳しさは受験専門出版社の実戦問題集にやや劣る"],"bestFor":"学校配布・低価格で実戦演習をこなしたい受験生","unis":["共通テスト"],"cover":"https://toho.tokyo-horei.co.jp/shop/imgs/14646.w200.gif"},
 {"id":"info-taisaku-keirinkan","name":"対策問題集 情報1","official":"大学入学共通テスト対策問題集 情報1（改訂版）","pub":"新興出版社啓林館","isbn10":"4402262895","isbn13":"9784402262891","year":2026,"stage":"kyotest","diff":4,"subjects":"情報I","hensachi":"42〜58","problems":"対策問題集（要確認：総問題数）","hours":"15〜25h","h":20,"style":"マーク演習","fb":{"bg":"linear-gradient(160deg,#E3B94E,#8C6A12)","light":true},"desc":"教科書出版社系列の啓林館グループが刊行する共通テスト情報Iの対策問題集（改訂版）。","pros":["教科書会社グループ刊行で学校の授業内容と親和性が高い","低価格","旧版（2024年）からの改訂で新傾向に対応"],"cons":["市販書店での取り扱いが限定的な場合がある（要確認）","解説の分量は受験専門出版社の実戦問題集よりやや少なめ"],"bestFor":"教科書会社系の教材で学習したい受験生","unis":["共通テスト"],"cover":"https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/10/%E6%83%85%E5%A0%B1%E2%85%A0%E8%A1%A8%E7%B4%99.png"},
 {"id":"info-jissen-kouryaku-jikkyo","name":"実戦攻略「情報1」大学入学共通テスト問題集","official":"実戦攻略「情報1」大学入学共通テスト問題集（2026）","pub":"実教出版","isbn10":"4407365307","isbn13":"9784407365306","year":2025,"stage":"kyotest","diff":4,"subjects":"情報I","hensachi":"42〜58","problems":"実戦形式問題集（要確認：総問題数）","hours":"15〜25h","h":20,"style":"マーク演習","fb":{"bg":"linear-gradient(160deg,#7FC8F8,#2A7AB8)"},"desc":"実教出版の「実戦攻略」シリーズの情報I版。低価格で毎年改訂される実戦問題集。","pros":["低価格で毎年改訂され最新傾向に対応","教科書出版社系列で学校授業との連携がしやすい","シリーズが他科目にもあり並行学習しやすい"],"cons":["市販流通が限定的な場合があり入手経路の確認が必要","解説の詳しさは受験専門出版社にやや劣る"],"bestFor":"学校採用教材で共通テスト演習を積みたい受験生","unis":["共通テスト"]},
 {"id":"info-honban-moshi","name":"本番模試 情報1","official":"大学入学共通テスト 本番模試 情報1","pub":"旺文社","isbn10":"401035433X","isbn13":"9784010354339","year":2024,"stage":"kyotest","diff":5,"subjects":"情報I","hensachi":"48〜65","problems":"本番形式模試・複数回分（要確認：回数）","hours":"15〜25h","h":20,"style":"マーク演習","fb":{"bg":"linear-gradient(160deg,#3D4657,#1B2233)"},"desc":"旺文社の「本番模試」シリーズの情報I版。本試験に近い形式・難易度のオリジナル模試を収録。","pros":["本試験に近い形式・時間配分で演習できる","「本番模試」シリーズ共通の解説の詳しさ","他科目の本番模試と並行して直前期の演習計画が立てやすい"],"cons":["基礎が固まっていない段階での使用は効果が薄い","難易度は本試想定のため入門段階には不向き"],"bestFor":"本試験直前に実戦形式で仕上げをしたい受験生","unis":["共通テスト"]},
@@ -967,6 +1004,11 @@ window.addEventListener("hashchange", applyHash);
    学校専売の傍用問題集など Amazon に商品画像が無い本は、
    出版社公式サイト等で実在を確認した URL を b.cover に持たせて最優先で参照します。 */
 function coverSrcs(b){
+  /* nocover: 商品画像がどこにも無いと確認できた本（未発売など）。
+     Amazon は画像を持たない ISBN に「書名だけを刷った自動生成画像」を返すことがあり、
+     これは 1x1 判定にも onerror にも掛からないので、候補を空にして代替表示へ落とす。
+     生成側は build/lib/cover.mjs が同じ分岐を持つ */
+  if(b.nocover) return [];
   const key = b.isbn10 || b.asin || "";
   const list = [];
   if(b.cover) list.push(b.cover);
@@ -1020,6 +1062,25 @@ function setFilter(k,v,btn){
   document.querySelectorAll(`.chip[data-k="${k}"]`).forEach(c=>c.classList.toggle("active", c.dataset.v===v));
   renderCatalog();
 }
+/* 絞り込みの結果が 0 件のときに出す。空文字だと前の結果が残って見える */
+const EMPTY_HTML = `<div class="cat-empty">条件に合う参考書がありません。絞り込みを緩めてください。</div>`;
+
+/* 図鑑・検索結果に並べる 1 枚のカード。セクション表示と通常表示で共有する */
+function bookCardHTML(b){
+  const st = STAGES[b.stage];
+  const dots = isProv(b) ? "" : Array.from({length:10},(_,i)=>`<i style="${i<b.diff?`background:${diffColor(b.diff)}`:""}"></i>`).join("");
+  return `<div class="book-card" role="button" tabindex="0" onclick="openModal('${b.id}')">
+    <div class="book-card__cover">${coverHTML(b)}</div>
+    <div class="book-card__body">
+      <div class="bc-name">${b.name}</div>
+      <div class="bc-pub">${b.pub}</div>
+      <div class="bc-diff"><span class="diff-dots">${dots}</span></div>
+      <div class="bc-hensachi">${isProv(b) ? `<span class="bc-prov">${PROV_LABEL}</span>` : `目安 <b>${b.hensachi}</b>`}</div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:${st.color}">${st.short}</span>${b.subjects ? `<span class="tag">${b.subjects}</span>` : ""}</div>
+    </div>
+  </div>`;
+}
+
 function renderCatalog(){
   const q = (document.getElementById("book-search").value||"").trim().toLowerCase();
   const sort = document.getElementById("sortSel").value;
@@ -1031,25 +1092,25 @@ function renderCatalog(){
     }
     return true;
   });
-  if(sort==="diff-asc") list.sort((a,b)=>provLast(a,b) || a.diff-b.diff);
-  else if(sort==="diff-desc") list.sort((a,b)=>provLast(a,b) || b.diff-a.diff);
+  document.getElementById("catCount").textContent = list.length;
+  const grid = document.getElementById("bookGrid");
+  if(sort==="field"){
+    /* 役割別×難易度順。共通テストと過去問はここで独立したまとまりになる */
+    let html = "";
+    for(const k in STAGES){
+      const g = list.filter(b=>b.stage===k).sort(byDiffAsc);
+      if(!g.length) continue;
+      html += `<div class="cat-sec" style="--sc:${STAGES[k].color}">${STAGES[k].label}<small>${g.length} BOOKS — やさしい順</small></div>`;
+      html += g.map(bookCardHTML).join("");
+    }
+    grid.innerHTML = html || EMPTY_HTML;
+    return;
+  }
+  if(sort==="diff-asc") list.sort(byDiffAsc);
+  else if(sort==="diff-desc") list.sort(byDiffDesc);
   else if(sort==="year") list.sort((a,b)=>b.year-a.year);
   else list.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
-  document.getElementById("catCount").textContent = list.length;
-  document.getElementById("bookGrid").innerHTML = list.map(b=>{
-    const st = STAGES[b.stage];
-    const dots = isProv(b) ? "" : Array.from({length:10},(_,i)=>`<i style="${i<b.diff?`background:${diffColor(b.diff)}`:""}"></i>`).join("");
-    return `<div class="book-card" role="button" tabindex="0" onclick="openModal('${b.id}')">
-      <div class="book-card__cover">${coverHTML(b)}</div>
-      <div class="book-card__body">
-        <div class="bc-name">${b.name}</div>
-        <div class="bc-pub">${b.pub}</div>
-        <div class="bc-diff"><span class="diff-dots">${dots}</span></div>
-        <div class="bc-hensachi">${isProv(b) ? `<span class="bc-prov">${PROV_LABEL}</span>` : `目安 <b>${b.hensachi}</b>`}</div>
-        <div class="bc-tags"><span class="tag tag-stage" style="background:${st.color}">${st.short}</span>${b.subjects ? `<span class="tag">${b.subjects}</span>` : ""}</div>
-      </div>
-    </div>`;
-  }).join("");
+  grid.innerHTML = list.map(bookCardHTML).join("") || EMPTY_HTML;
 }
 
 /* ============================================================

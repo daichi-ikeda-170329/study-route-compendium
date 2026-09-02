@@ -33,12 +33,14 @@
 
   var STYLE = [
     /* 検索欄は狭い画面でヘッダーの 2 行目に回る。ヘッダー側の折り返しもここで面倒を見る
-       （手書き HTML 5 枚と site.css に同じ 1 行を配ると、片方だけ直し忘れる） */
+       （手書き HTML 9 枚と site.css に同じ 1 行を配ると、片方だけ直し忘れる） */
     ".app-header__in{flex-wrap:wrap}",
     ".rt-search{position:relative;flex:1 1 100%;order:9;min-width:0}",
-    /* 1180px 未満ではヘッダーの 2 行目に置く。ナビと横並びにすると、
-       科目トップの 5 項目ナビが押し出されて先に折り返してしまう */
-    "@media(min-width:1180px){.rt-search{flex:0 1 280px;order:0}}",
+    /* 1100px 以上ではヘッダーの 1 行目に、ロゴとナビの間へ横並びに置く。
+       境目は「ロゴ＋ナビが最も広い科目トップ（英語 778px）＋検索 250px＋余白」が
+       収まる幅から決めてある。ここを下げると、その科目のナビが 2 行目へ折り返す。
+       縮む余地（flex-shrink）を残してあるので、境目のすぐ上でも折り返さない */
+    "@media(min-width:1100px){.rt-search{flex:0 1 250px;order:0;min-width:170px}}",
     ".rt-search__in{display:flex;align-items:center;gap:8px;height:38px;padding:0 12px;border:1px solid var(--line-d,#D8D4C8);border-radius:6px;background:var(--surface,#fff);transition:.15s}",
     ".rt-search__in:focus-within{border-color:var(--sc,#24427C);box-shadow:0 0 0 3px rgba(36,66,124,.09)}",
     ".rt-search__in>svg{flex:none;color:var(--muted-2,#8B8578)}",
@@ -47,7 +49,7 @@
     ".rt-search input::placeholder{color:var(--muted-2,#8B8578)}",
     ".rt-search__pop{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:90;background:var(--surface,#fff);border:1px solid var(--line-d,#D8D4C8);border-radius:6px;box-shadow:0 18px 40px rgba(30,28,24,.16);max-height:min(64vh,430px);overflow-y:auto;overscroll-behavior:contain}",
     ".rt-search__pop.open{display:block}",
-    "@media(min-width:1180px){.rt-search__pop{width:380px}}",
+    "@media(min-width:1100px){.rt-search__pop{width:380px}}",
     ".rt-search__hit{display:flex;align-items:flex-start;gap:10px;width:100%;padding:10px 13px;border:0;border-top:1px solid var(--line-2,#EDEAE1);background:none;text-align:left;font-family:inherit;cursor:pointer}",
     ".rt-search__hit:first-child{border-top:0}",
     ".rt-search__hit.cur,.rt-search__hit:hover{background:var(--surface-2,#F6F4EF)}",

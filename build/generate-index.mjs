@@ -11,7 +11,7 @@ import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/e
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
-import { provisionalLast } from './lib/newbooks.mjs';
+import { byDifficultyAsc } from './lib/rank.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -33,10 +33,9 @@ function render(sub, d, counts) {
 
   const sections = stageKeys.map(key => {
     const st = d.stages[key];
-    // 評価が未了の新刊は diff を持たない。a.diff - b.diff に通すと NaN になって
-    // 比較子が非対称になり、並び順が実行ごとに変わる。常に末尾へ落とす
-    const list = d.books.filter(b => b.stage === key)
-      .sort((a, b) => provisionalLast(a, b) || a.diff - b.diff);
+    // 難易度順は build/lib/rank.mjs の 1 か所だけを根拠にする。
+    // 評価が未了の新刊は diff を持たないので、比較子の中で常に末尾へ落とす
+    const list = d.books.filter(b => b.stage === key).sort(byDifficultyAsc);
 
     // 分野（現代文・物理など）を持つ科目は、役割の中をさらに分野で仕切る
     const groups = hasSub

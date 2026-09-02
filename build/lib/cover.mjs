@@ -15,6 +15,11 @@ import { esc } from './extract.mjs';
  * 表示側で naturalWidth を見て次の候補へ送る（科目ページと同じ方式）。
  */
 export function coverSrcs(b) {
+  // nocover: 商品画像がどこにも無いと確認できた本（未発売など）。
+  // Amazon は画像を持たない ISBN に「書名だけを刷った自動生成画像」を返すことがあり、
+  // これは 1x1 判定にも onerror にも掛からない。候補を空にして代替表示へ落とす。
+  // 科目トップの coverSrcs() にも同じ分岐がある
+  if (b.nocover) return [];
   const key = b.isbn10 || b.asin;
   const list = [];
   if (b.cover) list.push(b.cover);

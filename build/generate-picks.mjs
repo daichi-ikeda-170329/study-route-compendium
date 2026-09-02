@@ -15,6 +15,7 @@ import { searchName } from './lib/booktitle.mjs';
 import { tally } from './lib/tally.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { adUnit } from './lib/ads.mjs';
+import { byDifficultyAsc } from './lib/rank.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -49,7 +50,7 @@ function render(sub, d, counts) {
   // 本線に 1 回でも採用した本だけを、採用回数の多い順・同数なら易しい順に並べる
   const picked = d.books
     .filter(b => (t.main.get(b.id) || 0) > 0)
-    .sort((a, b) => (t.main.get(b.id) - t.main.get(a.id)) || (a.diff - b.diff));
+    .sort((a, b) => (t.main.get(b.id) - t.main.get(a.id)) || byDifficultyAsc(a, b));
   const n = picked.length;
   const stageKeys = Object.keys(d.stages).filter(k => picked.some(b => b.stage === k));
 

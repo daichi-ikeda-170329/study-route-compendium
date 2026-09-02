@@ -25,6 +25,7 @@ import { serializeBook, replaceBlock } from '../build/apply-new-books.mjs';
 import { isProvisional, provisionalLast, PROVISIONAL_LABEL, loadNewBooks } from '../build/lib/newbooks.mjs';
 import { bookCard } from '../build/lib/cards.mjs';
 import { SUBJECTS, extractSubject } from '../build/lib/extract.mjs';
+import { hensachiRange, byDifficultyAsc, byDifficultyDesc } from '../build/lib/rank.mjs';
 import { postF, weightedLen, X_LIMIT } from '../build/gen-x-posts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -160,11 +161,62 @@ test('科目トップすべてに評価未了の分岐が入っている', () =>
     assert.ok(src.includes('isProv(b) ? `<span class="bc-prov">'), `${s.dir}: カードのバッジが無い`);
     assert.ok(src.includes('(b.pros||[])'), `${s.dir}: pros の guard が無い（TypeError で描画が止まる）`);
     assert.ok(src.includes('(b.cons||[])'), `${s.dir}: cons の guard が無い`);
-    assert.ok(src.includes('provLast(a,b) || a.diff-b.diff'), `${s.dir}: やさしい順の並びに guard が無い`);
-    assert.ok(src.includes('provLast(a,b) || b.diff-a.diff'), `${s.dir}: 難しい順の並びに guard が無い`);
+    assert.ok(src.includes('function byDiffAsc(a,b)'), `${s.dir}: やさしい順の比較子が無い`);
+    assert.ok(src.includes('function byDiffDesc(a,b)'), `${s.dir}: 難しい順の比較子が無い`);
     assert.ok(src.includes('.bc-prov{'), `${s.dir}: バッジの CSS が無い`);
     assert.ok(src.includes(BEGIN) && src.includes(END), `${s.dir}: NEW BOOKS のマーカー区間が無い`);
   }
+});
+
+test('科目トップの難易度順は、偏差値まで見て並び、評価未了の本を末尾に置く', () => {
+  // 文字列の一致だけでは「guard が消えていないこと」しか分からないので、
+  // 科目トップの比較子を実際に動かして並びを確かめる。
+  // 生成側（build/lib/rank.mjs）と同じ結果になっていなければならない。
+  for (const s of SUBJECTS) {
+    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    const i = src.indexOf('function hRange(b){');
+    const j = src.indexOf('\n}\n', src.indexOf('function byDiffDesc(a,b){', i));
+    assert.ok(i > 0 && j > i, `${s.dir}: 比較子の定義が見つからない`);
+    const code = 'function provLast(a,b){ return (isProv(a)?1:0)-(isProv(b)?1:0); }'
+      + 'function isProv(b){ return !!b && b.provisional === true; }'
+      + src.slice(i, j + 3) + ';({hRange, byDiffAsc, byDiffDesc})';
+    const { hRange, byDiffAsc, byDiffDesc } = vm.runInNewContext(code);
+
+    assert.deepEqual([...hRange({ hensachi: '45〜60' })], [45, 60]);
+    assert.deepEqual([...hRange({ hensachi: '〜50(導入)' })], [0, 50]);
+    assert.deepEqual([...hRange({ hensachi: '50〜75(3段階)' })], [50, 75]);
+    assert.deepEqual([...hRange({})], [999, 999], '偏差値が無い本でも NaN を返さない');
+    assert.deepEqual([...hRange({ hensachi: '共テ7割〜9割' })], [999, 999],
+      '得点率の書き方は偏差値として並べない');
+    assert.deepEqual([...hRange({ hensachi: '68〜' })], [68, 68]);
+
+    const easy = { name: 'a', diff: 5, hensachi: '40〜50' };
+    const hard = { name: 'b', diff: 5, hensachi: '50〜60' };
+    const prov = { name: 'c', provisional: true };
+    assert.deepEqual([hard, prov, easy].sort(byDiffAsc).map(b => b.name), ['a', 'b', 'c'],
+      `${s.dir}: 同じ難易度は偏差値の低い順・評価未了は末尾`);
+    assert.deepEqual([easy, prov, hard].sort(byDiffDesc).map(b => b.name), ['b', 'a', 'c'],
+      `${s.dir}: 難しい順でも評価未了は末尾`);
+
+    // 得点率で書いてある本は、降順でも先頭へ出さない（[999,999] をそのまま降順に通すと先頭に来る）
+    const wari = { name: 'd', diff: 5, hensachi: '共テ7割〜9割' };
+    assert.deepEqual([wari, hard, easy].sort(byDiffAsc).map(b => b.name), ['a', 'b', 'd'], `${s.dir}: 昇順`);
+    assert.deepEqual([wari, easy, hard].sort(byDiffDesc).map(b => b.name), ['b', 'a', 'd'], `${s.dir}: 降順`);
+  }
+});
+
+test('生成側の難易度順（build/lib/rank.mjs）も同じ規則で並ぶ', () => {
+  assert.deepEqual(hensachiRange({ hensachi: '〜50(高校基礎)' }), [0, 50]);
+  assert.deepEqual(hensachiRange({ hensachi: '共テ7割〜9割' }), [999, 999]);
+  assert.deepEqual(hensachiRange({ hensachi: '68〜' }), [68, 68]);
+  const easy = { name: 'a', diff: 5, hensachi: '40〜50' };
+  const hard = { name: 'b', diff: 5, hensachi: '50〜60' };
+  const prov = { name: 'c', provisional: true };
+  assert.deepEqual([hard, prov, easy].sort(byDifficultyAsc).map(b => b.name), ['a', 'b', 'c']);
+  assert.deepEqual([easy, prov, hard].sort(byDifficultyDesc).map(b => b.name), ['b', 'a', 'c']);
+  const wari = { name: 'd', diff: 5, hensachi: '共テ7割〜9割' };
+  assert.deepEqual([wari, hard, easy].sort(byDifficultyAsc).map(b => b.name), ['a', 'b', 'd']);
+  assert.deepEqual([wari, easy, hard].sort(byDifficultyDesc).map(b => b.name), ['b', 'a', 'd']);
 });
 
 test('英語の現在地推定は、評価未了の本を最難関と誤判定しない', () => {

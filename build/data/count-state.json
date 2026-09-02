@@ -1,12 +1,12 @@
 {
   "note": "前回 build/apply-count.mjs が書き込んだ冊数。次回はこの値を新値へ置換する。手で編集しない。",
   "note2": "title や meta content 属性の中に HTML コメントは置けないため、プレースホルダ方式が使えない。前回値を持つことで置換対象を一意に特定している。設計は docs/new-books-plan.md の 8 節。",
-  "total": 1392,
+  "total": 1390,
   "subjects": {
     "english": 252,
     "japanese": 192,
     "math": 162,
-    "science": 375,
+    "science": 373,
     "social": 293,
     "joho": 29,
     "shoron": 89

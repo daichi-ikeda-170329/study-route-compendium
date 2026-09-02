@@ -25,6 +25,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { tally } from './lib/tally.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_FILE = path.join(ROOT, 'build', 'data', 'count-state.json');
@@ -66,21 +67,76 @@ function rules(oldS, newS) {
   return out;
 }
 
+/**
+ * 科目トップ（<科目>/index.html）の冊数を、前回値に頼らず文脈で置き換える。
+ *
+ * ポータルと README は count-state.json の前回値を手掛かりにできるが、科目トップは
+ * title・meta・og・twitter・JSON-LD・本文の 9〜11 箇所に同じ数字が散っていて、
+ * しかも state と実数が一致していると `main()` が早期に戻るため、これまで
+ * 一度も更新されていなかった（2026-09 時点で 5 科目が古い冊数のまま残っていた）。
+ *
+ * ここでは「参考書」「参考書一覧」「最新刊まで」「参考書おすすめ」という前後の
+ * 文脈ごと拾って書き換える。前回値を見ないので、何度流しても同じ結果になる。
+ * 文面を書き換えるときはこの正規表現も一緒に直す。
+ */
+function subjectTopRules(dir, total, picks) {
+  const rules = [
+    // 「英語参考書252冊」「英語の参考書252冊」「英語の参考書一覧 252冊」
+    [/(参考書(?:一覧)?[ 　]?)(\d+)冊/g, total],
+    // 科目トップの本文リード「定番から最新刊まで162冊を…」
+    [/(最新刊まで)(\d+)冊/g, total],
+  ];
+  // ルートを持たない科目（情報・小論文）はおすすめページ自体が無い
+  if (picks !== null) rules.push([/(参考書おすすめ[ 　]?)(\d+)冊/g, picks]);
+  return rules;
+}
+
+/** 科目トップの冊数を書き換える。書き換えた箇所数を返す */
+function applySubjectTops(data, write) {
+  let hits = 0;
+  for (const s of SUBJECTS) {
+    const d = data[s.dir];
+    const total = d.books.length;
+    const picks = s.catalogOnly ? null
+      : d.books.filter(b => (tally(d.routes, d.tiers).main.get(b.id) || 0) > 0).length;
+    const file = path.join(ROOT, s.dir, 'index.html');
+    const src = fs.readFileSync(file, 'utf8');
+    let out = src;
+    for (const [re, n] of subjectTopRules(s.dir, total, picks)) {
+      out = out.replace(re, (m, pre, old) => {
+        if (String(n) !== old) hits++;
+        return `${pre}${n}冊`;
+      });
+    }
+    if (out !== src) {
+      console.log(`  ${s.dir}/index.html: 冊数を書き換えた（全 ${total} 冊${picks === null ? '' : ` / おすすめ ${picks} 冊`}）`);
+      if (write) fs.writeFileSync(file, out, 'utf8');
+    }
+  }
+  return hits;
+}
+
 function main() {
   const old = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
 
+  const data = {};
   const subjects = {};
   let total = 0;
   for (const s of SUBJECTS) {
-    const n = extractSubject(ROOT, s.dir).books.length;
-    subjects[s.dir] = n;
-    total += n;
+    data[s.dir] = extractSubject(ROOT, s.dir);
+    subjects[s.dir] = data[s.dir].books.length;
+    total += subjects[s.dir];
   }
   const next = { total, subjects };
 
+  // 科目トップは前回値を見ずに毎回そろえる（state と実数が一致していても、
+  // 科目トップ側だけがずれていることがあるため。下の早期 return より前に置く）
+  const topHits = applySubjectTops(data, !CHECK);
+
   const same = old.total === total && SUBJECTS.every(s => old.subjects[s.dir] === subjects[s.dir]);
   if (same) {
-    console.log(`冊数は一致している（合計 ${comma(total)} 冊）。書き換えるものは無い`);
+    console.log(`ポータルと README の冊数は一致している（合計 ${comma(total)} 冊）`);
+    if (topHits) console.log(`科目トップの冊数を ${topHits} 箇所そろえた${CHECK ? '（--check なので書き込んでいない）' : ''}`);
     return;
   }
 
@@ -110,14 +166,14 @@ function main() {
   }
 
   if (CHECK) {
-    console.log(`置換 ${hits} 件（--check なので書き込んでいない）`);
+    console.log(`置換 ${hits} 件＋科目トップ ${topHits} 箇所（--check なので書き込んでいない）`);
     return;
   }
   for (const [file, src] of byFile) fs.writeFileSync(path.join(ROOT, file), src, 'utf8');
   fs.writeFileSync(STATE_FILE, `${JSON.stringify({
     note: old.note, note2: old.note2, ...next,
   }, null, 2)}\n`, 'utf8');
-  console.log(`置換 ${hits} 件。count-state.json を更新した`);
+  console.log(`置換 ${hits} 件（科目トップ ${topHits} 箇所を含む）。count-state.json を更新した`);
   console.log('画像に焼き込んだ冊数（assets/x-header.png・assets/ogp*.png）は別手順。docs/new-books-plan.md の 8 節を見る');
 }
 
