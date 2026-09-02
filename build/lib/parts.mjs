@@ -112,14 +112,16 @@ export function header(sub) {
     <div class="rt-search" id="rtSearch" style="min-height:38px">
       <div class="rt-search__in">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全${SUBJECTS.length}科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
       </div>
       <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
     </div>
     <div class="hdr-cta">
       <a href="/${sub.dir}/#catalog">参考書図鑑</a>
       <a href="/">全科目</a>
-      <a class="primary" href="/${sub.dir}/#route">ルートを作る</a>
+      ${sub.catalogOnly
+    ? `<a class="primary" href="/${sub.dir}/books/">参考書一覧</a>`
+    : `<a class="primary" href="/${sub.dir}/#route">ルートを作る</a>`}
     </div>
   </div>
 </header>`;
@@ -136,7 +138,7 @@ export function portalHeader() {
     <div class="rt-search" id="rtSearch" style="min-height:38px">
       <div class="rt-search__in">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全5科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全${SUBJECTS.length}科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
       </div>
       <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
     </div>
@@ -221,9 +223,9 @@ ${items}
     <div class="foot-links">
       <a href="/">ルート大全 トップ</a>
 ${curDir ? `      <a href="/${curDir}/">参考書図鑑</a>
-      <a href="/${curDir}/books/">参考書一覧</a>
+      <a href="/${curDir}/books/">参考書一覧</a>${SUBJECTS.find(s => s.dir === curDir)?.catalogOnly ? '' : `
       <a href="/${curDir}/routes/">志望校別ルート</a>
-      <a href="/${curDir}/guides/">参考書の選び方</a>` : `      <a href="/#subjects">科目から選ぶ</a>
+      <a href="/${curDir}/guides/">参考書の選び方</a>`}` : `      <a href="/#subjects">科目から選ぶ</a>
       <a href="/#catalog">参考書から探す</a>
       <a href="/guides/">参考書の選び方</a>`}
       <a href="/#faq">よくある質問</a>

@@ -238,7 +238,7 @@ function renderBook(book, ctx) {
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
-${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp-${sub.dir}.png` })}
+${head({ title, desc, url, ogImage: `${ORIGIN}/assets/${sub.ogp || `ogp-${sub.dir}.png`}` })}
 <style>:root{--sc:${st.color || sub.color}}</style>
 </head>
 <body>

@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { SUBJECTS } from '../build/lib/extract.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -47,9 +48,9 @@ const names = (q) => find(q).map((b) => `${INDEX.subjects[b[0]][0]}:${b[1]}`);
    索引そのもの
    ============================================================ */
 
-test('索引に 5 科目ぶんの全書籍が入っている', () => {
+test('索引に全科目ぶんの全書籍が入っている', () => {
   assert.equal(INDEX.v, 1);
-  assert.equal(INDEX.subjects.length, 5);
+  assert.equal(INDEX.subjects.length, SUBJECTS.length);
   const perSubject = {};
   for (const b of INDEX.books) perSubject[INDEX.subjects[b[0]][0]] = (perSubject[INDEX.subjects[b[0]][0]] || 0) + 1;
   for (const [dir] of INDEX.subjects) assert.ok(perSubject[dir] > 0, `${dir} の本が 1 冊も無い`);

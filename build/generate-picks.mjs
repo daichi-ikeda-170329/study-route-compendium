@@ -102,7 +102,7 @@ ${list.map((b, i) => card(b, sub, d.stages, t, i + 1)).join('\n')}
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
-${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp-${sub.dir}.png` })}
+${head({ title, desc, url, ogImage: `${ORIGIN}/assets/${sub.ogp || `ogp-${sub.dir}.png`}` })}
 <style>
 :root{--sc:${sub.color}}
 h2.sec .cnt{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:600;margin-left:12px;letter-spacing:.06em}
@@ -172,6 +172,8 @@ for (const s of SUBJECTS) {
 
 let total = 0;
 for (const sub of SUBJECTS) {
+  // おすすめはルートの採用回数で並べるページ。ルートが無い科目には作れない
+  if (sub.catalogOnly) { console.log(`  – ${sub.dir}: ルートを持たない科目のため生成しない`); continue; }
   const outDir = path.join(ROOT, sub.dir, 'osusume');
   fs.mkdirSync(outDir, { recursive: true });
   const html = render(sub, data[sub.dir], counts);

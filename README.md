@@ -1,6 +1,6 @@
 # ルート大全
 
-大学受験の参考書 1,052 冊を科目別に図鑑化し、志望校から逆算した参考書ルートを提示する無料サイト。
+大学受験の参考書 1,392 冊を科目別に図鑑化し、志望校から逆算した参考書ルートを提示する無料サイト。
 
 公開 URL: https://route-taizen.com/
 リポジトリ: https://github.com/daichi-ikeda-170329/study-route-compendium
@@ -8,6 +8,8 @@
 ## 概要
 
 英語・国語・数学・理科・社会の 5 科目それぞれについて、市販の参考書を難易度・役割・接続関係で整理した「参考書図鑑」と、志望校と現在地から組み立てる「参考書ルート」を提供する。
+
+情報・小論文の 2 科目は**参考書図鑑と 1 冊ごとの詳細ページだけ**を持つ。志望校別ルート・3 分診断・学習ガイドは無い（ルートを組むための志望レベル定義と大学データが無いため）。`build/lib/extract.mjs` の `SUBJECTS` で `catalogOnly: true` を立てており、`generate-routes.mjs` と `generate-picks.mjs` はこの科目を飛ばす。
 
 サイトは 2 層でできている。
 
@@ -20,21 +22,23 @@
 
 | 科目 | ディレクトリ | 収録冊数 | 志望レベル | 記事 | テーマカラー |
 |---|---|---|---|---|---|
-| 英語 | `english/` | 173 | 9 | 4 | `#B5432A` |
-| 国語 | `japanese/` | 152 | 8 | 2 | `#8A6D2F` |
-| 数学 | `math/` | 113 | 9 | 2 | `#24427C` |
-| 理科 | `science/` | 347 | 8 | 2 | `#2F6E4F` |
-| 社会 | `social/` | 267 | 8 | 2 | `#5B4E9E` |
+| 英語 | `english/` | 252 | 9 | 4 | `#B5432A` |
+| 国語 | `japanese/` | 192 | 8 | 2 | `#8A6D2F` |
+| 数学 | `math/` | 162 | 9 | 2 | `#24427C` |
+| 理科 | `science/` | 375 | 8 | 2 | `#2F6E4F` |
+| 社会 | `social/` | 293 | 8 | 2 | `#5B4E9E` |
+| 情報 | `joho/` | 29 | — | — | `#1F6E7A` |
+| 小論文 | `shoron/` | 89 | — | — | `#8E3B5E` |
 | 全科目共通 | `guides/` | — | — | 1 | — |
-| 合計 | — | 1,052 | 42 | 13 | — |
+| 合計 | — | 1,392 | 42 | 13 | — |
 
-公開ページ数は 1,134（`sitemap.xml` の URL 数と一致する）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
+公開ページ数は 1,478（`sitemap.xml` の URL 数と一致する）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
 
 ## ディレクトリ構成
 
 | パス | 用途 | 編集方法 |
 |---|---|---|
-| `index.html` | ポータル。5 科目への入口・FAQ・法定表記 | 手で編集 |
+| `index.html` | ポータル。7 科目への入口・FAQ・法定表記 | 手で編集 |
 | `<科目>/index.html` | 科目トップ（単一 HTML の SPA） | 手で編集 |
 | `<科目>/books/index.html` | 参考書一覧（役割別・難易度順） | 生成 |
 | `<科目>/osusume/index.html` | 参考書おすすめ（ルート採用回数順） | 生成 |
@@ -45,9 +49,9 @@
 | `guides/<slug>/index.html` | 科目に属さない解説記事 | 生成 |
 | `404.html` | 404 ページ | 手で編集 |
 | `assets/site.css` | 生成ページ共通のスタイル | 手で編集 |
-| `assets/js/share.js` | 3分診断の結果共有・保存と、ルート画面の共有。5 科目の科目トップから読み込む | 手で編集 |
+| `assets/js/share.js` | 3分診断の結果共有・保存と、ルート画面の共有。診断を持つ 5 科目の科目トップから読み込む | 手で編集 |
 | `assets/js/search.js` | 全ページ共通の参考書検索。ヘッダーの検索ボックスを動かす | 手で編集 |
-| `assets/js/book-index.js` | 検索が引く 1,052 冊の索引 | 生成 |
+| `assets/js/book-index.js` | 検索が引く 1,392 冊の索引 | 生成 |
 | `assets/js/pace.js` | ルート画面の進めるペース（いつまでに何を終えるか） | 手で編集 |
 | `assets/ogp*.png` | OGP 画像。冊数を画像内に焼き込んでいる | **元の SVG も生成手順も無く、現状は更新できない**（「[更新手順](#更新手順)」を参照） |
 | `assets/x-icon.svg` / `.png` | X のプロフィール画像（400×400） | SVG を手で編集し PNG を書き出す |
@@ -68,7 +72,7 @@
 | `docs/x-posts/` | X の投稿案。`YYYY-MM.md` に新刊調査の手順・カレンダー・本文が全部入る | 生成（`gen-x-posts.mjs`） |
 | `docs/` | 機能ごとの実装計画と調査記録 | 手で編集 |
 
-科目トップの内部構造は 5 科目で共通で、次の要素を同じクラス名で持つ。
+科目トップの内部構造は 5 科目で共通で、次の要素を同じクラス名で持つ。情報・小論文はこのうち `.view` が「ホーム」と「図鑑」の 2 つだけになる。
 
 - `.pr-bar` — アフィリエイト広告の明示（景品表示法のステマ規制対応）
 - `.xbar` — 科目切り替えバー。全ページ相互リンクの起点
@@ -81,8 +85,8 @@
 ## ビルド
 
 ```bash
-node build/generate-books.mjs      # 参考書の詳細ページ 1,052 件
-node build/generate-index.mjs      # 参考書一覧 5 件
+node build/generate-books.mjs      # 参考書の詳細ページ 1,392 件
+node build/generate-index.mjs      # 参考書一覧 7 件
 node build/generate-picks.mjs      # 参考書おすすめ 5 件
 node build/generate-routes.mjs     # 志望校別ルート 47 件
 node build/generate-articles.mjs   # 解説記事 19 件（記事 13 + 一覧 6）
@@ -125,7 +129,7 @@ node build/generate-books.mjs math ao
 | `build/lib/newbooks.mjs` | 新刊（評価が未了の本）の判定と並び順。**サイト全体でこの判定だけを根拠にする** |
 | `build/content/articles.mjs` | 解説記事の本文 |
 
-`ROUTES` の階層は 5 科目で共通で `ROUTES[志望レベル][トラック][方針]`。トラックだけが科目で違う（英語・数学は `bun`/`ri`、国語は `gendai`/`kobun`/`kanbun`、理科は `butsuri`/`kagaku`/`seibutsu`/`chigaku`、社会は `nihonshi`/`sekaishi`/…）。
+`ROUTES` の階層は、ルートを持つ 5 科目で共通で `ROUTES[志望レベル][トラック][方針]`。トラックだけが科目で違う（英語・数学は `bun`/`ri`、国語は `gendai`/`kobun`/`kanbun`、理科は `butsuri`/`kagaku`/`seibutsu`/`chigaku`、社会は `nihonshi`/`sekaishi`/…）。
 
 志望レベルの直下には、トラックのほかに次のキーが入ることがある。トラックとして扱わないので、増やすときは `generate-routes.mjs` の `NON_TRACK` にも足す。
 
@@ -159,12 +163,12 @@ node build/generate-books.mjs math ao
 
 ## 参考書検索（全ページ共通）
 
-すべてのページのヘッダーに検索ボックスがある（`#rtSearch`）。5 科目 1,052 冊を横断して探し、選ぶとその参考書の詳細ページ（`/<科目>/books/<id>/`）へ移動する。
+すべてのページのヘッダーに検索ボックスがある（`#rtSearch`）。7 科目 1,392 冊を横断して探し、選ぶとその参考書の詳細ページ（`/<科目>/books/<id>/`）へ移動する。
 
 - 処理は `assets/js/search.js`。見た目の CSS もこのファイルから差し込む。手書き HTML（ポータル・科目トップ・404）は `site.css` を読まないため、共通の置き場がここしかない
 - 索引は `assets/js/book-index.js`（`build/generate-search.mjs` が生成）。**最初に検索欄へ触れた時点で読み込む**。全ページに置く常設 UI なので、使わない人に 30KB 超を配らないため
 - 突き合わせるのは書名・正式名・出版社・収録範囲・分野・役割・あだ名
-- マークアップは 7 か所に同じものを置いてある（`build/lib/parts.mjs` の `header()` と `portalHeader()`、ポータル `index.html`、科目トップ 5 枚、`404.html`）。直すときは `rg 'id="rtSearch"'` で全箇所を出す
+- マークアップは 9 か所に同じものを置いてある（`build/lib/parts.mjs` の `header()` と `portalHeader()`、ポータル `index.html`、科目トップ 7 枚、`404.html`）。直すときは `rg 'id="rtSearch"'` で全箇所を出す
 
 ### 書き方の違いを吸収する
 
@@ -230,7 +234,7 @@ print(sorted(set(bad)) or 'リンク切れなし')
 | 科目トップのルート画面 | ルートの形を決める設定（`?rv=1&r=…`） | `assets/js/share.js` の `routeBlock()` |
 | 志望校別ルートの生成ページ | そのページの URL そのもの | `build/lib/parts.mjs` の `shareBar()` |
 
-診断とルートの処理は `assets/js/share.js` の 1 ファイルにまとまっていて、5 科目の科目トップから `<script src>` で読み込む。診断側は科目ごとの分岐を持たず、その科目の `QUIZ` 配列を入力に動く。
+診断とルートの処理は `assets/js/share.js` の 1 ファイルにまとまっていて、診断を持つ 5 科目の科目トップから `<script src>` で読み込む。診断側は科目ごとの分岐を持たず、その科目の `QUIZ` 配列を入力に動く。
 
 ### X の投稿画面に渡すもの
 
@@ -355,7 +359,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。
 | `test/share.test.mjs` | 診断結果の共有 URL の往復・不正な URL・保存データ・ルート共有の `encode`/`apply`・X の投稿画面に渡す `text=` の書式 | `QUIZ` を変えた / 科目トップのルート画面を触った / 共有の文面を変えた |
 | `test/search.test.mjs` | 索引の中身・正規化・あだ名で引けること・`aliases.json` の実在確認 | `BOOKS` を変えた / `aliases.json` を触った（先に `generate-search.mjs` を流す） |
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
-| `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ 5 枚に分岐が入っていること・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った |
+| `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った |
 
 診断は、科目ページから `QUIZ` を取り出し、到達しうる回答の組み合わせをすべて列挙して往復を確認する。あわせて不正な URL を 30 ケース以上、壊れた保存データの読み込みも検証する。
 
@@ -393,12 +397,12 @@ const CONFIG = {
 | フッターの法定表記 | 目安である旨だけ | アフィリエイト利用の明示を追加 |
 | Amazon アソシエイトの必須表記 | 出さない | `amazonTag` があるときだけ出す |
 
-生成ページ側は `build/lib/extract.mjs` の `affiliateEnabled()` が 5 科目の `CONFIG` を読んで同じ判定をする。**ID を入れたあとは必ず全ページを再生成する。**
+生成ページ側は `build/lib/extract.mjs` の `affiliateEnabled()` が各科目の `CONFIG` を読んで同じ判定をする。**ID を入れたあとは必ず全ページを再生成する。**
 
 ### Amazon アソシエイトに申請して承認されたら
 
 ```bash
-# 5 科目 + ポータルへ一括反映する（ID は自分のものに置き換える）
+# 全科目 + ポータルへ一括反映する（ID は自分のものに置き換える）
 for f in english japanese math science social; do
   sed -i '' 's/amazonTag:  ""/amazonTag:  "xxxxx-22"/' "$f/index.html"
 done
@@ -510,7 +514,7 @@ A 型が減るため、後からだと作り直しになる。`--force` で作�
 ### 評価が未了の本の扱い
 
 **新刊は現物を読んでいないので、難易度・到達目安・強み・注意点・向いている人を
-書かない。** 推測で埋めると、既存 1,052 冊を並べている 10 段階の物差しが狂う。
+書かない。** 推測で埋めると、既存 1,392 冊を並べている 10 段階の物差しが狂う。
 書名・出版社・ISBN・刊行年といった検証できる事実と、役割（`stage`）だけを入れ、
 `provisional: true` を立てて「新刊・評価準備中」と画面に明示する。
 
@@ -528,7 +532,7 @@ A 型が減るため、後からだと作り直しになる。`--force` で作�
 | `d<=2 ? … : 最難関` 形の分類 | 比較が全部 false になり、**静かに最難関へ化ける** |
 
 3 つ目が最も危ない。科目トップの `bookLv()`（英語のみ）と `diffColor()` が該当する。
-`test/new-books.test.mjs` が 5 科目すべてに分岐が入っていることを見張っている。
+`test/new-books.test.mjs` が全科目に分岐が入っていることを見張っている。
 
 評価が固まったら `build/data/new-books.json` から消し、科目 HTML の `BOOKS` 配列本体へ
 `provisional` を外した完全なエントリとして移す。**JSON に残っている数が評価の
@@ -539,7 +543,7 @@ A 型が減るため、後からだと作り直しになる。`--force` で作�
 公式アカウントは `@route_taizen`。運用設計の正本は [docs/x-account-plan.md](docs/x-account-plan.md)。
 
 ハンドルは `build/lib/extract.mjs` の `X_HANDLE` に持たせてある。ただし
-`assets/js/share.js` と手書き HTML（ポータル・科目トップ 5 枚）にも同じ値が
+`assets/js/share.js` と手書き HTML（ポータル・科目トップ 7 枚）にも同じ値が
 書いてあるので、**変えるときは `rg route_taizen` で全箇所を出してから直す。**
 
 | 置き場 | 用途 |

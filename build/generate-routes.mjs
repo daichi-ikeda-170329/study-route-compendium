@@ -193,7 +193,7 @@ ${sideList(final, bookById, sub, d.stages)}
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
-${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp-${sub.dir}.png` })}
+${head({ title, desc, url, ogImage: `${ORIGIN}/assets/${sub.ogp || `ogp-${sub.dir}.png`}` })}
 <style>
 :root{--sc:${tier.color || sub.color}}
 .tier-head{display:flex;flex-wrap:wrap;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:20px;box-shadow:var(--sh-s)}
@@ -356,7 +356,7 @@ function renderIndex(sub, d, norm, counts) {
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
-${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp-${sub.dir}.png` })}
+${head({ title, desc, url, ogImage: `${ORIGIN}/assets/${sub.ogp || `ogp-${sub.dir}.png`}` })}
 <style>
 :root{--sc:${sub.color}}
 .tgrid{display:grid;grid-template-columns:1fr;gap:11px;margin-top:22px}
@@ -421,6 +421,8 @@ for (const s of SUBJECTS) {
 
 let total = 0;
 for (const sub of SUBJECTS) {
+  // 図鑑だけの科目は ROUTES を持たない。作るページが無いので飛ばす
+  if (sub.catalogOnly) { console.log(`  – ${sub.dir}: ルートを持たない科目のため生成しない`); continue; }
   const d = data[sub.dir];
   const norm = normalize(d.routes, d.tiers);
   const tiers = d.tiers.filter(t => norm[t.id] && Object.keys(norm[t.id].tracks).length);
