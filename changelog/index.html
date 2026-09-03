@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>更新履歴 - ルート大全</title>
+<meta name="description" content="ルート大全の参考書データ・ページの更新履歴です。git のコミット履歴から自動で作っています。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/changelog/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="更新履歴 - ルート大全">
+<meta property="og:description" content="ルート大全の参考書データ・ページの更新履歴です。git のコミット履歴から自動で作っています。">
+<meta property="og:url" content="https://route-taizen.com/changelog/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="更新履歴 - ルート大全">
+<meta name="twitter:description" content="ルート大全の参考書データ・ページの更新履歴です。git のコミット履歴から自動で作っています。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX');
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#24427C}
+.chg{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-2)}
+.chg:last-child{border-bottom:none}
+.chg__d{font-family:var(--mono);font-size:11.5px;color:var(--muted-2);letter-spacing:.04em;padding-top:2px}
+.chg__l{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--ink-2);line-height:1.75}
+@media(max-width:620px){.chg{grid-template-columns:1fr;gap:5px}}
+</style>
+</head>
+<body>
+
+<div class="pr-bar">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</div>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/">
+      <div class="logo__mark" aria-hidden="true">全</div>
+      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><b>更新履歴</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Changelog</div>
+      <h1 class="art-h1">更新履歴</h1>
+      <p class="page-updated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
+      <p class="art-lead">参考書データとページの更新履歴です。リポジトリのコミット履歴から自動で作っているので、手で書き足すことはありません。各ページの最終更新日は、そのページのデータが実際に変わった日を表示しています。</p>
+    </div>
+
+    <section class="block">
+      <h2 class="sec">データとページの変更</h2>
+      <div class="chg">
+        <div class="chg__d"><time datetime="2026-09-03">2026-09-03</time></div>
+        <ul class="chg__l">
+          <li>スマホでタブバーが崩れる原因を断ち、回帰テストで止める</li>
+          <li>冊数の表記ずれを CI で止め、派生統計まで自動追従させる</li>
+          <li>参考書図鑑を科目・役割ごとに分け、難易度順と書影を直す</li>
+          <li>未掲載の参考書 340 冊を追加し、情報・小論文を新設する</li>
+        </ul>
+      </div>
+      <div class="chg">
+        <div class="chg__d"><time datetime="2026-08-29">2026-08-29</time></div>
+        <ul class="chg__l">
+          <li>Amazon アソシエイト ID を設定し、全ページを収益化する</li>
+        </ul>
+      </div>
+      <div class="chg">
+        <div class="chg__d"><time datetime="2026-08-28">2026-08-28</time></div>
+        <ul class="chg__l">
+          <li>新刊の検知を楽天 API から月次の Claude 調査へ切り替える</li>
+          <li>新刊を検知してサイトに載せ、X で速報を出せるようにする</li>
+          <li>AdSense のパブリッシャー ID を設定する</li>
+          <li>Google AdSense を ID 1 つで出し分けられるようにする</li>
+          <li>X のアイコンとヘッダー画像を作る</li>
+          <li>9月分の投稿を書き上げ、固定ポストを追加する</li>
+          <li>投稿案の生成を毎月自動で回し、README に運用を書く</li>
+          <li>X の投稿案を BOOKS から生成する</li>
+          <li>ルート採用回数の集計を build/lib/tally.mjs に切り出す</li>
+          <li>X アカウントへの導線を全ページに入れ、購入リンクのクリックを計測する</li>
+        </ul>
+      </div>
+      <div class="chg">
+        <div class="chg__d"><time datetime="2026-08-27">2026-08-27</time></div>
+        <ul class="chg__l">
+          <li>検索のあだ名対応・全画面の書影・ルートのペース表示を入れ、理科のデータ構造を揃える</li>
+        </ul>
+      </div>
+      <div class="chg">
+        <div class="chg__d"><time datetime="2026-08-26">2026-08-26</time></div>
+        <ul class="chg__l">
+          <li>ルートを終えている場合に結果画面が空になるのを直す</li>
+          <li>共有状態のリセット漏れを直し、スキーマ変更の検出とポリシー記述を補う</li>
+          <li>保存一覧の削除ボタンを押しやすくし、削除前に確認する</li>
+          <li>保存項目の ID を onclick に埋め込むのをやめ、data 属性とイベント委譲に変える</li>
+          <li>共有URLのスキーマとvを上げる運用ルールをREADMEに記載し、プライバシーポリシーに保存の説明を追記</li>
+          <li>診断結果の共有UI・ディープリンク復元・ローカル保存を科目トップに組み込み</li>
+          <li>診断結果の共有URLスキーマ（encode/decode）と保存ストアを実装</li>
+        </ul>
+      </div>
+      <div class="chg">
+        <div class="chg__d"><time datetime="2026-08-22">2026-08-22</time></div>
+        <ul class="chg__l">
+          <li>独自ドメイン route-taizen.com へ移行</li>
+        </ul>
+      </div>
+      <div class="chg">
+        <div class="chg__d"><time datetime="2026-08-21">2026-08-21</time></div>
+        <ul class="chg__l">
+          <li>個別最適化パネルがスマホ幅で横スクロールを起こしていた</li>
+          <li>キーボード操作とモーダルのアクセシビリティを整える</li>
+          <li>文字色のコントラストを WCAG AA（4.5:1）まで引き上げる</li>
+          <li>残っていた小さなタップ領域を 24px 以上にする</li>
+          <li>style: 汎用の線画アイコンをサイト固有の記号に置き換える</li>
+          <li>プライバシーポリシーの記述を実装の実態に合わせる</li>
+          <li>書籍詳細ページの書影に多段フォールバックを追加</li>
+          <li>書籍ページの title 重複を解消し、長い書名の title を短縮</li>
+          <li>広告表記を実際の参加状況に合わせて出し分ける</li>
+          <li>パンくず・フッターリンクのタップ領域を min-height で確保</li>
+          <li>モバイルのタップ領域とテーブルの横スクロールを改善</li>
+          <li>解説記事を4本追加（英語長文・古文・化学・世界史）</li>
+          <li>IndexNow によるインデックス即時通知を追加</li>
+          <li>Search Console・Google アナリティクス4・楽天アフィリエイトを導入</li>
+          <li>参考書の選び方・比較記事を9本追加</li>
+          <li>志望校レベル別の参考書ルートページを追加（47ページ）</li>
+          <li>参考書1,052冊の個別ページと科目別一覧ページを追加</li>
+          <li>ポータルページ・科目間ナビ・SEO基盤を追加</li>
+          <li>科目ディレクトリ名を小文字に統一（URL 正規化）</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="note">
+      <h3>そのほかの表記</h3>
+      <p><a href="/about/">運営者情報</a> ／ <a href="/methodology/">データの作り方</a> ／ <a href="/privacy/">プライバシーポリシー</a> ／ <a href="/disclaimer/">免責事項</a> ／ <a href="/ads/">広告について</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/#subjects">科目から選ぶ</a>
+      <a href="/#catalog">参考書から探す</a>
+      <a href="/guides/">参考書の選び方</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/changelog/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "更新履歴",
+     "item": "https://route-taizen.com/changelog/"
+    }
+   ]
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/changelog/#webpage",
+   "url": "https://route-taizen.com/changelog/",
+   "name": "更新履歴 - ルート大全",
+   "description": "ルート大全の参考書データ・ページの更新履歴です。git のコミット履歴から自動で作っています。",
+   "inLanguage": "ja",
+   "dateModified": "2026-09-03",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/changelog/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>
