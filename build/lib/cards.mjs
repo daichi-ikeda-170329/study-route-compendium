@@ -9,6 +9,7 @@
 import { esc, clip } from './extract.mjs';
 import { coverBox } from './cover.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './newbooks.mjs';
+import { seriesOf, hensachiPlain } from './series.mjs';
 
 /**
  * @param {object} b      BOOKS の 1 冊
@@ -23,9 +24,13 @@ export function bookCard(b, sub, stages) {
   // 「評価準備中」と書く。ここで `難易度 ${b.diff}` を通すと undefined が出る
   const prov = isProvisional(b);
   const bars = Array.from({ length: 10 }, (_, i) => `<i class="${!prov && i < b.diff ? 'on' : ''}"></i>`).join('');
+  // レベル別に複数の巻をまとめている本は、難易度の数字がシリーズ全体の代表値。
+  // 数字だけを並べると 1 冊の難易度として読まれるので、その場でしるしを付ける
+  const series = prov ? null : seriesOf(b);
   const foot = prov
     ? `<span class="bcard__prov">${esc(PROVISIONAL_LABEL)}</span>`
-    : `<span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}／${esc(b.hensachi || '—')}</span>`;
+    : `<span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}／${esc(hensachiPlain(b) || '—')}`
+      + `${series ? `<span class="bcard__series">${esc(series.label)}</span>` : ''}</span>`;
 
   return `      <a class="bcard" href="/${sub.dir}/books/${b.id}/" style="--bc:${color}">
         <div class="bcard__head">

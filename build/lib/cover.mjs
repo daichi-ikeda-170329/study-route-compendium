@@ -40,7 +40,9 @@ export function coverSrcs(b) {
  */
 function imgTag(srcs, alt) {
   if (!srcs.length) return '';
-  return `<img src="${esc(srcs[0])}" alt="${esc(alt)}" loading="lazy" decoding="async"`
+  // width / height は .rt-cov の aspect-ratio 5/7 と同じ比。CSS が届く前でも
+  // 枠の高さが決まるので、読み込みでレイアウトが跳ねない
+  return `<img src="${esc(srcs[0])}" alt="${esc(alt)}" width="50" height="70" loading="lazy" decoding="async"`
     + ` referrerpolicy="no-referrer" data-srcs="${esc(srcs.join('|'))}" data-s="0"`
     + ` onload="if(this.naturalWidth&lt;=1)this.onerror()"`
     + ` onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;`
@@ -51,7 +53,11 @@ function imgTag(srcs, alt) {
  * 一覧・ルートに並べる小さな書影。幅は --cw で呼び出し側から決める。
  *
  * @param {object} b     BOOKS の 1 冊
- * @param {object} opts  color: 代替表示の地色 / alt: 代替テキスト（既定は空 = 装飾扱い）
+ * @param {object} opts  color: 代替表示の地色 / alt: 代替テキスト
+ *
+ * alt を既定で空にしているのは、カードの中で書名がすぐ隣のテキストとして
+ * 読まれるため。ここに「◯◯の表紙」を入れると、読み上げで書名が 2 回続く。
+ * 画像だけが単独で置かれる場所（書籍ページのヒーロー）では alt を渡している。
  */
 export function coverBox(b, opts = {}) {
   const color = opts.color || 'var(--sc)';

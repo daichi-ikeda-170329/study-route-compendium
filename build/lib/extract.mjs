@@ -93,6 +93,22 @@ export function affiliateEnabled(rootDir) {
   return affCache;
 }
 
+/**
+ * Amazon アソシエイトの ID だけが入っているかを判定する。
+ * Amazon の運営規約が求める「適格販売により収入を得ています」の表記は、
+ * Amazon に参加しているときだけ出す（楽天だけの状態で出すと事実に反する）。
+ */
+let azCache = null;
+export function amazonEnabled(rootDir) {
+  if (azCache !== null) return azCache;
+  azCache = SUBJECTS.some(s => {
+    const src = fs.readFileSync(path.join(rootDir, s.dir, 'index.html'), 'utf8');
+    const tag = src.match(/\bamazonTag:\s*"([^"]*)"/);
+    return Boolean(tag && tag[1]);
+  });
+  return azCache;
+}
+
 /** サイト共通の科目メタ情報。冊数は BOOKS から実測するのでここには持たない */
 export const SUBJECTS = [
   { dir: 'english',  ja: '英語', mark: '英', en: 'ENGLISH',        color: '#B5432A',

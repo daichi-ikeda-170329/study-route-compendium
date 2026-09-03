@@ -3,7 +3,7 @@
  */
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SUBJECTS, ORIGIN, X_HANDLE, esc, affiliateEnabled } from './extract.mjs';
+import { SUBJECTS, ORIGIN, X_HANDLE, esc, affiliateEnabled, amazonEnabled } from './extract.mjs';
 import { ADSENSE, adsenseLoader } from './ads.mjs';
 
 /**
@@ -12,6 +12,8 @@ import { ADSENSE, adsenseLoader } from './ads.mjs';
  */
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const AFF = affiliateEnabled(ROOT);
+/** Amazon アソシエイトの ID が入っているか。必須表記の出し分けに使う */
+const AFF_AZ = amazonEnabled(ROOT);
 
 /**
  * <head> の共通部分。
@@ -57,8 +59,10 @@ ${analytics()}${adsenseLoader() ? '\n' + adsenseLoader() : ''}`;
  * 手書き HTML（ポータル・科目トップ・404）にも同じ測定 ID を直接書いてある。
  * ID を変えるときは `rg G-DQ5WFXEFMX` で全箇所を出してから直す。
  */
+export const GA_ID = 'G-DQ5WFXEFMX';
+
 export function analytics() {
-  const id = 'G-DQ5WFXEFMX';
+  const id = GA_ID;
   return `<!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>
 <script>
@@ -106,7 +110,7 @@ export function header(sub) {
   return `<header class="app-header">
   <div class="app-header__in">
     <a class="logo" href="/${sub.dir}/">
-      <div class="logo__mark">${sub.mark}</div>
+      <div class="logo__mark" aria-hidden="true">${sub.mark}</div>
       <div class="logo__txt"><b>${sub.full}</b><span>${sub.en} ROUTE</span></div>
     </a>
     <div class="rt-search" id="rtSearch" style="min-height:38px">
@@ -132,7 +136,7 @@ export function portalHeader() {
   return `<header class="app-header">
   <div class="app-header__in">
     <a class="logo" href="/">
-      <div class="logo__mark">全</div>
+      <div class="logo__mark" aria-hidden="true">全</div>
       <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
     </a>
     <div class="rt-search" id="rtSearch" style="min-height:38px">
@@ -206,11 +210,36 @@ export function crumbs(items) {
   return `<nav class="crumbs" aria-label="パンくずリスト">\n    ${parts}\n  </nav>`;
 }
 
+/**
+ * 信頼性ページ。全ページのフッターから同じ並びで出す。
+ * 静的ページが正本で、科目トップのモーダルはここへ送る補助にすぎない。
+ */
+export const LEGAL_PAGES = [
+  { slug: 'about', label: '運営者情報' },
+  { slug: 'methodology', label: 'データの作り方' },
+  { slug: 'privacy', label: 'プライバシーポリシー' },
+  { slug: 'disclaimer', label: '免責事項' },
+  { slug: 'ads', label: '広告について' },
+  { slug: 'changelog', label: '更新履歴' },
+];
+
+/**
+ * Amazon アソシエイトの運営規約が求める表記。
+ * amazonTag が入っているときだけ出す（未参加の状態で参加者の表記を出さない）。
+ * 表示名はアソシエイトの登録名。リポジトリからは分からないのでサイト名を使う。
+ */
+export const AMAZON_NAME = 'ルート大全';
+export function amazonDisclosure() {
+  return AFF_AZ
+    ? `Amazon のアソシエイトとして、${AMAZON_NAME}は適格販売により収入を得ています。`
+    : '';
+}
+
 /** フッター。counts は {dir: 冊数} */
 export function footer(curDir, counts) {
   const items = SUBJECTS.map(s =>
     `      <a href="/${s.dir}/" style="--fsc:${s.color}"${s.dir === curDir ? ' aria-current="page"' : ''}>
-        <span class="fs-mark">${s.mark}</span>
+        <span class="fs-mark" aria-hidden="true">${s.mark}</span>
         <span class="fs-txt"><b>${s.full}</b><span>${counts[s.dir]} BOOKS</span></span>
       </a>`
   ).join('\n');
@@ -231,10 +260,14 @@ ${curDir ? `      <a href="/${curDir}/">参考書図鑑</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/${X_HANDLE}" target="_blank" rel="noopener noreferrer me">X @${X_HANDLE}</a>
     </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+${LEGAL_PAGES.map(p => `      <a href="/${p.slug}/">${p.label}</a>`).join('\n')}
+    </nav>
     <div class="foot-legal">
       <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
-      ${AFF ? '当サイトはアフィリエイト広告を利用しています。' : ''}掲載している難易度・到達偏差値・想定学習時間は公開情報にもとづく目安であり、学習成果を保証するものではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
-      &copy; ${new Date().getFullYear()} ルート大全 編集部
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      ${AFF ? '当サイトはアフィリエイト広告を利用しています。' : ''}${amazonDisclosure()}<br>
+      &copy; ${new Date().getFullYear()} ルート大全
     </div>
   </div>
 </footer>`;

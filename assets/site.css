@@ -6,7 +6,7 @@
    ============================================================ */
 :root{
   --paper:#F6F4EF; --surface:#FFFFFF; --surface-2:#FAF9F6; --surface-3:#F1EFE8;
-  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#6A6F82;
+  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#656A7C;
   --line:#E4E1D6; --line-2:#EDEBE2; --line-d:#CFCBBE;
   --indigo:#24427C; --indigo-deep:#18305E; --indigo-soft:#E8EDF7;
   --accent:#B5432A; --accent-deep:#93331F; --accent-soft:#F7E9E5;
@@ -256,3 +256,66 @@ h1.bk-name{font-family:var(--serif);font-weight:800;font-size:29px;line-height:1
 .foot-links a:hover{color:var(--accent-deep)}
 .foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:20px auto 0;padding-top:18px;border-top:1px solid var(--line)}
 .foot-legal b{color:var(--ink-2);font-weight:700}
+
+/* ---------- 読み物ページの共通パーツ ----------
+   解説記事（generate-articles）と信頼性ページ（generate-legal）で同じものを使う。
+   記事側は当面インラインにも同じ定義を持つが、値を変えるときはここを正本にする。 */
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+
+/* ページの最終更新日。データが変わった日を自動で出すので、手で書き換えない */
+.page-updated{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted-2);margin-top:14px}
+.crumbs + article .page-updated,.art-head .page-updated{margin-top:12px}
+
+/* 表は幅を超えたら中だけ横スクロールさせる */
+.tbl-scroll{margin:22px 0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:560px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink)}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+
+/* ---------- 難易度スケールの定義表（build/lib/scale.mjs） ----------
+   難易度の数字を見た人が、その場で意味を確かめられる位置に置く共通コンポーネント。
+   文言を場所ごとに書くと 1〜5 段階と 10 段階が同居するので、必ずこれを呼ぶ。 */
+.scale{margin:22px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
+.scale > summary{list-style:none;cursor:pointer;padding:14px 42px 14px 17px;font-weight:700;font-size:13.2px;position:relative;line-height:1.6;letter-spacing:.02em;transition:.15s;min-height:26px}
+.scale > summary::-webkit-details-marker{display:none}
+.scale > summary:hover{background:var(--surface-2)}
+.scale > summary::after{content:"";position:absolute;right:18px;top:20px;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:.2s}
+.scale[open] > summary::after{transform:rotate(-135deg);top:23px}
+.scale[open] > summary{color:var(--accent-deep);border-bottom:1px solid var(--line-2)}
+.scale__in{padding:16px 17px 18px}
+.scale__in > p{font-size:13px;line-height:1.9;color:var(--ink-2);max-width:60em}
+.scale__tw{overflow-x:auto;margin:14px 0;-webkit-overflow-scrolling:touch}
+table.scale__t{border-collapse:collapse;width:100%;min-width:480px;font-size:12.2px}
+table.scale__t th,table.scale__t td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line-2);line-height:1.6;vertical-align:top}
+table.scale__t thead th{background:var(--surface-2);font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap}
+table.scale__t tbody th{font-family:var(--mono);font-weight:700;color:var(--ink);width:1%;white-space:nowrap;text-align:center}
+table.scale__t tbody td{color:var(--ink-2)}
+table.scale__t tbody tr.on{background:var(--accent-soft)}
+table.scale__t tbody tr.on th,table.scale__t tbody tr.on td{color:var(--accent-deep);font-weight:700}
+.scale__note{font-size:12.5px;line-height:1.85;color:var(--ink-2);margin-top:14px}
+.scale__roles{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:10px;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
+.scale__roles b{color:var(--ink);font-weight:700}
+
+/* ---------- シリーズ本のしるし ----------
+   複数の巻を 1 ページにまとめている本。難易度の数字を単独で読ませないための表示。 */
+.bk-series{margin-top:10px;font-size:12.3px;line-height:1.8;color:var(--ink-2);background:var(--surface-3);border-left:3px solid var(--line-d);padding:9px 12px}
+.bk-series b{color:var(--ink);font-weight:700}
+
+/* 信頼性ページのリンク列。科目リンクの列と見分けが付くよう一段細くする */
+.foot-links--legal{margin-top:10px;gap:5px 14px}
+.foot-links--legal a{font-size:11.5px;font-weight:600;color:var(--muted)}
+.foot-links--legal a:hover{color:var(--accent-deep)}
+
+/* スペック表の下に置く出どころの注記。事実と推定値を読者に区別させる */
+.spec__note{font-size:11.5px;line-height:1.8;color:var(--muted);margin-top:10px;max-width:56em}
+.spec__note a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px;font-weight:700}
+
+/* カードのシリーズ表示。難易度の数字がシリーズ全体の代表値であることを示す */
+.bcard__series{margin-left:6px;padding:1px 6px;border:1px solid var(--line-d);border-radius:2px;font-size:9.5px;color:var(--muted);white-space:nowrap}
