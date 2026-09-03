@@ -73,11 +73,13 @@
 | `build/lib/scale.mjs` | 難易度 10 段階の定義と、その表示コンポーネント | 手で編集 |
 | `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 | 手で編集 |
 | `build/lib/updated.mjs` | 最終更新日。レコードの中身が変わった日を台帳で持つ | 手で編集 |
+| `build/apply-book-text.mjs` | `data/_rewrite/` の説明文を各科目トップの `BOOKS` に流し込む | 手で編集 |
 | `build/content/legal.mjs` | 信頼性ページの本文 | 手で編集 |
 | `build/data/authors.json` | 著者名（openBD・国立国会図書館サーチ由来・実在確認済み 342 冊分） | 生成（`fetch-authors.mjs`） |
 | `build/data/record-dates.json` | 各レコードの中身が最後に変わった日。最終更新日の台帳 | 生成（触らない） |
 | `build/data/jis-kanji.txt` | JIS X 0208/0213 にある CJK 文字の一覧。簡体字の混入検出に使う | 生成（作り直し方は `check-site.mjs` のコメント） |
 | `data/_backup/` | 説明文を大きく書き換える前のスナップショット | 生成（`data/_backup/README.md` を参照） |
+| `data/_rewrite/` | 書き換え後の説明文。`build/apply-book-text.mjs` が流し込む入力 | 手で編集 |
 | `docs/style-guide.md` | 文章のスタイルガイド。`check-site.mjs` がこの一部を機械で検査する | 手で編集 |
 | `build/data/aliases.json` | 参考書のあだ名（「ネクステ」など）。検索の索引に混ぜる | 手で編集 |
 | `build/data/new-books.json` | 掲載を承認した新刊。ここに残っている数が「評価の残作業」 | 手で編集 |
@@ -140,6 +142,16 @@ node build/fetch-authors.mjs --no-ndl  # openBD だけ（速いが取れる数�
 
 `build/check-links.mjs` は書影と商品ページの生存を外部へ問い合わせる。**押すたびに数千件の
 リクエストが飛ぶので、通常のビルドには含めない**（週 1 回 `.github/workflows/links.yml` が流す）。
+
+`build/apply-book-text.mjs` は `data/_rewrite/` に置いた説明文を各科目トップの `BOOKS` へ
+流し込むもので、**説明文を一括で書き換えるときだけ**使う。通常のビルドには含めない。
+`--check` で件数だけを確認でき、科目名を引数に渡すとその科目だけを処理する。
+
+```bash
+node build/apply-book-text.mjs --check   # 対象の件数だけを出して書き込まない
+node build/apply-book-text.mjs           # 全科目に流し込む
+node build/apply-book-text.mjs english   # 科目を絞る
+```
 
 `build/gen-x-posts.mjs` は X の投稿案を作るもので、サイトの生成物とは無関係。
 上の一括再生成には含めない（「X アカウント」の節を参照）。
@@ -689,6 +701,10 @@ git push
 5. 科目トップの title・meta・OG・JSON-LD・本文・ヒーロー統計の冊数 ← `apply-count.mjs`
 6. 科目トップの図鑑・ルート一覧・ガイドの静的な中身 ← `prerender-tops.mjs`
 7. `assets/x-header.png`（X のヘッダー画像。SVG が正本なので「[画像を書き出す](#画像を書き出す)」の手順で作り直す）
+
+説明文（`desc` / `bestFor` / `pros` / `cons`）を一括で書き換えるときは、書き換え前の
+スナップショットを `data/_backup/` に取り、新しい文章を `data/_rewrite/` に置いてから
+`build/apply-book-text.mjs` を流し、そのあと 2 以降をやり直す。
 
 ### 冊数を古いまま公開しない仕組み
 
