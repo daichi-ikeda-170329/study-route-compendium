@@ -107,15 +107,17 @@ function badge(mark, color) {
  */
 export function subjectSvg(o) {
   const count = o.count.toLocaleString('en-US');
-  const chips = (o.tags || []).slice(0, 6);
+  // 並べられるだけ並べる。枚数を決め打ちすると、科目によって末尾が切れたり
+  // 余白が空いたりする（共通画像で「小論文」が落ちていた）
   let x = 72;
-  const chipSvg = chips.map(t => {
+  const chipSvg = (o.tags || []).map(t => {
     const w = Math.round(widthEm(t) * 25 + 34);
+    if (x + w > 1128) return '';
     const g = `<g><rect x="${x}" y="446" width="${w}" height="48" rx="6" fill="#FFFFFF" stroke="${INK}" stroke-opacity="0.14"/>`
       + `<text x="${x + w / 2}" y="477" text-anchor="middle" font-family="${SANS}" font-size="24" font-weight="500" fill="${INK2}">${esc(t)}</text></g>`;
     x += w + 14;
     return g;
-  }).join('\n');
+  }).filter(Boolean).join('\n');
 
   // 見出しは 1 行で収める。長いときだけ字を詰める
   const titleSize = Math.min(92, Math.floor(760 / Math.max(widthEm(o.full), 1) * 1.0));
