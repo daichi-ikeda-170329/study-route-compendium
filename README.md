@@ -13,8 +13,8 @@
 
 サイトは 2 層でできている。
 
-- **科目トップ**（`<科目>/index.html`）— 外部依存のない単一 HTML の SPA。図鑑・ルート・診断・学習ガイドを内包する。手で編集する
-- **生成ページ**（`<科目>/books/`、`<科目>/routes/`、`<科目>/guides/`）— 科目トップの `BOOKS` / `ROUTES` を正本として `build/` のスクリプトが出力する。手で編集しない
+- **科目トップ**（`<科目>/index.html`）— 外部依存のない単一 HTML の SPA。図鑑・ルート・診断・学習ガイドを内包する。手で編集する。ただし**図鑑・志望レベル一覧・講師ルート・学習ガイド・最終更新日の中身は `build/prerender-tops.mjs` が静的な HTML として書き込む**（「[科目トップの静的化](#科目トップの静的化)」を参照）
+- **生成ページ**（`<科目>/books/`、`<科目>/routes/`、`<科目>/guides/`、`/about/` ほかの信頼性ページ）— 科目トップの `BOOKS` / `ROUTES` を正本として `build/` のスクリプトが出力する。手で編集しない
 
 収益はページ内の書籍リンク（Amazon アソシエイト・楽天アフィリエイト）による。
 
@@ -47,6 +47,12 @@
 | `<科目>/routes/<tier>/index.html` | 志望レベル別ルート | 生成 |
 | `<科目>/guides/<slug>/index.html` | 解説記事 | 生成 |
 | `guides/<slug>/index.html` | 科目に属さない解説記事 | 生成 |
+| `about/index.html` | 運営者情報 | 生成（`generate-legal.mjs`） |
+| `methodology/index.html` | データの作り方（難易度・到達目安・学習時間の算出方法） | 同上 |
+| `privacy/index.html` | プライバシーポリシー | 同上 |
+| `disclaimer/index.html` | 免責事項 | 同上 |
+| `ads/index.html` | 広告について | 同上 |
+| `changelog/index.html` | 更新履歴（git のコミット履歴から自動集計） | 同上 |
 | `404.html` | 404 ページ | 手で編集 |
 | `assets/site.css` | 生成ページ共通のスタイル | 手で編集 |
 | `assets/js/share.js` | 3分診断の結果共有・保存と、ルート画面の共有。診断を持つ 5 科目の科目トップから読み込む | 手で編集 |
@@ -63,7 +69,16 @@
 | `.nojekyll` | GitHub Pages の Jekyll 処理を無効化 | — |
 | `build/` | 生成スクリプト | 手で編集 |
 | `build/lib/ads.mjs` | Google AdSense の ID・広告枠。広告の出力はここ 1 か所で決まる | `apply-adsense.mjs` が書き換える |
-| `build/data/authors.json` | 著者名（openBD 由来・実在確認済み 227 冊分） | 生成（再取得時のみ） |
+| `build/lib/flow.mjs` | 役割どうしの接続表。「次に進む本」の生成はここが正本 | 手で編集 |
+| `build/lib/scale.mjs` | 難易度 10 段階の定義と、その表示コンポーネント | 手で編集 |
+| `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 | 手で編集 |
+| `build/lib/updated.mjs` | 最終更新日。レコードの中身が変わった日を台帳で持つ | 手で編集 |
+| `build/content/legal.mjs` | 信頼性ページの本文 | 手で編集 |
+| `build/data/authors.json` | 著者名（openBD・国立国会図書館サーチ由来・実在確認済み 342 冊分） | 生成（`fetch-authors.mjs`） |
+| `build/data/record-dates.json` | 各レコードの中身が最後に変わった日。最終更新日の台帳 | 生成（触らない） |
+| `build/data/jis-kanji.txt` | JIS X 0208/0213 にある CJK 文字の一覧。簡体字の混入検出に使う | 生成（作り直し方は `check-site.mjs` のコメント） |
+| `data/_backup/` | 説明文を大きく書き換える前のスナップショット | 生成（`data/_backup/README.md` を参照） |
+| `docs/style-guide.md` | 文章のスタイルガイド。`check-site.mjs` がこの一部を機械で検査する | 手で編集 |
 | `build/data/aliases.json` | 参考書のあだ名（「ネクステ」など）。検索の索引に混ぜる | 手で編集 |
 | `build/data/new-books.json` | 掲載を承認した新刊。ここに残っている数が「評価の残作業」 | 手で編集 |
 | `build/data/publishers.json` | 新刊を調べに行く出版社と URL。`name` は `BOOKS[].pub` と一致させる | 手で編集 |
@@ -72,7 +87,9 @@
 | `test/` | 共有・保存・検索・ペース・新刊のテスト。`node --test` で実行する | 手で編集 |
 | `docs/x-posts/` | X の投稿案。`YYYY-MM.md` に新刊調査の手順・カレンダー・本文が全部入る | 生成（`gen-x-posts.mjs`） |
 | `docs/` | 機能ごとの実装計画と調査記録 | 手で編集 |
+| `.github/workflows/test.yml` | push のたびにテストと `check-site.mjs`・`prerender-tops.mjs --check` を流す | 手で編集 |
 | `.github/workflows/counts.yml` | push のたびに冊数の整合を取り、直せないずれでジョブを落とす | 手で編集 |
+| `.github/workflows/links.yml` | 週 1 回、書影と商品ページの生存を確認する（落とさない） | 手で編集 |
 | `.github/workflows/x-posts.yml` | 毎月 1 日に X の投稿案を生成してコミットする | 手で編集 |
 
 科目トップの内部構造は 5 科目で共通で、次の要素を同じクラス名で持つ。情報・小論文はこのうち `.view` が「ホーム」と「図鑑」の 2 つだけになる。
@@ -83,7 +100,7 @@
 - `.rt-search` — 全ページ共通の参考書検索。ヘッダーの中に置く
 - `.cat-index` — 生成ページ（一覧・ルート）への導線バナー
 - `.foot-subjects` — フッターの他科目リンク
-- `LEGAL` — 運営者情報・プライバシーポリシー・免責事項・広告についてのモーダル
+- `.foot-links` — 信頼性ページ（`/about/` `/methodology/` `/privacy/` `/disclaimer/` `/ads/` `/changelog/`）への静的リンク
 
 ## ビルド
 
@@ -93,19 +110,36 @@ node build/generate-index.mjs      # 参考書一覧 7 件
 node build/generate-picks.mjs      # 参考書おすすめ 5 件
 node build/generate-routes.mjs     # 志望校別ルート 47 件
 node build/generate-articles.mjs   # 解説記事 19 件（記事 13 + 一覧 6）
+node build/generate-legal.mjs      # 信頼性ページ 6 件（/about/ ほか）
 node build/generate-search.mjs     # 検索の索引 assets/js/book-index.js
+node build/prerender-tops.mjs      # 科目トップの図鑑・ルート一覧・ガイドを静的化
+node build/apply-count.mjs         # 冊数の表記を実数に合わせる
 node build/generate-sitemap.mjs    # sitemap.xml（最後に実行する）
+node build/check-site.mjs          # データと出力 HTML の検査（ずれていれば落ちる）
 ```
 
-参考書を足したときは、生成の**前**に注入、**後**に冊数の反映を挟む。
+**`generate-sitemap.mjs` は最後**。lastmod を各ページの `<time datetime>` から拾うので、
+先に流すと 1 世代古い日付が入る。**`prerender-tops.mjs` は `generate-*` のあと**で、
+科目トップに書き込む内容は `BOOKS` / `ROUTES` から作り直す。
+
+参考書を足したときは、生成の**前**に新刊を注入する。
 
 ```bash
 node build/apply-new-books.mjs    # 承認済みの新刊を科目 HTML に注入（生成の前）
-node build/apply-count.mjs        # 冊数の表記を実数に合わせる（生成の後）
+```
+
+著者名を取り直すときだけ、外部の書誌データベースに照会する（数十分かかる）。
+
+```bash
+node build/fetch-authors.mjs           # openBD と国立国会図書館サーチから取り直す
+node build/fetch-authors.mjs --no-ndl  # openBD だけ（速いが取れる数が減る）
 ```
 
 `build/apply-adsense.mjs` は AdSense の ID を全ページへ反映するもので、生成物には触らない
 （「[Google AdSense](#google-adsense)」の節を参照）。
+
+`build/check-links.mjs` は書影と商品ページの生存を外部へ問い合わせる。**押すたびに数千件の
+リクエストが飛ぶので、通常のビルドには含めない**（週 1 回 `.github/workflows/links.yml` が流す）。
 
 `build/gen-x-posts.mjs` は X の投稿案を作るもので、サイトの生成物とは無関係。
 上の一括再生成には含めない（「X アカウント」の節を参照）。
@@ -131,7 +165,12 @@ node build/generate-books.mjs math ao
 | `build/lib/cards.mjs` | 参考書 1 冊のカード（`.bcard`）。一覧・書籍ページ・解説記事で共有する |
 | `build/lib/newbooks.mjs` | 新刊（評価が未了の本）の判定と並び順。**サイト全体でこの判定だけを根拠にする** |
 | `build/lib/rank.mjs` | 難易度順の比較子。生成ページの並びはここ 1 か所で決まる（「[難易度順の並び](#難易度順の並び)」を参照） |
+| `build/lib/flow.mjs` | 役割どうしの接続表。「次に進む本」で役割が飛ばないようにする |
+| `build/lib/scale.mjs` | 難易度 10 段階の定義と表示。数字の意味はここ 1 か所で決まる |
+| `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 |
+| `build/lib/updated.mjs` | 最終更新日。git のコミット日と、レコード単位のハッシュ台帳 |
 | `build/content/articles.mjs` | 解説記事の本文 |
+| `build/content/legal.mjs` | 信頼性ページの本文 |
 
 `ROUTES` の階層は、ルートを持つ 5 科目で共通で `ROUTES[志望レベル][トラック][方針]`。トラックだけが科目で違う（英語・数学は `bun`/`ri`、国語は `gendai`/`kobun`/`kanbun`、理科は `butsuri`/`kagaku`/`seibutsu`/`chigaku`、社会は `nihonshi`/`sekaishi`/…）。
 
@@ -354,9 +393,12 @@ localStorage のキーは `rt_saved_routes`。全科目あわせて 10 件まで
 
 ```bash
 node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs
+node build/check-site.mjs           # データと出力 HTML の検査
+node build/prerender-tops.mjs --check   # 静的化した中身が最新か
 ```
 
-Node 標準の `node:test` だけで動く（依存の追加なし）。
+Node 標準の `node:test` だけで動く（依存の追加なし）。3 つとも
+`.github/workflows/test.yml` が push のたびに流す。
 
 | ファイル | 見ているもの | 流すべきとき |
 |---|---|---|
@@ -365,6 +407,24 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
 | `test/mobile-layout.test.mjs` | 科目トップが狭い画面で崩れる書き方に戻っていないか（タブバー・デスクトップナビが `button` と `a` を同じ規則で整えているか・`.tabbar` が列数を決め打ちしていないか・`a` と `img` の既定値を打ち消しているか・`.opt-fields` の子に `min-width:0` があるか） | 科目トップの CSS・タブバー・ナビの項目を触った |
 | `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・**難易度順の比較子（科目トップと `build/lib/rank.mjs` の両方を実際に動かす）**・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った / 並べ替えを触った |
+| `build/check-site.mjs` | データと出力 HTML の全件検査（下の表を参照） | 何かを変えたら毎回 |
+| `build/prerender-tops.mjs --check` | 科目トップに静的化した中身がデータとずれていないか | `BOOKS` / `ROUTES` / `GUIDES` を触った |
+
+### `build/check-site.mjs` が見ているもの
+
+**ずれていれば終了コード 1 で落ちる。** 誇張語だけは警告として出し、落とさない
+（書き換えるかどうかは人が決めるため）。
+
+| 分類 | 内容 |
+|---|---|
+| データ | 必須フィールド・ISBN-13 のチェックディジット・難易度が 1〜10 の整数・`STAGES` に無い役割・`build/lib/flow.mjs` の接続表の穴 |
+| 文章 | ハングル / キリル文字 / 想定外のギリシャ文字 / **JIS X 0208・0213 に無い CJK 文字（簡体字）** の混入、`docs/style-guide.md` の禁止語（警告）、「本アプリ」などの禁止表現 |
+| HTML | h1 が 1 つ・見出しの階層が飛んでいない・全ページに 7 科目のナビ・信頼性ページ 6 つへのリンク・Amazon アソシエイトの必須表記・title 60 字以内・meta description 120 字以内・canonical・`img` の alt・入力欄の名前（`label for` か `aria-label`）・JSON-LD が妥当な JSON・内部リンク切れ・書籍ページの最終更新日 |
+| 重複 | 書籍ページの半数以上に同じ段落が出ていないか（全冊共通の定型文の再発防止） |
+| 孤立 | どこからもリンクされていない書籍ページ・`sitemap.xml` への記載漏れ・`BOOKS` から外したのに残っているページ |
+
+簡体字の判定表は `build/data/jis-kanji.txt`。作り直し方は `build/check-site.mjs` の
+コメントにコマンドごと書いてある。
 
 診断は、科目ページから `QUIZ` を取り出し、到達しうる回答の組み合わせをすべて列挙して往復を確認する。あわせて不正な URL を 30 ケース以上、壊れた保存データの読み込みも検証する。
 
@@ -516,6 +576,11 @@ A 型が減るため、後からだと作り直しになる。`--force` で作�
 **IP アドレスの許可制**で、GitHub Actions の実行 IP（7,000 以上のレンジ）を
 登録しきれないためである。経緯は [docs/new-books-plan.md](docs/new-books-plan.md) の 3 節。
 
+同じ理由で、**書籍ページの楽天リンクは商品ページではなく ISBN の検索結果ページ**へ飛ぶ。
+楽天ブックスの商品 URL に入っているのは楽天内部の商品 ID で、ISBN からは作れず、
+対応表はこの API でしか取れない。ボタンの文言は「楽天ブックスで検索」にして
+遷移先と表示を一致させてある。Amazon 側は ISBN-10 から `/dp/<ISBN10>` を直接作れる。
+
 ### 評価が未了の本の扱い
 
 **新刊は現物を読んでいないので、難易度・到達目安・強み・注意点・向いている人を
@@ -618,11 +683,12 @@ git push
 やる**ので、手で数えるのは 1 だけである。
 
 1. 該当科目の `BOOKS` 配列（新刊は `build/data/new-books.json`。「[新刊の掲載](#新刊の掲載)」を参照）
-2. `build/` の全スクリプトを再実行
+2. `build/` の全スクリプトを、「[ビルド](#ビルド)」に書いた順で再実行
 3. この README の収録数テーブルと派生統計 ← `apply-count.mjs`
 4. ポータル `index.html` の科目カードとヒーローの冊数 ← `apply-count.mjs`
-5. 科目トップの title・meta・OG・JSON-LD・本文の冊数 ← `apply-count.mjs`
-6. `assets/x-header.png`（X のヘッダー画像。SVG が正本なので「[画像を書き出す](#画像を書き出す)」の手順で作り直す）
+5. 科目トップの title・meta・OG・JSON-LD・本文・ヒーロー統計の冊数 ← `apply-count.mjs`
+6. 科目トップの図鑑・ルート一覧・ガイドの静的な中身 ← `prerender-tops.mjs`
+7. `assets/x-header.png`（X のヘッダー画像。SVG が正本なので「[画像を書き出す](#画像を書き出す)」の手順で作り直す）
 
 ### 冊数を古いまま公開しない仕組み
 
@@ -642,8 +708,10 @@ git push
 | 種類 | 対象 | 直し方 |
 |---|---|---|
 | 前回値で置換 | ポータル `index.html`・README の合計と科目別 | `count-state.json` の前回値を新値へ置換する。`title` や `meta` の `content` 属性にはコメントを置けず、プレースホルダ方式が使えないため |
-| 文脈で置換 | 科目トップ 7 枚・README の派生統計・`build/lib/rank.mjs` の説明 | 前後の文脈ごと拾って書き換える。前回値を見ないので何度流しても同じ結果になる |
+| 文脈で置換 | 科目トップ 7 枚（本文とヒーロー統計）・ポータルの収録大学・README の派生統計・`build/lib/rank.mjs` の説明 | 前後の文脈ごと拾って書き換える。前回値を見ないので何度流しても同じ結果になる |
 | 走査して検出 | 生成ページを含む全ファイル | 「◯◯◯冊」（100 以上）を集め、実データから出ない値を報告する。直しはしない |
+
+**収録大学の数も同じ扱いにしてある。** 科目ごとに対応している大学が違い（英語・国語・数学・社会は 160 校、理科は 181 校）、ポータルはその和集合の 181 を出す。ヒーローの `<b id="stat-books">` / `<b id="stat-unis">` は JS が起動後に上書きするが、**クローラーと JS 無効の環境が見るのは HTML に書かれた値**なので、`apply-count.mjs` がそちらもそろえる。2026-09 時点で 5 科目が古い数字（英語 172・国語 152・数学 113・理科 346・社会 250）のまま凍っていた。
 
 **文脈で置換する分は、当たった件数まで検証する。** ポータルと README は前回値を
 手掛かりにできるが、科目トップは 9〜11 箇所に同じ数字が散っていて、state と実数が
@@ -738,9 +806,94 @@ console.log(n + ' / ' + t);"
 
 `test/new-books.test.mjs` が両方を実際に動かして、同じ並びになることと評価未了の本が末尾に来ることを確かめている。
 
+## 難易度スケール
+
+難易度は**サイト全体で共通の 1〜10 の 10 段階**。役割（導入 → 網羅 → 標準 → 応用 → 実戦）は別の軸で、数字とは混ぜない。到達目安の偏差値は**河合塾全統記述模試の換算値**で、ルート画面は模試の種類を選ぶと全統換算に直してから比較する。
+
+定義は `build/lib/scale.mjs` の `LEVELS` が正本で、表示も同じファイルの `degreeTable()` が出す。**この文言を各ページに書き下ろさない。** 2026-09 の点検では、トップに「難易度は共通の1〜5段階」、書籍詳細に「10段階中7」、一覧に「難易度 7」と 3 通りが同居していた。定義を 1 か所に閉じ込めたのはこれを繰り返さないため。
+
+読者向けの説明ページは `/methodology/`。難易度・到達目安・想定学習時間のどれが公開情報でどれが編集部の推定値かを分けて書いてある。
+
+## 参考書どうしの接続
+
+書籍ページの「同じ役割・同じレベルの参考書」「この本のあとに進む参考書」は自動生成する。規則は 2 つだけ。
+
+1. **同じレベルの選択肢** — 同じ役割・同じ分野で、難易度の差が 1 以内
+2. **次に進む本** — ①同じ役割のまま難易度が上の本、②`build/lib/flow.mjs` の接続表に載っている「次の役割」の本
+
+**`STAGES` の並び順で「自分より後ろの役割」を全部拾ってはいけない。** そうすると英文解釈のページに英作文の本が「次に進む本」として並ぶ（解釈 → 英作文は積み上げの順序ではなく別トラック）。並行して進めるトラック（英語のリスニング・英作文、社会の資料集）は接続表に入口を持たず、ルート画面の並行枠と図鑑から辿る。
+
+科目トップの `STAGES` にキーを足したら `flow.mjs` にも足す。足し忘れは `check-site.mjs` が落とす。
+
+## 複数の巻を 1 レコードで持つ本
+
+「英文法レベル別問題集(1〜6)」「データベース(3300/4800)」のようなシリーズは 1 冊として持っている。そのままだと難易度の数字がシリーズ全体の代表値になり、「この本は難易度 3」と読まれてしまう（実際は巻によって 2〜7 に散る）。
+
+**巻ごとに分割しない。** 分割すると巻ごとの ISBN・刊行年・問題数を現物なしに埋めることになり、このサイトが守っている「確認していない数字を置かない」に反する。代わりに、シリーズであることを表示に出して数字を単独では読ませない。
+
+判定は `build/lib/series.mjs`。根拠は `BOOKS[].hensachi` の末尾に既に入っている注記で、新しいフィールドは増やしていない。
+
+| 注記 | 意味 | 表示 |
+|---|---|---|
+| `(6段階)` | レベル別に 6 巻ある | 「レベル別 6 巻」 |
+| `(2冊構成)` `(3分冊)` | 複数冊で 1 セット | 「2 冊構成」 |
+| `(全レベル)` `(全期間)` `(通読)` | 総合英語・辞書のように学習中ずっと引く本 | 「全レベル（調べ先）」 |
+
+## 最終更新日
+
+**人が日付を書く仕組みにしない。** 手で書く運用は必ず古くなる。求め方は 2 通り。
+
+| 対象 | 求め方 |
+|---|---|
+| 1 ページ = 1 ファイル（解説記事・信頼性ページ） | git の最終コミット日（`build/lib/updated.mjs` の `fileDate()`） |
+| 1 ファイルに多数のレコード（書籍 1 冊・科目トップ） | レコードのハッシュを `build/data/record-dates.json` に控え、**中身が変わった日**を使う |
+
+科目 HTML を 1 文字直しただけで 252 冊ぜんぶの更新日が動かないよう、後者は git の日付を使わない。台帳は増えるだけで消さないので、生成を科目単位・1 冊単位で流しても実行しなかった本の日付は残る。
+
+日付は画面の `<time datetime>` と JSON-LD の `dateModified`、`sitemap.xml` の `lastmod` の 3 つに同じ値が出る。`sitemap.xml` は各ページの `<time datetime>` を読んで作るので、**`generate-sitemap.mjs` は必ず最後に流す**。
+
+`/changelog/` は git のコミット履歴のうちデータ・生成物に触ったものを日付ごとにまとめて出す。自動コミット（冊数そろえ）と作業中の保存は落とす。手書きの changelog は作らない。
+
+## 科目トップの静的化
+
+科目トップの図鑑・志望レベル一覧・講師ルート・学習ガイドは `getElementById(...).innerHTML = …` で描いている。JS が動く画面では問題ないが、**検索エンジン・リンクプレビュー・JS を切った環境が受け取る HTML では中身が空**で、図鑑は「0 冊を表示中」と出ていた。
+
+`build/prerender-tops.mjs` が初期状態の HTML をファイルに書き込む。カードの HTML をスクリプト側に書き写すと科目トップを直したときに必ずずれるので、**ページ自身の描画関数を vm 上で実行して結果を回収する**。DOM は `innerHTML` / `textContent` を記録するだけのスタブで代替する。JS が動く環境では初期化のときに同じ関数が同じ内容で上書きするので、画面の挙動は変わらない。
+
+**図鑑のグリッドだけは先頭 18 枚に切る。** 全冊を静的に出すと同じカードが `/<科目>/books/` と科目トップの 2 か所に並び、理科は HTML が 1.5MB（gzip 258KB）まで膨らむうえ、検索エンジンからは 2 ページが重複して見える。全冊の索引は `/<科目>/books/` が静的に持っているので、こちらは「空に見えない」ことと「総数が正しく出ること」を満たす枚数にして、続きへのリンクを添えてある。枚数は `CATALOG_STATIC_CARDS`。
+
+`node build/prerender-tops.mjs --check` はずれていれば落ちる。CI が push のたびに流す。
+
+## 信頼性ページ
+
+`/about/` `/methodology/` `/privacy/` `/disclaimer/` `/ads/` `/changelog/` の 6 枚。本文は `build/content/legal.mjs`、生成は `build/generate-legal.mjs`。
+
+以前この内容は科目トップの `LEGAL` にあり、**JS のモーダルとしてしか出ていなかった**。クローラー・AdSense の審査・JS を切った環境からは存在しないのと同じなので、静的ページを正本にしてモーダルは撤去し、フッターから静的ページへ送る形にした。
+
+- 冊数・大学数・広告表記の出し分けは実データと `CONFIG` から渡す。本文側に数字を書かない
+- **Amazon アソシエイトの必須表記**（「Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。」）は `build/lib/parts.mjs` の `amazonDisclosure()` が正本。`amazonTag` が入っているときだけ出す。手書き HTML にも同じ文字列を置いてあり、`check-site.mjs` が全ページにあることを確かめる
+- 表示名は**アソシエイトの登録名**。リポジトリからは分からないのでサイト名「ルート大全」を使っている。登録名が判明したら `parts.mjs` の `AMAZON_NAME` と手書き HTML を直す
+
+## 文章のスタイル
+
+正本は [docs/style-guide.md](docs/style-guide.md)。`build/check-site.mjs` がその機械で見られる部分（禁止語・非日本語文字・「本アプリ」・meta description の長さ・定型段落の重複）を検査する。**条文を変えたら検査も一緒に直す。**
+
+書籍ページの本文には「その本でしか成り立たない文」だけを書く。参考書の選び方の一般論は `/methodology/` と解説記事に 1 か所だけ置く。難易度の定義のような共通の説明は `build/lib/scale.mjs` のコンポーネントで出し、文章として書き下ろさない。
+
+説明文（`desc` / `pros` / `cons` / `bestFor`）を大きく書き換えるときは、書き換え前のスナップショットを `data/_backup/` に置く（手順は `data/_backup/README.md`）。
+
 ## 書影
 
 書影は Amazon・国立国会図書館サーチ・openBD が公開している商品画像 URL を参照するだけで、保存も加工もしない。どれも取れない本があるので、書名と出版社を出す代替表示を必ず画像の下に敷いてある。
+
+**自前ホストへの切り替えはしない**（画像の著作権は各出版社・著作権者にある）。代わりに、生きているかどうかを週 1 回外から確かめる。
+
+```bash
+node build/check-links.mjs --covers          # 書影だけ
+node build/check-links.mjs --limit=40        # 手元での動作確認
+```
+
+`.github/workflows/links.yml` が毎週月曜に流す。**このジョブは落とさない**（外部サービスの一時的な不調で毎週赤くなると、本当の欠損に気づけなくなるため）。結果はジョブのサマリで読む。全候補とも取れない本が出たら、出版社の商品画像を `cover` に入れるか `nocover` を立てる。
 
 候補 URL の作り方は 2 か所にある。同じ順番（`cover` → Amazon 2 種 → NDL → openBD）で並べること。
 
@@ -784,13 +937,17 @@ for (const s of SUBJECTS) {
 
 `BOOKS[].name` は図鑑で使う短い呼び名で、たいていはそのまま検索語になる（「速読英単語 入門編」「英文法ポラリス1」）。ただし一部は編集上の内部略称で、誰も検索しない形になっている（「河合 黒本」「東書『公共』」）。`name` の文字が `official` に 75% 未満しか含まれない本を略称とみなし、そのときだけ `official` を整えて使う。現在 28 冊が該当する。
 
-著者名は `build/data/authors.json` から引く。openBD API に各書の ISBN を投げて取得したもので、227 冊分ある。openBD に著者記載が無い本は、openBD 由来で実在を確認できた人名が `official` に現れる場合にのみ付けた。出版社名・団体名（塾・社・出版・書店・編集部 など）は著者から除外している。
+著者名は `build/data/authors.json` から引く。作るのは `build/fetch-authors.mjs` で、各書の ISBN を **openBD** と **国立国会図書館サーチ** に投げて人名を取得する。342 冊分ある。どちらの API にも著者記載が無い本は、API が実在を確認した人名が `official` に現れる場合にのみ付ける。出版社名・団体名（塾・社・出版・書店・編集部 など）は著者から除外している。
 
-**推測で著者名を補わない。** 判明しない 1,163 冊は未収録のままにし、生成側は著者欄そのものを出さない。大学受験参考書は編集部名義が多く、書誌データベースに個人著者が載らないものが実際に多数ある。
+**推測で著者名を補わない。** 判明しない 1,048 冊は未収録のままにし、生成側は著者欄そのものを出さない。大学受験参考書は編集部名義が多く、書誌データベースに個人著者が載らないものが実際に多数ある。
 
-`official` が「著者名の◯◯」という形を取っている本だけ、`title` と `h1` を著者名込みにする（「関正生の英文法ポラリス1」）。36 冊が該当する。書名にすでに著者名が入っている本には付けない。
+**書誌データベースの人名は「姓, 名, 生年-」の形で返る**（「西, きょうじ, 1963-」）。これをカンマで割って短い断片を捨てると、姓が 1 文字の著者は姓ごと消えて「きょうじ」になる。2026-08 に作った `authors.json` はこの壊れ方をしていて、ポレポレの著者が「きょうじ」、透視図が「中尾・全人・玉置・篠田・重晃」の 5 人に化けていた。`fetch-authors.mjs` は姓と名を連結して 1 人分に戻し、生没年を落とす。
 
-著者データを取り直すときは openBD へ再照会する。`authors.json` の `_provenance` に取得日と手順を書いてある。
+openBD は同じ ISBN に対して null を返すことがある（時期によって変わる）。取り直すたびに著者欄が消えたり出たりしないよう、**前回の結果にあった名前は「今回どこかの本で API が返した人名と完全一致する場合にかぎり」引き継ぐ**。名前を新しく作ることはない。
+
+`official` が「著者名の◯◯」という形を取っている本だけ、`title` と `h1` を著者名込みにする（「関正生の英文法ポラリス1」）。40 冊が該当する。書名にすでに著者名が入っている本には付けない。
+
+著者データを取り直すときは `node build/fetch-authors.mjs` を流す（NDL は 1 冊 1 リクエストなので数十分かかる。`--no-ndl` で openBD だけにもできる）。`authors.json` の `_provenance` に取得日と手順が入る。
 
 ## インデックス通知
 
@@ -829,7 +986,7 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 | GitHub Pages | 有効 | ホスティング | リポジトリ直下の `CNAME`（`route-taizen.com`） |
 | 独自ドメイン | 有効（2026-08-22〜） | `route-taizen.com`。HTTPS 強制済み | Xserver で保有、DNS は Cloudflare |
 | Cloudflare DNS | 有効 | 権威 DNS。`darwin` / `yolanda`.ns.cloudflare.com | Cloudflare ダッシュボード |
-| Google Search Console | 所有権確認メタ設置済み | インデックス登録・検索順位の把握 | ポータルと科目トップの `<head>` |
+| Google Search Console | 所有権確認メタ設置済み。**サイトマップの送信は未了** | インデックス登録・検索順位の把握 | ポータルと科目トップの `<head>`。送信する URL は `https://route-taizen.com/sitemap.xml` |
 | Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`） | アクセス解析 | 手書き HTML 9 件（ポータル・科目トップ 7 枚・404）と `build/lib/parts.mjs` の `analytics()` |
 | Google AdSense | ID 設置済み・**審査待ち**（`ca-pub-4704595822429716`） | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
 | 楽天アフィリエイト | 導入済み | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.rakutenId` |
