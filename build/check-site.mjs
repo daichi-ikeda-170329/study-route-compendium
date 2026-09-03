@@ -149,6 +149,83 @@ function checkData() {
 }
 
 /* ============================================================
+   1-2. 想定学習時間
+   ============================================================ */
+
+/**
+ * hours の書式。**信頼性ページ（/methodology/ の「想定学習時間」節）と同じ 4 種類を持つ。**
+ * 条文（build/content/legal.mjs）に無い書き方が混ざると、読み手はその表記の意味を
+ * どこにも確かめられない。片方だけ増やさない。
+ */
+const HOURS_FORMS = {
+  /** 「40〜55h」「100h〜」。1 冊を通して終える本 */
+  total: h => /\d+\s*h/.test(h),
+  /** 「毎日30分×4か月」「1週間100語×10週/巻」「各巻3〜4か月」。毎日回す本 */
+  pace: h => /(毎日|1週間|1巻|各巻|各\d)[^h]*[×=〜][^h]*(か月|週)/.test(h),
+  /** 「随時参照」「通年並行」。通読せず引き続ける本 */
+  reference: h => HOURS_REFERENCE.includes(h),
+  /** 「継続購読」。月刊誌など、終わりの無い定期刊行物 */
+  serial: h => h === '継続購読',
+};
+
+/** 参照の言い回し。ここに無い書き方が出たら、増やす前に /methodology/ に足す */
+const HOURS_REFERENCE = [
+  '辞書的使用', '随時参照', '通読不要・随時参照', '常時参照', '常時併用',
+  '通年並行', '毎日並行', '参照用', '辞書利用', '辞書的に通年使用', '任意',
+];
+
+/** 毎日回す役割。ペースで書いてよいのはここだけ */
+const STAGE_DAILY = new Set(['tango', 'jukugo', 'know']);
+/** 調べ先の役割。参照の言い回しで書いてよいのはここだけ */
+const STAGE_LOOKUP = new Set(['know', 'shiryo', 'text', 'kako']);
+
+/**
+ * 想定学習時間（hours）と、その代表値（h）の整合。
+ *
+ * hours は画面に出る文字列、h はルート画面の日程計算に使う数値で、別々に手で入れている。
+ * ずれても画面は壊れないので、**ここで見張らないと静かに食い違う**（実際に
+ * 「50〜80h」なのに h=195 の本が 6 冊あった。いずれも分冊で「各巻」が抜けていた）。
+ *
+ * 数値そのものは検算しない（算出式はコードにもデータにも無い。/methodology/ の
+ * 5 節に書いたとおり、再計算はしない方針）。見るのは書式と、桁が合っているかだけ。
+ */
+function checkHours() {
+  for (const s of SUBJECTS) {
+    for (const b of data[s.dir].books) {
+      const at = `${s.dir}/${b.id}`;
+      const h = String(b.hours || '');
+      if (!h) { if (!isProvisional(b)) warn(at, '想定学習時間（hours）が無い'); continue; }
+
+      const form = Object.keys(HOURS_FORMS).find(k => HOURS_FORMS[k](h));
+      if (!form) { warn(at, `想定学習時間の書式が /methodology/ に無い形（${h}）`); continue; }
+
+      // 役割との対応。/methodology/ は「毎日回すほうが実態に近い本はペースで書く」
+      // 「通読せず引き続ける本は参照と書く」と説明している
+      if (form === 'pace' && !STAGE_DAILY.has(b.stage)) {
+        warn(at, `毎日回す役割ではないのにペースで書いている（${h} / 役割 ${data[s.dir].stages[b.stage]?.label}）`);
+      }
+      if (form === 'reference' && !STAGE_LOOKUP.has(b.stage) && seriesOf(b)?.kind !== 'reference') {
+        warn(at, `調べ先の本ではないのに参照と書いている（${h} / 役割 ${data[s.dir].stages[b.stage]?.label}）`);
+      }
+
+      // 代表値 h との桁の突き合わせ。範囲の下限より小さい、または上限より大きすぎるものを出す。
+      // 「各巻」「1冊あたり」は巻数だけ積み上がるので上限を広く取る
+      const range = h.match(/(\d+)\s*〜\s*(\d+)\s*h/) || null;
+      const single = range ? null : h.match(/(?:^|[^〜\d])(\d+)\s*h/);
+      if (!range && !single) continue;
+      const lo = Number((range || single)[1]);
+      const hi = Number(range ? range[2] : single[1]);
+      const v = Number(b.h);
+      if (!Number.isFinite(v)) { warn(at, `h が数値でない（${b.h}）`); continue; }
+      const perVolume = /各巻|各\d|1冊あたり|上下合計|反復|h〜|〜$/.test(h);
+      if (v < lo * 0.7 || v > hi * (perVolume ? 6 : 1.6)) {
+        warn(at, `代表値 h=${v} が想定学習時間「${h}」と食い違う`);
+      }
+    }
+  }
+}
+
+/* ============================================================
    2. テキスト検査
    ============================================================ */
 
@@ -435,6 +512,7 @@ const files = htmlFiles();
 console.log(`HTML ${files.length} 枚・書籍 ${SUBJECTS.reduce((a, s) => a + data[s.dir].books.length, 0)} 冊を検査する`);
 
 checkData();
+checkHours();
 checkText();
 checkHtml(files);
 checkOrphans(files);
