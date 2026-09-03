@@ -1894,11 +1894,11 @@
    "d": "2026-09-03"
   },
   "math/3round-sugaku": {
-   "h": "8cb580291833",
+   "h": "56f84fdfc6c2",
    "d": "2026-09-03"
   },
   "math/3trial-sugaku": {
-   "h": "994ccf9951af",
+   "h": "7c2b06c86cfa",
    "d": "2026-09-03"
   },
   "math/aka": {
@@ -1994,7 +1994,7 @@
    "d": "2026-09-03"
   },
   "math/clear-sugaku": {
-   "h": "0742a3549069",
+   "h": "107ce8799ede",
    "d": "2026-09-03"
   },
   "math/clear-sugaku-enshu-juken": {
@@ -2298,7 +2298,7 @@
    "d": "2026-09-03"
   },
   "math/repeat-sugaku": {
-   "h": "49e63de5e850",
+   "h": "788c0e7be8c5",
    "d": "2026-09-03"
   },
   "math/rikai": {
@@ -3670,7 +3670,7 @@
    "d": "2026-09-03"
   },
   "science/shin-rikei-kagaku": {
-   "h": "405a3ae91c83",
+   "h": "656b48895ef7",
    "d": "2026-09-03"
   },
   "science/shinenshu": {
@@ -3874,7 +3874,7 @@
    "d": "2026-09-03"
   },
   "science/todai-nyushi-shokai-butsuri": {
-   "h": "32a7b42f5bc2",
+   "h": "3a20091b78e4",
    "d": "2026-09-03"
   },
   "science/todai-seibutsu-25": {
@@ -5574,11 +5574,11 @@
    "d": "2026-09-03"
   },
   "top/math": {
-   "h": "8ffd869e486a",
+   "h": "5e24c74aadc5",
    "d": "2026-09-03"
   },
   "top/science": {
-   "h": "193c3a6cb4a6",
+   "h": "4400ec85a017",
    "d": "2026-09-03"
   },
   "top/shoron": {
