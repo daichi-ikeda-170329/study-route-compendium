@@ -187,7 +187,8 @@ export function postF(b, sub, stages) {
 
 /**
  * BOOKS から実際に取れる事実だけを使う。推測で面白くしない。
- * 読者が確かめられるよう、母数（1,052 冊・42 ルート）と切り口を本文に書く。
+ * 読者が確かめられるよう、母数（そのとき収録している冊数・ルート数）と切り口を
+ * 本文に書く。母数は BOOKS / ROUTES から数えるので、ここに冊数は書かない。
  */
 function postsE(data) {
   const all = SUBJECTS.flatMap(s => data[s.dir].books.map(b => ({ ...b, _sub: s })));
@@ -292,7 +293,7 @@ function postsE(data) {
  * 書く月 1 回のセッションで Claude が調べる。設計は docs/new-books-plan.md。
  *
  * ここに出すのは「調べに行く先」と「いま何が収録されているか」だけにする。
- * 1,052 冊を全部読ませるとトークンを浪費するため、判断に要る集計だけを渡す。
+ * 収録している本を全部読ませるとトークンを浪費するため、判断に要る集計だけを渡す。
  */
 function survey(data, publishers) {
   const lines = [];

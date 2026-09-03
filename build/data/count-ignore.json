@@ -1,0 +1,4 @@
+{
+  "note": "build/apply-count.mjs の sweep() が報告する「◯◯◯冊」のうち、収録冊数ではないと確認したもの。file は ROOT からの相対パス、value は数字（カンマ抜き）。理由を書かずに足さない。",
+  "ignore": []
+}

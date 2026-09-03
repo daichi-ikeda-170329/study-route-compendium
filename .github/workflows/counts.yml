@@ -1,0 +1,62 @@
+# 収録冊数の表記が実データからずれたまま公開されるのを防ぐ。
+#
+# 参考書を足すと、ポータルの title・meta・JSON-LD・科目トップ・README・生成ページの
+# 数十か所がいっせいに古くなる。手順書に「apply-count.mjs を流す」と書くだけでは
+# 忘れるので、push のたびにここで流す。**この仕組みが冊数更新の正本**であって、
+# README の更新手順はその説明である。
+#
+#   1. build/apply-count.mjs を書き込みモードで流す（直せる分は自動で直る）
+#   2. 差分が出たらコミットして push する
+#   3. --check をもう一度流し、自動で直せなかったずれが残っていればジョブを落とす
+#
+# 2 の push は GITHUB_TOKEN で行うため、この workflow は再帰的に起動しない
+# （GitHub の仕様。GITHUB_TOKEN による push は workflow をトリガーしない）。
+name: 冊数の整合
+
+# paths で絞らない。冊数は生成ページ（<科目>/books/・<科目>/osusume/）にも出るので、
+# 絞ると「再生成した結果だけを push した」ときに素通りする。走査は数秒で終わる
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 直した冊数をコミットして push するため書き込みが要る
+permissions:
+  contents: write
+
+jobs:
+  counts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # 依存パッケージは無く、標準ライブラリだけで動く
+          node-version: '22'
+
+      # 自動で直せないずれがあるとここで終了コード 1 になるが、直せた分は
+      # すでに書き込まれている。先にコミットしてから最後の --check で落とす
+      - name: 冊数を実数に合わせる
+        continue-on-error: true
+        run: node build/apply-count.mjs
+
+      - name: 直した分をコミットする
+        run: |
+          set -euo pipefail
+          # checkout 直後は作業ツリーがきれいなので、差分は apply-count.mjs が
+          # 書いたものだけである。だから -A で拾ってよい
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "冊数はすでに一致している"
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'chore: 冊数の表記を実数に合わせる（自動）'
+          git push
+
+      # 自動で直せないずれ（新しい言い回しの冊数・文面を変えて外れたアンカー・
+      # 再生成し忘れた生成ページ）が残っていれば、ここで赤くする
+      - name: 残ったずれで落とす
+        run: node build/apply-count.mjs --check
