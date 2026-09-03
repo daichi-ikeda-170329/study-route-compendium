@@ -21,8 +21,9 @@ import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, ORIGIN } from './lib/extract.mjs';
 import { LEGAL_PAGES, amazonDisclosure } from './lib/parts.mjs';
 import { STAGE_FLOW } from './lib/flow.mjs';
-import { seriesOf } from './lib/series.mjs';
+import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { isProvisional } from './lib/newbooks.mjs';
+import { BANNED_WORDS, BANNED_PHRASES, BANNED_ALLOW } from './lib/words.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WARN_OK = process.argv.includes('--warn-ok');
@@ -133,9 +134,13 @@ function checkData() {
         }
       }
 
-      // シリーズ本は、到達目安に注記があるので範囲も持っているはず
+      // シリーズ本（レベル別・分冊）は、巻によって到達点が変わるので範囲を持っているはず。
+      // 「45〜65」だけでなく、このサイトが広く使う開いた範囲「〜70」も範囲として認める
+      // （下限を書かないのは「最初の巻から」の意味で、数値を単独で読ませてはいない）。
+      // 参照系（全レベル・全期間・通読）は通読して終える本ではなく、到達点そのものを
+      // 持たないので範囲を求めない。数字を足して黙らせると、確認していない数字を置くことになる。
       const ser = seriesOf(b);
-      if (ser && !/\d+\s*〜\s*\d+/.test(String(b.hensachi))) {
+      if (ser && ser.kind !== 'reference' && !hensachiPlain(b).includes('〜')) {
         warn(at, `${ser.label} なのに到達目安が範囲になっていない（${b.hensachi}）`);
       }
       void ids;
@@ -186,16 +191,34 @@ function nonJisCjk(text) {
   return [...bad];
 }
 
-/** 禁止語（docs/style-guide.md の 2 節と同じもの。片方だけ増やさない） */
-const BANNED_WORDS = [
-  '伝説', '名著', '最終兵器', '君臨', '滅法', '豪語', '最右翼', '国民的', '金字塔',
-  '決定版', '最強', '圧倒的', '無双', '必殺', '鉄板', '至高', '究極',
-];
-
-/** サイトの呼び方。Web サイトなので「アプリ」と書かない */
-const BANNED_PHRASES = ['本アプリ', '当アプリ'];
+/**
+ * 収録している全書籍の書名（name / official）を、長いものから並べて返す。
+ *
+ * 誇張語を探す前に文章からこれを取り除く。スタイルガイド 1 節が「同レベルの他書との
+ * 違いを 1 点書く」ことを求めている以上、他書の書名（『大森徹の最強講義126講』など）を
+ * 引用する説明文は今後も必ず出る。書名をそのまま数えると、書けば書くほど警告が増える。
+ *
+ * **長い書名から取り除く。**短い書名が先に消えると、長い書名の残りが地の文に見える
+ * （『看護・医療系の小論文 最強独学問題集』は『小論文』を先に消すと「最強」が露出する）。
+ * 科目をまたいだ引用があるので、対象は全科目の BOOKS を横断して集める。
+ */
+function bookNames() {
+  const names = new Set(BANNED_ALLOW);
+  for (const s of SUBJECTS) {
+    for (const b of data[s.dir].books) {
+      if (b.name) names.add(String(b.name));
+      if (b.official) names.add(String(b.official));
+    }
+  }
+  return [...names].sort((a, b) => b.length - a.length);
+}
 
 function checkText() {
+  // 書名は毎回同じなので 1 度だけ組み立てる（1,390 冊 × 全書名の置換になるため）
+  const names = bookNames();
+  /** 文章から書名・シリーズ名を取り除く。長いものから消す */
+  const stripNames = t => names.reduce((acc, n) => acc.split(n).join(' '), t);
+
   // --- データの中の文章 ---
   const fields = ['desc', 'bestFor', 'style', 'subjects', 'problems', 'hours', 'hensachi'];
   for (const s of SUBJECTS) {
@@ -214,8 +237,9 @@ function checkText() {
         const bad = nonJisCjk(t);
         if (bad.length) err(at, `${f} に簡体字が混ざっている: ${bad.join('')}（${t.slice(0, 40)}）`);
       }
-      // 禁止語は書名・正式名称を除いた文章だけを見る（『合格る計算』のような書名は別）
-      const prose = texts.filter(([f]) => f !== 'subjects').map(([, t]) => t).join(' ');
+      // 禁止語は書名・正式名称を除いた文章だけを見る（『合格る計算』のような書名は別）。
+      // 自分の書名だけでなく、引用した他書の書名も取り除く（docs/style-guide.md 2 節の例外）
+      const prose = stripNames(texts.filter(([f]) => f !== 'subjects').map(([, t]) => t).join(' '));
       for (const w of BANNED_WORDS) {
         if (prose.includes(w)) warn(at, `誇張語「${w}」が説明文にある`);
       }

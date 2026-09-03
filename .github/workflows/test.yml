@@ -33,7 +33,8 @@ jobs:
             test/search.test.mjs \
             test/pace.test.mjs \
             test/new-books.test.mjs \
-            test/mobile-layout.test.mjs
+            test/mobile-layout.test.mjs \
+            test/style-guide.test.mjs
 
       # データと出力 HTML の検査。非日本語文字の混入・孤立ページ・リンク切れ・
       # 信頼性ページへのリンク欠落・定型段落の重複などをここで落とす。

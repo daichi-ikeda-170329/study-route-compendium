@@ -72,6 +72,7 @@
 | `build/lib/flow.mjs` | 役割どうしの接続表。「次に進む本」の生成はここが正本 | 手で編集 |
 | `build/lib/scale.mjs` | 難易度 10 段階の定義と、その表示コンポーネント | 手で編集 |
 | `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 | 手で編集 |
+| `build/lib/words.mjs` | 禁止語・要注意語の一覧。`docs/style-guide.md` 2 節と同じものを持つ | 手で編集 |
 | `build/lib/updated.mjs` | 最終更新日。レコードの中身が変わった日を台帳で持つ | 手で編集 |
 | `build/apply-book-text.mjs` | `data/_rewrite/` の説明文を各科目トップの `BOOKS` に流し込む | 手で編集 |
 | `build/content/legal.mjs` | 信頼性ページの本文 | 手で編集 |
@@ -86,7 +87,7 @@
 | `build/data/publishers.json` | 新刊を調べに行く出版社と URL。`name` は `BOOKS[].pub` と一致させる | 手で編集 |
 | `build/data/count-state.json` | 前回書き込んだ冊数。置換対象を一意に決めるために持つ | 生成（`apply-count.mjs`） |
 | `build/data/count-ignore.json` | 冊数ではないと確認した「◯◯◯冊」。`apply-count.mjs` の走査を黙らせる | 手で編集 |
-| `test/` | 共有・保存・検索・ペース・新刊のテスト。`node --test` で実行する | 手で編集 |
+| `test/` | 共有・保存・検索・ペース・新刊・スタイルガイドのテスト。`node --test` で実行する | 手で編集 |
 | `docs/x-posts/` | X の投稿案。`YYYY-MM.md` に新刊調査の手順・カレンダー・本文が全部入る | 生成（`gen-x-posts.mjs`） |
 | `docs/` | 機能ごとの実装計画と調査記録 | 手で編集 |
 | `.github/workflows/test.yml` | push のたびにテストと `check-site.mjs`・`prerender-tops.mjs --check` を流す | 手で編集 |
@@ -404,7 +405,7 @@ localStorage のキーは `rt_saved_routes`。全科目あわせて 10 件まで
 ## テスト
 
 ```bash
-node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs
+node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs test/style-guide.test.mjs
 node build/check-site.mjs           # データと出力 HTML の検査
 node build/prerender-tops.mjs --check   # 静的化した中身が最新か
 ```
@@ -418,6 +419,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。3 つと
 | `test/search.test.mjs` | 索引の中身・正規化・あだ名で引けること・`aliases.json` の実在確認 | `BOOKS` を変えた / `aliases.json` を触った（先に `generate-search.mjs` を流す） |
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
 | `test/mobile-layout.test.mjs` | 科目トップが狭い画面で崩れる書き方に戻っていないか（タブバー・デスクトップナビが `button` と `a` を同じ規則で整えているか・`.tabbar` が列数を決め打ちしていないか・`a` と `img` の既定値を打ち消しているか・`.opt-fields` の子に `min-width:0` があるか） | 科目トップの CSS・タブバー・ナビの項目を触った |
+| `test/style-guide.test.mjs` | `docs/style-guide.md` 2 節の禁止語と `build/lib/words.mjs` が一致していること・機械で見ない語に条文の理由があること・`BANNED_ALLOW` が書名で代替できるものを持たないこと | スタイルガイドの語を増減した / `build/lib/words.mjs` を触った |
 | `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・**難易度順の比較子（科目トップと `build/lib/rank.mjs` の両方を実際に動かす）**・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った / 並べ替えを触った |
 | `build/check-site.mjs` | データと出力 HTML の全件検査（下の表を参照） | 何かを変えたら毎回 |
 | `build/prerender-tops.mjs --check` | 科目トップに静的化した中身がデータとずれていないか | `BOOKS` / `ROUTES` / `GUIDES` を触った |
@@ -430,7 +432,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。3 つと
 | 分類 | 内容 |
 |---|---|
 | データ | 必須フィールド・ISBN-13 のチェックディジット・難易度が 1〜10 の整数・`STAGES` に無い役割・`build/lib/flow.mjs` の接続表の穴 |
-| 文章 | ハングル / キリル文字 / 想定外のギリシャ文字 / **JIS X 0208・0213 に無い CJK 文字（簡体字）** の混入、`docs/style-guide.md` の禁止語（警告）、「本アプリ」などの禁止表現 |
+| 文章 | ハングル / キリル文字 / 想定外のギリシャ文字 / **JIS X 0208・0213 に無い CJK 文字（簡体字）** の混入、`docs/style-guide.md` の禁止語（警告。**収録している全書籍の書名を取り除いてから探す**ので、他書の書名の引用では鳴らない）、「本アプリ」などの禁止表現 |
 | HTML | h1 が 1 つ・見出しの階層が飛んでいない・全ページに 7 科目のナビ・信頼性ページ 6 つへのリンク・Amazon アソシエイトの必須表記・title 60 字以内・meta description 120 字以内・canonical・`img` の alt・入力欄の名前（`label for` か `aria-label`）・JSON-LD が妥当な JSON・内部リンク切れ・書籍ページの最終更新日 |
 | 重複 | 書籍ページの半数以上に同じ段落が出ていないか（全冊共通の定型文の再発防止） |
 | 孤立 | どこからもリンクされていない書籍ページ・`sitemap.xml` への記載漏れ・`BOOKS` から外したのに残っているページ |
@@ -773,7 +775,7 @@ console.log(bad.length ? bad : '孤児ページなし');"
 push の前にテストを流す。何をどのタイミングで流すかは「[テスト](#テスト)」の表を見る。
 
 ```bash
-node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs
+node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs test/style-guide.test.mjs
 ```
 
 ## 参考書図鑑の分け方
@@ -854,6 +856,11 @@ console.log(n + ' / ' + t);"
 | `(6段階)` | レベル別に 6 巻ある | 「レベル別 6 巻」 |
 | `(2冊構成)` `(3分冊)` | 複数冊で 1 セット | 「2 冊構成」 |
 | `(全レベル)` `(全期間)` `(通読)` | 総合英語・辞書のように学習中ずっと引く本 | 「全レベル（調べ先）」 |
+
+`check-site.mjs` は、レベル別・複数冊の本に**到達目安が範囲であること**を求める。
+「45〜65」だけでなく、下限を書かない「〜70」も範囲として認める（「最初の巻から 70 まで」の意味で、
+数字を単独で読ませてはいないため）。参照系（`(全レベル)` `(全期間)` `(通読)`）は通読して終える本ではなく
+到達点そのものを持たないので、範囲を求めない。**足りないぶんを `hensachi` に数字で埋めて黙らせない。**
 
 ## 最終更新日
 
