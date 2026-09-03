@@ -353,7 +353,7 @@ localStorage のキーは `rt_saved_routes`。全科目あわせて 10 件まで
 ## テスト
 
 ```bash
-node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs
+node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs
 ```
 
 Node 標準の `node:test` だけで動く（依存の追加なし）。
@@ -363,6 +363,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。
 | `test/share.test.mjs` | 診断結果の共有 URL の往復・不正な URL・保存データ・ルート共有の `encode`/`apply`・X の投稿画面に渡す `text=` の書式 | `QUIZ` を変えた / 科目トップのルート画面を触った / 共有の文面を変えた |
 | `test/search.test.mjs` | 索引の中身・正規化・あだ名で引けること・`aliases.json` の実在確認 | `BOOKS` を変えた / `aliases.json` を触った（先に `generate-search.mjs` を流す） |
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
+| `test/mobile-layout.test.mjs` | 科目トップが狭い画面で崩れる書き方に戻っていないか（タブバー・デスクトップナビが `button` と `a` を同じ規則で整えているか・`.tabbar` が列数を決め打ちしていないか・`a` と `img` の既定値を打ち消しているか・`.opt-fields` の子に `min-width:0` があるか） | 科目トップの CSS・タブバー・ナビの項目を触った |
 | `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・**難易度順の比較子（科目トップと `build/lib/rank.mjs` の両方を実際に動かす）**・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った / 並べ替えを触った |
 
 診断は、科目ページから `QUIZ` を取り出し、到達しうる回答の組み合わせをすべて列挙して往復を確認する。あわせて不正な URL を 30 ケース以上、壊れた保存データの読み込みも検証する。
@@ -688,7 +689,7 @@ console.log(bad.length ? bad : '孤児ページなし');"
 push の前にテストを流す。何をどのタイミングで流すかは「[テスト](#テスト)」の表を見る。
 
 ```bash
-node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs
+node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs
 ```
 
 ## 参考書図鑑の分け方

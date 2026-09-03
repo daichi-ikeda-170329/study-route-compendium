@@ -1,0 +1,36 @@
+# テストを push のたびに流す。
+#
+# これまでテストは手で流す前提だったが、「流し忘れても気づけない」ものが混ざった。
+# とくに test/mobile-layout.test.mjs が見張っているのは、ブラウザを狭くして開かない限り
+# 気づけない崩れ（2026-09-03 に情報・小論文のタブバーで実際に起きた）なので、
+# 手順書に「流すこと」と書くだけでは足りない。ここで機械的に落とす。
+#
+# 依存パッケージは無く、Node 標準の node:test だけで動く。
+name: テスト
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 走らせるファイルは README の「テスト」の表と同じ並びにしておく。
+      # テストを増やしたら両方に足す
+      - name: テストを流す
+        run: |
+          node --test \
+            test/share.test.mjs \
+            test/search.test.mjs \
+            test/pace.test.mjs \
+            test/new-books.test.mjs \
+            test/mobile-layout.test.mjs
