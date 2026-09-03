@@ -1,0 +1,16 @@
+{
+  "name": "study-route-compendium",
+  "version": "0.0.0",
+  "private": true,
+  "description": "ルート大全（route-taizen.com）。サイト本体は Node 標準だけで動き、ここにある依存は OGP 画像の生成にだけ使う。",
+  "_note_type": "\"type\": \"module\" は付けない。build/*.mjs は拡張子で ESM として読まれる一方、build/generate-search.mjs は assets/js/search.js を createRequire() で CommonJS として読むため、type を module にするとその読み込みが落ちる。",
+  "scripts": {
+    "ogp": "node build/gen-ogp.mjs",
+    "ogp:check": "node build/gen-ogp.mjs --check",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "sharp": "0.35.4"
+  }
+}

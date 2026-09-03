@@ -59,13 +59,15 @@
 | `assets/js/search.js` | 全ページ共通の参考書検索。ヘッダーの検索ボックスを動かす | 手で編集 |
 | `assets/js/book-index.js` | 検索が引く 1,390 冊の索引 | 生成 |
 | `assets/js/pace.js` | ルート画面の進めるペース（いつまでに何を終えるか） | 手で編集 |
-| `assets/ogp*.png` | OGP 画像。冊数を画像内に焼き込んでいる | **元の SVG も生成手順も無く、現状は更新できない**（「[更新手順](#更新手順)」を参照） |
+| `assets/ogp.png` / `assets/ogp-<科目>.png` | OGP 画像（サイト共通 + 7 科目）。冊数はデータから流し込む | 生成（`gen-ogp.mjs`） |
+| `assets/ogp/<科目>/<id>.png` | 参考書 1 冊ごとの OGP 画像 1,390 枚 | 同上 |
 | `assets/x-icon.svg` / `.png` | X のプロフィール画像（400×400） | SVG を手で編集し PNG を書き出す |
 | `assets/x-header.svg` / `.png` | X のヘッダー画像（1500×500） | 同上 |
 | `favicon.svg` | ファビコン | 手で編集 |
 | `sitemap.xml` | サイトマップ | 生成 |
 | `robots.txt` | クローラー設定 | 手で編集 |
 | `ads.txt` | AdSense の販売者宣言。ID を設定したときだけ存在する | 生成（`apply-adsense.mjs`） |
+| `package.json` / `package-lock.json` | **OGP の生成にだけ使う**開発用の依存（`@resvg/resvg-js`・`sharp`）。サイト本体は Node 標準だけで動く | 手で編集 |
 | `.nojekyll` | GitHub Pages の Jekyll 処理を無効化 | — |
 | `build/` | 生成スクリプト | 手で編集 |
 | `build/lib/ads.mjs` | Google AdSense の ID・広告枠。広告の出力はここ 1 か所で決まる | `apply-adsense.mjs` が書き換える |
@@ -75,9 +77,13 @@
 | `build/lib/words.mjs` | 禁止語・要注意語の一覧。`docs/style-guide.md` 2 節と同じものを持つ | 手で編集 |
 | `build/lib/updated.mjs` | 最終更新日。レコードの中身が変わった日を台帳で持つ | 手で編集 |
 | `build/apply-book-text.mjs` | `data/_rewrite/` の説明文を各科目トップの `BOOKS` に流し込む | 手で編集 |
+| `build/gen-ogp.mjs` | OGP 画像の生成。`--check` でデータとのずれを落とす | 手で編集 |
+| `build/ogp/` | OGP の SVG テンプレートと、ラスタライズに使うフォントの用意 | 手で編集 |
+| `build/.cache/fonts/` | OGP に使うフォント（Google Fonts から取る）。`.gitignore` 済み | 生成（触らない） |
 | `build/content/legal.mjs` | 信頼性ページの本文 | 手で編集 |
 | `build/data/authors.json` | 著者名（openBD・国立国会図書館サーチ由来・実在確認済み 342 冊分） | 生成（`fetch-authors.mjs`） |
 | `build/data/record-dates.json` | 各レコードの中身が最後に変わった日。最終更新日の台帳 | 生成（触らない） |
+| `build/data/ogp-hashes.json` | OGP の SVG のハッシュ台帳。変わった画像だけを書き出すために持つ | 生成（触らない） |
 | `build/data/jis-kanji.txt` | JIS X 0208/0213 にある CJK 文字の一覧。簡体字の混入検出に使う | 生成（作り直し方は `check-site.mjs` のコメント） |
 | `data/_backup/` | 説明文を大きく書き換える前のスナップショット | 生成（`data/_backup/README.md` を参照） |
 | `data/_rewrite/` | 書き換え後の説明文。`build/apply-book-text.mjs` が流し込む入力 | 手で編集 |
@@ -143,6 +149,18 @@ node build/fetch-authors.mjs --no-ndl  # openBD だけ（速いが取れる数�
 
 `build/check-links.mjs` は書影と商品ページの生存を外部へ問い合わせる。**押すたびに数千件の
 リクエストが飛ぶので、通常のビルドには含めない**（週 1 回 `.github/workflows/links.yml` が流す）。
+
+`build/gen-ogp.mjs` は OGP 画像を作る。**このリポジトリで唯一、依存パッケージを使う**
+（`@resvg/resvg-js`・`sharp`。`npm ci` で入る）。作り直す必要があるのは冊数・書名・役割・
+難易度・到達目安が変わったときで、`--check` が作り忘れを落とす（「[OGP 画像](#ogp-画像)」を参照）。
+
+```bash
+npm ci                              # 初回だけ
+node build/gen-ogp.mjs              # 共通 1 枚 + 科目別 7 枚 + 書籍別 1,390 枚
+node build/gen-ogp.mjs --subjects   # 科目別と共通だけ
+node build/gen-ogp.mjs --books      # 書籍別だけ
+node build/gen-ogp.mjs --check      # データとずれていれば終了コード 1 で落ちる
+```
 
 `build/apply-book-text.mjs` は `data/_rewrite/` に置いた説明文を各科目トップの `BOOKS` へ
 流し込むもので、**説明文を一括で書き換えるときだけ**使う。通常のビルドには含めない。
@@ -408,9 +426,11 @@ localStorage のキーは `rt_saved_routes`。全科目あわせて 10 件まで
 node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs test/style-guide.test.mjs
 node build/check-site.mjs           # データと出力 HTML の検査
 node build/prerender-tops.mjs --check   # 静的化した中身が最新か
+node build/gen-ogp.mjs --check          # OGP 画像が最新か（npm ci が要る）
 ```
 
-Node 標準の `node:test` だけで動く（依存の追加なし）。3 つとも
+テストと `check-site.mjs`・`prerender-tops.mjs` は Node 標準だけで動く。`gen-ogp.mjs --check`
+だけが依存パッケージを使うので、CI では先に `npm ci` を流している。すべて
 `.github/workflows/test.yml` が push のたびに流す。
 
 | ファイル | 見ているもの | 流すべきとき |
@@ -423,6 +443,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。3 つと
 | `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・**難易度順の比較子（科目トップと `build/lib/rank.mjs` の両方を実際に動かす）**・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った / 並べ替えを触った |
 | `build/check-site.mjs` | データと出力 HTML の全件検査（下の表を参照） | 何かを変えたら毎回 |
 | `build/prerender-tops.mjs --check` | 科目トップに静的化した中身がデータとずれていないか | `BOOKS` / `ROUTES` / `GUIDES` を触った |
+| `build/gen-ogp.mjs --check` | OGP 画像がデータとずれていないか（冊数・書名・役割・難易度・到達目安） | `BOOKS` を触った |
 
 ### `build/check-site.mjs` が見ているもの
 
@@ -434,6 +455,7 @@ Node 標準の `node:test` だけで動く（依存の追加なし）。3 つと
 | データ | 必須フィールド・ISBN-13 のチェックディジット・難易度が 1〜10 の整数・`STAGES` に無い役割・`build/lib/flow.mjs` の接続表の穴 |
 | 文章 | ハングル / キリル文字 / 想定外のギリシャ文字 / **JIS X 0208・0213 に無い CJK 文字（簡体字）** の混入、`docs/style-guide.md` の禁止語（警告。**収録している全書籍の書名を取り除いてから探す**ので、他書の書名の引用では鳴らない）、「本アプリ」などの禁止表現 |
 | HTML | h1 が 1 つ・見出しの階層が飛んでいない・全ページに 7 科目のナビ・信頼性ページ 6 つへのリンク・Amazon アソシエイトの必須表記・title 60 字以内・meta description 120 字以内・canonical・`img` の alt・入力欄の名前（`label for` か `aria-label`）・JSON-LD が妥当な JSON・内部リンク切れ・書籍ページの最終更新日 |
+| OGP | `og:image` / `twitter:image` が指すファイルが実在すること・書籍ページがその本の OGP を指していること |
 | 重複 | 書籍ページの半数以上に同じ段落が出ていないか（全冊共通の定型文の再発防止） |
 | 孤立 | どこからもリンクされていない書籍ページ・`sitemap.xml` への記載漏れ・`BOOKS` から外したのに残っているページ |
 
@@ -702,7 +724,8 @@ git push
 4. ポータル `index.html` の科目カードとヒーローの冊数 ← `apply-count.mjs`
 5. 科目トップの title・meta・OG・JSON-LD・本文・ヒーロー統計の冊数 ← `apply-count.mjs`
 6. 科目トップの図鑑・ルート一覧・ガイドの静的な中身 ← `prerender-tops.mjs`
-7. `assets/x-header.png`（X のヘッダー画像。SVG が正本なので「[画像を書き出す](#画像を書き出す)」の手順で作り直す）
+7. OGP 画像 ← `gen-ogp.mjs`（`--check` が CI で落とすので、忘れても公開はされない）
+8. `assets/x-header.png`（X のヘッダー画像。SVG が正本なので「[画像を書き出す](#画像を書き出す)」の手順で作り直す）
 
 説明文（`desc` / `bestFor` / `pros` / `cons`）を一括で書き換えるときは、書き換え前の
 スナップショットを `data/_backup/` に取り、新しい文章を `data/_rewrite/` に置いてから
@@ -747,10 +770,11 @@ git push
 区別が付かないため。冊数ではない数字を報告されたら `build/data/count-ignore.json` に
 **理由付きで**登録する。`docs/` は当時の記録なので走査しない。
 
-**`assets/ogp*.png` 6 枚は現状更新できない。** 冊数を画像内に焼き込んでいるが、
-元になる SVG も生成スクリプトもリポジトリに無い（`git log` で追うと初期コミットで
-PNG が直接追加されたきり）。冊数が数十ずれても表示は壊れないため据え置いており、
-SVG を起こし直す作業は別に切り出してある（`docs/new-books-plan.md` の 8 節）。
+**OGP 画像に焼き込む冊数は `build/gen-ogp.mjs` が流し込む。** 画像はビルドの生成物で、
+数字はテンプレートに書かず `BOOKS` から数える。作り直しは `node build/gen-ogp.mjs`、
+作り忘れは `node build/gen-ogp.mjs --check`（CI が push のたびに流す）で落ちる。
+2026-08 に置かれた初代の画像は元の SVG も生成手順も無く更新できなかったが、2026-09-04 に
+作り直した（「[OGP 画像](#ogp-画像)」を参照）。
 
 **参考書を削除したときは、生成済みの個別ページを手で消す。** 生成スクリプトは書き出すだけで消さないので、`BOOKS` から外しても `<科目>/books/<id>/` が残り、`sitemap.xml`（実ファイルを走査して作る）にも載り続ける。次で孤児を洗い出す。
 
@@ -904,6 +928,49 @@ console.log(n + ' / ' + t);"
 書籍ページの本文には「その本でしか成り立たない文」だけを書く。参考書の選び方の一般論は `/methodology/` と解説記事に 1 か所だけ置く。難易度の定義のような共通の説明は `build/lib/scale.mjs` のコンポーネントで出し、文章として書き下ろさない。
 
 説明文（`desc` / `pros` / `cons` / `bestFor`）を大きく書き換えるときは、書き換え前のスナップショットを `data/_backup/` に置く（手順は `data/_backup/README.md`）。
+
+## OGP 画像
+
+SNS やチャットにリンクを貼ったときに出る 1200×630 の画像。**全部がビルドの生成物**で、
+`node build/gen-ogp.mjs` で作り直せる。
+
+| 画像 | 何を出すか | どのページが指すか |
+|---|---|---|
+| `assets/ogp.png` | サイト名・7 科目・**合計冊数** | ポータル・信頼性ページ・科目に属さない記事 |
+| `assets/ogp-<科目>.png` | 科目名・分野・**その科目の冊数**・役割の一覧 | 科目トップ・一覧・おすすめ・ルート・その科目の記事 |
+| `assets/ogp/<科目>/<id>.png` | 書名・役割・難易度・到達目安 | 参考書 1 冊の詳細ページ |
+
+**冊数はテンプレートに書かない。**`BOOKS` から数えて流し込む。初代の OGP は画像に数字を
+焼き込んだまま元の SVG が残らず、冊数が増えても直せなくなっていた。同じことを繰り返さない
+ために、数字の出どころはデータだけにしてある。
+
+数字の出し方はサイトの他の画面と同じ判断にそろえる。
+
+- 評価が未了の新刊（`provisional: true`）は難易度も到達目安も持たないので出さない。役割だけを出す
+- レベル別・分冊・参照系（`build/lib/series.mjs` の `seriesOf()`）は、難易度の数字の代わりに
+  「レベル別 6 巻」「全レベル（調べ先）」のような注記を出す。**数字を単独で読ませない**
+- 書名は略さない。2 行に収まる大きさを大きいほうから探し、どうしても入らないときだけ末尾を「…」で切る
+
+### 作り直し
+
+```bash
+npm ci                     # @resvg/resvg-js と sharp。初回だけ
+node build/gen-ogp.mjs
+```
+
+- **変わった画像だけを書き出す。** SVG の文字列のハッシュを `build/data/ogp-hashes.json` に
+  持ち、前回と同じならスキップする（毎回 1,390 枚を書き換えると git の履歴が膨らむ）
+- 量子化やレイアウトを変えたときは `build/gen-ogp.mjs` の `RENDER_VERSION` を上げる。
+  上げないと SVG が同じ画像が古い設定のまま残る
+- `BOOKS` から消えた本の画像は自動で削除する
+
+### フォント
+
+ラスタライズに使う書体は Zen Kaku Gothic New と Shippori Mincho B1（サイト本文と同じ）。
+**`loadSystemFonts` に任せない。**環境によって字形も行送りも変わり、同じデータから違う画像が出て
+`--check` が手元と CI で食い違う。初回だけ Google Fonts から取って `build/.cache/fonts/` に置き、
+以後はそれを使う。**フォントファイルはリポジトリに入れない**（ライセンス表記と容量のため。
+`.gitignore` 済み）。`--check` は画像を作らないのでフォントを取りに行かない。
 
 ## 書影
 

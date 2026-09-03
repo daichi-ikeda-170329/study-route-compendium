@@ -123,14 +123,10 @@ export const SUBJECTS = [
     full: '社会ルート大全', fields: '日本史・世界史・地理・公民' },
   // 図鑑と書籍ページだけを持つ科目。志望校別ルート・3 分診断・学習ガイドは無い。
   // catalogOnly を見て generate-routes / generate-picks は飛ばす（ROUTES が無いため）。
-  // OGP は科目別の画像が作れないので（assets/ogp*.png は元の SVG も生成手順も残っていない）
-  // 共通の ogp.png を指す。ogp フィールドが無い科目は従来どおり ogp-<dir>.png を使う。
   { dir: 'joho',     ja: '情報', mark: '情', en: 'INFORMATICS',    color: '#1F6E7A',
-    full: '情報ルート大全', fields: '情報I（共通テスト）',
-    catalogOnly: true, ogp: 'ogp.png' },
+    full: '情報ルート大全', fields: '情報I（共通テスト）', catalogOnly: true },
   { dir: 'shoron',   ja: '小論文', mark: '論', en: 'ESSAY',        color: '#8E3B5E',
-    full: '小論文ルート大全', fields: '書き方・型・ネタ・学部別',
-    catalogOnly: true, ogp: 'ogp.png' },
+    full: '小論文ルート大全', fields: '書き方・型・ネタ・学部別', catalogOnly: true },
 ];
 
 export const ORIGIN = 'https://route-taizen.com';

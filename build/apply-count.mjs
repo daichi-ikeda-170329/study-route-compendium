@@ -27,7 +27,7 @@
  *
  * 画像に焼き込んだ冊数はここでは扱えない。
  *   assets/x-header.png … SVG が正本にあるので月 1 回焼き直す（README の X アカウント節）
- *   assets/ogp*.png     … 元の SVG も生成手順もリポジトリに無い。当面は据え置く
+ *   assets/ogp*.png     … build/gen-ogp.mjs が BOOKS から数え直して焼き直す
  */
 import fs from 'fs';
 import path from 'path';
@@ -348,7 +348,7 @@ function main() {
         note: old.note, note2: old.note2, ...next,
       }, null, 2)}\n`, 'utf8');
       console.log(`置換 ${hits} 件。count-state.json を更新した`);
-      console.log('画像に焼き込んだ冊数（assets/x-header.png・assets/ogp*.png）は別手順。docs/new-books-plan.md の 8 節を見る');
+      console.log('画像に焼き込んだ冊数は別手順。OGP は node build/gen-ogp.mjs、X のヘッダーは README の X アカウント節を見る');
     }
   }
 

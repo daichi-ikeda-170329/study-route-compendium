@@ -315,6 +315,24 @@ function checkHtml(files) {
     // canonical（noindex のページには要らない）
     if (!noindex && !/<link rel="canonical" href="https:\/\//.test(src)) err(at, 'canonical が無い');
 
+    // OGP 画像。**指しているファイルが実在すること**を見る。
+    // joho / shoron に科目別の画像が無いまま共通画像を指していた状態を二度と作らない
+    for (const m of src.matchAll(/<meta (?:property="og:image"|name="twitter:image") content="([^"]+)"/g)) {
+      const u = m[1];
+      if (!u.startsWith(`${ORIGIN}/`)) { err(at, `og:image が絶対 URL でない（${u}）`); continue; }
+      const f = path.join(ROOT, u.slice(ORIGIN.length + 1));
+      if (!fs.existsSync(f)) err(at, `og:image のファイルが無い（${u}）`);
+    }
+
+    // 書籍ページはその本の OGP を指す（科目共通の画像では、貼っても何の本か分からない）
+    if (isBook) {
+      const id = at.match(/([^/]+)\/books\/([^/]+)\/index\.html$/);
+      const want = `${ORIGIN}/assets/ogp/${id[1]}/${id[2]}.png`;
+      if (!src.includes(`<meta property="og:image" content="${want}">`)) {
+        err(at, `og:image がこの本の OGP を指していない（${want} のはず）`);
+      }
+    }
+
     // 画像の alt
     for (const m of markup.matchAll(/<img\b[^>]*>/g)) {
       if (!/\balt=/.test(m[0])) err(at, `alt の無い img: ${m[0].slice(0, 70)}`);
