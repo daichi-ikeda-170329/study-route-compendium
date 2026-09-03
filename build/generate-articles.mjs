@@ -16,6 +16,7 @@ import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumb
 import { bookCards } from './lib/cards.mjs';
 import { ARTICLES } from './content/articles.mjs';
 import { adUnit } from './lib/ads.mjs';
+import { fileDate } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -89,6 +90,8 @@ ${books.map(b => `            <tr><th scope="row">${bookLink(d, b.id)}</th>${col
 }
 
 function render(a) {
+  // 記事本文は build/content/articles.mjs にまとめてある。手で日付を書かず、git の最終コミット日を使う
+  const updated = fileDate('build/content/articles.mjs');
   const sub = a.subject ? SUBJECTS.find(s => s.dir === a.subject) : null;
   const base = sub ? `/${sub.dir}/guides/${a.slug}/` : `/guides/${a.slug}/`;
   const url = `${ORIGIN}${base}`;
@@ -117,7 +120,7 @@ ${s.body.map(bl => renderBlock(bl, a.subject)).join('\n')}
         description: a.desc,
         inLanguage: 'ja',
         datePublished: a.published,
-        dateModified: a.updated || a.published,
+        dateModified: updated,
         author: { '@type': 'Organization', name: 'ルート大全 編集部', url: `${ORIGIN}/` },
         publisher: { '@type': 'Organization', name: 'ルート大全 編集部', url: `${ORIGIN}/` },
         mainEntityOfPage: url,
@@ -136,7 +139,7 @@ ${s.body.map(bl => renderBlock(bl, a.subject)).join('\n')}
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
-${head({ title: a.title, desc: a.desc, url, ogImage: `${ORIGIN}/assets/ogp${sub ? `-${sub.dir}` : ''}.png` })}
+${head({ title: a.title, desc: clip(a.desc, 120), url, ogImage: `${ORIGIN}/assets/ogp${sub ? `-${sub.dir}` : ''}.png` })}
 <style>
 :root{--sc:${color}}
 .art-head{padding:26px 0 0}
@@ -184,7 +187,7 @@ ${sub ? header(sub) : portalHeader()}
       <h1 class="art-h1">${esc(a.h1 || a.title)}</h1>
       <div class="art-meta">
         <span>公開 ${esc(a.published)}</span>
-        ${a.updated && a.updated !== a.published ? `<span>更新 ${esc(a.updated)}</span>` : ''}
+        ${updated !== a.published ? `<span>更新 <time datetime="${updated}">${updated}</time></span>` : ''}
         <span>ルート大全 編集部</span>
       </div>
       <p class="art-lead">${inline(a.lead, a.subject)}</p>
@@ -228,8 +231,8 @@ function renderIndex(dir, list) {
     ? `${sub.ja}の参考書の選び方・比較記事一覧 - ${sub.full}`
     : '参考書の選び方・比較記事一覧 - ルート大全';
   const desc = sub
-    ? clip(`大学受験${sub.ja}の参考書について、似た本の違いと選び分けを解説した記事の一覧。${list.map(a => a.h1 || a.title).join('、')}。`, 158)
-    : clip(`大学受験の参考書選びについて、科目をまたいで役立つ考え方をまとめた記事の一覧。${list.map(a => a.h1 || a.title).join('、')}。`, 158);
+    ? clip(`大学受験${sub.ja}の参考書について、似た本の違いと選び分けを解説した記事の一覧（${list.length} 本）。`, 120)
+    : clip(`大学受験の参考書選びについて、科目をまたいで役立つ考え方をまとめた記事の一覧（${list.length} 本）。`, 120);
 
   const crumbItems = [{ name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` }];
   if (sub) crumbItems.push({ name: sub.full, url: `/${sub.dir}/`, absUrl: `${ORIGIN}/${sub.dir}/` });

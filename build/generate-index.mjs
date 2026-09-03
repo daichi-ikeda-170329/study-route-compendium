@@ -12,18 +12,24 @@ import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './l
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { byDifficultyAsc } from './lib/rank.mjs';
+import { degreeTable } from './lib/scale.mjs';
+import { fileDate } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 function render(sub, d, counts) {
   const url = `${ORIGIN}/${sub.dir}/books/`;
+  // 一覧の中身は科目 HTML の BOOKS がすべて。その最終コミット日を更新日にする
+  const updated = fileDate(`${sub.dir}/index.html`);
   const n = d.books.length;
   const stageKeys = Object.keys(d.stages).filter(k => d.books.some(b => b.stage === k));
   const hasSub = d.books.some(b => b.sub);
 
   const title = `${sub.ja}の参考書一覧${n}冊｜難易度・役割つき索引 - ${sub.full}`;
-  const desc = clip(`大学受験の${sub.ja}参考書${n}冊を、${stageKeys.map(k => d.stages[k].label).join('・')}の役割別に並べた索引。` +
-    `各冊のレベル・到達目安・向いている人・次に進む本を個別ページで確認できます。${sub.fields}に対応。2026年 新課程対応。`, 158);
+  // meta description は 120 字以内。役割の一覧を全部並べると尻切れになるので、
+  // 「何が何冊あって、1 冊ごとに何が分かるか」だけに絞る。
+  const desc = clip(`大学受験の${sub.ja}参考書${n}冊を、役割別・難易度順に並べた索引。`
+    + `1 冊ごとにレベル・到達目安・向いている人・次に進む本を確認できます。${sub.fields}に対応。`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -66,6 +72,7 @@ ${body}
         '@type': 'CollectionPage',
         '@id': `${url}#webpage`,
         url, name: title, description: desc, inLanguage: 'ja',
+        dateModified: updated,
         isPartOf: { '@id': `${ORIGIN}/#website` },
         breadcrumb: { '@id': `${url}#breadcrumb` },
       },
@@ -110,6 +117,8 @@ ${header(sub)}
     <h1 class="sec" style="font-size:29px">${esc(sub.ja)}の参考書一覧　${n}冊</h1>
     <p class="sec-lead">${esc(sub.full)}に収録している${esc(sub.ja)}の参考書${n}冊を、役割別・難易度順に並べた索引です。各冊のページで、レベル・到達目安・向いている人・強みと注意点・次に進む本を確認できます。対象は${esc(sub.fields)}。</p>
     ${sub.catalogOnly ? '' : `<p class="sec-lead">${n}冊は多すぎるという場合は、志望校ルートで実際に本線として選んだ本だけを集めた<a href="/${sub.dir}/osusume/">${esc(sub.ja)}の参考書おすすめ</a>から見てください。</p>`}
+    <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
+    ${degreeTable()}
     <div class="stnav">
 ${nav}
     </div>
@@ -126,7 +135,7 @@ ${sections}
       ${sub.catalogOnly
     ? `<a class="p" href="/${sub.dir}/#catalog">${esc(sub.ja)}の参考書図鑑へ<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="g" href="/">全科目を見る</a>`
-    : `<a class="p" href="/${sub.dir}/">${esc(sub.ja)}のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    : `<a class="p" href="/${sub.dir}/#route">${esc(sub.ja)}のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="g" href="/${sub.dir}/osusume/">おすすめだけ見る</a>`}
     </div>
   </div>${adUnit('bottom', '  ')}

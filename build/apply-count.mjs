@@ -51,11 +51,15 @@ const comma = n => n.toLocaleString('en-US');   // 1390 → "1,390"
 function truth() {
   const subjects = {};   // dir -> 収録冊数
   const picks = {};      // dir -> おすすめ（ルート本線で採用した本）の冊数。ルートを持たない科目は null
+  const unis = {};       // dir -> その科目のルートが対応している大学数
+  const uniNames = new Set();   // サイト全体の収録大学（科目をまたいだ和集合）
   let total = 0, covers = 0, nonHensachi = 0, shorthand = 0, withAuthorCount = 0;
 
   for (const s of SUBJECTS) {
     const d = extractSubject(ROOT, s.dir);
     subjects[s.dir] = d.books.length;
+    unis[s.dir] = d.unis.length;
+    d.unis.forEach(u => uniNames.add(u.n));
     total += d.books.length;
 
     if (s.catalogOnly) {
@@ -79,7 +83,7 @@ function truth() {
 
   const authors = Object.keys(JSON.parse(fs.readFileSync(AUTHORS_FILE, 'utf8')).authors).length;
   return {
-    total, subjects, picks,
+    total, subjects, picks, unis, uniTotal: uniNames.size,
     covers, nonHensachi, shorthand, withAuthor: withAuthorCount,
     authors, authorless: total - authors,
   };
@@ -135,7 +139,9 @@ function anchors(t) {
     { file: 'README.md', why: '内部略称とみなした本の数',
       re: /(整えて使う。現在 )([\d,]+)( 冊が該当する)/g, value: t.shorthand },
     { file: 'README.md', why: 'authors.json に著者名がある本の数',
-      re: /(取得したもので、)([\d,]+)( 冊分ある)/g, value: t.authors },
+      re: /(人名を取得する。)([\d,]+)( 冊分ある)/g, value: t.authors },
+    { file: 'README.md', why: 'authors.json に著者名がある本の数（構成表）',
+      re: /(実在確認済み )([\d,]+)( 冊分）)/g, value: t.authors },
     { file: 'README.md', why: '著者名が判明しない本の数（収録 − authors.json）',
       re: /(判明しない )([\d,]+)( 冊)/g, value: t.authorless },
     { file: 'README.md', why: 'title と h1 を著者名込みにする本の数',
@@ -144,6 +150,9 @@ function anchors(t) {
       re: /(収録 )([\d,]+)( 冊のうち)/g, value: t.total },
     { file: 'build/lib/rank.mjs', why: '偏差値を数値で書いていない本の数',
       re: /(冊のうち )([\d,]+)( 冊がこの書き方)/g, value: t.nonHensachi },
+    // ポータルのヒーロー統計。全科目を合わせた収録大学数（科目ごとの数とは別）
+    { file: 'index.html', why: '収録大学（全科目の和集合）',
+      re: /(<div class="stat"><b>)([\d,]+)(<\/b><span>収録大学（全科目）<\/span><\/div>)/g, value: t.uniTotal },
   ];
 }
 
@@ -186,12 +195,17 @@ function applyAnchors(t, write) {
  * `min` は「最低これだけ当たるはず」の件数。当たらなければ文面を変えて正規表現が
  * 外れたということなので、`applySubjectTops()` が落とす。
  */
-function subjectTopRules(total, picks) {
+function subjectTopRules(total, picks, unis) {
   const rules = [
     // 「英語参考書252冊」「英語の参考書252冊」「英語の参考書一覧 252冊」
     { re: /(参考書(?:一覧)?[ 　]?)(\d+)冊/g, value: total, min: 1, why: '収録冊数' },
     // 科目トップの本文リード「定番から最新刊まで162冊を…」（数学だけが持つ）
     { re: /(最新刊まで)(\d+)冊/g, value: total, min: 0, why: '収録冊数（リード）' },
+    // ヒーローの統計カード。JS が起動後に上書きするが、クローラーと JS 無効の
+    // 環境が見るのは HTML に書かれたこの値。2026-09 時点で 5 科目が古い数字のまま
+    // 凍っていた（英語 172・国語 152・数学 113・理科 346・社会 250）
+    { re: /(<b id="stat-books">)(\d+)(?=<\/b>)/g, value: total, min: 1, why: 'ヒーローの収録参考書' },
+    { re: /(<b id="stat-unis">)(\d+)(?=<\/b>)/g, value: unis, min: 0, why: 'ヒーローの収録大学' },
   ];
   // ルートを持たない科目（情報・小論文）はおすすめページ自体が無い
   if (picks !== null) {
@@ -212,12 +226,13 @@ function applySubjectTops(t, write) {
     const src = fs.readFileSync(file, 'utf8');
     let out = src;
 
-    for (const r of subjectTopRules(total, picks)) {
+    for (const r of subjectTopRules(total, picks, t.unis[s.dir])) {
       let found = 0;
       out = out.replace(r.re, (m, pre, old) => {
         found++;
         if (String(r.value) !== old) hits++;
-        return `${pre}${r.value}冊`;
+        // 「◯◯冊」の形と、タグの中の数字だけの形の両方がある
+        return r.re.source.includes('冊') ? `${pre}${r.value}冊` : `${pre}${r.value}`;
       });
       if (found < r.min) missing.push(`${s.dir}/index.html: ${r.why}（${r.re}）が ${found} 件しか当たらない`);
     }
@@ -230,7 +245,9 @@ function applySubjectTops(t, write) {
   return { hits, missing };
 }
 
-const SWEEP_SKIP_DIRS = new Set(['.git', 'node_modules', 'docs']);
+// changelog/ は git のコミットメッセージをそのまま並べたページ。当時の冊数が
+// 出てくるのは正しい記録なので、実データと照合しない
+const SWEEP_SKIP_DIRS = new Set(['.git', 'node_modules', 'docs', 'changelog']);
 const SWEEP_EXT = /\.(html|js|mjs|md)$/;
 
 /** 走査対象のファイルを集める。docs/ は当時の記録なので数字を凍らせたままでよい */

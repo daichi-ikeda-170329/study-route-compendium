@@ -16,6 +16,7 @@ import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/e
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { adUnit } from './lib/ads.mjs';
+import { fileDate } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -104,6 +105,8 @@ function sideList(steps, bookById, sub, stages) {
 }
 
 function render(sub, d, tier, norm, counts) {
+  // ルートの中身は科目 HTML の ROUTES がすべて。その最終コミット日を更新日にする
+  const updated = fileDate(`${sub.dir}/index.html`);
   const bookById = new Map(d.books.map(b => [b.id, b]));
   const url = `${ORIGIN}/${sub.dir}/routes/${tier.id}/`;
   const node = norm[tier.id];
@@ -116,9 +119,8 @@ function render(sub, d, tier, norm, counts) {
   for (const kind of ['para', 'final']) for (const k of Object.keys(node[kind])) node[kind][k].forEach(s => used.add(s.id));
 
   const title = `${tier.name}の${sub.ja}参考書ルート｜${tier.sub} - ${sub.full}`;
-  const desc = clip(`${tier.name}（${tier.sub}）を目指す人向けの${sub.ja}参考書ルート。` +
-    `目標は${tier.goal}、${tier.hensachi}。導入から過去問まで、何をどの順で進めるかを${used.size}冊の中から並べています。` +
-    `${trackKeys.map(trackLabel).join('・')}別、王道網羅型と時短・精選型の2通り。2026年 新課程対応。`, 158);
+  const desc = clip(`${tier.name}（${tier.sub}）を目指す人向けの${sub.ja}参考書ルート。`
+    + `目標は${tier.goal}。導入から過去問まで何をどの順で進めるかを、${used.size}冊の中から並べています。`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -182,6 +184,7 @@ ${sideList(final, bookById, sub, d.stages)}
       },
       {
         '@type': 'WebPage',
+        dateModified: updated,
         '@id': `${url}#webpage`,
         url, name: title, description: desc, inLanguage: 'ja',
         isPartOf: { '@id': `${ORIGIN}/#website` },
@@ -250,11 +253,12 @@ ${header(sub)}
     <div class="eyebrow">Route by target</div>
     <h1 class="sec" style="font-size:29px">${esc(tier.name)}の${esc(sub.ja)}参考書ルート</h1>
     <p class="sec-lead">${esc(tier.sub)}を目指す人に向けた${esc(sub.ja)}の並びです。導入から過去問まで、${used.size}冊の中から「何を・どの順で」やるかを${trackKeys.map(trackLabel).map(esc).join('・')}別にまとめています。すでに終えた段階は飛ばして構いません。</p>
-    <div class="tier-head">
+    <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
+    <dl class="tier-head">
       <div><dt>目標</dt><dd>${esc(tier.goal)}</dd></div>
       <div><dt>想定レベル</dt><dd>${esc(tier.hensachi)}</dd></div>
       <div><dt>収録冊数</dt><dd>${used.size} 冊</dd></div>
-    </div>
+    </dl>
     ${trackKeys.length > 1 ? `<div class="tnav">
 ${trackKeys.map(tk => `      <a href="#track-${tk}">${esc(trackLabel(tk))}のルート</a>`).join('\n')}
     </div>` : ''}
@@ -306,11 +310,12 @@ ${jsonLd(ld)}
 
 /** 科目ごとの志望レベル一覧ページ */
 function renderIndex(sub, d, norm, counts) {
+  const updated = fileDate(`${sub.dir}/index.html`);
   const url = `${ORIGIN}/${sub.dir}/routes/`;
   const tiers = d.tiers.filter(t => norm[t.id]);
   const title = `${sub.ja}の志望校別 参考書ルート一覧｜共通テストから最難関まで - ${sub.full}`;
-  const desc = clip(`大学受験${sub.ja}の参考書ルートを志望校レベル別にまとめた一覧。` +
-    `${tiers.map(t => t.name).join('・')}の${tiers.length}段階。各ルートで導入から過去問まで、何をどの順で進めるかを確認できます。2026年 新課程対応。`, 158);
+  const desc = clip(`大学受験${sub.ja}の参考書ルートを志望校レベル別にまとめた一覧（${tiers.length} 段階）。`
+    + `各ルートで導入から過去問まで、何をどの順で進めるかを確認できます。`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -336,6 +341,7 @@ function renderIndex(sub, d, norm, counts) {
       breadcrumbLd(crumbItems, `${url}#breadcrumb`),
       {
         '@type': 'CollectionPage',
+        dateModified: updated,
         '@id': `${url}#webpage`,
         url, name: title, description: desc, inLanguage: 'ja',
         isPartOf: { '@id': `${ORIGIN}/#website` },
@@ -385,6 +391,7 @@ ${header(sub)}
     <div class="eyebrow">Routes by target</div>
     <h1 class="sec" style="font-size:29px">${esc(sub.ja)}の志望校別 参考書ルート</h1>
     <p class="sec-lead">志望校のレベルごとに、${esc(sub.ja)}で必要になる参考書の並びをまとめました。同じ${esc(sub.ja)}でも、共通テストだけで使う場合と最難関大の二次試験で使う場合では、必要な到達点も冊数もまったく違います。まず自分の志望レベルを選んでください。</p>
+    <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
     <div class="tgrid">
 ${cards}
     </div>

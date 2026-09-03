@@ -16,6 +16,7 @@ import { tally } from './lib/tally.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { byDifficultyAsc } from './lib/rank.mjs';
+import { fileDate } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -44,6 +45,7 @@ function card(b, sub, stages, t, rank) {
 }
 
 function render(sub, d, counts) {
+  const updated = fileDate(`${sub.dir}/index.html`);
   const url = `${ORIGIN}/${sub.dir}/osusume/`;
   const t = tally(d.routes, d.tiers);
 
@@ -56,8 +58,8 @@ function render(sub, d, counts) {
 
   const title = `${sub.ja}の参考書おすすめ${n}冊｜志望校ルートで実際に選んだ定番 - ${sub.full}`;
   const desc = clip(
-    `大学受験の${sub.ja}参考書${d.books.length}冊のうち、${d.tiers.length}段階の志望校ルートで実際に本線として組み込んだ${n}冊。` +
-    `採用回数の多い順に並べ、役割・難易度・到達目安・どの志望レベルで使うかを添えています。${sub.fields}に対応。`, 158);
+    `${sub.ja}の参考書${d.books.length}冊のうち、志望校別ルートで実際に本線として組み込んだ${n}冊。`
+    + `採用回数の多い順に並べ、役割・難易度・使う志望レベルを添えています。`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -83,6 +85,7 @@ ${list.map((b, i) => card(b, sub, d.stages, t, i + 1)).join('\n')}
       breadcrumbLd(crumbItems, `${url}#breadcrumb`),
       {
         '@type': 'CollectionPage',
+        dateModified: updated,
         '@id': `${url}#webpage`,
         url, name: title, description: desc, inLanguage: 'ja',
         isPartOf: { '@id': `${ORIGIN}/#website` },
@@ -140,6 +143,7 @@ ${header(sub)}
     <div class="eyebrow">Recommended</div>
     <h1 class="sec" style="font-size:29px">${esc(sub.ja)}の参考書おすすめ　${n}冊</h1>
     <p class="sec-lead">収録している${esc(sub.ja)}の参考書${d.books.length}冊のうち、${d.tiers.length}段階の志望校ルートで実際に本線として組み込んだのがこの${n}冊です。並び順は採用回数の多い順で、多くの志望校で共通して通る定番ほど上に来ます。「誰かの主観で選んだ順位」ではなく「ルートを組んだ結果として何回必要になったか」で並べています。</p>
+    <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
     <p class="sec-lead">残りの${d.books.length - n}冊が悪い本というわけではありません。特定の志望校・特定の弱点に効く本や、上の本が合わなかったときの代替として、各ページで挙げています。全冊を見るなら<a href="/${sub.dir}/books/">${esc(sub.ja)}の参考書一覧</a>へ。</p>
   </div>
 

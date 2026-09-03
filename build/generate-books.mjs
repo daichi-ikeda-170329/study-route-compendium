@@ -18,6 +18,10 @@ import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { byDifficultyAsc } from './lib/rank.mjs';
+import { nextStages } from './lib/flow.mjs';
+import { seriesOf, hensachiPlain } from './lib/series.mjs';
+import { degreeTable, bandOf } from './lib/scale.mjs';
+import { recordDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -35,15 +39,27 @@ function diffPhrase(d) {
   return { band: '最難関レベル', text: '最難関大の入試で差がつく問題に対応する、到達点として設定される難易度' };
 }
 
-/** 学習時間の目安から、続けるイメージが持てる一文を作る */
-function paceSentence(hours) {
-  if (!hours) return '';
-  return `想定学習時間の目安は ${hours} です。1 冊を終えるまでの期間は、1 日に確保できる時間で大きく変わります。`;
-}
-
-/** stage の並び順（STAGES のキー順＝学習順）から index を引く */
-function stageIndex(stages, key) {
-  return Object.keys(stages).indexOf(key);
+/**
+ * 同じ役割の中でこの本がどのあたりに位置するかを、収録データから数えて 1 文にする。
+ *
+ * ここを「難易度は 10 段階中 7。到達目安は 60〜70。想定学習時間は 40〜55h」と
+ * 書くと、すぐ上のスペック表を文章で言い直しているだけになる。同じ役割の
+ * 何冊の中のどこか、は表に無い情報で、しかも本ごとに変わる。
+ */
+function positionSentence(book, books, st, fieldName) {
+  const peers = books.filter(b => !isProvisional(b) && b.stage === book.stage
+    && (book.sub ? b.sub === book.sub : true));
+  if (peers.length < 4) return '';
+  const lower = peers.filter(b => b.diff < book.diff).length;
+  const ratio = lower / (peers.length - 1);
+  const where = ratio < 0.25 ? 'もっともやさしい側'
+    : ratio < 0.45 ? 'やさしいほう'
+      : ratio < 0.6 ? '中ほど'
+        : ratio < 0.8 ? '難しいほう'
+          : 'もっとも難しい側';
+  return `${fieldName}の「${st.label}」には ${peers.length} 冊を収録しています。`
+    + `難易度 ${book.diff} の${book.name}は、そのうち${where}にあたります`
+    + `（この役割で難易度が ${book.diff} より下の本は ${lower} 冊）。`;
 }
 
 /** 同じ役割・近い難易度の本（横の選択肢） */
@@ -64,7 +80,7 @@ function pickAlternatives(book, books, max = 6) {
  * 同じ役割の上位と、次の段階の本を並べる。
  * 「同じレベルの選択肢」として既に出した本は、重複を避けるため除外する。
  */
-function pickNext(book, books, stages, exclude, max = 6) {
+function pickNext(book, books, stages, exclude, dir, max = 6) {
   if (isProvisional(book)) return { list: [], kind: 'same' };
   const skip = new Set([book.id, ...exclude.map(b => b.id)]);
   const sameRole = books
@@ -73,21 +89,22 @@ function pickNext(book, books, stages, exclude, max = 6) {
     .sort(byDifficultyAsc)
     .slice(0, 3);
 
-  // 次の段階は、1 つの段階で枠を埋めきらないよう段階ごとに 2 冊までにする。
-  // そうしないと「計算練習」のような並行トラックだけが並び、網羅系まで届かない。
-  const si = stageIndex(stages, book.stage);
+  // 次の段階は build/lib/flow.mjs が持つ接続表に限る。
+  // STAGES の並び順で「自分より後ろ」を全部拾うと、英文解釈のページに英作文が
+  // 並ぶような役割の飛びが出る（解釈 → 英作文は積み上げの順序ではない）。
+  // 1 つの役割で枠を埋めきらないよう、役割ごとに 2 冊までにする。
+  const allowed = nextStages(dir, book.stage);
   const byStage = new Map();
   books
-    .filter(b => !isProvisional(b) && !skip.has(b.id) && stageIndex(stages, b.stage) > si
+    .filter(b => !isProvisional(b) && !skip.has(b.id) && allowed.includes(b.stage)
       && (book.sub ? b.sub === book.sub : true) && b.diff >= book.diff)
     .sort(byDifficultyAsc)
     .forEach(b => {
       const arr = byStage.get(b.stage) || [];
       if (arr.length < 2) { arr.push(b); byStage.set(b.stage, arr); }
     });
-  const later = [...byStage.entries()]
-    .sort((a, b) => stageIndex(stages, a[0]) - stageIndex(stages, b[0]))
-    .flatMap(([, arr]) => arr)
+  const later = allowed
+    .flatMap(k => byStage.get(k) || [])
     .slice(0, max - sameRole.length);
 
   const kind = sameRole.length && later.length ? 'mixed' : later.length ? 'later' : 'same';
@@ -108,6 +125,15 @@ function amazonUrl(b, tag) {
  * 楽天アフィリエイトのリンク。科目トップの rakutenURL() と同じ形にそろえる。
  * 遷移先は最後に一度だけエンコードする（内側でもエンコードすると二重になり、
  * 楽天側で検索語が復元できずヒットしなくなる）。
+ *
+ * **遷移先は商品ページではなく ISBN の検索結果ページ。**楽天ブックスの商品 URL
+ * （books.rakuten.co.jp/rb/<商品ID>/）に入っているのは楽天内部の商品 ID で、
+ * ISBN からは作れない。対応表は楽天ブックス系 API（アプリ ID の登録が要る）
+ * でしか取れず、このリポジトリはアプリ ID を持っていない。
+ * 楽天のアプリ登録は IP アドレスの許可制で、GitHub Actions の実行 IP を
+ * 登録しきれないため見送っている（経緯は docs/new-books-plan.md の 3 節）。
+ * ボタンの文言を「楽天ブックスで検索」にして、遷移先と表示を一致させてある。
+ * 商品 ID を引けるようにしたら、ここと科目トップの rakutenURL() の両方を直す。
  */
 function rakutenUrl(b, id) {
   if (!id) return '';
@@ -129,9 +155,14 @@ function renderBook(book, ctx) {
   // 難易度に触る処理はすべてこのフラグで分岐する（docs/new-books-plan.md の 7 節）
   const prov = isProvisional(book);
   const dp = prov ? { band: '', text: '' } : diffPhrase(book.diff);
+  // レベル別に複数の巻をまとめている本。難易度の数字を単独で読ませないための注記を出す
+  const series = prov ? null : seriesOf(book);
   const url = `${ORIGIN}/${sub.dir}/books/${book.id}/`;
+  // 更新日はレコードの中身が変わった日。科目 HTML を 1 文字直しただけで
+  // その科目の全ページの日付が動かないよう、git の日付ではなくハッシュで見る
+  const updated = recordDate(`${sub.dir}/${book.id}`, book);
   const alts = pickAlternatives(book, books);
-  const next = pickNext(book, books, stages, alts);
+  const next = pickNext(book, books, stages, alts, sub.dir);
   const covers = coverSrcs(book);
   const az = amazonUrl(book, config.amazonTag);
   const rk = rakutenUrl(book, config.rakutenId);
@@ -145,6 +176,7 @@ function renderBook(book, ctx) {
   const affStores = [affAz ? 'Amazon' : null, affRk ? '楽天ブックス' : null].filter(Boolean).join('・');
 
   const fieldName = subLabel ? `${sub.ja}（${subLabel}）` : sub.ja;
+  const position = prov ? '' : positionSentence(book, books, st, fieldName);
 
   // 検索されるときの書名。内部略称の本は正式名称由来に、著者名が
   // 書名の一部として通っている本（「関正生の英文法ポラリス」など）は著者名込みにする。
@@ -169,15 +201,16 @@ function renderBook(book, ctx) {
     : titleName.length > 20 ? '｜レベルと使い方' : 'のレベルと使い方｜難易度・対象・次に進む本';
   const title = `${titleName}${titleTail} - ${sub.full}`;
   const by = authors.length ? `${authors.join('・')}／` : '';
+  // meta description は 120 字以内。本文の頭を写すのではなく、検索結果で
+  // 「自分に関係あるか」を判断できる要素（役割・難易度・向く人）だけを並べる。
   const desc = clip(prov
-    ? `${pageName}（${by}${book.pub}${book.year ? `／${book.year} 年` : ''}）は${st.label}に位置づけられる${fieldName}の参考書。` +
-      '刊行されたばかりのため、難易度と到達目安の評価は準備中です。書誌情報と、この本が置かれる役割をまとめました。'
-    : `${pageName}（${by}${book.pub}）は${st.label}に位置づけられる${fieldName}の参考書。${dp.band}（難易度${book.diff}/10）、到達目安は${book.hensachi}。` +
-      `${book.bestFor}に向いています。強みと注意点、同じレベルの他の選択肢、次に進む参考書までまとめました。`, 158);
+    ? `${pageName}（${by}${book.pub}）の書誌情報。${fieldName}の${st.label}に置かれる新刊で、難易度と到達目安は評価準備中です。`
+    : `${pageName}（${by}${book.pub}）のレベルと使い方。${fieldName}の${st.label}、難易度${book.diff}/10、到達目安${hensachiPlain(book)}。${book.bestFor}向け。`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
     { name: sub.full, url: `/${sub.dir}/`, absUrl: `${ORIGIN}/${sub.dir}/` },
+    { name: '参考書一覧', url: `/${sub.dir}/books/`, absUrl: `${ORIGIN}/${sub.dir}/books/` },
     { name: pageName, url, absUrl: url },
   ];
 
@@ -206,6 +239,7 @@ function renderBook(book, ctx) {
         '@type': 'WebPage',
         '@id': `${url}#webpage`,
         url, name: title, description: desc, inLanguage: 'ja',
+        dateModified: updated,
         isPartOf: { '@id': `${ORIGIN}/#website` },
         breadcrumb: { '@id': `${url}#breadcrumb` },
         mainEntity: { '@id': `${url}#book` },
@@ -222,8 +256,10 @@ function renderBook(book, ctx) {
     ['出版年', book.year ? `${book.year} 年` : '—'],
     ['対象範囲', esc(book.subjects || '—')],
     ['役割', esc(st.label || '—')],
-    ['難易度', prov ? `<span class="bk-prov">${esc(PROVISIONAL_LABEL)}</span>` : `${book.diff} / 10（${dp.band}）`],
-    ['到達目安', prov ? '評価準備中' : esc(book.hensachi || '—')],
+    ['難易度', prov ? `<span class="bk-prov">${esc(PROVISIONAL_LABEL)}</span>`
+      : `${book.diff} / 10（${bandOf(book.diff)}）${series ? `<br><small style="color:var(--muted)">${esc(series.label)}の全体の目安</small>` : ''}`],
+    ['到達目安', prov ? '評価準備中'
+      : `${esc(hensachiPlain(book) || '—')}<br><small style="color:var(--muted)">全統記述模試の換算</small>`],
     ['問題数・構成', esc(book.problems || '—')],
     ['想定学習時間', esc(book.hours || '—')],
     ['形式', esc(book.style || '—')],
@@ -261,6 +297,7 @@ ${header(sub)}
         <span class="bk-tag"><i></i>${esc(st.label)}${subLabel ? ` — ${esc(subLabel)}` : ''}</span>
         <h1 class="bk-name">${esc(searchTitle)}</h1>
         <p class="bk-official">${esc(book.official || book.name)}／${by ? `${esc(authors.join('・'))}／` : ''}${esc(book.pub)}${book.year ? `（${book.year} 年）` : ''}</p>
+        <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
         <p class="bk-desc">${prov
     ? `${esc(book.pub)}から刊行された新刊です。現物の確認が済んでいないため、難易度と到達目安の評価は準備中です。`
     : esc(book.desc)}</p>
@@ -270,7 +307,7 @@ ${header(sub)}
         </div>` : `<div class="bk-meter">
           <div class="bk-meter__t"><span>難易度</span><b>${book.diff} <small style="font-size:11px;color:var(--muted)">/ 10</small></b></div>
           <div class="bk-meter__bar">${meter}</div>
-        </div>`}
+        </div>${series ? `<div class="bk-series"><b>${esc(series.label)}</b> — ${esc(series.note)}</div>` : ''}`}
       </div>
     </div>
 
@@ -282,6 +319,7 @@ ${header(sub)}
 ${spec}
         </dl>
       </div>
+      <p class="spec__note">書名・出版社・ISBN・刊行年・問題数は公開されている書誌情報です。難易度・到達目安・想定学習時間は編集部の推定値で、<a href="/methodology/">算出方法</a>を公開しています。</p>
     </section>
 
     ${prov ? `<section class="block prose">
@@ -294,8 +332,9 @@ ${spec}
       <div class="eyebrow">Who is it for</div>
       <h2 class="sec">どんな人に向いているか</h2>
       <p><b>${esc(book.bestFor)}</b>に向いた一冊です。</p>
-      <p>${esc(book.name)}は${esc(st.label)}に位置づけられ、難易度は 10 段階中 ${book.diff}。${esc(dp.text)}にあたります。到達目安は「${esc(book.hensachi)}」です。${esc(paceSentence(book.hours))}</p>
-      <p>参考書は「良い本かどうか」より「いま自分が手を出す段になっているか」で決まります。今の自分にとって難しすぎる本を選ぶと、解説を読んでも定着せずに時間だけが過ぎます。逆にやさしすぎる本は、達成感のわりに得点が伸びません。上の難易度表示と到達目安を、手持ちの模試の結果と照らして判断してください。</p>
+      ${position ? `<p>${esc(position)}</p>` : ''}
+      ${series ? `<p>${esc(series.note)}</p>` : ''}
+      ${degreeTable({ current: book.diff })}
     </section>${adUnit('inArticle')}
 
     <div class="pc-grid">
@@ -343,7 +382,7 @@ ${bookCards(next.list, sub, stages)}
         </a>
         ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
-          楽天ブックスで見る
+          楽天ブックスで検索
         </a>` : ''}
       </div>
       <script>
@@ -419,6 +458,7 @@ for (const sub of targets) {
   }
   console.log(`  ✓ ${sub.dir}: ${list.length} ページ`);
 }
+saveDates();
 console.log(`合計 ${written} ページを生成した。`);
 
 /** 科目ページの CONFIG（アフィリエイト ID）を読む */
