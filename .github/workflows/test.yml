@@ -34,3 +34,15 @@ jobs:
             test/pace.test.mjs \
             test/new-books.test.mjs \
             test/mobile-layout.test.mjs
+
+      # データと出力 HTML の検査。非日本語文字の混入・孤立ページ・リンク切れ・
+      # 信頼性ページへのリンク欠落・定型段落の重複などをここで落とす。
+      # 誇張語は警告として出るだけで、ジョブは落とさない
+      - name: サイト全体を検査する
+        run: node build/check-site.mjs
+
+      # 科目トップに静的化した図鑑・ルート一覧・講師ルート・学習ガイドが
+      # データとずれていないか。ずれていれば落とす（JS を切った環境と
+      # 検索エンジンだけが古い内容を見ることになるため）
+      - name: 静的化した中身が最新か確かめる
+        run: node build/prerender-tops.mjs --check
