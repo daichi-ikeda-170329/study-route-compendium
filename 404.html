@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ページが見つかりません — ルート大全</title>
+<meta name="description" content="お探しのページは見つかりませんでした。参考書名で検索するか、7科目の参考書図鑑から探し直してください。">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#F6F4EF">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -14,7 +15,7 @@
 <style>
 :root{
   --paper:#F6F4EF;--surface:#FFFFFF;--surface-3:#F1EFE8;
-  --ink:#1B2233;--ink-2:#39415A;--muted:#585E70;--muted-2:#6A6F82;
+  --ink:#1B2233;--ink-2:#39415A;--muted:#585E70;--muted-2:#656A7C;
   --line:#E4E1D6;--line-d:#CFCBBE;--indigo-deep:#18305E;--accent:#B5432A;
   --jp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
   --serif:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
@@ -44,6 +45,12 @@ p.lead{font-size:13.5px;color:var(--ink-2);max-width:44ch;margin:0 auto 30px}
 .links b{font-size:11.5px;font-weight:700;letter-spacing:.03em}
 .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:14px;padding:13px 24px;border-radius:4px;background:var(--ink);color:#fff;box-shadow:var(--sh-m);transition:.16s;letter-spacing:.03em}
 .btn:hover{background:var(--indigo-deep);transform:translateY(-2px)}
+.foot-legal-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-top:38px;padding-top:22px;border-top:1px solid var(--line)}
+.foot-legal-links a{font-size:11.5px;font-weight:600;color:var(--muted);transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.foot-legal-links a:hover{color:var(--accent)}
+.foot-legal-note{margin-top:14px;font-size:10.5px;line-height:1.85;color:var(--muted);max-width:70ch;margin-left:auto;margin-right:auto}
+.foot-legal-note a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.foot-legal-note b{color:var(--ink-2);font-weight:700}
 </style>
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
@@ -57,7 +64,7 @@ gtag('config', 'G-DQ5WFXEFMX');
 </script>
 </head>
 <body>
-<div class="wrap">
+<main class="wrap">
   <div class="code">404 — NOT FOUND</div>
   <h1>お探しのページは<br>見つかりませんでした</h1>
   <p class="lead">URLが変更されたか、削除された可能性があります。参考書名で検索するか、下の科目から探し直してみてください。</p>
@@ -83,6 +90,18 @@ gtag('config', 'G-DQ5WFXEFMX');
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     ルート大全 トップへ
   </a>
-</div>
+  <nav class="foot-legal-links" aria-label="サイトの表記">
+    <a href="/about/">運営者情報</a>
+    <a href="/methodology/">データの作り方</a>
+    <a href="/privacy/">プライバシーポリシー</a>
+    <a href="/disclaimer/">免責事項</a>
+    <a href="/ads/">広告について</a>
+    <a href="/changelog/">更新履歴</a>
+  </nav>
+  <p class="foot-legal-note">
+    掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。<br>
+    当サイトはアフィリエイト広告を利用しています。<b>Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。</b>
+  </p>
+</main>
 </body>
 </html>

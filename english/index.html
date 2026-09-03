@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>英語の参考書ルート｜大学受験の英語参考書252冊を図鑑化 - 英語ルート大全</title>
 <meta name="google-site-verification" content="10bnNaPa-rqbt-UHQK1J_KTLT7k3HQb8xLFcHx5fSsw">
-<meta name="description" content="大学受験の英語参考書252冊を、単語・熟語・文法・英文解釈・長文・英作文・リスニングの役割別／難易度別に整理した参考書図鑑。志望校から逆算する参考書ルートと3分診断つき。共通テストから東大・早慶まで。2026年 新課程対応・完全無料。">
+<meta name="description" content="大学受験の英語参考書252冊を、単語・熟語・文法・英文解釈・長文・英作文・リスニングの役割別／難易度別に整理した参考書図鑑。志望校から逆算する参考書ルートと3分診断つき。共通テストから東大・早慶まで。2026年度入試対応・完全無料。">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#F6F4EF">
 <meta name="format-detection" content="telephone=no">
@@ -35,7 +35,7 @@
 <style>
 :root{
   --paper:#F6F4EF; --surface:#FFFFFF; --surface-2:#FAF9F6; --surface-3:#F1EFE8;
-  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#6A6F82;
+  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#656A7C;
   --line:#E4E1D6; --line-2:#EDEBE2; --line-d:#CFCBBE;
   --indigo:#24427C; --indigo-deep:#18305E; --indigo-soft:#E8EDF7;
   --accent:#B5432A; --accent-deep:#93331F; --accent-soft:#F7E9E5;
@@ -153,8 +153,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .rp-card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--tc,var(--indigo));padding:16px 16px 14px;cursor:pointer;transition:.18s;box-shadow:var(--sh-s);position:relative}
 .rp-card:hover{transform:translateY(-3px);box-shadow:var(--sh-m)}
 .rp-card__no{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.1em;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.rp-card__no em{font-style:normal;color:var(--tc,var(--indigo));font-weight:600}
-.rp-card h4{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
+/* 10px の小さな文字なので、カードごとの色（--tc）をそのまま使うと
+   コントラスト比 4.5:1 を割る色が出る（講師ルートの #2F8659 が 4.49）。
+   色分けはカード左の帯が担っているので、ここは固定色にする。 */
+.rp-card__no em{font-style:normal;color:var(--muted);font-weight:700}
+.rp-card h3{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
 .rp-card p{font-size:11.5px;color:var(--muted);min-height:32px;line-height:1.55}
 .guide-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
 @media(min-width:760px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
@@ -163,7 +166,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .guide-card:nth-child(2)::before{background:var(--accent)}
 .guide-card:nth-child(3)::before{background:var(--gold)}
 .guide-num{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted-2);letter-spacing:.14em;margin-bottom:10px}
-.guide-card h5{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
+.guide-card h3{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
 .guide-card p{font-size:12.5px;color:var(--muted);line-height:1.7}
 .guide-card p b{color:var(--ink-2)}
 
@@ -180,6 +183,8 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .chip:hover{color:var(--ink);border-color:var(--muted-2)}
 .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 .cat-meta{display:flex;align-items:center;justify-content:space-between;margin:14px 0 14px;flex-wrap:wrap;gap:8px}
+/* ページの最終更新日。データが変わった日を build/prerender-tops.mjs が入れる */
+.page-updated{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted-2)}
 .cat-count{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
 .cat-count b{color:var(--ink);font-family:var(--mono);font-size:14px}
 .sort-sel{border:1px solid var(--line-d);background:var(--surface);border-radius:4px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--ink);box-shadow:var(--sh-s)}
@@ -194,6 +199,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cat-sec{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin:16px 0 2px;font-weight:900;font-size:14px;color:var(--ink);letter-spacing:.04em}
 .cat-sec::before{content:"";width:16px;height:2.5px;background:var(--sc,var(--accent));align-self:center}
 .cat-sec small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
+/* 静的に出しておくカードの続き。build/prerender-tops.mjs が最後に足す枠で、
+   JS が起動して全冊を描き直すと消える。JS を切った環境と検索エンジンだけが見る。 */
+.cat-more{grid-column:1/-1;margin-top:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent)}
+.cat-more p{font-size:12.5px;line-height:1.85;color:var(--ink-2)}
+.cat-more a{display:inline-block;margin-top:9px;font-size:13px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
 .book-card{background:var(--surface);border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:.18s;box-shadow:var(--sh-s);display:flex;flex-direction:column;border-radius:6px}
 .book-card:hover{transform:translateY(-4px);box-shadow:var(--sh-m);border-color:var(--line-d)}
 .book-card__cover{padding:16px 14px 12px;display:flex;justify-content:center;background:linear-gradient(180deg,var(--surface-3),var(--surface-2));border-bottom:1px solid var(--line-2)}
@@ -347,14 +357,14 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .g-num{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;background:var(--ink);width:30px;height:30px;border-radius:5px;display:grid;place-items:center;flex:none;margin-top:2px}
 .g-card.open .g-num{background:var(--accent)}
 .g-ttl{flex:1;min-width:0}
-.g-ttl h4{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
+.g-ttl h3{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
 .g-ttl span{font-size:11.5px;color:var(--muted);line-height:1.6;display:block}
 .g-card__head .chev{flex:none;color:var(--muted-2);transition:transform .2s;margin-top:6px}
 .g-card.open .chev{transform:rotate(180deg)}
 .g-body{display:none;padding:0 20px 20px;border-top:1px solid var(--line-2);margin-top:-2px}
 .g-card.open .g-body{display:block;animation:fade .25s ease}
 .g-body p{font-size:13.5px;line-height:1.95;color:var(--ink-2);margin-top:14px}
-.g-body h5{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
+.g-body h4{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
 .g-body ul{margin-top:10px;padding-left:2px;list-style:none;display:flex;flex-direction:column;gap:7px}
 .g-body li{font-size:13px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
 .g-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:9px;flex:none}
@@ -368,13 +378,6 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .foot-links button:hover{color:var(--accent)}
 .foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:0 auto}
 .foot-legal b{color:var(--ink-2);font-weight:700}
-.legal-body{padding:22px 24px 30px}
-.legal-body h5{font-family:var(--serif);font-weight:800;font-size:14.5px;margin:20px 0 8px;letter-spacing:.02em}
-.legal-body h5:first-child{margin-top:0}
-.legal-body p{font-size:12.5px;line-height:1.9;color:var(--ink-2)}
-.legal-body ul{margin-top:8px;list-style:none;display:flex;flex-direction:column;gap:6px}
-.legal-body li{font-size:12.5px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
-.legal-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--muted-2);margin-top:9px;flex:none}
 @media(min-width:900px){.tabbar{display:none}}
 
 /* ================= ROUTE ================= */
@@ -507,7 +510,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cn-card__cover .fb-pub,.cn-card__cover .fb-band{display:none}
 .cn-info{flex:1;min-width:0}
 .cn-info__role{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.06em;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;color:#fff}
-.cn-info h5{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
+.cn-info h3{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
 .cn-info__note{font-size:11.5px;color:var(--muted);line-height:1.55}
 .cn-info__alt{font-size:10.5px;color:var(--indigo-deep);margin-top:7px;line-height:1.5}
 .cn-info__alt b{font-weight:700}
@@ -675,24 +678,62 @@ gtag('config', 'G-DQ5WFXEFMX');
       </div>
       </div>
       <div class="stat-row">
-        <div class="stat"><b id="stat-books">172</b><span>収録参考書</span></div>
-        <div class="stat"><b>160<small>× 学部で個別最適化</small></b><span>収録大学</span></div>
-        <div class="stat"><b>9<small>分野 × 難易度順で整理</small></b><span>単語〜過去問まで</span></div>
+        <div class="stat"><b id="stat-books">252</b><span>収録参考書</span></div>
+        <div class="stat"><b id="stat-unis">160</b><span>収録大学 — 医学部・国際系は別扱い</span></div>
+        <div class="stat"><b>9</b><span>対応分野 — 単語から過去問まで</span></div>
       </div>
+      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
     </div>
 
     <div class="home-block">
       <div class="eyebrow">Routes by target</div>
       <h2 class="sec">志望レベルから選ぶ</h2>
       <p class="sec-lead">代表的な志望レベルごとに王道ルートを用意。ルート画面では志望校名を直接入力して、その大学の英語の出題傾向に合わせた絞り込みもできます。</p>
-      <div class="route-preview" id="homeRoutes"></div>
+      <div class="route-preview" id="homeRoutes"><div class="rp-card" style="--tc:#2F6E4F" role="button" tabindex="0" onclick="selectTier('kyote');go('route')">
+      <div class="rp-card__no"><span>ROUTE 01</span><em>5 STEPS</em></div>
+      <h3>共通テスト対策</h3><p>共テ利用・国公立1次 — 共通テスト 7〜9割</p>
+    </div><div class="rp-card" style="--tc:#2E7D9A" role="button" tabindex="0" onclick="selectTier('nikkoma');go('route')">
+      <div class="rp-card__no"><span>ROUTE 02</span><em>5 STEPS</em></div>
+      <h3>日東駒専・産近甲龍</h3><p>中堅私大 — 日東駒専・産近甲龍 合格</p>
+    </div><div class="rp-card" style="--tc:#24427C" role="button" tabindex="0" onclick="selectTier('march');go('route')">
+      <div class="rp-card__no"><span>ROUTE 03</span><em>6 STEPS</em></div>
+      <h3>MARCH・関関同立</h3><p>難関私大 — MARCH・関関同立 合格</p>
+    </div><div class="rp-card" style="--tc:#0E7C6B" role="button" tabindex="0" onclick="selectTier('chikoku');go('route')">
+      <div class="rp-card__no"><span>ROUTE 04</span><em>7 STEPS</em></div>
+      <h3>地方国公立</h3><p>二次は標準記述型 — 地方国公立 合格</p>
+    </div><div class="rp-card" style="--tc:#5B4E9E" role="button" tabindex="0" onclick="selectTier('sokei');go('route')">
+      <div class="rp-card__no"><span>ROUTE 05</span><em>6 STEPS</em></div>
+      <h3>早慶・上智</h3><p>最難関私大(TEAP利用含む) — 早慶上智 合格</p>
+    </div><div class="rp-card" style="--tc:#B5432A" role="button" tabindex="0" onclick="selectTier('kyutei');go('route')">
+      <div class="rp-card__no"><span>ROUTE 06</span><em>7 STEPS</em></div>
+      <h3>地方旧帝</h3><p>北大・東北・名大・九大・神戸 — 旧帝大 合格</p>
+    </div><div class="rp-card" style="--tc:#8C2437" role="button" tabindex="0" onclick="selectTier('top');go('route')">
+      <div class="rp-card__no"><span>ROUTE 07</span><em>7 STEPS</em></div>
+      <h3>東大・京大・一橋・科学大</h3><p>最難関国立 — 最難関国立 合格</p>
+    </div><div class="rp-card" style="--tc:#946200" role="button" tabindex="0" onclick="selectTier('med');go('route')">
+      <div class="rp-card__no"><span>ROUTE 08</span><em>7 STEPS</em></div>
+      <h3>国公立医学部</h3><p>地方医〜旧帝医 — 国公立医学部 合格</p>
+    </div><div class="rp-card" style="--tc:#8C2437" role="button" tabindex="0" onclick="selectTier('shiritsui');go('route')">
+      <div class="rp-card__no"><span>ROUTE 09</span><em>6 STEPS</em></div>
+      <h3>私立医学部</h3><p>慈恵・日医・順天堂ほか — 私立医学部 合格</p>
+    </div></div>
     </div>
 
     <div class="home-block">
       <div class="eyebrow">Routes by teacher</div>
       <h2 class="sec">講師ルートで選ぶ</h2>
       <p class="sec-lead">英語は一人の講師が単語から文法・解釈・長文・英作文まで通しで執筆できる科目。教え方の一貫した「講師の道」で迷いなく積み上げられます。</p>
-      <div class="route-preview" id="homeSenseis"></div>
+      <p class="sec-lead" style="margin-top:8px"><b>いずれも非公式です。</b>各講師・所属予備校・出版社とは無関係に、当サイトが市販の著作をもとに独自に構成したもので、ご本人の推奨・監修を受けたものではありません。</p>
+      <div class="route-preview" id="homeSenseis"><div class="rp-card" style="--tc:#B5432A" role="button" tabindex="0" onclick="selectSensei('seki');go('route')">
+      <div class="rp-card__no"><span>TEACHER ROUTE</span><em>10 STEPS</em></div>
+      <h3>関正生ルート</h3><p>スタディサプリ — ポラリス&The Rulesの2本柱</p>
+    </div><div class="rp-card" style="--tc:#18305E" role="button" tabindex="0" onclick="selectSensei('takeoka');go('route')">
+      <div class="rp-card__no"><span>TEACHER ROUTE</span><em>8 STEPS</em></div>
+      <h3>竹岡広信ルート</h3><p>駿台・学研プライムゼミ — 精読と英作文の最高峰</p>
+    </div><div class="rp-card" style="--tc:#2F8659" role="button" tabindex="0" onclick="selectSensei('hijii');go('route')">
+      <div class="rp-card__no"><span>TEACHER ROUTE</span><em>9 STEPS</em></div>
+      <h3>肘井学ルート</h3><p>スタディサプリ — ゼロから面白いほどわかる道</p>
+    </div></div>
     </div>
 
     <div class="home-block">
@@ -701,23 +742,23 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="guide-grid">
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 01</div>
-          <h5>単語と文法が全ての土台</h5>
-          <p>英語の成績は<b>語彙力×構文把握力</b>でほぼ決まります。単語帳1冊と文法問題集1冊を「瞬時に答えられる」まで固めることが、長文・英作文・リスニング全ての前提。本アプリでは単語・熟語は常に並行枠として走らせます。</p>
+          <h3>単語と文法が全ての土台</h3>
+          <p>英語の成績は<b>語彙力×構文把握力</b>でほぼ決まります。単語帳1冊と文法問題集1冊を「瞬時に答えられる」まで固めることが、長文・英作文・リスニング全ての前提。本サイトでは単語・熟語は常に並行枠として走らせます。</p>
         </div>
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 02</div>
-          <h5>解釈を挟んで長文へ</h5>
+          <h3>解釈を挟んで長文へ</h3>
           <p>文法問題が解けても長文が読めないのは、<b>英文解釈(精読)の工程を飛ばしている</b>から。1文を正確に構造把握する訓練を挟むと長文の伸びが一変します。難易度が飛ぶと挫折するため、各書の「前にやる本・次にやる本」で接続を確認しましょう。</p>
         </div>
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 03</div>
-          <h5>過去問から逆算する</h5>
-          <p>英語は<b>大学による傾向差が最も大きい科目</b>。要約の東大、和訳と英作の京大、超長文の早慶——志望校の形式を知らずに演習しても遠回りです。志望校を入力すると、傾向に合わせた重点対策までルートに反映します。</p>
+          <h3>過去問から逆算する</h3>
+          <p>英語は<b>大学による傾向差が最も大きい科目</b>。要約の東大、和訳と英作の京大、超長文の早慶——志望校の形式を知らずに演習しても遠回りです。志望校を入力すると、収録している160校それぞれの出題形式（和訳・自由英作文・要約・リスニング・超長文など）に対応した重点対策の枠がルートに加わります。</p>
         </div>
       </div>
     </div>
 
-    <div class="disclaimer" id="homeDisclaimer"></div>
+    <div class="disclaimer" id="homeDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの出題傾向・入試方式(英語外部試験の利用可否を含む)は年度により変更されるため、出願前に必ず募集要項をご確認ください。書影はAmazon等が提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <!-- ============ CATALOG ============ -->
@@ -744,21 +785,183 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="cat-controls">
       <div class="search-wrap">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <input id="book-search" type="text" placeholder="書名・出版社・分野で検索(例:ターゲット、ポレポレ、竹岡)">
+        <input id="book-search" type="text" placeholder="書名・出版社・分野で検索(例:ターゲット、ポレポレ、竹岡)" aria-label="収録している参考書を書名・出版社・分野で検索">
       </div>
-      <div class="filter-scroll" id="filterScroll"></div>
+      <div class="filter-scroll" id="filterScroll"><button class="chip active" data-k="stage" data-v="all" onclick="setFilter('stage','all',this)">すべて</button><button class="chip" data-k="stage" data-v="tango" onclick="setFilter('stage','tango',this)">単語・語彙</button><button class="chip" data-k="stage" data-v="jukugo" onclick="setFilter('stage','jukugo',this)">熟語・知識問題</button><button class="chip" data-k="stage" data-v="bunpo" onclick="setFilter('stage','bunpo',this)">文法</button><button class="chip" data-k="stage" data-v="kaishaku" onclick="setFilter('stage','kaishaku',this)">英文解釈</button><button class="chip" data-k="stage" data-v="chobun" onclick="setFilter('stage','chobun',this)">長文読解</button><button class="chip" data-k="stage" data-v="eisaku" onclick="setFilter('stage','eisaku',this)">英作文</button><button class="chip" data-k="stage" data-v="listening" onclick="setFilter('stage','listening',this)">リスニング</button><button class="chip" data-k="stage" data-v="kyotest" onclick="setFilter('stage','kyotest',this)">共通テスト</button><button class="chip" data-k="stage" data-v="kako" onclick="setFilter('stage','kako',this)">過去問・大学別</button><span style="flex:none;width:1px;background:var(--line-d);margin:2px 4px"></span><button class="chip active" data-k="bunri" data-v="all" onclick="setFilter('bunri','all',this)">全対象</button><button class="chip" data-k="bunri" data-v="bun" onclick="setFilter('bunri','bun',this)">国公立二次向け</button><button class="chip" data-k="bunri" data-v="ri" onclick="setFilter('bunri','ri',this)">私立個別向け</button><span style="flex:none;width:1px;background:var(--line-d);margin:2px 4px"></span><button class="chip" data-k="sensei" data-v="seki" onclick="setFilter('sensei','seki',this)" style="--tc:#B5432A">関正生の本</button><button class="chip" data-k="sensei" data-v="takeoka" onclick="setFilter('sensei','takeoka',this)" style="--tc:#18305E">竹岡広信の本</button><button class="chip" data-k="sensei" data-v="hijii" onclick="setFilter('sensei','hijii',this)" style="--tc:#2F8659">肘井学の本</button></div>
     </div>
     <div class="cat-meta">
-      <div class="cat-count"><b id="catCount">0</b> 冊を表示中</div>
-      <select class="sort-sel" id="sortSel" onchange="renderCatalog()">
+      <div class="cat-count"><b id="catCount">252</b> 冊を表示中</div>
+      <select class="sort-sel" id="sortSel" onchange="renderCatalog()" aria-label="参考書の並べ替え">
         <option value="field">分野別・難易度順</option>
         <option value="diff-asc">難易度:やさしい順</option>
         <option value="diff-desc">難易度:難しい順</option>
         <option value="name">書名順</option>
       </select>
     </div>
-    <div class="book-grid" id="bookGrid"></div>
-    <div class="disclaimer" id="catDisclaimer"></div>
+    <div class="book-grid" id="bookGrid"><div class="cat-sec" style="--sc:#2E7D9A">単語・語彙<small>32 BOOKS — やさしい順</small></div><div class="book-card" role="button" tabindex="0" onclick="openModal('target1200')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010346488.jpg|https://cover.openbd.jp/9784010346488.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#E85D4A,#B5432A)"><span class="fb-spine"></span><span class="fb-pub">旺文社</span><span class="fb-title long">英単語ターゲット1200</span><span class="fb-band">単語1200+熟語300</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">英単語ターゲット1200</div>
+      <div class="bc-pub">旺文社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜50(高校基礎)</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1200+熟語300</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hijii-tango')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052575.jpg|https://cover.openbd.jp/9784046052575.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#F9C846,#E8A317);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA</span><span class="fb-title long">肘井学のゼロから英単語</span><span class="fb-band">基礎単語</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">肘井学のゼロから英単語</div>
+      <div class="bc-pub">KADOKAWA</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">基礎単語</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('kikutan-basic-4000')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784757433472.jpg|https://cover.openbd.jp/9784757433472.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F5A623,#C2571A)"><span class="fb-spine"></span><span class="fb-pub">アルク</span><span class="fb-title xlong">キクタン Basic 4000</span><span class="fb-band">単語4000</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">キクタン Basic 4000</div>
+      <div class="bc-pub">アルク</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語4000</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('sistan-basic')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796111416.jpg|https://cover.openbd.jp/9784796111416.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#4A9FD4,#1F5F8B)"><span class="fb-spine"></span><span class="fb-pub">駿台文庫</span><span class="fb-title long">システム英単語Basic</span><span class="fb-band">単語1500+多義語</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">システム英単語Basic</div>
+      <div class="bc-pub">駿台文庫</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>42〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1500+多義語</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('sokutan-nyumon')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865313642.jpg|https://cover.openbd.jp/9784865313642.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7EC8E3,#3E8FC0)"><span class="fb-spine"></span><span class="fb-pub">Z会</span><span class="fb-title ">速読英単語 入門編</span><span class="fb-band">単語1400</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">速読英単語 入門編</div>
+      <div class="bc-pub">Z会</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>42〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1400</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('leap-basic')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410144332.jpg|https://cover.openbd.jp/9784410144332.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#2F8659,#134D2E)"><span class="fb-spine"></span><span class="fb-pub">数研出版</span><span class="fb-title xlong">必携英単語LEAP Basic</span><span class="fb-band">単語1600+300</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">必携英単語LEAP Basic</div>
+      <div class="bc-pub">数研出版</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>42〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1600+300</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('database')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342264894.jpg|https://cover.openbd.jp/9784342264894.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#946200,#4E3300)"><span class="fb-spine"></span><span class="fb-pub">桐原書店</span><span class="fb-title xlong">データベース(3300/4800)</span><span class="fb-band">単語+熟語</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">データベース(3300/4800)</div>
+      <div class="bc-pub">桐原書店</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜65(2冊構成)</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語+熟語</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('stock3000')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578271413.jpg|https://cover.openbd.jp/9784578271413.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#4A9FD4,#24427C)"><span class="fb-spine"></span><span class="fb-pub">文英堂</span><span class="fb-title long">英単語Stock3000</span><span class="fb-band">単語3000</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">英単語Stock3000</div>
+      <div class="bc-pub">文英堂</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語3000</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('target1400')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010346471.jpg|https://cover.openbd.jp/9784010346471.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#F2A03D,#D97B1E);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">旺文社</span><span class="fb-title long">英単語ターゲット1400</span><span class="fb-band">単語1400</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">英単語ターゲット1400</div>
+      <div class="bc-pub">旺文社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1400</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('eiken-2kyu-derujun-pastan-shinso-5th')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010951194.jpg|https://cover.openbd.jp/9784010951194.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#D14B8F,#A32E6B)"><span class="fb-spine"></span><span class="fb-pub">旺文社</span><span class="fb-title long">英検2級 でる順パス単</span><span class="fb-band">単語1900</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">英検2級 でる順パス単</div>
+      <div class="bc-pub">旺文社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>48〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1900</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('rankjun2300')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061091.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061091.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061091.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053061096.jpg|https://cover.openbd.jp/9784053061096.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#E07B2E,#9E4F14)"><span class="fb-spine"></span><span class="fb-pub">Gakken</span><span class="fb-title long">ランク順 入試英単語2300</span><span class="fb-band">単語2300</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">ランク順 入試英単語2300</div>
+      <div class="bc-pub">Gakken</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>48〜65</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語2300</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('yumetan')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/475744236X.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/475744236X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/475744236X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784757442368.jpg|https://cover.openbd.jp/9784757442368.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#D14B8F,#8E2760)"><span class="fb-spine"></span><span class="fb-pub">アルク</span><span class="fb-title ">ユメタン(1・2)</span><span class="fb-band">単語1000×2巻</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">ユメタン(1・2)</div>
+      <div class="bc-pub">アルク</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>50〜72(2冊構成)</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1000×2巻</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('sparta')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230827.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230827.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230827.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761230821.jpg|https://cover.openbd.jp/9784761230821.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#1B2233,#0A0E18)"><span class="fb-spine"></span><span class="fb-pub">かんき出版</span><span class="fb-title ">英単語SPARTA</span><span class="fb-band">単語1000×3巻</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">英単語SPARTA</div>
+      <div class="bc-pub">かんき出版</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>50〜75(3段階)</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1000×3巻</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('sparta-2-advanced')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230835.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230835.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230835.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761230838.jpg|https://cover.openbd.jp/9784761230838.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7FC8F8,#2A7AB8)"><span class="fb-spine"></span><span class="fb-pub">かんき出版</span><span class="fb-title xlong">英単語SPARTA2 advanced level 1000語</span><span class="fb-band">単語1000</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">英単語SPARTA2 advanced level 1000語</div>
+      <div class="bc-pub">かんき出版</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>52〜60</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1000</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('kikutan-advanced-6000')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4757433484.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757433484.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433484.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784757433489.jpg|https://cover.openbd.jp/9784757433489.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#F4F6FA,#D8E2F0);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">アルク</span><span class="fb-title xlong">キクタン Advanced 6000</span><span class="fb-band">単語6000</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">キクタン Advanced 6000</div>
+      <div class="bc-pub">アルク</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>55〜65</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語6000</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('sokutan-hisshu')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4865316426.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865316426.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865316426.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865316421.jpg|https://cover.openbd.jp/9784865316421.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#2F8659,#0E5B36)"><span class="fb-spine"></span><span class="fb-pub">Z会</span><span class="fb-title ">速読英単語 必修編</span><span class="fb-band">単語1900+英文70本</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">速読英単語 必修編</div>
+      <div class="bc-pub">Z会</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>52〜68</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語1900+英文70本</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('leap')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4410144235.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410144235.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144235.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410144233.jpg|https://cover.openbd.jp/9784410144233.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#0E7C6B,#053A32)"><span class="fb-spine"></span><span class="fb-pub">数研出版</span><span class="fb-title ">必携英単語LEAP</span><span class="fb-band">単語2300</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">必携英単語LEAP</div>
+      <div class="bc-pub">数研出版</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>52〜68</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語2300</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('distinction-2000')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4046045337.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046045337.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046045337.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046045331.jpg|https://cover.openbd.jp/9784046045331.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#3D4657,#1B2233)"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA</span><span class="fb-title xlong">Distinction 2000</span><span class="fb-band">単語2000</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">Distinction 2000</div>
+      <div class="bc-pub">KADOKAWA</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>55〜65</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">単語</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">単語2000</span></div>
+    </div>
+  </div><div class="cat-more"><p>ここに出しているのは 252 冊のうち難易度順で最初の 18 冊です。続きは絞り込み・並べ替えで表示されます。</p><a href="/english/books/">252 冊すべてを役割別の索引で見る</a></div></div>
+    <div class="disclaimer" id="catDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの出題傾向・入試方式(英語外部試験の利用可否を含む)は年度により変更されるため、出願前に必ず募集要項をご確認ください。書影はAmazon等が提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <!-- ============ QUIZ ============ -->
@@ -796,14 +999,14 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div id="modeUni" style="display:none">
         <div class="uni-form">
           <div class="uni-field">
-            <label>志望大学</label>
+            <label for="uniInput">志望大学</label>
             <div class="uni-wrap">
               <input id="uniInput" type="text" placeholder="大学名を入力(例:東京大学、阪大、waseda、ひろだい)" autocomplete="off" spellcheck="false">
               <div class="sug" id="uniSug"></div>
             </div>
           </div>
           <div class="uni-field">
-            <label>学部・学科<em>任意</em></label>
+            <label for="facInput">学部・学科<em>任意</em></label>
             <div class="uni-wrap">
               <input id="facInput" type="text" placeholder="例:工学部、医学部医学科、国際教養学部" autocomplete="off" spellcheck="false">
             </div>
@@ -854,7 +1057,7 @@ gtag('config', 'G-DQ5WFXEFMX');
           <div class="opt-field">
             <label>英語の模試偏差値</label>
             <div class="hen-row">
-              <select id="moshiSel">
+              <select id="moshiSel" aria-label="偏差値を出した模試の種類">
                 <option value="0">全統模試(河合)</option>
                 <option value="-12">進研模試(ベネッセ)</option>
                 <option value="-3">駿台全国判定模試</option>
@@ -863,13 +1066,13 @@ gtag('config', 'G-DQ5WFXEFMX');
                 <option value="8">東進 難関大本番レベル</option>
                 <option value="-6">学校の実力テスト・校内模試</option>
               </select>
-              <input id="henInput" type="number" min="25" max="85" step="0.1" placeholder="偏差値">
+              <input id="henInput" type="number" min="25" max="85" step="0.1" placeholder="偏差値" aria-label="英語の模試偏差値">
             </div>
           </div>
           <div class="opt-field">
             <label>これまでにやった参考書<em style="font-style:normal;font-weight:600;color:var(--muted-2);font-size:10.5px;margin-left:5px">複数可</em></label>
             <div class="done-picker">
-              <input id="doneInput" type="text" placeholder="書名で検索して追加(例:ターゲット、ネクステ)" autocomplete="off" spellcheck="false">
+              <input id="doneInput" type="text" placeholder="書名で検索して追加(例:ターゲット、ネクステ)" aria-label="すでに終えた参考書を書名で検索して追加" autocomplete="off" spellcheck="false">
               <div class="sug" id="doneSug"></div>
             </div>
             <div class="done-chips" id="doneChips"></div>
@@ -890,8 +1093,179 @@ gtag('config', 'G-DQ5WFXEFMX');
       <h2 class="sec">英語の学習ガイド</h2>
       <p class="sec-lead">単語帳の回し方から音読・過去問の使い方まで。ルートを実行するうえで前提になる考え方を、テーマ別にまとめています。</p>
     </div>
-    <div class="guide-list" id="guideList"></div>
-    <div class="disclaimer" id="guideDisclaimer"></div>
+    <div class="guide-list" id="guideList">
+    <article class="g-card" id="g0">
+      <button class="g-card__head" onclick="toggleGuide(0)" aria-expanded="false">
+        <span class="g-num">01</span>
+        <span class="g-ttl"><h3>英語の参考書は「冊数」ではなく「完成度」で決まる</h3><span>1冊を仕上げる基準を、言葉で定義できていますか</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>英語の相談で最も多い失敗が、<b>単語帳を3冊、長文問題集を4冊、どれも中途半端</b>という状態です。冊数だけ見れば十分に見えるのに、模試の偏差値が動かない。これは珍しいことではなく、むしろ典型的な行き詰まり方です。</p>
+<h4>「終わった」の定義を厳しくする</h4>
+<p>単語帳が終わったと言えるのは、1周した時ではありません。<b>どのページを開いても、見出し語を見て1秒以内に意味が言える</b>状態です。長文問題集なら、全ての英文を「返り読みせずに、音読しながら意味が取れる」状態です。解き終わることと、仕上がることは全く別です。</p>
+<ul><li>単語:ランダムに開いて100語テストし、95語即答できるか</li><li>文法:正解の選択肢だけでなく「他の選択肢がなぜ違うか」を言えるか</li><li>長文:全文をスラッシュ音読しながら、日本語を介さず意味が浮かぶか</li></ul>
+<p>この基準を満たさないまま次の1冊に進むより、今の1冊をやり込む方が確実に点が上がります。</p>
+<div class="g-quote">目安として、単語帳は最低10周、長文は1題につき音読10回。周回数は目的ではなく結果ですが、英語は「反復量」が成績に最も素直に反映される科目です。</div></div>
+    </article>
+    <article class="g-card" id="g1">
+      <button class="g-card__head" onclick="toggleGuide(1)" aria-expanded="false">
+        <span class="g-num">02</span>
+        <span class="g-ttl"><h3>単語帳の選び方と「高速で何周も」の回し方</h3><span>1日30分×毎日が、週末3時間×週1に圧勝します</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>英語の成績の土台は語彙力です。そして単語学習の成否は、どの単語帳を選ぶかより<b>どう回すか</b>でほぼ決まります。</p>
+<h4>選び方 — 1冊主義</h4>
+<p>ターゲット1900・システム英単語・LEAP・速読英単語のどれを選んでも到達点はほぼ同じです。重要なのは<b>受験を通して軸を1冊に固定する</b>こと。2冊目(パス単準1級・速単上級・鉄壁など)は、1冊目が上の基準で仕上がってから、志望校が要求する場合のみです。</p>
+<h4>回し方 — 1周を速く、周回数を多く</h4>
+<ul><li><b>1周を2週間以内に</b> — 1日100〜200語に触れる。1語あたり数秒でよく、「思い出そうとして、できなければすぐ答えを見る」を高速で繰り返します</li><li><b>覚えていない語だけ印をつける</b> — 2周目以降は印のついた語だけ回すことで、周回はどんどん速くなります</li><li><b>音声を必ず使う</b> — 発音とセットで覚えた単語はリスニングでも使えます。逆に目だけで覚えた単語は聞き取れません</li></ul>
+<div class="g-quote">「書いて覚える」は時間対効果が最も悪い方法です。書くのはスペルが必要な英作文頻出語だけに絞り、基本は「見て・聞いて・声に出して」高速で回してください。</div></div>
+    </article>
+    <article class="g-card" id="g2">
+      <button class="g-card__head" onclick="toggleGuide(2)" aria-expanded="false">
+        <span class="g-num">03</span>
+        <span class="g-ttl"><h3>文法は「講義本+問題集」の2冊構成で</h3><span>ネクステから始めると丸暗記地獄になります</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>文法学習で挫折する典型パターンは、いきなりNext StageやVintageのような<b>4択網羅系から始めて丸暗記地獄に陥る</b>ことです。問題集は「理解したことを確認する」道具であって、理解する道具ではありません。</p>
+<h4>正しい順序</h4>
+<ul><li><b>1. 講義本で理解する</b> — 大岩のいちばんはじめ・ゼロから英文法・真英文法大全などで「なぜそうなるか」を先に入れます</li><li><b>2. 問題集で運用する</b> — ポラリス・ネクステ系・ソリューションなどで、理解した知識を問題で使える形にします</li><li><b>3. 間違えたら講義本に戻る</b> — この往復が定着を作ります。総合英語(Evergreen等)を辞書として手元に置くと効率が上がります</li></ul>
+<h4>文法はどこまでやるか</h4>
+<p>志望校の出題形式で決まります。文法の独立問題が出ない大学(東大・京大など読解中心の国公立)なら、読解・英作文に必要な理解があれば十分で、4択の細かい知識を極める必要はありません。逆に立命館・法政など文法独立問題の比重が高い私大や、正誤問題が名物の早稲田・上智は、問題集をもう一段やり込む価値があります。</p>
+<div class="g-quote">文法学習のゴールは4択が解けることではなく、<b>英文を正確に読み・書きするための土台</b>です。文法だけを延々とやり続けず、目安2〜3か月で解釈・長文に進んでください。</div></div>
+    </article>
+    <article class="g-card" id="g3">
+      <button class="g-card__head" onclick="toggleGuide(3)" aria-expanded="false">
+        <span class="g-num">04</span>
+        <span class="g-ttl"><h3>解釈(精読)を飛ばすと、長文で必ず詰まる</h3><span>「単語も文法もやったのに長文が読めない」の正体</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>単語帳と文法問題集を仕上げたのに長文が読めない——この相談は毎年後を絶ちません。原因はほぼ一つで、<b>英文解釈(1文を正確に構造把握する訓練)の工程を飛ばしている</b>からです。</p>
+<h4>解釈で身につけること</h4>
+<ul><li>SVOCを振り、文の骨格と修飾を見分ける</li><li>不定詞・分詞・関係詞などの「カタマリ」を瞬時に認識する</li><li>倒置・省略・挿入などの変形パターンに気づく</li></ul>
+<p>この訓練を挟むと、長文は「知らない単語がある文章」から「構造の分かる文章の連続」に変わります。肘井の読解のための英文法、入門70・基礎100などの技術シリーズ、入門英文問題精講あたりが定番の入口です。</p>
+<h4>どこまでやるか</h4>
+<p>マーク式の私大中心なら標準レベル(肘井必修編・基礎100)まで。和訳が出る国公立は上級(ポレポレ・熟考下・難関大編)まで。京大・阪大など和訳最重視の大学は透視図・解釈教室クラスまで視野に入ります。<b>志望校に和訳が出るかどうか</b>が投資量の判断基準です。</p>
+<div class="g-quote">解釈の復習は「訳を暗記する」のではなく、<b>初見のつもりで構造をとり直し、口頭で訳せるか</b>を確認してください。構造が言えれば訳は自然についてきます。</div></div>
+    </article>
+    <article class="g-card" id="g4">
+      <button class="g-card__head" onclick="toggleGuide(4)" aria-expanded="false">
+        <span class="g-num">05</span>
+        <span class="g-ttl"><h3>長文は「解いた後」が本番 — 音読による復習法</h3><span>1題を10回音読する人が、10題を1回ずつ解く人に勝つ</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>長文問題集を「解いて、丸つけして、次へ」と消費していく学習は、ほとんど力になりません。長文学習の成果は<b>解いた後の復習、特に音読</b>で決まります。</p>
+<h4>1題の正しい消化手順</h4>
+<ul><li><b>1. 時間を計って解く</b> — 本番同様の緊張感で</li><li><b>2. 構文を確認する</b> — 全文について、読めなかった文はSVOCを振って構造を特定する。ここで解釈の力が活きます</li><li><b>3. 意味とセットで音読×10回</b> — 音声があればシャドーイングも。「英語の語順のまま意味が浮かぶ」状態になるまで繰り返します</li></ul>
+<h4>音読の効果</h4>
+<p>音読は返り読みを物理的に不可能にするため、<b>英語を英語の語順で処理する回路</b>が作られます。これが速読力の正体で、共テの分量にも私大の超長文にも効きます。さらに音とセットになった英文はリスニングの土台にもなります。The Rules・ソリューション・ハイパートレーニングなど現代の長文問題集が音読用白文と音声を付けているのはこのためです。</p>
+<div class="g-quote">1日1長文・音読10回を3か月続けると、ほとんどの受験生が「読むのが遅い」という悩みを卒業します。新しい問題を解く量より、消化の深さを優先してください。</div></div>
+    </article>
+    <article class="g-card" id="g5">
+      <button class="g-card__head" onclick="toggleGuide(5)" aria-expanded="false">
+        <span class="g-num">06</span>
+        <span class="g-ttl"><h3>英作文は「暗唱例文」から始める</h3><span>書けない原因は発想力ではなくストックの不足です</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>英作文が書けないのは、発想力やセンスの問題ではありません。<b>使える英文のストックが無い</b>だけです。ゼロから英文を「発明」できる受験生はおらず、上位者は覚えた例文の部品を組み替えて書いています。</p>
+<h4>学習の順序</h4>
+<ul><li><b>1. 例文暗唱</b> — ドラゴン・イングリッシュ100文や英作文基本300選クラスを1冊。文法・語法的に正しいと保証された部品を頭に入れます</li><li><b>2. 和文英訳の訓練</b> — ハイパートレーニング和文英訳編・英作文ポラリス1などで「日本語をほぐして、書ける日本語に変換してから訳す」技術を学びます</li><li><b>3. 自由英作文の型</b> — 主張→理由→具体例の構成テンプレートと、意見問題の頻出テーマへの仕込み。ハイトレ自由英作文編Plus・英作文ポラリス2など</li></ul>
+<h4>減点されないことが最優先</h4>
+<p>入試の英作文は加点法ではなく減点法で採点されることが多く、<b>難しい構文で書いて間違えるより、中学レベルの構文で正確に書く</b>方が高得点です。自信のない表現は使わない、が鉄則です。</p>
+<div class="g-quote">書いた英文は必ず誰かに添削してもらうか、模範解答と1文ずつ突き合わせて「自分の答案でも減点されないか」を検証してください。書きっぱなしは効果が半減します。</div></div>
+    </article>
+    <article class="g-card" id="g6">
+      <button class="g-card__head" onclick="toggleGuide(6)" aria-expanded="false">
+        <span class="g-num">07</span>
+        <span class="g-ttl"><h3>リスニングは毎日15分 — 「音の変化」と「先読み」</h3><span>聞き取れないのは耳ではなく、知識と技術の問題です</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>リスニングは共テで配点の半分(100点)を占めるうえ、東大・一橋・ICUなど二次でも課す大学があります。にもかかわらず対策が最も後回しにされる分野です。</p>
+<h4>聞き取れない2つの原因</h4>
+<ul><li><b>音の変化を知らない</b> — get itが「ゲリッ」になる連結・脱落・同化のルールを知らないと、知っている単語も聞き取れません。ゼロからリスニング等の入門書で最初に体系的に学びます</li><li><b>処理が追いつかない</b> — 読んで分からない英文は聞いても分かりません。音声つき長文の音読・シャドーイングが、実はリスニングの最強の訓練になります</li></ul>
+<h4>試験技術 — 先読み</h4>
+<p>共テ・東大とも、<b>放送前に設問と選択肢を読んで「何を聞き取るか」を決めておく</b>先読みが得点を大きく左右します。プラチナルールや満点のコツ系の対策書は、この技術を体系的に教えてくれます。</p>
+<div class="g-quote">リスニングは筋トレと同じで、直前の詰め込みが効かない代わりに毎日15分の継続が確実に効きます。単語帳の音声・長文のシャドーイングを日課に組み込み、実質的な対策時間をゼロにするのが賢い設計です。</div></div>
+    </article>
+    <article class="g-card" id="g7">
+      <button class="g-card__head" onclick="toggleGuide(7)" aria-expanded="false">
+        <span class="g-num">08</span>
+        <span class="g-ttl"><h3>過去問はいつから始めるべきか</h3><span>英語は大学による傾向差が最も大きい科目です</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>要約とリスニングの東大、和訳と英作文だけの京大、90分で超長文2題の科学大、辞書持込可の慶應文、正誤問題の早稲田社学——<b>英語ほど大学による形式差が激しい科目はありません</b>。つまり過去問研究の価値が最も高い科目です。</p>
+<h4>過去問の役割は2つある</h4>
+<p>ひとつは<b>仕上げの演習</b>、もうひとつは<b>設計図の入手</b>です。後者は早ければ早いほど価値があります。</p>
+<ul><li>大問構成と時間から、1題あたりに使える時間が分かる</li><li>和訳・英作文・リスニングの有無で、やるべき参考書が大きく変わる</li><li>語彙レベルが分かるので、単語帳を2冊目まで進めるべきか判断できる</li><li>合格最低点から、何割取れば受かるのかが分かる</li></ul>
+<h4>推奨するタイミング</h4>
+<p>高3の春〜夏に<b>1年分だけ</b>時間を計って解いてください。ボロボロで構いません。目的は点を取ることではなく、ゴールの形を知ることです。本サイトの志望校入力機能で傾向の概要は掴めますが、実物に触れるのが一番です。標準演習が終わる秋からは、週1年分ペースで本格的に回します。</p>
+<div class="g-quote">過去問で見つけた弱点形式(要約・正誤・自由英作文など)は、分野特化の参考書でピンポイント補強してから過去問に戻る。この往復が直前期の最効率ルートです。</div></div>
+    </article>
+    <article class="g-card" id="g8">
+      <button class="g-card__head" onclick="toggleGuide(8)" aria-expanded="false">
+        <span class="g-num">09</span>
+        <span class="g-ttl"><h3>模試の偏差値をどう読むか</h3><span>母集団が違えば、同じ数字の意味は10以上変わります</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>「偏差値60です」という情報だけでは、実力はほとんど判断できません。<b>どの模試か</b>によって意味がまったく変わるからです。</p>
+<h4>主要模試の難易度と母集団</h4>
+<ul><li><b>進研模試(ベネッセ)</b> — 受験者層が広く、難関大志望者には易しめ。偏差値は高めに出ます</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。合格可能性判定の基準として広く使われます</li><li><b>駿台全国模試</b> — 難関大志望者中心の母集団で難度も高い。偏差値は低めに出ます</li><li><b>東進の本番レベル模試</b> — 大学別・レベル別に母集団が異なります</li></ul>
+<p>目安として、同じ実力でも<b>進研で67、全統で57、駿台全国で47</b>といった開きが生じます。本サイトのルート画面では、模試の種類を選ぶと全統換算に直したうえで志望校の到達目安との差を表示します。</p>
+<h4>英語で見るべきは偏差値より「内訳」</h4>
+<p>英語の模試は、どの大問で落としたかが次にやるべきことを直接教えてくれます。<b>文法問題で失点</b>なら文法の網羅、<b>長文の後半で時間切れ</b>なら音読による速読訓練、<b>和訳で部分点止まり</b>なら解釈、<b>リスニングだけ低い</b>なら音の学習——偏差値そのものより、この切り分けを毎回やることが成績を動かします。</p></div>
+    </article>
+    <article class="g-card" id="g9">
+      <button class="g-card__head" onclick="toggleGuide(9)" aria-expanded="false">
+        <span class="g-num">10</span>
+        <span class="g-ttl"><h3>共通テスト英語は「時間との戦い」</h3><span>リーディングは全文を同じ深さで読んではいけません</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>共通テスト英語リーディングの最大の特徴は、80分で大問8つ・合計6000語超という<b>圧倒的な分量</b>です(2025年からの新形式)。難しい構文はほぼ出ないのに平均点が伸びないのは、時間が足りないからです。</p>
+<h4>リーディングの戦略</h4>
+<ul><li><b>設問先読み</b> — 何を探すかを決めてから本文を読む。全文を精読してから設問に向かうと確実に時間切れになります</li><li><b>大問ごとの時間配分を固定する</b> — 前半(大問1〜3)を速く処理し、配点の重い後半に時間を残すのが定石です</li><li><b>速読力の土台は音読</b> — 小手先のテクニックの前に、1日1長文の音読でWPM(読速)自体を上げるのが本質的な対策です</li></ul>
+<h4>リスニングは配点50%</h4>
+<p>共テ英語はリーディング100点+リスニング100点。<b>リスニングの1点はリーディングの1点と同じ重さ</b>です(大学により傾斜あり)。読解ばかり対策してリスニングを直前まで放置するのは、配点構造から見て最も損な戦略です。</p>
+<div class="g-quote">共テ形式の演習は、講義系対策書で解法を学んでから、過去問→黒本・青本の実戦問題集へ。秋以降は週1セット、必ず時間を計って解いてください。</div></div>
+    </article>
+    <article class="g-card" id="g10">
+      <button class="g-card__head" onclick="toggleGuide(10)" aria-expanded="false">
+        <span class="g-num">11</span>
+        <span class="g-ttl"><h3>英検・TEAPなど外部試験の活用が合否を分ける大学</h3><span>上智・立教・早稲田国教…「受験英語」の外にある得点源</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>近年の私大入試では、<b>英語外部試験(英検・TEAP・TOEFL等)のスコアが得点換算・加点される方式</b>が急速に広がっています。これを知らずに一般方式だけで戦うのは、大学によっては明確に不利です。</p>
+<h4>代表的な大学</h4>
+<ul><li><b>上智大学</b> — TEAPスコア利用型が主要方式。独自の英語試験は原則なく、TEAPの完成度が合否に直結します</li><li><b>立教大学</b> — 一般入試の英語を外部スコアまたは共テで代替。英検準1級レベルのスコアがあると大きく有利です</li><li><b>早稲田(国際教養など)・青学・明治(一部)・MARCH各学部</b> — 加点・出願資格・得点換算など方式が多様にあります</li><li><b>千葉大・広島大など国公立</b> — 出願要件や加点に使う大学が増えています</li></ul>
+<h4>戦略上のポイント</h4>
+<p>外部試験は<b>複数回受験でき、高2からスコアを作れる</b>のが最大の利点です。本番一発の入試と違い、失敗してもやり直せます。志望校に外部利用方式があるなら、高2〜高3春に英検準1級・TEAPを計画的に受けておくと、受験校の選択肢が大きく広がります。</p>
+<div class="g-quote">対策としては、受験用の単語・長文学習に加えて、パス単準1級などの級別語彙と、ライティング・スピーキングの型の練習を早めに始めてください。受験英語との重なりは大きく、二重投資にはなりません。</div></div>
+    </article>
+    <article class="g-card" id="g11">
+      <button class="g-card__head" onclick="toggleGuide(11)" aria-expanded="false">
+        <span class="g-num">12</span>
+        <span class="g-ttl"><h3>国公立型と私立型 — 対策はどう違うか</h3><span>記述の国公立、速読の私立。同じ英語でも別競技です</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>本サイトのルートで「国公立二次型」と「私立個別型」を分けているのは、要求される能力が大きく違うからです。</p>
+<h4>国公立二次型(記述中心)</h4>
+<ul><li><b>下線部和訳</b> — 構文把握を日本語に落とす精読力。解釈系参考書への投資が直接効きます</li><li><b>内容説明</b> — 「〜はどういうことか説明せよ」に日本語でまとめる要約的な力</li><li><b>英作文</b> — 和文英訳・自由英作文はほぼ必出。暗唱例文と添削訓練が必要です</li><li>語彙は標準レベルで足りることが多く、<b>答案の質</b>で差がつきます</li></ul>
+<h4>私立個別型(マーク中心)</h4>
+<ul><li><b>速読と処理速度</b> — 分量が多く、時間内に読み切る力が最重要。音読による速読訓練が軸になります</li><li><b>語彙・熟語・文法の知識量</b> — マーク式は知識の即答が得点に直結。単語帳2冊目・熟語帳・文法網羅系の価値が上がります</li><li><b>形式への習熟</b> — 正誤(早稲田)・段落整序(関大)・会話文など大学名物の形式は過去問反復が全てです</li></ul>
+<p>併願で両方受ける場合は、<b>国公立型を軸に組み、私大の形式対策を過去問で上乗せ</b>するのが基本です。精読・記述の力はマーク式にも転用できますが、逆は難しいためです。</p></div>
+    </article>
+    <article class="g-card" id="g12">
+      <button class="g-card__head" onclick="toggleGuide(12)" aria-expanded="false">
+        <span class="g-num">13</span>
+        <span class="g-ttl"><h3>志望校が決まっていないときの動き方</h3><span>迷っている間も、やるべきことは共通しています</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>「志望校が決まっていないので参考書も決められない」という相談をよく受けますが、これは順序が逆です。<b>どの志望校であっても、最初の2〜3段階は共通しています</b>。</p>
+<h4>志望校に依存しない部分</h4>
+<ul><li><b>単語帳1冊</b> — どこを受けるにしても必要で、最も時間がかかります。今日から始められます</li><li><b>文法の講義+問題集</b> — 読解・英作文・リスニング全ての土台。志望校を問いません</li><li><b>英文解釈の基礎</b> — 構造をとって読む力は全形式に共通します</li></ul>
+<p>志望校によって分かれるのは、長文演習の上限レベルと、英作文・リスニング・要約など<b>形式特化の対策</b>です。つまり最初の3〜6か月は志望校を決めずに走り出して問題ありません。</p>
+<h4>決めるべきタイミング</h4>
+<p>遅くとも高3の夏までには、<b>国公立型か私立型か</b>と<b>レベル帯</b>を確定させてください。この2つが決まれば、標準演習以降のルートが定まります。大学名そのものは秋まで揺れても構いません。迷っている段階では<b>少し上のレベル+国公立型(記述あり)を想定して</b>進めるのが安全です。記述型の力はマーク式に転用できますが、逆は利かないからです。</p></div>
+    </article></div>
+    <div class="disclaimer" id="guideDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの出題傾向・入試方式(英語外部試験の利用可否を含む)は年度により変更されるため、出願前に必ず募集要項をご確認ください。書影はAmazon等が提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <div class="site-foot">
@@ -933,22 +1307,23 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="/english/books/">参考書一覧</a>
       <a href="/english/routes/">志望校別ルート</a>
       <a href="/english/guides/">参考書の選び方</a>
-      <button onclick="openLegal('about')">運営者情報</button>
-      <button onclick="openLegal('privacy')">プライバシーポリシー</button>
-      <button onclick="openLegal('disclaimer')">免責事項</button>
-      <button onclick="openLegal('affiliate')">広告について</button>
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
       <button onclick="go('guide')">学習ガイド</button>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
-    <div class="foot-legal" id="footLegal"></div>
+    <div class="foot-legal">
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。<b>Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。</b><br>
+      <span style="display:inline-block;margin-top:10px;font-family:var(--mono);letter-spacing:.06em">英語ルート大全 — ENGLISH ROUTE COMPENDIUM</span>
+    </div>
   </div>
 
 </main>
-
-<!-- Legal modal -->
-<div class="modal-overlay" id="legalModal" onclick="if(event.target===this)closeLegal()">
-  <div class="modal" id="legalInner" role="dialog" aria-modal="true" aria-label="サイト情報"></div>
-</div>
 
 <!-- Book detail modal -->
 <div class="modal-overlay" id="bookModal" onclick="if(event.target===this)closeModal()">
@@ -1044,7 +1419,10 @@ if (!AFF && !ADSENSE) document.getElementById("prBar")?.remove();
    ============================================================ */
 const STAGES = {
   tango:    {label:"単語・語彙",  color:"#2E7D9A", short:"単語"},
-  jukugo:   {label:"熟語",        color:"#8A6D2F", short:"熟語"},
+  /* 熟語帳だけでなく、多義語・会話表現・発音アクセントといった「文法以外の知識問題」を
+     扱う本もここに入る（英語頻出問題ポラリスなど）。ラベルを「熟語」だけにすると
+     分類ミスに見えるので、役割の名前のほうを実態に合わせてある。 */
+  jukugo:   {label:"熟語・知識問題", color:"#8A6D2F", short:"熟語"},
   bunpo:    {label:"文法",        color:"#24427C", short:"文法"},
   kaishaku: {label:"英文解釈",    color:"#5B4E9E", short:"解釈"},
   chobun:   {label:"長文読解",    color:"#B5432A", short:"長文"},
@@ -1810,7 +2188,7 @@ const BOOKS = [
  bestFor:"最小の暗唱量で英作文の核を作りたい人",unis:["旧帝","東大・京大","地方国公立"]},
 
 {id:"haitore-wabun",name:"英作文ハイパートレーニング 和文英訳編",official:"大学入試 英作文ハイパートレーニング 和文英訳編 新装版",pub:"桐原書店",isbn13:"9784342207785",year:2024,subjects:"英作文(和文英訳)",stage:"eisaku",diff:5,hensachi:"50〜65",problems:"256頁",hours:"35〜50h",h:40,style:"和文英訳",bunri:"bun",fb:{bg:"linear-gradient(160deg,#2F6E4F,#134D2E)"},
- desc:"大矢復による和文英訳の定番(新装版)。文法ミスの撲滅から始まり、「日本語をほぐしてから訳す」プロセスを段階的に训练する。国公立の英作文対策の第一選択。",
+ desc:"大矢復による和文英訳の定番(新装版)。文法ミスの撲滅から始まり、「日本語をほぐしてから訳す」プロセスを段階的に訓練する。国公立の英作文対策の第一選択。",
  pros:["ミス撲滅→表現の段階設計が秀逸","国公立の和文英訳に直結"],
  cons:["自由英作文は姉妹編で","例文暗唱は別途あると良い"],
  bestFor:"国公立二次の和文英訳対策の主軸",unis:["地方国公立","旧帝","神戸大"]},
@@ -1931,7 +2309,7 @@ const BOOKS = [
  bestFor:"講義でじっくり共テLを対策したい人",unis:["共テ利用","地方国公立","旧帝"]},
 
 {id:"takeoka-lis",name:"共テ英語[リスニング]面白いほど",official:"改訂第2版 大学入学共通テスト 英語[リスニング]の点数が面白いほどとれる本 音声DL付",pub:"KADOKAWA",isbn13:"9784046062444",year:2024,subjects:"リスニング(共テ)",stage:"listening",diff:5,hensachi:"45〜65",problems:"352頁",hours:"30〜45h",h:35,style:"網羅講義",bunri:"both",fb:{bg:"linear-gradient(160deg,#946200,#4E3300)"},
- desc:"竹岡広信が0点から100点까지を掲げる共テLの網羅的対策書(改訂第2版)。設問形式別の攻略と音声訓練を両立し、共テ面白いほどRとの併用で共テ英語が完結する。",
+ desc:"竹岡広信が0点から100点までを掲げる共テLの網羅的対策書(改訂第2版)。設問形式別の攻略と音声訓練を両立し、共テ面白いほどRとの併用で共テ英語が完結する。",
  pros:["網羅性が高く1冊で完結できる","竹岡の設問分析が鋭い"],
  cons:["分厚く時間がかかる","直前期には集中講義系を"],
  bestFor:"共テLを本格的に仕上げたい人・竹岡ルート",unis:["共テ利用","旧帝","国公立医"]},
@@ -2422,7 +2800,7 @@ const GUIDES = [
 {t:"英語の参考書は「冊数」ではなく「完成度」で決まる",
  s:"1冊を仕上げる基準を、言葉で定義できていますか",
  b:`<p>英語の相談で最も多い失敗が、<b>単語帳を3冊、長文問題集を4冊、どれも中途半端</b>という状態です。冊数だけ見れば十分に見えるのに、模試の偏差値が動かない。これは珍しいことではなく、むしろ典型的な行き詰まり方です。</p>
-<h5>「終わった」の定義を厳しくする</h5>
+<h4>「終わった」の定義を厳しくする</h4>
 <p>単語帳が終わったと言えるのは、1周した時ではありません。<b>どのページを開いても、見出し語を見て1秒以内に意味が言える</b>状態です。長文問題集なら、全ての英文を「返り読みせずに、音読しながら意味が取れる」状態です。解き終わることと、仕上がることは全く別です。</p>
 <ul><li>単語:ランダムに開いて100語テストし、95語即答できるか</li><li>文法:正解の選択肢だけでなく「他の選択肢がなぜ違うか」を言えるか</li><li>長文:全文をスラッシュ音読しながら、日本語を介さず意味が浮かぶか</li></ul>
 <p>この基準を満たさないまま次の1冊に進むより、今の1冊をやり込む方が確実に点が上がります。</p>
@@ -2431,183 +2809,123 @@ const GUIDES = [
 {t:"単語帳の選び方と「高速で何周も」の回し方",
  s:"1日30分×毎日が、週末3時間×週1に圧勝します",
  b:`<p>英語の成績の土台は語彙力です。そして単語学習の成否は、どの単語帳を選ぶかより<b>どう回すか</b>でほぼ決まります。</p>
-<h5>選び方 — 1冊主義</h5>
+<h4>選び方 — 1冊主義</h4>
 <p>ターゲット1900・システム英単語・LEAP・速読英単語のどれを選んでも到達点はほぼ同じです。重要なのは<b>受験を通して軸を1冊に固定する</b>こと。2冊目(パス単準1級・速単上級・鉄壁など)は、1冊目が上の基準で仕上がってから、志望校が要求する場合のみです。</p>
-<h5>回し方 — 1周を速く、周回数を多く</h5>
+<h4>回し方 — 1周を速く、周回数を多く</h4>
 <ul><li><b>1周を2週間以内に</b> — 1日100〜200語に触れる。1語あたり数秒でよく、「思い出そうとして、できなければすぐ答えを見る」を高速で繰り返します</li><li><b>覚えていない語だけ印をつける</b> — 2周目以降は印のついた語だけ回すことで、周回はどんどん速くなります</li><li><b>音声を必ず使う</b> — 発音とセットで覚えた単語はリスニングでも使えます。逆に目だけで覚えた単語は聞き取れません</li></ul>
 <div class="g-quote">「書いて覚える」は時間対効果が最も悪い方法です。書くのはスペルが必要な英作文頻出語だけに絞り、基本は「見て・聞いて・声に出して」高速で回してください。</div>`},
 
 {t:"文法は「講義本+問題集」の2冊構成で",
  s:"ネクステから始めると丸暗記地獄になります",
  b:`<p>文法学習で挫折する典型パターンは、いきなりNext StageやVintageのような<b>4択網羅系から始めて丸暗記地獄に陥る</b>ことです。問題集は「理解したことを確認する」道具であって、理解する道具ではありません。</p>
-<h5>正しい順序</h5>
+<h4>正しい順序</h4>
 <ul><li><b>1. 講義本で理解する</b> — 大岩のいちばんはじめ・ゼロから英文法・真英文法大全などで「なぜそうなるか」を先に入れます</li><li><b>2. 問題集で運用する</b> — ポラリス・ネクステ系・ソリューションなどで、理解した知識を問題で使える形にします</li><li><b>3. 間違えたら講義本に戻る</b> — この往復が定着を作ります。総合英語(Evergreen等)を辞書として手元に置くと効率が上がります</li></ul>
-<h5>文法はどこまでやるか</h5>
+<h4>文法はどこまでやるか</h4>
 <p>志望校の出題形式で決まります。文法の独立問題が出ない大学(東大・京大など読解中心の国公立)なら、読解・英作文に必要な理解があれば十分で、4択の細かい知識を極める必要はありません。逆に立命館・法政など文法独立問題の比重が高い私大や、正誤問題が名物の早稲田・上智は、問題集をもう一段やり込む価値があります。</p>
 <div class="g-quote">文法学習のゴールは4択が解けることではなく、<b>英文を正確に読み・書きするための土台</b>です。文法だけを延々とやり続けず、目安2〜3か月で解釈・長文に進んでください。</div>`},
 
 {t:"解釈(精読)を飛ばすと、長文で必ず詰まる",
  s:"「単語も文法もやったのに長文が読めない」の正体",
  b:`<p>単語帳と文法問題集を仕上げたのに長文が読めない——この相談は毎年後を絶ちません。原因はほぼ一つで、<b>英文解釈(1文を正確に構造把握する訓練)の工程を飛ばしている</b>からです。</p>
-<h5>解釈で身につけること</h5>
+<h4>解釈で身につけること</h4>
 <ul><li>SVOCを振り、文の骨格と修飾を見分ける</li><li>不定詞・分詞・関係詞などの「カタマリ」を瞬時に認識する</li><li>倒置・省略・挿入などの変形パターンに気づく</li></ul>
 <p>この訓練を挟むと、長文は「知らない単語がある文章」から「構造の分かる文章の連続」に変わります。肘井の読解のための英文法、入門70・基礎100などの技術シリーズ、入門英文問題精講あたりが定番の入口です。</p>
-<h5>どこまでやるか</h5>
+<h4>どこまでやるか</h4>
 <p>マーク式の私大中心なら標準レベル(肘井必修編・基礎100)まで。和訳が出る国公立は上級(ポレポレ・熟考下・難関大編)まで。京大・阪大など和訳最重視の大学は透視図・解釈教室クラスまで視野に入ります。<b>志望校に和訳が出るかどうか</b>が投資量の判断基準です。</p>
 <div class="g-quote">解釈の復習は「訳を暗記する」のではなく、<b>初見のつもりで構造をとり直し、口頭で訳せるか</b>を確認してください。構造が言えれば訳は自然についてきます。</div>`},
 
 {t:"長文は「解いた後」が本番 — 音読による復習法",
  s:"1題を10回音読する人が、10題を1回ずつ解く人に勝つ",
  b:`<p>長文問題集を「解いて、丸つけして、次へ」と消費していく学習は、ほとんど力になりません。長文学習の成果は<b>解いた後の復習、特に音読</b>で決まります。</p>
-<h5>1題の正しい消化手順</h5>
+<h4>1題の正しい消化手順</h4>
 <ul><li><b>1. 時間を計って解く</b> — 本番同様の緊張感で</li><li><b>2. 構文を確認する</b> — 全文について、読めなかった文はSVOCを振って構造を特定する。ここで解釈の力が活きます</li><li><b>3. 意味とセットで音読×10回</b> — 音声があればシャドーイングも。「英語の語順のまま意味が浮かぶ」状態になるまで繰り返します</li></ul>
-<h5>音読の効果</h5>
+<h4>音読の効果</h4>
 <p>音読は返り読みを物理的に不可能にするため、<b>英語を英語の語順で処理する回路</b>が作られます。これが速読力の正体で、共テの分量にも私大の超長文にも効きます。さらに音とセットになった英文はリスニングの土台にもなります。The Rules・ソリューション・ハイパートレーニングなど現代の長文問題集が音読用白文と音声を付けているのはこのためです。</p>
 <div class="g-quote">1日1長文・音読10回を3か月続けると、ほとんどの受験生が「読むのが遅い」という悩みを卒業します。新しい問題を解く量より、消化の深さを優先してください。</div>`},
 
 {t:"英作文は「暗唱例文」から始める",
  s:"書けない原因は発想力ではなくストックの不足です",
  b:`<p>英作文が書けないのは、発想力やセンスの問題ではありません。<b>使える英文のストックが無い</b>だけです。ゼロから英文を「発明」できる受験生はおらず、上位者は覚えた例文の部品を組み替えて書いています。</p>
-<h5>学習の順序</h5>
+<h4>学習の順序</h4>
 <ul><li><b>1. 例文暗唱</b> — ドラゴン・イングリッシュ100文や英作文基本300選クラスを1冊。文法・語法的に正しいと保証された部品を頭に入れます</li><li><b>2. 和文英訳の訓練</b> — ハイパートレーニング和文英訳編・英作文ポラリス1などで「日本語をほぐして、書ける日本語に変換してから訳す」技術を学びます</li><li><b>3. 自由英作文の型</b> — 主張→理由→具体例の構成テンプレートと、意見問題の頻出テーマへの仕込み。ハイトレ自由英作文編Plus・英作文ポラリス2など</li></ul>
-<h5>減点されないことが最優先</h5>
+<h4>減点されないことが最優先</h4>
 <p>入試の英作文は加点法ではなく減点法で採点されることが多く、<b>難しい構文で書いて間違えるより、中学レベルの構文で正確に書く</b>方が高得点です。自信のない表現は使わない、が鉄則です。</p>
 <div class="g-quote">書いた英文は必ず誰かに添削してもらうか、模範解答と1文ずつ突き合わせて「自分の答案でも減点されないか」を検証してください。書きっぱなしは効果が半減します。</div>`},
 
 {t:"リスニングは毎日15分 — 「音の変化」と「先読み」",
  s:"聞き取れないのは耳ではなく、知識と技術の問題です",
  b:`<p>リスニングは共テで配点の半分(100点)を占めるうえ、東大・一橋・ICUなど二次でも課す大学があります。にもかかわらず対策が最も後回しにされる分野です。</p>
-<h5>聞き取れない2つの原因</h5>
+<h4>聞き取れない2つの原因</h4>
 <ul><li><b>音の変化を知らない</b> — get itが「ゲリッ」になる連結・脱落・同化のルールを知らないと、知っている単語も聞き取れません。ゼロからリスニング等の入門書で最初に体系的に学びます</li><li><b>処理が追いつかない</b> — 読んで分からない英文は聞いても分かりません。音声つき長文の音読・シャドーイングが、実はリスニングの最強の訓練になります</li></ul>
-<h5>試験技術 — 先読み</h5>
+<h4>試験技術 — 先読み</h4>
 <p>共テ・東大とも、<b>放送前に設問と選択肢を読んで「何を聞き取るか」を決めておく</b>先読みが得点を大きく左右します。プラチナルールや満点のコツ系の対策書は、この技術を体系的に教えてくれます。</p>
 <div class="g-quote">リスニングは筋トレと同じで、直前の詰め込みが効かない代わりに毎日15分の継続が確実に効きます。単語帳の音声・長文のシャドーイングを日課に組み込み、実質的な対策時間をゼロにするのが賢い設計です。</div>`},
 
 {t:"過去問はいつから始めるべきか",
  s:"英語は大学による傾向差が最も大きい科目です",
  b:`<p>要約とリスニングの東大、和訳と英作文だけの京大、90分で超長文2題の科学大、辞書持込可の慶應文、正誤問題の早稲田社学——<b>英語ほど大学による形式差が激しい科目はありません</b>。つまり過去問研究の価値が最も高い科目です。</p>
-<h5>過去問の役割は2つある</h5>
+<h4>過去問の役割は2つある</h4>
 <p>ひとつは<b>仕上げの演習</b>、もうひとつは<b>設計図の入手</b>です。後者は早ければ早いほど価値があります。</p>
 <ul><li>大問構成と時間から、1題あたりに使える時間が分かる</li><li>和訳・英作文・リスニングの有無で、やるべき参考書が大きく変わる</li><li>語彙レベルが分かるので、単語帳を2冊目まで進めるべきか判断できる</li><li>合格最低点から、何割取れば受かるのかが分かる</li></ul>
-<h5>推奨するタイミング</h5>
-<p>高3の春〜夏に<b>1年分だけ</b>時間を計って解いてください。ボロボロで構いません。目的は点を取ることではなく、ゴールの形を知ることです。本アプリの志望校入力機能で傾向の概要は掴めますが、実物に触れるのが一番です。標準演習が終わる秋からは、週1年分ペースで本格的に回します。</p>
+<h4>推奨するタイミング</h4>
+<p>高3の春〜夏に<b>1年分だけ</b>時間を計って解いてください。ボロボロで構いません。目的は点を取ることではなく、ゴールの形を知ることです。本サイトの志望校入力機能で傾向の概要は掴めますが、実物に触れるのが一番です。標準演習が終わる秋からは、週1年分ペースで本格的に回します。</p>
 <div class="g-quote">過去問で見つけた弱点形式(要約・正誤・自由英作文など)は、分野特化の参考書でピンポイント補強してから過去問に戻る。この往復が直前期の最効率ルートです。</div>`},
 
 {t:"模試の偏差値をどう読むか",
  s:"母集団が違えば、同じ数字の意味は10以上変わります",
  b:`<p>「偏差値60です」という情報だけでは、実力はほとんど判断できません。<b>どの模試か</b>によって意味がまったく変わるからです。</p>
-<h5>主要模試の難易度と母集団</h5>
+<h4>主要模試の難易度と母集団</h4>
 <ul><li><b>進研模試(ベネッセ)</b> — 受験者層が広く、難関大志望者には易しめ。偏差値は高めに出ます</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。合格可能性判定の基準として広く使われます</li><li><b>駿台全国模試</b> — 難関大志望者中心の母集団で難度も高い。偏差値は低めに出ます</li><li><b>東進の本番レベル模試</b> — 大学別・レベル別に母集団が異なります</li></ul>
-<p>目安として、同じ実力でも<b>進研で67、全統で57、駿台全国で47</b>といった開きが生じます。本アプリのルート画面では、模試の種類を選ぶと全統換算に直したうえで志望校の到達目安との差を表示します。</p>
-<h5>英語で見るべきは偏差値より「内訳」</h5>
+<p>目安として、同じ実力でも<b>進研で67、全統で57、駿台全国で47</b>といった開きが生じます。本サイトのルート画面では、模試の種類を選ぶと全統換算に直したうえで志望校の到達目安との差を表示します。</p>
+<h4>英語で見るべきは偏差値より「内訳」</h4>
 <p>英語の模試は、どの大問で落としたかが次にやるべきことを直接教えてくれます。<b>文法問題で失点</b>なら文法の網羅、<b>長文の後半で時間切れ</b>なら音読による速読訓練、<b>和訳で部分点止まり</b>なら解釈、<b>リスニングだけ低い</b>なら音の学習——偏差値そのものより、この切り分けを毎回やることが成績を動かします。</p>`},
 
 {t:"共通テスト英語は「時間との戦い」",
  s:"リーディングは全文を同じ深さで読んではいけません",
  b:`<p>共通テスト英語リーディングの最大の特徴は、80分で大問8つ・合計6000語超という<b>圧倒的な分量</b>です(2025年からの新形式)。難しい構文はほぼ出ないのに平均点が伸びないのは、時間が足りないからです。</p>
-<h5>リーディングの戦略</h5>
+<h4>リーディングの戦略</h4>
 <ul><li><b>設問先読み</b> — 何を探すかを決めてから本文を読む。全文を精読してから設問に向かうと確実に時間切れになります</li><li><b>大問ごとの時間配分を固定する</b> — 前半(大問1〜3)を速く処理し、配点の重い後半に時間を残すのが定石です</li><li><b>速読力の土台は音読</b> — 小手先のテクニックの前に、1日1長文の音読でWPM(読速)自体を上げるのが本質的な対策です</li></ul>
-<h5>リスニングは配点50%</h5>
+<h4>リスニングは配点50%</h4>
 <p>共テ英語はリーディング100点+リスニング100点。<b>リスニングの1点はリーディングの1点と同じ重さ</b>です(大学により傾斜あり)。読解ばかり対策してリスニングを直前まで放置するのは、配点構造から見て最も損な戦略です。</p>
 <div class="g-quote">共テ形式の演習は、講義系対策書で解法を学んでから、過去問→黒本・青本の実戦問題集へ。秋以降は週1セット、必ず時間を計って解いてください。</div>`},
 
 {t:"英検・TEAPなど外部試験の活用が合否を分ける大学",
  s:"上智・立教・早稲田国教…「受験英語」の外にある得点源",
  b:`<p>近年の私大入試では、<b>英語外部試験(英検・TEAP・TOEFL等)のスコアが得点換算・加点される方式</b>が急速に広がっています。これを知らずに一般方式だけで戦うのは、大学によっては明確に不利です。</p>
-<h5>代表的な大学</h5>
+<h4>代表的な大学</h4>
 <ul><li><b>上智大学</b> — TEAPスコア利用型が主要方式。独自の英語試験は原則なく、TEAPの完成度が合否に直結します</li><li><b>立教大学</b> — 一般入試の英語を外部スコアまたは共テで代替。英検準1級レベルのスコアがあると大きく有利です</li><li><b>早稲田(国際教養など)・青学・明治(一部)・MARCH各学部</b> — 加点・出願資格・得点換算など方式が多様にあります</li><li><b>千葉大・広島大など国公立</b> — 出願要件や加点に使う大学が増えています</li></ul>
-<h5>戦略上のポイント</h5>
+<h4>戦略上のポイント</h4>
 <p>外部試験は<b>複数回受験でき、高2からスコアを作れる</b>のが最大の利点です。本番一発の入試と違い、失敗してもやり直せます。志望校に外部利用方式があるなら、高2〜高3春に英検準1級・TEAPを計画的に受けておくと、受験校の選択肢が大きく広がります。</p>
 <div class="g-quote">対策としては、受験用の単語・長文学習に加えて、パス単準1級などの級別語彙と、ライティング・スピーキングの型の練習を早めに始めてください。受験英語との重なりは大きく、二重投資にはなりません。</div>`},
 
 {t:"国公立型と私立型 — 対策はどう違うか",
  s:"記述の国公立、速読の私立。同じ英語でも別競技です",
- b:`<p>本アプリのルートで「国公立二次型」と「私立個別型」を分けているのは、要求される能力が大きく違うからです。</p>
-<h5>国公立二次型(記述中心)</h5>
+ b:`<p>本サイトのルートで「国公立二次型」と「私立個別型」を分けているのは、要求される能力が大きく違うからです。</p>
+<h4>国公立二次型(記述中心)</h4>
 <ul><li><b>下線部和訳</b> — 構文把握を日本語に落とす精読力。解釈系参考書への投資が直接効きます</li><li><b>内容説明</b> — 「〜はどういうことか説明せよ」に日本語でまとめる要約的な力</li><li><b>英作文</b> — 和文英訳・自由英作文はほぼ必出。暗唱例文と添削訓練が必要です</li><li>語彙は標準レベルで足りることが多く、<b>答案の質</b>で差がつきます</li></ul>
-<h5>私立個別型(マーク中心)</h5>
+<h4>私立個別型(マーク中心)</h4>
 <ul><li><b>速読と処理速度</b> — 分量が多く、時間内に読み切る力が最重要。音読による速読訓練が軸になります</li><li><b>語彙・熟語・文法の知識量</b> — マーク式は知識の即答が得点に直結。単語帳2冊目・熟語帳・文法網羅系の価値が上がります</li><li><b>形式への習熟</b> — 正誤(早稲田)・段落整序(関大)・会話文など大学名物の形式は過去問反復が全てです</li></ul>
 <p>併願で両方受ける場合は、<b>国公立型を軸に組み、私大の形式対策を過去問で上乗せ</b>するのが基本です。精読・記述の力はマーク式にも転用できますが、逆は難しいためです。</p>`},
 
 {t:"志望校が決まっていないときの動き方",
  s:"迷っている間も、やるべきことは共通しています",
  b:`<p>「志望校が決まっていないので参考書も決められない」という相談をよく受けますが、これは順序が逆です。<b>どの志望校であっても、最初の2〜3段階は共通しています</b>。</p>
-<h5>志望校に依存しない部分</h5>
+<h4>志望校に依存しない部分</h4>
 <ul><li><b>単語帳1冊</b> — どこを受けるにしても必要で、最も時間がかかります。今日から始められます</li><li><b>文法の講義+問題集</b> — 読解・英作文・リスニング全ての土台。志望校を問いません</li><li><b>英文解釈の基礎</b> — 構造をとって読む力は全形式に共通します</li></ul>
 <p>志望校によって分かれるのは、長文演習の上限レベルと、英作文・リスニング・要約など<b>形式特化の対策</b>です。つまり最初の3〜6か月は志望校を決めずに走り出して問題ありません。</p>
-<h5>決めるべきタイミング</h5>
+<h4>決めるべきタイミング</h4>
 <p>遅くとも高3の夏までには、<b>国公立型か私立型か</b>と<b>レベル帯</b>を確定させてください。この2つが決まれば、標準演習以降のルートが定まります。大学名そのものは秋まで揺れても構いません。迷っている段階では<b>少し上のレベル+国公立型(記述あり)を想定して</b>進めるのが安全です。記述型の力はマーク式に転用できますが、逆は利かないからです。</p>`}
 ];
 
 /* ============================================================
    LEGAL — 法定表記・ポリシー
    ============================================================ */
-const LEGAL = {
-about:{title:"運営者情報",body:()=>`
-<h5>サイト名</h5><p>${CONFIG.siteName}</p>
-<h5>運営者</h5><p>${CONFIG.operator || CONFIG.siteName + " 運営者"}</p>
-${CONFIG.contact?`<h5>お問い合わせ</h5><p>${CONFIG.contact}</p>`:`<h5>お問い合わせ</h5><p>お問い合わせ先は準備中です。</p>`}
-<h5>サイトの目的</h5>
-<p>本サイトは、高校英語・大学受験英語の参考書情報と学習ルートを整理して提供する情報サイトです。掲載している参考書の難易度・到達目安・所要時間は、各出版社の公表情報および大手予備校・塾が公開する学習ルート解説をもとにした編集部独自の目安であり、特定の成果を保証するものではありません。</p>
-<h5>掲載情報について</h5>
-<p>書誌情報(書名・出版社・ISBN・刊行年)は各出版社および書店データベースの公開情報にもとづいています。版の改訂等により情報が古くなる場合がありますので、購入前には必ず販売ページで最新の情報をご確認ください。</p>`},
-
-privacy:{title:"プライバシーポリシー",body:()=>`
-<h5>個人情報の取り扱い</h5>
-<p>本サイトは静的なウェブページとして提供されており、氏名・住所・メールアドレス等の個人情報を入力するフォームを設置していません。ルート作成のために入力された志望校名・偏差値・学習済み参考書などの情報は、お使いのブラウザ内でのみ処理され、サーバーへ送信・保存されることはありません。</p>
-<h5>診断結果の保存と共有について</h5>
-<p>3分診断の結果は、結果画面の「この結果を保存」を押したときにかぎり、お使いのブラウザのローカルストレージ（端末内の保存領域）に記録されます。保存されるのは診断の回答と、そこから作られた表示用の見出しだけで、氏名などの個人を特定できる情報は含まれません。この情報が外部へ送信されることはなく、当サイトの運営者が取得・閲覧することもできません。保存した内容は診断画面の一覧からいつでも削除でき、ブラウザの閲覧データを消去した場合にも失われます。ブラウザの設定やプライベートブラウズによりローカルストレージが使えない場合は、保存ボタンを表示しません。この判定のため、診断の画面を開いた時点で確認用の値をローカルストレージに一度書き込み、すぐに削除します。この値に診断の内容や個人を特定できる情報は含まれません。</p>
-<p>診断結果の共有リンクに含まれるのも診断の回答だけです。リンクを開いた方の画面では、その回答をもとに結果があらためて計算されます。</p>
-${AFF ? `<h5>クッキー(Cookie)および類似技術について</h5>
-<p>本サイトは${AFF_PROGRAMS}に参加しています。これらのプログラムの提供事業者(第三者)は、広告の配信および成果の計測のために、クッキー、ピクセルタグ、その他の類似技術を使用して、本サイトを訪問された方の情報を取得する場合があります。</p>
-<p>これらの第三者は、本サイトおよび他のウェブサイトへのアクセス情報にもとづいて、利用者の興味・関心に応じた広告を表示することがあります。この際に取得される情報に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
-<h5>広告配信の停止(オプトアウト)について</h5>
-<p>クッキーの使用を望まれない場合は、お使いのブラウザの設定からクッキーを無効にすることで、情報の収集を拒否できます。設定方法はブラウザのヘルプをご確認ください。</p>
-<ul>
-${CONFIG.amazonTag ? `<li>Amazonにおける情報の取り扱いについては、Amazon.co.jp のプライバシー規約をご確認ください</li>` : ``}
-${CONFIG.rakutenId ? `<li>楽天における情報の取り扱いについては、楽天グループのプライバシーポリシーをご確認ください</li>` : ``}
-<li>広告配信事業者による行動ターゲティング広告は、一般社団法人日本インタラクティブ広告協会(JIAA)のオプトアウトページ等からも停止できます</li>
-</ul>` : `<h5>クッキー(Cookie)について</h5>
-<p>本サイトは、広告配信を目的としたクッキーを使用していません。アクセス解析のためのクッキーについては下記をご覧ください。</p>`}
-${ADSENSE ? `<h5>Google AdSense による広告配信について</h5>
-<p>本サイトは、第三者配信の広告サービス「Google AdSense」を利用しています。Google をはじめとする第三者配信事業者は、クッキー(Cookie)を使用して、本サイトや他のウェブサイトへの過去のアクセス情報にもとづく広告を配信します。これにより表示される広告に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
-<p>パーソナライズ広告(興味・関心に応じた広告)の表示は、Google の<a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">広告設定</a>から無効にできます。また、<a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a> では、参加している第三者配信事業者のクッキーをまとめて無効にできます。</p>
-<p>Google が広告配信のために取得する情報とその使われ方については、<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">「広告 - ポリシーと規約 - Google」</a>をご確認ください。</p>` : ``}
-<h5>アクセス解析について</h5>
-<p>当サイトでは、利用状況の把握と改善のために Google LLC が提供する「Google アナリティクス」を利用しています。Google アナリティクスは Cookie を使用して、氏名・住所などの個人を特定する情報を含まない形で、閲覧されたページや滞在時間などのアクセス情報を収集します。</p>
-<p>収集された情報は Google 社のプライバシーポリシーに基づいて管理されます。データの収集を望まない場合は、Google が提供する「Google アナリティクス オプトアウト アドオン」を利用するか、お使いのブラウザの設定で Cookie を無効にすることで停止できます。</p>
-<h5>ポリシーの変更</h5>
-<p>本ポリシーの内容は、法令の改正やサービスの変更に応じて予告なく改定する場合があります。</p>`},
-
-disclaimer:{title:"免責事項",body:()=>`
-<h5>掲載情報の正確性について</h5>
-<p>本サイトに掲載している参考書の難易度・到達偏差値・所要時間・問題数、および大学ごとの出題傾向・到達目安偏差値は、公開情報にもとづく<b>編集上の目安</b>です。実際の難易度の感じ方や必要な学習時間には個人差があり、また入試制度・出題傾向・入試方式(英語外部試験の利用可否を含む)は年度によって変更されます。</p>
-<p>掲載内容の正確性・完全性・最新性について、可能な範囲で努力しておりますが、これを保証するものではありません。出願にあたっては必ず各大学の募集要項をご確認ください。</p>
-<h5>学習成果について</h5>
-<p>本サイトが提示する学習ルートは、一般的に有効とされる学習順序を整理したものであり、<b>特定の大学への合格や成績の向上を保証するものではありません</b>。最終的な参考書の選択・学習計画の決定は、利用者ご自身の判断と責任において行ってください。学校や塾の先生など、あなたの状況を直接把握している方に相談されることをおすすめします。</p>
-<h5>損害の責任</h5>
-<p>本サイトの情報を利用したことにより生じたいかなる損害についても、運営者は一切の責任を負いかねます。</p>
-<h5>外部サイトについて</h5>
-<p>本サイトから外部のウェブサイト(オンライン書店等)へ移動された場合、移動先で提供される情報・サービスについて、運営者は一切の責任を負いません。商品の購入に関する契約は、利用者と販売事業者との間で成立するものです。</p>
-<h5>著作権について</h5>
-<p>本サイトに掲載している書影(商品画像)は、各アフィリエイト・プログラム等が提供する商品画像URLを参照して表示しています。書影の著作権は各出版社・著作権者に帰属します。掲載内容について権利者の方からご連絡をいただいた場合は、速やかに対応いたします。</p>`},
-
-affiliate:{title:"広告について",body:()=>`
-${AFF ? `<h5>アフィリエイト・プログラムの利用</h5>
-<p>本サイトは${AFF_PROGRAMS}に参加しています。参考書の詳細画面に設置している${AFF_STORES}へのリンクは広告リンクであり、リンクを経由して商品が購入された場合、販売事業者から本サイトに紹介料が支払われることがあります。${AFF_AZ ? `` : `Amazonへのリンクはアフィリエイトタグを含まない通常のリンクで、リンク経由の購入によって本サイトが紹介料を得ることはありません。`}</p>
-<p><b>紹介料の発生によって、利用者が商品を購入する際の価格が変わることはありません。</b></p>` : `<h5>広告の掲載について</h5>
-<p>本サイトは現在、アフィリエイト・プログラムを含む広告を掲載していません。参考書の販売サイトへのリンクは書誌情報を確認していただくための通常のリンクであり、リンク経由の購入によって本サイトが収益を得ることはありません。</p>`}
-${CONFIG.amazonTag ? `<h5>Amazonアソシエイト・プログラムについて</h5>
-<p>${CONFIG.siteName}は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。</p>
-<p><b>Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</b></p>` : ""}
-${ADSENSE ? `<h5>第三者配信の広告について</h5>
-<p>本サイトは、Google LLC が提供する広告配信サービス「Google AdSense」を利用しています。ページ内に「広告」と表示している枠に配信される広告の内容は Google 側で選ばれており、本サイトが個別に選定・推奨しているものではありません。表示された広告が閲覧またはクリックされることで、本サイトに収益が発生することがあります。</p>
-<p>広告の表示に用いられるクッキーの扱いと、その停止方法は「プライバシーポリシー」に記載しています。</p>` : ``}
-<h5>掲載順序と広告の関係</h5>
-<p>本サイトにおける参考書の掲載順・ルートへの採否・評価コメントは、紹介料の有無や料率によって決定していません。学習上の有効性と、公開されている一般的な評価にもとづいて編集しています。</p>
-<h5>価格・在庫について</h5>
-<p>本サイトでは商品の価格・在庫状況を掲載していません。価格および在庫状況は変動しますので、購入時には必ず販売サイト上の表示をご確認ください。</p>`}
-};
+/* サイトの表記（運営者情報・データの作り方・プライバシーポリシー・免責事項・
+   広告について）は /about/ /methodology/ /privacy/ /disclaimer/ /ads/ の静的
+   ページが正本。以前はここに JS のモーダルとして持っていたが、クローラー・
+   AdSense の審査・JS を切った環境からは存在しないのと同じだったため、
+   フッターから静的ページへ送る形にした。
+   本文の正本は build/content/legal.mjs（node build/generate-legal.mjs で生成）。 */
 /* ============================================================
    TIERS & ROUTES — 志望レベル×受験タイプ×方針
    bun=国公立二次型(記述) / ri=私立個別型(マーク)
@@ -3334,7 +3652,7 @@ function openModal(id){
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
     <div class="aff-actions">
       ${az?`<a class="aff-btn amz" href="${az}" target="_blank" rel="nofollow${AFF_AZ?' sponsored':''} noopener">Amazonで見る${ext}</a>`:""}
-      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener">楽天ブックスで見る${ext}</a>`:""}
+      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener">楽天ブックスで検索${ext}</a>`:""}
     </div>
     <p class="aff-note">${AFF?`${AFF_STORES}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります(価格は変わりません)。`:""}版の改訂により内容が異なる場合がありますので、購入前に販売ページで最新版をご確認ください。</p>
   </div>` : "";
@@ -3527,7 +3845,7 @@ function climbNodeHTML(s, i, st0, startIdx){
       <div class="cn-card__cover">${coverHTML(b)}</div>
       <div class="cn-info">
         <span class="cn-info__role" style="background:${st.color}">${s.role}</span>
-        <h5>${b.name}</h5>
+        <h3>${b.name}</h3>
         <div class="cn-info__note">${s.note}</div>
         ${altHtml}
         <div class="cn-info__meta">
@@ -3547,7 +3865,7 @@ function paraNodeHTML(p, stepLabel){
       <div class="cn-card__cover">${coverHTML(b)}</div>
       <div class="cn-info">
         <span class="cn-info__role" style="background:${st.color}">${st.label}</span>
-        <h5>${b.name}</h5>
+        <h4>${b.name}</h4>
         <div class="cn-info__note">${p.note}</div>
       </div>
     </div>
@@ -3614,10 +3932,11 @@ function renderRouteBody(){
   }
   const months = Math.max(1, Math.round(hours/90));
   const uniNote = (S.mode==="uni" && S.uni)
-    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg><p><b>${S.uni.n}${S.fac?" "+S.fac.trim():""}向けに調整済み。</b>${S.uni.no}。下部の「重点対策」は本学の英語の傾向に合わせた追加枠です。過去問の段は志望校の赤本に読み替えて進めてください。</p></div>`
+    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg><p><b>${S.uni.n}${S.fac?" "+S.fac.trim():""}に合わせて調整しています</b>（到達目安から志望レベルを判定し、出題形式に対応する重点対策の枠を足しています）。${S.uni.no}。下部の「重点対策」は本学の英語の傾向に合わせた追加枠です。過去問の段は志望校の赤本に読み替えて進めてください。</p></div>`
     : "";
   const senseiNote = sensei
-    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><p><b>${sensei.name}(${sensei.kana} / ${sensei.tag}):</b>${sensei.desc}<br><b>補完メモ:</b>${sensei.lack}</p></div>`
+    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><p><b>${sensei.name}(${sensei.kana} / ${sensei.tag}):</b>${sensei.desc}<br><b>補完メモ:</b>${sensei.lack}</p></div>
+       <div class="note-card"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 16h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><p><b>このルートは非公式です。</b>${sensei.name}は、講師ご本人・所属予備校・出版社とは無関係に、当サイトが市販の著作をもとに独自に構成したものです。ご本人の推奨・監修を受けたものではありません。<a href="/disclaimer/" style="color:var(--indigo);font-weight:700">免責事項</a></p></div>`
     : "";
   const polNote = sensei
     ? "講師ルート:解説の言葉づかい・方法論が全編で一貫しているため、本と本の間で「流儀の違い」に戸惑うことがなく、独学でも迷いにくいのが最大の利点です。"
@@ -3664,21 +3983,22 @@ function renderRouteBody(){
    ============================================================ */
 function renderHome(){
   document.getElementById("stat-books").textContent = BOOKS.length;
+  document.getElementById("stat-unis").textContent = UNIS.length;
   document.getElementById("homeRoutes").innerHTML = TIERS.map(t=>{
     const g = ROUTES[t.id].ri || ROUTES[t.id].bun;
     const seq = g.quick || g.omni;
     return `<div class="rp-card" style="--tc:${t.color}" role="button" tabindex="0" onclick="selectTier('${t.id}');go('route')">
       <div class="rp-card__no"><span>ROUTE ${t.no}</span><em>${seq.length} STEPS</em></div>
-      <h4>${t.name}</h4><p>${t.sub} — ${t.goal}</p>
+      <h3>${t.name}</h3><p>${t.sub} — ${t.goal}</p>
     </div>`;
   }).join("");
   document.getElementById("homeSenseis").innerHTML = SENSEIS.map(s=>{
     return `<div class="rp-card" style="--tc:${s.color}" role="button" tabindex="0" onclick="selectSensei('${s.id}');go('route')">
       <div class="rp-card__no"><span>TEACHER ROUTE</span><em>${s.seq.length} STEPS</em></div>
-      <h4>${s.name}</h4><p>${s.tag} — ${s.sub}</p>
+      <h3>${s.name}</h3><p>${s.tag} — ${s.sub}</p>
     </div>`;
   }).join("");
-  const disc = `<b>ご利用にあたって:</b>本アプリの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの出題傾向・入試方式(英語外部試験の利用可否を含む)は年度により変更されるため、出願前に必ず募集要項をご確認ください。書影はAmazon等が提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
+  const disc = `<b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの出題傾向・入試方式(英語外部試験の利用可否を含む)は年度により変更されるため、出願前に必ず募集要項をご確認ください。書影はAmazon等が提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
   document.getElementById("homeDisclaimer").innerHTML = disc;
   document.getElementById("catDisclaimer").innerHTML = disc;
   document.getElementById("guideDisclaimer").innerHTML = disc;
@@ -3782,7 +4102,7 @@ function renderGuide(){
     <article class="g-card" id="g${i}">
       <button class="g-card__head" onclick="toggleGuide(${i})" aria-expanded="false">
         <span class="g-num">${String(i+1).padStart(2,"0")}</span>
-        <span class="g-ttl"><h4>${g.t}</h4><span>${g.s}</span></span>
+        <span class="g-ttl"><h3>${g.t}</h3><span>${g.s}</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="g-body">${g.b}</div>
@@ -3792,31 +4112,6 @@ function toggleGuide(i){
   const el = document.getElementById("g"+i);
   const open = el.classList.toggle("open");
   el.querySelector(".g-card__head").setAttribute("aria-expanded", open);
-}
-function openLegal(key){
-  const L = LEGAL[key]; if(!L) return;
-  document.getElementById("legalInner").innerHTML = `
-    <div class="modal__grab"></div>
-    <div class="modal__head" style="padding-bottom:16px">
-      <div class="modal__titles"><h3>${L.title}</h3></div>
-      <button class="modal__close" onclick="closeLegal()" aria-label="閉じる"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-    </div>
-    <div class="legal-body">${L.body()}</div>`;
-  document.getElementById("legalModal").classList.add("open");
-  modalOpened("legalInner");
-  document.body.style.overflow="hidden";
-}
-function closeLegal(){
-  document.getElementById("legalModal").classList.remove("open");
-  modalClosed();
-  document.body.style.overflow="";
-}
-function renderFooter(){
-  document.getElementById("footLegal").innerHTML =
-    (CONFIG.amazonTag ? `<b>Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</b><br>` : "") +
-    (AFF ? `当サイトは第三者のアフィリエイト・プログラムを利用しており、広告リンク経由の購入により紹介料が発生することがあります。` : ``) +
-    `掲載している難易度・偏差値・所要時間は公開情報にもとづく目安であり、学習成果を保証するものではありません。書影はAmazon等が提供する商品画像URLを参照して表示しています。<br>` +
-    `<span style="display:inline-block;margin-top:10px;font-family:var(--mono);letter-spacing:.06em">${CONFIG.siteName} — ENGLISH ROUTE COMPENDIUM</span>`;
 }
 
 /* ============================================================
@@ -3854,12 +4149,10 @@ function modalClosed(){
 function openBox(){
   const el = document.getElementById("bookModal");
   if(el && el.classList.contains("open")) return document.getElementById("modalInner");
-  const lg = document.getElementById("legalModal");
-  if(lg && lg.classList.contains("open")) return document.getElementById("legalInner");
   return null;
 }
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){ closeModal(); closeLegal(); return; }
+  if(e.key==="Escape"){ closeModal(); return; }
   if(e.key!=="Tab") return;
   const box = openBox();
   if(!box) return;
@@ -3912,7 +4205,6 @@ buildSenseiPicker();
 renderRoute();
 renderHome();
 renderGuide();
-renderFooter();
 
 /* ハッシュ付きで開かれていれば、その画面から始める（共有 URL の復元より先に評価する。
    ?v=1&a=... が付いていれば下の setup が診断結果へ上書きする） */
@@ -4013,7 +4305,7 @@ RTShare.setup({
       "@id": "https://route-taizen.com/english/#webpage",
       "url": "https://route-taizen.com/english/",
       "name": "英語ルート大全 — 大学受験の英語参考書252冊を図鑑化",
-      "description": "大学受験の英語参考書252冊を、単語・熟語・文法・英文解釈・長文・英作文・リスニングの役割別／難易度別に整理した参考書図鑑。志望校から逆算する参考書ルートと3分診断つき。共通テストから東大・早慶まで。2026年 新課程対応・完全無料。",
+      "description": "大学受験の英語参考書252冊を、単語・熟語・文法・英文解釈・長文・英作文・リスニングの役割別／難易度別に整理した参考書図鑑。志望校から逆算する参考書ルートと3分診断つき。共通テストから東大・早慶まで。2026年度入試対応・完全無料。",
       "isPartOf": {
         "@id": "https://route-taizen.com/#website"
       },

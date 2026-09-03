@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>理科の参考書ルート｜物理・化学・生物・地学の参考書373冊 - 理科ルート大全</title>
 <meta name="google-site-verification" content="10bnNaPa-rqbt-UHQK1J_KTLT7k3HQb8xLFcHx5fSsw">
-<meta name="description" content="大学受験の理科（物理・化学・生物・地学）の参考書373冊を科目別・段階別に網羅した参考書図鑑と、志望校から逆算する参考書ルート。共通テストのみの人から医学部・難関理系まで、必要な到達点に合わせて選べます。2026年 新課程対応・完全無料。">
+<meta name="description" content="大学受験の理科（物理・化学・生物・地学）の参考書373冊を科目別・段階別に網羅した参考書図鑑と、志望校から逆算する参考書ルート。共通テストのみの人から医学部・難関理系まで、必要な到達点に合わせて選べます。2026年度入試対応・完全無料。">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#F6F4EF">
 <meta name="format-detection" content="telephone=no">
@@ -35,7 +35,7 @@
 <style>
 :root{
   --paper:#F6F4EF; --surface:#FFFFFF; --surface-2:#FAF9F6; --surface-3:#F1EFE8;
-  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#6A6F82;
+  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#656A7C;
   --line:#E4E1D6; --line-2:#EDEBE2; --line-d:#CFCBBE;
   --indigo:#24427C; --indigo-deep:#18305E; --indigo-soft:#E8EDF7;
   --accent:#B5432A; --accent-deep:#93331F; --accent-soft:#F7E9E5;
@@ -153,8 +153,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .rp-card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--tc,var(--indigo));padding:16px 16px 14px;cursor:pointer;transition:.18s;box-shadow:var(--sh-s);position:relative}
 .rp-card:hover{transform:translateY(-3px);box-shadow:var(--sh-m)}
 .rp-card__no{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.1em;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.rp-card__no em{font-style:normal;color:var(--tc,var(--indigo));font-weight:600}
-.rp-card h4{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
+/* 10px の小さな文字なので、カードごとの色（--tc）をそのまま使うと
+   コントラスト比 4.5:1 を割る色が出る（講師ルートの #2F8659 が 4.49）。
+   色分けはカード左の帯が担っているので、ここは固定色にする。 */
+.rp-card__no em{font-style:normal;color:var(--muted);font-weight:700}
+.rp-card h3{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
 .rp-card p{font-size:11.5px;color:var(--muted);min-height:32px;line-height:1.55}
 .guide-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
 @media(min-width:760px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
@@ -163,7 +166,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .guide-card:nth-child(2)::before{background:var(--accent)}
 .guide-card:nth-child(3)::before{background:var(--gold)}
 .guide-num{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted-2);letter-spacing:.14em;margin-bottom:10px}
-.guide-card h5{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
+.guide-card h3{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
 .guide-card p{font-size:12.5px;color:var(--muted);line-height:1.7}
 .guide-card p b{color:var(--ink-2)}
 
@@ -180,6 +183,8 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .chip:hover{color:var(--ink);border-color:var(--muted-2)}
 .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 .cat-meta{display:flex;align-items:center;justify-content:space-between;margin:14px 0 14px;flex-wrap:wrap;gap:8px}
+/* ページの最終更新日。データが変わった日を build/prerender-tops.mjs が入れる */
+.page-updated{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted-2)}
 .cat-count{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
 .cat-count b{color:var(--ink);font-family:var(--mono);font-size:14px}
 .sort-sel{border:1px solid var(--line-d);background:var(--surface);border-radius:4px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--ink);box-shadow:var(--sh-s)}
@@ -190,6 +195,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cat-sec{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin:16px 0 2px;font-weight:900;font-size:14px;color:var(--ink);letter-spacing:.04em}
 .cat-sec::before{content:"";width:16px;height:2.5px;background:var(--sc,var(--accent));align-self:center}
 .cat-sec small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
+/* 静的に出しておくカードの続き。build/prerender-tops.mjs が最後に足す枠で、
+   JS が起動して全冊を描き直すと消える。JS を切った環境と検索エンジンだけが見る。 */
+.cat-more{grid-column:1/-1;margin-top:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent)}
+.cat-more p{font-size:12.5px;line-height:1.85;color:var(--ink-2)}
+.cat-more a{display:inline-block;margin-top:9px;font-size:13px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
 .cat-empty{grid-column:1/-1;padding:26px 4px;color:var(--muted);font-size:13px}
 @media(min-width:560px){.book-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:820px){.book-grid{grid-template-columns:repeat(4,1fr)}}
@@ -347,14 +357,14 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .g-num{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;background:var(--ink);width:30px;height:30px;border-radius:5px;display:grid;place-items:center;flex:none;margin-top:2px}
 .g-card.open .g-num{background:var(--accent)}
 .g-ttl{flex:1;min-width:0}
-.g-ttl h4{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
+.g-ttl h3{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
 .g-ttl span{font-size:11.5px;color:var(--muted);line-height:1.6;display:block}
 .g-card__head .chev{flex:none;color:var(--muted-2);transition:transform .2s;margin-top:6px}
 .g-card.open .chev{transform:rotate(180deg)}
 .g-body{display:none;padding:0 20px 20px;border-top:1px solid var(--line-2);margin-top:-2px}
 .g-card.open .g-body{display:block;animation:fade .25s ease}
 .g-body p{font-size:13.5px;line-height:1.95;color:var(--ink-2);margin-top:14px}
-.g-body h5{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
+.g-body h4{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
 .g-body ul{margin-top:10px;padding-left:2px;list-style:none;display:flex;flex-direction:column;gap:7px}
 .g-body li{font-size:13px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
 .g-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:9px;flex:none}
@@ -368,13 +378,6 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .foot-links button:hover{color:var(--accent)}
 .foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:0 auto}
 .foot-legal b{color:var(--ink-2);font-weight:700}
-.legal-body{padding:22px 24px 30px}
-.legal-body h5{font-family:var(--serif);font-weight:800;font-size:14.5px;margin:20px 0 8px;letter-spacing:.02em}
-.legal-body h5:first-child{margin-top:0}
-.legal-body p{font-size:12.5px;line-height:1.9;color:var(--ink-2)}
-.legal-body ul{margin-top:8px;list-style:none;display:flex;flex-direction:column;gap:6px}
-.legal-body li{font-size:12.5px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
-.legal-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--muted-2);margin-top:9px;flex:none}
 @media(min-width:900px){.tabbar{display:none}}
 
 /* ================= ROUTE ================= */
@@ -506,7 +509,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cn-card__cover .fb-pub,.cn-card__cover .fb-band{display:none}
 .cn-info{flex:1;min-width:0}
 .cn-info__role{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.06em;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;color:#fff}
-.cn-info h5{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
+.cn-info h3{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
 .cn-info__note{font-size:11.5px;color:var(--muted);line-height:1.55}
 .cn-info__alt{font-size:10.5px;color:var(--indigo-deep);margin-top:7px;line-height:1.5}
 .cn-info__alt b{font-weight:700}
@@ -690,7 +693,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       <button data-view="route" onclick="go('route')">ルート</button>
       <button data-view="quiz" onclick="go('quiz')">診断</button>
       <button data-view="guide" onclick="go('guide')">学習ガイド</button>
-      <span class="hdr-tag">2026 新課程対応</span>
+      <span class="hdr-tag">2026年度入試対応</span>
     </nav>
   </div>
 </header>
@@ -713,7 +716,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <path d="M296 62v-12m0 0h8l-2 3 2 3h-8" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div class="hero__main">
-      <span class="hero__badge"><i></i>物理・化学・生物・地学 大学受験 — 2026 新課程対応</span>
+      <span class="hero__badge"><i></i>物理・化学・生物・地学 大学受験 — 2026年度入試対応</span>
       <h1>志望校までの道を、<br><span class="hl">一冊ずつ<b>確かに</b>。</span></h1>
       <p class="lead">教科書レベルから東大・医学部の記述まで。定番から最新刊まで<span id="lead-count">340</span>冊超を物理・化学・生物・地学に分け、難易度・役割・接続で整理。志望校と現在地に合わせた「何を・どの順で」を科目ごとに一本の道に描きます。</p>
       <div class="hero__cta">
@@ -726,17 +729,42 @@ gtag('config', 'G-DQ5WFXEFMX');
       </div>
       </div>
       <div class="stat-row">
-        <div class="stat"><b id="stat-books">346</b><span>収録参考書</span></div>
-        <div class="stat"><b id="stat-unis">181<small>× 学部で科目を自動判定</small></b><span>収録大学</span></div>
-        <div class="stat"><b>4<small>物理 / 化学 / 生物 / 地学</small></b><span>科目別ルート</span></div>
+        <div class="stat"><b id="stat-books">373</b><span>収録参考書</span></div>
+        <div class="stat"><b id="stat-unis">181</b><span>収録大学 — 選べる科目まで判定</span></div>
+        <div class="stat"><b>4</b><span>科目別ルート — 物理 / 化学 / 生物 / 地学</span></div>
       </div>
+      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
     </div>
 
     <div class="home-block">
       <div class="eyebrow">Routes by target</div>
       <h2 class="sec">志望レベルから選ぶ</h2>
       <p class="sec-lead">代表的な志望レベルごとに、物理・化学・生物・地学の王道ルートを用意。ルート画面では志望校名を直接入力して、その大学で選べる科目・必要な科目数に絞り込むこともできます。</p>
-      <div class="route-preview" id="homeRoutes"></div>
+      <div class="route-preview" id="homeRoutes"><div class="rp-card" style="--tc:#2F6E4F" role="button" tabindex="0" onclick="selectTier('kyote');go('route')">
+      <div class="rp-card__no"><span>ROUTE 01</span><em>27 STEPS</em></div>
+      <h3>共通テスト対策</h3><p>理科基礎・共テ利用・国公立1次 — 共通テスト理科 8割以上</p>
+    </div><div class="rp-card" style="--tc:#2E7D9A" role="button" tabindex="0" onclick="selectTier('nikkoma');go('route')">
+      <div class="rp-card__no"><span>ROUTE 02</span><em>25 STEPS</em></div>
+      <h3>日東駒専・産近甲龍</h3><p>中堅私大理系(理科1科目) — 日東駒専・産近甲龍 合格</p>
+    </div><div class="rp-card" style="--tc:#24427C" role="button" tabindex="0" onclick="selectTier('march');go('route')">
+      <div class="rp-card__no"><span>ROUTE 03</span><em>26 STEPS</em></div>
+      <h3>MARCH・関関同立</h3><p>難関私大理系(理科1科目) — MARCH・関関同立 合格</p>
+    </div><div class="rp-card" style="--tc:#0E7C6B" role="button" tabindex="0" onclick="selectTier('chikoku');go('route')">
+      <div class="rp-card__no"><span>ROUTE 04</span><em>30 STEPS</em></div>
+      <h3>地方国公立</h3><p>二次で理科記述がある学部 — 地方国公立 合格</p>
+    </div><div class="rp-card" style="--tc:#5B4E9E" role="button" tabindex="0" onclick="selectTier('sokei');go('route')">
+      <div class="rp-card__no"><span>ROUTE 05</span><em>28 STEPS</em></div>
+      <h3>早慶理工・上智・理科大</h3><p>最難関私大理系(理工は2科目) — 早慶理工・上智・理科大 合格</p>
+    </div><div class="rp-card" style="--tc:#B5432A" role="button" tabindex="0" onclick="selectTier('kyutei');go('route')">
+      <div class="rp-card__no"><span>ROUTE 06</span><em>32 STEPS</em></div>
+      <h3>地方旧帝・神戸</h3><p>阪大・名大・東北・九大・北大 — 旧帝大 合格</p>
+    </div><div class="rp-card" style="--tc:#8C2437" role="button" tabindex="0" onclick="selectTier('top');go('route')">
+      <div class="rp-card__no"><span>ROUTE 07</span><em>32 STEPS</em></div>
+      <h3>東大・京大・東京科学大</h3><p>最難関国立(理科2科目) — 東大・京大 合格</p>
+    </div><div class="rp-card" style="--tc:#946200" role="button" tabindex="0" onclick="selectTier('med');go('route')">
+      <div class="rp-card__no"><span>ROUTE 08</span><em>32 STEPS</em></div>
+      <h3>医学部医学科</h3><p>国公立医・私立医(取りこぼし0) — 医学部医学科 合格</p>
+    </div></div>
     </div>
 
     <div class="home-block">
@@ -745,23 +773,23 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="guide-grid">
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 01</div>
-          <h5>科目選びで半分決まる</h5>
+          <h3>科目選びで半分決まる</h3>
           <p><b>物理</b>は理解できれば満点が狙えるが最初の壁が高い科目。<b>化学</b>は理論・無機・有機の三分野で、ほぼ全学部が指定する必須枠。<b>生物</b>は安定するが論述・考察が重い。<b>地学</b>は受験できる大学が限られます。志望学部から逆算して選ぶのが最初の分岐点です。</p>
         </div>
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 02</div>
-          <h5>知識は並行、演習は順番に</h5>
+          <h3>知識は並行、演習は順番に</h3>
           <p>一問一答・図録・計算問題集は<b>毎日15分の並行学習</b>で。演習は講義系で原理を掴んでから問題集へ。各書の詳細画面で「前にやる本・次にやる本」を確認し、段差の小さい道を進みましょう。理科は<b>1冊を完成させてから次へ</b>が鉄則です。</p>
         </div>
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 03</div>
-          <h5>志望校の形式から逆算する</h5>
+          <h3>志望校の形式から逆算する</h3>
           <p>理科は<b>大学ごとの科目指定と時間配分の差が大きい科目</b>。選択できる科目、必要な科目数、2科目まとめて何分か、記述か穴埋めかを最初に確認し、不要な科目に時間をかけず、必要な形式に早く触れるのが最短です。</p>
         </div>
       </div>
     </div>
 
-    <div class="disclaimer" id="homeDisclaimer"></div>
+    <div class="disclaimer" id="homeDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの選択可能科目・必要科目数・試験時間は編集時点の公開情報にもとづく目安であり、必ず最新の入試要項でご確認ください。2025年入試からの新課程(共通テスト理科の再編、物理・化学・生物・地学の出題範囲の変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonおよび公開書誌データベースが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <!-- ============ CATALOG ============ -->
@@ -788,13 +816,13 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="cat-controls">
       <div class="search-wrap">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <input id="book-search" type="text" placeholder="書名・出版社・分野で検索(例:エッセンス、重要問題集、Do、河合)">
+        <input id="book-search" type="text" placeholder="書名・出版社・分野で検索(例:エッセンス、重要問題集、Do、河合)" aria-label="収録している参考書を書名・出版社・分野で検索">
       </div>
-      <div class="filter-scroll" id="filterScroll"></div>
+      <div class="filter-scroll" id="filterScroll"><button class="chip active" data-k="sub" data-v="all" onclick="setFilter('sub','all',this)">全科目</button><button class="chip" data-k="sub" data-v="butsuri" onclick="setFilter('sub','butsuri',this)">物理</button><button class="chip" data-k="sub" data-v="kagaku" onclick="setFilter('sub','kagaku',this)">化学</button><button class="chip" data-k="sub" data-v="seibutsu" onclick="setFilter('sub','seibutsu',this)">生物</button><button class="chip" data-k="sub" data-v="chigaku" onclick="setFilter('sub','chigaku',this)">地学</button><span style="flex:none;width:1px;background:var(--line-d);margin:2px 4px"></span><button class="chip" data-k="sub" data-v="butsuri_k" onclick="setFilter('sub','butsuri_k',this)">物理基礎</button><button class="chip" data-k="sub" data-v="kagaku_k" onclick="setFilter('sub','kagaku_k',this)">化学基礎</button><button class="chip" data-k="sub" data-v="seibutsu_k" onclick="setFilter('sub','seibutsu_k',this)">生物基礎</button><button class="chip" data-k="sub" data-v="chigaku_k" onclick="setFilter('sub','chigaku_k',this)">地学基礎</button><span style="flex:none;width:1px;background:var(--line-d);margin:2px 4px"></span><button class="chip" data-k="sub" data-v="sogo" onclick="setFilter('sub','sogo',this)">全科目共通</button><span style="flex:none;width:1px;background:var(--line-d);margin:2px 4px"></span><button class="chip active" data-k="stage" data-v="all" onclick="setFilter('stage','all',this)">全段階</button><button class="chip" data-k="stage" data-v="intro" onclick="setFilter('stage','intro',this)">導入・講義</button><button class="chip" data-k="stage" data-v="know" onclick="setFilter('stage','know',this)">知識・図録・一問一答</button><button class="chip" data-k="stage" data-v="core" onclick="setFilter('stage','core',this)">基礎演習</button><button class="chip" data-k="stage" data-v="std" onclick="setFilter('stage','std',this)">入試標準</button><button class="chip" data-k="stage" data-v="adv" onclick="setFilter('stage','adv',this)">応用・難関</button><button class="chip" data-k="stage" data-v="kyotest" onclick="setFilter('stage','kyotest',this)">共通テスト</button><button class="chip" data-k="stage" data-v="kako" onclick="setFilter('stage','kako',this)">過去問</button></div>
     </div>
     <div class="cat-meta">
-      <div class="cat-count"><b id="catCount">0</b> 冊を表示中</div>
-      <select class="sort-sel" id="sortSel" onchange="renderCatalog()">
+      <div class="cat-count"><b id="catCount">373</b> 冊を表示中</div>
+      <select class="sort-sel" id="sortSel" onchange="renderCatalog()" aria-label="参考書の並べ替え">
         <option value="field">科目別・難易度順</option>
         <option value="diff-asc">難易度:やさしい順</option>
         <option value="diff-desc">難易度:難しい順</option>
@@ -802,8 +830,170 @@ gtag('config', 'G-DQ5WFXEFMX');
         <option value="name">書名順</option>
       </select>
     </div>
-    <div class="book-grid" id="bookGrid"></div>
-    <div class="disclaimer" id="catDisclaimer"></div>
+    <div class="book-grid" id="bookGrid"><div class="cat-grp" style="--gc:#24427C">物理<small>105 BOOKS</small></div><div class="cat-sec" style="--sc:#2E7D9A">導入・講義<small>19 BOOKS — やさしい順</small></div><div class="book-card" role="button" tabindex="0" onclick="openModal('uchu-denjiki')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056454.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056454.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056454.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056450.jpg|https://cover.openbd.jp/9784053056450.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F08AA8,#B23A62)"><span class="fb-spine"></span><span class="fb-pub">Gakken</span><span class="fb-title xlong">宇宙一わかりやすい高校物理 電磁気・熱・原子</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">宇宙一わかりやすい高校物理 電磁気・熱・原子</div>
+      <div class="bc-pub">Gakken</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('uchu-rikigaku')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056467.jpg|https://cover.openbd.jp/9784053056467.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F08AA8,#B23A62)"><span class="fb-spine"></span><span class="fb-pub">Gakken</span><span class="fb-title xlong">宇宙一わかりやすい高校物理 力学・波動</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">宇宙一わかりやすい高校物理 力学・波動</div>
+      <div class="bc-pub">Gakken</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hitotsu-tokikata')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/405305706X.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/405305706X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405305706X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053057068.jpg|https://cover.openbd.jp/9784053057068.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7FC8F8,#2A7AB8)"><span class="fb-spine"></span><span class="fb-pub">Gakken</span><span class="fb-title xlong">高校物理の解き方をひとつひとつわかりやすく。</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">高校物理の解き方をひとつひとつわかりやすく。</div>
+      <div class="bc-pub">Gakken</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hashimoto-denjiki')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4890857087.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890857087.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890857087.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890857081.jpg|https://cover.openbd.jp/9784890857081.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7FC8F8,#2A7AB8)"><span class="fb-spine"></span><span class="fb-pub">ナガセ(東進ブックス)</span><span class="fb-title xlong">橋元の物理をはじめからていねいに 電磁気編</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">橋元の物理をはじめからていねいに 電磁気編</div>
+      <div class="bc-pub">ナガセ(東進ブックス)</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜52</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hashimoto-netsu')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4890857397.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890857397.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890857397.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890857395.jpg|https://cover.openbd.jp/9784890857395.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7FC8F8,#2A7AB8)"><span class="fb-spine"></span><span class="fb-pub">ナガセ(東進ブックス)</span><span class="fb-title xlong">橋元の物理をはじめからていねいに 熱・波動・原子編</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">橋元の物理をはじめからていねいに 熱・波動・原子編</div>
+      <div class="bc-pub">ナガセ(東進ブックス)</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜52</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hashimoto-rikigaku')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4890856803.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890856803.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890856803.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890856800.jpg|https://cover.openbd.jp/9784890856800.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7FC8F8,#2A7AB8)"><span class="fb-spine"></span><span class="fb-pub">ナガセ(東進ブックス)</span><span class="fb-title xlong">橋元の物理をはじめからていねいに 力学編</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">橋元の物理をはじめからていねいに 力学編</div>
+      <div class="bc-pub">ナガセ(東進ブックス)</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜52</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('suzuki-hadou')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4297137852.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4297137852.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4297137852.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784297137854.jpg|https://cover.openbd.jp/9784297137854.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#A8D65C,#5C8A1E)"><span class="fb-spine"></span><span class="fb-pub">技術評論社</span><span class="fb-title xlong">鈴木誠治の物理が初歩からしっかり身につく 波動・電磁気・原子編</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">鈴木誠治の物理が初歩からしっかり身につく 波動・電磁気・原子編</div>
+      <div class="bc-pub">技術評論社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('suzuki-rikigaku')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4297137879.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4297137879.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4297137879.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784297137878.jpg|https://cover.openbd.jp/9784297137878.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#A8D65C,#5C8A1E)"><span class="fb-spine"></span><span class="fb-pub">技術評論社</span><span class="fb-title xlong">鈴木誠治の物理が初歩からしっかり身につく 力学・熱力学編</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">鈴木誠治の物理が初歩からしっかり身につく 力学・熱力学編</div>
+      <div class="bc-pub">技術評論社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('sakata-butsuri')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4046064951.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046064951.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046064951.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046064950.jpg|https://cover.openbd.jp/9784046064950.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F5A623,#C2571A)"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA</span><span class="fb-title xlong">坂田アキラの物理基礎・物理の解法が面白いほどわかる本</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">坂田アキラの物理基礎・物理の解法が面白いほどわかる本</div>
+      <div class="bc-pub">KADOKAWA</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>42〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('urushibara-denjiki')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052244.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052244.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052244.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052247.jpg|https://cover.openbd.jp/9784046052247.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F5A623,#C2571A)"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA</span><span class="fb-title xlong">漆原晃の物理 面白いほど 電磁気</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">漆原晃の物理 面白いほど 電磁気</div>
+      <div class="bc-pub">KADOKAWA</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>42〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('urushibara-hadou')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052252.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052252.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052252.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052254.jpg|https://cover.openbd.jp/9784046052254.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F5A623,#C2571A)"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA</span><span class="fb-title xlong">漆原晃の物理 面白いほど 波動・原子</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">漆原晃の物理 面白いほど 波動・原子</div>
+      <div class="bc-pub">KADOKAWA</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>42〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('urushibara-rikigaku')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052236.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052236.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052236.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052230.jpg|https://cover.openbd.jp/9784046052230.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F5A623,#C2571A)"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA</span><span class="fb-title xlong">漆原晃の物理 面白いほど 力学・熱力学</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">漆原晃の物理 面白いほど 力学・熱力学</div>
+      <div class="bc-pub">KADOKAWA</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>42〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hamashima-jikkyo1')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688407.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688407.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688407.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688402.jpg|https://cover.openbd.jp/9784875688402.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#A8D65C,#5C8A1E)"><span class="fb-spine"></span><span class="fb-pub">語学春秋社</span><span class="fb-title xlong">浜島清利 物理講義の実況中継(1)</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">浜島清利 物理講義の実況中継(1)</div>
+      <div class="bc-pub">語学春秋社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hamashima-jikkyo2')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688415.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688415.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688415.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688419.jpg|https://cover.openbd.jp/9784875688419.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#A8D65C,#5C8A1E)"><span class="fb-spine"></span><span class="fb-pub">語学春秋社</span><span class="fb-title xlong">浜島清利 物理講義の実況中継(2)</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">浜島清利 物理講義の実況中継(2)</div>
+      <div class="bc-pub">語学春秋社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜58</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hiden-denjiki')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057868.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057868.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057868.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053057860.jpg|https://cover.openbd.jp/9784053057860.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#2BB3A3,#136F68)"><span class="fb-spine"></span><span class="fb-pub">Gakken</span><span class="fb-title xlong">秘伝の物理講義 電磁気・熱・原子</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">秘伝の物理講義 電磁気・熱・原子</div>
+      <div class="bc-pub">Gakken</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜60</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hiden-rikigaku')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057876.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057876.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057876.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053057877.jpg|https://cover.openbd.jp/9784053057877.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#2BB3A3,#136F68)"><span class="fb-spine"></span><span class="fb-pub">Gakken</span><span class="fb-title long">秘伝の物理講義 力学・波動</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">秘伝の物理講義 力学・波動</div>
+      <div class="bc-pub">Gakken</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜60</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('orito-chanto')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4325248137.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325248137.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325248137.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325248132.jpg|https://cover.openbd.jp/9784325248132.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#8A98A8,#3E4A59)"><span class="fb-spine"></span><span class="fb-pub">教学社</span><span class="fb-title long">ちゃんと身につく物理</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">ちゃんと身につく物理</div>
+      <div class="bc-pub">教学社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>48〜62</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('orito-dokushu')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4325223002.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325223002.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325223002.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325223009.jpg|https://cover.openbd.jp/9784325223009.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#8A98A8,#3E4A59)"><span class="fb-spine"></span><span class="fb-pub">教学社</span><span class="fb-title ">折戸の独習物理</span><span class="fb-band">物理</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">折戸の独習物理</div>
+      <div class="bc-pub">教学社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>48〜62</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:#24427C1A;color:#24427C">物理</span></div>
+    </div>
+  </div><div class="cat-more"><p>ここに出しているのは 373 冊のうち難易度順で最初の 18 冊です。続きは絞り込み・並べ替えで表示されます。</p><a href="/science/books/">373 冊すべてを役割別の索引で見る</a></div></div>
+    <div class="disclaimer" id="catDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの選択可能科目・必要科目数・試験時間は編集時点の公開情報にもとづく目安であり、必ず最新の入試要項でご確認ください。2025年入試からの新課程(共通テスト理科の再編、物理・化学・生物・地学の出題範囲の変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonおよび公開書誌データベースが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <!-- ============ QUIZ ============ -->
@@ -840,14 +1030,14 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div id="modeUni" style="display:none">
         <div class="uni-form">
           <div class="uni-field">
-            <label>志望大学</label>
+            <label for="uniInput">志望大学</label>
             <div class="uni-wrap">
               <input id="uniInput" type="text" placeholder="大学名を入力(例:東京大学、阪大、waseda、ひろだい)" autocomplete="off" spellcheck="false">
               <div class="sug" id="uniSug"></div>
             </div>
           </div>
           <div class="uni-field">
-            <label>学部・学科<em>任意(文系学部は共テ理科基礎ルートに自動切替)</em></label>
+            <label for="facInput">学部・学科<em>任意(文系学部は共テ理科基礎ルートに自動切替)</em></label>
             <div class="uni-wrap">
               <input id="facInput" type="text" placeholder="例:工学部、医学部医学科、薬学部、理学部地球科学科" autocomplete="off" spellcheck="false">
             </div>
@@ -885,7 +1075,7 @@ gtag('config', 'G-DQ5WFXEFMX');
           <div class="opt-field">
             <label>理科の模試偏差値</label>
             <div class="hen-row">
-              <select id="moshiSel">
+              <select id="moshiSel" aria-label="偏差値を出した模試の種類">
                 <option value="0">全統模試(河合)</option>
                 <option value="-12">進研模試(ベネッセ)</option>
                 <option value="-3">駿台全国判定模試</option>
@@ -894,13 +1084,13 @@ gtag('config', 'G-DQ5WFXEFMX');
                 <option value="8">東進 難関大本番レベル</option>
                 <option value="-6">学校の実力テスト・校内模試</option>
               </select>
-              <input id="henInput" type="number" min="25" max="85" step="0.1" placeholder="偏差値">
+              <input id="henInput" type="number" min="25" max="85" step="0.1" placeholder="偏差値" aria-label="理科の模試偏差値">
             </div>
           </div>
           <div class="opt-field">
             <label>これまでにやった参考書<em style="font-style:normal;font-weight:600;color:var(--muted-2);font-size:10.5px;margin-left:5px">複数可</em></label>
             <div class="done-picker">
-              <input id="doneInput" type="text" placeholder="書名で検索して追加(例:エッセンス、重要問題集、リードα)" autocomplete="off" spellcheck="false">
+              <input id="doneInput" type="text" placeholder="書名で検索して追加(例:エッセンス、重要問題集、リードα)" aria-label="すでに終えた参考書を書名で検索して追加" autocomplete="off" spellcheck="false">
               <div class="sug" id="doneSug"></div>
             </div>
             <div class="done-chips" id="doneChips"></div>
@@ -942,8 +1132,266 @@ gtag('config', 'G-DQ5WFXEFMX');
       <h2 class="sec">理科の学習ガイド</h2>
       <p class="sec-lead">科目の選び方から1冊の使い切り方まで。物理・化学・生物・地学それぞれの勉強法と、ルートを実行するうえで前提になる考え方をテーマ別にまとめています。</p>
     </div>
-    <div class="guide-list" id="guideList"></div>
-    <div class="disclaimer" id="guideDisclaimer"></div>
+    <div class="guide-list" id="guideList">
+    <article class="g-card" id="g0">
+      <button class="g-card__head" onclick="toggleGuide(0)" aria-expanded="false">
+        <span class="g-num">01</span>
+        <span class="g-ttl"><h3>理科は「科目選び」で勝負の半分が決まります</h3><span>物理・化学・生物・地学の得点特性と、志望学部別の最適な組み合わせ</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>理科の科目選択は、多くの高校で高1の終わりから高2にかけて、ほとんど説明もないまま決まってしまいます。ですが、この選択は受験戦略の半分を占めます。同じ勉強量をかけても、科目の組み合わせ次第で本番の得点は20点単位で変わりますし、そもそも出願できない大学が出てきます。</p>
+
+<h4>4科目の得点特性を正しく知る</h4>
+<p><b>物理</b>は上限が高い科目です。覚えるべき法則は実質20個程度で、それを使いこなせれば満点も現実的に狙えます。ただし最初の1〜2か月に「公式は言えるのに立式ができない」壁があり、ここで脱落すると30点台から動きません。得点分布が二極化しやすいのが物理です。</p>
+<p><b>化学</b>は全学部で使え、指定されることも最も多い科目です。理論・無機・有機と分野が分かれているため、どこかで失敗しても他で埋められます。60〜80点に収束しやすく、事故が少ないのが利点です。</p>
+<p><b>生物</b>は覚える量が最大ですが、知識分だけは必ず取れるので0点にはなりません。反面、実験考察と論述の比重が高く、9割を超えるのは物理より難しくなります。安定するが天井が低い科目だと考えてください。</p>
+<p><b>地学</b>は内容そのものは重くありませんが、受験できる大学が限られます。詳しくは地学の記事で扱います。</p>
+
+<h4>志望別の最適な組み合わせ</h4>
+<ul>
+<li><b>工学系・理学系(物理系)</b>…物理・化学。多くの大学で事実上の指定です。</li>
+<li><b>医学部</b>…物理・化学、または化学・生物。どちらでも合格者は出ます。</li>
+<li><b>農学・薬学・看護・生命科学系</b>…化学・生物。入学後の内容とも直結します。</li>
+<li><b>地球科学・地球惑星系</b>…地学が使えるなら大きな武器になります。</li>
+</ul>
+<p>並べてわかる通り、化学はどの組み合わせにも入っています。理科の科目選択とは、実質的に「化学の相方を物理にするか生物にするか」を決める作業です。</p>
+
+<h4>迷ったときの判断基準</h4>
+<p>数学の関数やグラフを苦にしない、図形的な状況把握が得意、数学IIIの学習が順調——この3つに当てはまるなら物理が向いています。逆に、文章を読んで整理するのが得意で、書く作業が苦にならないなら生物です。「暗記が嫌だから物理」という消極的な選び方は、最初の壁で崩れます。</p>
+
+<div class="g-quote">化学は選ぶものではなく前提です。本当に選んでいるのは、化学の相方を物理にするか生物にするか、その一点だけです。</div></div>
+    </article>
+    <article class="g-card" id="g1">
+      <button class="g-card__head" onclick="toggleGuide(1)" aria-expanded="false">
+        <span class="g-num">02</span>
+        <span class="g-ttl"><h3>理科は後回しにされる科目だからこそ、いちばん差がつきます</h3><span>高2冬から高3春にかけての理科の進み具合が、そのまま合否に直結します</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>受験勉強の時間は、まず英語と数学に吸い込まれます。理科は「学校の授業があるから」「暗記だからあとで間に合う」と後回しにされ、気づけば高3の夏の模試で理科だけ偏差値が10低い、という状況が毎年大量に生まれます。裏を返せば、ここは正しく手を打った人がそのまま抜き去れる場所です。</p>
+
+<h4>学校の進度は入試に間に合わない</h4>
+<p>多くの高校で、理科の最終単元が終わるのは高3の11月から12月です。具体的には、物理の<b>原子</b>、化学の<b>高分子化合物(天然・合成)</b>、生物の<b>生態系・進化と系統</b>あたりが最後に残ります。</p>
+<p>問題は、これらが入試で普通に出るということです。化学の高分子は多くの大学で大問1つ分を占めますし、共通テストの物理でも原子分野は出題されます。過去問演習を始めるべき10月の時点で未習範囲が残っていると、演習の質そのものが落ちます。学校を待っていては間に合わない、というのが出発点です。</p>
+
+<h4>逆算するとこうなります</h4>
+<ul>
+<li><b>高2の冬</b>…物理は力学、化学は理論のmol計算・酸塩基・酸化還元まで。生物は代謝と遺伝情報まで。</li>
+<li><b>高3の4〜6月</b>…全範囲の基礎を一周。物理は電磁気、化学は無機に着手。</li>
+<li><b>高3の夏</b>…標準レベルの問題集を1冊仕上げる。ここが最大の山場です。</li>
+<li><b>高3の9〜11月</b>…過去問と苦手分野の潰し込み。</li>
+<li><b>高3の12月以降</b>…共通テスト対策。直前は無機・高分子・原子など暗記寄りの分野が最も伸びます。</li>
+</ul>
+
+<h4>先取りは思ったより簡単です</h4>
+<p>理科は分野の独立性が高い科目です。化学の無機と有機は理論のmol計算さえ済んでいればいつ始めても構いませんし、物理の波動や熱は力学の後ならどこからでも入れます。講義系の参考書を1冊と教科書があれば、1単元は数日で通せます。</p>
+<p>先取りの本当の効果は、学校の授業が「初見の講義」から「2回目の復習」に変わることです。同じ50分の授業から得られるものが倍になります。</p>
+
+<div class="g-quote">理科は最後に伸びる科目です。ただしそれは、伸ばすための時間を残しておいた人にだけ起こります。</div></div>
+    </article>
+    <article class="g-card" id="g2">
+      <button class="g-card__head" onclick="toggleGuide(2)" aria-expanded="false">
+        <span class="g-num">03</span>
+        <span class="g-ttl"><h3>参考書の「完成」とは、白紙に再現できる状態のことです</h3><span>3周主義の誤解と、印付け・再現テストによる本当の到達判定</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>「この参考書を3周しました」という言葉ほど、実態を表さないものはありません。3周しても解けない人がいる一方で、1周で仕上げてしまう人もいます。周回数は結果として出てくる数字であって、目標にした瞬間に勉強が作業に変わります。</p>
+
+<h4>印付けで「やるべき問題」を減らしていく</h4>
+<p>1周目で、全ての問題に次の3種類の印を付けます。</p>
+<ul>
+<li><b>○</b>…自力で、迷いなく解けた。</li>
+<li><b>△</b>…解けたが迷った、時間がかかりすぎた、根拠が曖昧だった。</li>
+<li><b>×</b>…手が止まった、解答を見た。</li>
+</ul>
+<p>2周目に解くのは△と×だけ、3周目は×だけです。300問の問題集なら、2周目は120問、3周目は40問ほどに減ります。1周目に1か月かかっても、2周目は10日、3周目は3日で終わります。周回数を増やすのではなく、周回のたびに対象を減らすのが正しい形です。</p>
+<p>ここで最も危険なのは△を○にしてしまうことです。「まあ解けたし」で流した問題が、本番で手が止まる問題になります。迷ったら△、が原則です。</p>
+
+<h4>「わかる」と「できる」の間にある断層</h4>
+<p>解答を読んで理解できるというのは、著者が敷いたレールの上を歩けたということです。自力で再現できるというのは、何もない状態から最初の一手を自分で選べるということです。この2つの間には大きな段差があり、多くの受験生はここを飛び越えたつもりで飛び越えていません。</p>
+<p>差が出るのは「なぜその式を立てるのか」「なぜその実験に注目するのか」という判断の部分です。解説を読んだあとに、その判断の理由を一言でメモしておくと、2周目の効率が変わります。</p>
+
+<h4>白紙再現テストで判定する</h4>
+<p>完成したかどうかは、次の方法で確かめられます。問題文だけを見て、何も参照せずに答案を最後まで書く。5分考えて手が動かなければ×です。</p>
+<p>さらに月に一度、その本からランダムに10問を抜き出して抜き打ちテストをしてください。8問を自力で通せたら、その本は完成です。この判定を通っていない本を「終わった」ことにして次に進むのが、理科でいちばん多い失敗です。</p>
+
+<div class="g-quote">1冊を完成させるとは、その本の問題を全部解けることではありません。その本と同じ考え方で、初見の問題に手が出る状態のことです。</div></div>
+    </article>
+    <article class="g-card" id="g3">
+      <button class="g-card__head" onclick="toggleGuide(3)" aria-expanded="false">
+        <span class="g-num">04</span>
+        <span class="g-ttl"><h3>物理は公式を覚える科目ではなく、立式する科目です</h3><span>現象の把握から立式へ。力学・電磁気・波動熱・原子を積む順序</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>物理が伸びない人には、はっきりした共通点があります。公式は全部言えるのに、問題を前にすると手が止まるのです。原因は覚えている量ではありません。物理で本当に必要な法則は、運動方程式、力学的エネルギー保存、運動量保存、ガウスの法則、キルヒホッフの法則……と数えても20個程度です。足りないのは、目の前の現象をどの法則で切るかという判断です。</p>
+
+<h4>最初に身につけるべき技術は、図を描くことです</h4>
+<p>力学なら、物体に働く力の矢印を全部描くことから始めます。重力、垂直抗力、張力、摩擦力、そして加速する座標系なら慣性力。描き漏らした力が、そのまま失点になります。電磁気なら、複雑な回路を等価な形に描き直す。波動なら、波の形と進行方向を描く。</p>
+<p>図が正確に描ければ、式はほとんど自動的に出てきます。逆に、図を描かずにいきなり式を書き始める人は、必ずどこかで詰まります。答案上でも図は評価されますから、練習段階から必ず描く癖をつけてください。</p>
+
+<h4>力学 → 電磁気 → 波動・熱 → 原子の順で積む</h4>
+<p>力学は全分野の土台です。電磁気の荷電粒子の運動は、力の正体が電気力に変わっただけで中身は力学ですし、交流回路も単振動と同じ数学です。力学の運動方程式が自在に立てられないうちに電磁気へ進むと、まず崩れます。</p>
+<p>波動と熱力学は独立性が高いので、時期をずらしても構いません。原子分野は最後で十分ですが、量は少ないので直前期でも間に合います。むしろ手を付けずに本番を迎える人が多い分野なので、確実に取っておきたいところです。</p>
+
+<h4>微積分と、上位向けの参考書について</h4>
+<p>微積分を使うかどうかは、必須ではありません。ただ、v-tグラフの面積が変位になること、単振動の運動方程式がなぜあの形なのか、といった場面では、微積の言葉で理解したほうが腑に落ちます。数学IIIが進んでいるなら、理解の補助として使う価値はあります。</p>
+<p>一方で、教科書レベルで詰まっている段階で『新・物理入門』のような本に手を出すのは事故のもとです。『難問題の系統とその解き方』も同様で、標準的な問題集を8割方仕上げてから、旧帝大・単科医科大クラスを狙う人が使う本だと考えてください。</p>
+
+<div class="g-quote">物理の問題は、式を思い出す作業ではありません。何が起きているかを絵に描き、その絵から式を1本ずつ起こしていく作業です。</div></div>
+    </article>
+    <article class="g-card" id="g4">
+      <button class="g-card__head" onclick="toggleGuide(4)" aria-expanded="false">
+        <span class="g-num">05</span>
+        <span class="g-ttl"><h3>化学は理論・無機・有機という3つの別科目だと考えてください</h3><span>理解の理論、つなげる暗記の無機、パズルの有機。回し方が違います</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>化学が伸び悩む人の多くは、3つの分野を同じやり方で勉強しています。ですが理論・無機・有機は、必要な能力がまったく違います。理論は理解と計算で数学に近く、無機は暗記で社会に近く、有機は情報を絞り込むパズルで推理に近い。同じ回し方をすれば、必ずどれかが崩れます。</p>
+
+<h4>理論は理解、そして処理速度</h4>
+<p>山になるのは、mol概念、化学平衡、電池と電気分解の3つです。ここは公式暗記ではなく、何が起きているかを式で追えるようにします。</p>
+<p>そのうえで意識してほしいのが処理速度です。入試本番では、標準的な計算問題を1問2分程度で処理できないと最後まで届きません。答えが合うかどうかだけでなく、何分かかったかを毎回記録してください。有効数字の丸め方も、演習の段階から本番と同じようにやっておきます。</p>
+
+<h4>無機は「理論とつなげる暗記」で半分に減ります</h4>
+<p>無機化学は丸暗記の分野に見えますが、理屈でつながる部分が大半です。気体の製法は「弱酸の遊離」「揮発性酸の遊離」「酸化還元」のほぼ3パターンに分類できますし、沈殿の生成は溶解度積の話です。分類してから覚えると、覚える項目数が体感で半分になります。</p>
+<p>純粋な丸暗記が必要なのは、炎色反応と沈殿の色くらいです。そこは割り切って、毎日15分の反復で処理してください。</p>
+
+<h4>有機は構造決定というパズル</h4>
+<p>構造決定は、情報を1つずつ使って可能性を絞る作業です。手順は決まっています。分子式を出す、不飽和度を計算する、検出反応から官能基を特定する、加水分解などで骨格を分解する、最後に組み立てる。この順序を紙の上で毎回書くようにすると、ある時期から急に見えるようになります。1日1問でも続く力になります。</p>
+<p>3分野の回し方としては、理論を軸にしつつ、無機は毎日短時間の暗記、有機は理論のmol計算が済んだ段階から並行させます。無機と有機は理論ほど前提を必要としないので、学校の進度を待つ必要はありません。</p>
+<p>なお『化学の新研究』は通読する本ではありません。「なぜこうなるのか」という疑問が湧いたときだけ引く辞書です。最初から読み通そうとして挫折する人が、毎年一定数います。</p>
+
+<div class="g-quote">無機化学の暗記量は、覚え方を変えるだけで半分になります。覚えるべきは事実そのものではなく、その事実を生んでいる理屈のほうです。</div></div>
+    </article>
+    <article class="g-card" id="g5">
+      <button class="g-card__head" onclick="toggleGuide(5)" aria-expanded="false">
+        <span class="g-num">06</span>
+        <span class="g-ttl"><h3>生物は用語暗記で頭打ちになります。次の段階は考察と論述です</h3><span>知識・考察・論述の3段階。実験考察の読み方と論述の型を身につける</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>用語集を隅から隅まで覚えたのに、模試の点数が60点前後で止まる。生物でいちばん多い相談がこれです。理由は単純で、入試が知識だけを問うていないからです。難関大の生物では、単純な知識問題は3〜4割程度で、残りは実験考察と論述が占めます。</p>
+<p>生物の勉強は、知識 → 考察 → 論述の3段階で組み立ててください。知識は土台であって、ゴールではありません。</p>
+
+<h4>実験考察は「条件の差」だけを読む</h4>
+<p>長いリード文に圧倒される必要はありません。見るべきなのは、対照実験と実験区で何が違うか、その1点です。</p>
+<p>読みながら、条件を表に書き出してください。処理の有無、温度、加えた物質、除いた器官。そして結果と結びつけます。「Aを除いたら効果が消えた」ならAは<b>必要</b>、「Aを加えただけで効果が出た」ならAで<b>十分</b>。この必要と十分の区別を意識するだけで、正答率が変わります。</p>
+<p>グラフは、まず軸が何かを確認します。そのうえで、変化が始まる点と飽和する点に印を付ける。設問はほぼこの2か所を聞いてきます。</p>
+
+<h4>論述には型と字数感覚があります</h4>
+<p>論述の基本形は「〜だから、〜となる」という因果の1本道です。そのうえで字数の感覚を持ってください。40字なら、主語+仕組み+結果でちょうど1文から2文。60字なら要素を2つ、100字なら3つに前提の説明が入ります。指定字数を見た瞬間に、盛り込む要素の数が決まる状態が理想です。</p>
+<p>採点は要素点です。キーワードが入っているかで加点されるので、字数は8割以上埋めます。そして書き終えたら必ず、問いに答えているかを確認してください。理由を聞かれているのに現象を説明して終わる答案が、想像以上に多いのです。文末は問いに対応させます(「〜から。」「〜こと。」)。</p>
+
+<h4>図説は読むのではなく、見比べる</h4>
+<p>資料集を最初から読んでも頭に残りません。使い方は比較です。体細胞分裂と減数分裂を並べる、C3植物とC4植物とCAM植物を並べる、動物と植物の細胞を並べる。入試が聞いてくるのは、ほぼ「違い」だからです。並べて違いを言葉にできれば、それがそのまま論述の答案になります。</p>
+
+<div class="g-quote">生物で差がつくのは、知らない実験を出されたときです。知識は0点を防ぐためのもので、上位との差を作るのは考察と論述だけです。</div></div>
+    </article>
+    <article class="g-card" id="g6">
+      <button class="g-card__head" onclick="toggleGuide(6)" aria-expanded="false">
+        <span class="g-num">07</span>
+        <span class="g-ttl"><h3>地学基礎は最短、専門地学は茨の道。それでも選ぶ理由があります</h3><span>文系の共通テスト理科基礎の最適解と、専門地学の現実的な学習法</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>地学は、選択肢に入れる価値がある場面と、慎重になるべき場面がはっきり分かれる科目です。結論から言えば、共通テストの理科基礎としては最短ルートの候補であり、二次試験で使う専門地学としては受験校が限られます。</p>
+
+<h4>文系の理科基礎なら地学基礎が最短です</h4>
+<p>共通テストの理科基礎は、「物理基礎・化学基礎・生物基礎・地学基礎」が1つの試験冊子にまとまっており、4科目から2科目を選んで解答します。試験時間は2科目あわせて60分、配点は各50点の計100点です。</p>
+<p>この4つのなかで地学基礎は、計算問題が少なく、宇宙・地球内部・岩石・大気と海洋・地史と、分野が独立しているのが特徴です。どこから手を付けても成立するので、短期間で仕上げやすい。教科書と図表、問題集1冊で2〜3か月が目安になります。生物基礎との組み合わせが定番なのは、どちらも暗記寄りで勉強法を揃えられるからです。</p>
+<p>注意点は、高校によっては地学基礎の授業自体がないことです。その場合は完全に独学になります。逆に言えば、独学でも十分に到達できる分量だということでもあります。</p>
+
+<h4>専門地学の現実を直視する</h4>
+<p>一方で、二次試験の科目として「地学」を選べる大学は限られます。国公立でも実施しているのは数えるほどで、私立ではほとんど選択肢に入りません。理工系学部の一般的な入試では、まず使えないと考えてください。</p>
+<p>ですから、専門地学を選ぶなら順序が逆になります。先に志望校を絞り、募集要項で地学が使えることを確認してから選ぶ。これを怠ると、高3の夏に出願先が消えるという最悪の事態になります。</p>
+<p>逆の面もあります。受験人口が少ないため、地球科学系の学科では地学選択が有利に働く場面がありますし、内容そのものへの興味が続くなら、勉強のモチベーションは保ちやすい科目です。</p>
+
+<h4>参考書が少ないなかでの学習法</h4>
+<p>地学は市販の参考書が他科目に比べて圧倒的に少ない科目です。だからこそ、主教材は教科書と図表になります。用語は必ず図とセットで覚えてください。地質断面、天球図、気圧配置——地学の問題は図から出ます。</p>
+<p>計算は限定的で、年周視差、地震のS-P時間、湿度、放射性年代あたりが中心です。ここは公式が少ないので、確実に取り切ります。演習量が足りないときは、共通テストとセンター試験の過去問を教材として使うのが実践的です。</p>
+
+<div class="g-quote">地学は情報が少ない科目です。だからこそ、教科書を隅まで読み込んだ人が、そのまま上位に立てます。</div></div>
+    </article>
+    <article class="g-card" id="g7">
+      <button class="g-card__head" onclick="toggleGuide(7)" aria-expanded="false">
+        <span class="g-num">08</span>
+        <span class="g-ttl"><h3>共通テスト理科は、知識量ではなく処理速度で差がつきます</h3><span>基礎と発展の違い、時間配分、マーク式特有の失点をつぶす</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>共通テストの理科で20点落とした人の内訳を分析すると、「知らなかったから落とした」失点は数点しかありません。残りは、急いだせいのミスと、時間切れです。対策の重心は、知識の追加ではなく処理の設計に置くべきです。</p>
+
+<h4>まず科目構成を正確に把握する</h4>
+<ul>
+<li><b>理科基礎</b>…「物理基礎・化学基礎・生物基礎・地学基礎」が1つの試験。4科目から2科目を選択解答し、試験時間は2科目あわせて60分、配点は各50点の計100点です。</li>
+<li><b>発展科目</b>…「物理」「化学」「生物」「地学」。1科目60分・100点で、2科目選択する場合の試験時間は130分(解答時間120分、間に答案回収等の時間が入ります)。</li>
+</ul>
+<p>2科目受験では第1解答科目・第2解答科目という区別があり、大学によっては「第1解答科目の成績を使う」と指定されることがあります。当日の解答順が合否に関わるので、出願前に必ず確認してください。</p>
+
+<h4>時間配分と、マーク式特有の失点</h4>
+<p>発展科目は60分。化学なら大問5題として1題12分、見直しに5分残すなら実質55分で解き切る計算です。1問に3分以上かけた時点で全体が崩れるので、飛ばす判断を練習しておきます。</p>
+<p>そして、マーク式でこそ起きる失点があります。</p>
+<ul>
+<li>有効数字の桁指定や10のべき乗の選択欄をずらす</li>
+<li>グラフの軸の単位(対数軸、10⁻³ など)を読み違える</li>
+<li>「すべて選べ」「誤っているものを選べ」を読み飛ばす</li>
+<li>解答欄の形式(整数値か小数第1位か)に合わせ損ねる</li>
+</ul>
+<p>計算そのものより、この形式ミスのほうが多いのが実情です。演習では丸付けのときに、間違いを「知識不足」「計算ミス」「形式ミス」に分類してください。3つ目が多いなら、対策は暗記ではなく読み方の矯正です。</p>
+<p>また共通テストは実験考察型や会話文形式の出題が多く、リード文が長くなります。先に設問に目を通してから本文に戻ると、読む量が半分になります。</p>
+
+<h4>直前期の実戦問題集の使い方</h4>
+<p>いわゆる黒本(河合塾)は過去問と模試の再録が中心で分量があり、標準的な難易度です。青本(駿台)は解説が詳しく、やや難しめ。緑本(Z会)は予想問題として新傾向を試すのに向きます。</p>
+<p>順序としては、まず本試験の過去問(センター試験のものも十分使えます)。そのうえで1冊を追加すれば十分です。3冊すべてに手を出すと、どれも中途半端に終わります。解くときは必ず時間を計り、本番と同じ順序で通してください。</p>
+
+<div class="g-quote">共通テストの理科で落とす20点のうち、知らなかったせいの失点は数点です。残りは、急いだせいの失点です。</div></div>
+    </article>
+    <article class="g-card" id="g8">
+      <button class="g-card__head" onclick="toggleGuide(8)" aria-expanded="false">
+        <span class="g-num">09</span>
+        <span class="g-ttl"><h3>記述の理科は、答えが合っているかより見せ方で点が動きます</h3><span>導出過程・記号定義・単位・部分点。答案の作り方で数十点変わる</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>二次試験の理科は、答えの数値だけを書いても点になりません。逆に、最後まで到達できなくても点が入ります。記述式の答案は採点者への説明文であり、その書き方には作法があります。ここを知っているかどうかで、同じ実力でも数十点の差が生まれます。</p>
+
+<h4>答案に必ず入れる4つの要素</h4>
+<ul>
+<li><b>根拠の明示</b>…「x方向の運動方程式より」「エネルギー保存則より」と、使った法則を名指しします。式だけが並んだ答案は、途中で間違えたときに部分点が拾えません。</li>
+<li><b>記号の定義</b>…自分で置いた文字は必ず定義します。「小球Aの速さをv₁、床からの高さをhとする」の一行があるかないかで、答案の読みやすさが変わります。図に記号を書き込むのも有効です。</li>
+<li><b>単位</b>…数値解答には必ず単位を付けます。付け忘れは減点対象です。</li>
+<li><b>有効数字</b>…問題文で与えられた数値の桁数に合わせます。2桁で与えられていれば答えも2桁。計算途中は1桁多く保持して、最後に丸めます。</li>
+</ul>
+<p>そして最終的な答えは囲むか下線を引いて、どれが答えかを一目でわかるようにします。</p>
+
+<h4>部分点は待つものではなく、取りに行くもの</h4>
+<p>完答できそうにない問題でも、立式までは書いてください。設定した座標系、立てた式、途中で出した結果、そのそれぞれに配点があります。白紙は確実に0点で、これだけが唯一確実な失点です。</p>
+<p>時間切れになりそうなときの動き方も決めておきます。大問の(1)(2)は基本問題であることが多いので、残り時間が少ないなら、手を付けていない大問の前半だけを回収しに行く。これだけで10点単位の差になります。</p>
+
+<h4>化学の構造決定と、生物の論述</h4>
+<p>化学の構造決定では、答えの構造式だけでなく、判断の根拠を1行添えてください。「ヨードホルム反応が陽性より、CH₃CO−またはCH₃CH(OH)−の構造をもつ」といった記述です。仮に最終構造を間違えても、ここまでで部分点が入ります。異性体を数える問題は数え漏らしが致命的なので、炭素骨格から系統的に書き出す手順を固定しておきます。</p>
+<p>生物の論述は、字数の8割以上を埋めるのが原則です。40字なら32字以上。要素点である以上、短い答案は取りこぼしが増えます。そして文末を問いに対応させる。「なぜか」には「〜から。」、「何か」には「〜こと。」。基本的なことですが、緊張下ではここが崩れます。</p>
+
+<div class="g-quote">記述の答案で問われているのは、答えを知っているかどうかではありません。その答えに至った道筋を、他人に見せられるかどうかです。</div></div>
+    </article>
+    <article class="g-card" id="g9">
+      <button class="g-card__head" onclick="toggleGuide(9)" aria-expanded="false">
+        <span class="g-num">10</span>
+        <span class="g-ttl"><h3>医学部の理科は、難問を解く力より取りこぼさない力です</h3><span>2科目150分の配分、物化と化生の戦略差、東大京大での取捨選択</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>最難関の理科というと、見たこともない難問を解く力が必要だと思われがちです。実際は逆です。合格者を分けているのは、標準的な問題を全部拾えるかどうか。特に医学部では、この傾向がはっきりしています。</p>
+
+<h4>合格ラインは満点ではなく「安定」です</h4>
+<p>多くの医学部の理科は、標準からやや難の問題が並びます。合格者の得点は8割前後に集まり、満点近くを取る必要はありません。必要なのは、9割を狙う勉強ではなく、5割の日を作らない勉強です。</p>
+<p>実際に失点を分解すると、難問が解けなかったことによる失点より、計算ミス、単位の書き落とし、設問の読み違い、時間切れによる失点のほうが大きくなります。ここを潰す作業は地味ですが、最も費用対効果が高い部分です。演習のたびに失点を種類別に記録し、同じ種類のミスが3回続いたら、それを潰す練習だけを1週間やる。この繰り返しです。</p>
+
+<h4>理科2科目150分をどう割るか</h4>
+<p>多くの国公立医学部は、理科2科目で150分の一括方式です。単純に割れば1科目75分ですが、実際は「得意科目を70分以内で終え、余りを苦手科目に回す」という設計をしておきます。</p>
+<p>開始から10分は、解かずに全問に目を通す時間に充ててください。そのうえで、すぐ解ける問題、時間はかかるが確実に取れる問題、捨てる問題の3つに仕分けます。慣れている受験生ほど、捨てる問題を早い段階で決めています。化学は分量が多く時間を食いやすいので、先に化学を処理してから物理や生物に移る人が多い、というのも覚えておくと役に立ちます。</p>
+<p>選択科目による戦略の違いもあります。<b>物理・化学</b>は上限が高く、噛み合えば2科目とも9割を超えます。反面、物理は設定を1つ読み違えると大問がまるごと飛ぶ事故のリスクがある。<b>化学・生物</b>は得点が安定しますが、生物の論述に時間を取られ、9割が出にくく時間切れの危険が高い。書く速度そのものが実力の一部になります。どちらでも合格者は出ますから、高3の途中で乗り換えないことが何より重要です。</p>
+
+<h4>東大・京大は「全部は解かない」前提で</h4>
+<p>東大の理科は2科目150分、大問は合計6題。すべてを丁寧に解き切る時間は与えられていません。京大も同様に、量と難度の両面で完答は想定されていません。合格者の答案にも空欄はあります。</p>
+<p>ですから、演習の目的が変わります。「全部解けるようにする」のではなく、「どれを解かないかを短時間で判断する」練習をする。過去問を解くときは必ず本番と同じ時間で通し、終わったあとに「どの問題を捨てるべきだったか」を検討してください。この振り返りが、そのまま本番の得点になります。</p>
+
+<div class="g-quote">最難関の理科で合格者がやっているのは、難問を解くことではありません。解かない問題を、最初の10分で決めることです。</div></div>
+    </article></div>
+    <div class="disclaimer" id="guideDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの選択可能科目・必要科目数・試験時間は編集時点の公開情報にもとづく目安であり、必ず最新の入試要項でご確認ください。2025年入試からの新課程(共通テスト理科の再編、物理・化学・生物・地学の出題範囲の変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonおよび公開書誌データベースが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <div class="site-foot">
@@ -985,22 +1433,23 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="/science/books/">参考書一覧</a>
       <a href="/science/routes/">志望校別ルート</a>
       <a href="/science/guides/">参考書の選び方</a>
-      <button onclick="openLegal('about')">運営者情報</button>
-      <button onclick="openLegal('privacy')">プライバシーポリシー</button>
-      <button onclick="openLegal('disclaimer')">免責事項</button>
-      <button onclick="openLegal('affiliate')">広告について</button>
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
       <button onclick="go('guide')">学習ガイド</button>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
-    <div class="foot-legal" id="footLegal"></div>
+    <div class="foot-legal">
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。<b>Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。</b><br>
+      <span style="display:inline-block;margin-top:10px;font-family:var(--mono);letter-spacing:.06em">理科ルート大全 — SCIENCE ROUTE COMPENDIUM</span>
+    </div>
   </div>
 
 </main>
-
-<!-- Legal modal -->
-<div class="modal-overlay" id="legalModal" onclick="if(event.target===this)closeLegal()">
-  <div class="modal" id="legalInner" role="dialog" aria-modal="true" aria-label="サイト情報"></div>
-</div>
 
 <!-- Book detail modal -->
 <div class="modal-overlay" id="bookModal" onclick="if(event.target===this)closeModal()">
@@ -1089,7 +1538,7 @@ const AFF_STORES = [
 /* 表記は静的に置いてある。ID が未設定のときだけ取り除く（描画のズレを起こさないため） */
 if (!AFF && !ADSENSE) document.getElementById("prBar")?.remove();
 /* ============================================================
-   DATA — 大学受験 理科 参考書データベース(2026 新課程)
+   DATA — 大学受験 理科 参考書データベース(2026年度入試・新課程)
    ISBNは出版社/書店DBで確認した最新版。表紙は書店DBの画像を使用し、
    取得できない場合は別ソース→プレースホルダー表紙へ自動で切替。
    sub: butsuri 物理 / kagaku 化学 / seibutsu 生物 / chigaku 地学 / sogo 全科目共通
@@ -1188,7 +1637,7 @@ const UNI_RAW = [["東京大学","東大 todai tokyo とうきょう","top","国
 const UNIS = UNI_RAW.map(r=>({n:r[0],a:r[1],t:r[2],ty:r[3],h:r[4],p:r[5],c:r[6],b:r[7],g:r[8],need:r[9],fix:r[10],med:r[11],bun:r[12],time:r[13],no:r[14]}));
 
 /* ===== GUIDES — オリジナル学習ガイド記事(理科) ===== */
-const GUIDES = [{"t":"理科は「科目選び」で勝負の半分が決まります","s":"物理・化学・生物・地学の得点特性と、志望学部別の最適な組み合わせ","b":"<p>理科の科目選択は、多くの高校で高1の終わりから高2にかけて、ほとんど説明もないまま決まってしまいます。ですが、この選択は受験戦略の半分を占めます。同じ勉強量をかけても、科目の組み合わせ次第で本番の得点は20点単位で変わりますし、そもそも出願できない大学が出てきます。</p>\n\n<h5>4科目の得点特性を正しく知る</h5>\n<p><b>物理</b>は上限が高い科目です。覚えるべき法則は実質20個程度で、それを使いこなせれば満点も現実的に狙えます。ただし最初の1〜2か月に「公式は言えるのに立式ができない」壁があり、ここで脱落すると30点台から動きません。得点分布が二極化しやすいのが物理です。</p>\n<p><b>化学</b>は全学部で使え、指定されることも最も多い科目です。理論・無機・有機と分野が分かれているため、どこかで失敗しても他で埋められます。60〜80点に収束しやすく、事故が少ないのが利点です。</p>\n<p><b>生物</b>は覚える量が最大ですが、知識分だけは必ず取れるので0点にはなりません。反面、実験考察と論述の比重が高く、9割を超えるのは物理より難しくなります。安定するが天井が低い科目だと考えてください。</p>\n<p><b>地学</b>は内容そのものは重くありませんが、受験できる大学が限られます。詳しくは地学の記事で扱います。</p>\n\n<h5>志望別の最適な組み合わせ</h5>\n<ul>\n<li><b>工学系・理学系(物理系)</b>…物理・化学。多くの大学で事実上の指定です。</li>\n<li><b>医学部</b>…物理・化学、または化学・生物。どちらでも合格者は出ます。</li>\n<li><b>農学・薬学・看護・生命科学系</b>…化学・生物。入学後の内容とも直結します。</li>\n<li><b>地球科学・地球惑星系</b>…地学が使えるなら大きな武器になります。</li>\n</ul>\n<p>並べてわかる通り、化学はどの組み合わせにも入っています。理科の科目選択とは、実質的に「化学の相方を物理にするか生物にするか」を決める作業です。</p>\n\n<h5>迷ったときの判断基準</h5>\n<p>数学の関数やグラフを苦にしない、図形的な状況把握が得意、数学IIIの学習が順調——この3つに当てはまるなら物理が向いています。逆に、文章を読んで整理するのが得意で、書く作業が苦にならないなら生物です。「暗記が嫌だから物理」という消極的な選び方は、最初の壁で崩れます。</p>\n\n<div class=\"g-quote\">化学は選ぶものではなく前提です。本当に選んでいるのは、化学の相方を物理にするか生物にするか、その一点だけです。</div>"},{"t":"理科は後回しにされる科目だからこそ、いちばん差がつきます","s":"高2冬から高3春にかけての理科の進み具合が、そのまま合否に直結します","b":"<p>受験勉強の時間は、まず英語と数学に吸い込まれます。理科は「学校の授業があるから」「暗記だからあとで間に合う」と後回しにされ、気づけば高3の夏の模試で理科だけ偏差値が10低い、という状況が毎年大量に生まれます。裏を返せば、ここは正しく手を打った人がそのまま抜き去れる場所です。</p>\n\n<h5>学校の進度は入試に間に合わない</h5>\n<p>多くの高校で、理科の最終単元が終わるのは高3の11月から12月です。具体的には、物理の<b>原子</b>、化学の<b>高分子化合物(天然・合成)</b>、生物の<b>生態系・進化と系統</b>あたりが最後に残ります。</p>\n<p>問題は、これらが入試で普通に出るということです。化学の高分子は多くの大学で大問1つ分を占めますし、共通テストの物理でも原子分野は出題されます。過去問演習を始めるべき10月の時点で未習範囲が残っていると、演習の質そのものが落ちます。学校を待っていては間に合わない、というのが出発点です。</p>\n\n<h5>逆算するとこうなります</h5>\n<ul>\n<li><b>高2の冬</b>…物理は力学、化学は理論のmol計算・酸塩基・酸化還元まで。生物は代謝と遺伝情報まで。</li>\n<li><b>高3の4〜6月</b>…全範囲の基礎を一周。物理は電磁気、化学は無機に着手。</li>\n<li><b>高3の夏</b>…標準レベルの問題集を1冊仕上げる。ここが最大の山場です。</li>\n<li><b>高3の9〜11月</b>…過去問と苦手分野の潰し込み。</li>\n<li><b>高3の12月以降</b>…共通テスト対策。直前は無機・高分子・原子など暗記寄りの分野が最も伸びます。</li>\n</ul>\n\n<h5>先取りは思ったより簡単です</h5>\n<p>理科は分野の独立性が高い科目です。化学の無機と有機は理論のmol計算さえ済んでいればいつ始めても構いませんし、物理の波動や熱は力学の後ならどこからでも入れます。講義系の参考書を1冊と教科書があれば、1単元は数日で通せます。</p>\n<p>先取りの本当の効果は、学校の授業が「初見の講義」から「2回目の復習」に変わることです。同じ50分の授業から得られるものが倍になります。</p>\n\n<div class=\"g-quote\">理科は最後に伸びる科目です。ただしそれは、伸ばすための時間を残しておいた人にだけ起こります。</div>"},{"t":"参考書の「完成」とは、白紙に再現できる状態のことです","s":"3周主義の誤解と、印付け・再現テストによる本当の到達判定","b":"<p>「この参考書を3周しました」という言葉ほど、実態を表さないものはありません。3周しても解けない人がいる一方で、1周で仕上げてしまう人もいます。周回数は結果として出てくる数字であって、目標にした瞬間に勉強が作業に変わります。</p>\n\n<h5>印付けで「やるべき問題」を減らしていく</h5>\n<p>1周目で、全ての問題に次の3種類の印を付けます。</p>\n<ul>\n<li><b>○</b>…自力で、迷いなく解けた。</li>\n<li><b>△</b>…解けたが迷った、時間がかかりすぎた、根拠が曖昧だった。</li>\n<li><b>×</b>…手が止まった、解答を見た。</li>\n</ul>\n<p>2周目に解くのは△と×だけ、3周目は×だけです。300問の問題集なら、2周目は120問、3周目は40問ほどに減ります。1周目に1か月かかっても、2周目は10日、3周目は3日で終わります。周回数を増やすのではなく、周回のたびに対象を減らすのが正しい形です。</p>\n<p>ここで最も危険なのは△を○にしてしまうことです。「まあ解けたし」で流した問題が、本番で手が止まる問題になります。迷ったら△、が原則です。</p>\n\n<h5>「わかる」と「できる」の間にある断層</h5>\n<p>解答を読んで理解できるというのは、著者が敷いたレールの上を歩けたということです。自力で再現できるというのは、何もない状態から最初の一手を自分で選べるということです。この2つの間には大きな段差があり、多くの受験生はここを飛び越えたつもりで飛び越えていません。</p>\n<p>差が出るのは「なぜその式を立てるのか」「なぜその実験に注目するのか」という判断の部分です。解説を読んだあとに、その判断の理由を一言でメモしておくと、2周目の効率が変わります。</p>\n\n<h5>白紙再現テストで判定する</h5>\n<p>完成したかどうかは、次の方法で確かめられます。問題文だけを見て、何も参照せずに答案を最後まで書く。5分考えて手が動かなければ×です。</p>\n<p>さらに月に一度、その本からランダムに10問を抜き出して抜き打ちテストをしてください。8問を自力で通せたら、その本は完成です。この判定を通っていない本を「終わった」ことにして次に進むのが、理科でいちばん多い失敗です。</p>\n\n<div class=\"g-quote\">1冊を完成させるとは、その本の問題を全部解けることではありません。その本と同じ考え方で、初見の問題に手が出る状態のことです。</div>"},{"t":"物理は公式を覚える科目ではなく、立式する科目です","s":"現象の把握から立式へ。力学・電磁気・波動熱・原子を積む順序","b":"<p>物理が伸びない人には、はっきりした共通点があります。公式は全部言えるのに、問題を前にすると手が止まるのです。原因は覚えている量ではありません。物理で本当に必要な法則は、運動方程式、力学的エネルギー保存、運動量保存、ガウスの法則、キルヒホッフの法則……と数えても20個程度です。足りないのは、目の前の現象をどの法則で切るかという判断です。</p>\n\n<h5>最初に身につけるべき技術は、図を描くことです</h5>\n<p>力学なら、物体に働く力の矢印を全部描くことから始めます。重力、垂直抗力、張力、摩擦力、そして加速する座標系なら慣性力。描き漏らした力が、そのまま失点になります。電磁気なら、複雑な回路を等価な形に描き直す。波動なら、波の形と進行方向を描く。</p>\n<p>図が正確に描ければ、式はほとんど自動的に出てきます。逆に、図を描かずにいきなり式を書き始める人は、必ずどこかで詰まります。答案上でも図は評価されますから、練習段階から必ず描く癖をつけてください。</p>\n\n<h5>力学 → 電磁気 → 波動・熱 → 原子の順で積む</h5>\n<p>力学は全分野の土台です。電磁気の荷電粒子の運動は、力の正体が電気力に変わっただけで中身は力学ですし、交流回路も単振動と同じ数学です。力学の運動方程式が自在に立てられないうちに電磁気へ進むと、まず崩れます。</p>\n<p>波動と熱力学は独立性が高いので、時期をずらしても構いません。原子分野は最後で十分ですが、量は少ないので直前期でも間に合います。むしろ手を付けずに本番を迎える人が多い分野なので、確実に取っておきたいところです。</p>\n\n<h5>微積分と、上位向けの参考書について</h5>\n<p>微積分を使うかどうかは、必須ではありません。ただ、v-tグラフの面積が変位になること、単振動の運動方程式がなぜあの形なのか、といった場面では、微積の言葉で理解したほうが腑に落ちます。数学IIIが進んでいるなら、理解の補助として使う価値はあります。</p>\n<p>一方で、教科書レベルで詰まっている段階で『新・物理入門』のような本に手を出すのは事故のもとです。『難問題の系統とその解き方』も同様で、標準的な問題集を8割方仕上げてから、旧帝大・単科医科大クラスを狙う人が使う本だと考えてください。</p>\n\n<div class=\"g-quote\">物理の問題は、式を思い出す作業ではありません。何が起きているかを絵に描き、その絵から式を1本ずつ起こしていく作業です。</div>"},{"t":"化学は理論・無機・有機という3つの別科目だと考えてください","s":"理解の理論、つなげる暗記の無機、パズルの有機。回し方が違います","b":"<p>化学が伸び悩む人の多くは、3つの分野を同じやり方で勉強しています。ですが理論・無機・有機は、必要な能力がまったく違います。理論は理解と計算で数学に近く、無機は暗記で社会に近く、有機は情報を絞り込むパズルで推理に近い。同じ回し方をすれば、必ずどれかが崩れます。</p>\n\n<h5>理論は理解、そして処理速度</h5>\n<p>山になるのは、mol概念、化学平衡、電池と電気分解の3つです。ここは公式暗記ではなく、何が起きているかを式で追えるようにします。</p>\n<p>そのうえで意識してほしいのが処理速度です。入試本番では、標準的な計算問題を1問2分程度で処理できないと最後まで届きません。答えが合うかどうかだけでなく、何分かかったかを毎回記録してください。有効数字の丸め方も、演習の段階から本番と同じようにやっておきます。</p>\n\n<h5>無機は「理論とつなげる暗記」で半分に減ります</h5>\n<p>無機化学は丸暗記の分野に見えますが、理屈でつながる部分が大半です。気体の製法は「弱酸の遊離」「揮発性酸の遊離」「酸化還元」のほぼ3パターンに分類できますし、沈殿の生成は溶解度積の話です。分類してから覚えると、覚える項目数が体感で半分になります。</p>\n<p>純粋な丸暗記が必要なのは、炎色反応と沈殿の色くらいです。そこは割り切って、毎日15分の反復で処理してください。</p>\n\n<h5>有機は構造決定というパズル</h5>\n<p>構造決定は、情報を1つずつ使って可能性を絞る作業です。手順は決まっています。分子式を出す、不飽和度を計算する、検出反応から官能基を特定する、加水分解などで骨格を分解する、最後に組み立てる。この順序を紙の上で毎回書くようにすると、ある時期から急に見えるようになります。1日1問でも続く力になります。</p>\n<p>3分野の回し方としては、理論を軸にしつつ、無機は毎日短時間の暗記、有機は理論のmol計算が済んだ段階から並行させます。無機と有機は理論ほど前提を必要としないので、学校の進度を待つ必要はありません。</p>\n<p>なお『化学の新研究』は通読する本ではありません。「なぜこうなるのか」という疑問が湧いたときだけ引く辞書です。最初から読み通そうとして挫折する人が、毎年一定数います。</p>\n\n<div class=\"g-quote\">無機化学の暗記量は、覚え方を変えるだけで半分になります。覚えるべきは事実そのものではなく、その事実を生んでいる理屈のほうです。</div>"},{"t":"生物は用語暗記で頭打ちになります。次の段階は考察と論述です","s":"知識・考察・論述の3段階。実験考察の読み方と論述の型を身につける","b":"<p>用語集を隅から隅まで覚えたのに、模試の点数が60点前後で止まる。生物でいちばん多い相談がこれです。理由は単純で、入試が知識だけを問うていないからです。難関大の生物では、単純な知識問題は3〜4割程度で、残りは実験考察と論述が占めます。</p>\n<p>生物の勉強は、知識 → 考察 → 論述の3段階で組み立ててください。知識は土台であって、ゴールではありません。</p>\n\n<h5>実験考察は「条件の差」だけを読む</h5>\n<p>長いリード文に圧倒される必要はありません。見るべきなのは、対照実験と実験区で何が違うか、その1点です。</p>\n<p>読みながら、条件を表に書き出してください。処理の有無、温度、加えた物質、除いた器官。そして結果と結びつけます。「Aを除いたら効果が消えた」ならAは<b>必要</b>、「Aを加えただけで効果が出た」ならAで<b>十分</b>。この必要と十分の区別を意識するだけで、正答率が変わります。</p>\n<p>グラフは、まず軸が何かを確認します。そのうえで、変化が始まる点と飽和する点に印を付ける。設問はほぼこの2か所を聞いてきます。</p>\n\n<h5>論述には型と字数感覚があります</h5>\n<p>論述の基本形は「〜だから、〜となる」という因果の1本道です。そのうえで字数の感覚を持ってください。40字なら、主語+仕組み+結果でちょうど1文から2文。60字なら要素を2つ、100字なら3つに前提の説明が入ります。指定字数を見た瞬間に、盛り込む要素の数が決まる状態が理想です。</p>\n<p>採点は要素点です。キーワードが入っているかで加点されるので、字数は8割以上埋めます。そして書き終えたら必ず、問いに答えているかを確認してください。理由を聞かれているのに現象を説明して終わる答案が、想像以上に多いのです。文末は問いに対応させます(「〜から。」「〜こと。」)。</p>\n\n<h5>図説は読むのではなく、見比べる</h5>\n<p>資料集を最初から読んでも頭に残りません。使い方は比較です。体細胞分裂と減数分裂を並べる、C3植物とC4植物とCAM植物を並べる、動物と植物の細胞を並べる。入試が聞いてくるのは、ほぼ「違い」だからです。並べて違いを言葉にできれば、それがそのまま論述の答案になります。</p>\n\n<div class=\"g-quote\">生物で差がつくのは、知らない実験を出されたときです。知識は0点を防ぐためのもので、上位との差を作るのは考察と論述だけです。</div>"},{"t":"地学基礎は最短、専門地学は茨の道。それでも選ぶ理由があります","s":"文系の共通テスト理科基礎の最適解と、専門地学の現実的な学習法","b":"<p>地学は、選択肢に入れる価値がある場面と、慎重になるべき場面がはっきり分かれる科目です。結論から言えば、共通テストの理科基礎としては最短ルートの候補であり、二次試験で使う専門地学としては受験校が限られます。</p>\n\n<h5>文系の理科基礎なら地学基礎が最短です</h5>\n<p>共通テストの理科基礎は、「物理基礎・化学基礎・生物基礎・地学基礎」が1つの試験冊子にまとまっており、4科目から2科目を選んで解答します。試験時間は2科目あわせて60分、配点は各50点の計100点です。</p>\n<p>この4つのなかで地学基礎は、計算問題が少なく、宇宙・地球内部・岩石・大気と海洋・地史と、分野が独立しているのが特徴です。どこから手を付けても成立するので、短期間で仕上げやすい。教科書と図表、問題集1冊で2〜3か月が目安になります。生物基礎との組み合わせが定番なのは、どちらも暗記寄りで勉強法を揃えられるからです。</p>\n<p>注意点は、高校によっては地学基礎の授業自体がないことです。その場合は完全に独学になります。逆に言えば、独学でも十分に到達できる分量だということでもあります。</p>\n\n<h5>専門地学の現実を直視する</h5>\n<p>一方で、二次試験の科目として「地学」を選べる大学は限られます。国公立でも実施しているのは数えるほどで、私立ではほとんど選択肢に入りません。理工系学部の一般的な入試では、まず使えないと考えてください。</p>\n<p>ですから、専門地学を選ぶなら順序が逆になります。先に志望校を絞り、募集要項で地学が使えることを確認してから選ぶ。これを怠ると、高3の夏に出願先が消えるという最悪の事態になります。</p>\n<p>逆の面もあります。受験人口が少ないため、地球科学系の学科では地学選択が有利に働く場面がありますし、内容そのものへの興味が続くなら、勉強のモチベーションは保ちやすい科目です。</p>\n\n<h5>参考書が少ないなかでの学習法</h5>\n<p>地学は市販の参考書が他科目に比べて圧倒的に少ない科目です。だからこそ、主教材は教科書と図表になります。用語は必ず図とセットで覚えてください。地質断面、天球図、気圧配置——地学の問題は図から出ます。</p>\n<p>計算は限定的で、年周視差、地震のS-P時間、湿度、放射性年代あたりが中心です。ここは公式が少ないので、確実に取り切ります。演習量が足りないときは、共通テストとセンター試験の過去問を教材として使うのが実践的です。</p>\n\n<div class=\"g-quote\">地学は情報が少ない科目です。だからこそ、教科書を隅まで読み込んだ人が、そのまま上位に立てます。</div>"},{"t":"共通テスト理科は、知識量ではなく処理速度で差がつきます","s":"基礎と発展の違い、時間配分、マーク式特有の失点をつぶす","b":"<p>共通テストの理科で20点落とした人の内訳を分析すると、「知らなかったから落とした」失点は数点しかありません。残りは、急いだせいのミスと、時間切れです。対策の重心は、知識の追加ではなく処理の設計に置くべきです。</p>\n\n<h5>まず科目構成を正確に把握する</h5>\n<ul>\n<li><b>理科基礎</b>…「物理基礎・化学基礎・生物基礎・地学基礎」が1つの試験。4科目から2科目を選択解答し、試験時間は2科目あわせて60分、配点は各50点の計100点です。</li>\n<li><b>発展科目</b>…「物理」「化学」「生物」「地学」。1科目60分・100点で、2科目選択する場合の試験時間は130分(解答時間120分、間に答案回収等の時間が入ります)。</li>\n</ul>\n<p>2科目受験では第1解答科目・第2解答科目という区別があり、大学によっては「第1解答科目の成績を使う」と指定されることがあります。当日の解答順が合否に関わるので、出願前に必ず確認してください。</p>\n\n<h5>時間配分と、マーク式特有の失点</h5>\n<p>発展科目は60分。化学なら大問5題として1題12分、見直しに5分残すなら実質55分で解き切る計算です。1問に3分以上かけた時点で全体が崩れるので、飛ばす判断を練習しておきます。</p>\n<p>そして、マーク式でこそ起きる失点があります。</p>\n<ul>\n<li>有効数字の桁指定や10のべき乗の選択欄をずらす</li>\n<li>グラフの軸の単位(対数軸、10⁻³ など)を読み違える</li>\n<li>「すべて選べ」「誤っているものを選べ」を読み飛ばす</li>\n<li>解答欄の形式(整数値か小数第1位か)に合わせ損ねる</li>\n</ul>\n<p>計算そのものより、この形式ミスのほうが多いのが実情です。演習では丸付けのときに、間違いを「知識不足」「計算ミス」「形式ミス」に分類してください。3つ目が多いなら、対策は暗記ではなく読み方の矯正です。</p>\n<p>また共通テストは実験考察型や会話文形式の出題が多く、リード文が長くなります。先に設問に目を通してから本文に戻ると、読む量が半分になります。</p>\n\n<h5>直前期の実戦問題集の使い方</h5>\n<p>いわゆる黒本(河合塾)は過去問と模試の再録が中心で分量があり、標準的な難易度です。青本(駿台)は解説が詳しく、やや難しめ。緑本(Z会)は予想問題として新傾向を試すのに向きます。</p>\n<p>順序としては、まず本試験の過去問(センター試験のものも十分使えます)。そのうえで1冊を追加すれば十分です。3冊すべてに手を出すと、どれも中途半端に終わります。解くときは必ず時間を計り、本番と同じ順序で通してください。</p>\n\n<div class=\"g-quote\">共通テストの理科で落とす20点のうち、知らなかったせいの失点は数点です。残りは、急いだせいの失点です。</div>"},{"t":"記述の理科は、答えが合っているかより見せ方で点が動きます","s":"導出過程・記号定義・単位・部分点。答案の作り方で数十点変わる","b":"<p>二次試験の理科は、答えの数値だけを書いても点になりません。逆に、最後まで到達できなくても点が入ります。記述式の答案は採点者への説明文であり、その書き方には作法があります。ここを知っているかどうかで、同じ実力でも数十点の差が生まれます。</p>\n\n<h5>答案に必ず入れる4つの要素</h5>\n<ul>\n<li><b>根拠の明示</b>…「x方向の運動方程式より」「エネルギー保存則より」と、使った法則を名指しします。式だけが並んだ答案は、途中で間違えたときに部分点が拾えません。</li>\n<li><b>記号の定義</b>…自分で置いた文字は必ず定義します。「小球Aの速さをv₁、床からの高さをhとする」の一行があるかないかで、答案の読みやすさが変わります。図に記号を書き込むのも有効です。</li>\n<li><b>単位</b>…数値解答には必ず単位を付けます。付け忘れは減点対象です。</li>\n<li><b>有効数字</b>…問題文で与えられた数値の桁数に合わせます。2桁で与えられていれば答えも2桁。計算途中は1桁多く保持して、最後に丸めます。</li>\n</ul>\n<p>そして最終的な答えは囲むか下線を引いて、どれが答えかを一目でわかるようにします。</p>\n\n<h5>部分点は待つものではなく、取りに行くもの</h5>\n<p>完答できそうにない問題でも、立式までは書いてください。設定した座標系、立てた式、途中で出した結果、そのそれぞれに配点があります。白紙は確実に0点で、これだけが唯一確実な失点です。</p>\n<p>時間切れになりそうなときの動き方も決めておきます。大問の(1)(2)は基本問題であることが多いので、残り時間が少ないなら、手を付けていない大問の前半だけを回収しに行く。これだけで10点単位の差になります。</p>\n\n<h5>化学の構造決定と、生物の論述</h5>\n<p>化学の構造決定では、答えの構造式だけでなく、判断の根拠を1行添えてください。「ヨードホルム反応が陽性より、CH₃CO−またはCH₃CH(OH)−の構造をもつ」といった記述です。仮に最終構造を間違えても、ここまでで部分点が入ります。異性体を数える問題は数え漏らしが致命的なので、炭素骨格から系統的に書き出す手順を固定しておきます。</p>\n<p>生物の論述は、字数の8割以上を埋めるのが原則です。40字なら32字以上。要素点である以上、短い答案は取りこぼしが増えます。そして文末を問いに対応させる。「なぜか」には「〜から。」、「何か」には「〜こと。」。基本的なことですが、緊張下ではここが崩れます。</p>\n\n<div class=\"g-quote\">記述の答案で問われているのは、答えを知っているかどうかではありません。その答えに至った道筋を、他人に見せられるかどうかです。</div>"},{"t":"医学部の理科は、難問を解く力より取りこぼさない力です","s":"2科目150分の配分、物化と化生の戦略差、東大京大での取捨選択","b":"<p>最難関の理科というと、見たこともない難問を解く力が必要だと思われがちです。実際は逆です。合格者を分けているのは、標準的な問題を全部拾えるかどうか。特に医学部では、この傾向がはっきりしています。</p>\n\n<h5>合格ラインは満点ではなく「安定」です</h5>\n<p>多くの医学部の理科は、標準からやや難の問題が並びます。合格者の得点は8割前後に集まり、満点近くを取る必要はありません。必要なのは、9割を狙う勉強ではなく、5割の日を作らない勉強です。</p>\n<p>実際に失点を分解すると、難問が解けなかったことによる失点より、計算ミス、単位の書き落とし、設問の読み違い、時間切れによる失点のほうが大きくなります。ここを潰す作業は地味ですが、最も費用対効果が高い部分です。演習のたびに失点を種類別に記録し、同じ種類のミスが3回続いたら、それを潰す練習だけを1週間やる。この繰り返しです。</p>\n\n<h5>理科2科目150分をどう割るか</h5>\n<p>多くの国公立医学部は、理科2科目で150分の一括方式です。単純に割れば1科目75分ですが、実際は「得意科目を70分以内で終え、余りを苦手科目に回す」という設計をしておきます。</p>\n<p>開始から10分は、解かずに全問に目を通す時間に充ててください。そのうえで、すぐ解ける問題、時間はかかるが確実に取れる問題、捨てる問題の3つに仕分けます。慣れている受験生ほど、捨てる問題を早い段階で決めています。化学は分量が多く時間を食いやすいので、先に化学を処理してから物理や生物に移る人が多い、というのも覚えておくと役に立ちます。</p>\n<p>選択科目による戦略の違いもあります。<b>物理・化学</b>は上限が高く、噛み合えば2科目とも9割を超えます。反面、物理は設定を1つ読み違えると大問がまるごと飛ぶ事故のリスクがある。<b>化学・生物</b>は得点が安定しますが、生物の論述に時間を取られ、9割が出にくく時間切れの危険が高い。書く速度そのものが実力の一部になります。どちらでも合格者は出ますから、高3の途中で乗り換えないことが何より重要です。</p>\n\n<h5>東大・京大は「全部は解かない」前提で</h5>\n<p>東大の理科は2科目150分、大問は合計6題。すべてを丁寧に解き切る時間は与えられていません。京大も同様に、量と難度の両面で完答は想定されていません。合格者の答案にも空欄はあります。</p>\n<p>ですから、演習の目的が変わります。「全部解けるようにする」のではなく、「どれを解かないかを短時間で判断する」練習をする。過去問を解くときは必ず本番と同じ時間で通し、終わったあとに「どの問題を捨てるべきだったか」を検討してください。この振り返りが、そのまま本番の得点になります。</p>\n\n<div class=\"g-quote\">最難関の理科で合格者がやっているのは、難問を解くことではありません。解かない問題を、最初の10分で決めることです。</div>"}];
+const GUIDES = [{"t":"理科は「科目選び」で勝負の半分が決まります","s":"物理・化学・生物・地学の得点特性と、志望学部別の最適な組み合わせ","b":"<p>理科の科目選択は、多くの高校で高1の終わりから高2にかけて、ほとんど説明もないまま決まってしまいます。ですが、この選択は受験戦略の半分を占めます。同じ勉強量をかけても、科目の組み合わせ次第で本番の得点は20点単位で変わりますし、そもそも出願できない大学が出てきます。</p>\n\n<h4>4科目の得点特性を正しく知る</h4>\n<p><b>物理</b>は上限が高い科目です。覚えるべき法則は実質20個程度で、それを使いこなせれば満点も現実的に狙えます。ただし最初の1〜2か月に「公式は言えるのに立式ができない」壁があり、ここで脱落すると30点台から動きません。得点分布が二極化しやすいのが物理です。</p>\n<p><b>化学</b>は全学部で使え、指定されることも最も多い科目です。理論・無機・有機と分野が分かれているため、どこかで失敗しても他で埋められます。60〜80点に収束しやすく、事故が少ないのが利点です。</p>\n<p><b>生物</b>は覚える量が最大ですが、知識分だけは必ず取れるので0点にはなりません。反面、実験考察と論述の比重が高く、9割を超えるのは物理より難しくなります。安定するが天井が低い科目だと考えてください。</p>\n<p><b>地学</b>は内容そのものは重くありませんが、受験できる大学が限られます。詳しくは地学の記事で扱います。</p>\n\n<h4>志望別の最適な組み合わせ</h4>\n<ul>\n<li><b>工学系・理学系(物理系)</b>…物理・化学。多くの大学で事実上の指定です。</li>\n<li><b>医学部</b>…物理・化学、または化学・生物。どちらでも合格者は出ます。</li>\n<li><b>農学・薬学・看護・生命科学系</b>…化学・生物。入学後の内容とも直結します。</li>\n<li><b>地球科学・地球惑星系</b>…地学が使えるなら大きな武器になります。</li>\n</ul>\n<p>並べてわかる通り、化学はどの組み合わせにも入っています。理科の科目選択とは、実質的に「化学の相方を物理にするか生物にするか」を決める作業です。</p>\n\n<h4>迷ったときの判断基準</h4>\n<p>数学の関数やグラフを苦にしない、図形的な状況把握が得意、数学IIIの学習が順調——この3つに当てはまるなら物理が向いています。逆に、文章を読んで整理するのが得意で、書く作業が苦にならないなら生物です。「暗記が嫌だから物理」という消極的な選び方は、最初の壁で崩れます。</p>\n\n<div class=\"g-quote\">化学は選ぶものではなく前提です。本当に選んでいるのは、化学の相方を物理にするか生物にするか、その一点だけです。</div>"},{"t":"理科は後回しにされる科目だからこそ、いちばん差がつきます","s":"高2冬から高3春にかけての理科の進み具合が、そのまま合否に直結します","b":"<p>受験勉強の時間は、まず英語と数学に吸い込まれます。理科は「学校の授業があるから」「暗記だからあとで間に合う」と後回しにされ、気づけば高3の夏の模試で理科だけ偏差値が10低い、という状況が毎年大量に生まれます。裏を返せば、ここは正しく手を打った人がそのまま抜き去れる場所です。</p>\n\n<h4>学校の進度は入試に間に合わない</h4>\n<p>多くの高校で、理科の最終単元が終わるのは高3の11月から12月です。具体的には、物理の<b>原子</b>、化学の<b>高分子化合物(天然・合成)</b>、生物の<b>生態系・進化と系統</b>あたりが最後に残ります。</p>\n<p>問題は、これらが入試で普通に出るということです。化学の高分子は多くの大学で大問1つ分を占めますし、共通テストの物理でも原子分野は出題されます。過去問演習を始めるべき10月の時点で未習範囲が残っていると、演習の質そのものが落ちます。学校を待っていては間に合わない、というのが出発点です。</p>\n\n<h4>逆算するとこうなります</h4>\n<ul>\n<li><b>高2の冬</b>…物理は力学、化学は理論のmol計算・酸塩基・酸化還元まで。生物は代謝と遺伝情報まで。</li>\n<li><b>高3の4〜6月</b>…全範囲の基礎を一周。物理は電磁気、化学は無機に着手。</li>\n<li><b>高3の夏</b>…標準レベルの問題集を1冊仕上げる。ここが最大の山場です。</li>\n<li><b>高3の9〜11月</b>…過去問と苦手分野の潰し込み。</li>\n<li><b>高3の12月以降</b>…共通テスト対策。直前は無機・高分子・原子など暗記寄りの分野が最も伸びます。</li>\n</ul>\n\n<h4>先取りは思ったより簡単です</h4>\n<p>理科は分野の独立性が高い科目です。化学の無機と有機は理論のmol計算さえ済んでいればいつ始めても構いませんし、物理の波動や熱は力学の後ならどこからでも入れます。講義系の参考書を1冊と教科書があれば、1単元は数日で通せます。</p>\n<p>先取りの本当の効果は、学校の授業が「初見の講義」から「2回目の復習」に変わることです。同じ50分の授業から得られるものが倍になります。</p>\n\n<div class=\"g-quote\">理科は最後に伸びる科目です。ただしそれは、伸ばすための時間を残しておいた人にだけ起こります。</div>"},{"t":"参考書の「完成」とは、白紙に再現できる状態のことです","s":"3周主義の誤解と、印付け・再現テストによる本当の到達判定","b":"<p>「この参考書を3周しました」という言葉ほど、実態を表さないものはありません。3周しても解けない人がいる一方で、1周で仕上げてしまう人もいます。周回数は結果として出てくる数字であって、目標にした瞬間に勉強が作業に変わります。</p>\n\n<h4>印付けで「やるべき問題」を減らしていく</h4>\n<p>1周目で、全ての問題に次の3種類の印を付けます。</p>\n<ul>\n<li><b>○</b>…自力で、迷いなく解けた。</li>\n<li><b>△</b>…解けたが迷った、時間がかかりすぎた、根拠が曖昧だった。</li>\n<li><b>×</b>…手が止まった、解答を見た。</li>\n</ul>\n<p>2周目に解くのは△と×だけ、3周目は×だけです。300問の問題集なら、2周目は120問、3周目は40問ほどに減ります。1周目に1か月かかっても、2周目は10日、3周目は3日で終わります。周回数を増やすのではなく、周回のたびに対象を減らすのが正しい形です。</p>\n<p>ここで最も危険なのは△を○にしてしまうことです。「まあ解けたし」で流した問題が、本番で手が止まる問題になります。迷ったら△、が原則です。</p>\n\n<h4>「わかる」と「できる」の間にある断層</h4>\n<p>解答を読んで理解できるというのは、著者が敷いたレールの上を歩けたということです。自力で再現できるというのは、何もない状態から最初の一手を自分で選べるということです。この2つの間には大きな段差があり、多くの受験生はここを飛び越えたつもりで飛び越えていません。</p>\n<p>差が出るのは「なぜその式を立てるのか」「なぜその実験に注目するのか」という判断の部分です。解説を読んだあとに、その判断の理由を一言でメモしておくと、2周目の効率が変わります。</p>\n\n<h4>白紙再現テストで判定する</h4>\n<p>完成したかどうかは、次の方法で確かめられます。問題文だけを見て、何も参照せずに答案を最後まで書く。5分考えて手が動かなければ×です。</p>\n<p>さらに月に一度、その本からランダムに10問を抜き出して抜き打ちテストをしてください。8問を自力で通せたら、その本は完成です。この判定を通っていない本を「終わった」ことにして次に進むのが、理科でいちばん多い失敗です。</p>\n\n<div class=\"g-quote\">1冊を完成させるとは、その本の問題を全部解けることではありません。その本と同じ考え方で、初見の問題に手が出る状態のことです。</div>"},{"t":"物理は公式を覚える科目ではなく、立式する科目です","s":"現象の把握から立式へ。力学・電磁気・波動熱・原子を積む順序","b":"<p>物理が伸びない人には、はっきりした共通点があります。公式は全部言えるのに、問題を前にすると手が止まるのです。原因は覚えている量ではありません。物理で本当に必要な法則は、運動方程式、力学的エネルギー保存、運動量保存、ガウスの法則、キルヒホッフの法則……と数えても20個程度です。足りないのは、目の前の現象をどの法則で切るかという判断です。</p>\n\n<h4>最初に身につけるべき技術は、図を描くことです</h4>\n<p>力学なら、物体に働く力の矢印を全部描くことから始めます。重力、垂直抗力、張力、摩擦力、そして加速する座標系なら慣性力。描き漏らした力が、そのまま失点になります。電磁気なら、複雑な回路を等価な形に描き直す。波動なら、波の形と進行方向を描く。</p>\n<p>図が正確に描ければ、式はほとんど自動的に出てきます。逆に、図を描かずにいきなり式を書き始める人は、必ずどこかで詰まります。答案上でも図は評価されますから、練習段階から必ず描く癖をつけてください。</p>\n\n<h4>力学 → 電磁気 → 波動・熱 → 原子の順で積む</h4>\n<p>力学は全分野の土台です。電磁気の荷電粒子の運動は、力の正体が電気力に変わっただけで中身は力学ですし、交流回路も単振動と同じ数学です。力学の運動方程式が自在に立てられないうちに電磁気へ進むと、まず崩れます。</p>\n<p>波動と熱力学は独立性が高いので、時期をずらしても構いません。原子分野は最後で十分ですが、量は少ないので直前期でも間に合います。むしろ手を付けずに本番を迎える人が多い分野なので、確実に取っておきたいところです。</p>\n\n<h4>微積分と、上位向けの参考書について</h4>\n<p>微積分を使うかどうかは、必須ではありません。ただ、v-tグラフの面積が変位になること、単振動の運動方程式がなぜあの形なのか、といった場面では、微積の言葉で理解したほうが腑に落ちます。数学IIIが進んでいるなら、理解の補助として使う価値はあります。</p>\n<p>一方で、教科書レベルで詰まっている段階で『新・物理入門』のような本に手を出すのは事故のもとです。『難問題の系統とその解き方』も同様で、標準的な問題集を8割方仕上げてから、旧帝大・単科医科大クラスを狙う人が使う本だと考えてください。</p>\n\n<div class=\"g-quote\">物理の問題は、式を思い出す作業ではありません。何が起きているかを絵に描き、その絵から式を1本ずつ起こしていく作業です。</div>"},{"t":"化学は理論・無機・有機という3つの別科目だと考えてください","s":"理解の理論、つなげる暗記の無機、パズルの有機。回し方が違います","b":"<p>化学が伸び悩む人の多くは、3つの分野を同じやり方で勉強しています。ですが理論・無機・有機は、必要な能力がまったく違います。理論は理解と計算で数学に近く、無機は暗記で社会に近く、有機は情報を絞り込むパズルで推理に近い。同じ回し方をすれば、必ずどれかが崩れます。</p>\n\n<h4>理論は理解、そして処理速度</h4>\n<p>山になるのは、mol概念、化学平衡、電池と電気分解の3つです。ここは公式暗記ではなく、何が起きているかを式で追えるようにします。</p>\n<p>そのうえで意識してほしいのが処理速度です。入試本番では、標準的な計算問題を1問2分程度で処理できないと最後まで届きません。答えが合うかどうかだけでなく、何分かかったかを毎回記録してください。有効数字の丸め方も、演習の段階から本番と同じようにやっておきます。</p>\n\n<h4>無機は「理論とつなげる暗記」で半分に減ります</h4>\n<p>無機化学は丸暗記の分野に見えますが、理屈でつながる部分が大半です。気体の製法は「弱酸の遊離」「揮発性酸の遊離」「酸化還元」のほぼ3パターンに分類できますし、沈殿の生成は溶解度積の話です。分類してから覚えると、覚える項目数が体感で半分になります。</p>\n<p>純粋な丸暗記が必要なのは、炎色反応と沈殿の色くらいです。そこは割り切って、毎日15分の反復で処理してください。</p>\n\n<h4>有機は構造決定というパズル</h4>\n<p>構造決定は、情報を1つずつ使って可能性を絞る作業です。手順は決まっています。分子式を出す、不飽和度を計算する、検出反応から官能基を特定する、加水分解などで骨格を分解する、最後に組み立てる。この順序を紙の上で毎回書くようにすると、ある時期から急に見えるようになります。1日1問でも続く力になります。</p>\n<p>3分野の回し方としては、理論を軸にしつつ、無機は毎日短時間の暗記、有機は理論のmol計算が済んだ段階から並行させます。無機と有機は理論ほど前提を必要としないので、学校の進度を待つ必要はありません。</p>\n<p>なお『化学の新研究』は通読する本ではありません。「なぜこうなるのか」という疑問が湧いたときだけ引く辞書です。最初から読み通そうとして挫折する人が、毎年一定数います。</p>\n\n<div class=\"g-quote\">無機化学の暗記量は、覚え方を変えるだけで半分になります。覚えるべきは事実そのものではなく、その事実を生んでいる理屈のほうです。</div>"},{"t":"生物は用語暗記で頭打ちになります。次の段階は考察と論述です","s":"知識・考察・論述の3段階。実験考察の読み方と論述の型を身につける","b":"<p>用語集を隅から隅まで覚えたのに、模試の点数が60点前後で止まる。生物でいちばん多い相談がこれです。理由は単純で、入試が知識だけを問うていないからです。難関大の生物では、単純な知識問題は3〜4割程度で、残りは実験考察と論述が占めます。</p>\n<p>生物の勉強は、知識 → 考察 → 論述の3段階で組み立ててください。知識は土台であって、ゴールではありません。</p>\n\n<h4>実験考察は「条件の差」だけを読む</h4>\n<p>長いリード文に圧倒される必要はありません。見るべきなのは、対照実験と実験区で何が違うか、その1点です。</p>\n<p>読みながら、条件を表に書き出してください。処理の有無、温度、加えた物質、除いた器官。そして結果と結びつけます。「Aを除いたら効果が消えた」ならAは<b>必要</b>、「Aを加えただけで効果が出た」ならAで<b>十分</b>。この必要と十分の区別を意識するだけで、正答率が変わります。</p>\n<p>グラフは、まず軸が何かを確認します。そのうえで、変化が始まる点と飽和する点に印を付ける。設問はほぼこの2か所を聞いてきます。</p>\n\n<h4>論述には型と字数感覚があります</h4>\n<p>論述の基本形は「〜だから、〜となる」という因果の1本道です。そのうえで字数の感覚を持ってください。40字なら、主語+仕組み+結果でちょうど1文から2文。60字なら要素を2つ、100字なら3つに前提の説明が入ります。指定字数を見た瞬間に、盛り込む要素の数が決まる状態が理想です。</p>\n<p>採点は要素点です。キーワードが入っているかで加点されるので、字数は8割以上埋めます。そして書き終えたら必ず、問いに答えているかを確認してください。理由を聞かれているのに現象を説明して終わる答案が、想像以上に多いのです。文末は問いに対応させます(「〜から。」「〜こと。」)。</p>\n\n<h4>図説は読むのではなく、見比べる</h4>\n<p>資料集を最初から読んでも頭に残りません。使い方は比較です。体細胞分裂と減数分裂を並べる、C3植物とC4植物とCAM植物を並べる、動物と植物の細胞を並べる。入試が聞いてくるのは、ほぼ「違い」だからです。並べて違いを言葉にできれば、それがそのまま論述の答案になります。</p>\n\n<div class=\"g-quote\">生物で差がつくのは、知らない実験を出されたときです。知識は0点を防ぐためのもので、上位との差を作るのは考察と論述だけです。</div>"},{"t":"地学基礎は最短、専門地学は茨の道。それでも選ぶ理由があります","s":"文系の共通テスト理科基礎の最適解と、専門地学の現実的な学習法","b":"<p>地学は、選択肢に入れる価値がある場面と、慎重になるべき場面がはっきり分かれる科目です。結論から言えば、共通テストの理科基礎としては最短ルートの候補であり、二次試験で使う専門地学としては受験校が限られます。</p>\n\n<h4>文系の理科基礎なら地学基礎が最短です</h4>\n<p>共通テストの理科基礎は、「物理基礎・化学基礎・生物基礎・地学基礎」が1つの試験冊子にまとまっており、4科目から2科目を選んで解答します。試験時間は2科目あわせて60分、配点は各50点の計100点です。</p>\n<p>この4つのなかで地学基礎は、計算問題が少なく、宇宙・地球内部・岩石・大気と海洋・地史と、分野が独立しているのが特徴です。どこから手を付けても成立するので、短期間で仕上げやすい。教科書と図表、問題集1冊で2〜3か月が目安になります。生物基礎との組み合わせが定番なのは、どちらも暗記寄りで勉強法を揃えられるからです。</p>\n<p>注意点は、高校によっては地学基礎の授業自体がないことです。その場合は完全に独学になります。逆に言えば、独学でも十分に到達できる分量だということでもあります。</p>\n\n<h4>専門地学の現実を直視する</h4>\n<p>一方で、二次試験の科目として「地学」を選べる大学は限られます。国公立でも実施しているのは数えるほどで、私立ではほとんど選択肢に入りません。理工系学部の一般的な入試では、まず使えないと考えてください。</p>\n<p>ですから、専門地学を選ぶなら順序が逆になります。先に志望校を絞り、募集要項で地学が使えることを確認してから選ぶ。これを怠ると、高3の夏に出願先が消えるという最悪の事態になります。</p>\n<p>逆の面もあります。受験人口が少ないため、地球科学系の学科では地学選択が有利に働く場面がありますし、内容そのものへの興味が続くなら、勉強のモチベーションは保ちやすい科目です。</p>\n\n<h4>参考書が少ないなかでの学習法</h4>\n<p>地学は市販の参考書が他科目に比べて圧倒的に少ない科目です。だからこそ、主教材は教科書と図表になります。用語は必ず図とセットで覚えてください。地質断面、天球図、気圧配置——地学の問題は図から出ます。</p>\n<p>計算は限定的で、年周視差、地震のS-P時間、湿度、放射性年代あたりが中心です。ここは公式が少ないので、確実に取り切ります。演習量が足りないときは、共通テストとセンター試験の過去問を教材として使うのが実践的です。</p>\n\n<div class=\"g-quote\">地学は情報が少ない科目です。だからこそ、教科書を隅まで読み込んだ人が、そのまま上位に立てます。</div>"},{"t":"共通テスト理科は、知識量ではなく処理速度で差がつきます","s":"基礎と発展の違い、時間配分、マーク式特有の失点をつぶす","b":"<p>共通テストの理科で20点落とした人の内訳を分析すると、「知らなかったから落とした」失点は数点しかありません。残りは、急いだせいのミスと、時間切れです。対策の重心は、知識の追加ではなく処理の設計に置くべきです。</p>\n\n<h4>まず科目構成を正確に把握する</h4>\n<ul>\n<li><b>理科基礎</b>…「物理基礎・化学基礎・生物基礎・地学基礎」が1つの試験。4科目から2科目を選択解答し、試験時間は2科目あわせて60分、配点は各50点の計100点です。</li>\n<li><b>発展科目</b>…「物理」「化学」「生物」「地学」。1科目60分・100点で、2科目選択する場合の試験時間は130分(解答時間120分、間に答案回収等の時間が入ります)。</li>\n</ul>\n<p>2科目受験では第1解答科目・第2解答科目という区別があり、大学によっては「第1解答科目の成績を使う」と指定されることがあります。当日の解答順が合否に関わるので、出願前に必ず確認してください。</p>\n\n<h4>時間配分と、マーク式特有の失点</h4>\n<p>発展科目は60分。化学なら大問5題として1題12分、見直しに5分残すなら実質55分で解き切る計算です。1問に3分以上かけた時点で全体が崩れるので、飛ばす判断を練習しておきます。</p>\n<p>そして、マーク式でこそ起きる失点があります。</p>\n<ul>\n<li>有効数字の桁指定や10のべき乗の選択欄をずらす</li>\n<li>グラフの軸の単位(対数軸、10⁻³ など)を読み違える</li>\n<li>「すべて選べ」「誤っているものを選べ」を読み飛ばす</li>\n<li>解答欄の形式(整数値か小数第1位か)に合わせ損ねる</li>\n</ul>\n<p>計算そのものより、この形式ミスのほうが多いのが実情です。演習では丸付けのときに、間違いを「知識不足」「計算ミス」「形式ミス」に分類してください。3つ目が多いなら、対策は暗記ではなく読み方の矯正です。</p>\n<p>また共通テストは実験考察型や会話文形式の出題が多く、リード文が長くなります。先に設問に目を通してから本文に戻ると、読む量が半分になります。</p>\n\n<h4>直前期の実戦問題集の使い方</h4>\n<p>いわゆる黒本(河合塾)は過去問と模試の再録が中心で分量があり、標準的な難易度です。青本(駿台)は解説が詳しく、やや難しめ。緑本(Z会)は予想問題として新傾向を試すのに向きます。</p>\n<p>順序としては、まず本試験の過去問(センター試験のものも十分使えます)。そのうえで1冊を追加すれば十分です。3冊すべてに手を出すと、どれも中途半端に終わります。解くときは必ず時間を計り、本番と同じ順序で通してください。</p>\n\n<div class=\"g-quote\">共通テストの理科で落とす20点のうち、知らなかったせいの失点は数点です。残りは、急いだせいの失点です。</div>"},{"t":"記述の理科は、答えが合っているかより見せ方で点が動きます","s":"導出過程・記号定義・単位・部分点。答案の作り方で数十点変わる","b":"<p>二次試験の理科は、答えの数値だけを書いても点になりません。逆に、最後まで到達できなくても点が入ります。記述式の答案は採点者への説明文であり、その書き方には作法があります。ここを知っているかどうかで、同じ実力でも数十点の差が生まれます。</p>\n\n<h4>答案に必ず入れる4つの要素</h4>\n<ul>\n<li><b>根拠の明示</b>…「x方向の運動方程式より」「エネルギー保存則より」と、使った法則を名指しします。式だけが並んだ答案は、途中で間違えたときに部分点が拾えません。</li>\n<li><b>記号の定義</b>…自分で置いた文字は必ず定義します。「小球Aの速さをv₁、床からの高さをhとする」の一行があるかないかで、答案の読みやすさが変わります。図に記号を書き込むのも有効です。</li>\n<li><b>単位</b>…数値解答には必ず単位を付けます。付け忘れは減点対象です。</li>\n<li><b>有効数字</b>…問題文で与えられた数値の桁数に合わせます。2桁で与えられていれば答えも2桁。計算途中は1桁多く保持して、最後に丸めます。</li>\n</ul>\n<p>そして最終的な答えは囲むか下線を引いて、どれが答えかを一目でわかるようにします。</p>\n\n<h4>部分点は待つものではなく、取りに行くもの</h4>\n<p>完答できそうにない問題でも、立式までは書いてください。設定した座標系、立てた式、途中で出した結果、そのそれぞれに配点があります。白紙は確実に0点で、これだけが唯一確実な失点です。</p>\n<p>時間切れになりそうなときの動き方も決めておきます。大問の(1)(2)は基本問題であることが多いので、残り時間が少ないなら、手を付けていない大問の前半だけを回収しに行く。これだけで10点単位の差になります。</p>\n\n<h4>化学の構造決定と、生物の論述</h4>\n<p>化学の構造決定では、答えの構造式だけでなく、判断の根拠を1行添えてください。「ヨードホルム反応が陽性より、CH₃CO−またはCH₃CH(OH)−の構造をもつ」といった記述です。仮に最終構造を間違えても、ここまでで部分点が入ります。異性体を数える問題は数え漏らしが致命的なので、炭素骨格から系統的に書き出す手順を固定しておきます。</p>\n<p>生物の論述は、字数の8割以上を埋めるのが原則です。40字なら32字以上。要素点である以上、短い答案は取りこぼしが増えます。そして文末を問いに対応させる。「なぜか」には「〜から。」、「何か」には「〜こと。」。基本的なことですが、緊張下ではここが崩れます。</p>\n\n<div class=\"g-quote\">記述の答案で問われているのは、答えを知っているかどうかではありません。その答えに至った道筋を、他人に見せられるかどうかです。</div>"},{"t":"医学部の理科は、難問を解く力より取りこぼさない力です","s":"2科目150分の配分、物化と化生の戦略差、東大京大での取捨選択","b":"<p>最難関の理科というと、見たこともない難問を解く力が必要だと思われがちです。実際は逆です。合格者を分けているのは、標準的な問題を全部拾えるかどうか。特に医学部では、この傾向がはっきりしています。</p>\n\n<h4>合格ラインは満点ではなく「安定」です</h4>\n<p>多くの医学部の理科は、標準からやや難の問題が並びます。合格者の得点は8割前後に集まり、満点近くを取る必要はありません。必要なのは、9割を狙う勉強ではなく、5割の日を作らない勉強です。</p>\n<p>実際に失点を分解すると、難問が解けなかったことによる失点より、計算ミス、単位の書き落とし、設問の読み違い、時間切れによる失点のほうが大きくなります。ここを潰す作業は地味ですが、最も費用対効果が高い部分です。演習のたびに失点を種類別に記録し、同じ種類のミスが3回続いたら、それを潰す練習だけを1週間やる。この繰り返しです。</p>\n\n<h4>理科2科目150分をどう割るか</h4>\n<p>多くの国公立医学部は、理科2科目で150分の一括方式です。単純に割れば1科目75分ですが、実際は「得意科目を70分以内で終え、余りを苦手科目に回す」という設計をしておきます。</p>\n<p>開始から10分は、解かずに全問に目を通す時間に充ててください。そのうえで、すぐ解ける問題、時間はかかるが確実に取れる問題、捨てる問題の3つに仕分けます。慣れている受験生ほど、捨てる問題を早い段階で決めています。化学は分量が多く時間を食いやすいので、先に化学を処理してから物理や生物に移る人が多い、というのも覚えておくと役に立ちます。</p>\n<p>選択科目による戦略の違いもあります。<b>物理・化学</b>は上限が高く、噛み合えば2科目とも9割を超えます。反面、物理は設定を1つ読み違えると大問がまるごと飛ぶ事故のリスクがある。<b>化学・生物</b>は得点が安定しますが、生物の論述に時間を取られ、9割が出にくく時間切れの危険が高い。書く速度そのものが実力の一部になります。どちらでも合格者は出ますから、高3の途中で乗り換えないことが何より重要です。</p>\n\n<h4>東大・京大は「全部は解かない」前提で</h4>\n<p>東大の理科は2科目150分、大問は合計6題。すべてを丁寧に解き切る時間は与えられていません。京大も同様に、量と難度の両面で完答は想定されていません。合格者の答案にも空欄はあります。</p>\n<p>ですから、演習の目的が変わります。「全部解けるようにする」のではなく、「どれを解かないかを短時間で判断する」練習をする。過去問を解くときは必ず本番と同じ時間で通し、終わったあとに「どの問題を捨てるべきだったか」を検討してください。この振り返りが、そのまま本番の得点になります。</p>\n\n<div class=\"g-quote\">最難関の理科で合格者がやっているのは、難問を解くことではありません。解かない問題を、最初の10分で決めることです。</div>"}];
 
 /* ===== TIERS / SUBJ ===== */
 const TIERS = [{"id":"kyote","no":"01","name":"共通テスト対策","sub":"理科基礎・共テ利用・国公立1次","color":"#2F6E4F","goal":"共通テスト理科 8割以上","hensachi":"共テ得点最適化"},{"id":"nikkoma","no":"02","name":"日東駒専・産近甲龍","sub":"中堅私大理系(理科1科目)","color":"#2E7D9A","goal":"日東駒専・産近甲龍 合格","hensachi":"偏差値 〜55"},{"id":"march","no":"03","name":"MARCH・関関同立","sub":"難関私大理系(理科1科目)","color":"#24427C","goal":"MARCH・関関同立 合格","hensachi":"偏差値 55〜62"},{"id":"chikoku","no":"04","name":"地方国公立","sub":"二次で理科記述がある学部","color":"#0E7C6B","goal":"地方国公立 合格","hensachi":"偏差値 50〜60"},{"id":"sokei","no":"05","name":"早慶理工・上智・理科大","sub":"最難関私大理系(理工は2科目)","color":"#5B4E9E","goal":"早慶理工・上智・理科大 合格","hensachi":"偏差値 62〜70"},{"id":"kyutei","no":"06","name":"地方旧帝・神戸","sub":"阪大・名大・東北・九大・北大","color":"#B5432A","goal":"旧帝大 合格","hensachi":"偏差値 57〜67"},{"id":"top","no":"07","name":"東大・京大・東京科学大","sub":"最難関国立(理科2科目)","color":"#8C2437","goal":"東大・京大 合格","hensachi":"偏差値 65〜75"},{"id":"med","no":"08","name":"医学部医学科","sub":"国公立医・私立医(取りこぼし0)","color":"#946200","goal":"医学部医学科 合格","hensachi":"偏差値 63〜75"}];
@@ -1291,58 +1740,12 @@ BOOKS.push(
 
 
 /* ===== LEGAL — 法定表記・ポリシー ===== */
-const LEGAL = {
-about:{title:"運営者情報",body:()=>`
-<h5>サイト名</h5><p>${CONFIG.siteName}</p>
-<h5>運営者</h5><p>${CONFIG.operator || CONFIG.siteName + " 運営者"}</p>
-${CONFIG.contact?`<h5>お問い合わせ</h5><p>${CONFIG.contact}</p>`:`<h5>お問い合わせ</h5><p>お問い合わせ先は準備中です。</p>`}
-<h5>サイトの目的</h5>
-<p>大学受験の理科(物理・化学・生物・地学)の参考書について、難易度・役割・接続関係を整理し、志望校と現在地から「何を・どの順で」学ぶかを一本の道として示すことを目的としています。掲載内容は各出版社の公表情報および大手予備校・塾が公開する学習ルート解説を参照して編集した、独自の見解にもとづく目安です。</p>
-<h5>掲載情報について</h5>
-<p>参考書の書誌情報(書名・出版社・ISBN・刊行年)は編集時点の公開情報にもとづきます。改訂・新課程対応版への切り替えにより内容が変わる場合がありますので、購入前に販売ページで最新版をご確認ください。大学ごとの選択可能科目・必要科目数・試験時間・配点は必ず各大学の最新の入試要項でご確認ください。</p>`},
-
-privacy:{title:"プライバシーポリシー",body:()=>`
-<h5>個人情報の取得について</h5>
-<p>当サイトでは、お問い合わせ等をいただかない限り、氏名・住所・電話番号・メールアドレスなどの個人情報を取得することはありません。診断結果や入力した志望校・参考書の情報は、お使いのブラウザ内でのみ処理され、サーバーへ送信・保存されることはありません。</p>
-<h5>診断結果の保存と共有について</h5>
-<p>3分診断の結果は、結果画面の「この結果を保存」を押したときにかぎり、お使いのブラウザのローカルストレージ（端末内の保存領域）に記録されます。保存されるのは診断の回答と、そこから作られた表示用の見出しだけで、氏名などの個人を特定できる情報は含まれません。この情報が外部へ送信されることはなく、当サイトの運営者が取得・閲覧することもできません。保存した内容は診断画面の一覧からいつでも削除でき、ブラウザの閲覧データを消去した場合にも失われます。ブラウザの設定やプライベートブラウズによりローカルストレージが使えない場合は、保存ボタンを表示しません。この判定のため、診断の画面を開いた時点で確認用の値をローカルストレージに一度書き込み、すぐに削除します。この値に診断の内容や個人を特定できる情報は含まれません。</p>
-<p>診断結果の共有リンクに含まれるのも診断の回答だけです。リンクを開いた方の画面では、その回答をもとに結果があらためて計算されます。</p>
-${ADSENSE ? `<h5>Google AdSense による広告配信について</h5>
-<p>本サイトは、第三者配信の広告サービス「Google AdSense」を利用しています。Google をはじめとする第三者配信事業者は、クッキー(Cookie)を使用して、本サイトや他のウェブサイトへの過去のアクセス情報にもとづく広告を配信します。これにより表示される広告に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
-<p>パーソナライズ広告(興味・関心に応じた広告)の表示は、Google の<a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">広告設定</a>から無効にできます。また、<a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a> では、参加している第三者配信事業者のクッキーをまとめて無効にできます。</p>
-<p>Google が広告配信のために取得する情報とその使われ方については、<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">「広告 - ポリシーと規約 - Google」</a>をご確認ください。</p>` : ``}
-<h5>アクセス解析について</h5>
-<p>当サイトでは、利用状況の把握と改善のために Google LLC が提供する「Google アナリティクス」を利用しています。Google アナリティクスは Cookie を使用して、氏名・住所などの個人を特定する情報を含まない形で、閲覧されたページや滞在時間などのアクセス情報を収集します。</p>
-<p>収集された情報は Google 社のプライバシーポリシーに基づいて管理されます。データの収集を望まない場合は、Google が提供する「Google アナリティクス オプトアウト アドオン」を利用するか、お使いのブラウザの設定で Cookie を無効にすることで停止できます。</p>
-${AFF ? `<h5>第三者配信の広告サービスについて</h5>
-<p>当サイトは${AFF_PROGRAMS}に参加しています。これらの広告配信事業者は、広告の配信および成果の計測のために Cookie を使用することがあります。この際に取得される情報に、氏名・住所・メールアドレスなど個人を特定できる情報は含まれません。Cookie の使用はブラウザの設定により無効にできます。</p>` : ``}
-<h5>免責</h5>
-<p>当サイトの情報の利用により生じたいかなる損害についても、運営者は責任を負いかねます。</p>`},
-
-disclaimer:{title:"免責事項",body:()=>`
-<h5>掲載情報の正確性について</h5>
-<p>当サイトに掲載する参考書の難易度・到達偏差値・目安学習時間・対象大学は、出版社の公表情報および予備校・塾が公開する学習ルート解説をもとにした<b>編集部の見解による目安</b>であり、学習成果や合格を保証するものではありません。学習効果には個人差があります。</p>
-<h5>大学入試情報について</h5>
-<p>大学ごとの選択可能科目(物理・化学・生物・地学の可否)、必要科目数、試験時間、配点、出題傾向は編集時点の公開情報にもとづく目安です。学部・学科・方式・年度によって異なり、変更されることがあります。出願前に必ず各大学が公表する最新の入試要項・募集要項でご確認ください。</p>
-<h5>新課程について</h5>
-<p>2025年入試から適用された新課程により、共通テスト理科の構成や各科目の出題範囲が変更されています。旧課程向けの参考書を購入される場合はご注意ください。</p>
-<h5>リンク先について</h5>
-<p>当サイトからリンクやバナーなどによって他のサイトに移動された場合、移動先サイトで提供される情報・サービス等について一切の責任を負いません。</p>`},
-
-affiliate:{title:"広告について",body:()=>`
-${AFF ? `<h5>アフィリエイトプログラムの利用</h5>
-<p>当サイトは${AFF_PROGRAMS}に参加しています。参考書の詳細画面に設置している${AFF_STORES}へのリンクは広告リンクであり、リンク経由で商品が購入された場合、当サイトに紹介料が発生することがあります。購入者が支払う価格に影響はありません。${AFF_AZ ? "" : "なお、Amazonへのリンクはアフィリエイトタグを含まない通常のリンクであり、リンク経由の購入によって当サイトが紹介料を得ることはありません。"}</p>` : `<h5>広告の掲載について</h5>
-<p>当サイトは現在、アフィリエイトプログラムを含む広告を掲載していません。参考書の販売サイトへのリンクは書誌情報を確認していただくための通常のリンクであり、リンク経由の購入によって当サイトが収益を得ることはありません。</p>`}
-${CONFIG.amazonTag ? `<h5>Amazonアソシエイト</h5>
-<p>${CONFIG.siteName}は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</p>` : ""}
-${ADSENSE ? `<h5>第三者配信の広告について</h5>
-<p>本サイトは、Google LLC が提供する広告配信サービス「Google AdSense」を利用しています。ページ内に「広告」と表示している枠に配信される広告の内容は Google 側で選ばれており、本サイトが個別に選定・推奨しているものではありません。表示された広告が閲覧またはクリックされることで、本サイトに収益が発生することがあります。</p>
-<p>広告の表示に用いられるクッキーの扱いと、その停止方法は「プライバシーポリシー」に記載しています。</p>` : ``}
-<h5>書影(表紙画像)について</h5>
-<p>参考書の表紙画像は、Amazonが提供する商品画像URL、国立国会図書館サーチ・openBDといった公開書誌データベースが提供する書影URL、および学校専売品については各出版社が公式サイトで公開している商品画像URLを参照して表示しています。画像を当サイトのサーバーに保存・再アップロードしたり、加工したりすることはしていません。</p>
-<h5>掲載方針</h5>
-<p>掲載する参考書の選定・評価は、広告収益の有無にかかわらず編集部の判断で行っています。紹介料の多寡によって順位や評価を変えることはありません。</p>`}
-};
+/* サイトの表記（運営者情報・データの作り方・プライバシーポリシー・免責事項・
+   広告について）は /about/ /methodology/ /privacy/ /disclaimer/ /ads/ の静的
+   ページが正本。以前はここに JS のモーダルとして持っていたが、クローラー・
+   AdSense の審査・JS を切った環境からは存在しないのと同じだったため、
+   フッターから静的ページへ送る形にした。
+   本文の正本は build/content/legal.mjs（node build/generate-legal.mjs で生成）。 */
 
 /* ============================================================
    STATE
@@ -1715,7 +2118,7 @@ function openModal(id){
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
     <div class="aff-actions">
       ${az?`<a class="aff-btn amz" href="${az}" target="_blank" rel="nofollow${AFF_AZ?' sponsored':''} noopener">Amazonで見る${ext}</a>`:""}
-      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener">楽天ブックスで見る${ext}</a>`:""}
+      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener">楽天ブックスで検索${ext}</a>`:""}
     </div>
     <p class="aff-note">${AFF?`${AFF_STORES}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります(価格は変わりません)。`:""}版の改訂により内容が異なる場合がありますので、購入前に販売ページで最新版をご確認ください。</p>
   </div>` : "";
@@ -1972,7 +2375,7 @@ function nodeHTML(s, i, st0, startIdx, b, extraCls){
       <div class="cn-card__cover">${coverHTML(b)}</div>
       <div class="cn-info">
         <span class="cn-info__role" style="background:${st.color}">${s.role||st.short}</span>
-        <h5>${b.name}</h5>
+        <h4>${b.name}</h4>
         <div class="cn-info__note">${s.note}</div>
         ${altHtml}
         <div class="cn-info__meta">
@@ -2037,7 +2440,7 @@ function renderRouteBody(){
             <div class="cn-card__cover">${coverHTML(b)}</div>
             <div class="cn-info">
               <span class="cn-info__role" style="background:${st.color}">${st.label}</span>
-              <h5>${b.name}</h5>
+              <h4>${b.name}</h4>
               <div class="cn-info__note">${p.note}</div>
               ${p.alts&&p.alts.length?`<div class="cn-info__alt"><b>代替:</b> ${p.alts.map(a=>{const ab=bookById(a);return ab?`<button onclick="event.stopPropagation();openModal('${a}')">${ab.name}</button>`:"";}).filter(Boolean).join(" / ")}</div>`:""}
             </div>
@@ -2075,7 +2478,7 @@ function renderRouteBody(){
 
   const months = Math.max(1, Math.round(hours/60));
   const uniNote = uniR
-    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg><p><b>${uniR.label}向けに調整済み。</b>${S.uni.time}。${uniR.extra||""}過去問の段は志望校の赤本に読み替えて進めてください。</p></div>`
+    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg><p><b>${uniR.label}に合わせて調整しています</b>（選べる科目と必要な科目数、志望レベルを判定し、そのレベルのルートを出しています）。${S.uni.time}。${uniR.extra||""}過去問の段は志望校の赤本に読み替えて進めてください。</p></div>`
     : "";
   const polNote = S.policy==="omni"
     ? "王道じっくり型:講義系で原理を理解し、段差の小さい問題集を順に積み上げる、時間のある高1・高2や浪人生向けの盤石ルートです。一問一答・図録・計算問題集は並行枠で毎日回すのが鉄則。"
@@ -2114,15 +2517,15 @@ function renderHome(){
   document.getElementById("stat-books").textContent = BOOKS.length;
   document.getElementById("lead-count").textContent = BOOKS.length;
   document.getElementById("cat-lead-count").textContent = BOOKS.length;
-  document.getElementById("stat-unis").innerHTML = UNIS.length + `<small>× 学部で科目を自動判定</small>`;
+  document.getElementById("stat-unis").textContent = UNIS.length;
   document.getElementById("homeRoutes").innerHTML = TIERS.map(t=>{
     const total = SUBJ_KEYS.reduce((a,k)=>a+(ROUTES[t.id][k].omni||[]).length,0) + (ROUTES[t.id].final||[]).length;
     return `<div class="rp-card" style="--tc:${t.color}" role="button" tabindex="0" onclick="selectTier('${t.id}');go('route')">
       <div class="rp-card__no"><span>ROUTE ${t.no}</span><em>${total} STEPS</em></div>
-      <h4>${t.name}</h4><p>${t.sub} — ${t.goal}</p>
+      <h3>${t.name}</h3><p>${t.sub} — ${t.goal}</p>
     </div>`;
   }).join("");
-  const disc = `<b>ご利用にあたって:</b>本アプリの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの選択可能科目・必要科目数・試験時間は編集時点の公開情報にもとづく目安であり、必ず最新の入試要項でご確認ください。2025年入試からの新課程(共通テスト理科の再編、物理・化学・生物・地学の出題範囲の変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonおよび公開書誌データベースが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
+  const disc = `<b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの選択可能科目・必要科目数・試験時間は編集時点の公開情報にもとづく目安であり、必ず最新の入試要項でご確認ください。2025年入試からの新課程(共通テスト理科の再編、物理・化学・生物・地学の出題範囲の変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonおよび公開書誌データベースが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
   document.getElementById("homeDisclaimer").innerHTML = disc;
   document.getElementById("catDisclaimer").innerHTML = disc;
   document.getElementById("guideDisclaimer").innerHTML = disc;
@@ -2262,7 +2665,7 @@ function renderGuide(){
     <article class="g-card" id="g${i}">
       <button class="g-card__head" onclick="toggleGuide(${i})" aria-expanded="false">
         <span class="g-num">${String(i+1).padStart(2,"0")}</span>
-        <span class="g-ttl"><h4>${g.t}</h4><span>${g.s}</span></span>
+        <span class="g-ttl"><h3>${g.t}</h3><span>${g.s}</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="g-body">${g.b}</div>
@@ -2272,31 +2675,6 @@ function toggleGuide(i){
   const el = document.getElementById("g"+i);
   const open = el.classList.toggle("open");
   el.querySelector(".g-card__head").setAttribute("aria-expanded", open);
-}
-function openLegal(key){
-  const L = LEGAL[key]; if(!L) return;
-  document.getElementById("legalInner").innerHTML = `
-    <div class="modal__grab"></div>
-    <div class="modal__head" style="padding-bottom:16px">
-      <div class="modal__titles"><h3>${L.title}</h3></div>
-      <button class="modal__close" onclick="closeLegal()" aria-label="閉じる"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-    </div>
-    <div class="legal-body">${L.body()}</div>`;
-  document.getElementById("legalModal").classList.add("open");
-  modalOpened("legalInner");
-  document.body.style.overflow="hidden";
-}
-function closeLegal(){
-  document.getElementById("legalModal").classList.remove("open");
-  modalClosed();
-  document.body.style.overflow="";
-}
-function renderFooter(){
-  document.getElementById("footLegal").innerHTML =
-    (CONFIG.amazonTag ? `<b>Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</b><br>` : "") +
-    (AFF ? `当サイトは第三者のアフィリエイト・プログラムを利用しており、広告リンク経由の購入により紹介料が発生することがあります。` : ``) +
-    `掲載している難易度・偏差値・所要時間・大学別の選択可能科目は公開情報にもとづく目安であり、学習成果を保証するものではありません。書影はAmazonおよび公開書誌データベースが提供する商品画像URLを参照して表示しています。<br>` +
-    `<span style="display:inline-block;margin-top:10px;font-family:var(--mono);letter-spacing:.06em">${CONFIG.siteName} — RIKA ROUTE COMPENDIUM</span>`;
 }
 
 /* ============================================================
@@ -2334,12 +2712,10 @@ function modalClosed(){
 function openBox(){
   const el = document.getElementById("bookModal");
   if(el && el.classList.contains("open")) return document.getElementById("modalInner");
-  const lg = document.getElementById("legalModal");
-  if(lg && lg.classList.contains("open")) return document.getElementById("legalInner");
   return null;
 }
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){ closeModal(); closeLegal(); return; }
+  if(e.key==="Escape"){ closeModal(); return; }
   if(e.key!=="Tab") return;
   const box = openBox();
   if(!box) return;
@@ -2393,7 +2769,6 @@ renderSubjBar();
 renderRoute();
 renderHome();
 renderGuide();
-renderFooter();
 
 /* ハッシュ付きで開かれていれば、その画面から始める（共有 URL の復元より先に評価する。
    ?v=1&a=... が付いていれば下の setup が診断結果へ上書きする） */
@@ -2488,7 +2863,7 @@ RTShare.setup({
       "@id": "https://route-taizen.com/science/#webpage",
       "url": "https://route-taizen.com/science/",
       "name": "理科ルート大全 — 大学受験の理科参考書373冊を図鑑化",
-      "description": "大学受験の理科（物理・化学・生物・地学）の参考書373冊を科目別・段階別に網羅した参考書図鑑と、志望校から逆算する参考書ルート。共通テストのみの人から医学部・難関理系まで、必要な到達点に合わせて選べます。2026年 新課程対応・完全無料。",
+      "description": "大学受験の理科（物理・化学・生物・地学）の参考書373冊を科目別・段階別に網羅した参考書図鑑と、志望校から逆算する参考書ルート。共通テストのみの人から医学部・難関理系まで、必要な到達点に合わせて選べます。2026年度入試対応・完全無料。",
       "isPartOf": {
         "@id": "https://route-taizen.com/#website"
       },

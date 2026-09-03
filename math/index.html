@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>数学の参考書ルート｜大学受験の数学参考書162冊を図鑑化 - 数学ルート大全</title>
 <meta name="google-site-verification" content="10bnNaPa-rqbt-UHQK1J_KTLT7k3HQb8xLFcHx5fSsw">
-<meta name="description" content="大学受験の数学参考書162冊を、導入・網羅・標準・応用・実戦の役割別／難易度別に整理した参考書図鑑。青チャート・Focus Gold・1対1対応の演習などの接続関係つき。教科書レベルから東大理三まで。2026年 新課程・数C対応・完全無料。">
+<meta name="description" content="大学受験の数学参考書162冊を、導入・網羅・標準・応用・実戦の役割別／難易度別に整理した参考書図鑑。青チャート・Focus Gold などの接続関係つき。教科書レベルから東大理三まで。2026年度入試対応・完全無料。">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#F6F4EF">
 <meta name="format-detection" content="telephone=no">
@@ -35,7 +35,7 @@
 <style>
 :root{
   --paper:#F6F4EF; --surface:#FFFFFF; --surface-2:#FAF9F6; --surface-3:#F1EFE8;
-  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#6A6F82;
+  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#656A7C;
   --line:#E4E1D6; --line-2:#EDEBE2; --line-d:#CFCBBE;
   --indigo:#24427C; --indigo-deep:#18305E; --indigo-soft:#E8EDF7;
   --accent:#B5432A; --accent-deep:#93331F; --accent-soft:#F7E9E5;
@@ -153,8 +153,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .rp-card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--tc,var(--indigo));padding:16px 16px 14px;cursor:pointer;transition:.18s;box-shadow:var(--sh-s);position:relative}
 .rp-card:hover{transform:translateY(-3px);box-shadow:var(--sh-m)}
 .rp-card__no{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.1em;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.rp-card__no em{font-style:normal;color:var(--tc,var(--indigo));font-weight:600}
-.rp-card h4{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
+/* 10px の小さな文字なので、カードごとの色（--tc）をそのまま使うと
+   コントラスト比 4.5:1 を割る色が出る（講師ルートの #2F8659 が 4.49）。
+   色分けはカード左の帯が担っているので、ここは固定色にする。 */
+.rp-card__no em{font-style:normal;color:var(--muted);font-weight:700}
+.rp-card h3{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
 .rp-card p{font-size:11.5px;color:var(--muted);min-height:32px;line-height:1.55}
 .guide-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
 @media(min-width:760px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
@@ -163,7 +166,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .guide-card:nth-child(2)::before{background:var(--accent)}
 .guide-card:nth-child(3)::before{background:var(--gold)}
 .guide-num{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted-2);letter-spacing:.14em;margin-bottom:10px}
-.guide-card h5{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
+.guide-card h3{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
 .guide-card p{font-size:12.5px;color:var(--muted);line-height:1.7}
 .guide-card p b{color:var(--ink-2)}
 
@@ -180,6 +183,8 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .chip:hover{color:var(--ink);border-color:var(--muted-2)}
 .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 .cat-meta{display:flex;align-items:center;justify-content:space-between;margin:14px 0 14px;flex-wrap:wrap;gap:8px}
+/* ページの最終更新日。データが変わった日を build/prerender-tops.mjs が入れる */
+.page-updated{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted-2)}
 .cat-count{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
 .cat-count b{color:var(--ink);font-family:var(--mono);font-size:14px}
 .sort-sel{border:1px solid var(--line-d);background:var(--surface);border-radius:4px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--ink);box-shadow:var(--sh-s)}
@@ -190,6 +195,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cat-sec{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin:16px 0 2px;font-weight:900;font-size:14px;color:var(--ink);letter-spacing:.04em}
 .cat-sec::before{content:"";width:16px;height:2.5px;background:var(--sc,var(--accent));align-self:center}
 .cat-sec small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
+/* 静的に出しておくカードの続き。build/prerender-tops.mjs が最後に足す枠で、
+   JS が起動して全冊を描き直すと消える。JS を切った環境と検索エンジンだけが見る。 */
+.cat-more{grid-column:1/-1;margin-top:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent)}
+.cat-more p{font-size:12.5px;line-height:1.85;color:var(--ink-2)}
+.cat-more a{display:inline-block;margin-top:9px;font-size:13px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
 .cat-empty{grid-column:1/-1;padding:26px 4px;color:var(--muted);font-size:13px}
 @media(min-width:560px){.book-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:820px){.book-grid{grid-template-columns:repeat(4,1fr)}}
@@ -347,14 +357,14 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .g-num{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;background:var(--ink);width:30px;height:30px;border-radius:5px;display:grid;place-items:center;flex:none;margin-top:2px}
 .g-card.open .g-num{background:var(--accent)}
 .g-ttl{flex:1;min-width:0}
-.g-ttl h4{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
+.g-ttl h3{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
 .g-ttl span{font-size:11.5px;color:var(--muted);line-height:1.6;display:block}
 .g-card__head .chev{flex:none;color:var(--muted-2);transition:transform .2s;margin-top:6px}
 .g-card.open .chev{transform:rotate(180deg)}
 .g-body{display:none;padding:0 20px 20px;border-top:1px solid var(--line-2);margin-top:-2px}
 .g-card.open .g-body{display:block;animation:fade .25s ease}
 .g-body p{font-size:13.5px;line-height:1.95;color:var(--ink-2);margin-top:14px}
-.g-body h5{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
+.g-body h4{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
 .g-body ul{margin-top:10px;padding-left:2px;list-style:none;display:flex;flex-direction:column;gap:7px}
 .g-body li{font-size:13px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
 .g-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:9px;flex:none}
@@ -368,13 +378,6 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .foot-links button:hover{color:var(--accent)}
 .foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:0 auto}
 .foot-legal b{color:var(--ink-2);font-weight:700}
-.legal-body{padding:22px 24px 30px}
-.legal-body h5{font-family:var(--serif);font-weight:800;font-size:14.5px;margin:20px 0 8px;letter-spacing:.02em}
-.legal-body h5:first-child{margin-top:0}
-.legal-body p{font-size:12.5px;line-height:1.9;color:var(--ink-2)}
-.legal-body ul{margin-top:8px;list-style:none;display:flex;flex-direction:column;gap:6px}
-.legal-body li{font-size:12.5px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
-.legal-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--muted-2);margin-top:9px;flex:none}
 @media(min-width:900px){.tabbar{display:none}}
 
 /* ================= ROUTE ================= */
@@ -503,7 +506,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cn-card__cover .fb-pub,.cn-card__cover .fb-band{display:none}
 .cn-info{flex:1;min-width:0}
 .cn-info__role{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.06em;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;color:#fff}
-.cn-info h5{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
+.cn-info h3{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
 .cn-info__note{font-size:11.5px;color:var(--muted);line-height:1.55}
 .cn-info__alt{font-size:10.5px;color:var(--indigo-deep);margin-top:7px;line-height:1.5}
 .cn-info__alt b{font-weight:700}
@@ -635,7 +638,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       <button data-view="route" onclick="go('route')">ルート</button>
       <button data-view="quiz" onclick="go('quiz')">診断</button>
       <button data-view="guide" onclick="go('guide')">学習ガイド</button>
-      <span class="hdr-tag">2026 新課程対応</span>
+      <span class="hdr-tag">2026年度入試対応</span>
     </nav>
   </div>
 </header>
@@ -658,7 +661,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <path d="M296 62v-12m0 0h8l-2 3 2 3h-8" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div class="hero__main">
-      <span class="hero__badge"><i></i>高校数学・大学受験 — 2026 新課程対応</span>
+      <span class="hero__badge"><i></i>高校数学・大学受験 — 2026年度入試対応</span>
       <h1>志望校までの道を、<br><span class="hl">一冊ずつ<b>確かに</b>。</span></h1>
       <p class="lead">教科書レベルから東大理三まで。定番から最新刊まで162冊を難易度・役割・接続で整理し、志望校と現在地に合わせた「何を・どの順で」を一本の道に描きます。</p>
       <div class="hero__cta">
@@ -671,17 +674,45 @@ gtag('config', 'G-DQ5WFXEFMX');
       </div>
       </div>
       <div class="stat-row">
-        <div class="stat"><b id="stat-books">113</b><span>収録参考書</span></div>
-        <div class="stat"><b>160<small>× 学部で個別最適化</small></b><span>収録大学</span></div>
-        <div class="stat"><b>2026</b><span>新課程・数C 対応</span></div>
+        <div class="stat"><b id="stat-books">162</b><span>収録参考書</span></div>
+        <div class="stat"><b id="stat-unis">160</b><span>収録大学 — 医学部は別扱い</span></div>
+        <div class="stat"><b>2026</b><span>年度入試対応（新課程・数C）</span></div>
       </div>
+      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
     </div>
 
     <div class="home-block">
       <div class="eyebrow">Routes by target</div>
       <h2 class="sec">志望レベルから選ぶ</h2>
       <p class="sec-lead">代表的な志望レベルごとに王道ルートを用意。ルート画面では志望校名を直接入力しての絞り込みもできます。</p>
-      <div class="route-preview" id="homeRoutes"></div>
+      <div class="route-preview" id="homeRoutes"><div class="rp-card" style="--tc:#2F6E4F" role="button" tabindex="0" onclick="selectTier('kyote');go('route')">
+      <div class="rp-card__no"><span>ROUTE 01</span><em>5 STEPS</em></div>
+      <h3>共通テスト対策</h3><p>共テ利用・国公立1次 — 共通テスト 7〜9割</p>
+    </div><div class="rp-card" style="--tc:#2E7D9A" role="button" tabindex="0" onclick="selectTier('nikkoma');go('route')">
+      <div class="rp-card__no"><span>ROUTE 02</span><em>4 STEPS</em></div>
+      <h3>日東駒専・産近甲龍</h3><p>中堅私大 — 日東駒専・産近甲龍 合格</p>
+    </div><div class="rp-card" style="--tc:#24427C" role="button" tabindex="0" onclick="selectTier('march');go('route')">
+      <div class="rp-card__no"><span>ROUTE 03</span><em>4 STEPS</em></div>
+      <h3>MARCH・関関同立</h3><p>難関私大 — MARCH・関関同立 合格</p>
+    </div><div class="rp-card" style="--tc:#0E7C6B" role="button" tabindex="0" onclick="selectTier('chikoku');go('route')">
+      <div class="rp-card__no"><span>ROUTE 04</span><em>5 STEPS</em></div>
+      <h3>地方国公立</h3><p>5S・STARSなど二次標準 — 地方国公立 合格</p>
+    </div><div class="rp-card" style="--tc:#5B4E9E" role="button" tabindex="0" onclick="selectTier('sokei');go('route')">
+      <div class="rp-card__no"><span>ROUTE 05</span><em>5 STEPS</em></div>
+      <h3>早慶</h3><p>早稲田・慶應(理工含む) — 早慶 合格</p>
+    </div><div class="rp-card" style="--tc:#B5432A" role="button" tabindex="0" onclick="selectTier('kyutei');go('route')">
+      <div class="rp-card__no"><span>ROUTE 06</span><em>5 STEPS</em></div>
+      <h3>地方旧帝</h3><p>北大・東北・名大・九大 — 旧帝大 合格</p>
+    </div><div class="rp-card" style="--tc:#8C2437" role="button" tabindex="0" onclick="selectTier('top');go('route')">
+      <div class="rp-card__no"><span>ROUTE 07</span><em>4 STEPS</em></div>
+      <h3>東大・京大・一橋・科学大</h3><p>最難関国立 — 最難関国立 合格</p>
+    </div><div class="rp-card" style="--tc:#946200" role="button" tabindex="0" onclick="selectTier('med');go('route')">
+      <div class="rp-card__no"><span>ROUTE 08</span><em>4 STEPS</em></div>
+      <h3>国公立医学部</h3><p>地方医〜旧帝医 — 国公立医学部 合格</p>
+    </div><div class="rp-card" style="--tc:#8C2437" role="button" tabindex="0" onclick="selectTier('shiritsui');go('route')">
+      <div class="rp-card__no"><span>ROUTE 09</span><em>4 STEPS</em></div>
+      <h3>私立医学部</h3><p>慈恵・日医・順天堂ほか — 私立医学部 合格</p>
+    </div></div>
     </div>
 
     <div class="home-block">
@@ -690,23 +721,23 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="guide-grid">
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 01</div>
-          <h5>網羅型か、速習型か</h5>
-          <p>時間があるなら<b>青チャート・Focus Gold</b>などの網羅系で盤石に。高3から巻き返すなら<b>基礎問題精講</b>を軸にした精選型で圧縮。本アプリはどちらの方針でもルートを組めます。</p>
+          <h3>網羅型か、速習型か</h3>
+          <p>時間があるなら<b>青チャート・Focus Gold</b>などの網羅系で盤石に。高3から巻き返すなら<b>基礎問題精講</b>を軸にした精選型で圧縮。本サイトはどちらの方針でもルートを組めます。</p>
         </div>
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 02</div>
-          <h5>接続を切らさない</h5>
+          <h3>接続を切らさない</h3>
           <p>参考書は1冊の出来より<b>前後のつながり</b>が重要。難易度が飛ぶと挫折します。各書の詳細画面で「前にやる本・次にやる本」を確認しながら段差の小さい道を進みましょう。</p>
         </div>
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 03</div>
-          <h5>過去問から逆算する</h5>
+          <h3>過去問から逆算する</h3>
           <p>ゴールは参考書の完走ではなく<b>志望校の過去問で合格点</b>を取ること。標準演習まで終えたら早めに過去問に触れ、足りない分野だけ分野別参考書で補強するのが最短です。</p>
         </div>
       </div>
     </div>
 
-    <div class="disclaimer" id="homeDisclaimer"></div>
+    <div class="disclaimer" id="homeDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。2025年入試からの新課程(数学C新設・「整数の性質」の扱い変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <!-- ============ CATALOG ============ -->
@@ -733,21 +764,183 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="cat-controls">
       <div class="search-wrap">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <input id="book-search" type="text" placeholder="書名・出版社・分野で検索(例:青チャート、整数、河合)">
+        <input id="book-search" type="text" placeholder="書名・出版社・分野で検索(例:青チャート、整数、河合)" aria-label="収録している参考書を書名・出版社・分野で検索">
       </div>
-      <div class="filter-scroll" id="filterScroll"></div>
+      <div class="filter-scroll" id="filterScroll"><button class="chip active" data-k="stage" data-v="all" onclick="setFilter('stage','all',this)">すべて</button><button class="chip" data-k="stage" data-v="intro" onclick="setFilter('stage','intro',this)">導入・講義</button><button class="chip" data-k="stage" data-v="calc" onclick="setFilter('stage','calc',this)">計算力</button><button class="chip" data-k="stage" data-v="core" onclick="setFilter('stage','core',this)">網羅・基礎</button><button class="chip" data-k="stage" data-v="std" onclick="setFilter('stage','std',this)">入試標準</button><button class="chip" data-k="stage" data-v="adv" onclick="setFilter('stage','adv',this)">応用・難関</button><button class="chip" data-k="stage" data-v="kyotest" onclick="setFilter('stage','kyotest',this)">共通テスト</button><button class="chip" data-k="stage" data-v="field" onclick="setFilter('stage','field',this)">分野別</button><button class="chip" data-k="stage" data-v="kako" onclick="setFilter('stage','kako',this)">過去問</button><span style="flex:none;width:1px;background:var(--line-d);margin:2px 4px"></span><button class="chip active" data-k="bunri" data-v="all" onclick="setFilter('bunri','all',this)">文理両方</button><button class="chip" data-k="bunri" data-v="bun" onclick="setFilter('bunri','bun',this)">文系向け</button><button class="chip" data-k="bunri" data-v="ri" onclick="setFilter('bunri','ri',this)">理系向け</button></div>
     </div>
     <div class="cat-meta">
-      <div class="cat-count"><b id="catCount">0</b> 冊を表示中</div>
-      <select class="sort-sel" id="sortSel" onchange="renderCatalog()">
+      <div class="cat-count"><b id="catCount">162</b> 冊を表示中</div>
+      <select class="sort-sel" id="sortSel" onchange="renderCatalog()" aria-label="参考書の並べ替え">
         <option value="field">分野別・難易度順</option>
         <option value="diff-asc">難易度:やさしい順</option>
         <option value="diff-desc">難易度:難しい順</option>
         <option value="name">書名順</option>
       </select>
     </div>
-    <div class="book-grid" id="bookGrid"></div>
-    <div class="disclaimer" id="catDisclaimer"></div>
+    <div class="book-grid" id="bookGrid"><div class="cat-sec" style="--sc:#2E7D9A">導入・講義<small>13 BOOKS — やさしい順</small></div><div class="book-card" role="button" tabindex="0" onclick="openModal('shikkari')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230592.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230592.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230592.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#E9EDF4,#C9D4E6);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">かんき出版</span><span class="fb-title xlong">高校の数学I・Aが1冊でしっかりわかる本</span><span class="fb-band">IA</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">高校の数学I・Aが1冊でしっかりわかる本</div>
+      <div class="bc-pub">かんき出版</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜45</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hitotsu')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053054370.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053054370.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053054370.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#F4F6FA,#D8E2F0);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">学研</span><span class="fb-title xlong">高校数学をひとつひとつわかりやすく。</span><span class="fb-band">IA / IIB</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">高校数学をひとつひとつわかりやすく。</div>
+      <div class="bc-pub">学研</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜45</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('yasashiko')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7EC8E3,#4A9FD4)"><span class="fb-spine"></span><span class="fb-pub">学研</span><span class="fb-title ">やさしい高校数学</span><span class="fb-band">IA / IIBC / IIIC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">やさしい高校数学</div>
+      <div class="bc-pub">学研</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜50(導入)</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('okita')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4890856269.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890856269.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890856269.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#5AB0A0,#2F8B78)"><span class="fb-spine"></span><span class="fb-pub">ナガセ(東進)</span><span class="fb-title xlong">沖田の数学をはじめからていねいに</span><span class="fb-band">IA</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">沖田の数学をはじめからていねいに</div>
+      <div class="bc-pub">ナガセ(東進)</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜48</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hajihaji')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://m.media-amazon.com/images/I/61ZT2XJ0c3L._SL500_.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/61ZT2XJ0c3L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4866154233.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866154233.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#FFD23F,#F59E0B);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">マセマ出版社</span><span class="fb-title ">初めから始める数学</span><span class="fb-band">IA / IIBC / IIIC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">初めから始める数学</div>
+      <div class="bc-pub">マセマ出版社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>〜50(超入門)</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('koko-korede-wakaru-sugaku')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4578242366.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578242366.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578242366.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#5CB85C,#2E7D32)"><span class="fb-spine"></span><span class="fb-pub">文英堂（シグマベスト）</span><span class="fb-title long">高校 これでわかる数学</span><span class="fb-band">IAIIBC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">高校 これでわかる数学</div>
+      <div class="bc-pub">文英堂（シグマベスト）</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>35〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IAIIBC</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('sugaku-no-torisetsu')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://image.maruzenjunkudo.co.jp/item/1/324/3152/3602/31523602_01.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://image.maruzenjunkudo.co.jp/item/1/324/3152/3602/31523602_01.jpg|https://images-fe.ssl-images-amazon.com/images/P/4909214127.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4909214127.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#3A7BD5,#1E4F9A)"><span class="fb-spine"></span><span class="fb-pub">数学のトリセツ</span><span class="fb-title ">数学のトリセツ!</span><span class="fb-band">IAIIBC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">数学のトリセツ!</div>
+      <div class="bc-pub">数学のトリセツ</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>35〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IAIIBC</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('chokiso70')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859942.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859942.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859942.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#4A9FD4,#1F5F8B)"><span class="fb-spine"></span><span class="fb-pub">ナガセ(東進)</span><span class="fb-title long">超基礎 最重要問題70</span><span class="fb-band">IA / IIBC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">超基礎 最重要問題70</div>
+      <div class="bc-pub">ナガセ(東進)</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>35〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('hajitoke')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://m.media-amazon.com/images/I/51V-KNBtGYL._SL500_.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/51V-KNBtGYL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4866152273.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866152273.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#F9C846,#E8A317);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">マセマ出版社</span><span class="fb-title long">初めから解ける数学問題集</span><span class="fb-band">IA / IIBC / IIIC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">初めから解ける数学問題集</div>
+      <div class="bc-pub">マセマ出版社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>38〜52</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('yasashiko-mondai')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053062926.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053062926.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053062926.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7EC8E3,#3E8FC0)"><span class="fb-spine"></span><span class="fb-pub">Gakken</span><span class="fb-title long">やさしい高校数学 問題集</span><span class="fb-band">IA</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">やさしい高校数学 問題集</div>
+      <div class="bc-pub">Gakken</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('nyumon')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://m.media-amazon.com/images/I/41GWHF03gEL._SL500_.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41GWHF03gEL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349158.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349158.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F2A03D,#E07B2E)"><span class="fb-spine"></span><span class="fb-pub">旺文社</span><span class="fb-title ">入門問題精講</span><span class="fb-band">IA / IIBC / IIIC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">入門問題精講</div>
+      <div class="bc-pub">旺文社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('genkini-nobiru-sugaku-1a')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4866152125.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4866152125.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866152125.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#2C3E7A,#141F4A)"><span class="fb-spine"></span><span class="fb-pub">マセマ出版社</span><span class="fb-title long">元気に伸びる数学I・A問題集</span><span class="fb-band">IA</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">元気に伸びる数学I・A問題集</div>
+      <div class="bc-pub">マセマ出版社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>38〜52</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('genki')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://m.media-amazon.com/images/I/61ZajAXU8WL._SL500_.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/61ZajAXU8WL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4866153407.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866153407.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F59E0B,#C26A02)"><span class="fb-spine"></span><span class="fb-pub">マセマ出版社</span><span class="fb-title long">元気が出る数学(マセマ)</span><span class="fb-band">IA / IIBC / IIIC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">元気が出る数学(マセマ)</div>
+      <div class="bc-pub">マセマ出版社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">導入</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="cat-sec" style="--sc:#8A6D2F">計算力<small>5 BOOKS — やさしい順</small></div><div class="book-card" role="button" tabindex="0" onclick="openModal('dragon-drill')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4065273226.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4065273226.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4065273226.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#3D4657,#1B2233)"><span class="fb-spine"></span><span class="fb-pub">講談社</span><span class="fb-title long">ドラゴン桜式 数学力ドリル</span><span class="fb-band">IA / IIB</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">ドラゴン桜式 数学力ドリル</div>
+      <div class="bc-pub">講談社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>35〜50</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#8A6D2F">計算</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('calcul')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4796113649.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796113649.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113649.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#25549E,#153468)"><span class="fb-spine"></span><span class="fb-pub">駿台文庫</span><span class="fb-title ">カルキュール数学</span><span class="fb-band">IA / IIBC / IIIC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">カルキュール数学</div>
+      <div class="bc-pub">駿台文庫</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>40〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#8A6D2F">計算</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('ichikara')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053045045.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053045045.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053045045.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#4A9FD4,#1F5F8B)"><span class="fb-spine"></span><span class="fb-pub">学研</span><span class="fb-title long">イチから鍛える数学演習</span><span class="fb-band">IA / IIB / III</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">イチから鍛える数学演習</div>
+      <div class="bc-pub">学研</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜55</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#8A6D2F">計算</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('ukaru-keisan')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#C9A227,#8A6D2F)"><span class="fb-spine"></span><span class="fb-pub">文英堂</span><span class="fb-title xlong">合格る計算 数学I・A・II・B・C</span><span class="fb-band">IA / IIBC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">合格る計算 数学I・A・II・B・C</div>
+      <div class="bc-pub">文英堂</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>45〜65(全レベル)</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#8A6D2F">計算</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IA</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('ukaru-keisan3')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#B08A1E,#7A5D1A)"><span class="fb-spine"></span><span class="fb-pub">文英堂</span><span class="fb-title long">合格る計算 数学III・C</span><span class="fb-band">IIIC</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">合格る計算 数学III・C</div>
+      <div class="bc-pub">文英堂</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style="background:#24427C"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>50〜67(理系)</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#8A6D2F">計算</span><span class="tag" style="background:var(--surface-3);color:var(--ink-2)">IIIC</span></div>
+    </div>
+  </div><div class="cat-more"><p>ここに出しているのは 162 冊のうち難易度順で最初の 18 冊です。続きは絞り込み・並べ替えで表示されます。</p><a href="/math/books/">162 冊すべてを役割別の索引で見る</a></div></div>
+    <div class="disclaimer" id="catDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。2025年入試からの新課程(数学C新設・「整数の性質」の扱い変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <!-- ============ QUIZ ============ -->
@@ -784,14 +977,14 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div id="modeUni" style="display:none">
         <div class="uni-form">
           <div class="uni-field">
-            <label>志望大学</label>
+            <label for="uniInput">志望大学</label>
             <div class="uni-wrap">
               <input id="uniInput" type="text" placeholder="大学名を入力(例:東京大学、阪大、waseda、ひろだい)" autocomplete="off" spellcheck="false">
               <div class="sug" id="uniSug"></div>
             </div>
           </div>
           <div class="uni-field">
-            <label>学部・学科<em>任意</em></label>
+            <label for="facInput">学部・学科<em>任意</em></label>
             <div class="uni-wrap">
               <input id="facInput" type="text" placeholder="例:工学部、医学部医学科、経済学部" autocomplete="off" spellcheck="false">
             </div>
@@ -836,7 +1029,7 @@ gtag('config', 'G-DQ5WFXEFMX');
           <div class="opt-field">
             <label>数学の模試偏差値</label>
             <div class="hen-row">
-              <select id="moshiSel">
+              <select id="moshiSel" aria-label="偏差値を出した模試の種類">
                 <option value="0">全統模試(河合)</option>
                 <option value="-12">進研模試(ベネッセ)</option>
                 <option value="-3">駿台全国判定模試</option>
@@ -845,13 +1038,13 @@ gtag('config', 'G-DQ5WFXEFMX');
                 <option value="8">東進 難関大本番レベル</option>
                 <option value="-6">学校の実力テスト・校内模試</option>
               </select>
-              <input id="henInput" type="number" min="25" max="85" step="0.1" placeholder="偏差値">
+              <input id="henInput" type="number" min="25" max="85" step="0.1" placeholder="偏差値" aria-label="数学の模試偏差値">
             </div>
           </div>
           <div class="opt-field">
             <label>これまでにやった参考書<em style="font-style:normal;font-weight:600;color:var(--muted-2);font-size:10.5px;margin-left:5px">複数可</em></label>
             <div class="done-picker">
-              <input id="doneInput" type="text" placeholder="書名で検索して追加(例:青チャート、基礎問)" autocomplete="off" spellcheck="false">
+              <input id="doneInput" type="text" placeholder="書名で検索して追加(例:青チャート、基礎問)" aria-label="すでに終えた参考書を書名で検索して追加" autocomplete="off" spellcheck="false">
               <div class="sug" id="doneSug"></div>
             </div>
             <div class="done-chips" id="doneChips"></div>
@@ -872,8 +1065,170 @@ gtag('config', 'G-DQ5WFXEFMX');
       <h2 class="sec">数学の学習ガイド</h2>
       <p class="sec-lead">参考書の選び方から1冊の使い切り方まで。ルートを実行するうえで前提になる考え方を、テーマ別にまとめています。</p>
     </div>
-    <div class="guide-list" id="guideList"></div>
-    <div class="disclaimer" id="guideDisclaimer"></div>
+    <div class="guide-list" id="guideList">
+    <article class="g-card" id="g0">
+      <button class="g-card__head" onclick="toggleGuide(0)" aria-expanded="false">
+        <span class="g-num">01</span>
+        <span class="g-ttl"><h3>参考書は「冊数」ではなく「完成度」で決まる</h3><span>1冊を仕上げる基準を、言葉で定義できていますか</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>受験生の相談で最も多い失敗が、<b>何冊もの参考書を薄く広く触って、どれも完成していない</b>という状態です。青チャートを1周し、1対1を1周し、プラチカにも手を出した。冊数だけ見れば十分に見えるのに、模試の偏差値が動かない。これは珍しいことではなく、むしろ典型的な行き詰まり方です。</p>
+<h4>「終わった」の定義を厳しくする</h4>
+<p>1冊が終わったと言えるのは、その本の問題を解き直したときではありません。<b>初見の類題を、解法の方針を自分の言葉で説明しながら解ける</b>状態です。答えを覚えているかどうかではなく、なぜその一手を選ぶのかを言えるかどうかで判定してください。</p>
+<ul><li>例題を見た瞬間に、方針が3秒以内に浮かぶか</li><li>解答を隠した状態で、手が止まらずに最後まで書き切れるか</li><li>「なぜその式変形をしたのか」を後輩に説明できるか</li></ul>
+<p>この3つを満たしていない例題が1割でも残っているなら、その本はまだ終わっていません。次の1冊に進むより、その1割を潰す方が確実に点が上がります。</p>
+<div class="g-quote">目安として、網羅系参考書は最低3周、精選系の演習書は2周が必要です。ただし周回数は結果であって目的ではありません。上の3条件を満たしたときが「終わり」です。</div></div>
+    </article>
+    <article class="g-card" id="g1">
+      <button class="g-card__head" onclick="toggleGuide(1)" aria-expanded="false">
+        <span class="g-num">02</span>
+        <span class="g-ttl"><h3>網羅型と精選型 — どちらを選ぶべきか</h3><span>残り時間から逆算すると、答えは自動的に決まります</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>高校数学の参考書は、大きく2つの系統に分かれます。チャート式やFocus Goldに代表される<b>網羅型</b>と、基礎問題精講のように問題を絞り込んだ<b>精選型</b>です。どちらが優れているかという議論に意味はなく、<b>使える時間が決めます</b>。</p>
+<h4>網羅型が向く人</h4>
+<ul><li>高1・高2で、受験まで1年以上ある</li><li>浪人生で、数学に十分な時間を割ける</li><li>数学を得点源にしたい、あるいは既に得意である</li></ul>
+<p>網羅型の価値は、入試で問われる解法をほぼ漏れなく持てることです。青チャートやFocus Goldの例題を完成させれば、多くの大学の入試問題は「知っている解法の組み合わせ」に見えるようになります。ただし1冊あたり90〜120時間、3冊で300時間規模の投資が必要です。</p>
+<h4>精選型が向く人</h4>
+<ul><li>高3の春以降にスタートする</li><li>他教科に時間を回す必要がある(私大文系・国公立の共テ比率が高い場合など)</li><li>数学は合格点を確保できればよい</li></ul>
+<p>基礎問題精講は青チャートの約3分の1の問題数で入試頻出パターンを押さえます。網羅性は落ちますが、<b>完走できない網羅型より、完成する精選型のほうが確実に点になります</b>。</p>
+<div class="g-quote">判断に迷ったら、残り月数 × 1日の数学学習時間 × 30 で総時間を出してください。300時間を切るなら網羅型は現実的ではありません。</div></div>
+    </article>
+    <article class="g-card" id="g2">
+      <button class="g-card__head" onclick="toggleGuide(2)" aria-expanded="false">
+        <span class="g-num">03</span>
+        <span class="g-ttl"><h3>参考書の「接続」を切らさない</h3><span>挫折の原因は、本の質ではなく段差にあります</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>参考書で挫折する最大の原因は、その本が悪いからではなく、<b>前の本との難易度差が大きすぎる</b>ことです。これを接続の問題と呼びます。</p>
+<h4>よくある段差</h4>
+<ul><li><b>基礎問題精講 → 標準問題精講</b>:名前が連続しているので繋がって見えますが、実際には難易度差がかなりあります。間に1冊挟むか、標問の易しい問題だけ拾う運用が必要です</li><li><b>教科書 → 青チャート</b>:青チャートは教科書レベルの例題から始まりますが、後半のコンパス4〜5は入試標準です。教科書が怪しいなら白チャートか講義系を先に</li><li><b>網羅系 → プラチカ</b>:文系プラチカは名前に反して東大・一橋レベルです。1対1や文系の数学を経由するのが自然です</li></ul>
+<h4>段差を測る方法</h4>
+<p>候補の本を書店で開き、<b>最初の10問のうち7問以上で方針が立つか</b>を確認してください。3問以下なら段差が大きすぎます。逆に10問すべて即答できるなら、その本は簡単すぎて時間の無駄です。</p>
+<p>本サイトの各参考書の詳細画面には「前にやる本・次にやる本」を表示しています。ルートを組むときは、この接続を必ず確認してください。</p></div>
+    </article>
+    <article class="g-card" id="g3">
+      <button class="g-card__head" onclick="toggleGuide(3)" aria-expanded="false">
+        <span class="g-num">04</span>
+        <span class="g-ttl"><h3>解けなかった問題との正しい向き合い方</h3><span>復習のやり方だけで、同じ時間の価値が3倍変わります</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>数学の伸びは、解けた問題ではなく<b>解けなかった問題をどう処理したか</b>で決まります。ところが多くの受験生は、解答を読んで「なるほど」と思った時点で復習を終えてしまいます。これはほとんど何も残りません。</p>
+<h4>3ステップの復習法</h4>
+<ul><li><b>1. 詰まった地点を特定する</b> — 「解けなかった」ではなく「どこで手が止まったか」を1行で書きます。方針が浮かばなかったのか、方針は合っていたが計算で崩れたのか、条件を見落としたのか。この切り分けをしないと対策が打てません</li><li><b>2. 解答の中で「知らなかった一手」だけを抜き出す</b> — 解答全体を写経しても意味はありません。自分に欠けていた考え方は、たいてい1〜2手です。それだけをノートに書きます</li><li><b>3. 翌日、白紙から解き直す</b> — 解答を見た直後に解けるのは当たり前です。24時間後に自力で再現できて初めて、その解法は自分のものになります</li></ul>
+<div class="g-quote">「方針が浮かばなかった」問題が多いなら演習量ではなく網羅の不足、「計算で崩れた」が多いなら計算特化の教材を並行すべきです。詰まった地点の記録は、次に何をやるべきかを教えてくれます。</div></div>
+    </article>
+    <article class="g-card" id="g4">
+      <button class="g-card__head" onclick="toggleGuide(4)" aria-expanded="false">
+        <span class="g-num">05</span>
+        <span class="g-ttl"><h3>計算力は才能ではなく、独立して鍛える技術</h3><span>数学の失点の半分近くは、思考ではなく処理で起きています</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>模試を返却されたとき、「解法は合っていたのに答えが合わなかった」という失点がどれくらいあるか数えてみてください。多くの受験生で、これが失点全体の3〜4割を占めます。<b>解法を増やしても、この部分は1点も改善しません</b>。</p>
+<h4>計算力の3つの要素</h4>
+<ul><li><b>速度</b> — 同じ処理を短時間で終える。試験時間内に解き切れるかを決めます</li><li><b>正確性</b> — 符号ミス、写し間違い、条件の落としを起こさない</li><li><b>工夫</b> — そもそも計算量の少ない道を選ぶ。これが最も差がつく部分です</li></ul>
+<p>3つ目の「工夫」は自然には身につきません。『合格る計算』のような計算特化書は、まさにこの部分を体系的に扱います。1日15〜20分を毎日、網羅系や演習書と並行して回すのが効果的です。</p>
+<h4>数III・Cは特に致命的</h4>
+<p>理系の場合、微積分の計算量は他分野と比較になりません。置換積分の選択ひとつで計算時間が倍変わることも珍しくない。数IIIの計算を鍛えることは、実質的に試験時間を増やすことと同じです。</p></div>
+    </article>
+    <article class="g-card" id="g5">
+      <button class="g-card__head" onclick="toggleGuide(5)" aria-expanded="false">
+        <span class="g-num">06</span>
+        <span class="g-ttl"><h3>過去問はいつから始めるべきか</h3><span>「実力がついてから」では遅すぎます</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>過去問に手を出すのが遅すぎる受験生が非常に多いです。「まだ実力がないから」と後回しにして、11月や12月にようやく開くケースをよく見ます。これは順序が逆です。</p>
+<h4>過去問の役割は2つある</h4>
+<p>ひとつは<b>仕上げの演習</b>、もうひとつは<b>設計図の入手</b>です。後者は早ければ早いほど価値があります。</p>
+<ul><li>試験時間と大問数から、1問あたりに使える時間が分かる</li><li>頻出分野が分かるので、限られた時間を配分できる</li><li>記述量・誘導の有無から、必要な答案作成力の水準が分かる</li><li>合格最低点から、何問取れば受かるのかが分かる</li></ul>
+<p>特に最後の点が重要です。多くの難関大学は6〜7割で合格します。<b>全問完答する必要はない</b>と知っているかどうかで、本番の戦い方も、それまでの学習方針も変わります。</p>
+<h4>推奨するタイミング</h4>
+<p>高3の春〜夏に<b>1年分だけ</b>時間を計って解いてみてください。ボロボロで構いません。目的は点を取ることではなく、ゴールの形を知ることです。そのうえで標準演習が終わった段階から本格的に年度を重ねていきます。</p>
+<div class="g-quote">過去問を解いて足りない分野が見えたら、分野別参考書で補強し、また過去問に戻る。この往復が最後の2〜3か月で最も効率よく点を伸ばします。</div></div>
+    </article>
+    <article class="g-card" id="g6">
+      <button class="g-card__head" onclick="toggleGuide(6)" aria-expanded="false">
+        <span class="g-num">07</span>
+        <span class="g-ttl"><h3>模試の偏差値をどう読むか</h3><span>母集団が違えば、同じ数字の意味は10以上変わります</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>「偏差値55です」という情報だけでは、実力はほとんど判断できません。<b>どの模試か</b>によって意味がまったく変わるからです。</p>
+<h4>主要模試の難易度と母集団</h4>
+<ul><li><b>進研模試(ベネッセ)</b> — 受験者数が最も多く、幅広い層が受けます。難関大志望者にとっては易しめで、偏差値は高めに出ます</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。大学の合格可能性判定の基準として広く使われます</li><li><b>駿台全国模試</b> — 難関大志望者が中心の母集団で、難度も高い。偏差値は低めに出ます</li><li><b>東進の本番レベル模試</b> — 大学別・レベル別に分かれており、模試ごとに母集団が異なります</li></ul>
+<p>目安として、同じ実力の受験生でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。志望校の判定を見るときは、その大学の合格者が主にどの模試を受けているかを意識してください。</p>
+<h4>偏差値より大切な読み方</h4>
+<p>総合偏差値よりも、<b>分野別の得点率</b>と<b>失点の内訳</b>を見てください。偏差値は結果であり、次に何をすべきかを教えてくれません。「確率だけ得点率が3割」「解法は合っていたが計算ミスで15点落とした」といった情報のほうが、はるかに行動に直結します。</p>
+<p>本サイトのルート画面では、模試の種類を選ぶと全統換算の偏差値に直したうえで、志望校の到達目安との差を表示します。</p></div>
+    </article>
+    <article class="g-card" id="g7">
+      <button class="g-card__head" onclick="toggleGuide(7)" aria-expanded="false">
+        <span class="g-num">08</span>
+        <span class="g-ttl"><h3>文系数学の戦い方</h3><span>範囲が狭いことは、有利にも不利にもなります</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>文系数学は数III・Cを含まないぶん範囲が狭く、必要な学習時間は理系の半分程度で済みます。一方で、<b>範囲が狭いということは差がつきにくく、取りこぼしが致命傷になる</b>という側面もあります。</p>
+<h4>頻出分野に偏りがある</h4>
+<p>文系入試では出題分野がかなり集中します。多くの大学で以下が定番です。</p>
+<ul><li><b>微分・積分(数II)</b> — 3次関数の増減、面積計算はほぼ必出</li><li><b>確率・場合の数</b> — 独立性の高い分野で、対策の効果が出やすい</li><li><b>数列</b> — 漸化式の型を押さえているかで大きく差がつきます</li><li><b>ベクトル(数C)</b> — 新課程で数Cに移りましたが、文系でも引き続き出題されます</li><li><b>図形と方程式</b> — 軌跡・領域は差がつく分野</li></ul>
+<h4>文系上位の難度を侮らない</h4>
+<p>一橋大学や東京大学の文系数学は、理系の標準レベルを上回ります。整数問題や確率漸化式など、思考力を正面から問う出題が続きます。文系数学の良問プラチカが「名前に反して難しい」と言われるのは、こうした層を対象にしているからです。</p>
+<div class="g-quote">文系で数学を選択する最大の利点は、私大入試で英語・国語より得点が安定しやすいことです。仕上がれば、数学は最も裏切らない科目になります。</div></div>
+    </article>
+    <article class="g-card" id="g8">
+      <button class="g-card__head" onclick="toggleGuide(8)" aria-expanded="false">
+        <span class="g-num">09</span>
+        <span class="g-ttl"><h3>理系は数III・Cにどれだけ時間を残せるか</h3><span>配点の半分近くを占める範囲を、後回しにしていませんか</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>理系入試の数学では、数III・Cの比重が非常に高くなります。大学によっては<b>大問の半分以上が数III範囲</b>ということも珍しくありません。にもかかわらず、学校のカリキュラム上、数IIIを習い終わるのが高3の秋という受験生が多いのが実情です。</p>
+<h4>先取りの価値が最も高い範囲</h4>
+<p>数IIIは他のどの範囲よりも先取りの効果が大きい分野です。理由は3つあります。</p>
+<ul><li>演習量がそのまま得点に直結する(典型パターンの比率が高い)</li><li>計算処理の比重が大きく、慣れによる伸びしろが大きい</li><li>過去問演習の期間を長く取れるかどうかが、そのまま合否に効く</li></ul>
+<h4>優先順位</h4>
+<p>数III・Cの中でも重要度には差があります。<b>微分法・積分法</b>が最優先で、次に<b>複素数平面</b>、<b>極限</b>、<b>式と曲線</b>と続きます。時間が足りないなら微積分に集中するのが合理的です。</p>
+<p>また数III・Cは、数II(微積分の基礎)、数B(数列・極限の前提)、三角関数・指数対数の理解がそのまま土台になります。数IIIでつまずいている場合、原因が数II範囲にあることも少なくありません。</p></div>
+    </article>
+    <article class="g-card" id="g9">
+      <button class="g-card__head" onclick="toggleGuide(9)" aria-expanded="false">
+        <span class="g-num">10</span>
+        <span class="g-ttl"><h3>共通テストと二次試験は別competency</h3><span>記述が得意でも共通テストで崩れる理由</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>共通テストの数学で点が取れない受験生の中には、<b>二次試験の記述問題なら解ける</b>という人が一定数います。これは実力不足ではなく、要求される能力が違うからです。</p>
+<h4>共通テスト特有の要求</h4>
+<ul><li><b>時間との戦い</b> — 数I・Aは70分で大問4つ。1問あたり15分前後で、思考する余裕はほとんどありません</li><li><b>誘導に乗る力</b> — 出題者が用意した筋道に素早く合流する必要があります。自分の解法にこだわると、かえって時間を失います</li><li><b>マーク形式への適応</b> — 答えの形(空欄の桁数など)から逆算して検算する技術が使えます</li><li><b>日常題材・会話形式</b> — 長い問題文から数学的な構造を読み取る処理が必要です</li></ul>
+<h4>対策の順序</h4>
+<p>まず基礎的な解法が入っていることが前提です。そのうえで、<b>形式に慣れる</b>ことが独立した課題になります。講義系の共テ対策書で誘導の読み方を学び、そのあと実戦問題集・過去問で時間内に解き切る訓練を積みます。</p>
+<div class="g-quote">共通テストは過去問の蓄積が少ないため、模試の過去問(黒本・青本)が貴重な演習素材になります。秋以降は週に1セット、時間を計って解く習慣をつけてください。</div></div>
+    </article>
+    <article class="g-card" id="g10">
+      <button class="g-card__head" onclick="toggleGuide(10)" aria-expanded="false">
+        <span class="g-num">11</span>
+        <span class="g-ttl"><h3>新課程(2025年入試〜)で変わったこと</h3><span>買う前に、その参考書が対応しているか確認を</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>2022年度入学生から実施された新課程により、2025年入試以降の高校数学は構成が変わりました。参考書を選ぶ際は、<b>新課程に対応した版かどうか</b>を必ず確認してください。</p>
+<h4>主な変更点</h4>
+<ul><li><b>数学Cが新設</b> — ベクトル(旧・数B)、平面上の曲線と複素数平面(旧・数III)が数Cに移りました。文系でもベクトルは数Cとして扱われます</li><li><b>数学Bの構成変更</b> — 数列と統計的な推測が中心になりました</li><li><b>統計分野の比重増</b> — 「データの分析」に外れ値・仮説検定の考え方などが加わり、共通テストでも扱われます</li><li><b>整数の性質の扱い</b> — 旧・数Aの「整数の性質」という単元自体は再編されましたが、整数問題は難関大で引き続き出題されています</li></ul>
+<h4>参考書の見分け方</h4>
+<p>表紙や書名に<b>「数学I・A」「数学II・B・C」「数学III・C」</b>という表記があれば新課程版です。「数学II・B」「数学III」という旧表記のものは旧課程版の可能性が高くなります。</p>
+<p>ただし、やさしい理系数学やハイレベル理系数学のように、新課程改訂が出ていないまま定番として使われ続けている本もあります。こうした本は、扱う内容自体が課程変更の影響を受けにくいため実用上の問題は小さいですが、ベクトル・複素数平面の位置づけだけは自分で読み替える必要があります。</p></div>
+    </article>
+    <article class="g-card" id="g11">
+      <button class="g-card__head" onclick="toggleGuide(11)" aria-expanded="false">
+        <span class="g-num">12</span>
+        <span class="g-ttl"><h3>志望校が決まっていないときの動き方</h3><span>迷っている間も、やるべきことは共通しています</span></span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="g-body"><p>「志望校が決まっていないので参考書も決められない」という相談をよく受けますが、これは順序が逆です。<b>どの志望校であっても、最初の1〜2段階は共通しています</b>。</p>
+<h4>志望校に依存しない部分</h4>
+<ul><li><b>教科書レベルの理解</b> — どこを受けるにしても必要です</li><li><b>入試基礎の典型解法</b> — 基礎問題精講や網羅系の易しい例題にあたる部分。日東駒専でも東大でも土台は同じです</li><li><b>計算力</b> — 全レベルで必要かつ、伸ばすのに時間がかかります</li></ul>
+<p>志望校によって分かれるのは、標準演習より上の段階です。つまり<b>最初の3〜6か月は志望校を決めずに走り出して問題ありません</b>。むしろ、決まるまで待つほうが時間を失います。</p>
+<h4>決めるべきタイミング</h4>
+<p>遅くとも高3の夏までには、志望校の<b>レベル帯</b>と<b>文理</b>を確定させてください。この2つが決まれば、標準演習以降のルートが定まります。大学名そのものは秋まで揺れても構いません。</p>
+<p>迷っている段階では、<b>少し上のレベルを想定して進める</b>のが安全です。上のルートから下げるのは簡単ですが、下から急に上げるのは間に合わないことがあります。</p></div>
+    </article></div>
+    <div class="disclaimer" id="guideDisclaimer"><b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。2025年入試からの新課程(数学C新設・「整数の性質」の扱い変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。当サイトはアフィリエイト広告を利用しています。</div>
   </section>
 
   <div class="site-foot">
@@ -915,22 +1270,23 @@ gtag('config', 'G-DQ5WFXEFMX');
       <a href="/math/books/">参考書一覧</a>
       <a href="/math/routes/">志望校別ルート</a>
       <a href="/math/guides/">参考書の選び方</a>
-      <button onclick="openLegal('about')">運営者情報</button>
-      <button onclick="openLegal('privacy')">プライバシーポリシー</button>
-      <button onclick="openLegal('disclaimer')">免責事項</button>
-      <button onclick="openLegal('affiliate')">広告について</button>
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
       <button onclick="go('guide')">学習ガイド</button>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
-    <div class="foot-legal" id="footLegal"></div>
+    <div class="foot-legal">
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。<b>Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。</b><br>
+      <span style="display:inline-block;margin-top:10px;font-family:var(--mono);letter-spacing:.06em">数学ルート大全 — MATHEMATICS ROUTE COMPENDIUM</span>
+    </div>
   </div>
 
 </main>
-
-<!-- Legal modal -->
-<div class="modal-overlay" id="legalModal" onclick="if(event.target===this)closeLegal()">
-  <div class="modal" id="legalInner" role="dialog" aria-modal="true" aria-label="サイト情報"></div>
-</div>
 
 <!-- Book detail modal -->
 <div class="modal-overlay" id="bookModal" onclick="if(event.target===this)closeModal()">
@@ -1019,7 +1375,7 @@ const AFF_STORES = [
 /* 表記は静的に置いてある。ID が未設定のときだけ取り除く（描画のズレを起こさないため） */
 if (!AFF && !ADSENSE) document.getElementById("prBar")?.remove();
 /* ============================================================
-   DATA — 高校数学 参考書データベース(2026 新課程)
+   DATA — 高校数学 参考書データベース(2026年度入試・新課程)
    ISBNは出版社/書店DBで確認した最新版。表紙は書店DBの画像を使用し、
    取得できない場合は自動でプレースホルダー表紙に切替。
    diff: 体感難易度 1–10 / h: シリーズ完走の目安時間(概算)
@@ -2037,7 +2393,7 @@ const GUIDES = [
 {t:"参考書は「冊数」ではなく「完成度」で決まる",
  s:"1冊を仕上げる基準を、言葉で定義できていますか",
  b:`<p>受験生の相談で最も多い失敗が、<b>何冊もの参考書を薄く広く触って、どれも完成していない</b>という状態です。青チャートを1周し、1対1を1周し、プラチカにも手を出した。冊数だけ見れば十分に見えるのに、模試の偏差値が動かない。これは珍しいことではなく、むしろ典型的な行き詰まり方です。</p>
-<h5>「終わった」の定義を厳しくする</h5>
+<h4>「終わった」の定義を厳しくする</h4>
 <p>1冊が終わったと言えるのは、その本の問題を解き直したときではありません。<b>初見の類題を、解法の方針を自分の言葉で説明しながら解ける</b>状態です。答えを覚えているかどうかではなく、なぜその一手を選ぶのかを言えるかどうかで判定してください。</p>
 <ul><li>例題を見た瞬間に、方針が3秒以内に浮かぶか</li><li>解答を隠した状態で、手が止まらずに最後まで書き切れるか</li><li>「なぜその式変形をしたのか」を後輩に説明できるか</li></ul>
 <p>この3つを満たしていない例題が1割でも残っているなら、その本はまだ終わっていません。次の1冊に進むより、その1割を潰す方が確実に点が上がります。</p>
@@ -2046,10 +2402,10 @@ const GUIDES = [
 {t:"網羅型と精選型 — どちらを選ぶべきか",
  s:"残り時間から逆算すると、答えは自動的に決まります",
  b:`<p>高校数学の参考書は、大きく2つの系統に分かれます。チャート式やFocus Goldに代表される<b>網羅型</b>と、基礎問題精講のように問題を絞り込んだ<b>精選型</b>です。どちらが優れているかという議論に意味はなく、<b>使える時間が決めます</b>。</p>
-<h5>網羅型が向く人</h5>
+<h4>網羅型が向く人</h4>
 <ul><li>高1・高2で、受験まで1年以上ある</li><li>浪人生で、数学に十分な時間を割ける</li><li>数学を得点源にしたい、あるいは既に得意である</li></ul>
 <p>網羅型の価値は、入試で問われる解法をほぼ漏れなく持てることです。青チャートやFocus Goldの例題を完成させれば、多くの大学の入試問題は「知っている解法の組み合わせ」に見えるようになります。ただし1冊あたり90〜120時間、3冊で300時間規模の投資が必要です。</p>
-<h5>精選型が向く人</h5>
+<h4>精選型が向く人</h4>
 <ul><li>高3の春以降にスタートする</li><li>他教科に時間を回す必要がある(私大文系・国公立の共テ比率が高い場合など)</li><li>数学は合格点を確保できればよい</li></ul>
 <p>基礎問題精講は青チャートの約3分の1の問題数で入試頻出パターンを押さえます。網羅性は落ちますが、<b>完走できない網羅型より、完成する精選型のほうが確実に点になります</b>。</p>
 <div class="g-quote">判断に迷ったら、残り月数 × 1日の数学学習時間 × 30 で総時間を出してください。300時間を切るなら網羅型は現実的ではありません。</div>`},
@@ -2057,94 +2413,94 @@ const GUIDES = [
 {t:"参考書の「接続」を切らさない",
  s:"挫折の原因は、本の質ではなく段差にあります",
  b:`<p>参考書で挫折する最大の原因は、その本が悪いからではなく、<b>前の本との難易度差が大きすぎる</b>ことです。これを接続の問題と呼びます。</p>
-<h5>よくある段差</h5>
+<h4>よくある段差</h4>
 <ul><li><b>基礎問題精講 → 標準問題精講</b>:名前が連続しているので繋がって見えますが、実際には難易度差がかなりあります。間に1冊挟むか、標問の易しい問題だけ拾う運用が必要です</li><li><b>教科書 → 青チャート</b>:青チャートは教科書レベルの例題から始まりますが、後半のコンパス4〜5は入試標準です。教科書が怪しいなら白チャートか講義系を先に</li><li><b>網羅系 → プラチカ</b>:文系プラチカは名前に反して東大・一橋レベルです。1対1や文系の数学を経由するのが自然です</li></ul>
-<h5>段差を測る方法</h5>
+<h4>段差を測る方法</h4>
 <p>候補の本を書店で開き、<b>最初の10問のうち7問以上で方針が立つか</b>を確認してください。3問以下なら段差が大きすぎます。逆に10問すべて即答できるなら、その本は簡単すぎて時間の無駄です。</p>
-<p>本アプリの各参考書の詳細画面には「前にやる本・次にやる本」を表示しています。ルートを組むときは、この接続を必ず確認してください。</p>`},
+<p>本サイトの各参考書の詳細画面には「前にやる本・次にやる本」を表示しています。ルートを組むときは、この接続を必ず確認してください。</p>`},
 
 {t:"解けなかった問題との正しい向き合い方",
  s:"復習のやり方だけで、同じ時間の価値が3倍変わります",
  b:`<p>数学の伸びは、解けた問題ではなく<b>解けなかった問題をどう処理したか</b>で決まります。ところが多くの受験生は、解答を読んで「なるほど」と思った時点で復習を終えてしまいます。これはほとんど何も残りません。</p>
-<h5>3ステップの復習法</h5>
+<h4>3ステップの復習法</h4>
 <ul><li><b>1. 詰まった地点を特定する</b> — 「解けなかった」ではなく「どこで手が止まったか」を1行で書きます。方針が浮かばなかったのか、方針は合っていたが計算で崩れたのか、条件を見落としたのか。この切り分けをしないと対策が打てません</li><li><b>2. 解答の中で「知らなかった一手」だけを抜き出す</b> — 解答全体を写経しても意味はありません。自分に欠けていた考え方は、たいてい1〜2手です。それだけをノートに書きます</li><li><b>3. 翌日、白紙から解き直す</b> — 解答を見た直後に解けるのは当たり前です。24時間後に自力で再現できて初めて、その解法は自分のものになります</li></ul>
 <div class="g-quote">「方針が浮かばなかった」問題が多いなら演習量ではなく網羅の不足、「計算で崩れた」が多いなら計算特化の教材を並行すべきです。詰まった地点の記録は、次に何をやるべきかを教えてくれます。</div>`},
 
 {t:"計算力は才能ではなく、独立して鍛える技術",
  s:"数学の失点の半分近くは、思考ではなく処理で起きています",
  b:`<p>模試を返却されたとき、「解法は合っていたのに答えが合わなかった」という失点がどれくらいあるか数えてみてください。多くの受験生で、これが失点全体の3〜4割を占めます。<b>解法を増やしても、この部分は1点も改善しません</b>。</p>
-<h5>計算力の3つの要素</h5>
+<h4>計算力の3つの要素</h4>
 <ul><li><b>速度</b> — 同じ処理を短時間で終える。試験時間内に解き切れるかを決めます</li><li><b>正確性</b> — 符号ミス、写し間違い、条件の落としを起こさない</li><li><b>工夫</b> — そもそも計算量の少ない道を選ぶ。これが最も差がつく部分です</li></ul>
 <p>3つ目の「工夫」は自然には身につきません。『合格る計算』のような計算特化書は、まさにこの部分を体系的に扱います。1日15〜20分を毎日、網羅系や演習書と並行して回すのが効果的です。</p>
-<h5>数III・Cは特に致命的</h5>
+<h4>数III・Cは特に致命的</h4>
 <p>理系の場合、微積分の計算量は他分野と比較になりません。置換積分の選択ひとつで計算時間が倍変わることも珍しくない。数IIIの計算を鍛えることは、実質的に試験時間を増やすことと同じです。</p>`},
 
 {t:"過去問はいつから始めるべきか",
  s:"「実力がついてから」では遅すぎます",
  b:`<p>過去問に手を出すのが遅すぎる受験生が非常に多いです。「まだ実力がないから」と後回しにして、11月や12月にようやく開くケースをよく見ます。これは順序が逆です。</p>
-<h5>過去問の役割は2つある</h5>
+<h4>過去問の役割は2つある</h4>
 <p>ひとつは<b>仕上げの演習</b>、もうひとつは<b>設計図の入手</b>です。後者は早ければ早いほど価値があります。</p>
 <ul><li>試験時間と大問数から、1問あたりに使える時間が分かる</li><li>頻出分野が分かるので、限られた時間を配分できる</li><li>記述量・誘導の有無から、必要な答案作成力の水準が分かる</li><li>合格最低点から、何問取れば受かるのかが分かる</li></ul>
 <p>特に最後の点が重要です。多くの難関大学は6〜7割で合格します。<b>全問完答する必要はない</b>と知っているかどうかで、本番の戦い方も、それまでの学習方針も変わります。</p>
-<h5>推奨するタイミング</h5>
+<h4>推奨するタイミング</h4>
 <p>高3の春〜夏に<b>1年分だけ</b>時間を計って解いてみてください。ボロボロで構いません。目的は点を取ることではなく、ゴールの形を知ることです。そのうえで標準演習が終わった段階から本格的に年度を重ねていきます。</p>
 <div class="g-quote">過去問を解いて足りない分野が見えたら、分野別参考書で補強し、また過去問に戻る。この往復が最後の2〜3か月で最も効率よく点を伸ばします。</div>`},
 
 {t:"模試の偏差値をどう読むか",
  s:"母集団が違えば、同じ数字の意味は10以上変わります",
  b:`<p>「偏差値55です」という情報だけでは、実力はほとんど判断できません。<b>どの模試か</b>によって意味がまったく変わるからです。</p>
-<h5>主要模試の難易度と母集団</h5>
+<h4>主要模試の難易度と母集団</h4>
 <ul><li><b>進研模試(ベネッセ)</b> — 受験者数が最も多く、幅広い層が受けます。難関大志望者にとっては易しめで、偏差値は高めに出ます</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。大学の合格可能性判定の基準として広く使われます</li><li><b>駿台全国模試</b> — 難関大志望者が中心の母集団で、難度も高い。偏差値は低めに出ます</li><li><b>東進の本番レベル模試</b> — 大学別・レベル別に分かれており、模試ごとに母集団が異なります</li></ul>
 <p>目安として、同じ実力の受験生でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。志望校の判定を見るときは、その大学の合格者が主にどの模試を受けているかを意識してください。</p>
-<h5>偏差値より大切な読み方</h5>
+<h4>偏差値より大切な読み方</h4>
 <p>総合偏差値よりも、<b>分野別の得点率</b>と<b>失点の内訳</b>を見てください。偏差値は結果であり、次に何をすべきかを教えてくれません。「確率だけ得点率が3割」「解法は合っていたが計算ミスで15点落とした」といった情報のほうが、はるかに行動に直結します。</p>
-<p>本アプリのルート画面では、模試の種類を選ぶと全統換算の偏差値に直したうえで、志望校の到達目安との差を表示します。</p>`},
+<p>本サイトのルート画面では、模試の種類を選ぶと全統換算の偏差値に直したうえで、志望校の到達目安との差を表示します。</p>`},
 
 {t:"文系数学の戦い方",
  s:"範囲が狭いことは、有利にも不利にもなります",
  b:`<p>文系数学は数III・Cを含まないぶん範囲が狭く、必要な学習時間は理系の半分程度で済みます。一方で、<b>範囲が狭いということは差がつきにくく、取りこぼしが致命傷になる</b>という側面もあります。</p>
-<h5>頻出分野に偏りがある</h5>
+<h4>頻出分野に偏りがある</h4>
 <p>文系入試では出題分野がかなり集中します。多くの大学で以下が定番です。</p>
 <ul><li><b>微分・積分(数II)</b> — 3次関数の増減、面積計算はほぼ必出</li><li><b>確率・場合の数</b> — 独立性の高い分野で、対策の効果が出やすい</li><li><b>数列</b> — 漸化式の型を押さえているかで大きく差がつきます</li><li><b>ベクトル(数C)</b> — 新課程で数Cに移りましたが、文系でも引き続き出題されます</li><li><b>図形と方程式</b> — 軌跡・領域は差がつく分野</li></ul>
-<h5>文系上位の難度を侮らない</h5>
+<h4>文系上位の難度を侮らない</h4>
 <p>一橋大学や東京大学の文系数学は、理系の標準レベルを上回ります。整数問題や確率漸化式など、思考力を正面から問う出題が続きます。文系数学の良問プラチカが「名前に反して難しい」と言われるのは、こうした層を対象にしているからです。</p>
 <div class="g-quote">文系で数学を選択する最大の利点は、私大入試で英語・国語より得点が安定しやすいことです。仕上がれば、数学は最も裏切らない科目になります。</div>`},
 
 {t:"理系は数III・Cにどれだけ時間を残せるか",
  s:"配点の半分近くを占める範囲を、後回しにしていませんか",
  b:`<p>理系入試の数学では、数III・Cの比重が非常に高くなります。大学によっては<b>大問の半分以上が数III範囲</b>ということも珍しくありません。にもかかわらず、学校のカリキュラム上、数IIIを習い終わるのが高3の秋という受験生が多いのが実情です。</p>
-<h5>先取りの価値が最も高い範囲</h5>
+<h4>先取りの価値が最も高い範囲</h4>
 <p>数IIIは他のどの範囲よりも先取りの効果が大きい分野です。理由は3つあります。</p>
 <ul><li>演習量がそのまま得点に直結する(典型パターンの比率が高い)</li><li>計算処理の比重が大きく、慣れによる伸びしろが大きい</li><li>過去問演習の期間を長く取れるかどうかが、そのまま合否に効く</li></ul>
-<h5>優先順位</h5>
+<h4>優先順位</h4>
 <p>数III・Cの中でも重要度には差があります。<b>微分法・積分法</b>が最優先で、次に<b>複素数平面</b>、<b>極限</b>、<b>式と曲線</b>と続きます。時間が足りないなら微積分に集中するのが合理的です。</p>
 <p>また数III・Cは、数II(微積分の基礎)、数B(数列・極限の前提)、三角関数・指数対数の理解がそのまま土台になります。数IIIでつまずいている場合、原因が数II範囲にあることも少なくありません。</p>`},
 
 {t:"共通テストと二次試験は別competency",
  s:"記述が得意でも共通テストで崩れる理由",
  b:`<p>共通テストの数学で点が取れない受験生の中には、<b>二次試験の記述問題なら解ける</b>という人が一定数います。これは実力不足ではなく、要求される能力が違うからです。</p>
-<h5>共通テスト特有の要求</h5>
+<h4>共通テスト特有の要求</h4>
 <ul><li><b>時間との戦い</b> — 数I・Aは70分で大問4つ。1問あたり15分前後で、思考する余裕はほとんどありません</li><li><b>誘導に乗る力</b> — 出題者が用意した筋道に素早く合流する必要があります。自分の解法にこだわると、かえって時間を失います</li><li><b>マーク形式への適応</b> — 答えの形(空欄の桁数など)から逆算して検算する技術が使えます</li><li><b>日常題材・会話形式</b> — 長い問題文から数学的な構造を読み取る処理が必要です</li></ul>
-<h5>対策の順序</h5>
+<h4>対策の順序</h4>
 <p>まず基礎的な解法が入っていることが前提です。そのうえで、<b>形式に慣れる</b>ことが独立した課題になります。講義系の共テ対策書で誘導の読み方を学び、そのあと実戦問題集・過去問で時間内に解き切る訓練を積みます。</p>
 <div class="g-quote">共通テストは過去問の蓄積が少ないため、模試の過去問(黒本・青本)が貴重な演習素材になります。秋以降は週に1セット、時間を計って解く習慣をつけてください。</div>`},
 
 {t:"新課程(2025年入試〜)で変わったこと",
  s:"買う前に、その参考書が対応しているか確認を",
  b:`<p>2022年度入学生から実施された新課程により、2025年入試以降の高校数学は構成が変わりました。参考書を選ぶ際は、<b>新課程に対応した版かどうか</b>を必ず確認してください。</p>
-<h5>主な変更点</h5>
+<h4>主な変更点</h4>
 <ul><li><b>数学Cが新設</b> — ベクトル(旧・数B)、平面上の曲線と複素数平面(旧・数III)が数Cに移りました。文系でもベクトルは数Cとして扱われます</li><li><b>数学Bの構成変更</b> — 数列と統計的な推測が中心になりました</li><li><b>統計分野の比重増</b> — 「データの分析」に外れ値・仮説検定の考え方などが加わり、共通テストでも扱われます</li><li><b>整数の性質の扱い</b> — 旧・数Aの「整数の性質」という単元自体は再編されましたが、整数問題は難関大で引き続き出題されています</li></ul>
-<h5>参考書の見分け方</h5>
+<h4>参考書の見分け方</h4>
 <p>表紙や書名に<b>「数学I・A」「数学II・B・C」「数学III・C」</b>という表記があれば新課程版です。「数学II・B」「数学III」という旧表記のものは旧課程版の可能性が高くなります。</p>
 <p>ただし、やさしい理系数学やハイレベル理系数学のように、新課程改訂が出ていないまま定番として使われ続けている本もあります。こうした本は、扱う内容自体が課程変更の影響を受けにくいため実用上の問題は小さいですが、ベクトル・複素数平面の位置づけだけは自分で読み替える必要があります。</p>`},
 
 {t:"志望校が決まっていないときの動き方",
  s:"迷っている間も、やるべきことは共通しています",
  b:`<p>「志望校が決まっていないので参考書も決められない」という相談をよく受けますが、これは順序が逆です。<b>どの志望校であっても、最初の1〜2段階は共通しています</b>。</p>
-<h5>志望校に依存しない部分</h5>
+<h4>志望校に依存しない部分</h4>
 <ul><li><b>教科書レベルの理解</b> — どこを受けるにしても必要です</li><li><b>入試基礎の典型解法</b> — 基礎問題精講や網羅系の易しい例題にあたる部分。日東駒専でも東大でも土台は同じです</li><li><b>計算力</b> — 全レベルで必要かつ、伸ばすのに時間がかかります</li></ul>
 <p>志望校によって分かれるのは、標準演習より上の段階です。つまり<b>最初の3〜6か月は志望校を決めずに走り出して問題ありません</b>。むしろ、決まるまで待つほうが時間を失います。</p>
-<h5>決めるべきタイミング</h5>
+<h4>決めるべきタイミング</h4>
 <p>遅くとも高3の夏までには、志望校の<b>レベル帯</b>と<b>文理</b>を確定させてください。この2つが決まれば、標準演習以降のルートが定まります。大学名そのものは秋まで揺れても構いません。</p>
 <p>迷っている段階では、<b>少し上のレベルを想定して進める</b>のが安全です。上のルートから下げるのは簡単ですが、下から急に上げるのは間に合わないことがあります。</p>`}
 ];
@@ -2152,72 +2508,12 @@ const GUIDES = [
 /* ============================================================
    LEGAL — 法定表記・ポリシー
    ============================================================ */
-const LEGAL = {
-about:{title:"運営者情報",body:()=>`
-<h5>サイト名</h5><p>${CONFIG.siteName}</p>
-<h5>運営者</h5><p>${CONFIG.operator || CONFIG.siteName + " 運営者"}</p>
-${CONFIG.contact?`<h5>お問い合わせ</h5><p>${CONFIG.contact}</p>`:`<h5>お問い合わせ</h5><p>お問い合わせ先は準備中です。</p>`}
-<h5>サイトの目的</h5>
-<p>本サイトは、高校数学・大学受験数学の参考書情報と学習ルートを整理して提供する情報サイトです。掲載している参考書の難易度・到達目安・所要時間は、各出版社の公表情報および大手予備校・塾が公開する学習ルート解説をもとにした編集部独自の目安であり、特定の成果を保証するものではありません。</p>
-<h5>掲載情報について</h5>
-<p>書誌情報(書名・出版社・ISBN・刊行年)は各出版社および書店データベースの公開情報にもとづいています。版の改訂等により情報が古くなる場合がありますので、購入前には必ず販売ページで最新の情報をご確認ください。</p>`},
-
-privacy:{title:"プライバシーポリシー",body:()=>`
-<h5>個人情報の取り扱い</h5>
-<p>本サイトは静的なウェブページとして提供されており、氏名・住所・メールアドレス等の個人情報を入力するフォームを設置していません。ルート作成のために入力された志望校名・偏差値・学習済み参考書などの情報は、お使いのブラウザ内でのみ処理され、サーバーへ送信・保存されることはありません。</p>
-<h5>診断結果の保存と共有について</h5>
-<p>3分診断の結果は、結果画面の「この結果を保存」を押したときにかぎり、お使いのブラウザのローカルストレージ（端末内の保存領域）に記録されます。保存されるのは診断の回答と、そこから作られた表示用の見出しだけで、氏名などの個人を特定できる情報は含まれません。この情報が外部へ送信されることはなく、当サイトの運営者が取得・閲覧することもできません。保存した内容は診断画面の一覧からいつでも削除でき、ブラウザの閲覧データを消去した場合にも失われます。ブラウザの設定やプライベートブラウズによりローカルストレージが使えない場合は、保存ボタンを表示しません。この判定のため、診断の画面を開いた時点で確認用の値をローカルストレージに一度書き込み、すぐに削除します。この値に診断の内容や個人を特定できる情報は含まれません。</p>
-<p>診断結果の共有リンクに含まれるのも診断の回答だけです。リンクを開いた方の画面では、その回答をもとに結果があらためて計算されます。</p>
-${AFF ? `<h5>クッキー(Cookie)および類似技術について</h5>
-<p>本サイトは${AFF_PROGRAMS}に参加しています。これらのプログラムの提供事業者(第三者)は、広告の配信および成果の計測のために、クッキー、ピクセルタグ、その他の類似技術を使用して、本サイトを訪問された方の情報を取得する場合があります。</p>
-<p>これらの第三者は、本サイトおよび他のウェブサイトへのアクセス情報にもとづいて、利用者の興味・関心に応じた広告を表示することがあります。この際に取得される情報に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
-<h5>広告配信の停止(オプトアウト)について</h5>
-<p>クッキーの使用を望まれない場合は、お使いのブラウザの設定からクッキーを無効にすることで、情報の収集を拒否できます。設定方法はブラウザのヘルプをご確認ください。</p>
-<ul>
-${CONFIG.amazonTag ? `<li>Amazonにおける情報の取り扱いについては、Amazon.co.jp のプライバシー規約をご確認ください</li>` : ``}
-${CONFIG.rakutenId ? `<li>楽天における情報の取り扱いについては、楽天グループのプライバシーポリシーをご確認ください</li>` : ``}
-<li>広告配信事業者による行動ターゲティング広告は、一般社団法人日本インタラクティブ広告協会(JIAA)のオプトアウトページ等からも停止できます</li>
-</ul>` : `<h5>クッキー(Cookie)について</h5>
-<p>本サイトは、広告配信を目的としたクッキーを使用していません。アクセス解析のためのクッキーについては下記をご覧ください。</p>`}
-${ADSENSE ? `<h5>Google AdSense による広告配信について</h5>
-<p>本サイトは、第三者配信の広告サービス「Google AdSense」を利用しています。Google をはじめとする第三者配信事業者は、クッキー(Cookie)を使用して、本サイトや他のウェブサイトへの過去のアクセス情報にもとづく広告を配信します。これにより表示される広告に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
-<p>パーソナライズ広告(興味・関心に応じた広告)の表示は、Google の<a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">広告設定</a>から無効にできます。また、<a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a> では、参加している第三者配信事業者のクッキーをまとめて無効にできます。</p>
-<p>Google が広告配信のために取得する情報とその使われ方については、<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">「広告 - ポリシーと規約 - Google」</a>をご確認ください。</p>` : ``}
-<h5>アクセス解析について</h5>
-<p>当サイトでは、利用状況の把握と改善のために Google LLC が提供する「Google アナリティクス」を利用しています。Google アナリティクスは Cookie を使用して、氏名・住所などの個人を特定する情報を含まない形で、閲覧されたページや滞在時間などのアクセス情報を収集します。</p>
-<p>収集された情報は Google 社のプライバシーポリシーに基づいて管理されます。データの収集を望まない場合は、Google が提供する「Google アナリティクス オプトアウト アドオン」を利用するか、お使いのブラウザの設定で Cookie を無効にすることで停止できます。</p>
-<h5>ポリシーの変更</h5>
-<p>本ポリシーの内容は、法令の改正やサービスの変更に応じて予告なく改定する場合があります。</p>`},
-
-disclaimer:{title:"免責事項",body:()=>`
-<h5>掲載情報の正確性について</h5>
-<p>本サイトに掲載している参考書の難易度・到達偏差値・所要時間・問題数、および大学ごとの出題傾向・到達目安偏差値は、公開情報にもとづく<b>編集上の目安</b>です。実際の難易度の感じ方や必要な学習時間には個人差があり、また入試制度・出題傾向は年度によって変更されます。</p>
-<p>掲載内容の正確性・完全性・最新性について、可能な範囲で努力しておりますが、これを保証するものではありません。</p>
-<h5>学習成果について</h5>
-<p>本サイトが提示する学習ルートは、一般的に有効とされる学習順序を整理したものであり、<b>特定の大学への合格や成績の向上を保証するものではありません</b>。最終的な参考書の選択・学習計画の決定は、利用者ご自身の判断と責任において行ってください。学校や塾の先生など、あなたの状況を直接把握している方に相談されることをおすすめします。</p>
-<h5>損害の責任</h5>
-<p>本サイトの情報を利用したことにより生じたいかなる損害についても、運営者は一切の責任を負いかねます。</p>
-<h5>外部サイトについて</h5>
-<p>本サイトから外部のウェブサイト(オンライン書店等)へ移動された場合、移動先で提供される情報・サービスについて、運営者は一切の責任を負いません。商品の購入に関する契約は、利用者と販売事業者との間で成立するものです。</p>
-<h5>著作権について</h5>
-<p>本サイトに掲載している書影(商品画像)は、各アフィリエイト・プログラムが提供する商品画像URLを参照して表示しています。書影の著作権は各出版社・著作権者に帰属します。掲載内容について権利者の方からご連絡をいただいた場合は、速やかに対応いたします。</p>`},
-
-affiliate:{title:"広告について",body:()=>`
-${AFF ? `<h5>アフィリエイト・プログラムの利用</h5>
-<p>本サイトは${AFF_PROGRAMS}に参加しています。参考書の詳細画面に設置している${AFF_STORES}へのリンクは広告リンクであり、リンクを経由して商品が購入された場合、販売事業者から本サイトに紹介料が支払われることがあります。${AFF_AZ ? `` : `Amazonへのリンクはアフィリエイトタグを含まない通常のリンクで、リンク経由の購入によって本サイトが紹介料を得ることはありません。`}</p>
-<p><b>紹介料の発生によって、利用者が商品を購入する際の価格が変わることはありません。</b></p>` : `<h5>広告の掲載について</h5>
-<p>本サイトは現在、アフィリエイト・プログラムを含む広告を掲載していません。参考書の販売サイトへのリンクは書誌情報を確認していただくための通常のリンクであり、リンク経由の購入によって本サイトが収益を得ることはありません。</p>`}
-${CONFIG.amazonTag ? `<h5>Amazonアソシエイト・プログラムについて</h5>
-<p>${CONFIG.siteName}は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。</p>
-<p><b>Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</b></p>` : ""}
-${ADSENSE ? `<h5>第三者配信の広告について</h5>
-<p>本サイトは、Google LLC が提供する広告配信サービス「Google AdSense」を利用しています。ページ内に「広告」と表示している枠に配信される広告の内容は Google 側で選ばれており、本サイトが個別に選定・推奨しているものではありません。表示された広告が閲覧またはクリックされることで、本サイトに収益が発生することがあります。</p>
-<p>広告の表示に用いられるクッキーの扱いと、その停止方法は「プライバシーポリシー」に記載しています。</p>` : ``}
-<h5>掲載順序と広告の関係</h5>
-<p>本サイトにおける参考書の掲載順・ルートへの採否・評価コメントは、紹介料の有無や料率によって決定していません。学習上の有効性と、公開されている一般的な評価にもとづいて編集しています。</p>
-<h5>価格・在庫について</h5>
-<p>本サイトでは商品の価格・在庫状況を掲載していません。価格および在庫状況は変動しますので、購入時には必ず販売サイト上の表示をご確認ください。</p>`}
-};
+/* サイトの表記（運営者情報・データの作り方・プライバシーポリシー・免責事項・
+   広告について）は /about/ /methodology/ /privacy/ /disclaimer/ /ads/ の静的
+   ページが正本。以前はここに JS のモーダルとして持っていたが、クローラー・
+   AdSense の審査・JS を切った環境からは存在しないのと同じだったため、
+   フッターから静的ページへ送る形にした。
+   本文の正本は build/content/legal.mjs（node build/generate-legal.mjs で生成）。 */
 /* ============================================================
    ROUTES — 志望レベル×文理×方針(omni=王道網羅型 / quick=時短・精選型)
    lvl: 0 導入 / 1 基礎・網羅 / 2 標準 / 3 応用 / 4 過去問
@@ -2841,7 +3137,7 @@ function openModal(id){
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
     <div class="aff-actions">
       ${az?`<a class="aff-btn amz" href="${az}" target="_blank" rel="nofollow${AFF_AZ?' sponsored':''} noopener">Amazonで見る${ext}</a>`:""}
-      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener">楽天ブックスで見る${ext}</a>`:""}
+      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener">楽天ブックスで検索${ext}</a>`:""}
     </div>
     <p class="aff-note">${AFF?`${AFF_STORES}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります(価格は変わりません)。`:""}版の改訂により内容が異なる場合がありますので、購入前に販売ページで最新版をご確認ください。</p>
   </div>` : "";
@@ -3057,7 +3353,7 @@ function renderRouteBody(){
         <div class="cn-card__cover">${coverHTML(b)}</div>
         <div class="cn-info">
           <span class="cn-info__role" style="background:${st.color}">${s.role}</span>
-          <h5>${b.name}</h5>
+          <h3>${b.name}</h3>
           <div class="cn-info__note">${s.note}</div>
           ${altHtml}
           <div class="cn-info__meta">
@@ -3079,7 +3375,7 @@ function renderRouteBody(){
           <div class="cn-card__cover">${coverHTML(b)}</div>
           <div class="cn-info">
             <span class="cn-info__role" style="background:${st.color}">${st.label}</span>
-            <h5>${b.name}</h5>
+            <h4>${b.name}</h4>
             <div class="cn-info__note">${p.note}</div>
           </div>
         </div>
@@ -3087,7 +3383,7 @@ function renderRouteBody(){
     }).join("")}` : "";
   const months = Math.max(1, Math.round(hours/90));
   const uniNote = (S.mode==="uni" && S.uni)
-    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg><p><b>${S.uni.n}${S.fac?" "+S.fac.trim():""}向けに調整済み。</b>${S.uni.no}。過去問の段は志望校の赤本に読み替えて進めてください。</p></div>`
+    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg><p><b>${S.uni.n}${S.fac?" "+S.fac.trim():""}に合わせて調整しています</b>（到達目安と文系・理系から志望レベルを判定し、そのレベルのルートを出しています）。${S.uni.no}。過去問の段は志望校の赤本に読み替えて進めてください。</p></div>`
     : "";
   const polNote = S.policy==="omni"
     ? "王道網羅型:チャート/FG系を軸にした、時間のある高1・高2や浪人生向けの盤石ルートです。網羅系は「例題を見た瞬間に方針が言える」まで反復するのが鉄則。"
@@ -3122,15 +3418,16 @@ function renderRouteBody(){
    ============================================================ */
 function renderHome(){
   document.getElementById("stat-books").textContent = BOOKS.length;
+  document.getElementById("stat-unis").textContent = UNIS.length;
   document.getElementById("homeRoutes").innerHTML = TIERS.map(t=>{
     const g = ROUTES[t.id].ri || ROUTES[t.id].bun;
     const seq = g.quick || g.omni;
     return `<div class="rp-card" style="--tc:${t.color}" role="button" tabindex="0" onclick="selectTier('${t.id}');go('route')">
       <div class="rp-card__no"><span>ROUTE ${t.no}</span><em>${seq.length} STEPS</em></div>
-      <h4>${t.name}</h4><p>${t.sub} — ${t.goal}</p>
+      <h3>${t.name}</h3><p>${t.sub} — ${t.goal}</p>
     </div>`;
   }).join("");
-  const disc = `<b>ご利用にあたって:</b>本アプリの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。2025年入試からの新課程(数学C新設・「整数の性質」の扱い変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
+  const disc = `<b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。2025年入試からの新課程(数学C新設・「整数の性質」の扱い変更など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
   document.getElementById("homeDisclaimer").innerHTML = disc;
   document.getElementById("catDisclaimer").innerHTML = disc;
   document.getElementById("guideDisclaimer").innerHTML = disc;
@@ -3232,7 +3529,7 @@ function renderGuide(){
     <article class="g-card" id="g${i}">
       <button class="g-card__head" onclick="toggleGuide(${i})" aria-expanded="false">
         <span class="g-num">${String(i+1).padStart(2,"0")}</span>
-        <span class="g-ttl"><h4>${g.t}</h4><span>${g.s}</span></span>
+        <span class="g-ttl"><h3>${g.t}</h3><span>${g.s}</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="g-body">${g.b}</div>
@@ -3242,31 +3539,6 @@ function toggleGuide(i){
   const el = document.getElementById("g"+i);
   const open = el.classList.toggle("open");
   el.querySelector(".g-card__head").setAttribute("aria-expanded", open);
-}
-function openLegal(key){
-  const L = LEGAL[key]; if(!L) return;
-  document.getElementById("legalInner").innerHTML = `
-    <div class="modal__grab"></div>
-    <div class="modal__head" style="padding-bottom:16px">
-      <div class="modal__titles"><h3>${L.title}</h3></div>
-      <button class="modal__close" onclick="closeLegal()" aria-label="閉じる"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-    </div>
-    <div class="legal-body">${L.body()}</div>`;
-  document.getElementById("legalModal").classList.add("open");
-  modalOpened("legalInner");
-  document.body.style.overflow="hidden";
-}
-function closeLegal(){
-  document.getElementById("legalModal").classList.remove("open");
-  modalClosed();
-  document.body.style.overflow="";
-}
-function renderFooter(){
-  document.getElementById("footLegal").innerHTML =
-    (CONFIG.amazonTag ? `<b>Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</b><br>` : "") +
-    (AFF ? `当サイトは第三者のアフィリエイト・プログラムを利用しており、広告リンク経由の購入により紹介料が発生することがあります。` : ``) +
-    `掲載している難易度・偏差値・所要時間は公開情報にもとづく目安であり、学習成果を保証するものではありません。書影はAmazonが提供する商品画像URLを参照して表示しています。<br>` +
-    `<span style="display:inline-block;margin-top:10px;font-family:var(--mono);letter-spacing:.06em">${CONFIG.siteName} — MATH ROUTE COMPENDIUM</span>`;
 }
 
 /* ============================================================
@@ -3304,12 +3576,10 @@ function modalClosed(){
 function openBox(){
   const el = document.getElementById("bookModal");
   if(el && el.classList.contains("open")) return document.getElementById("modalInner");
-  const lg = document.getElementById("legalModal");
-  if(lg && lg.classList.contains("open")) return document.getElementById("legalInner");
   return null;
 }
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){ closeModal(); closeLegal(); return; }
+  if(e.key==="Escape"){ closeModal(); return; }
   if(e.key!=="Tab") return;
   const box = openBox();
   if(!box) return;
@@ -3361,7 +3631,6 @@ buildRoutePicker();
 renderRoute();
 renderHome();
 renderGuide();
-renderFooter();
 
 /* ハッシュ付きで開かれていれば、その画面から始める（共有 URL の復元より先に評価する。
    ?v=1&a=... が付いていれば下の setup が診断結果へ上書きする） */
@@ -3449,7 +3718,7 @@ RTShare.setup({
       "@id": "https://route-taizen.com/math/#webpage",
       "url": "https://route-taizen.com/math/",
       "name": "数学ルート大全 — 大学受験の数学参考書162冊を図鑑化",
-      "description": "大学受験の数学参考書162冊を、導入・網羅・標準・応用・実戦の役割別／難易度別に整理した参考書図鑑。青チャート・Focus Gold・1対1対応の演習などの接続関係つき。教科書レベルから東大理三まで。2026年 新課程・数C対応・完全無料。",
+      "description": "大学受験の数学参考書162冊を、導入・網羅・標準・応用・実戦の役割別／難易度別に整理した参考書図鑑。青チャート・Focus Gold などの接続関係つき。教科書レベルから東大理三まで。2026年度入試対応・完全無料。",
       "isPartOf": {
         "@id": "https://route-taizen.com/#website"
       },

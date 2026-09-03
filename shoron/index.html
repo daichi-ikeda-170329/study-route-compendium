@@ -34,7 +34,7 @@
 <style>
 :root{
   --paper:#F6F4EF; --surface:#FFFFFF; --surface-2:#FAF9F6; --surface-3:#F1EFE8;
-  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#6A6F82;
+  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#656A7C;
   --line:#E4E1D6; --line-2:#EDEBE2; --line-d:#CFCBBE;
   --indigo:#24427C; --indigo-deep:#18305E; --indigo-soft:#E8EDF7;
   --accent:#B5432A; --accent-deep:#93331F; --accent-soft:#F7E9E5;
@@ -152,8 +152,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .rp-card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--tc,var(--indigo));padding:16px 16px 14px;cursor:pointer;transition:.18s;box-shadow:var(--sh-s);position:relative}
 .rp-card:hover{transform:translateY(-3px);box-shadow:var(--sh-m)}
 .rp-card__no{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.1em;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.rp-card__no em{font-style:normal;color:var(--tc,var(--indigo));font-weight:600}
-.rp-card h4{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
+/* 10px の小さな文字なので、カードごとの色（--tc）をそのまま使うと
+   コントラスト比 4.5:1 を割る色が出る（講師ルートの #2F8659 が 4.49）。
+   色分けはカード左の帯が担っているので、ここは固定色にする。 */
+.rp-card__no em{font-style:normal;color:var(--muted);font-weight:700}
+.rp-card h3{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
 .rp-card p{font-size:11.5px;color:var(--muted);min-height:32px;line-height:1.55}
 .guide-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
 @media(min-width:760px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
@@ -162,7 +165,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .guide-card:nth-child(2)::before{background:var(--accent)}
 .guide-card:nth-child(3)::before{background:var(--gold)}
 .guide-num{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted-2);letter-spacing:.14em;margin-bottom:10px}
-.guide-card h5{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
+.guide-card h3{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
 .guide-card p{font-size:12.5px;color:var(--muted);line-height:1.7}
 .guide-card p b{color:var(--ink-2)}
 
@@ -179,6 +182,8 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .chip:hover{color:var(--ink);border-color:var(--muted-2)}
 .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 .cat-meta{display:flex;align-items:center;justify-content:space-between;margin:14px 0 14px;flex-wrap:wrap;gap:8px}
+/* ページの最終更新日。データが変わった日を build/prerender-tops.mjs が入れる */
+.page-updated{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted-2)}
 .cat-count{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
 .cat-count b{color:var(--ink);font-family:var(--mono);font-size:14px}
 .sort-sel{border:1px solid var(--line-d);background:var(--surface);border-radius:4px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--ink);box-shadow:var(--sh-s)}
@@ -189,6 +194,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cat-sec{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin:16px 0 2px;font-weight:900;font-size:14px;color:var(--ink);letter-spacing:.04em}
 .cat-sec::before{content:"";width:16px;height:2.5px;background:var(--sc,var(--accent));align-self:center}
 .cat-sec small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
+/* 静的に出しておくカードの続き。build/prerender-tops.mjs が最後に足す枠で、
+   JS が起動して全冊を描き直すと消える。JS を切った環境と検索エンジンだけが見る。 */
+.cat-more{grid-column:1/-1;margin-top:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent)}
+.cat-more p{font-size:12.5px;line-height:1.85;color:var(--ink-2)}
+.cat-more a{display:inline-block;margin-top:9px;font-size:13px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
 .cat-empty{grid-column:1/-1;padding:26px 4px;color:var(--muted);font-size:13px}
 @media(min-width:560px){.book-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:820px){.book-grid{grid-template-columns:repeat(4,1fr)}}
@@ -346,14 +356,14 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .g-num{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;background:var(--ink);width:30px;height:30px;border-radius:5px;display:grid;place-items:center;flex:none;margin-top:2px}
 .g-card.open .g-num{background:var(--accent)}
 .g-ttl{flex:1;min-width:0}
-.g-ttl h4{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
+.g-ttl h3{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
 .g-ttl span{font-size:11.5px;color:var(--muted);line-height:1.6;display:block}
 .g-card__head .chev{flex:none;color:var(--muted-2);transition:transform .2s;margin-top:6px}
 .g-card.open .chev{transform:rotate(180deg)}
 .g-body{display:none;padding:0 20px 20px;border-top:1px solid var(--line-2);margin-top:-2px}
 .g-card.open .g-body{display:block;animation:fade .25s ease}
 .g-body p{font-size:13.5px;line-height:1.95;color:var(--ink-2);margin-top:14px}
-.g-body h5{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
+.g-body h4{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
 .g-body ul{margin-top:10px;padding-left:2px;list-style:none;display:flex;flex-direction:column;gap:7px}
 .g-body li{font-size:13px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
 .g-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:9px;flex:none}
@@ -367,13 +377,6 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .foot-links button:hover{color:var(--accent)}
 .foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:0 auto}
 .foot-legal b{color:var(--ink-2);font-weight:700}
-.legal-body{padding:22px 24px 30px}
-.legal-body h5{font-family:var(--serif);font-weight:800;font-size:14.5px;margin:20px 0 8px;letter-spacing:.02em}
-.legal-body h5:first-child{margin-top:0}
-.legal-body p{font-size:12.5px;line-height:1.9;color:var(--ink-2)}
-.legal-body ul{margin-top:8px;list-style:none;display:flex;flex-direction:column;gap:6px}
-.legal-body li{font-size:12.5px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
-.legal-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--muted-2);margin-top:9px;flex:none}
 @media(min-width:900px){.tabbar{display:none}}
 
 /* ================= ROUTE ================= */
@@ -502,7 +505,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cn-card__cover .fb-pub,.cn-card__cover .fb-band{display:none}
 .cn-info{flex:1;min-width:0}
 .cn-info__role{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.06em;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;color:#fff}
-.cn-info h5{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
+.cn-info h3{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
 .cn-info__note{font-size:11.5px;color:var(--muted);line-height:1.55}
 .cn-info__alt{font-size:10.5px;color:var(--indigo-deep);margin-top:7px;line-height:1.5}
 .cn-info__alt b{font-weight:700}
@@ -658,9 +661,10 @@ gtag('config', 'G-DQ5WFXEFMX');
       </div>
       <div class="stat-row">
         <div class="stat"><b id="stat-books">89</b><span>収録参考書</span></div>
-        <div class="stat"><b>6<small>入門 / 型 / ネタ / 演習 / 学部別 / 過去問</small></b><span>段階</span></div>
-        <div class="stat"><b>1<small>冊ごとに詳細ページ</small></b><span>詳細解説</span></div>
+        <div class="stat"><b>6</b><span>段階 — 入門 / 型 / ネタ / 演習 / 学部別 / 過去問</span></div>
+        <div class="stat"><b>1</b><span>冊ごとに詳細ページ</span></div>
       </div>
+      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
     </div>
 
     <div class="home-block">
@@ -669,17 +673,17 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="guide-grid">
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 01</div>
-          <h5>型を覚えてから中身を入れる</h5>
+          <h3>型を覚えてから中身を入れる</h3>
           <p>小論文は<b>書き方の型を先に固めるほど早く安定します</b>。何を書くかで悩む前に、序論・本論・結論の組み立てと、設問への答え方を 1 冊で覚えてください。型が無いまま書き続けても、うまくなりません。</p>
         </div>
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 02</div>
-          <h5>ネタは志望学部から逆算する</h5>
+          <h3>ネタは志望学部から逆算する</h3>
           <p>頻出テーマは学部系統でまったく違います。医歯薬・看護医療系、人文・教育系、社会科学系、自然科学系。<b>自分の系統のネタ本を 1 冊</b>選んで、そこに載っている論点を自分の言葉で言えるようにします。</p>
         </div>
         <div class="guide-card">
           <div class="guide-num">PRINCIPLE 03</div>
-          <h5>書いたら必ず人に読んでもらう</h5>
+          <h3>書いたら必ず人に読んでもらう</h3>
           <p>小論文は自分では採点できません。模範解答つきの演習書で自己添削しつつ、<b>学校や塾の先生に最低でも数本は読んでもらう</b>こと。独学だけで仕上げるのがいちばん難しい科目です。</p>
         </div>
       </div>
@@ -705,13 +709,13 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="cat-controls">
       <div class="search-wrap">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <input id="book-search" type="text" placeholder="書名・出版社・学部系統で検索(例:これだけ、ネタ本、医学部、看護)">
+        <input id="book-search" type="text" placeholder="書名・出版社・学部系統で検索(例:これだけ、ネタ本、医学部、看護)" aria-label="収録している参考書を書名・出版社・分野で検索">
       </div>
-      <div class="filter-scroll" id="filterScroll"></div>
+      <div class="filter-scroll" id="filterScroll"><button class="chip active" data-k="stage" data-v="all" onclick="setFilter('stage','all',this)">すべて</button><button class="chip" data-k="stage" data-v="intro" onclick="setFilter('stage','intro',this)">書き方・入門</button><button class="chip" data-k="stage" data-v="kata" onclick="setFilter('stage','kata',this)">講義・型</button><button class="chip" data-k="stage" data-v="neta" onclick="setFilter('stage','neta',this)">ネタ・時事・キーワード</button><button class="chip" data-k="stage" data-v="enshu" onclick="setFilter('stage','enshu',this)">演習・添削</button><button class="chip" data-k="stage" data-v="gakubu" onclick="setFilter('stage','gakubu',this)">学部別・大学別</button><button class="chip" data-k="stage" data-v="kako" onclick="setFilter('stage','kako',this)">過去問</button></div>
     </div>
     <div class="cat-meta">
-      <div class="cat-count"><b id="catCount">0</b> 冊を表示中</div>
-      <select class="sort-sel" id="sortSel" onchange="renderCatalog()">
+      <div class="cat-count"><b id="catCount">89</b> 冊を表示中</div>
+      <select class="sort-sel" id="sortSel" onchange="renderCatalog()" aria-label="参考書の並べ替え">
         <option value="field">分野別・難易度順</option>
         <option value="diff-asc">難易度:やさしい順</option>
         <option value="diff-desc">難易度:難しい順</option>
@@ -719,7 +723,169 @@ gtag('config', 'G-DQ5WFXEFMX');
         <option value="name">書名順</option>
       </select>
     </div>
-    <div class="book-grid" id="bookGrid"></div>
+    <div class="book-grid" id="bookGrid"><div class="cat-sec" style="--sc:#2E7D9A">書き方・入門<small>10 BOOKS — やさしい順</small></div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-zerokara-1kagetsu-rulebook')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/404605574X.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404605574X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404605574X.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#5CB85C,#2E7D32)"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA（中経出版）</span><span class="fb-title xlong">ゼロから1カ月で受かる 大学入試 小論文のルールブック</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">ゼロから1カ月で受かる 大学入試 小論文のルールブック</div>
+      <div class="bc-pub">KADOKAWA（中経出版）</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-buttsuke')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4578013162.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578013162.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578013162.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#D14B8F,#A32E6B)"><span class="fb-spine"></span><span class="fb-pub">文英堂</span><span class="fb-title ">ぶっつけ小論文</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">ぶっつけ小論文</div>
+      <div class="bc-pub">文英堂</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-naniga-kaketara')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688067.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688067.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688067.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#8E6BD8,#4B2A91)"><span class="fb-spine"></span><span class="fb-pub">語学春秋社</span><span class="fb-title long">何が書けたら「小論文」なの?</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">何が書けたら「小論文」なの?</div>
+      <div class="bc-pub">語学春秋社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-okite55')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4046044675.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046044675.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046044675.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#8E6BD8,#4B2A91)"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA（中経出版）</span><span class="fb-title xlong">何を書けばいいかわからない人のための 小論文のオキテ55</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">何を書けばいいかわからない人のための 小論文のオキテ55</div>
+      <div class="bc-pub">KADOKAWA（中経出版）</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-koredake')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4492042121.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492042121.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492042121.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#3A7BD5,#1E4F9A)"><span class="fb-spine"></span><span class="fb-pub">東洋経済新報社</span><span class="fb-title ">小論文 これだけ!</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">小論文 これだけ!</div>
+      <div class="bc-pub">東洋経済新報社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-koredake-kakikata-chokikiso')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4492044973.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492044973.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492044973.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#B5432A,#7E2A18)"><span class="fb-spine"></span><span class="fb-pub">東洋経済新報社</span><span class="fb-title xlong">小論文 これだけ! 書き方 超基礎編</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">小論文 これだけ! 書き方 超基礎編</div>
+      <div class="bc-pub">東洋経済新報社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-koredake-kakikata-chokikiso2')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4492047417.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492047417.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492047417.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#2C3E7A,#141F4A)"><span class="fb-spine"></span><span class="fb-pub">東洋経済新報社</span><span class="fb-title xlong">小論文 これだけ! 書き方 超基礎編(2)</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">小論文 これだけ! 書き方 超基礎編(2)</div>
+      <div class="bc-pub">東洋経済新報社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-koredake-chokikiso')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4492043853.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492043853.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492043853.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#E3B94E,#8C6A12);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">東洋経済新報社</span><span class="fb-title long">小論文 これだけ! 超基礎編</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">小論文 これだけ! 超基礎編</div>
+      <div class="bc-pub">東洋経済新報社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-ota-zerokara')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4046075260.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046075260.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046075260.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#39B4E0,#1C6F9A)"><span class="fb-spine"></span><span class="fb-pub">KADOKAWA（中経出版）</span><span class="fb-title xlong">太田貴之の ゼロから始める小論文</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">太田貴之の ゼロから始める小論文</div>
+      <div class="bc-pub">KADOKAWA（中経出版）</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2F8659"></i><i style="background:#2F8659"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-11method-kiso')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4010349816.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010349816.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349816.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#D14B8F,#A32E6B)"><span class="fb-spine"></span><span class="fb-pub">旺文社</span><span class="fb-title xlong">短期完成 受かる11メソッド 小論文の書き方 基礎編</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">短期完成 受かる11メソッド 小論文の書き方 基礎編</div>
+      <div class="bc-pub">旺文社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦/私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#2E7D9A">入門</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="cat-sec" style="--sc:#24427C">講義・型<small>9 BOOKS — やさしい順</small></div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-koredake-qa')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4492046291.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492046291.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492046291.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#3D4657,#1B2233)"><span class="fb-spine"></span><span class="fb-pub">東洋経済新報社</span><span class="fb-title xlong">小論文 これだけ! 受験生の疑問にズバリ回答! Q&A編</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">小論文 これだけ! 受験生の疑問にズバリ回答! Q&A編</div>
+      <div class="bc-pub">東洋経済新報社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦/私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#24427C">型</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-koredake-mohan-chokikiso')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4492046186.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492046186.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492046186.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7FC8F8,#2A7AB8)"><span class="fb-spine"></span><span class="fb-pub">東洋経済新報社</span><span class="fb-title xlong">小論文 これだけ! 模範解答 超基礎編</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">小論文 これだけ! 模範解答 超基礎編</div>
+      <div class="bc-pub">東洋経済新報社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>総合型・推薦/私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#24427C">型</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-yoshioka-naruhodo10')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4342774895.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342774895.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342774895.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#7FC8F8,#2A7AB8)"><span class="fb-spine"></span><span class="fb-pub">桐原書店</span><span class="fb-title xlong">吉岡の なるほど小論文講義10</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">吉岡の なるほど小論文講義10</div>
+      <div class="bc-pub">桐原書店</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#24427C">型</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-gentensarenai')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4053062578.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053062578.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053062578.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#F5A623,#C2571A)"><span class="fb-spine"></span><span class="fb-pub">Gakken</span><span class="fb-title xlong">採点者の視点を見抜く 減点されない小論文</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">採点者の視点を見抜く 減点されない小論文</div>
+      <div class="bc-pub">Gakken</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#24427C">型</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-saitensha-kakikata')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4761231033.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761231033.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231033.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#2BB5A0,#127065)"><span class="fb-spine"></span><span class="fb-pub">かんき出版</span><span class="fb-title xlong">採点者の心をつかむ 合格する小論文の書き方</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">採点者の心をつかむ 合格する小論文の書き方</div>
+      <div class="bc-pub">かんき出版</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#24427C">型</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-koredake-kakikata-oyo')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4492045449.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492045449.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492045449.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#E3B94E,#8C6A12);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">東洋経済新報社</span><span class="fb-title xlong">小論文 これだけ! 書き方 応用編</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">小論文 これだけ! 書き方 応用編</div>
+      <div class="bc-pub">東洋経済新報社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#24427C">型</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-higuchi-training')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4893086030.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4893086030.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4893086030.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb light" style="background:linear-gradient(160deg,#F4F6FA,#D8E2F0);color:#1B2233;text-shadow:none"><span class="fb-spine"></span><span class="fb-pub">ブックマン社</span><span class="fb-title xlong">樋口裕一の 小論文トレーニング</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">樋口裕一の 小論文トレーニング</div>
+      <div class="bc-pub">ブックマン社</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#24427C">型</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="book-card" role="button" tabindex="0" onclick="openModal('shoron-deguchi-ronri')">
+    <div class="book-card__cover"><div class="bcov"><img src="https://images-fe.ssl-images-amazon.com/images/P/4864700982.09.LZZZZZZZ.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4864700982.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4864700982.09.LZZZZZZZ.jpg" data-s="0" onload="covLoad(this)" onerror="covErr(this)"><div class="bcov-fb" style="background:linear-gradient(160deg,#B5432A,#7E2A18)"><span class="fb-spine"></span><span class="fb-pub">水王舎</span><span class="fb-title long">論理で書ける 小論文</span><span class="fb-band">全学部系統</span></div></div></div>
+    <div class="book-card__body">
+      <div class="bc-name">論理で書ける 小論文</div>
+      <div class="bc-pub">水王舎</div>
+      <div class="bc-diff"><span class="diff-dots"><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style="background:#2E7D9A"></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i><i style=""></i></span></div>
+      <div class="bc-hensachi">目安 <b>私大一般</b></div>
+      <div class="bc-tags"><span class="tag tag-stage" style="background:#24427C">型</span><span class="tag">全学部系統</span></div>
+    </div>
+  </div><div class="cat-more"><p>ここに出しているのは 89 冊のうち難易度順で最初の 18 冊です。続きは絞り込み・並べ替えで表示されます。</p><a href="/shoron/books/">89 冊すべてを役割別の索引で見る</a></div></div>
     <div class="disclaimer" id="catDisclaimer"></div>
   </section>
 
@@ -732,21 +898,22 @@ gtag('config', 'G-DQ5WFXEFMX');
     <div class="foot-links">
       <a href="/">ルート大全 トップ</a>
       <a href="/shoron/books/">参考書一覧</a>
-      <button onclick="openLegal('about')">運営者情報</button>
-      <button onclick="openLegal('privacy')">プライバシーポリシー</button>
-      <button onclick="openLegal('disclaimer')">免責事項</button>
-      <button onclick="openLegal('affiliate')">広告について</button>
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
-    <div class="foot-legal" id="footLegal"></div>
+    <div class="foot-legal">
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。<b>Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。</b><br>
+      <span style="display:inline-block;margin-top:10px;font-family:var(--mono);letter-spacing:.06em">小論文ルート大全 — ESSAY ROUTE COMPENDIUM</span>
+    </div>
   </div>
 
 </main>
-
-<!-- Legal modal -->
-<div class="modal-overlay" id="legalModal" onclick="if(event.target===this)closeLegal()">
-  <div class="modal" id="legalInner" role="dialog" aria-modal="true" aria-label="サイト情報"></div>
-</div>
 
 <!-- Book detail modal -->
 <div class="modal-overlay" id="bookModal" onclick="if(event.target===this)closeModal()">
@@ -973,72 +1140,12 @@ const BOOKS = [
 /* ============================================================
    LEGAL — 法定表記・ポリシー
    ============================================================ */
-const LEGAL = {
-about:{title:"運営者情報",body:()=>`
-<h5>サイト名</h5><p>${CONFIG.siteName}</p>
-<h5>運営者</h5><p>${CONFIG.operator || CONFIG.siteName + " 運営者"}</p>
-${CONFIG.contact?`<h5>お問い合わせ</h5><p>${CONFIG.contact}</p>`:`<h5>お問い合わせ</h5><p>お問い合わせ先は準備中です。</p>`}
-<h5>サイトの目的</h5>
-<p>本サイトは、大学受験の小論文の参考書情報を整理して提供する情報サイトです。掲載している参考書の難易度・到達目安・所要時間は、各出版社の公表情報および大手予備校・塾が公開する学習ルート解説をもとにした編集部独自の目安であり、特定の成果を保証するものではありません。</p>
-<h5>掲載情報について</h5>
-<p>書誌情報(書名・出版社・ISBN・刊行年)は各出版社および書店データベースの公開情報にもとづいています。版の改訂等により情報が古くなる場合がありますので、購入前には必ず販売ページで最新の情報をご確認ください。</p>`},
-
-privacy:{title:"プライバシーポリシー",body:()=>`
-<h5>個人情報の取り扱い</h5>
-<p>本サイトは静的なウェブページとして提供されており、氏名・住所・メールアドレス等の個人情報を入力するフォームを設置していません。ルート作成のために入力された志望校名・偏差値・学習済み参考書などの情報は、お使いのブラウザ内でのみ処理され、サーバーへ送信・保存されることはありません。</p>
-<h5>診断結果の保存と共有について</h5>
-<p>3分診断の結果は、結果画面の「この結果を保存」を押したときにかぎり、お使いのブラウザのローカルストレージ（端末内の保存領域）に記録されます。保存されるのは診断の回答と、そこから作られた表示用の見出しだけで、氏名などの個人を特定できる情報は含まれません。この情報が外部へ送信されることはなく、当サイトの運営者が取得・閲覧することもできません。保存した内容は診断画面の一覧からいつでも削除でき、ブラウザの閲覧データを消去した場合にも失われます。ブラウザの設定やプライベートブラウズによりローカルストレージが使えない場合は、保存ボタンを表示しません。この判定のため、診断の画面を開いた時点で確認用の値をローカルストレージに一度書き込み、すぐに削除します。この値に診断の内容や個人を特定できる情報は含まれません。</p>
-<p>診断結果の共有リンクに含まれるのも診断の回答だけです。リンクを開いた方の画面では、その回答をもとに結果があらためて計算されます。</p>
-${AFF ? `<h5>クッキー(Cookie)および類似技術について</h5>
-<p>本サイトは${AFF_PROGRAMS}に参加しています。これらのプログラムの提供事業者(第三者)は、広告の配信および成果の計測のために、クッキー、ピクセルタグ、その他の類似技術を使用して、本サイトを訪問された方の情報を取得する場合があります。</p>
-<p>これらの第三者は、本サイトおよび他のウェブサイトへのアクセス情報にもとづいて、利用者の興味・関心に応じた広告を表示することがあります。この際に取得される情報に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
-<h5>広告配信の停止(オプトアウト)について</h5>
-<p>クッキーの使用を望まれない場合は、お使いのブラウザの設定からクッキーを無効にすることで、情報の収集を拒否できます。設定方法はブラウザのヘルプをご確認ください。</p>
-<ul>
-${CONFIG.amazonTag ? `<li>Amazonにおける情報の取り扱いについては、Amazon.co.jp のプライバシー規約をご確認ください</li>` : ``}
-${CONFIG.rakutenId ? `<li>楽天における情報の取り扱いについては、楽天グループのプライバシーポリシーをご確認ください</li>` : ``}
-<li>広告配信事業者による行動ターゲティング広告は、一般社団法人日本インタラクティブ広告協会(JIAA)のオプトアウトページ等からも停止できます</li>
-</ul>` : `<h5>クッキー(Cookie)について</h5>
-<p>本サイトは、広告配信を目的としたクッキーを使用していません。アクセス解析のためのクッキーについては下記をご覧ください。</p>`}
-${ADSENSE ? `<h5>Google AdSense による広告配信について</h5>
-<p>本サイトは、第三者配信の広告サービス「Google AdSense」を利用しています。Google をはじめとする第三者配信事業者は、クッキー(Cookie)を使用して、本サイトや他のウェブサイトへの過去のアクセス情報にもとづく広告を配信します。これにより表示される広告に、氏名・住所・メールアドレス・電話番号などの個人を特定できる情報は含まれません。</p>
-<p>パーソナライズ広告(興味・関心に応じた広告)の表示は、Google の<a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">広告設定</a>から無効にできます。また、<a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a> では、参加している第三者配信事業者のクッキーをまとめて無効にできます。</p>
-<p>Google が広告配信のために取得する情報とその使われ方については、<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">「広告 - ポリシーと規約 - Google」</a>をご確認ください。</p>` : ``}
-<h5>アクセス解析について</h5>
-<p>当サイトでは、利用状況の把握と改善のために Google LLC が提供する「Google アナリティクス」を利用しています。Google アナリティクスは Cookie を使用して、氏名・住所などの個人を特定する情報を含まない形で、閲覧されたページや滞在時間などのアクセス情報を収集します。</p>
-<p>収集された情報は Google 社のプライバシーポリシーに基づいて管理されます。データの収集を望まない場合は、Google が提供する「Google アナリティクス オプトアウト アドオン」を利用するか、お使いのブラウザの設定で Cookie を無効にすることで停止できます。</p>
-<h5>ポリシーの変更</h5>
-<p>本ポリシーの内容は、法令の改正やサービスの変更に応じて予告なく改定する場合があります。</p>`},
-
-disclaimer:{title:"免責事項",body:()=>`
-<h5>掲載情報の正確性について</h5>
-<p>本サイトに掲載している参考書の難易度・到達偏差値・所要時間・問題数、および大学ごとの出題傾向・到達目安偏差値は、公開情報にもとづく<b>編集上の目安</b>です。実際の難易度の感じ方や必要な学習時間には個人差があり、また入試制度・出題傾向は年度によって変更されます。</p>
-<p>掲載内容の正確性・完全性・最新性について、可能な範囲で努力しておりますが、これを保証するものではありません。</p>
-<h5>学習成果について</h5>
-<p>本サイトが提示する学習ルートは、一般的に有効とされる学習順序を整理したものであり、<b>特定の大学への合格や成績の向上を保証するものではありません</b>。最終的な参考書の選択・学習計画の決定は、利用者ご自身の判断と責任において行ってください。学校や塾の先生など、あなたの状況を直接把握している方に相談されることをおすすめします。</p>
-<h5>損害の責任</h5>
-<p>本サイトの情報を利用したことにより生じたいかなる損害についても、運営者は一切の責任を負いかねます。</p>
-<h5>外部サイトについて</h5>
-<p>本サイトから外部のウェブサイト(オンライン書店等)へ移動された場合、移動先で提供される情報・サービスについて、運営者は一切の責任を負いません。商品の購入に関する契約は、利用者と販売事業者との間で成立するものです。</p>
-<h5>著作権について</h5>
-<p>本サイトに掲載している書影(商品画像)は、各アフィリエイト・プログラムが提供する商品画像URLを参照して表示しています。書影の著作権は各出版社・著作権者に帰属します。掲載内容について権利者の方からご連絡をいただいた場合は、速やかに対応いたします。</p>`},
-
-affiliate:{title:"広告について",body:()=>`
-${AFF ? `<h5>アフィリエイト・プログラムの利用</h5>
-<p>本サイトは${AFF_PROGRAMS}に参加しています。参考書の詳細画面に設置している${AFF_STORES}へのリンクは広告リンクであり、リンクを経由して商品が購入された場合、販売事業者から本サイトに紹介料が支払われることがあります。${AFF_AZ ? `` : `Amazonへのリンクはアフィリエイトタグを含まない通常のリンクで、リンク経由の購入によって本サイトが紹介料を得ることはありません。`}</p>
-<p><b>紹介料の発生によって、利用者が商品を購入する際の価格が変わることはありません。</b></p>` : `<h5>広告の掲載について</h5>
-<p>本サイトは現在、アフィリエイト・プログラムを含む広告を掲載していません。参考書の販売サイトへのリンクは書誌情報を確認していただくための通常のリンクであり、リンク経由の購入によって本サイトが収益を得ることはありません。</p>`}
-${CONFIG.amazonTag ? `<h5>Amazonアソシエイト・プログラムについて</h5>
-<p>${CONFIG.siteName}は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。</p>
-<p><b>Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</b></p>` : ""}
-${ADSENSE ? `<h5>第三者配信の広告について</h5>
-<p>本サイトは、Google LLC が提供する広告配信サービス「Google AdSense」を利用しています。ページ内に「広告」と表示している枠に配信される広告の内容は Google 側で選ばれており、本サイトが個別に選定・推奨しているものではありません。表示された広告が閲覧またはクリックされることで、本サイトに収益が発生することがあります。</p>
-<p>広告の表示に用いられるクッキーの扱いと、その停止方法は「プライバシーポリシー」に記載しています。</p>` : ``}
-<h5>掲載順序と広告の関係</h5>
-<p>本サイトにおける参考書の掲載順・ルートへの採否・評価コメントは、紹介料の有無や料率によって決定していません。学習上の有効性と、公開されている一般的な評価にもとづいて編集しています。</p>
-<h5>価格・在庫について</h5>
-<p>本サイトでは商品の価格・在庫状況を掲載していません。価格および在庫状況は変動しますので、購入時には必ず販売サイト上の表示をご確認ください。</p>`}
-};
+/* サイトの表記（運営者情報・データの作り方・プライバシーポリシー・免責事項・
+   広告について）は /about/ /methodology/ /privacy/ /disclaimer/ /ads/ の静的
+   ページが正本。以前はここに JS のモーダルとして持っていたが、クローラー・
+   AdSense の審査・JS を切った環境からは存在しないのと同じだったため、
+   フッターから静的ページへ送る形にした。
+   本文の正本は build/content/legal.mjs（node build/generate-legal.mjs で生成）。 */
 /* ============================================================
    STATE
    ============================================================ */
@@ -1232,7 +1339,7 @@ function openModal(id){
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
     <div class="aff-actions">
       ${az?`<a class="aff-btn amz" href="${az}" target="_blank" rel="nofollow${AFF_AZ?' sponsored':''} noopener">Amazonで見る${ext}</a>`:""}
-      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener">楽天ブックスで見る${ext}</a>`:""}
+      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener">楽天ブックスで検索${ext}</a>`:""}
     </div>
     <p class="aff-note">${AFF?`${AFF_STORES}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります(価格は変わりません)。`:""}版の改訂により内容が異なる場合がありますので、購入前に販売ページで最新版をご確認ください。</p>
   </div>` : "";
@@ -1278,31 +1385,6 @@ function closeModal(){
 /* ============================================================
    FOOTER / LEGAL
    ============================================================ */
-function openLegal(key){
-  const L = LEGAL[key]; if(!L) return;
-  document.getElementById("legalInner").innerHTML = `
-    <div class="modal__grab"></div>
-    <div class="modal__head" style="padding-bottom:16px">
-      <div class="modal__titles"><h3>${L.title}</h3></div>
-      <button class="modal__close" onclick="closeLegal()" aria-label="閉じる"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
-    </div>
-    <div class="legal-body">${L.body()}</div>`;
-  document.getElementById("legalModal").classList.add("open");
-  modalOpened("legalInner");
-  document.body.style.overflow="hidden";
-}
-function closeLegal(){
-  document.getElementById("legalModal").classList.remove("open");
-  modalClosed();
-  document.body.style.overflow="";
-}
-function renderFooter(){
-  document.getElementById("footLegal").innerHTML =
-    (CONFIG.amazonTag ? `<b>Amazonのアソシエイトとして、${CONFIG.siteName}は適格販売により収入を得ています。</b><br>` : "") +
-    (AFF ? `当サイトは第三者のアフィリエイト・プログラムを利用しており、広告リンク経由の購入により紹介料が発生することがあります。` : ``) +
-    `掲載している難易度・偏差値・所要時間は公開情報にもとづく目安であり、学習成果を保証するものではありません。書影はAmazonが提供する商品画像URLを参照して表示しています。<br>` +
-    `<span style="display:inline-block;margin-top:10px;font-family:var(--mono);letter-spacing:.06em">${CONFIG.siteName} — ESSAY ROUTE COMPENDIUM</span>`;
-}
 /* 他科目へのリンク。冊数は各科目の実数に合わせて手で直す */
 const OTHER_SUBJECTS = [
   {
@@ -1398,12 +1480,10 @@ function modalClosed(){
 function openBox(){
   const el = document.getElementById("bookModal");
   if(el && el.classList.contains("open")) return document.getElementById("modalInner");
-  const lg = document.getElementById("legalModal");
-  if(lg && lg.classList.contains("open")) return document.getElementById("legalInner");
   return null;
 }
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){ closeModal(); closeLegal(); return; }
+  if(e.key==="Escape"){ closeModal(); return; }
   if(e.key!=="Tab") return;
   const box = openBox();
   if(!box) return;
@@ -1416,7 +1496,6 @@ document.addEventListener("keydown",e=>{
 
 buildFilters();
 renderCatalog();
-renderFooter();
 renderFootSubjects();
 
 /* ハッシュ付きで開かれていれば、その画面から始める */
