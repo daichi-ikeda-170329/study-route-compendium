@@ -30,6 +30,12 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer なので描画は止めない -->
+<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
+     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
+     defer にするとその時点でまだ読めておらず、記録が落ちる -->
+<script src="/assets/js/analytics.js"></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>

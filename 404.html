@@ -11,6 +11,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&family=Shippori+Mincho+B1:wght@700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
+     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
+     defer にするとその時点でまだ読めておらず、記録が落ちる -->
+<script src="/assets/js/analytics.js"></script>
 <script src="/assets/js/search.js" defer></script>
 <style>
 :root{
@@ -60,7 +64,14 @@ p.lead{font-size:13.5px;color:var(--ink-2);max-width:44ch;margin:0 auto 30px}
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-DQ5WFXEFMX');
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
 </script>
 </head>
 <body>

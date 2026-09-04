@@ -30,6 +30,12 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer なので描画は止めない -->
+<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
+     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
+     defer にするとその時点でまだ読めておらず、記録が落ちる -->
+<script src="/assets/js/analytics.js"></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -37,7 +43,14 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-DQ5WFXEFMX');
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
 </script>
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
@@ -104,13 +117,15 @@ gtag('config', 'G-DQ5WFXEFMX');
       <h2 class="sec">診断結果の保存と共有について</h2>
       <p>3 分診断の結果は、結果画面の「この結果を保存」を押したときにかぎり、お使いのブラウザのローカルストレージ（端末内の保存領域）に記録されます。保存されるのは診断の回答と、そこから作られた表示用の見出しだけで、個人を特定できる情報は含まれません。</p>
       <p>保存した内容は診断画面の一覧からいつでも削除でき、ブラウザの閲覧データを消去した場合にも失われます。ブラウザの設定やプライベートブラウズによりローカルストレージが使えない場合は、保存ボタンを表示しません。この判定のため、診断の画面を開いた時点で確認用の値を一度書き込み、すぐに削除します。この値に診断の内容や個人を特定できる情報は含まれません。</p>
-      <p>診断結果やルートの共有リンクに含まれるのも、診断の回答とルートの設定だけです。リンクを開いた方の画面では、その内容をもとに結果があらためて計算されます。</p>
+      <p>診断結果やルートの共有リンクに含まれるのも、診断の回答とルートの設定だけです。学部名・模試の偏差値・すでに終えた参考書は含みません。リンクを開いた方の画面では、その内容をもとに結果があらためて計算されます。共有リンクを開いて結果を復元したあとは、アドレスバーからその情報を自動的に取り除いています（広告や解析にページの URL がそのまま渡るためです）。</p>
+      <p>志望校名・学部名・模試の偏差値・すでに終えた参考書・診断の回答は、いずれもお使いの端末の中だけで処理しています。これらをアクセス解析や広告の配信先へ送ることはありません。送ってよい項目は仕組みとして限定しており、一覧は<a href="https://github.com/daichi-ikeda-170329/study-route-compendium/blob/main/docs/analytics-events.md" target="_blank" rel="noopener noreferrer">GitHub の docs/analytics-events.md</a>で公開しています。</p>
     </section>
 
     <section class="block prose" id="s3">
       <h2 class="sec">アクセス解析について</h2>
       <p>当サイトでは、利用状況の把握と改善のために Google LLC が提供する「Google アナリティクス」（測定 ID: G-DQ5WFXEFMX）を利用しています。Google アナリティクスは Cookie を使用して、氏名・住所などの個人を特定する情報を含まない形で、閲覧されたページや滞在時間などのアクセス情報を収集します。</p>
       <p>あわせて、どの参考書の購入リンクが押されたかを、書籍 ID と科目名の形で記録しています。どの本が実際に選ばれているかを知るためのもので、個人を特定できる情報は含みません。</p>
+      <p>解析へ送る項目は、科目 ID・書籍 ID・販売サイト名など、あらかじめ決めた固定の値だけに限定しています。志望校名・学部名・偏差値・診断の回答・すでに終えた参考書は送りません。また、ページの URL を送る際には、共有リンクの内容（診断の回答や志望校名）が含まれないよう、クエリと # 以降を取り除いています。</p>
       <p>収集された情報は Google 社のプライバシーポリシーに基づいて管理されます。データの収集を望まない場合は、Google が提供する「Google アナリティクス オプトアウト アドオン」を利用するか、お使いのブラウザの設定で Cookie を無効にすることで停止できます。</p>
     </section>
 

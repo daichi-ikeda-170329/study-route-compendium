@@ -98,9 +98,13 @@
       .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
 
+  /**
+   * 解析イベントは assets/js/analytics.js の allowlist を必ず通す。
+   * **検索語そのものは送らない。**送るのは、どの本の詳細へ抜けたかだけ。
+   */
   function track(name, params) {
     try {
-      if (typeof global.gtag === "function") global.gtag("event", name, params || {});
+      if (global.RTAnalytics) global.RTAnalytics.track(name, params || {});
     } catch (e) { /* 計測が無い環境では何もしない */ }
   }
 
@@ -222,7 +226,7 @@
   function go(i) {
     var b = hits[i];
     if (!b) return;
-    track("book_search_open", { subject: global.RT_BOOK_INDEX.subjects[b[0]][0], book: b[1] });
+    track("book_search_open", { subject_id: global.RT_BOOK_INDEX.subjects[b[0]][0], book_id: b[1] });
     global.location.href = bookURL(b);
   }
 

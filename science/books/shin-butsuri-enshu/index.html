@@ -30,6 +30,12 @@
 <link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer なので描画は止めない -->
+<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
+     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
+     defer にするとその時点でまだ読めておらず、記録が落ちる -->
+<script src="/assets/js/analytics.js"></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -37,7 +43,14 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-DQ5WFXEFMX');
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
 </script>
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
@@ -343,27 +356,28 @@ gtag('config', 'G-DQ5WFXEFMX');
       <div class="eyebrow">Where to buy</div>
       <h2 class="sec">購入する</h2>
       <div class="buy">
-        <a class="az" href="https://www.amazon.co.jp/dp/4796116214/ref=nosim?tag=routetaizen-22" target="_blank" rel="nofollow sponsored noopener" data-rt-buy="amazon" data-rt-bid="shin-butsuri-enshu" data-rt-sub="science">
+        <a class="az" href="https://www.amazon.co.jp/dp/4796116214/ref=nosim?tag=routetaizen-22" target="_blank" rel="nofollow sponsored noopener noreferrer" data-rt-buy="amazon" data-rt-bid="shin-butsuri-enshu" data-rt-sub="science">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
           Amazon で見る
         </a>
-        <a class="rk" href="https://hb.afl.rakuten.co.jp/hgc/56ba2770.50b55cf7.56ba2771.68ff96bc/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F9784796116213%2F&amp;m=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F9784796116213%2F" target="_blank" rel="nofollow sponsored noopener" data-rt-buy="rakuten" data-rt-bid="shin-butsuri-enshu" data-rt-sub="science">
+        <a class="rk" href="https://hb.afl.rakuten.co.jp/hgc/56ba2770.50b55cf7.56ba2771.68ff96bc/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F9784796116213%2F&amp;m=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F9784796116213%2F" target="_blank" rel="nofollow sponsored noopener noreferrer" data-rt-buy="rakuten" data-rt-bid="shin-butsuri-enshu" data-rt-sub="science">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
           楽天ブックスで検索
         </a>
       </div>
       <script>
-      /* 購入リンクのクリックを GA4 に送る。どの本が実際に踏まれたかを書籍単位で見るため。
-         GA4 の拡張計測（外部リンククリック）でも URL は取れるが、書籍 id と科目は取れない。
+      /* 購入リンクのクリックを記録する。どの本が実際に踏まれたかを書籍単位で見るため。
+         **送信は assets/js/analytics.js の allowlist を必ず通す**（gtag をここから
+         直接呼ばない。許可していない値が外へ出る道を残さないため）。
          計測の失敗でリンクの遷移を止めないよう、全体を try で囲う。 */
       document.addEventListener("click", function (e) {
         var a = e.target.closest ? e.target.closest("[data-rt-buy]") : null;
         if (!a) return;
         try {
-          if (typeof gtag === "function") gtag("event", "book_buy_click", {
+          if (window.RTAnalytics) window.RTAnalytics.track("affiliate_click", {
             store: a.getAttribute("data-rt-buy"),
             book_id: a.getAttribute("data-rt-bid"),
-            subject: a.getAttribute("data-rt-sub")
+            subject_id: a.getAttribute("data-rt-sub")
           });
         } catch (err) { /* 計測の失敗で購入導線を止めない */ }
       });

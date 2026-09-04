@@ -180,8 +180,12 @@ function renderBook(book, ctx) {
   const affAz = Boolean(config.amazonTag);
   const affRk = Boolean(config.rakutenId);
   const aff = affAz || affRk;
-  const relAz = affAz ? 'nofollow sponsored noopener' : 'nofollow noopener';
-  const relRk = 'nofollow sponsored noopener';
+  /* 外部の販売サイトへ出るリンク。target="_blank" を使うので noopener は必須。
+     noreferrer も付ける（どのページから来たかを販売サイトへ渡さない。
+     アフィリエイトの計測は URL の tag= と経路 ID で行われるので影響しない）。
+     広告リンクであることは sponsored で示す。ID が入っている側だけに付ける */
+  const relAz = affAz ? 'nofollow sponsored noopener noreferrer' : 'nofollow noopener noreferrer';
+  const relRk = 'nofollow sponsored noopener noreferrer';
   const affStores = [affAz ? 'Amazon' : null, affRk ? '楽天ブックス' : null].filter(Boolean).join('・');
 
   const fieldName = subLabel ? `${sub.ja}（${subLabel}）` : sub.ja;
@@ -421,17 +425,18 @@ ${bookCards(next.list, sub, stages)}
         </a>` : ''}
       </div>
       <script>
-      /* 購入リンクのクリックを GA4 に送る。どの本が実際に踏まれたかを書籍単位で見るため。
-         GA4 の拡張計測（外部リンククリック）でも URL は取れるが、書籍 id と科目は取れない。
+      /* 購入リンクのクリックを記録する。どの本が実際に踏まれたかを書籍単位で見るため。
+         **送信は assets/js/analytics.js の allowlist を必ず通す**（gtag をここから
+         直接呼ばない。許可していない値が外へ出る道を残さないため）。
          計測の失敗でリンクの遷移を止めないよう、全体を try で囲う。 */
       document.addEventListener("click", function (e) {
         var a = e.target.closest ? e.target.closest("[data-rt-buy]") : null;
         if (!a) return;
         try {
-          if (typeof gtag === "function") gtag("event", "book_buy_click", {
+          if (window.RTAnalytics) window.RTAnalytics.track("affiliate_click", {
             store: a.getAttribute("data-rt-buy"),
             book_id: a.getAttribute("data-rt-bid"),
-            subject: a.getAttribute("data-rt-sub")
+            subject_id: a.getAttribute("data-rt-sub")
           });
         } catch (err) { /* 計測の失敗で購入導線を止めない */ }
       });

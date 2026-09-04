@@ -42,6 +42,12 @@ export function adsenseLoader() {
  * 「広告」の見出しを必ず添える。AdSense のポリシーは広告をコンテンツと
  * 誤認させる配置を禁じており、ラベルを付けるのが最も確実な満たし方になる。
  *
+ * **置いてよい場所は本文の切れ目だけ。** 診断の質問の途中、エラー、重要な注意書き、
+ * 保存の操作、結果の最重要部分には割り込ませない。ここに広告を挟むと、
+ * 押すつもりのないものを押させることになり、受験生への公益を損なう。
+ * 自動広告の除外は AdSense の管理画面でしか設定できないため、
+ * README の「運営者が行う手動設定」に手順を分けてある。
+ *
  * 空でないときは前後の改行とインデントも自分で持つ。呼び出し側は直前の行の末尾に
  * そのまま置く。広告が無効なときに空行だけが生成物に残るのを避けるため。
  *
@@ -52,9 +58,11 @@ export function adUnit(key, indent = '    ') {
   const slot = AD_SLOTS[key];
   if (!ADSENSE || !slot) return '';
   const i = indent;
-  return `\n\n${i}<aside class="ad-slot" aria-label="広告">
+  /* 遅延読み込み。ファーストビューの外に置く枠だけを対象にする
+     （inArticle も bottom も本文の途中以降なので、どちらも該当する） */
+  return `\n\n${i}<aside class="ad-slot" aria-label="広告" data-nosnippet>
 ${i}  <span class="ad-slot__t">広告</span>
-${i}  <ins class="adsbygoogle" style="display:block" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${slot}" data-ad-format="auto" data-full-width-responsive="true"></ins>
+${i}  <ins class="adsbygoogle" style="display:block" data-ad-client="${ADSENSE_CLIENT}" data-ad-slot="${slot}" data-ad-format="auto" data-full-width-responsive="true" loading="lazy"></ins>
 ${i}  <script>(adsbygoogle = window.adsbygoogle || []).push({});</` + `script>
 ${i}</aside>`;
 }

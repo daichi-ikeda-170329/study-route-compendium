@@ -232,9 +232,14 @@
   }
 
   /** GA4 が読み込まれているときだけイベントを送る。失敗しても診断の動作には影響させない */
+  /**
+   * 解析イベントは assets/js/analytics.js の allowlist を必ず通す。
+   * gtag をここから直接呼ばない（許可していない値が外へ出る道を残さないため）。
+   * analytics.js を読めていない環境では何も送らない。
+   */
   function track(name, params) {
     try {
-      if (typeof global.gtag === "function") global.gtag("event", name, params || {});
+      if (global.RTAnalytics) global.RTAnalytics.track(name, params || {});
     } catch (e) { /* 計測の失敗で機能を止めない */ }
   }
 
@@ -597,7 +602,7 @@
   function copyLink(btn) {
     var t = targetOf(btn);
     if (!t) return;
-    var done = function () { msg(t.box, "コピーしました"); track("share_copy", { subject: CFG.subject }); };
+    var done = function () { msg(t.box, "コピーしました"); track("share_copy", { subject_id: CFG.subject }); };
     try {
       if (global.navigator.clipboard && global.navigator.clipboard.writeText) {
         global.navigator.clipboard.writeText(t.url).then(done, function () { copyFallback(t.box, t.url); });
@@ -609,7 +614,7 @@
 
   function trackShareX() {
     if (!CFG) return;
-    track("share_x", { subject: CFG.subject });
+    track("share_x", { subject_id: CFG.subject });
   }
 
   function shareNative(btn) {
@@ -621,7 +626,7 @@
         text: t.label + "のルートが出ました",
         url: t.url
       }).then(function () {
-        track("share_native", { subject: CFG.subject });
+        track("share_native", { subject_id: CFG.subject });
       }, function () { /* 利用者がキャンセルした場合。何もしない */ });
     } catch (e) { /* 共有シートを開けない環境 */ }
   }
@@ -642,7 +647,7 @@
       store.items[same].label = CURRENT.label;
       if (!saveStore(store)) { msg(box, "保存できませんでした", "warn"); return; }
       msg(box, "保存しました（既存の項目を更新）");
-      track("route_save", { subject: CFG.subject, updated: true });
+      track("route_save", { subject_id: CFG.subject, storage: "local" });
       return;
     }
 
@@ -666,7 +671,7 @@
     });
     if (!saveStore(store)) { msg(box, "保存できませんでした", "warn"); return; }
     msg(box, "保存しました");
-    track("route_save", { subject: CFG.subject, updated: false });
+    track("route_save", { subject_id: CFG.subject, storage: "local" });
   }
 
   function openSaved(id) {
@@ -759,6 +764,16 @@
   }
 
   /** ルート共有のパラメータだけを取り除く。画面を指すハッシュ（#route）は残す */
+  /** 診断の回答列をアドレスバーから落とす。復元後に呼ぶ */
+  function clearAnswerParams() {
+    try {
+      var u = new URL(global.location.href);
+      u.searchParams.delete(PARAM_VERSION);
+      u.searchParams.delete(PARAM_ANSWERS);
+      global.history.replaceState(null, "", u.pathname + u.search + u.hash);
+    } catch (e) { /* URL を組み直せない環境では、そのまま残しておく */ }
+  }
+
   function clearRouteParams() {
     try {
       var u = new URL(global.location.href);
@@ -808,14 +823,16 @@
       linkFailed = true;
       clearParams();
       cfg.restart();
-      track("shared_link_invalid", { subject: cfg.subject, reason: res.reason });
+      track("shared_link_invalid", { subject_id: cfg.subject, reason: res.reason });
       return;
     }
     restored = true;
     cfg.state.started = true;
     cfg.state.ans = res.ans;
     cfg.showResult();
-    track("shared_link_open", { subject: cfg.subject });
+    /* 回答列もアドレスバーから落とす（上と同じ理由） */
+    clearAnswerParams();
+    track("shared_link_open", { subject_id: cfg.subject });
   }
 
   /**
@@ -828,7 +845,7 @@
   function restoreRoute(cfg, params) {
     var bail = function (reason) {
       clearRouteParams();
-      track("shared_route_invalid", { subject: cfg.subject, reason: reason });
+      track("shared_route_invalid", { subject_id: cfg.subject, reason: reason });
     };
     if (!cfg.route || typeof cfg.route.apply !== "function") return bail("route-unsupported");
     if (params.get(PARAM_ROUTE_VERSION) !== String(ROUTE_VERSION)) return bail("version");
@@ -847,7 +864,13 @@
     if (!ok) { restoredRouteKey = null; return bail("route-rejected"); }
 
     try { cfg.route.show(); } catch (e) { /* 表示に失敗しても状態は適用済み */ }
-    track("shared_route_open", { subject: cfg.subject });
+    /* 復元し終えたらアドレスバーから共有パラメータを落とす。
+       **広告や解析はページ URL をそのまま受け取る**ので、志望校名や回答が
+       URL に残ったままだと第三者へ渡ってしまう。状態はすでに画面へ反映済みで、
+       落としても表示は変わらない（共有し直すときは routeBlock が組み直す）。
+       restoredRouteKey は残すので「共有されたルートです」の注記は出続ける */
+    clearRouteParams();
+    track("shared_route_open", { subject_id: cfg.subject });
   }
 
   var RTShare = {
