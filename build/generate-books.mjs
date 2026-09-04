@@ -22,6 +22,7 @@ import { nextStages } from './lib/flow.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { degreeTable, bandOf } from './lib/scale.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
+import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL, placeholderSearchUrl } from './lib/record-type.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -112,6 +113,12 @@ function pickNext(book, books, stages, exclude, dir, max = 6) {
 }
 
 function amazonUrl(b, tag) {
+  // ルート上の枠（志望校の過去問など）は特定の商品ではない。/dp/ の直リンクを
+  // 出すと、志望校が違う利用者を別大学の 1 冊へ送ってしまう
+  if (isPlaceholder(b)) {
+    const base = placeholderSearchUrl(b.official || b.name);
+    return tag ? `${base}&tag=${tag}` : base;
+  }
   const key = b.isbn10 || b.asin;
   const q = encodeURIComponent(b.official || b.name);
   const base = key
@@ -137,7 +144,8 @@ function amazonUrl(b, tag) {
  */
 function rakutenUrl(b, id) {
   if (!id) return '';
-  const dest = `https://search.rakuten.co.jp/search/mall/${b.isbn13 || b.name}/`;
+  // 枠は ISBN を持たない。書名そのままの検索結果へ送る
+  const dest = `https://search.rakuten.co.jp/search/mall/${isPlaceholder(b) ? b.name : (b.isbn13 || b.name)}/`;
   const e = encodeURIComponent(dest);
   return `https://hb.afl.rakuten.co.jp/hgc/${id}/?pc=${e}&m=${e}`;
 }
@@ -214,10 +222,10 @@ function renderBook(book, ctx) {
     { name: pageName, url, absUrl: url },
   ];
 
-  const ld = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      breadcrumbLd(crumbItems, `${url}#breadcrumb`),
+  // 枠には Book を出さない。ISBN も刊行年も持たない「1 冊」を構造化データで
+  // 主張すると、検索エンジンに実在しない商品を渡すことになる
+  const placeholder = isPlaceholder(book);
+  const bookNode = placeholder ? [] : [
       {
         '@type': 'Book',
         '@id': `${url}#book`,
@@ -235,6 +243,13 @@ function renderBook(book, ctx) {
         about: `大学受験 ${fieldName}`,
         url,
       },
+  ];
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      breadcrumbLd(crumbItems, `${url}#breadcrumb`),
+      ...bookNode,
       {
         '@type': 'WebPage',
         '@id': `${url}#webpage`,
@@ -242,7 +257,7 @@ function renderBook(book, ctx) {
         dateModified: updated,
         isPartOf: { '@id': `${ORIGIN}/#website` },
         breadcrumb: { '@id': `${url}#breadcrumb` },
-        mainEntity: { '@id': `${url}#book` },
+        ...(placeholder ? {} : { mainEntity: { '@id': `${url}#book` } }),
       },
     ],
   };
@@ -253,7 +268,7 @@ function renderBook(book, ctx) {
   const spec = [
     ...(authors.length ? [['著者', esc(authors.join('・'))]] : []),
     ['出版社', esc(book.pub)],
-    ['出版年', book.year ? `${book.year} 年` : '—'],
+    ['出版年', placeholder ? '志望校・年度による' : (book.year ? `${book.year} 年` : '—')],
     ['対象範囲', esc(book.subjects || '—')],
     ['役割', esc(st.label || '—')],
     ['難易度', prov ? `<span class="bk-prov">${esc(PROVISIONAL_LABEL)}</span>`
@@ -263,7 +278,8 @@ function renderBook(book, ctx) {
     ['問題数・構成', esc(book.problems || '—')],
     ['想定学習時間', esc(book.hours || '—')],
     ['形式', esc(book.style || '—')],
-    ['ISBN', book.isbn13 ? `<span class="mono">${esc(book.isbn13)}</span>` : '—'],
+    ['ISBN', placeholder ? '—（特定の商品ではありません）'
+      : book.isbn13 ? `<span class="mono">${esc(book.isbn13)}</span>` : '—'],
   ].map(([k, v]) => `      <div><dt>${k}</dt><dd>${v}</dd></div>`).join('\n');
 
   const nextLead = next.kind === 'same'
@@ -378,7 +394,7 @@ ${bookCards(next.list, sub, stages)}
       <div class="buy">
         <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
-          Amazon で見る
+          ${placeholder ? '志望校の過去問題集を検索' : 'Amazon で見る'}
         </a>
         ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
@@ -401,6 +417,7 @@ ${bookCards(next.list, sub, stages)}
         } catch (err) { /* 計測の失敗で購入導線を止めない */ }
       });
       </script>
+      ${placeholder ? `<p class="buy__note buy__note--warn"><b>${esc(PLACEHOLDER_LABEL)}。</b>${esc(PLACEHOLDER_NOTE)}</p>` : ''}
       <p class="buy__note">${aff ? `${affStores}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。` : ''}価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
     </section>
 

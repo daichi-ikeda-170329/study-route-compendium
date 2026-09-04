@@ -1142,6 +1142,12 @@ function coverSrcs(b){
 }
 /* ---------- アフィリエイトリンク ---------- */
 function amazonURL(b){
+  /* ルート上の枠（志望校の過去問など）は特定の商品ではない。直リンクを出すと、
+     志望校が違う利用者を別大学の 1 冊へ送ってしまう。検索結果へ送る */
+  if(b.recordType === "routePlaceholder"){
+    const q = encodeURIComponent(b.official || b.name);
+    return `https://www.amazon.co.jp/s?k=${q}` + (CONFIG.amazonTag ? `&tag=${CONFIG.amazonTag}` : "");
+  }
   const k = b.isbn10 || b.asin; if(!k) return null;
   return `https://www.amazon.co.jp/dp/${k}/ref=nosim` + (CONFIG.amazonTag ? `?tag=${CONFIG.amazonTag}` : "");
 }

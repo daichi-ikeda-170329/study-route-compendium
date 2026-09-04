@@ -678,7 +678,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <div class="stat"><b id="stat-unis">160</b><span>収録大学 — 医学部は別扱い</span></div>
         <div class="stat"><b>2026</b><span>年度入試対応（新課程・数C）</span></div>
       </div>
-      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
+      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-04">2026-09-04</time></p>
     </div>
 
     <div class="home-block">
@@ -1819,7 +1819,7 @@ const BOOKS = [
  bestFor:"数IIICの入試対策を始めたばかりの理系受験生",unis:["地方国公立","GMARCH理系"]},
 
 /* ================== 過去問 ================== */
-{id:"akahon",name:"大学赤本(志望校過去問)",official:"各大学 赤本(教学社・年度版) ※表紙は東京大学(理科)の例",pub:"教学社",isbn10:"4325273948",isbn13:"9784325273943",year:2026,subjects:"志望校による",stage:"kako",diff:7,hensachi:"志望校による",problems:"直近数か年分",hours:"60〜100h",h:80,style:"過去問",bunri:"both",fb:{bg:"linear-gradient(160deg,#D0353A,#8E1F23)"},
+{id:"akahon",recordType:"routePlaceholder",nocover:true,name:"志望校の大学別過去問題集",official:"志望校・年度に合った大学別過去問題集（赤本・青本など）",pub:"教学社ほか",subjects:"志望校による",stage:"kako",diff:7,hensachi:"志望校による",problems:"直近数か年分",hours:"60〜100h",h:80,style:"過去問",bunri:"both",fb:{bg:"linear-gradient(160deg,#D0353A,#8E1F23)"},
  desc:"教学社の志望校別過去問集（年度版、直近数か年分）。東大の理系数学25カ年など分野別収録の過去問研究書と違い、年度ごとの本番形式で時間配分と傾向を確かめる本。標準演習を終えた全受験生が早めに着手し、足りない分野を分野別教材へ戻す。解説の質は大学・年度による。",
  pros:["志望校対策の中心になる教材","時間配分と傾向を本番形式で確かめられる"],
  cons:["解説の質は大学・年度による","始めるのが遅くなりがち"],
@@ -2994,6 +2994,12 @@ function coverSrcs(b){
 }
 /* ---------- アフィリエイトリンク ---------- */
 function amazonURL(b){
+  /* ルート上の枠（志望校の過去問など）は特定の商品ではない。直リンクを出すと、
+     志望校が違う利用者を別大学の 1 冊へ送ってしまう。検索結果へ送る */
+  if(b.recordType === "routePlaceholder"){
+    const q = encodeURIComponent(b.official || b.name);
+    return `https://www.amazon.co.jp/s?k=${q}` + (CONFIG.amazonTag ? `&tag=${CONFIG.amazonTag}` : "");
+  }
   const k = b.isbn10 || b.asin; if(!k) return null;
   return `https://www.amazon.co.jp/dp/${k}/ref=nosim` + (CONFIG.amazonTag ? `?tag=${CONFIG.amazonTag}` : "");
 }

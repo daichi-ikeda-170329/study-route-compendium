@@ -682,7 +682,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <div class="stat"><b id="stat-unis">160</b><span>収録大学 — 医学部・国際系は別扱い</span></div>
         <div class="stat"><b>9</b><span>対応分野 — 単語から過去問まで</span></div>
       </div>
-      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
+      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-04">2026-09-04</time></p>
     </div>
 
     <div class="home-block">
@@ -2406,7 +2406,7 @@ const BOOKS = [
  bestFor:"共テ英語で9割を狙う旧帝・国公立医志望者",unis:["旧帝","国公立医","東大・京大"]},
 
 /* ================== 過去問・大学別 ================== */
-{id:"akahon",name:"大学赤本シリーズ(志望校の過去問)",official:"大学赤本シリーズ 各大学・学部版(教学社・年度版) ※表紙は東京大学(理科)の例",pub:"教学社",isbn13:"9784325273943",year:2026,subjects:"過去問",stage:"kako",diff:7,hensachi:"志望校による",problems:"直近数か年分+傾向分析",hours:"60〜120h",h:80,style:"過去問",bunri:"both",fb:{bg:"linear-gradient(160deg,#B5432A,#5E1B0E)"},
+{id:"akahon",recordType:"routePlaceholder",nocover:true,name:"志望校の大学別過去問題集",official:"志望校・年度に合った大学別過去問題集（赤本・青本など）",pub:"教学社ほか",subjects:"過去問",stage:"kako",diff:7,hensachi:"志望校による",problems:"直近数か年分+傾向分析",hours:"60〜120h",h:80,style:"過去問",bunri:"both",fb:{bg:"linear-gradient(160deg,#B5432A,#5E1B0E)"},
  desc:"志望校の直近数か年分の過去問と傾向分析を収めた教学社の年度版。東大の英語25カ年などが1大学を長期間追うのに対し、こちらは志望校ごとに最新年度から数年分を確認できる。英語は大学ごとの形式差が大きく、傾向分析を読んでから年度演習に入る。解説の詳しさは大学による。",
  pros:["傾向と対策の情報が1か所にまとまる","志望校の形式に慣れられる"],
  cons:["解説の詳しさは大学によって差がある","古い年度は傾向が違うことがある"],
@@ -3497,6 +3497,12 @@ function coverSrcs(b){
 }
 /* ---------- アフィリエイトリンク ---------- */
 function amazonURL(b){
+  /* ルート上の枠（志望校の過去問など）は特定の商品ではない。直リンクを出すと、
+     志望校が違う利用者を別大学の 1 冊へ送ってしまう。検索結果へ送る */
+  if(b.recordType === "routePlaceholder"){
+    const q = encodeURIComponent(b.official || b.name);
+    return `https://www.amazon.co.jp/s?k=${q}` + (CONFIG.amazonTag ? `&tag=${CONFIG.amazonTag}` : "");
+  }
   const k = b.isbn10 || b.asin;
   if(k) return `https://www.amazon.co.jp/dp/${k}/ref=nosim` + (CONFIG.amazonTag ? `?tag=${CONFIG.amazonTag}` : "");
   if(b.azq) return `https://www.amazon.co.jp/s?k=${encodeURIComponent(b.azq)}` + (CONFIG.amazonTag ? `&tag=${CONFIG.amazonTag}` : "");

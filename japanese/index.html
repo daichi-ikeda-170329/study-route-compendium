@@ -714,7 +714,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <div class="stat"><b id="stat-unis">160</b><span>収録大学 — 必要な科目まで判定</span></div>
         <div class="stat"><b>3</b><span>科目別ルート — 現代文 / 古文 / 漢文</span></div>
       </div>
-      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
+      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-04">2026-09-04</time></p>
     </div>
 
     <div class="home-block">
@@ -1934,7 +1934,7 @@ const BOOKS = [
  cons:["早稲田に特化しており他大学には転用しにくい","志望学部の赤本との併用が前提"],
  bestFor:"早稲田を複数学部受験する人",unis:["早稲田"]},
 
-{id:"akahon",name:"大学赤本(志望校の過去問)",official:"東京大学(文科) 2027年版 ほか 大学赤本シリーズ",pub:"教学社",isbn10:"432527393X",isbn13:"9784325273936",year:2026,sub:"sogo",subjects:"国語総合",stage:"kako",diff:6,hensachi:"志望校による",problems:"各大学・年度版",hours:"40〜80h",h:60,style:"過去問",fb:{bg:"linear-gradient(160deg,#B5432A,#6E2413)"},
+{id:"akahon",recordType:"routePlaceholder",nocover:true,name:"志望校の大学別過去問題集",official:"志望校・年度に合った大学別過去問題集（赤本・青本など）",pub:"教学社ほか",sub:"sogo",subjects:"国語総合",stage:"kako",diff:6,hensachi:"志望校による",problems:"各大学・年度版",hours:"40〜80h",h:60,style:"過去問",fb:{bg:"linear-gradient(160deg,#B5432A,#6E2413)"},
  desc:"志望校ごとの過去問集（教学社）。全ルートの最終段階に置き、出題形式・時間・頻出ジャンルを本物で確認する。早稲田の国語や阪大の国語15カ年が1大学を長期収録するのに対し、こちらは各大学・年度版。標準演習を終えたら早めに1年分解いて到達点を知る人向け。",
  pros:["志望校の傾向を本物で確認できる","記述量・時間配分が分かる"],
  cons:["解説の詳しさは大学により差がある","自己採点が難しい記述は添削が要る"],
@@ -3450,6 +3450,12 @@ function coverSrcs(b){
 }
 /* ---------- アフィリエイトリンク ---------- */
 function amazonURL(b){
+  /* ルート上の枠（志望校の過去問など）は特定の商品ではない。直リンクを出すと、
+     志望校が違う利用者を別大学の 1 冊へ送ってしまう。検索結果へ送る */
+  if(b.recordType === "routePlaceholder"){
+    const q = encodeURIComponent(b.official || b.name);
+    return `https://www.amazon.co.jp/s?k=${q}` + (CONFIG.amazonTag ? `&tag=${CONFIG.amazonTag}` : "");
+  }
   const k = b.isbn10 || b.asin; if(!k) return null;
   return `https://www.amazon.co.jp/dp/${k}/ref=nosim` + (CONFIG.amazonTag ? `?tag=${CONFIG.amazonTag}` : "");
 }
