@@ -16,7 +16,7 @@ import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/e
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { adUnit } from './lib/ads.mjs';
-import { fileDate } from './lib/updated.mjs';
+import { fileDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -446,3 +446,7 @@ for (const sub of SUBJECTS) {
   console.log(`  ✓ ${sub.dir}: ${tiers.length} ルート + 一覧`);
 }
 console.log(`合計 ${total} ページを生成した。`);
+
+/* 更新日の台帳を書き戻す。書き戻さないと次の実行で前回の日付を思い出せず、
+   実際には変えていない日を「更新日」として出してしまう */
+saveDates();

@@ -16,7 +16,7 @@ import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumb
 import { bookCards } from './lib/cards.mjs';
 import { ARTICLES } from './content/articles.mjs';
 import { adUnit } from './lib/ads.mjs';
-import { fileDate } from './lib/updated.mjs';
+import { fileDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -331,3 +331,7 @@ for (const [key, list] of bySubject) {
   console.log(`  ✓ ${key || '(全科目)'}: 記事 ${list.length} 本 + 一覧`);
 }
 console.log(`合計 ${n} ページを生成した。`);
+
+/* 更新日の台帳を書き戻す。書き戻さないと次の実行で前回の日付を思い出せず、
+   実際には変えていない日を「更新日」として出してしまう */
+saveDates();

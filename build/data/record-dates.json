@@ -1009,6 +1009,118 @@
    "h": "3280ad1fb132",
    "d": "2026-09-03"
   },
+  "file:build/content/articles.mjs": {
+   "h": "aa03fe7a50e4",
+   "d": "2026-08-21"
+  },
+  "file:build/content/legal.mjs": {
+   "h": "86b59f8908eb",
+   "d": "2026-09-04"
+  },
+  "file:english/guides/bunpo-comparison/index.html": {
+   "h": "f35a80d83ec7",
+   "d": "2026-09-04"
+  },
+  "file:english/guides/chobun-comparison/index.html": {
+   "h": "91b9478887ed",
+   "d": "2026-09-04"
+  },
+  "file:english/guides/index.html": {
+   "h": "c27bc984bd23",
+   "d": "2026-09-04"
+  },
+  "file:english/guides/kaishaku-comparison/index.html": {
+   "h": "bd58260838ba",
+   "d": "2026-09-04"
+  },
+  "file:english/guides/tango-comparison/index.html": {
+   "h": "3e427207df56",
+   "d": "2026-09-04"
+  },
+  "file:english/index.html": {
+   "h": "cf43f15cf817",
+   "d": "2026-09-04"
+  },
+  "file:guides/how-many-books/index.html": {
+   "h": "0077bfefcb93",
+   "d": "2026-09-04"
+  },
+  "file:guides/index.html": {
+   "h": "0cfb1e004de6",
+   "d": "2026-09-04"
+  },
+  "file:japanese/guides/gendaibun-start/index.html": {
+   "h": "9e9ee0fe5541",
+   "d": "2026-09-04"
+  },
+  "file:japanese/guides/index.html": {
+   "h": "996c157b1421",
+   "d": "2026-09-04"
+  },
+  "file:japanese/guides/kobun-start/index.html": {
+   "h": "613caf5a83b5",
+   "d": "2026-09-04"
+  },
+  "file:japanese/index.html": {
+   "h": "f5c3b3c1cf3e",
+   "d": "2026-09-04"
+  },
+  "file:joho/index.html": {
+   "h": "803d3b6e7732",
+   "d": "2026-09-04"
+  },
+  "file:math/guides/enshu-comparison/index.html": {
+   "h": "4e4d7151fb8b",
+   "d": "2026-09-04"
+  },
+  "file:math/guides/index.html": {
+   "h": "2672dcdde885",
+   "d": "2026-09-04"
+  },
+  "file:math/guides/moura-comparison/index.html": {
+   "h": "29887415fed1",
+   "d": "2026-09-04"
+  },
+  "file:math/index.html": {
+   "h": "a457d09252d2",
+   "d": "2026-09-04"
+  },
+  "file:science/guides/butsuri-route/index.html": {
+   "h": "6b7bc375f93f",
+   "d": "2026-09-04"
+  },
+  "file:science/guides/index.html": {
+   "h": "162b78b749e0",
+   "d": "2026-09-04"
+  },
+  "file:science/guides/kagaku-route/index.html": {
+   "h": "6751d509bad2",
+   "d": "2026-09-04"
+  },
+  "file:science/index.html": {
+   "h": "bcdce08d9bbe",
+   "d": "2026-09-04"
+  },
+  "file:shoron/index.html": {
+   "h": "cb39a95c4569",
+   "d": "2026-09-04"
+  },
+  "file:social/guides/index.html": {
+   "h": "d712848fb9bd",
+   "d": "2026-09-04"
+  },
+  "file:social/guides/nihonshi-route/index.html": {
+   "h": "c63fcc1de7f6",
+   "d": "2026-09-04"
+  },
+  "file:social/guides/sekaishi-route/index.html": {
+   "h": "2f7ef13af2df",
+   "d": "2026-09-04"
+  },
+  "file:social/index.html": {
+   "h": "1e706345cc8f",
+   "d": "2026-09-04"
+  },
   "japanese/access-hatten": {
    "h": "243fc6ad36b7",
    "d": "2026-09-03"

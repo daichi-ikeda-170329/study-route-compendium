@@ -222,3 +222,41 @@ test('不明な値を空文字や 0 で表していない', () => {
   }
   assert.deepEqual(bad, [], `分からない値は項目ごと持たない（0 や空文字を「未設定」の意味で使わない）:\n${bad.join('\n')}`);
 });
+
+/* ============================================================
+   生成が環境に依存しないこと
+
+   `git log -1 --format=%cs -- <path>` は、浅いクローン（GitHub Actions の
+   actions/checkout の既定は fetch-depth: 1）ではすべてのファイルが「今日」に
+   なる。手元と CI で生成物が食い違うだけでなく、実際には変えていない日を
+   「更新日」として公開することになる（2026-09-04 に実際に起きた）。
+   ============================================================ */
+
+test('生成スクリプトが git のメタデータに依存していない', () => {
+  const dir = path.join(ROOT, 'build');
+  const bad = [];
+  const walk = (d) => {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      if (e.name === '.cache' || e.name === 'data') continue;
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) { walk(p); continue; }
+      if (!e.name.endsWith('.mjs')) continue;
+      // build/all.mjs は node を起動するだけで git を呼ばない
+      const src = fs.readFileSync(p, 'utf8');
+      if (/execFileSync\(\s*['"]git['"]/.test(src) || /spawnSync\(\s*['"]git['"]/.test(src)) {
+        bad.push(path.relative(ROOT, p));
+      }
+    }
+  };
+  walk(dir);
+  assert.deepEqual(bad, [],
+    `生成に git の履歴を使っている。浅いクローンでは全ファイルが「今日」になる:\n${bad.join('\n')}`);
+});
+
+test('更新日は中身が変わった日で、実行するたびには進まない', async () => {
+  const { fileDate } = await import('../build/lib/updated.mjs');
+  const first = fileDate('build/content/articles.mjs');
+  const again = fileDate('build/content/articles.mjs');
+  assert.equal(first, again, '同じ中身なのに日付が動いている');
+  assert.match(first, /^\d{4}-\d{2}-\d{2}$/);
+});

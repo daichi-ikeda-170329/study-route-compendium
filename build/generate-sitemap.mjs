@@ -13,17 +13,17 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { SUBJECTS, ORIGIN } from './lib/extract.mjs';
-import { fileDate } from './lib/updated.mjs';
+import { fileDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-/** そのページが表示している最終更新日。取れなければ git のコミット日 */
+/** そのページが表示している最終更新日。取れなければファイルの中身から求める */
 function lastmodOf(relDir) {
   const file = path.join(ROOT, relDir, 'index.html');
   try {
     const m = fs.readFileSync(file, 'utf8').match(/<time datetime="(\d{4}-\d{2}-\d{2})"/);
     if (m) return m[1];
-  } catch { /* 読めなければ git に聞く */ }
+  } catch { /* 読めなければ中身のハッシュから求める */ }
   return fileDate(path.join(relDir, 'index.html'));
 }
 
@@ -90,3 +90,7 @@ ${urls.map(u => `  <url>
 
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml);
 console.log(`  ✓ sitemap.xml — ${urls.length} URL`);
+
+/* 更新日の台帳を書き戻す。書き戻さないと次の実行で前回の日付を思い出せず、
+   実際には変えていない日を「更新日」として出してしまう */
+saveDates();
