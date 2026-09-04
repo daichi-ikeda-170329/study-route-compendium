@@ -37,7 +37,10 @@ const warn = (where, msg) => warns.push(`${where}: ${msg}`);
    走査対象
    ============================================================ */
 
-const SKIP_DIRS = new Set(['.git', 'node_modules', 'docs', 'build', 'test', 'data']);
+// dist/ は公開用の写しなので二重に数えない（検査は build/build-public.mjs と
+// test/dist.test.mjs が別に行う）。e2e/ と Playwright の出力も生成物
+const SKIP_DIRS = new Set(['.git', 'node_modules', 'docs', 'build', 'test', 'data',
+  'dist', 'e2e', 'test-results', 'playwright-report']);
 
 function htmlFiles(dir = ROOT, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {

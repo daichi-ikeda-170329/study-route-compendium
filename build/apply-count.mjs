@@ -292,7 +292,9 @@ function applySubjectTops(t, write) {
 
 // changelog/ は git のコミットメッセージをそのまま並べたページ。当時の冊数が
 // 出てくるのは正しい記録なので、実データと照合しない
-const SWEEP_SKIP_DIRS = new Set(['.git', 'node_modules', 'docs', 'changelog']);
+const SWEEP_SKIP_DIRS = new Set(['.git', 'node_modules', 'docs', 'changelog',
+  // dist/ は公開用の写し。ここを直しても元が古いままなので、元だけを見る
+  'dist', 'test-results', 'playwright-report']);
 const SWEEP_EXT = /\.(html|js|mjs|md)$/;
 
 /** 走査対象のファイルを集める。docs/ は当時の記録なので数字を凍らせたままでよい */

@@ -10,3 +10,4 @@ build/.cache/
 # Playwright の実行結果（生成物）
 test-results/
 playwright-report/
+dist/

@@ -5,11 +5,21 @@
   "description": "ルート大全（route-taizen.com）。サイト本体は Node 標準だけで動き、ここにある依存は OGP 画像の生成にだけ使う。",
   "_note_type": "\"type\": \"module\" は付けない。build/*.mjs は拡張子で ESM として読まれる一方、build/generate-search.mjs は assets/js/search.js を createRequire() で CommonJS として読むため、type を module にするとその読み込みが落ちる。",
   "scripts": {
+    "build": "node build/all.mjs",
+    "build:public": "node build/build-public.mjs",
+    "check:data": "node build/check-data.mjs",
+    "check:counts": "node build/apply-count.mjs --check",
+    "check:generated": "node build/all.mjs --check",
+    "check:site": "node build/check-site.mjs",
+    "check:links": "node build/check-links.mjs",
+    "report:quality": "node build/report-data-quality.mjs",
+    "fetch:verification": "node build/fetch-verification.mjs",
     "ogp": "node build/gen-ogp.mjs",
     "ogp:check": "node build/gen-ogp.mjs --check",
-    "test": "node --test test/*.test.mjs",
     "serve": "node build/serve.mjs",
-    "test:e2e": "playwright test"
+    "test": "node --test test/*.test.mjs",
+    "test:e2e": "playwright test",
+    "validate": "npm run build && npm test && npm run test:e2e"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",

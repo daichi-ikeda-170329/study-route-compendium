@@ -1,0 +1,85 @@
+# 公開用の dist/ だけを GitHub Pages へ配信する。
+#
+# **リポジトリ全体を公開しない。** 2026-09 の時点では Pages がリポジトリ直下を
+# そのまま配信していたため、本番から build/・test/・data/_backup/・package.json を
+# 取得できた。ここでは build/build-public.mjs が作る dist/ だけを artifact にする。
+#
+# 有効にする手順（コードだけでは完結しない。README の「運営者が行う手動設定」参照）
+#   1. この workflow を main へ入れる（配信先はまだ変わらない）
+#   2. Settings → Pages → Build and deployment → Source を "GitHub Actions" に変える
+#   3. main への push で deploy job が走り、dist/ が公開される
+#   この順で行う。2 を先にすると、workflow が無い状態で配信が止まる。
+name: Pages 公開
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# 既定は読み取りだけ。書き込みが要るのは deploy job だけに与える
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: 依存パッケージを入れる
+        run: npm ci
+
+      - name: 生成物が最新か確かめる
+        run: |
+          node build/all.mjs
+          git diff --exit-code
+
+      - name: 公開用 dist/ を作る
+        run: node build/build-public.mjs
+
+      - name: 公開物を検査する
+        run: node --test test/dist.test.mjs
+
+      - name: 公開物の容量を記録する
+        run: |
+          {
+            echo "### 公開物の容量"
+            echo ""
+            echo "| 種類 | 数 | 容量 |"
+            echo "|---|---:|---:|"
+            echo "| 全体 | $(find dist -type f | wc -l) | $(du -sh dist | cut -f1) |"
+            echo "| HTML | $(find dist -name '*.html' | wc -l) | $(du -sh --exclude='*' dist 2>/dev/null | cut -f1 || find dist -name '*.html' -exec du -ch {} + | tail -1 | cut -f1) |"
+            echo "| OGP 画像 | $(find dist/assets/ogp -type f 2>/dev/null | wc -l) | $(du -sh dist/assets/ogp 2>/dev/null | cut -f1) |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Pages の artifact として上げる
+        # main への push のときだけ。PR ではビルドと検査だけ行う
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    # デプロイ job にだけ必要最小限の権限を与える
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

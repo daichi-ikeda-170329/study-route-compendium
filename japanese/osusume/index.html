@@ -43,7 +43,14 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-DQ5WFXEFMX');
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
 </script>
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
