@@ -12,7 +12,7 @@
 ## 実装結果
 
 - **Base SHA**: `dabdb86de0f201ecf8d8d26da1f7c9367d179552`（`origin/main`）
-- **Final SHA**: `docs/remediation-progress.md` の末尾を参照（この報告のコミット）
+- **Final SHA**: `6363f94f4ebde639038c5bf10f77af6a53db2923`（main へのマージコミット）
 - **ブランチ**: `fix/unresolved-items`
 - **DONE**: 未解決事項 8 件のうち **8 件**（うち 3 件に外部作業が残る）
 - **BLOCKED_EXTERNAL**: 4 件（実機 QA / KPI の実数 / 書影の利用条件 / GitHub の Description）
@@ -175,7 +175,7 @@ Lighthouse が挙げる原因はすべて Web font で、広告・解析では�
 | `npm run ogp:check` | ok | — | |
 | `npm run report:quality` | ok | — | verified 402 / partial 727 / unverified 257 |
 | `npm run audit:performance` | ok | — | 上の性能表 |
-| `npm run check:production` | ok | 19 / 0 / 0 | S1 時点で本番へ実行。**その後は流していない** |
+| `npm run check:production` | ok | 19 / 0 / 0 | **マージと Pages 反映のあとに本番へ実行**（下の「公開確認」） |
 
 ## QA
 
@@ -193,14 +193,30 @@ Lighthouse が挙げる原因はすべて Web font で、広告・解析では�
 
 詳細は `docs/qa-report-2026-09-05.md`。
 
-## 公開確認
+## 公開確認（マージ後に実施）
 
 | 項目 | 状態 |
 |---|---|
-| Pages workflow | `.github/workflows/pages.yml`（既存）。**このブランチはまだ push していないので実行されていない** |
-| deployed SHA | **未確認。** マージと Pages 実行のあとに `npm run check:production` で確かめる |
-| production parity | S1 時点（`dabdb86d`）で 19 項目すべて通過。**この改修の反映後は未確認** |
+| PR | [#8](https://github.com/daichi-ikeda-170329/study-route-compendium/pull/8)。CI は build / counts / test / e2e すべて pass（e2e は Firefox・WebKit 込みで 11m37s） |
+| マージ | `6363f94f4ebde639038c5bf10f77af6a53db2923`（main） |
+| Pages workflow | 「Pages 公開」success（45s）。run `33923016966` |
+| production parity | **`npm run check:production` が 19 / 0 / 0 で通過**（終了コード 0） |
+| 新しいページ | `/search/` `/progress/` とも HTTP 200 |
+| 配信アセット | `assets/generated/subjects/science.books.json`・`assets/generated/search-facets.json`・`assets/js/subject-science.js`・`progress.js`・`cover-resolver.js` すべて 200 |
+| 本番の科目 HTML | science 157,273 / social 150,361 / english 143,242 / japanese 142,418 / math 136,775 / joho 91,063 / shoron 92,022 バイト（手元と一致） |
+| ブラウザでの動作 | `/science/` 図鑑 373 枚・ルート 8 本・コンソールエラー 0。`/search/` は 1,390 → 数学 162 冊に絞れる。`/progress/` は `noindex,follow` |
 | GitHub description | **未更新。** `参考書1,052冊` のまま（OWNER ACTION 1） |
+
+### 本番の性能は「測れていない」
+
+マージ後に本番を 5 回測ったが、**この環境からの計測は信頼できない。**
+5 run のうち 4 run で LCP が 19〜20 秒に張り付き、1 run だけ 5.1 秒だった。
+この機械から Google Fonts・AdSense への通信が不安定なためで、サイトの側の問題ではない
+（同じコードが localhost では安定して Performance 53 / Speed Index 4.56 秒を出す）。
+
+**外れ値を避けて都合のよい数字を採ることもしない。**
+本番の実力は PageSpeed Insights か Search Console の Core Web Vitals で見る。
+詳細は `docs/performance-report.md` §6.5。
 
 ## OWNER ACTION
 
@@ -249,9 +265,12 @@ Lighthouse が挙げる原因はすべて Web font で、広告・解析では�
    完了判定: 変更後に `npm run audit:performance -- --runs=9 --path=/science/` の
    CLS 中央値が 0.10 以下。詳細は `docs/performance-report.md` §6。
 
-7. **マージ後に公開状態を確かめる。** Actions の「Pages 公開」が成功したあと
-   `npm run check:production`。手順は `docs/deployment-runbook.md`。
-   完了判定: 終了コード 0（不一致 0 / 未検査 0）。
+7. **本番の性能を、信頼できる方法で測る。**
+   この環境からの Lighthouse は外部通信が不安定で判断に使えなかった（上の「公開確認」）。
+   `https://pagespeed.web.dev/` に `https://route-taizen.com/science/` を入れるか、
+   Search Console の「ウェブに関する主な指標」で実際の訪問者の値を見る。
+   完了判定: どちらかの数字を `docs/performance-report.md` へ追記する。
+   （マージ後の公開状態そのものは `npm run check:production` で確認済み・19/19 通過）
 
 8. **同意管理（CMP）の方針。** 未判断のまま（`README.md`）。
    Best Practices の残差は AdSense の第三者 cookie 1 件だが、
