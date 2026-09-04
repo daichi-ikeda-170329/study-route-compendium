@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "stages": {
+    "intro": {"label":"書き方・入門","color":"#2E7D9A","short":"入門"},
+    "kata": {"label":"講義・型","color":"#24427C","short":"型"},
+    "neta": {"label":"ネタ・時事・キーワード","color":"#8A6D2F","short":"ネタ"},
+    "enshu": {"label":"演習・添削","color":"#5B4E9E","short":"演習"},
+    "gakubu": {"label":"学部別・大学別","color":"#B5432A","short":"学部別"},
+    "kako": {"label":"過去問","color":"#3D4657","short":"過去問"}
+  }
+}

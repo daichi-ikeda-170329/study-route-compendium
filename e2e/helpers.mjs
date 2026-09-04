@@ -13,7 +13,12 @@ export const KEY_PAGES = [
   { url: '/english/', name: '英語トップ' },
   { url: '/math/', name: '数学トップ' },
   { url: '/science/', name: '理科トップ' },
+  /* 7 科目すべてのトップを見る。科目データを HTML の外へ出す改修は 1 科目ずつ
+     進めるので、対象から漏れている科目があると壊れたまま気づけない */
+  { url: '/japanese/', name: '国語トップ' },
+  { url: '/social/', name: '社会トップ' },
   { url: '/joho/', name: '情報トップ' },
+  { url: '/shoron/', name: '小論文トップ' },
   { url: '/english/books/nextstage/', name: '書籍ページ' },
   { url: '/english/books/', name: '参考書一覧' },
   { url: '/math/routes/top/', name: '志望校別ルート' },
