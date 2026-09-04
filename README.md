@@ -113,23 +113,45 @@
 
 ## ビルド
 
+**入口はひとつ。** 順序は `build/all.mjs` が持つので、個々のスクリプトを手で並べない。
+
 ```bash
-node build/generate-books.mjs      # 参考書の詳細ページ 1,390 件
-node build/generate-index.mjs      # 参考書一覧 7 件
-node build/generate-picks.mjs      # 参考書おすすめ 5 件
-node build/generate-routes.mjs     # 志望校別ルート 47 件
-node build/generate-articles.mjs   # 解説記事 19 件（記事 13 + 一覧 6）
-node build/generate-legal.mjs      # 信頼性ページ 6 件（/about/ ほか）
-node build/generate-search.mjs     # 検索の索引 assets/js/book-index.js
-node build/prerender-tops.mjs      # 科目トップの図鑑・ルート一覧・ガイドを静的化
-node build/apply-count.mjs         # 冊数の表記を実数に合わせる
-node build/generate-sitemap.mjs    # sitemap.xml（最後に実行する）
-node build/check-site.mjs          # データと出力 HTML の検査（ずれていれば落ちる）
+npm ci
+npm run build          # データ検証 → 各種生成 → 件数 → sitemap → 公開用 dist/
+npm run check:generated  # 生成せずに、ずれているかだけ見る
+npm run build -- --no-ogp  # OGP 画像を飛ばす（依存パッケージが要るため）
 ```
 
-**`generate-sitemap.mjs` は最後**。lastmod を各ページの `<time datetime>` から拾うので、
+`npm run build` が流すもの（この順序に意味がある）。
+
+| 順 | ステップ | スクリプト |
+|---:|---|---|
+| 1 | データ検証（**ここで落ちたら先を作らない**） | `build/check-data.mjs` |
+| 2 | 年度表記を `build/data/site-meta.json` にそろえる | `build/apply-site-meta.mjs` |
+| 3 | 参考書の詳細ページ 1,390 件 | `build/generate-books.mjs` |
+| 4 | 参考書一覧 7 件 | `build/generate-index.mjs` |
+| 5 | 参考書おすすめ 5 件 | `build/generate-picks.mjs` |
+| 6 | 志望校別ルート 47 件 | `build/generate-routes.mjs` |
+| 7 | 解説記事 19 件 | `build/generate-articles.mjs` |
+| 8 | 信頼性ページ 6 件 | `build/generate-legal.mjs` |
+| 9 | 検索の索引 | `build/generate-search.mjs` |
+| 10 | 科目トップの静的化 | `build/prerender-tops.mjs` |
+| 11 | 冊数の表記を実数に合わせる | `build/apply-count.mjs` |
+| 12 | `sitemap.xml`（作り終えたページだけを載せる） | `build/generate-sitemap.mjs` |
+| 13 | データ品質レポート | `build/report-data-quality.mjs` |
+| 14 | OGP 画像 | `build/gen-ogp.mjs` |
+| 15 | 公開用 `dist/` | `build/build-public.mjs` |
+
+**`generate-sitemap.mjs` は生成のあと**。lastmod を各ページの `<time datetime>` から拾うので、
 先に流すと 1 世代古い日付が入る。**`prerender-tops.mjs` は `generate-*` のあと**で、
 科目トップに書き込む内容は `BOOKS` / `ROUTES` から作り直す。
+
+### 公開されるのは `dist/` だけ
+
+`build/build-public.mjs` が**許可リスト**で拾って `dist/` を作る。禁止リストにすると
+「新しく置いたものが既定で公開される」ので、足し忘れが事故になる。許可リストなら
+足し忘れは「公開されない」で終わる。`build/`・`test/`・`e2e/`・`docs/`・`data/`・
+`package.json`・`README.md` は公開されない。検査は `node --test test/dist.test.mjs`。
 
 参考書を足したときは、生成の**前**に新刊を注入する。
 
@@ -423,11 +445,19 @@ localStorage のキーは `rt_saved_routes`。全科目あわせて 10 件まで
 ## テスト
 
 ```bash
-node --test test/share.test.mjs test/search.test.mjs test/pace.test.mjs test/new-books.test.mjs test/mobile-layout.test.mjs test/style-guide.test.mjs
-node build/check-site.mjs           # データと出力 HTML の検査
-node build/prerender-tops.mjs --check   # 静的化した中身が最新か
-node build/gen-ogp.mjs --check          # OGP 画像が最新か（npm ci が要る）
+npm ci
+npm run check:data       # ISBN・id・確認状態（生成の前の関門）
+npm test                 # ユニットテスト（test/*.test.mjs をすべて）
+npm run check:site       # データと出力 HTML の検査
+npm run build            # 生成
+git diff --exit-code     # 生成物が最新か
+npm run test:e2e         # E2E とアクセシビリティ（320/375/768/1366px）
+npm run check:counts     # 収録冊数
 ```
+
+**E2E は HTTP 経由で走る**（`build/serve.mjs` が静的配信する）。`file://` で開いた
+確認は、絶対パスのリンクと localStorage の扱いが本番と違うので、確かめたことに
+ならない。ブラウザは `npx playwright install chromium` で入れる。
 
 テストと `check-site.mjs`・`prerender-tops.mjs` は Node 標準だけで動く。`gen-ogp.mjs --check`
 だけが依存パッケージを使うので、CI では先に `npm ci` を流している。すべて
@@ -1069,6 +1099,70 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 - **A / AAAA / CNAME は Cloudflare のプロキシを通さない**（グレーの雲＝DNS only）。オレンジにすると GitHub の証明書発行の確認が Cloudflare 止まりになり、HTTPS を有効化できない
 - `www` の CNAME の向き先は**リポジトリ名ではなくアカウントの Pages ホスト名**。リポジトリをリネームしても変えない
 - Cloudflare へ移す前は Xserver のネームサーバーを使っていたが、**GitHub のリゾルバから解決できず**、Pages のドメイン判定とアカウントのドメイン認証が揃って失敗した（`InvalidDNSError` / `Dnsruby::ServFail`）。公開リゾルバからは正常に引けていたため切り分けに時間がかかった。Cloudflare へ移した直後に解決したので、**Xserver のネームサーバーには戻さない**
+
+## 運営者が行う手動設定
+
+コードでは完結しない作業。**やっていないものを「やった」と書かない。**
+
+### GitHub Pages の配信元を変える（未実施・要対応）
+
+いまはリポジトリ直下がそのまま配信されている。`.github/workflows/pages.yml` を
+入れたので、`dist/` だけを配信する形へ切り替えられる。**順番を守ること。**
+
+1. `pages.yml` が入った状態で main へ push する（この時点では配信先は変わらない）
+2. Actions タブで「Pages 公開」が成功していることを確かめる
+3. Settings → Pages → Build and deployment → Source を **GitHub Actions** に変える
+4. 数分後、`https://route-taizen.com/` が dist/ から配信されていることを確かめる
+   （`https://route-taizen.com/package.json` が 404 になれば切り替わっている）
+
+**2 を確かめる前に 3 をやらない。** workflow が失敗する状態で Source を変えると、
+配信が止まる。切り戻すときは Source を「Deploy from a branch」に戻す。
+
+### Google Search Console
+
+- [ ] 所有権の確認（DNS の TXT か、`2d7e64a…txt` のファイル）
+- [ ] `https://route-taizen.com/sitemap.xml` を送信
+- [ ] カバレッジで index 登録の状況と、除外の理由を確認
+- [ ] 主要クエリの表示回数・CTR・平均掲載順位をページ単位で確認
+- [ ] リッチリザルト検査で、書籍ページのパンくずと `Book` を確認
+- [ ] 数値を `docs/kpi-plan.md` の基準値欄へ記入（**推測で埋めない**）
+
+### Google アナリティクス 4
+
+- [ ] イベントが `docs/analytics-events.md` の表と一致しているか確認
+- [ ] データ保持期間の設定を確認
+- [ ] Google シグナルを使うかどうかを判断（使うと収集範囲が広がる）
+
+### Google AdSense
+
+- [ ] **自動広告の除外設定。** 3 分診断の質問画面・重要な注意書き・保存の操作・
+      結果の最重要部分に広告を入れない。管理画面の「広告」→「サイトごと」から
+      除外する領域を指定する。コードからは指定できない
+- [ ] RPM と viewability を確認し、CLS・診断完了率と突き合わせる
+
+### 同意管理（CMP）
+
+- [ ] 欧州経済領域・英国・スイスからのアクセスがあるかを GA4 で確認
+- [ ] ある場合、Google 認定 CMP と Consent Mode v2 の設定が要る（AdSense の
+      管理画面から設定する）。**法令上どこまで必要かは運営者の確認事項**として
+      未判断のままにしてある
+
+### リポジトリの説明
+
+- [ ] Description を実態に合わせる。例:
+      `大学受験の参考書を科目・目的別に整理し、学習ルートと進捗管理を提供する静的サイト`
+- [ ] Topics を実態に合わせる（`static-site` `github-pages` `education` など）
+
+### ライセンス
+
+- [ ] このリポジトリにライセンスは指定されていない（2026-09 時点）。
+      追加するかどうかは権利者の判断。**こちらでは決めない**
+
+### 連絡先
+
+- [ ] 公開の連絡先メールアドレスは用意していない。セキュリティ上の報告は
+      GitHub Security Advisory へ案内している（`SECURITY.md`）。
+      公開の連絡先を作るかどうかは運営者の判断
 
 ## 外部サービスの登録状況
 

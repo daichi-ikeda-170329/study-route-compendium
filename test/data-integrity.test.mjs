@@ -189,3 +189,36 @@ test('公開表示に「全統換算」が残っていない', () => {
   })(ROOT);
   assert.deepEqual(bad, [], bad.join('\n'));
 });
+
+/* ============================================================
+   科目データの形
+
+   データを科目 HTML から別ファイルへ移すときに、「移したつもりで中身が
+   変わっていた」を検出できるようにしておく（build/snapshot-subject-data.mjs）。
+   ============================================================ */
+
+test('科目データの形が検証を通る', async () => {
+  const { validateSubjectData } = await import('../build/lib/validate-subject-data.mjs');
+  const bad = [];
+  for (const d of DATA) bad.push(...validateSubjectData(d.sub.dir, d));
+  assert.deepEqual(bad.slice(0, 20), [], bad.slice(0, 20).join('\n'));
+});
+
+test('科目データがスナップショットと一致する', async () => {
+  const { snapshot } = await import('../build/snapshot-subject-data.mjs');
+  const saved = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'subject-snapshot.json'), 'utf8'));
+  const { out } = snapshot();
+  assert.deepEqual(JSON.parse(JSON.stringify(out)), saved,
+    '科目データが変わっている。意図した変更なら node build/snapshot-subject-data.mjs で取り直す');
+});
+
+test('不明な値を空文字や 0 で表していない', () => {
+  const bad = [];
+  for (const { b, dir } of ALL) {
+    for (const f of ['official', 'pub', 'isbn13', 'isbn10', 'hensachi', 'problems', 'hours', 'style']) {
+      if (b[f] === '') bad.push(`${dir}:${b.id}.${f} が空文字`);
+    }
+    if (b.h === 0) bad.push(`${dir}:${b.id}.h が 0`);
+  }
+  assert.deepEqual(bad, [], `分からない値は項目ごと持たない（0 や空文字を「未設定」の意味で使わない）:\n${bad.join('\n')}`);
+});
