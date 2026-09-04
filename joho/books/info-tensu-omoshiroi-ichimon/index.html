@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>情報Iの点数が面白いほどとれる一問一答</b><span>KADOKAWA</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4046073888.09.LZZZZZZZ.jpg" alt="情報Iの点数が面白いほどとれる一問一答の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046073888.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046073888.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046073884.jpg|https://cover.openbd.jp/9784046073884.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4046073888.09.LZZZZZZZ.jpg" alt="情報Iの点数が面白いほどとれる一問一答の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046073888.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046073888.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046073888.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046073888.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046073888.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046073884.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046073884.jpg|https://books.google.com/books/content?vid=ISBN9784046073884&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046073884.jpg|https://www.gakusan.com/bookimage_s/9784046073884.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>知識・一問一答</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/joho/books/info-bunkei-yougoshu/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>文系でもわかる「情報1」用語集 共通テストで100点がとれる!</b><em>徳間書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4198657971.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4198657971.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4198657971.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784198657970.jpg|https://cover.openbd.jp/9784198657970.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>文系でもわかる「情報1」用語集 共通テストで100点がとれる!</b><em>徳間書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4198657971.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4198657971.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4198657971.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4198657971.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4198657971.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4198657971.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784198657970.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784198657970.jpg|https://books.google.com/books/content?vid=ISBN9784198657970&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784198657970.jpg|https://www.gakusan.com/bookimage_s/9784198657970.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>徳間書店</span></div>
             <b>文系でもわかる「情報1」用語集 共通テストで100点がとれる!</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/joho/books/info-yougoshu-roots/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>共通テスト情報1用語集ROOTS</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010351500.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010351500.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010351500.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010351505.jpg|https://cover.openbd.jp/9784010351505.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>共通テスト情報1用語集ROOTS</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010351500.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010351500.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010351500.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010351500.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010351500.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010351500.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010351505.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010351505.jpg|https://books.google.com/books/content?vid=ISBN9784010351505&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010351505.jpg|https://www.gakusan.com/bookimage_s/9784010351505.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>旺文社</span></div>
             <b>共通テスト情報1用語集ROOTS</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/joho/books/info-1satsu-ichimon/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>高校の情報1が一問一答でしっかりわかる本</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761231289.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761231289.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231289.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761231286.jpg|https://cover.openbd.jp/9784761231286.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>高校の情報1が一問一答でしっかりわかる本</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761231289.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761231289.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231289.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761231289.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761231289.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231289.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761231286.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761231286.jpg|https://books.google.com/books/content?vid=ISBN9784761231286&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761231286.jpg|https://www.gakusan.com/bookimage_s/9784761231286.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>かんき出版</span></div>
             <b>高校の情報1が一問一答でしっかりわかる本</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/joho/books/info-ichimon-itto/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>情報1 一問一答</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060230.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060230.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060230.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053060235.jpg|https://cover.openbd.jp/9784053060235.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>情報1 一問一答</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060230.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060230.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060230.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053060230.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053060230.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060230.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053060235.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053060235.jpg|https://books.google.com/books/content?vid=ISBN9784053060235&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053060235.jpg|https://www.gakusan.com/bookimage_s/9784053060235.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>Gakken</span></div>
             <b>情報1 一問一答</b>
@@ -295,7 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/joho/books/info-ichimon-kanzen/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>情報1一問一答</b><em>ナガセ（東進ブックス）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859969.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859969.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859969.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859962.jpg|https://cover.openbd.jp/9784890859962.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>情報1一問一答</b><em>ナガセ（東進ブックス）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859969.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859969.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859969.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890859969.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890859969.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859969.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859962.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859962.jpg|https://books.google.com/books/content?vid=ISBN9784890859962&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859962.jpg|https://www.gakusan.com/bookimage_s/9784890859962.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>ナガセ（東進ブックス）</span></div>
             <b>情報1一問一答</b>
@@ -315,7 +321,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/joho/books/info-1satsu-mondaishu/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>高校の情報1が1冊でしっかりわかる問題集</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761231688.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761231688.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231688.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761231682.jpg|https://cover.openbd.jp/9784761231682.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>高校の情報1が1冊でしっかりわかる問題集</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761231688.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761231688.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231688.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761231688.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761231688.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231688.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761231682.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761231682.jpg|https://books.google.com/books/content?vid=ISBN9784761231682&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761231682.jpg|https://www.gakusan.com/bookimage_s/9784761231682.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">演習</span><span>かんき出版</span></div>
             <b>高校の情報1が1冊でしっかりわかる問題集</b>
@@ -327,7 +333,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/joho/books/info-kaiwagata-text/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>情報1 大学入学共通テスト対策</b><em>インプレス</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4295018112.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4295018112.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4295018112.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784295018117.jpg|https://cover.openbd.jp/9784295018117.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>情報1 大学入学共通テスト対策</b><em>インプレス</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4295018112.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4295018112.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4295018112.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4295018112.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4295018112.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4295018112.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784295018117.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784295018117.jpg|https://books.google.com/books/content?vid=ISBN9784295018117&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784295018117.jpg|https://www.gakusan.com/bookimage_s/9784295018117.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">演習</span><span>インプレス</span></div>
             <b>情報1 大学入学共通テスト対策</b>
@@ -372,6 +378,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="joho" data-book-id="info-tensu-omoshiroi-ichimon" data-book-name="情報Iの点数が面白いほどとれる一問一答"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -422,6 +436,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/">ルート大全 トップ</a>
       <a href="/joho/">参考書図鑑</a>
       <a href="/joho/books/">参考書一覧</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -513,6 +529,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>合格へ導く 英語長文Rise 構文解釈 1. 基礎〜難関編</b><span>Z会</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4860669533.09.LZZZZZZZ.jpg" alt="合格へ導く 英語長文Rise 構文解釈 1. 基礎〜難関編の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860669533.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860669533.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860669539.jpg|https://cover.openbd.jp/9784860669539.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4860669533.09.LZZZZZZZ.jpg" alt="合格へ導く 英語長文Rise 構文解釈 1. 基礎〜難関編の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860669533.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860669533.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4860669533.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4860669533.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860669533.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784860669539.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860669539.jpg|https://books.google.com/books/content?vid=ISBN9784860669539&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784860669539.jpg|https://www.gakusan.com/bookimage_s/9784860669539.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>英文解釈</span>
@@ -246,7 +252,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/english/books/shin-eigo-no-kobun-150/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>新・英語の構文150</b><em>美誠社</em></span><img src="https://www.biseisha.co.jp/zf/file/books/key/729/w/400/%E6%96%B0%E3%83%BB%E8%8B%B1%E8%AA%9E%E3%81%AE%E6%A7%8B%E6%96%87150-%E3%82%AB%E3%83%90%E3%83%BC.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.biseisha.co.jp/zf/file/books/key/729/w/400/%E6%96%B0%E3%83%BB%E8%8B%B1%E8%AA%9E%E3%81%AE%E6%A7%8B%E6%96%87150-%E3%82%AB%E3%83%90%E3%83%BC.jpg|https://images-fe.ssl-images-amazon.com/images/P/4828533788.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4828533788.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784828533780.jpg|https://cover.openbd.jp/9784828533780.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>新・英語の構文150</b><em>美誠社</em></span><img src="https://www.biseisha.co.jp/zf/file/books/key/729/w/400/%E6%96%B0%E3%83%BB%E8%8B%B1%E8%AA%9E%E3%81%AE%E6%A7%8B%E6%96%87150-%E3%82%AB%E3%83%90%E3%83%BC.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.biseisha.co.jp/zf/file/books/key/729/w/400/%E6%96%B0%E3%83%BB%E8%8B%B1%E8%AA%9E%E3%81%AE%E6%A7%8B%E6%96%87150-%E3%82%AB%E3%83%90%E3%83%BC.jpg|https://images-fe.ssl-images-amazon.com/images/P/4828533788.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4828533788.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4828533788.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4828533788.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4828533788.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784828533780.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784828533780.jpg|https://books.google.com/books/content?vid=ISBN9784828533780&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784828533780.jpg|https://www.gakusan.com/bookimage_s/9784828533780.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>美誠社</span></div>
             <b>新・英語の構文150</b>
@@ -258,7 +264,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/eibun-kaishaku-kyoshitsu-kiso/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>英文解釈教室 基礎編</b><em>研究社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4327763985.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4327763985.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4327763985.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784327763985.jpg|https://cover.openbd.jp/9784327763985.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>英文解釈教室 基礎編</b><em>研究社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4327763985.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4327763985.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4327763985.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4327763985.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4327763985.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4327763985.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784327763985.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784327763985.jpg|https://books.google.com/books/content?vid=ISBN9784327763985&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784327763985.jpg|https://www.gakusan.com/bookimage_s/9784327763985.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>研究社</span></div>
             <b>英文解釈教室 基礎編</b>
@@ -270,7 +276,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/eibun-wayaku-enshu-kiso/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>英文和訳演習 基礎篇</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796110046.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796110046.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796110046.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796110044.jpg|https://cover.openbd.jp/9784796110044.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>英文和訳演習 基礎篇</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796110046.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796110046.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796110046.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796110046.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796110046.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796110046.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796110044.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796110044.jpg|https://books.google.com/books/content?vid=ISBN9784796110044&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796110044.jpg|https://www.gakusan.com/bookimage_s/9784796110044.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>駿台文庫</span></div>
             <b>英文和訳演習 基礎篇</b>
@@ -282,7 +288,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/jukou-jo/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>英文熟考 上</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401035125X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401035125X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035125X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010351253.jpg|https://cover.openbd.jp/9784010351253.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>英文熟考 上</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401035125X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401035125X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035125X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/401035125X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/401035125X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035125X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010351253.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010351253.jpg|https://books.google.com/books/content?vid=ISBN9784010351253&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010351253.jpg|https://www.gakusan.com/bookimage_s/9784010351253.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>旺文社</span></div>
             <b>英文熟考 上</b>
@@ -294,7 +300,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/gijutsu100k/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>基礎英文解釈の技術100</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342210118.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342210118.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342210118.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342210112.jpg|https://cover.openbd.jp/9784342210112.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>基礎英文解釈の技術100</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342210118.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342210118.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342210118.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342210118.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342210118.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342210118.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342210112.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342210112.jpg|https://books.google.com/books/content?vid=ISBN9784342210112&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342210112.jpg|https://www.gakusan.com/bookimage_s/9784342210112.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>桐原書店</span></div>
             <b>基礎英文解釈の技術100</b>
@@ -306,7 +312,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/kiso-eibun/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>基礎英文問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010348119.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010348119.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348119.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010348116.jpg|https://cover.openbd.jp/9784010348116.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>基礎英文問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010348119.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010348119.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348119.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010348119.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010348119.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348119.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010348116.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010348116.jpg|https://books.google.com/books/content?vid=ISBN9784010348116&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010348116.jpg|https://www.gakusan.com/bookimage_s/9784010348116.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>旺文社</span></div>
             <b>基礎英文問題精講</b>
@@ -326,7 +332,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/english/books/hijii-dokkai-eibunpo-kobun-seiha/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>肘井学の読解のための英文法が面白いほどわかる本 構文制覇編</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046076259.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046076259.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046076259.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046076250.jpg|https://cover.openbd.jp/9784046076250.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>肘井学の読解のための英文法が面白いほどわかる本 構文制覇編</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046076259.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046076259.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046076259.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046076259.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046076259.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046076259.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046076250.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046076250.jpg|https://books.google.com/books/content?vid=ISBN9784046076250&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046076250.jpg|https://www.gakusan.com/bookimage_s/9784046076250.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>KADOKAWA</span></div>
             <b>肘井学の読解のための英文法が面白いほどわかる本 構文制覇編</b>
@@ -338,7 +344,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/eigo-reading-kyohon-kihon-bunpo/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>基本文法から学ぶ 英語リーディング教本</b><em>研究社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4327453056.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4327453056.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4327453056.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784327453053.jpg|https://cover.openbd.jp/9784327453053.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>基本文法から学ぶ 英語リーディング教本</b><em>研究社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4327453056.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4327453056.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4327453056.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4327453056.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4327453056.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4327453056.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784327453053.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784327453053.jpg|https://books.google.com/books/content?vid=ISBN9784327453053&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784327453053.jpg|https://www.gakusan.com/bookimage_s/9784327453053.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>研究社</span></div>
             <b>基本文法から学ぶ 英語リーディング教本</b>
@@ -350,7 +356,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/visual-eibun-kaishaku-2/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>ビジュアル英文解釈 PART II</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796120025.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796120025.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796120025.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796120029.jpg|https://cover.openbd.jp/9784796120029.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>ビジュアル英文解釈 PART II</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796120025.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796120025.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796120025.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796120025.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796120025.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796120025.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796120029.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796120029.jpg|https://books.google.com/books/content?vid=ISBN9784796120029&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796120029.jpg|https://www.gakusan.com/bookimage_s/9784796120029.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">解釈</span><span>駿台文庫</span></div>
             <b>ビジュアル英文解釈 PART II</b>
@@ -362,7 +368,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/rise/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>英語長文Rise 読解演習(1〜4)</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860669193.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860669193.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860669193.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860669195.jpg|https://cover.openbd.jp/9784860669195.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>英語長文Rise 読解演習(1〜4)</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860669193.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860669193.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860669193.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4860669193.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4860669193.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860669193.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784860669195.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860669195.jpg|https://books.google.com/books/content?vid=ISBN9784860669195&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784860669195.jpg|https://www.gakusan.com/bookimage_s/9784860669195.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">長文</span><span>Z会</span></div>
             <b>英語長文Rise 読解演習(1〜4)</b>
@@ -374,7 +380,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/solution-theme/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>ソリューション最新テーマ編</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230495.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230495.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230495.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761230494.jpg|https://cover.openbd.jp/9784761230494.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>ソリューション最新テーマ編</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230495.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230495.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230495.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230495.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230495.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230495.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230494.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761230494.jpg|https://books.google.com/books/content?vid=ISBN9784761230494&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230494.jpg|https://www.gakusan.com/bookimage_s/9784761230494.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">長文</span><span>かんき出版</span></div>
             <b>ソリューション最新テーマ編</b>
@@ -419,6 +425,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="english" data-book-id="rise-kobun-kaishaku-1" data-book-name="合格へ導く 英語長文Rise 構文解釈 1. 基礎〜難関編"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -471,6 +485,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/english/books/">参考書一覧</a>
       <a href="/english/routes/">志望校別ルート</a>
       <a href="/english/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -562,6 +578,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

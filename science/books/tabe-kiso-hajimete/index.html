@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>田部の生物基礎をはじめからていねいに</b><span>ナガセ(東進ブックス)</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/489085956X.09.LZZZZZZZ.jpg" alt="田部の生物基礎をはじめからていねいにの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085956X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085956X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859566.jpg|https://cover.openbd.jp/9784890859566.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/489085956X.09.LZZZZZZZ.jpg" alt="田部の生物基礎をはじめからていねいにの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085956X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085956X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/489085956X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/489085956X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085956X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859566.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859566.jpg|https://books.google.com/books/content?vid=ISBN9784890859566&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859566.jpg|https://www.gakusan.com/bookimage_s/9784890859566.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>導入・講義 — 生物</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/science/books/wasureta-seibutsu/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>忘れてしまった高校の生物を復習する本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046028792.jpg|https://cover.openbd.jp/9784046028792.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>忘れてしまった高校の生物を復習する本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046028793.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046028793.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046028792.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046028792.jpg|https://books.google.com/books/content?vid=ISBN9784046028792&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046028792.jpg|https://www.gakusan.com/bookimage_s/9784046028792.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>KADOKAWA</span></div>
             <b>忘れてしまった高校の生物を復習する本</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/yamakawa-omoshiroi-kiso/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>山川喜輝の生物基礎が面白いほどわかる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052309.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052309.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052309.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052308.jpg|https://cover.openbd.jp/9784046052308.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>山川喜輝の生物基礎が面白いほどわかる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052309.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052309.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052309.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046052309.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046052309.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052309.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046052308.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052308.jpg|https://books.google.com/books/content?vid=ISBN9784046052308&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046052308.jpg|https://www.gakusan.com/bookimage_s/9784046052308.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>KADOKAWA</span></div>
             <b>山川喜輝の生物基礎が面白いほどわかる本</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/omori-41ko-kiso/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>大森徹の生物基礎が驚くほど身につく41講</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578242676.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578242676.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578242676.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578242673.jpg|https://cover.openbd.jp/9784578242673.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>大森徹の生物基礎が驚くほど身につく41講</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578242676.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578242676.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578242676.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578242676.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578242676.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578242676.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578242673.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578242673.jpg|https://books.google.com/books/content?vid=ISBN9784578242673&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578242673.jpg|https://www.gakusan.com/bookimage_s/9784578242673.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>文英堂</span></div>
             <b>大森徹の生物基礎が驚くほど身につく41講</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/rikai-shiyasui-kiso/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>理解しやすい生物基礎</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578244180.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578244180.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578244180.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578244189.jpg|https://cover.openbd.jp/9784578244189.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>理解しやすい生物基礎</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578244180.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578244180.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578244180.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578244180.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578244180.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578244180.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578244189.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578244189.jpg|https://books.google.com/books/content?vid=ISBN9784578244189&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578244189.jpg|https://www.gakusan.com/bookimage_s/9784578244189.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>文英堂</span></div>
             <b>理解しやすい生物基礎</b>
@@ -295,7 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/suzukawa-theme75/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>鈴川のとにかく伝えたい生物基礎テーマ75</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4863467486.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863467486.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863467486.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784863467484.jpg|https://cover.openbd.jp/9784863467484.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>鈴川のとにかく伝えたい生物基礎テーマ75</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4863467486.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863467486.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863467486.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4863467486.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4863467486.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863467486.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784863467484.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784863467484.jpg|https://books.google.com/books/content?vid=ISBN9784863467484&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784863467484.jpg|https://www.gakusan.com/bookimage_s/9784863467484.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>代々木ライブラリー</span></div>
             <b>鈴川のとにかく伝えたい生物基礎テーマ75</b>
@@ -307,7 +313,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/uchu-ichi-kiso/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>宇宙一わかりやすい高校生物(生物基礎)</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056634.jpg|https://cover.openbd.jp/9784053056634.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>宇宙一わかりやすい高校生物(生物基礎)</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053056632.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056632.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053056634.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056634.jpg|https://books.google.com/books/content?vid=ISBN9784053056634&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053056634.jpg|https://www.gakusan.com/bookimage_s/9784053056634.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>Gakken</span></div>
             <b>宇宙一わかりやすい高校生物(生物基礎)</b>
@@ -327,7 +333,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/science/books/yokuwakaru-kiso-seibutsu/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>よくわかる高校生物基礎+生物</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056658.jpg|https://cover.openbd.jp/9784053056658.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>よくわかる高校生物基礎+生物</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053056659.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053056659.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056659.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053056658.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053056658.jpg|https://books.google.com/books/content?vid=ISBN9784053056658&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053056658.jpg|https://www.gakusan.com/bookimage_s/9784053056658.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>Gakken</span></div>
             <b>よくわかる高校生物基礎+生物</b>
@@ -339,7 +345,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/yamakawa-omoshiroi/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>山川喜輝の生物が面白いほどわかる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052292.jpg|https://cover.openbd.jp/9784046052292.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>山川喜輝の生物が面白いほどわかる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046052295.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046052295.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052295.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046052292.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052292.jpg|https://books.google.com/books/content?vid=ISBN9784046052292&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046052292.jpg|https://www.gakusan.com/bookimage_s/9784046052292.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>KADOKAWA</span></div>
             <b>山川喜輝の生物が面白いほどわかる本</b>
@@ -351,7 +357,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/rikai-shiyasui-seibutsu/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>理解しやすい生物+生物基礎</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578244199.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578244199.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578244199.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578244196.jpg|https://cover.openbd.jp/9784578244196.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>理解しやすい生物+生物基礎</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578244199.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578244199.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578244199.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578244199.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578244199.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578244199.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578244196.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578244196.jpg|https://books.google.com/books/content?vid=ISBN9784578244196&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578244196.jpg|https://www.gakusan.com/bookimage_s/9784578244196.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>文英堂</span></div>
             <b>理解しやすい生物+生物基礎</b>
@@ -363,7 +369,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/rankjun-kiso/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ランク順 高校生物基礎一問一答</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060168.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060168.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060168.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053060167.jpg|https://cover.openbd.jp/9784053060167.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ランク順 高校生物基礎一問一答</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060168.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060168.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060168.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053060168.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053060168.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060168.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053060167.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053060167.jpg|https://books.google.com/books/content?vid=ISBN9784053060167&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053060167.jpg|https://www.gakusan.com/bookimage_s/9784053060167.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>Gakken</span></div>
             <b>ランク順 高校生物基礎一問一答</b>
@@ -375,7 +381,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/kiso-ichimon-itto/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>生物基礎 一問一答 完全版</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4868270087.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4868270087.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4868270087.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784868270089.jpg|https://cover.openbd.jp/9784868270089.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>生物基礎 一問一答 完全版</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4868270087.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4868270087.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4868270087.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4868270087.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4868270087.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4868270087.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784868270089.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784868270089.jpg|https://books.google.com/books/content?vid=ISBN9784868270089&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784868270089.jpg|https://www.gakusan.com/bookimage_s/9784868270089.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>ナガセ(東進ブックス)</span></div>
             <b>生物基礎 一問一答 完全版</b>
@@ -387,7 +393,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/lead-light-note-kiso/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート生物基礎</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410283472.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410283472.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410283472.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410283475.jpg|https://cover.openbd.jp/9784410283475.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート生物基礎</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410283472.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410283472.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410283472.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410283472.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410283472.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410283472.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410283475.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410283475.jpg|https://books.google.com/books/content?vid=ISBN9784410283475&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410283475.jpg|https://www.gakusan.com/bookimage_s/9784410283475.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>数研出版</span></div>
             <b>リードLightノート生物基礎</b>
@@ -432,6 +438,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="science" data-book-id="tabe-kiso-hajimete" data-book-name="田部の生物基礎をはじめからていねいに"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -484,6 +498,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/science/books/">参考書一覧</a>
       <a href="/science/routes/">志望校別ルート</a>
       <a href="/science/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -575,6 +591,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

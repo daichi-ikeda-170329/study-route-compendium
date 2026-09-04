@@ -111,6 +111,40 @@ export function validateSubjectData(dir, data) {
 }
 
 /**
+ * canonical ファイル（data/subjects/<科目>/*.json）そのものの検証。
+ *
+ * `validateSubjectData()` が見るのは「読み込んだあとの形」なので、
+ * JSON ファイル側の約束（schemaVersion がある・関数が無い）は別に見る。
+ * **関数を持たせたくなったら .mjs へ逃がす**という誘惑への歯止め。
+ * 関数が入ると vm 依存が別の形で戻り、データを静的に検査できなくなる。
+ *
+ * @param {string} file  表示用のファイル名
+ * @param {*} raw        JSON.parse した中身
+ * @returns {string[]} 問題の一覧（空なら合格）
+ */
+export function validateCanonicalFile(file, raw) {
+  const problems = [];
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+    problems.push(`${file}: トップレベルがオブジェクトでない`);
+    return problems;
+  }
+  if (raw.schemaVersion !== 1) {
+    problems.push(`${file}: schemaVersion が ${JSON.stringify(raw.schemaVersion)}。想定は 1`);
+  }
+  // JSON.parse の結果に関数は入らないが、書き出す側が JS を書いた場合に備えて見る
+  const seen = new Set();
+  const walk = (v, at) => {
+    if (typeof v === 'function') { problems.push(`${file}: ${at} が関数。canonical データに関数を置かない`); return; }
+    if (!v || typeof v !== 'object') return;
+    if (seen.has(v)) return;
+    seen.add(v);
+    for (const [k, x] of Object.entries(v)) walk(x, `${at}.${k}`);
+  };
+  walk(raw, '');
+  return problems;
+}
+
+/**
  * 比較に使う正規形。**キーの並び順に依存しない**ハッシュを作るために使う。
  * 関数（cond など）は文字列にして比べる。
  */

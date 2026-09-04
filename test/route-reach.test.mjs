@@ -12,7 +12,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadQuiz, loadPage, loadShare, fakeStorage, SUBJECTS } from './helpers.mjs';
-import { extractSubject } from '../build/lib/extract.mjs';
+import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
 import { ROOT } from './helpers.mjs';
 
 /**
@@ -41,7 +41,7 @@ function reachableFromQuiz(quiz) {
 }
 
 for (const dir of SUBJECTS) {
-  const { tiers, unis } = extractSubject(ROOT, dir);
+  const { tiers, unis } = loadSubjectData(ROOT, dir);
   const quiz = loadQuiz(dir);
   const fromQuiz = reachableFromQuiz(quiz);
   const fromUni = new Set(unis.map(u => u.t));

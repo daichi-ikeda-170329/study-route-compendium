@@ -16,7 +16,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'build', 'data', 'authors.json');
@@ -78,7 +79,7 @@ export function authorsFromNdl(xml) {
 async function main() {
   const books = [];
   for (const s of SUBJECTS) {
-    for (const b of extractSubject(ROOT, s.dir).books) {
+    for (const b of loadSubjectData(ROOT, s.dir).books) {
       if (b.isbn13) books.push({ key: `${s.dir}/${b.id}`, isbn: String(b.isbn13) });
     }
   }
@@ -153,7 +154,7 @@ async function main() {
   const verified = [...new Set(Object.values(authors).flat())].filter(n => [...n].length >= 3);
   let inferred = 0;
   for (const s of SUBJECTS) {
-    for (const b of extractSubject(ROOT, s.dir).books) {
+    for (const b of loadSubjectData(ROOT, s.dir).books) {
       const key = `${s.dir}/${b.id}`;
       if (authors[key]) continue;
       const hay = `${b.official || ''} ${b.name || ''}`;

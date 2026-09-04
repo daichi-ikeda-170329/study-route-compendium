@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -223,6 +229,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/science/books/">参考書一覧</a>
       <a href="/science/routes/">志望校別ルート</a>
       <a href="/science/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>

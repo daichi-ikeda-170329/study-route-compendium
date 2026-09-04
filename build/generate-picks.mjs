@@ -9,14 +9,15 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { searchName } from './lib/booktitle.mjs';
 import { tally } from './lib/tally.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { byDifficultyAsc } from './lib/rank.mjs';
-import { fileDate, saveDates } from './lib/updated.mjs';
+import { subjectContentDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -45,7 +46,7 @@ function card(b, sub, stages, t, rank) {
 }
 
 function render(sub, d, counts) {
-  const updated = fileDate(`${sub.dir}/index.html`);
+  const updated = subjectContentDate(sub.dir, d);
   const url = `${ORIGIN}/${sub.dir}/osusume/`;
   const t = tally(d.routes, d.tiers);
 
@@ -171,7 +172,7 @@ ${jsonLd(ld)}
 const data = {};
 const counts = {};
 for (const s of SUBJECTS) {
-  data[s.dir] = extractSubject(ROOT, s.dir);
+  data[s.dir] = loadSubjectData(ROOT, s.dir);
   counts[s.dir] = data[s.dir].books.length;
 }
 

@@ -1,4 +1,10 @@
 {
   "note": "build/apply-count.mjs の sweep() が報告する「◯◯◯冊」のうち、収録冊数ではないと確認したもの。file は ROOT からの相対パス、value は数字（カンマ抜き）。理由を書かずに足さない。",
-  "ignore": []
+  "ignore": [
+    {
+      "file": "README.md",
+      "value": 1052,
+      "reason": "GitHub リポジトリの Description に現在入っている古い文言をそのまま引用している箇所。運営者が gh repo edit で直したことを確かめるための照合対象なので、サイト側の冊数に追従させてはいけない。Description を直したらこの引用ごと消す。"
+    }
+  ]
 }

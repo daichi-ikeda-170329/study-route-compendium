@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>神戸大の国語15カ年</b><span>教学社</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/432526695X.09.LZZZZZZZ.jpg" alt="神戸大の国語15カ年の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/432526695X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/432526695X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325266952.jpg|https://cover.openbd.jp/9784325266952.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/432526695X.09.LZZZZZZZ.jpg" alt="神戸大の国語15カ年の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/432526695X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/432526695X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/432526695X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/432526695X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/432526695X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325266952.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325266952.jpg|https://books.google.com/books/content?vid=ISBN9784325266952&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325266952.jpg|https://www.gakusan.com/bookimage_s/9784325266952.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>過去問 — 総合</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/japanese/books/handai-kokugo-15kanen-4/" style="--bc:#3D4657">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>阪大の国語15カ年</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325266860.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325266860.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325266860.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325266860.jpg|https://cover.openbd.jp/9784325266860.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>阪大の国語15カ年</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325266860.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325266860.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325266860.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325266860.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325266860.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325266860.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325266860.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325266860.jpg|https://books.google.com/books/content?vid=ISBN9784325266860&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325266860.jpg|https://www.gakusan.com/bookimage_s/9784325266860.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">過去問</span><span>教学社</span></div>
             <b>阪大の国語15カ年</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/waseda-kokugo/" style="--bc:#3D4657">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>早稲田の国語</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273212.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273212.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273212.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273219.jpg|https://cover.openbd.jp/9784325273219.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>早稲田の国語</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273212.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273212.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273212.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325273212.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325273212.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273212.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325273219.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273219.jpg|https://books.google.com/books/content?vid=ISBN9784325273219&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325273219.jpg|https://www.gakusan.com/bookimage_s/9784325273219.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">過去問</span><span>教学社</span></div>
             <b>早稲田の国語</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/hitotsubashi-kokugo/" style="--bc:#3D4657">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>一橋大の国語20カ年</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273131.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273131.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273131.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273134.jpg|https://cover.openbd.jp/9784325273134.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>一橋大の国語20カ年</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325273131.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325273131.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273131.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325273131.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325273131.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325273131.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325273134.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273134.jpg|https://books.google.com/books/content?vid=ISBN9784325273134&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325273134.jpg|https://www.gakusan.com/bookimage_s/9784325273134.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">過去問</span><span>教学社</span></div>
             <b>一橋大の国語20カ年</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/daizemi-todai-pre-kokugo/" style="--bc:#3D4657">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>2026東大入試プレ問題集 国語</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4863469225.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863469225.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469225.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784863469228.jpg|https://cover.openbd.jp/9784863469228.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>2026東大入試プレ問題集 国語</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4863469225.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863469225.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469225.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4863469225.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4863469225.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469225.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784863469228.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784863469228.jpg|https://books.google.com/books/content?vid=ISBN9784863469228&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784863469228.jpg|https://www.gakusan.com/bookimage_s/9784863469228.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">過去問</span><span>代々木ライブラリー</span></div>
             <b>2026東大入試プレ問題集 国語</b>
@@ -330,6 +336,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="japanese" data-book-id="kobedai-kokugo-15kanen-4" data-book-name="神戸大の国語15カ年"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -382,6 +396,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/japanese/books/">参考書一覧</a>
       <a href="/japanese/routes/">志望校別ルート</a>
       <a href="/japanese/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -472,6 +488,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

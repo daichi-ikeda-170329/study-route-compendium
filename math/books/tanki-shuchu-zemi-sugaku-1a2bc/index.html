@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>2026 大学入試 短期集中ゼミ 数学I・A・II・B・C</b><span>実教出版</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4407365153.09.LZZZZZZZ.jpg" alt="2026 大学入試 短期集中ゼミ 数学I・A・II・B・Cの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4407365153.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407365153.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407365153.jpg|https://cover.openbd.jp/9784407365153.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4407365153.09.LZZZZZZZ.jpg" alt="2026 大学入試 短期集中ゼミ 数学I・A・II・B・Cの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4407365153.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407365153.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4407365153.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4407365153.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407365153.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784407365153.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407365153.jpg|https://books.google.com/books/content?vid=ISBN9784407365153&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784407365153.jpg|https://www.gakusan.com/bookimage_s/9784407365153.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>入試標準</span>
@@ -248,7 +254,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/math/books/zenlevel/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル問題集 数学</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353759.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353759.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353759.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353752.jpg|https://cover.openbd.jp/9784010353752.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル問題集 数学</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353759.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353759.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353759.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010353759.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010353759.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353759.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010353752.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353752.jpg|https://books.google.com/books/content?vid=ISBN9784010353752&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010353752.jpg|https://www.gakusan.com/bookimage_s/9784010353752.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>旺文社</span></div>
             <b>全レベル問題集 数学</b>
@@ -260,7 +266,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/tanki-shuchu-zemi-sugaku-3/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>2026 大学入試 短期集中ゼミ 数学III</b><em>実教出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4407365161.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4407365161.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407365161.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407365160.jpg|https://cover.openbd.jp/9784407365160.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>2026 大学入試 短期集中ゼミ 数学III</b><em>実教出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4407365161.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4407365161.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407365161.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4407365161.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4407365161.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407365161.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784407365160.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407365160.jpg|https://books.google.com/books/content?vid=ISBN9784407365160&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784407365160.jpg|https://www.gakusan.com/bookimage_s/9784407365160.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>実教出版</span></div>
             <b>2026 大学入試 短期集中ゼミ 数学III</b>
@@ -272,7 +278,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/choice/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>チョイス新標準問題集</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227280.jpg|https://cover.openbd.jp/9784777227280.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>チョイス新標準問題集</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227286.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227286.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227280.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227280.jpg|https://books.google.com/books/content?vid=ISBN9784777227280&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227280.jpg|https://www.gakusan.com/bookimage_s/9784777227280.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>河合出版</span></div>
             <b>チョイス新標準問題集</b>
@@ -284,7 +290,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/masema-up/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>合格!数学 実力UP!問題集</b><em>マセマ出版社</em></span><img src="https://m.media-amazon.com/images/I/516q21EcY6L._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/516q21EcY6L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4866152346.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866152346.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784866152349.jpg|https://cover.openbd.jp/9784866152349.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>合格!数学 実力UP!問題集</b><em>マセマ出版社</em></span><img src="https://m.media-amazon.com/images/I/516q21EcY6L._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/516q21EcY6L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4866152346.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866152346.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4866152346.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4866152346.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866152346.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784866152349.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784866152349.jpg|https://books.google.com/books/content?vid=ISBN9784866152349&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784866152349.jpg|https://www.gakusan.com/bookimage_s/9784866152349.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>マセマ出版社</span></div>
             <b>合格!数学 実力UP!問題集</b>
@@ -296,7 +302,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/jitsuryoku-kyoka/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>入試数学「実力強化」問題集</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796113460.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796113460.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113460.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796113465.jpg|https://cover.openbd.jp/9784796113465.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>入試数学「実力強化」問題集</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796113460.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796113460.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113460.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796113460.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796113460.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113460.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796113465.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796113465.jpg|https://books.google.com/books/content?vid=ISBN9784796113465&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796113465.jpg|https://www.gakusan.com/bookimage_s/9784796113465.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>駿台文庫</span></div>
             <b>入試数学「実力強化」問題集</b>
@@ -308,7 +314,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/bunkei-juyo/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>文系の数学 重要事項完全習得編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777228669.jpg|https://cover.openbd.jp/9784777228669.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>文系の数学 重要事項完全習得編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777228665.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228665.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228669.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777228669.jpg|https://books.google.com/books/content?vid=ISBN9784777228669&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228669.jpg|https://www.gakusan.com/bookimage_s/9784777228669.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>河合出版</span></div>
             <b>文系の数学 重要事項完全習得編</b>
@@ -328,7 +334,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/math/books/canpass/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>国公立標準問題集 CanPass</b><em>駿台文庫</em></span><img src="https://m.media-amazon.com/images/I/51stpTYrWNL._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/51stpTYrWNL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796113606.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113606.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796113601.jpg|https://cover.openbd.jp/9784796113601.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>国公立標準問題集 CanPass</b><em>駿台文庫</em></span><img src="https://m.media-amazon.com/images/I/51stpTYrWNL._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/51stpTYrWNL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796113606.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113606.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796113606.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796113606.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796113606.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796113601.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796113601.jpg|https://books.google.com/books/content?vid=ISBN9784796113601&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796113601.jpg|https://www.gakusan.com/bookimage_s/9784796113601.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>駿台文庫</span></div>
             <b>国公立標準問題集 CanPass</b>
@@ -340,7 +346,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/original-standard-sugaku-3c/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>オリジナル・スタンダード数学演習III</b><em>数研出版</em></span><img src="https://www.chart.co.jp/wp_item/wp-content/uploads/2023/09/24210.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.chart.co.jp/wp_item/wp-content/uploads/2023/09/24210.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410242105.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410242105.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410242106.jpg|https://cover.openbd.jp/9784410242106.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>オリジナル・スタンダード数学演習III</b><em>数研出版</em></span><img src="https://www.chart.co.jp/wp_item/wp-content/uploads/2023/09/24210.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.chart.co.jp/wp_item/wp-content/uploads/2023/09/24210.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410242105.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410242105.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410242105.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410242105.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410242105.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410242106.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410242106.jpg|https://books.google.com/books/content?vid=ISBN9784410242106&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410242106.jpg|https://www.gakusan.com/bookimage_s/9784410242106.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>数研出版</span></div>
             <b>オリジナル・スタンダード数学演習III</b>
@@ -352,7 +358,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/clear-sugaku-enshu-juken/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>クリアー数学演習I・II・A・B・C〔ベクトル〕受験編</b><em>数研出版</em></span><img src="https://www.chart.co.jp/wp_item/wp-content/uploads/2025/10/24106.png" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.chart.co.jp/wp_item/wp-content/uploads/2025/10/24106.png|https://images-fe.ssl-images-amazon.com/images/P/4410241052.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410241052.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410241055.jpg|https://cover.openbd.jp/9784410241055.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>クリアー数学演習I・II・A・B・C〔ベクトル〕受験編</b><em>数研出版</em></span><img src="https://www.chart.co.jp/wp_item/wp-content/uploads/2025/10/24106.png" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.chart.co.jp/wp_item/wp-content/uploads/2025/10/24106.png|https://images-fe.ssl-images-amazon.com/images/P/4410241052.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410241052.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410241052.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410241052.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410241052.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410241055.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410241055.jpg|https://books.google.com/books/content?vid=ISBN9784410241055&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410241055.jpg|https://www.gakusan.com/bookimage_s/9784410241055.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>数研出版</span></div>
             <b>クリアー数学演習I・II・A・B・C〔ベクトル〕受験編</b>
@@ -364,7 +370,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/jissen-sugaku-juyo-mondaishu-bunkei/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>実戦 数学重要問題集 数学I・II・A・B・C〔ベクトル〕</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410142445.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410142445.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410142445.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410142444.jpg|https://cover.openbd.jp/9784410142444.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>実戦 数学重要問題集 数学I・II・A・B・C〔ベクトル〕</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410142445.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410142445.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410142445.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410142445.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410142445.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410142445.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410142444.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410142444.jpg|https://books.google.com/books/content?vid=ISBN9784410142444&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410142444.jpg|https://www.gakusan.com/bookimage_s/9784410142444.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">応用</span><span>数研出版</span></div>
             <b>実戦 数学重要問題集 数学I・II・A・B・C〔ベクトル〕</b>
@@ -376,7 +382,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/rikei-platica/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>理系数学の良問プラチカ IAIIBC</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227219.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227219.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227219.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227211.jpg|https://cover.openbd.jp/9784777227211.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>理系数学の良問プラチカ IAIIBC</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227219.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227219.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227219.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227219.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227219.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227219.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227211.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227211.jpg|https://books.google.com/books/content?vid=ISBN9784777227211&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227211.jpg|https://www.gakusan.com/bookimage_s/9784777227211.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">応用</span><span>河合出版</span></div>
             <b>理系数学の良問プラチカ IAIIBC</b>
@@ -388,7 +394,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/math/books/toshin-kyotsu-test-jissen-mondaishu-sugaku/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>2025 大学入学共通テスト実戦問題集 数学I・A/数学II</b><em>ナガセ（東進ブックス）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859586.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859586.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859586.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859580.jpg|https://cover.openbd.jp/9784890859580.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>2025 大学入学共通テスト実戦問題集 数学I・A/数学II</b><em>ナガセ（東進ブックス）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859586.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859586.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859586.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890859586.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890859586.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859586.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859580.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859580.jpg|https://books.google.com/books/content?vid=ISBN9784890859580&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859580.jpg|https://www.gakusan.com/bookimage_s/9784890859580.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>ナガセ（東進ブックス）</span></div>
             <b>2025 大学入学共通テスト実戦問題集 数学I・A/数学II</b>
@@ -433,6 +439,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="math" data-book-id="tanki-shuchu-zemi-sugaku-1a2bc" data-book-name="2026 大学入試 短期集中ゼミ 数学I・A・II・B・C"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -485,6 +499,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/math/books/">参考書一覧</a>
       <a href="/math/routes/">志望校別ルート</a>
       <a href="/math/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -582,6 +598,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

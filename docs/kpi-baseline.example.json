@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "period": {
+    "start": null,
+    "end": null,
+    "days": 28
+  },
+  "collectedAt": null,
+  "currency": null,
+  "sources": {
+    "searchConsole": {
+      "clicks": null,
+      "impressions": null,
+      "ctr": null,
+      "position": null
+    },
+    "ga4": {
+      "sessions": null,
+      "engagementRate": null,
+      "activeUsers": null
+    },
+    "adsense": {
+      "pageViews": null,
+      "estimatedEarnings": null,
+      "rpm": null
+    }
+  },
+  "notes": [
+    "これは形を示すための例。**実数ではない。** すべて null のまま置いてある。",
+    "実際の値は build/import-kpi.mjs が docs/kpi-baseline.json へ書く。"
+  ]
+}

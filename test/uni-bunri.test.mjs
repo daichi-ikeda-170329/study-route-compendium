@@ -114,7 +114,10 @@ test('数学: 医学部医学科だけは学部の記載から理系を確定し
 test('5 科目すべてが assets/js/bunri.js を読み込んでいる', () => {
   for (const dir of SUBJECTS) {
     const src = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
-    assert.match(src, /<script src="\/assets\/js\/bunri\.js"><\/script>/, `${dir}: bunri.js を読み込んでいない`);
+    // defer で読み込む（2026-09-05）。描画をブロックしないため。
+    // 科目トップの描画コードは subject-loader.js が起動するので、
+    // defer どうしの実行順（文書の順）で bunri.js のほうが必ず先になる
+    assert.match(src, /<script src="\/assets\/js\/bunri\.js" defer><\/script>/, `${dir}: bunri.js を defer で読み込んでいない`);
   }
 });
 

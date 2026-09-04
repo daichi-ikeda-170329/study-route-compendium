@@ -11,7 +11,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { ARTICLES } from './content/articles.mjs';
@@ -23,7 +24,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const data = {};
 const counts = {};
 for (const s of SUBJECTS) {
-  data[s.dir] = extractSubject(ROOT, s.dir);
+  data[s.dir] = loadSubjectData(ROOT, s.dir);
   counts[s.dir] = data[s.dir].books.length;
 }
 

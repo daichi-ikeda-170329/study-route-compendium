@@ -1,0 +1,550 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-09-04T19:31:40.869Z",
+  "commit": "b92680f7d76b3255c0f287032c18f46232af63cf",
+  "lighthouseVersion": "13.4.1",
+  "chromeVersion": "Google Chrome 152.0.7977.76",
+  "target": "localhost (build/serve.mjs, .)",
+  "baseUrl": "http://127.0.0.1:4188",
+  "formFactor": "mobile",
+  "throttling": "simulate (lighthouse mobile default)",
+  "thirdParty": "allowed",
+  "runs": 1,
+  "pages": [
+    {
+      "path": "/",
+      "url": "http://127.0.0.1:4188/",
+      "runs": [
+        {
+          "performance": 71,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 4054.266965835929,
+          "fcpMs": 3471.108465835929,
+          "cls": 0.18865154902350803,
+          "tbtMs": 0,
+          "speedIndexMs": 3471.108465835929,
+          "ttiMs": 4054.266965835929,
+          "transferBytes": 1891215
+        }
+      ],
+      "median": {
+        "performance": 71,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 4054.267,
+        "fcpMs": 3471.108,
+        "cls": 0.189,
+        "tbtMs": 0,
+        "speedIndexMs": 3471.108,
+        "ttiMs": 4054.267,
+        "transferBytes": 1891215
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 3
+          },
+          {
+            "label": "Element render delay",
+            "ms": 255.7
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1040
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 850
+          },
+          {
+            "id": "unminified-css",
+            "title": "Minify CSS",
+            "savingsMs": 170
+          }
+        ]
+      }
+    },
+    {
+      "path": "/english/",
+      "url": "http://127.0.0.1:4188/english/",
+      "runs": [
+        {
+          "performance": 57,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 9610.245906930679,
+          "fcpMs": 3298.0997600360015,
+          "cls": 0.22509898155097352,
+          "tbtMs": 0,
+          "speedIndexMs": 3298.0997600360015,
+          "ttiMs": 9610.245906930679,
+          "transferBytes": 2633154
+        }
+      ],
+      "median": {
+        "performance": 57,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 9610.246,
+        "fcpMs": 3298.1,
+        "cls": 0.225,
+        "tbtMs": 0,
+        "speedIndexMs": 3298.1,
+        "ttiMs": 9610.246,
+        "transferBytes": 2633154
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 1.1
+          },
+          {
+            "label": "Element render delay",
+            "ms": 359.1
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1330
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 1290
+          },
+          {
+            "id": "unminified-javascript",
+            "title": "Minify JavaScript",
+            "savingsMs": 470
+          },
+          {
+            "id": "unminified-css",
+            "title": "Minify CSS",
+            "savingsMs": 150
+          }
+        ]
+      }
+    },
+    {
+      "path": "/japanese/",
+      "url": "http://127.0.0.1:4188/japanese/",
+      "runs": [
+        {
+          "performance": 43,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 20580.32556165794,
+          "fcpMs": 15854.742561657948,
+          "cls": 0.2361781102272121,
+          "tbtMs": 0,
+          "speedIndexMs": 15854.742561657948,
+          "ttiMs": 20580.32556165794,
+          "transferBytes": 2357321
+        }
+      ],
+      "median": {
+        "performance": 43,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 20580.326,
+        "fcpMs": 15854.743,
+        "cls": 0.236,
+        "tbtMs": 0,
+        "speedIndexMs": 15854.743,
+        "ttiMs": 20580.326,
+        "transferBytes": 2357321
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 1
+          },
+          {
+            "label": "Element render delay",
+            "ms": 1613
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 2560
+          },
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1490
+          },
+          {
+            "id": "unminified-css",
+            "title": "Minify CSS",
+            "savingsMs": 320
+          },
+          {
+            "id": "unminified-javascript",
+            "title": "Minify JavaScript",
+            "savingsMs": 230
+          }
+        ]
+      }
+    },
+    {
+      "path": "/math/",
+      "url": "http://127.0.0.1:4188/math/",
+      "runs": [
+        {
+          "performance": 53,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 9839.407565702808,
+          "fcpMs": 4536.045517918948,
+          "cls": 0.21653169288352025,
+          "tbtMs": 41,
+          "speedIndexMs": 4536.045517918948,
+          "ttiMs": 9852.323760924424,
+          "transferBytes": 2324095
+        }
+      ],
+      "median": {
+        "performance": 53,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 9839.408,
+        "fcpMs": 4536.046,
+        "cls": 0.217,
+        "tbtMs": 41,
+        "speedIndexMs": 4536.046,
+        "ttiMs": 9852.324,
+        "transferBytes": 2324095
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 1
+          },
+          {
+            "label": "Element render delay",
+            "ms": 397.8
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 1290
+          },
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1160
+          },
+          {
+            "id": "unminified-javascript",
+            "title": "Minify JavaScript",
+            "savingsMs": 320
+          },
+          {
+            "id": "unminified-css",
+            "title": "Minify CSS",
+            "savingsMs": 60
+          }
+        ]
+      }
+    },
+    {
+      "path": "/social/",
+      "url": "http://127.0.0.1:4188/social/",
+      "runs": [
+        {
+          "performance": 52,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 10321.189235873218,
+          "fcpMs": 4703.577805231511,
+          "cls": 0.22228965580851584,
+          "tbtMs": 40,
+          "speedIndexMs": 4703.577805231511,
+          "ttiMs": 10321.189235873218,
+          "transferBytes": 2705112
+        }
+      ],
+      "median": {
+        "performance": 52,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 10321.189,
+        "fcpMs": 4703.578,
+        "cls": 0.222,
+        "tbtMs": 40,
+        "speedIndexMs": 4703.578,
+        "ttiMs": 10321.189,
+        "transferBytes": 2705112
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 1.1
+          },
+          {
+            "label": "Element render delay",
+            "ms": 283.8
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 1780
+          },
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1710
+          },
+          {
+            "id": "unminified-javascript",
+            "title": "Minify JavaScript",
+            "savingsMs": 660
+          },
+          {
+            "id": "unminified-css",
+            "title": "Minify CSS",
+            "savingsMs": 150
+          }
+        ]
+      }
+    },
+    {
+      "path": "/joho/",
+      "url": "http://127.0.0.1:4188/joho/",
+      "runs": [
+        {
+          "performance": 60,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 6873.904043842105,
+          "fcpMs": 2902.648043842105,
+          "cls": 0.23416675479600504,
+          "tbtMs": 0,
+          "speedIndexMs": 2902.648043842105,
+          "ttiMs": 6873.904043842105,
+          "transferBytes": 1719641
+        }
+      ],
+      "median": {
+        "performance": 60,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 6873.904,
+        "fcpMs": 2902.648,
+        "cls": 0.234,
+        "tbtMs": 0,
+        "speedIndexMs": 2902.648,
+        "ttiMs": 6873.904,
+        "transferBytes": 1719641
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 0.9
+          },
+          {
+            "label": "Element render delay",
+            "ms": 379.6
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1110
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 970
+          }
+        ]
+      }
+    },
+    {
+      "path": "/shoron/",
+      "url": "http://127.0.0.1:4188/shoron/",
+      "runs": [
+        {
+          "performance": 67,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 7252.964652379502,
+          "fcpMs": 3755.8676523795,
+          "cls": 0.0023628594854600703,
+          "tbtMs": 0,
+          "speedIndexMs": 3755.8676523795,
+          "ttiMs": 7252.964652379502,
+          "transferBytes": 1710967
+        }
+      ],
+      "median": {
+        "performance": 67,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 7252.965,
+        "fcpMs": 3755.868,
+        "cls": 0.002,
+        "tbtMs": 0,
+        "speedIndexMs": 3755.868,
+        "ttiMs": 7252.965,
+        "transferBytes": 1710967
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 0.9
+          },
+          {
+            "label": "Element render delay",
+            "ms": 364.5
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 810
+          },
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 400
+          }
+        ]
+      }
+    }
+  ]
+}

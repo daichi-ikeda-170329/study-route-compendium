@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>速読英単語 入門編</b><span>Z会</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg" alt="速読英単語 入門編の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865313642.jpg|https://cover.openbd.jp/9784865313642.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg" alt="速読英単語 入門編の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4865313648.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4865313648.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865313648.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784865313642.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865313642.jpg|https://books.google.com/books/content?vid=ISBN9784865313642&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784865313642.jpg|https://www.gakusan.com/bookimage_s/9784865313642.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>単語・語彙</span>
@@ -248,7 +254,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/english/books/sistan-basic/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語Basic</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796111416.jpg|https://cover.openbd.jp/9784796111416.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語Basic</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111417.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111416.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796111416.jpg|https://books.google.com/books/content?vid=ISBN9784796111416&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111416.jpg|https://www.gakusan.com/bookimage_s/9784796111416.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>駿台文庫</span></div>
             <b>システム英単語Basic</b>
@@ -260,7 +266,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/leap-basic/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>必携英単語LEAP Basic</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410144332.jpg|https://cover.openbd.jp/9784410144332.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>必携英単語LEAP Basic</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410144332.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410144332.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410144332.jpg|https://books.google.com/books/content?vid=ISBN9784410144332&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410144332.jpg|https://www.gakusan.com/bookimage_s/9784410144332.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>数研出版</span></div>
             <b>必携英単語LEAP Basic</b>
@@ -272,7 +278,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/target1200/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1200</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010346488.jpg|https://cover.openbd.jp/9784010346488.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1200</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346485.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346485.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346488.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010346488.jpg|https://books.google.com/books/content?vid=ISBN9784010346488&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346488.jpg|https://www.gakusan.com/bookimage_s/9784010346488.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>旺文社</span></div>
             <b>英単語ターゲット1200</b>
@@ -284,7 +290,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/hijii-tango/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>肘井学のゼロから英単語</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052575.jpg|https://cover.openbd.jp/9784046052575.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>肘井学のゼロから英単語</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046052570.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046052575.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046052575.jpg|https://books.google.com/books/content?vid=ISBN9784046052575&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046052575.jpg|https://www.gakusan.com/bookimage_s/9784046052575.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>KADOKAWA</span></div>
             <b>肘井学のゼロから英単語</b>
@@ -296,7 +302,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/kikutan-basic-4000/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>キクタン Basic 4000</b><em>アルク</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784757433472.jpg|https://cover.openbd.jp/9784757433472.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>キクタン Basic 4000</b><em>アルク</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4757433476.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433476.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784757433472.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784757433472.jpg|https://books.google.com/books/content?vid=ISBN9784757433472&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784757433472.jpg|https://www.gakusan.com/bookimage_s/9784757433472.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>アルク</span></div>
             <b>キクタン Basic 4000</b>
@@ -308,7 +314,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/database/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>データベース(3300/4800)</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342264894.jpg|https://cover.openbd.jp/9784342264894.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>データベース(3300/4800)</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342264897.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342264897.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342264897.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342264894.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342264894.jpg|https://books.google.com/books/content?vid=ISBN9784342264894&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342264894.jpg|https://www.gakusan.com/bookimage_s/9784342264894.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>桐原書店</span></div>
             <b>データベース(3300/4800)</b>
@@ -328,7 +334,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/english/books/stock3000/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語Stock3000</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578271413.jpg|https://cover.openbd.jp/9784578271413.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語Stock3000</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578271412.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578271412.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578271412.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578271413.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784578271413.jpg|https://books.google.com/books/content?vid=ISBN9784578271413&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578271413.jpg|https://www.gakusan.com/bookimage_s/9784578271413.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>文英堂</span></div>
             <b>英単語Stock3000</b>
@@ -340,7 +346,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/target1400/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1400</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010346471.jpg|https://cover.openbd.jp/9784010346471.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1400</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346471.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010346471.jpg|https://books.google.com/books/content?vid=ISBN9784010346471&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346471.jpg|https://www.gakusan.com/bookimage_s/9784010346471.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>旺文社</span></div>
             <b>英単語ターゲット1400</b>
@@ -352,7 +358,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/eiken-2kyu-derujun-pastan-shinso-5th/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英検2級 でる順パス単</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010951194.jpg|https://cover.openbd.jp/9784010951194.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英検2級 でる順パス単</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010951192.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010951192.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010951194.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010951194.jpg|https://books.google.com/books/content?vid=ISBN9784010951194&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010951194.jpg|https://www.gakusan.com/bookimage_s/9784010951194.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">単語</span><span>旺文社</span></div>
             <b>英検2級 でる順パス単</b>
@@ -364,7 +370,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/eijukugo-always-1001/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>英熟語Always1001</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777200132.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777200132.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777200132.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777200139.jpg|https://cover.openbd.jp/9784777200139.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>英熟語Always1001</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777200132.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777200132.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777200132.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777200132.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777200132.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777200132.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777200139.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777200139.jpg|https://books.google.com/books/content?vid=ISBN9784777200139&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777200139.jpg|https://www.gakusan.com/bookimage_s/9784777200139.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">熟語</span><span>河合出版</span></div>
             <b>英熟語Always1001</b>
@@ -376,7 +382,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/target1000/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>英熟語ターゲット1000</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010346495.jpg|https://cover.openbd.jp/9784010346495.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>英熟語ターゲット1000</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346493.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346493.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346495.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010346495.jpg|https://books.google.com/books/content?vid=ISBN9784010346495&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346495.jpg|https://www.gakusan.com/bookimage_s/9784010346495.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">熟語</span><span>旺文社</span></div>
             <b>英熟語ターゲット1000</b>
@@ -388,7 +394,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/english/books/toshin-bunpo-lv/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>英文法レベル別問題集(1〜6)</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859399.jpg|https://cover.openbd.jp/9784890859399.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>英文法レベル別問題集(1〜6)</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/489085939X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085939X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859399.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890859399.jpg|https://books.google.com/books/content?vid=ISBN9784890859399&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859399.jpg|https://www.gakusan.com/bookimage_s/9784890859399.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">文法</span><span>ナガセ(東進)</span></div>
             <b>英文法レベル別問題集(1〜6)</b>
@@ -433,6 +439,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="english" data-book-id="sokutan-nyumon" data-book-name="速読英単語 入門編"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -485,6 +499,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/english/books/">参考書一覧</a>
       <a href="/english/routes/">志望校別ルート</a>
       <a href="/english/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -582,6 +598,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

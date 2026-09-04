@@ -28,8 +28,17 @@ jobs:
         with:
           node-version: '22'
 
+      - name: 書影の取得元の整合を見る（外部へ出ない）
+        run: node build/check-covers.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: 書影の到達を確かめる（外部へ出る。**落とさない**）
+        run: |
+          set +e
+          node build/check-covers.mjs --live | tee -a "$GITHUB_STEP_SUMMARY"
+          exit 0
+
       - name: 書影と商品ページを確認する
-        run: node build/check-links.mjs | tee "$GITHUB_STEP_SUMMARY"
+        run: node build/check-links.mjs | tee -a "$GITHUB_STEP_SUMMARY"
 
       # 機械可読な結果も残す。持続的な欠損だけを拾って直すときに使う。
       # **issue は乱造しない。**同じ不備で毎週 issue が増えると読まれなくなるので、

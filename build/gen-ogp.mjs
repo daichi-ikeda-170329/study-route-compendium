@@ -25,7 +25,8 @@ import { fileURLToPath } from 'url';
 import { Resvg } from '@resvg/resvg-js';
 import sharp from 'sharp';
 
-import { SUBJECTS, extractSubject } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { ensureFonts } from './ogp/fonts.mjs';
@@ -155,7 +156,7 @@ async function genBooks(data, hashes) {
    ============================================================ */
 
 const data = {};
-for (const s of SUBJECTS) data[s.dir] = extractSubject(ROOT, s.dir);
+for (const s of SUBJECTS) data[s.dir] = loadSubjectData(ROOT, s.dir);
 
 if (!CHECK) fonts = await ensureFonts();
 

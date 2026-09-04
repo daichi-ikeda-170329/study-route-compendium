@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>土屋の古文単語222 新装</b><span>タイレル出版（発売：星雲社）</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg" alt="土屋の古文単語222 新装の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784434207969.jpg|https://cover.openbd.jp/9784434207969.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg" alt="土屋の古文単語222 新装の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4434207962.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4434207962.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784434207969.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784434207969.jpg|https://books.google.com/books/content?vid=ISBN9784434207969&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784434207969.jpg|https://www.gakusan.com/bookimage_s/9784434207969.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>単語・文法・句法 — 古文</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/japanese/books/stepup-trial/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート30 古典文法トレーニング</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777228737.jpg|https://cover.openbd.jp/9784777228737.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート30 古典文法トレーニング</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777228738.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228738.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228737.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777228737.jpg|https://books.google.com/books/content?vid=ISBN9784777228737&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228737.jpg|https://www.gakusan.com/bookimage_s/9784777228737.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>河合出版</span></div>
             <b>ステップアップノート30 古典文法トレーニング</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/bunpo-30theme/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古文文法問題演習 基本テーマ30</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784877258436.jpg|https://cover.openbd.jp/9784877258436.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古文文法問題演習 基本テーマ30</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4877258434.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877258434.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784877258436.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784877258436.jpg|https://books.google.com/books/content?vid=ISBN9784877258436&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784877258436.jpg|https://www.gakusan.com/bookimage_s/9784877258436.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>河合出版</span></div>
             <b>古文文法問題演習 基本テーマ30</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/group30/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>GROUP30で覚える古文単語600</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875687917.jpg|https://cover.openbd.jp/9784875687917.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>GROUP30で覚える古文単語600</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4875687915.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875687915.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784875687917.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875687917.jpg|https://books.google.com/books/content?vid=ISBN9784875687917&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784875687917.jpg|https://www.gakusan.com/bookimage_s/9784875687917.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>語学春秋社</span></div>
             <b>GROUP30で覚える古文単語600</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/sokudoku-joshiki/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>速読古文常識</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860661591.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860661591.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860661591.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860661595.jpg|https://cover.openbd.jp/9784860661595.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>速読古文常識</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860661591.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860661591.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860661591.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4860661591.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4860661591.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860661591.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784860661595.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860661595.jpg|https://books.google.com/books/content?vid=ISBN9784860661595&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784860661595.jpg|https://www.gakusan.com/bookimage_s/9784860661595.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>Z会</span></div>
             <b>速読古文常識</b>
@@ -295,7 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/nitoryu634/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>二刀流古文単語634</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010303875.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010303875.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010303875.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010303870.jpg|https://cover.openbd.jp/9784010303870.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>二刀流古文単語634</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010303875.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010303875.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010303875.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010303875.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010303875.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010303875.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010303870.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010303870.jpg|https://books.google.com/books/content?vid=ISBN9784010303870&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010303870.jpg|https://www.gakusan.com/bookimage_s/9784010303870.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>旺文社</span></div>
             <b>二刀流古文単語634</b>
@@ -307,7 +313,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/formula600/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古文単語FORMULA600</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890856398.jpg|https://cover.openbd.jp/9784890856398.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古文単語FORMULA600</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890856390.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890856390.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890856398.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890856398.jpg|https://books.google.com/books/content?vid=ISBN9784890856398&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890856398.jpg|https://www.gakusan.com/bookimage_s/9784890856398.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>東進ブックス(ナガセ)</span></div>
             <b>古文単語FORMULA600</b>
@@ -327,7 +333,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/japanese/books/yomitoki-tango/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>読み解き古文単語</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784879156051.jpg|https://cover.openbd.jp/9784879156051.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>読み解き古文単語</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4879156051.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4879156051.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784879156051.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784879156051.jpg|https://books.google.com/books/content?vid=ISBN9784879156051&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784879156051.jpg|https://www.gakusan.com/bookimage_s/9784879156051.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>Z会</span></div>
             <b>読み解き古文単語</b>
@@ -339,7 +345,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/dokkai-tango-training/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>読解のための古文単語トレーニング</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325272887.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325272887.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325272887.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325272885.jpg|https://cover.openbd.jp/9784325272885.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>読解のための古文単語トレーニング</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325272887.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325272887.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325272887.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325272887.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325272887.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325272887.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325272885.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325272885.jpg|https://books.google.com/books/content?vid=ISBN9784325272885&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325272885.jpg|https://www.gakusan.com/bookimage_s/9784325272885.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>教学社</span></div>
             <b>読解のための古文単語トレーニング</b>
@@ -351,7 +357,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/yazawa-ryomon-tokkun-1-basic/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ムビスタ 八澤の良問特訓 1 ベーシック古文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061725.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061725.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061725.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053061720.jpg|https://cover.openbd.jp/9784053061720.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ムビスタ 八澤の良問特訓 1 ベーシック古文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061725.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061725.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061725.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053061725.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053061725.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061725.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053061720.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053061720.jpg|https://books.google.com/books/content?vid=ISBN9784053061720&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053061720.jpg|https://www.gakusan.com/bookimage_s/9784053061720.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>Gakken</span></div>
             <b>ムビスタ 八澤の良問特訓 1 ベーシック古文</b>
@@ -363,7 +369,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/madonna-kaiho/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>マドンナ入試解法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/405304247X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/405304247X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405304247X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053042477.jpg|https://cover.openbd.jp/9784053042477.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>マドンナ入試解法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/405304247X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/405304247X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405304247X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/405304247X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/405304247X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405304247X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053042477.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053042477.jpg|https://books.google.com/books/content?vid=ISBN9784053042477&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053042477.jpg|https://www.gakusan.com/bookimage_s/9784053042477.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>Gakken</span></div>
             <b>マドンナ入試解法</b>
@@ -408,6 +414,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="japanese" data-book-id="tsuchiya-kobun-tango-222" data-book-name="土屋の古文単語222 新装"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -460,6 +474,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/japanese/books/">参考書一覧</a>
       <a href="/japanese/routes/">志望校別ルート</a>
       <a href="/japanese/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -551,6 +567,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

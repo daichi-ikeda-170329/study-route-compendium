@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>現代文 基礎問題精講</b><span>旺文社</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4010345810.09.LZZZZZZZ.jpg" alt="現代文 基礎問題精講の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010345810.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010345810.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010345818.jpg|https://cover.openbd.jp/9784010345818.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4010345810.09.LZZZZZZZ.jpg" alt="現代文 基礎問題精講の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010345810.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010345810.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010345810.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010345810.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010345810.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010345818.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010345818.jpg|https://books.google.com/books/content?vid=ISBN9784010345818&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010345818.jpg|https://www.gakusan.com/bookimage_s/9784010345818.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>基礎演習 — 現代文</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/japanese/books/sou-ryomon-tokkun-1-basic/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ムビスタ 宗の良問特訓 1 ベーシック現代文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/405306046X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/405306046X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405306046X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053060464.jpg|https://cover.openbd.jp/9784053060464.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ムビスタ 宗の良問特訓 1 ベーシック現代文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/405306046X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/405306046X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405306046X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/405306046X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/405306046X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405306046X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053060464.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053060464.jpg|https://books.google.com/books/content?vid=ISBN9784053060464&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053060464.jpg|https://www.gakusan.com/bookimage_s/9784053060464.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>Gakken</span></div>
             <b>ムビスタ 宗の良問特訓 1 ベーシック現代文</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/gendaibun-training-nyumon/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>入門編 現代文のトレーニング</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860661249.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860661249.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860661249.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860661243.jpg|https://cover.openbd.jp/9784860661243.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>入門編 現代文のトレーニング</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860661249.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860661249.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860661249.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4860661249.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4860661249.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860661249.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784860661243.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784860661243.jpg|https://books.google.com/books/content?vid=ISBN9784860661243&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784860661243.jpg|https://www.gakusan.com/bookimage_s/9784860661243.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>Z会</span></div>
             <b>入門編 現代文のトレーニング</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/zero-kakusei-final/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ゼロから覚醒Final</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230436.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230436.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230436.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761230432.jpg|https://cover.openbd.jp/9784761230432.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ゼロから覚醒Final</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230436.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230436.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230436.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230436.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230436.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230436.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230432.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761230432.jpg|https://books.google.com/books/content?vid=ISBN9784761230432&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230432.jpg|https://www.gakusan.com/bookimage_s/9784761230432.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>かんき出版</span></div>
             <b>ゼロから覚醒Final</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/system-bible/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>出口のシステム現代文 バイブル編</b><em>水王舎</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4864700176.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4864700176.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4864700176.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784864700177.jpg|https://cover.openbd.jp/9784864700177.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>出口のシステム現代文 バイブル編</b><em>水王舎</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4864700176.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4864700176.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4864700176.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4864700176.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4864700176.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4864700176.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784864700177.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784864700177.jpg|https://books.google.com/books/content?vid=ISBN9784864700177&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784864700177.jpg|https://www.gakusan.com/bookimage_s/9784864700177.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>水王舎</span></div>
             <b>出口のシステム現代文 バイブル編</b>
@@ -295,7 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/yagyu-koko-tsunageru-drill/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>柳生のここからつなげる現代文ドリル</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057450.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057450.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057450.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053057457.jpg|https://cover.openbd.jp/9784053057457.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>柳生のここからつなげる現代文ドリル</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057450.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057450.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057450.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057450.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057450.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057450.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057457.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053057457.jpg|https://books.google.com/books/content?vid=ISBN9784053057457&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057457.jpg|https://www.gakusan.com/bookimage_s/9784053057457.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>Gakken</span></div>
             <b>柳生のここからつなげる現代文ドリル</b>
@@ -307,7 +313,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/level-g/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>新・現代文レベル別問題集</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890858881.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890858881.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858881.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890858880.jpg|https://cover.openbd.jp/9784890858880.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>新・現代文レベル別問題集</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890858881.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890858881.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858881.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890858881.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890858881.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858881.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890858880.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890858880.jpg|https://books.google.com/books/content?vid=ISBN9784890858880&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890858880.jpg|https://www.gakusan.com/bookimage_s/9784890858880.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>東進ブックス(ナガセ)</span></div>
             <b>新・現代文レベル別問題集</b>
@@ -327,7 +333,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/japanese/books/chikuma-hyoron-sen/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ちくま評論選 三訂版（高校生のための現代思想エッセンス）</b><em>筑摩書房</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4480917454.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4480917454.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4480917454.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784480917454.jpg|https://cover.openbd.jp/9784480917454.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ちくま評論選 三訂版（高校生のための現代思想エッセンス）</b><em>筑摩書房</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4480917454.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4480917454.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4480917454.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4480917454.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4480917454.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4480917454.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784480917454.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784480917454.jpg|https://books.google.com/books/content?vid=ISBN9784480917454&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784480917454.jpg|https://www.gakusan.com/bookimage_s/9784480917454.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>筑摩書房</span></div>
             <b>ちくま評論選 三訂版（高校生のための現代思想エッセンス）</b>
@@ -339,7 +345,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/shin-tamura-gendaibun-1/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>新・田村の現代文講義(1) 評論〔基本問題〕篇</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4896803728.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4896803728.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4896803728.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784896803723.jpg|https://cover.openbd.jp/9784896803723.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>新・田村の現代文講義(1) 評論〔基本問題〕篇</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4896803728.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4896803728.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4896803728.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4896803728.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4896803728.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4896803728.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784896803723.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784896803723.jpg|https://books.google.com/books/content?vid=ISBN9784896803723&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784896803723.jpg|https://www.gakusan.com/bookimage_s/9784896803723.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>代々木ライブラリー</span></div>
             <b>新・田村の現代文講義(1) 評論〔基本問題〕篇</b>
@@ -351,7 +357,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/japanese/books/sou-ryomon-tokkun-2-standard/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>ムビスタ 宗の良問特訓 2 スタンダード現代文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061539.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061539.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061539.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053061539.jpg|https://cover.openbd.jp/9784053061539.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>ムビスタ 宗の良問特訓 2 スタンダード現代文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061539.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061539.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061539.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053061539.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053061539.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061539.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053061539.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053061539.jpg|https://books.google.com/books/content?vid=ISBN9784053061539&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053061539.jpg|https://www.gakusan.com/bookimage_s/9784053061539.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>Gakken</span></div>
             <b>ムビスタ 宗の良問特訓 2 スタンダード現代文</b>
@@ -396,6 +402,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="japanese" data-book-id="kiso-seikou-g" data-book-name="現代文 基礎問題精講"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -448,6 +462,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/japanese/books/">参考書一覧</a>
       <a href="/japanese/routes/">志望校別ルート</a>
       <a href="/japanese/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -539,6 +555,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

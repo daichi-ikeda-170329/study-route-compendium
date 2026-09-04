@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-09-04T21:09:29.760Z",
+  "commit": "0efeb4d545aea52fdeb0d71734e8fd317758e341",
+  "lighthouseVersion": "13.4.1",
+  "chromeVersion": "Google Chrome 152.0.7977.76",
+  "target": "localhost (build/serve.mjs, .)",
+  "baseUrl": "http://127.0.0.1:4192",
+  "formFactor": "mobile",
+  "throttling": "simulate (lighthouse mobile default)",
+  "thirdParty": "blocked",
+  "runs": 5,
+  "pages": [
+    {
+      "path": "/science/",
+      "url": "http://127.0.0.1:4192/science/",
+      "runs": [
+        {
+          "performance": 58,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcpMs": 8255.75729643975,
+          "fcpMs": 3148.2638495549686,
+          "cls": 0.2164466906405581,
+          "tbtMs": 0,
+          "speedIndexMs": 3148.2638495549686,
+          "ttiMs": 8255.75729643975,
+          "transferBytes": 2410993
+        },
+        {
+          "performance": 58,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcpMs": 8856.783815037872,
+          "fcpMs": 3287.998767119754,
+          "cls": 0.21546776225606867,
+          "tbtMs": 0,
+          "speedIndexMs": 3287.998767119754,
+          "ttiMs": 8856.783815037874,
+          "transferBytes": 2411049
+        },
+        {
+          "performance": 58,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcpMs": 8856.748874776089,
+          "fcpMs": 3294.9568701664716,
+          "cls": 0.21545253185979493,
+          "tbtMs": 0,
+          "speedIndexMs": 3294.9568701664716,
+          "ttiMs": 8856.748874776089,
+          "transferBytes": 2411054
+        },
+        {
+          "performance": 69,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcpMs": 8323.79396132979,
+          "fcpMs": 3211.0698701662236,
+          "cls": 0.0026216779008041684,
+          "tbtMs": 0,
+          "speedIndexMs": 3211.0698701662236,
+          "ttiMs": 8323.79396132979,
+          "transferBytes": 2411066
+        },
+        {
+          "performance": 55,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcpMs": 21587.90028772381,
+          "fcpMs": 16624.150287723813,
+          "cls": 0,
+          "tbtMs": 0,
+          "speedIndexMs": 16624.150287723813,
+          "ttiMs": 21587.90028772381,
+          "transferBytes": 2411074
+        }
+      ],
+      "median": {
+        "performance": 58,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 100,
+        "lcpMs": 8856.749,
+        "fcpMs": 3287.999,
+        "cls": 0.215,
+        "tbtMs": 0,
+        "speedIndexMs": 3287.999,
+        "ttiMs": 8856.749,
+        "transferBytes": 2411054
+      },
+      "failedBestPractices": [],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 0.9
+          },
+          {
+            "label": "Element render delay",
+            "ms": 2665.2
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1290
+          },
+          {
+            "id": "unminified-javascript",
+            "title": "Minify JavaScript",
+            "savingsMs": 330
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 330
+          }
+        ]
+      }
+    }
+  ]
+}

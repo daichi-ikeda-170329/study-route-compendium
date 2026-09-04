@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-09-04T21:06:39.262Z",
+  "commit": "0efeb4d545aea52fdeb0d71734e8fd317758e341",
+  "lighthouseVersion": "13.4.1",
+  "chromeVersion": "Google Chrome 152.0.7977.76",
+  "target": "localhost (build/serve.mjs, .)",
+  "baseUrl": "http://127.0.0.1:4191",
+  "formFactor": "mobile",
+  "throttling": "simulate (lighthouse mobile default)",
+  "thirdParty": "allowed",
+  "runs": 5,
+  "pages": [
+    {
+      "path": "/science/",
+      "url": "http://127.0.0.1:4191/science/",
+      "runs": [
+        {
+          "performance": 53,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 10982.04289644033,
+          "fcpMs": 4541.409370169451,
+          "cls": 0.21448381276583298,
+          "tbtMs": 40,
+          "speedIndexMs": 4541.409370169451,
+          "ttiMs": 10982.042896440333,
+          "transferBytes": 2864545
+        },
+        {
+          "performance": 53,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 11458.328315269542,
+          "fcpMs": 4567.406535029949,
+          "cls": 0.2199809750596672,
+          "tbtMs": 40,
+          "speedIndexMs": 4567.406535029949,
+          "ttiMs": 11458.328315269544,
+          "transferBytes": 2864683
+        },
+        {
+          "performance": 52,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 11138.31966564011,
+          "fcpMs": 4843.874746502417,
+          "cls": 0.21545143935103764,
+          "tbtMs": 27,
+          "speedIndexMs": 4843.874746502417,
+          "ttiMs": 11145.820138527632,
+          "transferBytes": 2864755
+        },
+        {
+          "performance": 55,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 27912.61293199862,
+          "fcpMs": 19980.192931998623,
+          "cls": 0.0007411085115424898,
+          "tbtMs": 0,
+          "speedIndexMs": 19980.192931998623,
+          "ttiMs": 27912.61293199862,
+          "transferBytes": 2864670
+        },
+        {
+          "performance": 58,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 8683.49138819223,
+          "fcpMs": 3295.2653289526506,
+          "cls": 0.21636961905259727,
+          "tbtMs": 0,
+          "speedIndexMs": 3295.2653289526506,
+          "ttiMs": 8683.49138819223,
+          "transferBytes": 2864408
+        }
+      ],
+      "median": {
+        "performance": 53,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 11138.32,
+        "fcpMs": 4567.407,
+        "cls": 0.215,
+        "tbtMs": 27,
+        "speedIndexMs": 4567.407,
+        "ttiMs": 11145.82,
+        "transferBytes": 2864670
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 1
+          },
+          {
+            "label": "Element render delay",
+            "ms": 267.9
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1070
+          },
+          {
+            "id": "unminified-javascript",
+            "title": "Minify JavaScript",
+            "savingsMs": 470
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 220
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -19,9 +19,16 @@
     "serve": "node build/serve.mjs",
     "test": "node --test test/*.test.mjs",
     "test:e2e": "playwright test",
+    "test:cross-browser": "playwright test --project=firefox-desktop --project=webkit-desktop --project=webkit-mobile",
     "validate": "npm run build && npm test && npm run test:e2e",
     "check:shape": "node build/snapshot-subject-data.mjs --check",
-    "snapshot": "node build/snapshot-subject-data.mjs"
+    "snapshot": "node build/snapshot-subject-data.mjs",
+    "check:covers": "node build/check-covers.mjs",
+    "check:covers:live": "node build/check-covers.mjs --live",
+    "check:budgets": "node --test test/performance-budget.test.mjs",
+    "check:production": "node build/check-production.mjs",
+    "import:kpi": "node build/import-kpi.mjs",
+    "audit:performance": "node build/audit-performance.mjs --commit=$(git rev-parse HEAD 2>/dev/null || echo unknown)"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

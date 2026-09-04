@@ -14,7 +14,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { tally } from './lib/tally.mjs';
 import { isPlaceholder } from './lib/record-type.mjs';
 import { verificationOf, loadVerification, UNVERIFIED_MARK, FACT_FIELDS } from './lib/verification.mjs';
@@ -45,7 +46,7 @@ function main() {
   const staleChecks = [];
 
   for (const s of SUBJECTS) {
-    const d = extractSubject(ROOT, s.dir);
+    const d = loadSubjectData(ROOT, s.dir);
     const inRoute = s.catalogOnly ? new Map() : tally(d.routes, d.tiers).main;
     bySubject[s.dir] = { total: d.books.length, verified: 0, partial: 0, unverified: 0, notApplicable: 0 };
 

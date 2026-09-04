@@ -1109,6 +1109,10 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 `.github/workflows/pages.yml` が作る `dist/` だけを配信している。
 2026-09-04 に切り替わったことを本番で確認済み。
 
+配信の反映待ち・切り分け・切り戻しの手順は **`docs/deployment-runbook.md`** にまとめてある。
+公開状態は `npm run check:production` で機械的に確かめる（終了コード 0 = 一致 / 1 = 食い違い /
+2 = 未検査。**2 を成功として扱わない**）。
+
 ```
 https://route-taizen.com/               200
 https://route-taizen.com/package.json   404
@@ -1164,9 +1168,28 @@ https://route-taizen.com/test/…         404
 
 ### リポジトリの説明
 
-- [ ] Description を実態に合わせる。例:
-      `大学受験の参考書を科目・目的別に整理し、学習ルートと進捗管理を提供する静的サイト`
-- [ ] Topics を実態に合わせる（`static-site` `github-pages` `education` など）
+**未実施。** 2026-09-05 時点の Description は
+`ルート大全 — 大学受験の参考書1,052冊を科目別に図鑑化・ルート化した無料サイト` で、
+実際の 1,390 冊と食い違っている。これはサイトの生成物ではなく GitHub の設定なので、
+`npm run build` では直らない。
+
+- [ ] Description を実態に合わせる。冊数を書かない案（増えるたびに古くなるため）:
+
+      ```bash
+      gh repo edit daichi-ikeda-170329/study-route-compendium \
+        --description "大学受験の参考書を科目・目的別に整理し、学習ルートと進捗管理を提供する静的サイト"
+      ```
+
+      完了判定: `gh repo view --json description` の出力に `1,052` が含まれないこと。
+
+- [ ] Topics を実態に合わせる。
+
+      ```bash
+      gh repo edit daichi-ikeda-170329/study-route-compendium \
+        --add-topic static-site --add-topic github-pages --add-topic education --add-topic japanese
+      ```
+
+      完了判定: `gh repo view --json repositoryTopics` が `null` でないこと。
 
 ### ライセンス
 

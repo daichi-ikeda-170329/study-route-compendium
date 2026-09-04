@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>大学入試 柳生好之の 小論文 プラチナルール</b><span>KADOKAWA（中経出版）</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/404607499X.09.LZZZZZZZ.jpg" alt="大学入試 柳生好之の 小論文 プラチナルールの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404607499X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404607499X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046074997.jpg|https://cover.openbd.jp/9784046074997.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/404607499X.09.LZZZZZZZ.jpg" alt="大学入試 柳生好之の 小論文 プラチナルールの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404607499X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404607499X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/404607499X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/404607499X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404607499X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046074997.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046074997.jpg|https://books.google.com/books/content?vid=ISBN9784046074997&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046074997.jpg|https://www.gakusan.com/bookimage_s/9784046074997.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>学部別・大学別</span>
@@ -248,7 +254,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/shoron/books/shoron-iryokei-zettai/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>医療系小論文 絶対問題集</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342301784.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342301784.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342301784.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342301780.jpg|https://cover.openbd.jp/9784342301780.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>医療系小論文 絶対問題集</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342301784.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342301784.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342301784.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342301784.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342301784.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342301784.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342301780.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784342301780.jpg|https://books.google.com/books/content?vid=ISBN9784342301780&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342301780.jpg|https://www.gakusan.com/bookimage_s/9784342301780.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>桐原書店</span></div>
             <b>医療系小論文 絶対問題集</b>
@@ -260,7 +266,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-kango-iryo-saikyo-dokugaku/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>看護・医療系の小論文 最強独学問題集</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761231408.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761231408.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231408.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761231408.jpg|https://cover.openbd.jp/9784761231408.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>看護・医療系の小論文 最強独学問題集</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761231408.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761231408.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231408.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761231408.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761231408.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761231408.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761231408.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761231408.jpg|https://books.google.com/books/content?vid=ISBN9784761231408&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761231408.jpg|https://www.gakusan.com/bookimage_s/9784761231408.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>かんき出版</span></div>
             <b>看護・医療系の小論文 最強独学問題集</b>
@@ -272,7 +278,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-kango-gakubu-kawai/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>看護系学部の小論文</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777220710.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777220710.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777220710.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777220717.jpg|https://cover.openbd.jp/9784777220717.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>看護系学部の小論文</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777220710.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777220710.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777220710.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777220710.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777220710.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777220710.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777220717.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777220717.jpg|https://books.google.com/books/content?vid=ISBN9784777220717&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777220717.jpg|https://www.gakusan.com/bookimage_s/9784777220717.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>河合出版</span></div>
             <b>看護系学部の小論文</b>
@@ -284,7 +290,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-saitensha-neta-ishiyaku-kango/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>採点者の心をつかむ 合格する小論文のネタ 医歯薬・看護医療編</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230487.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230487.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230487.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761230487.jpg|https://cover.openbd.jp/9784761230487.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>採点者の心をつかむ 合格する小論文のネタ 医歯薬・看護医療編</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230487.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230487.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230487.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230487.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230487.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230487.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230487.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784761230487.jpg|https://books.google.com/books/content?vid=ISBN9784761230487&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230487.jpg|https://www.gakusan.com/bookimage_s/9784761230487.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>かんき出版</span></div>
             <b>採点者の心をつかむ 合格する小論文のネタ 医歯薬・看護医療編</b>
@@ -296,7 +302,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-koredake-kango-fukabori/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>小論文 これだけ! 看護 深掘り編</b><em>東洋経済新報社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4492044477.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492044477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492044477.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784492044476.jpg|https://cover.openbd.jp/9784492044476.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>小論文 これだけ! 看護 深掘り編</b><em>東洋経済新報社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4492044477.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492044477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492044477.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4492044477.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4492044477.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492044477.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784492044476.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784492044476.jpg|https://books.google.com/books/content?vid=ISBN9784492044476&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784492044476.jpg|https://www.gakusan.com/bookimage_s/9784492044476.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>東洋経済新報社</span></div>
             <b>小論文 これだけ! 看護 深掘り編</b>
@@ -308,7 +314,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-koredake-kakikata-igaku-iryo/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>小論文 これだけ! 書き方 医学・医療編</b><em>東洋経済新報社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4492045775.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492045775.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492045775.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784492045770.jpg|https://cover.openbd.jp/9784492045770.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>小論文 これだけ! 書き方 医学・医療編</b><em>東洋経済新報社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4492045775.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4492045775.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492045775.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4492045775.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4492045775.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4492045775.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784492045770.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784492045770.jpg|https://books.google.com/books/content?vid=ISBN9784492045770&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784492045770.jpg|https://www.gakusan.com/bookimage_s/9784492045770.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>東洋経済新報社</span></div>
             <b>小論文 これだけ! 書き方 医学・医療編</b>
@@ -328,7 +334,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/shoron/books/shoron-igakubu-seimei-rinri/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>医学部入試 小論文実践演習 〜生命・医療倫理入門編〜</b><em>エール出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4753932389.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4753932389.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4753932389.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784753932382.jpg|https://cover.openbd.jp/9784753932382.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>医学部入試 小論文実践演習 〜生命・医療倫理入門編〜</b><em>エール出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4753932389.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4753932389.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4753932389.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4753932389.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4753932389.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4753932389.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784753932382.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784753932382.jpg|https://books.google.com/books/content?vid=ISBN9784753932382&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784753932382.jpg|https://www.gakusan.com/bookimage_s/9784753932382.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>エール出版社</span></div>
             <b>医学部入試 小論文実践演習 〜生命・医療倫理入門編〜</b>
@@ -340,7 +346,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-ikei-saihinshutsu20/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>医系小論文 最頻出論点20</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325247998.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325247998.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325247998.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325247999.jpg|https://cover.openbd.jp/9784325247999.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>医系小論文 最頻出論点20</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325247998.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325247998.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325247998.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325247998.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325247998.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325247998.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325247999.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325247999.jpg|https://books.google.com/books/content?vid=ISBN9784325247999&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325247999.jpg|https://www.gakusan.com/bookimage_s/9784325247999.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>教学社</span></div>
             <b>医系小論文 最頻出論点20</b>
@@ -352,7 +358,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-ikei-17theme-suntan/" style="--bc:#B5432A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>医系小論文 入試頻出17テーマ これからの医療をめぐる論点</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796115749.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796115749.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796115749.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796115742.jpg|https://cover.openbd.jp/9784796115742.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>医系小論文 入試頻出17テーマ これからの医療をめぐる論点</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796115749.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796115749.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796115749.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796115749.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796115749.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796115749.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796115742.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796115742.jpg|https://books.google.com/books/content?vid=ISBN9784796115742&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796115742.jpg|https://www.gakusan.com/bookimage_s/9784796115742.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">学部別</span><span>駿台文庫</span></div>
             <b>医系小論文 入試頻出17テーマ これからの医療をめぐる論点</b>
@@ -364,7 +370,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-shin-shoronbun-note-2027/" style="--bc:#3D4657">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>2027 新小論文ノート</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4863469489.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863469489.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469489.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784863469488.jpg|https://cover.openbd.jp/9784863469488.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>2027 新小論文ノート</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4863469489.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863469489.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469489.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4863469489.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4863469489.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469489.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784863469488.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784863469488.jpg|https://books.google.com/books/content?vid=ISBN9784863469488&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784863469488.jpg|https://www.gakusan.com/bookimage_s/9784863469488.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">過去問</span><span>代々木ライブラリー</span></div>
             <b>2027 新小論文ノート</b>
@@ -376,7 +382,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/shoron/books/shoron-keisetsu-jidai-5kanen/" style="--bc:#3D4657">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>2027年受験対策 全国大学 小論文入試</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010091401.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010091401.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010091401.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010091401.jpg|https://cover.openbd.jp/9784010091401.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>2027年受験対策 全国大学 小論文入試</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010091401.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010091401.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010091401.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010091401.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010091401.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010091401.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010091401.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010091401.jpg|https://books.google.com/books/content?vid=ISBN9784010091401&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010091401.jpg|https://www.gakusan.com/bookimage_s/9784010091401.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">過去問</span><span>旺文社</span></div>
             <b>2027年受験対策 全国大学 小論文入試</b>
@@ -421,6 +427,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="shoron" data-book-id="shoron-yagyu-platinum-rule" data-book-name="大学入試 柳生好之の 小論文 プラチナルール"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -471,6 +485,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/">ルート大全 トップ</a>
       <a href="/shoron/">参考書図鑑</a>
       <a href="/shoron/books/">参考書一覧</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -567,6 +583,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

@@ -7,20 +7,21 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { byDifficultyAsc } from './lib/rank.mjs';
 import { degreeTable } from './lib/scale.mjs';
-import { fileDate, saveDates } from './lib/updated.mjs';
+import { subjectContentDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 function render(sub, d, counts) {
   const url = `${ORIGIN}/${sub.dir}/books/`;
-  // 一覧の中身は科目 HTML の BOOKS がすべて。その最終コミット日を更新日にする
-  const updated = fileDate(`${sub.dir}/index.html`);
+  // 一覧の中身は科目データの BOOKS がすべて。**読者に見える中身が変わった日**を更新日にする
+  const updated = subjectContentDate(sub.dir, d);
   const n = d.books.length;
   const stageKeys = Object.keys(d.stages).filter(k => d.books.some(b => b.stage === k));
   const hasSub = d.books.some(b => b.sub);
@@ -153,7 +154,7 @@ ${jsonLd(ld)}
 const data = {};
 const counts = {};
 for (const s of SUBJECTS) {
-  data[s.dir] = extractSubject(ROOT, s.dir);
+  data[s.dir] = loadSubjectData(ROOT, s.dir);
   counts[s.dir] = data[s.dir].books.length;
 }
 

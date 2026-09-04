@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>物理 入門問題精講</b><span>旺文社</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4010352523.09.LZZZZZZZ.jpg" alt="物理 入門問題精講の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352523.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352523.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352526.jpg|https://cover.openbd.jp/9784010352526.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4010352523.09.LZZZZZZZ.jpg" alt="物理 入門問題精講の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352523.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352523.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352523.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352523.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352523.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352526.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352526.jpg|https://books.google.com/books/content?vid=ISBN9784010352526&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352526.jpg|https://www.gakusan.com/bookimage_s/9784010352526.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>基礎演習 — 物理</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/science/books/lead-light-kiso/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート 物理基礎</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410261053.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410261053.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410261053.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410261053.jpg|https://cover.openbd.jp/9784410261053.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート 物理基礎</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410261053.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410261053.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410261053.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410261053.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410261053.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410261053.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410261053.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410261053.jpg|https://books.google.com/books/content?vid=ISBN9784410261053&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410261053.jpg|https://www.gakusan.com/bookimage_s/9784410261053.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>数研出版</span></div>
             <b>リードLightノート 物理基礎</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/b-zen-level-1/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>全レベル問題集 物理 1 基礎レベル</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353791.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353791.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353791.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353790.jpg|https://cover.openbd.jp/9784010353790.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>全レベル問題集 物理 1 基礎レベル</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353791.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353791.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353791.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010353791.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010353791.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353791.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010353790.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353790.jpg|https://books.google.com/books/content?vid=ISBN9784010353790&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010353790.jpg|https://www.gakusan.com/bookimage_s/9784010353790.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>旺文社</span></div>
             <b>全レベル問題集 物理 1 基礎レベル</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/level-1/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>物理 レベル別問題集 1 基礎編</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890855718.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890855718.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855718.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890855711.jpg|https://cover.openbd.jp/9784890855711.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>物理 レベル別問題集 1 基礎編</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890855718.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890855718.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855718.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890855718.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890855718.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855718.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890855711.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890855711.jpg|https://books.google.com/books/content?vid=ISBN9784890855711&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890855711.jpg|https://www.gakusan.com/bookimage_s/9784890855711.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>ナガセ(東進ブックス)</span></div>
             <b>物理 レベル別問題集 1 基礎編</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/lead-light-butsuri/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート 物理</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410260872.jpg|https://cover.openbd.jp/9784410260872.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート 物理</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410260871.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410260871.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410260872.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784410260872.jpg|https://books.google.com/books/content?vid=ISBN9784410260872&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410260872.jpg|https://www.gakusan.com/bookimage_s/9784410260872.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>数研出版</span></div>
             <b>リードLightノート 物理</b>
@@ -295,7 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/excel-butsuri/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>エクセル物理 総合版</b><em>実教出版</em></span><img src="https://baseec-img-mng.akamaized.net/images/item/origin/042123383aaecfedb4431e6633bc9a01.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://baseec-img-mng.akamaized.net/images/item/origin/042123383aaecfedb4431e6633bc9a01.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal|https://images-fe.ssl-images-amazon.com/images/P/4407364068.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407364068.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407364064.jpg|https://cover.openbd.jp/9784407364064.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>エクセル物理 総合版</b><em>実教出版</em></span><img src="https://baseec-img-mng.akamaized.net/images/item/origin/042123383aaecfedb4431e6633bc9a01.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://baseec-img-mng.akamaized.net/images/item/origin/042123383aaecfedb4431e6633bc9a01.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal|https://images-fe.ssl-images-amazon.com/images/P/4407364068.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407364068.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4407364068.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4407364068.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407364068.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784407364064.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407364064.jpg|https://books.google.com/books/content?vid=ISBN9784407364064&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784407364064.jpg|https://www.gakusan.com/bookimage_s/9784407364064.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>実教出版</span></div>
             <b>エクセル物理 総合版</b>
@@ -307,7 +313,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/seminar-butsuri/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>セミナー物理基礎+物理</b><em>第一学習社</em></span><img src="https://baseec-img-mng.akamaized.net/images/item/origin/c6a97af86423421d1093727a9c940e8f.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://baseec-img-mng.akamaized.net/images/item/origin/c6a97af86423421d1093727a9c940e8f.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal|https://images-fe.ssl-images-amazon.com/images/P/4804047662.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047662.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804047669.jpg|https://cover.openbd.jp/9784804047669.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>セミナー物理基礎+物理</b><em>第一学習社</em></span><img src="https://baseec-img-mng.akamaized.net/images/item/origin/c6a97af86423421d1093727a9c940e8f.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://baseec-img-mng.akamaized.net/images/item/origin/c6a97af86423421d1093727a9c940e8f.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal|https://images-fe.ssl-images-amazon.com/images/P/4804047662.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047662.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4804047662.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4804047662.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047662.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784804047669.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804047669.jpg|https://books.google.com/books/content?vid=ISBN9784804047669&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784804047669.jpg|https://www.gakusan.com/bookimage_s/9784804047669.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>第一学習社</span></div>
             <b>セミナー物理基礎+物理</b>
@@ -327,7 +333,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/science/books/sensor-sogo/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>センサー総合物理</b><em>新興出版社啓林館</em></span><img src="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/02/img03-1-1.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/02/img03-1-1.jpg|https://images-fe.ssl-images-amazon.com/images/P/440223512X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/440223512X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784402235123.jpg|https://cover.openbd.jp/9784402235123.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>センサー総合物理</b><em>新興出版社啓林館</em></span><img src="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/02/img03-1-1.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/02/img03-1-1.jpg|https://images-fe.ssl-images-amazon.com/images/P/440223512X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/440223512X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/440223512X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/440223512X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/440223512X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784402235123.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784402235123.jpg|https://books.google.com/books/content?vid=ISBN9784402235123&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784402235123.jpg|https://www.gakusan.com/bookimage_s/9784402235123.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>新興出版社啓林館</span></div>
             <b>センサー総合物理</b>
@@ -339,7 +345,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/sensor-butsuri/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>センサー物理</b><em>新興出版社啓林館</em></span><img src="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/02/img02-11.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/02/img02-11.jpg|https://images-fe.ssl-images-amazon.com/images/P/4402235111.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402235111.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784402235116.jpg|https://cover.openbd.jp/9784402235116.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>センサー物理</b><em>新興出版社啓林館</em></span><img src="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/02/img02-11.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/02/img02-11.jpg|https://images-fe.ssl-images-amazon.com/images/P/4402235111.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402235111.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4402235111.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4402235111.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402235111.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784402235116.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784402235116.jpg|https://books.google.com/books/content?vid=ISBN9784402235116&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784402235116.jpg|https://www.gakusan.com/bookimage_s/9784402235116.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>新興出版社啓林館</span></div>
             <b>センサー物理</b>
@@ -351,7 +357,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/new-global/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ニューグローバル物理基礎+物理</b><em>東京書籍</em></span><img src="https://ten.tokyo-shoseki.co.jp/text/hs_current/rika/assets/img/16630/tab03_img03.png?250407" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://ten.tokyo-shoseki.co.jp/text/hs_current/rika/assets/img/16630/tab03_img03.png?250407|https://images-fe.ssl-images-amazon.com/images/P/4487386721.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4487386721.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784487386727.jpg|https://cover.openbd.jp/9784487386727.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ニューグローバル物理基礎+物理</b><em>東京書籍</em></span><img src="https://ten.tokyo-shoseki.co.jp/text/hs_current/rika/assets/img/16630/tab03_img03.png?250407" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://ten.tokyo-shoseki.co.jp/text/hs_current/rika/assets/img/16630/tab03_img03.png?250407|https://images-fe.ssl-images-amazon.com/images/P/4487386721.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4487386721.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4487386721.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4487386721.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4487386721.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784487386727.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784487386727.jpg|https://books.google.com/books/content?vid=ISBN9784487386727&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784487386727.jpg|https://www.gakusan.com/bookimage_s/9784487386727.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>東京書籍</span></div>
             <b>ニューグローバル物理基礎+物理</b>
@@ -363,7 +369,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/tamechika-all-in-one/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>為近の物理基礎&amp;物理 物理問題集 All in ONE</b><em>学研プラス</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053043271.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053043271.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053043271.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053043276.jpg|https://cover.openbd.jp/9784053043276.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>為近の物理基礎&amp;物理 物理問題集 All in ONE</b><em>学研プラス</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053043271.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053043271.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053043271.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053043271.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053043271.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053043271.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053043276.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053043276.jpg|https://books.google.com/books/content?vid=ISBN9784053043276&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053043276.jpg|https://www.gakusan.com/bookimage_s/9784053043276.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>学研プラス</span></div>
             <b>為近の物理基礎&amp;物理 物理問題集 All in ONE</b>
@@ -375,7 +381,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/ryomon-butsuri-kiso/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>物理の良問問題集 物理基礎・物理</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354763.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354763.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354763.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010354766.jpg|https://cover.openbd.jp/9784010354766.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>物理の良問問題集 物理基礎・物理</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354763.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354763.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354763.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010354763.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010354763.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354763.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010354766.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010354766.jpg|https://books.google.com/books/content?vid=ISBN9784010354766&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010354766.jpg|https://www.gakusan.com/bookimage_s/9784010354766.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>旺文社</span></div>
             <b>物理の良問問題集 物理基礎・物理</b>
@@ -420,6 +426,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="science" data-book-id="kosei-nyumon" data-book-name="物理 入門問題精講"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -472,6 +486,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/science/books/">参考書一覧</a>
       <a href="/science/routes/">志望校別ルート</a>
       <a href="/science/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -563,6 +579,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

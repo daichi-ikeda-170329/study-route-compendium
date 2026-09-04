@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>一度読んだら忘れない</b><span>SBクリエイティブ</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg" alt="一度読んだら忘れないの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784797397123.jpg|https://cover.openbd.jp/9784797397123.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg" alt="一度読んだら忘れないの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4797397128.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4797397128.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784797397123.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784797397123.jpg|https://books.google.com/books/content?vid=ISBN9784797397123&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784797397123.jpg|https://www.gakusan.com/bookimage_s/9784797397123.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>導入・講義 — 世界史</span>
@@ -248,7 +254,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/social/books/kyokasho-yasashii-sekaishi/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>教科書よりやさしい世界史</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010338308.jpg|https://cover.openbd.jp/9784010338308.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>教科書よりやさしい世界史</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/401033830X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401033830X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010338308.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010338308.jpg|https://books.google.com/books/content?vid=ISBN9784010338308&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010338308.jpg|https://www.gakusan.com/bookimage_s/9784010338308.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>旺文社</span></div>
             <b>教科書よりやさしい世界史</b>
@@ -260,7 +266,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/panorama-sekaishi-kodai/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>パノラマ世界史①</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053042590.jpg|https://cover.openbd.jp/9784053042590.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>パノラマ世界史①</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053042593.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053042593.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053042593.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053042590.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053042590.jpg|https://books.google.com/books/content?vid=ISBN9784053042590&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053042590.jpg|https://www.gakusan.com/bookimage_s/9784053042590.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>Gakken</span></div>
             <b>パノラマ世界史①</b>
@@ -272,7 +278,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/panorama-sekaishi-kingendai/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>パノラマ世界史②</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053043658.jpg|https://cover.openbd.jp/9784053043658.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>パノラマ世界史②</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053043654.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053043654.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053043654.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053043658.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053043658.jpg|https://books.google.com/books/content?vid=ISBN9784053043658&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053043658.jpg|https://www.gakusan.com/bookimage_s/9784053043658.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>Gakken</span></div>
             <b>パノラマ世界史②</b>
@@ -292,7 +298,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/social/books/navi-sekaishi-1/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ナビゲーター①</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634030659.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634030659.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634030659.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634030657.jpg|https://cover.openbd.jp/9784634030657.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ナビゲーター①</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634030659.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634030659.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634030659.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4634030659.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4634030659.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634030659.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784634030657.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634030657.jpg|https://books.google.com/books/content?vid=ISBN9784634030657&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784634030657.jpg|https://www.gakusan.com/bookimage_s/9784634030657.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>山川出版社</span></div>
             <b>ナビゲーター①</b>
@@ -304,7 +310,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/navi-sekaishi-2/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ナビゲーター②</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634030667.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634030667.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634030667.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634030664.jpg|https://cover.openbd.jp/9784634030664.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ナビゲーター②</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634030667.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634030667.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634030667.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4634030667.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4634030667.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634030667.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784634030664.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634030664.jpg|https://books.google.com/books/content?vid=ISBN9784634030664&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784634030664.jpg|https://www.gakusan.com/bookimage_s/9784634030664.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>山川出版社</span></div>
             <b>ナビゲーター②</b>
@@ -316,7 +322,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/jikkyo-sekaishi-1/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継①</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688365.jpg|https://cover.openbd.jp/9784875688365.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継①</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4875688369.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688369.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784875688365.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784875688365.jpg|https://books.google.com/books/content?vid=ISBN9784875688365&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784875688365.jpg|https://www.gakusan.com/bookimage_s/9784875688365.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>語学春秋社</span></div>
             <b>実況中継①</b>
@@ -328,7 +334,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/sekaishi-nendai-onephrase/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>世界史年代ワンフレーズnew</b><em>パレード（発売元: 星雲社）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/443411817X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/443411817X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/443411817X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784434118173.jpg|https://cover.openbd.jp/9784434118173.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>世界史年代ワンフレーズnew</b><em>パレード（発売元: 星雲社）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/443411817X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/443411817X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/443411817X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/443411817X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/443411817X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/443411817X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784434118173.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784434118173.jpg|https://books.google.com/books/content?vid=ISBN9784434118173&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784434118173.jpg|https://www.gakusan.com/bookimage_s/9784434118173.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">暗記</span><span>パレード（発売元: 星雲社）</span></div>
             <b>世界史年代ワンフレーズnew</b>
@@ -340,7 +346,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/kakikomi-sekaishi/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>書きこみ教科書</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/463403221X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/463403221X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463403221X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634032217.jpg|https://cover.openbd.jp/9784634032217.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>書きこみ教科書</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/463403221X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/463403221X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463403221X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/463403221X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/463403221X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463403221X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784634032217.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634032217.jpg|https://books.google.com/books/content?vid=ISBN9784634032217&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784634032217.jpg|https://www.gakusan.com/bookimage_s/9784634032217.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">暗記</span><span>山川出版社</span></div>
             <b>書きこみ教科書</b>
@@ -385,6 +391,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="social" data-book-id="ichidoyondara-sekaishi" data-book-name="一度読んだら忘れない"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -437,6 +451,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/social/books/">参考書一覧</a>
       <a href="/social/routes/">志望校別ルート</a>
       <a href="/social/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -534,6 +550,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

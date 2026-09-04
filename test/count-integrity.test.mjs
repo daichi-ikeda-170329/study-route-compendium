@@ -12,14 +12,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { extractSubject, SUBJECTS } from '../build/lib/extract.mjs';
+import { SUBJECTS } from '../build/lib/extract.mjs';
+import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
 import { ROOT } from './helpers.mjs';
 
 /* ---------- 元データから数え直す（唯一の正本） ---------- */
 const counts = {};
 let TOTAL = 0;
 for (const s of SUBJECTS) {
-  counts[s.dir] = extractSubject(ROOT, s.dir).books.length;
+  counts[s.dir] = loadSubjectData(ROOT, s.dir).books.length;
   TOTAL += counts[s.dir];
 }
 const byJa = new Map(SUBJECTS.map(s => [s.ja, counts[s.dir]]));

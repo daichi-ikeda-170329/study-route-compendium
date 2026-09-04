@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>化学レベル別問題集 2 標準編</b><span>ナガセ</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4890855408.09.LZZZZZZZ.jpg" alt="化学レベル別問題集 2 標準編の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890855408.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855408.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890855407.jpg|https://cover.openbd.jp/9784890855407.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4890855408.09.LZZZZZZZ.jpg" alt="化学レベル別問題集 2 標準編の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890855408.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855408.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890855408.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890855408.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855408.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890855407.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890855407.jpg|https://books.google.com/books/content?vid=ISBN9784890855407&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890855407.jpg|https://www.gakusan.com/bookimage_s/9784890855407.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>基礎演習 — 化学</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/science/books/rakumasu-kagaku/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>らくらくマスター化学基礎・化学</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777225984.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777225984.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777225984.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777225989.jpg|https://cover.openbd.jp/9784777225989.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>らくらくマスター化学基礎・化学</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777225984.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777225984.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777225984.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777225984.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777225984.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777225984.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777225989.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777225989.jpg|https://books.google.com/books/content?vid=ISBN9784777225989&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777225989.jpg|https://www.gakusan.com/bookimage_s/9784777225989.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>河合出版</span></div>
             <b>らくらくマスター化学基礎・化学</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/terui-mondaishu-riron-keisan/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>照井式問題集 理論化学 計算問題の解き方</b><em>学研プラス（Gakken）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053045207.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053045207.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053045207.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053045201.jpg|https://cover.openbd.jp/9784053045201.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>照井式問題集 理論化学 計算問題の解き方</b><em>学研プラス（Gakken）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053045207.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053045207.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053045207.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053045207.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053045207.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053045207.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053045201.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053045201.jpg|https://books.google.com/books/content?vid=ISBN9784053045201&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053045201.jpg|https://www.gakusan.com/bookimage_s/9784053045201.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>学研プラス（Gakken）</span></div>
             <b>照井式問題集 理論化学 計算問題の解き方</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/excel-kagaku/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>エクセル化学 総合版</b><em>実教出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4407352337.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4407352337.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407352337.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407352337.jpg|https://cover.openbd.jp/9784407352337.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>エクセル化学 総合版</b><em>実教出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4407352337.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4407352337.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407352337.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4407352337.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4407352337.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407352337.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784407352337.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784407352337.jpg|https://books.google.com/books/content?vid=ISBN9784407352337&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784407352337.jpg|https://www.gakusan.com/bookimage_s/9784407352337.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>実教出版</span></div>
             <b>エクセル化学 総合版</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/seminar-kagaku/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>セミナー化学基礎+化学</b><em>第一学習社</em></span><img src="https://baseec-img-mng.akamaized.net/images/item/origin/3c272163f2bcb38155b83d873f044264.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://baseec-img-mng.akamaized.net/images/item/origin/3c272163f2bcb38155b83d873f044264.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal|https://images-fe.ssl-images-amazon.com/images/P/4804047735.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047735.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804047737.jpg|https://cover.openbd.jp/9784804047737.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>セミナー化学基礎+化学</b><em>第一学習社</em></span><img src="https://baseec-img-mng.akamaized.net/images/item/origin/3c272163f2bcb38155b83d873f044264.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://baseec-img-mng.akamaized.net/images/item/origin/3c272163f2bcb38155b83d873f044264.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=600,type=normal|https://images-fe.ssl-images-amazon.com/images/P/4804047735.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047735.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4804047735.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4804047735.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4804047735.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784804047737.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784804047737.jpg|https://books.google.com/books/content?vid=ISBN9784804047737&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784804047737.jpg|https://www.gakusan.com/bookimage_s/9784804047737.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>第一学習社</span></div>
             <b>セミナー化学基礎+化学</b>
@@ -295,7 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/sensor-kagaku/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>センサー化学基礎+化学</b><em>新興出版社啓林館</em></span><img src="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/03/%E3%82%BB%E3%83%B3%E3%82%B5%E3%83%BC%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E%E5%8C%96%E5%AD%A64th.png" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/03/%E3%82%BB%E3%83%B3%E3%82%B5%E3%83%BC%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E%E5%8C%96%E5%AD%A64th.png|https://images-fe.ssl-images-amazon.com/images/P/440226281X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/440226281X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784402262815.jpg|https://cover.openbd.jp/9784402262815.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>センサー化学基礎+化学</b><em>新興出版社啓林館</em></span><img src="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/03/%E3%82%BB%E3%83%B3%E3%82%B5%E3%83%BC%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E%E5%8C%96%E5%AD%A64th.png" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.shinko-keirin.co.jp/keirinkan/kou/kou_wp/wp-content/uploads/2025/03/%E3%82%BB%E3%83%B3%E3%82%B5%E3%83%BC%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E%E5%8C%96%E5%AD%A64th.png|https://images-fe.ssl-images-amazon.com/images/P/440226281X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/440226281X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/440226281X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/440226281X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/440226281X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784402262815.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784402262815.jpg|https://books.google.com/books/content?vid=ISBN9784402262815&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784402262815.jpg|https://www.gakusan.com/bookimage_s/9784402262815.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>新興出版社啓林館</span></div>
             <b>センサー化学基礎+化学</b>
@@ -307,7 +313,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/newglobal-kagaku/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ニューグローバル化学基礎+化学</b><em>東京書籍</em></span><img src="https://ten.tokyo-shoseki.co.jp/text/hs_current/rika/assets/img/16668/tab03_img03.png?250407" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://ten.tokyo-shoseki.co.jp/text/hs_current/rika/assets/img/16668/tab03_img03.png?250407|https://images-fe.ssl-images-amazon.com/images/P/4487386748.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4487386748.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784487386741.jpg|https://cover.openbd.jp/9784487386741.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>ニューグローバル化学基礎+化学</b><em>東京書籍</em></span><img src="https://ten.tokyo-shoseki.co.jp/text/hs_current/rika/assets/img/16668/tab03_img03.png?250407" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://ten.tokyo-shoseki.co.jp/text/hs_current/rika/assets/img/16668/tab03_img03.png?250407|https://images-fe.ssl-images-amazon.com/images/P/4487386748.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4487386748.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4487386748.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4487386748.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4487386748.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784487386741.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784487386741.jpg|https://books.google.com/books/content?vid=ISBN9784487386741&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784487386741.jpg|https://www.gakusan.com/bookimage_s/9784487386741.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>東京書籍</span></div>
             <b>ニューグローバル化学基礎+化学</b>
@@ -327,7 +333,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/science/books/kiso-seiko/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>化学 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352564.jpg|https://cover.openbd.jp/9784010352564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>化学 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352566.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352566.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352564.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352564.jpg|https://books.google.com/books/content?vid=ISBN9784010352564&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352564.jpg|https://www.gakusan.com/bookimage_s/9784010352564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>旺文社</span></div>
             <b>化学 基礎問題精講</b>
@@ -339,7 +345,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/kamata-mondai/" style="--bc:#24427C">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>鎌田の化学問題集 理論・無機・有機</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352981.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352981.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352981.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352984.jpg|https://cover.openbd.jp/9784010352984.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>鎌田の化学問題集 理論・無機・有機</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352981.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352981.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352981.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352981.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352981.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352981.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352984.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352984.jpg|https://books.google.com/books/content?vid=ISBN9784010352984&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352984.jpg|https://www.gakusan.com/bookimage_s/9784010352984.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">基礎</span><span>旺文社</span></div>
             <b>鎌田の化学問題集 理論・無機・有機</b>
@@ -351,7 +357,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/k-zen-level-3/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル問題集 化学 3 私大標準・国公立大レベル</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353856.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353856.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353856.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353851.jpg|https://cover.openbd.jp/9784010353851.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル問題集 化学 3 私大標準・国公立大レベル</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353856.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353856.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353856.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010353856.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010353856.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353856.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010353851.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353851.jpg|https://books.google.com/books/content?vid=ISBN9784010353851&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010353851.jpg|https://www.gakusan.com/bookimage_s/9784010353851.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>旺文社</span></div>
             <b>全レベル問題集 化学 3 私大標準・国公立大レベル</b>
@@ -363,7 +369,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/k-nyushi-kakushin/" style="--bc:#5B4E9E">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>化学 入試の核心</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865310215.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865310215.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865310215.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865310214.jpg|https://cover.openbd.jp/9784865310214.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>化学 入試の核心</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865310215.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865310215.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865310215.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4865310215.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4865310215.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865310215.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784865310214.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865310214.jpg|https://books.google.com/books/content?vid=ISBN9784865310214&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784865310214.jpg|https://www.gakusan.com/bookimage_s/9784865310214.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">標準</span><span>Z会</span></div>
             <b>化学 入試の核心</b>
@@ -408,6 +414,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="science" data-book-id="level-betsu-2" data-book-name="化学レベル別問題集 2 標準編"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -460,6 +474,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/science/books/">参考書一覧</a>
       <a href="/science/routes/">志望校別ルート</a>
       <a href="/science/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -550,6 +566,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

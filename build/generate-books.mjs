@@ -10,7 +10,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { authorsOf, searchName, withAuthor } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
@@ -451,6 +452,14 @@ ${bookCards(next.list, sub, stages)}
       <p class="buy__note">${aff ? `${affStores}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。` : ''}価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
     </section>
 
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="${esc(sub.dir)}" data-book-id="${esc(book.id)}" data-book-name="${esc(book.name)}"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
+    </section>
+
     <div class="cta">
       <h2>${esc(book.name)}は、あなたのルートの何冊目か</h2>
       <p>1 冊単位で選ぶより、志望校までの並びの中で位置を決めたほうが迷いません。${esc(sub.full)}では、志望校と現在地から ${counts[sub.dir]} 冊の中を通る道を組み立てられます。</p>
@@ -466,6 +475,9 @@ ${footer(sub.dir, counts)}
 
 ${jsonLd(ld)}
 
+<script src="/assets/js/progress.js" defer></` + `script>
+<script src="/assets/js/progress-control.js" defer></` + `script>
+
 </body>
 </html>
 `;
@@ -477,7 +489,7 @@ ${jsonLd(ld)}
 const data = {};
 const counts = {};
 for (const s of SUBJECTS) {
-  data[s.dir] = extractSubject(ROOT, s.dir);
+  data[s.dir] = loadSubjectData(ROOT, s.dir);
   counts[s.dir] = data[s.dir].books.length;
 }
 
@@ -490,7 +502,7 @@ if (onlyDir && targets.length === 0) {
 
 for (const sub of targets) {
   const d = data[sub.dir];
-  const config = extractConfig(ROOT, sub.dir);
+  const config = d.config;
   const list = onlyId ? d.books.filter(b => b.id === onlyId) : d.books;
   if (onlyId && list.length === 0) {
     console.error(`${sub.dir}: id "${onlyId}" が見つからない`);
@@ -508,12 +520,15 @@ for (const sub of targets) {
 saveDates();
 console.log(`合計 ${written} ページを生成した。`);
 
-/** 科目ページの CONFIG（アフィリエイト ID）を読む */
-function extractConfig(root, dir) {
-  const src = fs.readFileSync(path.join(root, dir, 'index.html'), 'utf8');
-  const pick = (key) => {
-    const m = src.match(new RegExp(`${key}:\\s*"([^"]*)"`));
-    return m ? m[1] : '';
-  };
-  return { amazonTag: pick('amazonTag'), rakutenId: pick('rakutenId') };
-}
+/*
+ * ここには以前 extractConfig() があり、科目 HTML を正規表現で読んで
+ * アフィリエイト ID を取っていた。
+ *
+ *     const m = src.match(new RegExp(`${key}:\\s*"([^"]*)"`));
+ *
+ * CONFIG を HTML の外へ出すと何にもマッチしなくなり、**例外も警告も出さずに空文字**に
+ * なる。その結果、購入リンクから tag= と経路 ID が消え、rel="sponsored" と
+ * 広告リンクの注記も消えた（2026-09-05 に joho の移行で実際に起きた）。
+ * いまは loadSubjectData() の config を使う。**ここに正規表現で読む実装を戻さない。**
+ * test/affiliate-disclosure.test.mjs の「購入リンク」の検査が固定している。
+ */

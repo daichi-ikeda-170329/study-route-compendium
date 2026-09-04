@@ -24,7 +24,8 @@ import fs from 'fs';
 import path from 'path';
 import vm from 'vm';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData, isMigrated } from './lib/load-subject-data.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -62,7 +63,7 @@ const TARGETS = [
  * （＝読者にとって中身が変わった日）を台帳から引く。
  */
 function topUpdated(dir) {
-  const d = extractSubject(ROOT, dir);
+  const d = loadSubjectData(ROOT, dir);
   return recordDate(`top/${dir}`, {
     books: d.books, routes: d.routes, tiers: d.tiers, guides: d.guides, unis: d.unis.length,
   });
@@ -74,7 +75,7 @@ function topUpdated(dir) {
  * ページの初期化処理は DOM に触れて落ちるので、定義だけを読み込んだ状態で
  * 目的の関数を名指しで呼ぶ。呼べなかった関数は結果に出ないだけで、止めない。
  */
-function collect(src) {
+function collect(src, dir) {
   const captured = new Map();
 
   const el = id => ({
@@ -115,7 +116,21 @@ function collect(src) {
   const ctx = {
     console: { log: noop, warn: noop, error: noop },
     document: doc,
-    window: { addEventListener: noop, location: { hash: '', href: '', search: '' }, matchMedia: () => ({ matches: false, addEventListener: noop }) },
+    /* 科目トップは共通スクリプトのグローバル（share.js / pace.js / bunri.js）を参照する。
+       事前描画では使わないので、何を呼んでも落ちない代替を置く。
+       **window にも同じものを置く。** 移行済み科目の app は
+       `var RTShare = window.RTShare;` で受け取るため（build/lib/subject-split.mjs の
+       bridgedGlobals を見る）。ここを忘れると、事前描画のときだけ no-op になる */
+    window: {
+      addEventListener: noop, location: { hash: '', href: '', search: '' },
+      matchMedia: () => ({ matches: false, addEventListener: noop }),
+      RTShare: { setup: noop, beforeQuiz: () => '', beforeResult: () => '', afterResult: () => '', routeBlock: () => '' },
+      RTPace: { setup: noop, apply: noop },
+      RTBunri: { needsAsk: () => false, ask: () => '' },
+    },
+    RTShare: { setup: noop, beforeQuiz: () => '', beforeResult: () => '', afterResult: () => '', routeBlock: () => '' },
+    RTPace: { setup: noop, apply: noop },
+    RTBunri: { needsAsk: () => false, ask: () => '' },
     localStorage: { getItem: () => null, setItem: noop, removeItem: noop },
     navigator: { clipboard: { writeText: () => Promise.resolve() }, userAgent: '' },
     location: { hash: '', href: '', search: '' },
@@ -131,8 +146,16 @@ function collect(src) {
   ctx.self = ctx;
   vm.createContext(ctx);
 
-  const scripts = [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)]
-    .map(m => m[1]);
+  /* 移行済み科目では、描画コードは HTML の中ではなく assets/js/subject-<科目>.js にある。
+     データは data/subjects/<科目>/ から読み、実行時と同じ形（RT_SUBJECT_APP(DATA)）で走らせる。
+     **この仕組み自体は変えない。** 変えるのはコードとデータの取得元だけ。 */
+  const migrated = isMigrated(ROOT, dir);
+  ctx.window.RT_SUBJECT_APP = null;
+
+  const scripts = migrated
+    ? [fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8')]
+    : [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
+
   for (const code of scripts) {
     try {
       vm.runInContext(code, ctx, { timeout: 30000 });
@@ -141,11 +164,28 @@ function collect(src) {
     }
   }
 
+  if (migrated) {
+    const d = loadSubjectData(ROOT, dir);
+    const DATA = {
+      config: d.config, stages: d.stages, tiers: d.tiers,
+      routes: d.routes, unis: d.unis, guides: d.guides, books: d.books,
+    };
+    if (typeof ctx.window.RT_SUBJECT_APP !== 'function') {
+      throw new Error(`${dir}: assets/js/subject-${dir}.js が RT_SUBJECT_APP を定義していない`);
+    }
+    try {
+      ctx.window.RT_SUBJECT_APP(DATA);
+    } catch {
+      // 末尾の初期化が DOM に触れて落ちるのは想定内。
+      // 描画関数は本体より先に window へ載せてあるので、下で名指しで呼べる
+    }
+  }
+
   const done = new Set();
   for (const t of TARGETS) {
     if (done.has(t.render)) continue;
     done.add(t.render);
-    const fn = ctx[t.render];
+    const fn = migrated ? ctx.window[t.render] : ctx[t.render];
     if (typeof fn !== 'function') continue;
     try { fn(); } catch (e) { console.warn(`  ! ${t.render}() が最後まで走らなかった: ${e.message}`); }
   }
@@ -205,7 +245,7 @@ const stale = [];
 for (const sub of SUBJECTS) {
   const file = path.join(ROOT, sub.dir, 'index.html');
   const original = fs.readFileSync(file, 'utf8');
-  const captured = collect(original);
+  const captured = collect(original, sub.dir);
 
   let src = original;
   let n = 0;

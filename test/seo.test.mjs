@@ -9,7 +9,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT } from './helpers.mjs';
-import { extractSubject, SUBJECTS, ORIGIN } from '../build/lib/extract.mjs';
+import { SUBJECTS, ORIGIN } from '../build/lib/extract.mjs';
+import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
 import { bookIndexable } from '../build/lib/indexing.mjs';
 
 const SKIP = new Set(['.git', 'node_modules', 'dist', 'data', 'test-results', 'playwright-report', 'e2e', 'build', 'test', 'docs']);
@@ -113,7 +114,7 @@ test('robots.txt が noindex の代用をしていない', () => {
 test('index 判定は「評価準備中」だけを外す（未確認だけを理由に外さない）', () => {
   let noindex = 0, total = 0;
   for (const s of SUBJECTS) {
-    for (const b of extractSubject(ROOT, s.dir).books) {
+    for (const b of loadSubjectData(ROOT, s.dir).books) {
       total++;
       if (!bookIndexable(b).indexable) noindex++;
     }

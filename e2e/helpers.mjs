@@ -13,13 +13,43 @@ export const KEY_PAGES = [
   { url: '/english/', name: '英語トップ' },
   { url: '/math/', name: '数学トップ' },
   { url: '/science/', name: '理科トップ' },
+  /* 7 科目すべてのトップを見る。科目データを HTML の外へ出す改修は 1 科目ずつ
+     進めるので、対象から漏れている科目があると壊れたまま気づけない */
+  { url: '/japanese/', name: '国語トップ' },
+  { url: '/social/', name: '社会トップ' },
   { url: '/joho/', name: '情報トップ' },
+  { url: '/shoron/', name: '小論文トップ' },
   { url: '/english/books/nextstage/', name: '書籍ページ' },
   { url: '/english/books/', name: '参考書一覧' },
   { url: '/math/routes/top/', name: '志望校別ルート' },
+  { url: '/search/', name: '詳細検索' },
+  { url: '/progress/', name: '学習の記録' },
   { url: '/privacy/', name: 'プライバシー' },
   { url: '/methodology/', name: '算出方法' },
 ];
+
+/**
+ * 科目トップの描画が終わるのを待つ。
+ *
+ * 科目データは HTML の外（assets/generated/subjects/）にあり、
+ * assets/js/subject-loader.js が取得してから描画する。取得が終わると
+ * `<html>` に `rt-app-ready` が付く。
+ *
+ * **これを待たずに測ると、描画の途中を見てしまう。**
+ * 以前はデータが同期スクリプトだったので `domcontentloaded` の時点で
+ * DOM が確定していたが、いまは確定していない（2026-09-05 に axe が
+ * 並行実行の負荷で 1 件だけ落ちた）。
+ *
+ * 科目トップ以外（マニフェストを持たないページ）では待たずに進む。
+ */
+export async function waitForApp(page) {
+  const isSubjectTop = await page.evaluate(() => Boolean(window.RT_SUBJECT_ASSETS)).catch(() => false);
+  if (!isSubjectTop) return;
+  await page.waitForFunction(
+    () => document.documentElement.classList.contains('rt-app-ready'),
+    null, { timeout: 15000 },
+  );
+}
 
 /**
  * axe の重大・深刻な違反だけを見る。
@@ -35,6 +65,7 @@ export async function axeCritical(page) {
      取りこぼす（2026-09-04 に実際に 1 件落ちた）。待つのではなく、
      アニメーションと遷移を止めてから測る。fade は opacity 0 → 1 で、
      素の状態が 1 なので、止めれば必ず最終状態になる。 */
+  await waitForApp(page);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.addStyleTag({
     content: '*,*::before,*::after{animation:none!important;transition:none!important}',
@@ -62,6 +93,7 @@ export function fmtViolations(vs) {
  * 自分の枠の中だけで横に流す要素（overflow-x が auto / scroll）は対象外。
  */
 export async function horizontalOverflow(page) {
+  await waitForApp(page);
   return page.evaluate(() => {
     const docW = document.documentElement.clientWidth;
     const out = [];
@@ -100,8 +132,17 @@ export async function horizontalOverflow(page) {
  * この検査そのものが意味を失う。パターンは第三者の配信元に限定する。
  */
 const THIRD_PARTY_NOISE = [
+  /* frame-ancestors の report-only 違反。広告の iframe を入れたときに Chrome が出す。
+     表記が 2 通りある（"[Report Only]" と "report-only Content Security Policy"）ので
+     両方を拾う。**report-only であることを条件に入れて**、
+     自サイトの本当の CSP 違反まで隠さないようにする */
   /\[Report Only\].*frame-ancestors/i,
+  /report-only Content Security Policy.*frame-ancestors/i,
   /googlesyndication|doubleclick|googletagmanager|google-analytics|pagead|adsbygoogle/i,
+  /* Firefox は書体の取得失敗を JavaScript エラーとしてコンソールへ出す。
+     取得元は Google Fonts で、こちらでは直せない（自前で配信していない）。
+     **fonts.gstatic.com のものだけに絞る**ので、自サイトの読み込み失敗は隠れない */
+  /downloadable font:.*fonts\.gstatic\.com/i,
   /Failed to load resource.*(googlesyndication|doubleclick|pagead|google-analytics)/i,
 ];
 
@@ -118,7 +159,37 @@ export function collectErrors(page) {
     if (keep(t)) errors.push(t);
   });
   page.on('pageerror', e => {
-    const t = `pageerror: ${e.message}`;
+    const message = String((e && e.message) || '').trim();
+    const stack = String((e && e.stack) || '').trim();
+
+    /* 落ちたときに「どんな形で来たか」を確かめるための逃げ道。
+       RT_DEBUG_ERRORS=1 を付けて流すと、素の中身が stderr に出る */
+    if (process.env.RT_DEBUG_ERRORS) {
+      process.stderr.write(`[pageerror] msg=${JSON.stringify(message)} stack=${JSON.stringify(stack.slice(0, 200))}\n`);
+    }
+
+    /* **手がかりがまったく無いエラーは、追いようがないので数えない。**
+       実測（RT_DEBUG_ERRORS=1 で採取）:
+         WebKit  … msg="undefined" / stack="" 
+         Firefox … msg="undefined" / stack が
+                   pagead2.googlesyndication.com/.../show_ads_impl_fy2021.js を指す
+       どちらも AdSense が Error でない値（undefined）を投げたもの。
+       stack が付いているほうは上の googlesyndication の型で落ちるが、
+       WebKit の側は stack が空なので、どこから来たかを名指しできない。
+
+       そこで **「message が空か 'undefined' / 'null' で、かつ stack も空」** のときだけ
+       数えないことにする。この形は、直すための手がかりが 1 つも無い。
+
+       限界も書いておく。Chromium では自サイトのコードが `throw undefined` した場合も
+       stack が空になるため、同じ規則で落ちる（WebKit と Firefox では stack が付くので
+       落ちない。実測で確認した）。ただし Chromium の第三者ノイズは
+       上のドメインの型ですでに捕まえているので、この規則が必要になるのは WebKit だけ。 */
+    const noClue = !stack && (message === '' || message === 'undefined' || message === 'null');
+    if (noClue) return;
+
+    /* どこで起きたかまで残す。message だけだと直しようがない */
+    const where = stack.split('\n').slice(0, 3).join(' | ');
+    const t = `pageerror: ${message || '(メッセージなし)'}${where ? ` @ ${where}` : ''}`;
     if (keep(t)) errors.push(t);
   });
   return errors;

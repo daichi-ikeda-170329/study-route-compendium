@@ -1,113 +1,30 @@
 /**
- * 各科目の単一 HTML から、ページ生成に必要なデータを取り出す。
+ * サイト共通の科目メタ情報と、生成でよく使う小さな道具。
  *
- * 科目ページはビルド工程を持たない単一 HTML なので、データは <script> の中に
- * リテラルとして書かれている。ここでは script を切り出して vm 上で実行し、
- * DOM 依存の初期化処理はスタブで空振りさせたうえで、定数だけを回収する。
- */
-import fs from 'fs';
-import path from 'path';
-import vm from 'vm';
-
-/** DOM API を「何を呼んでも落ちない」オブジェクトとして代替する */
-const stub = () => new Proxy(function () {}, {
-  get: (t, k) => (k === Symbol.toPrimitive ? () => '' : stub()),
-  set: () => true,
-  apply: () => stub(),
-  construct: () => stub(),
-});
-
-/** 科目ページが持つトップレベル定数。const のままだと vm の外から読めないので globalThis に移す */
-const WANTED = ['BOOKS', 'UNIS', 'TIERS', 'ROUTES', 'GUIDES', 'STAGES', 'CONFIG'];
-
-/**
- * @param {string} rootDir リポジトリのルート
- * @param {string} dir     科目ディレクトリ名
- * @param {string} [srcOverride] ファイルの代わりに読む HTML。
- *   build/apply-new-books.mjs が「新刊を注入する前の状態」を基準にするために使う。
- *   ファイルをそのまま読むと、前回自分が注入した本まで既存書として数えてしまい、
- *   2 回目の実行が id の衝突として落ちる。
- */
-export function extractSubject(rootDir, dir, srcOverride = null) {
-  const file = path.join(rootDir, dir, 'index.html');
-  const src = srcOverride ?? fs.readFileSync(file, 'utf8');
-  const scripts = [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)]
-    .map(m => m[1]);
-
-  const ctx = {
-    console: { log() {}, warn() {}, error() {} },
-    document: stub(), window: stub(), localStorage: stub(), navigator: stub(),
-    setTimeout() {}, setInterval() {}, addEventListener() {}, requestAnimationFrame() {},
-  };
-  ctx.globalThis = ctx;
-  vm.createContext(ctx);
-
-  const re = new RegExp(`\\bconst (${WANTED.join('|')})\\s*=`, 'g');
-  for (const code of scripts) {
-    try {
-      vm.runInContext(code.replace(re, 'globalThis.$1 ='), ctx, { timeout: 30000 });
-    } catch {
-      // 初期化処理が DOM に触れて落ちるのは想定内。定数の定義はその前に済んでいる
-    }
-  }
-
-  const books = ctx.BOOKS;
-  if (!Array.isArray(books) || books.length === 0) {
-    throw new Error(`${dir}: BOOKS を取り出せなかった`);
-  }
-  const ids = books.map(b => b.id);
-  const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
-  if (dup.length) throw new Error(`${dir}: id が重複している — ${[...new Set(dup)].join(', ')}`);
-  const badId = ids.filter(id => !/^[a-z0-9][a-z0-9_-]*$/i.test(id));
-  if (badId.length) throw new Error(`${dir}: URL に使えない id — ${badId.join(', ')}`);
-
-  return {
-    dir,
-    books,
-    stages: ctx.STAGES || {},
-    tiers: Array.isArray(ctx.TIERS) ? ctx.TIERS : [],
-    routes: ctx.ROUTES || {},
-    unis: Array.isArray(ctx.UNIS) ? ctx.UNIS : [],
-    guides: Array.isArray(ctx.GUIDES) ? ctx.GUIDES : [],
-    config: ctx.CONFIG || {},
-  };
-}
-
-/**
- * サイト全体でアフィリエイトを利用しているかを、各科目の CONFIG から判定する。
+ * ここには以前 extractSubject() があり、科目 HTML の <script> を vm 上で実行して
+ * BOOKS / UNIS / TIERS / ROUTES / GUIDES / STAGES / CONFIG を回収していた。
+ * 2026-09-05 に 7 科目すべてのデータを data/subjects/<科目>/ へ移したので削除した
+ * （実装指示書 §25・§26）。**科目データの読み口は build/lib/load-subject-data.mjs だけ。**
  *
- * 生成ページの広告表記はここを唯一の根拠にする。ID が未設定のうちは
- * 「アフィリエイト広告を利用しています」と書かない（事実に反するため）。
- * ID を入れて再生成すれば、必要な表記が自動で戻る。
- * <script> を実行せずに済むよう、CONFIG の該当行だけを読む。
+ * 移行そのものを行った変換スクリプト（build/migrate-subject.mjs）も、
+ * 移行が終わったので削除した。中身は commit 9d4f6a85〜7f596b06 に残っている。
+ * 同じ変換をやり直す必要が出たら `git show 9d4f6a85:build/migrate-subject.mjs` で取り出す。
  */
-let affCache = null;
-export function affiliateEnabled(rootDir) {
-  if (affCache !== null) return affCache;
-  affCache = SUBJECTS.some(s => {
-    const src = fs.readFileSync(path.join(rootDir, s.dir, 'index.html'), 'utf8');
-    const tag = src.match(/\bamazonTag:\s*"([^"]*)"/);
-    const rak = src.match(/\brakutenId:\s*"([^"]*)"/);
-    return Boolean((tag && tag[1]) || (rak && rak[1]));
-  });
-  return affCache;
-}
 
-/**
- * Amazon アソシエイトの ID だけが入っているかを判定する。
- * Amazon の運営規約が求める「適格販売により収入を得ています」の表記は、
- * Amazon に参加しているときだけ出す（楽天だけの状態で出すと事実に反する）。
+/*
+ * アフィリエイト表記の判定は build/lib/load-subject-data.mjs へ移した。
+ *
+ * ここには以前 affiliateEnabled() / amazonEnabled() があり、科目 HTML を
+ * 正規表現で直接読んで ID の有無を見ていた。
+ *
+ *     const tag = src.match(/\bamazonTag:\s*"([^"]*)"/);
+ *
+ * データを HTML の外へ出すと、この正規表現は何にもマッチしなくなり、**例外も警告も
+ * 出さずに戻り値が false になる**。その結果、生成される 1,390 ページから
+ * アフィリエイト開示と Amazon アソシエイトの必須表記がまるごと消える。
+ * 表示崩れではなく規約違反なので、canonical な CONFIG から判定する形へ移した。
+ * **ここに正規表現で読む実装を戻さない。**（test/affiliate-disclosure.test.mjs が固定している）
  */
-let azCache = null;
-export function amazonEnabled(rootDir) {
-  if (azCache !== null) return azCache;
-  azCache = SUBJECTS.some(s => {
-    const src = fs.readFileSync(path.join(rootDir, s.dir, 'index.html'), 'utf8');
-    const tag = src.match(/\bamazonTag:\s*"([^"]*)"/);
-    return Boolean(tag && tag[1]);
-  });
-  return azCache;
-}
 
 /** サイト共通の科目メタ情報。冊数は BOOKS から実測するのでここには持たない */
 export const SUBJECTS = [

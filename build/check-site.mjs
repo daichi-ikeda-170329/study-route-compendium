@@ -18,7 +18,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS, ORIGIN } from './lib/extract.mjs';
+import { SUBJECTS, ORIGIN } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { LEGAL_PAGES, amazonDisclosure } from './lib/parts.mjs';
 import { STAGE_FLOW } from './lib/flow.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
@@ -86,7 +87,7 @@ const STAGE_KEYWORDS = {
 };
 
 const data = {};
-for (const s of SUBJECTS) data[s.dir] = extractSubject(ROOT, s.dir);
+for (const s of SUBJECTS) data[s.dir] = loadSubjectData(ROOT, s.dir);
 
 function checkData() {
   const required = ['id', 'name', 'pub', 'stage', 'subjects'];

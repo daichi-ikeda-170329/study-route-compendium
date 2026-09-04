@@ -36,6 +36,12 @@ const ALLOW_FILES = [
 const ALLOW_DIRS = [
   'assets',
   'about', 'ads', 'changelog', 'disclaimer', 'guides', 'methodology', 'privacy',
+  /* 学習の記録（noindex,follow）。中身は端末の localStorage にしかないが、
+     器の HTML と描画コードは配信する。ここへ足し忘れると、生成はされるのに
+     本番で 404 になる（許可リスト方式のため） */
+  'progress',
+  /* 詳細検索（noindex,follow）。ここへ足し忘れると、生成はされるのに本番で 404 になる */
+  'search',
   ...SUBJECTS.map(s => s.dir),
 ];
 

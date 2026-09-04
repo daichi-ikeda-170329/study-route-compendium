@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -191,7 +197,7 @@ table.cmp td{color:var(--ink-2)}
       <div class="bcards" style="margin:20px 0">
       <a class="bcard" href="/japanese/books/stepup30/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート30 古典文法基礎ドリル</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777228720.jpg|https://cover.openbd.jp/9784777228720.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート30 古典文法基礎ドリル</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/477722872X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722872X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228720.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777228720.jpg|https://books.google.com/books/content?vid=ISBN9784777228720&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228720.jpg|https://www.gakusan.com/bookimage_s/9784777228720.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>河合出版</span></div>
             <b>ステップアップノート30 古典文法基礎ドリル</b>
@@ -203,7 +209,7 @@ table.cmp td{color:var(--ink-2)}
       </a>
       <a class="bcard" href="/japanese/books/bunpo-10drill/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古典文法10題ドリル 古文基礎編</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796115230.jpg|https://cover.openbd.jp/9784796115230.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古典文法10題ドリル 古文基礎編</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796115234.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796115234.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796115230.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796115230.jpg|https://books.google.com/books/content?vid=ISBN9784796115230&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796115230.jpg|https://www.gakusan.com/bookimage_s/9784796115230.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">知識</span><span>駿台文庫</span></div>
             <b>古典文法10題ドリル 古文基礎編</b>
@@ -331,6 +337,8 @@ table.cmp td{color:var(--ink-2)}
       <a href="/japanese/books/">参考書一覧</a>
       <a href="/japanese/routes/">志望校別ルート</a>
       <a href="/japanese/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>

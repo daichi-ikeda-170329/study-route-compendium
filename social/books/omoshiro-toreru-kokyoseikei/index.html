@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>面白いほどとれる</b><span>KADOKAWA</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4046067705.09.LZZZZZZZ.jpg" alt="面白いほどとれるの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046067705.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046067705.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046067708.jpg|https://cover.openbd.jp/9784046067708.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4046067705.09.LZZZZZZZ.jpg" alt="面白いほどとれるの表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046067705.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046067705.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046067705.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046067705.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046067705.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046067708.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046067708.jpg|https://books.google.com/books/content?vid=ISBN9784046067708&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046067708.jpg|https://www.gakusan.com/bookimage_s/9784046067708.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>導入・講義 — 政治・経済</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/social/books/kageyama-omoshiro-seikei/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山面白いほど</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046077035.jpg|https://cover.openbd.jp/9784046077035.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山面白いほど</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046077034.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046077034.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046077034.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046077035.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784046077035.jpg|https://books.google.com/books/content?vid=ISBN9784046077035&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046077035.jpg|https://www.gakusan.com/bookimage_s/9784046077035.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>KADOKAWA</span></div>
             <b>蔭山面白いほど</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/shuchu-kogi-kokyoseikei/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>集中講義 政経</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352861.jpg|https://cover.openbd.jp/9784010352861.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>集中講義 政経</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352868.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352868.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352868.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352861.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010352861.jpg|https://books.google.com/books/content?vid=ISBN9784010352861&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352861.jpg|https://www.gakusan.com/bookimage_s/9784010352861.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>旺文社</span></div>
             <b>集中講義 政経</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/kimeru-kokyoseikei/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>きめる!公共政経</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053064394.jpg|https://cover.openbd.jp/9784053064394.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>きめる!公共政経</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053064392.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053064392.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053064394.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053064394.jpg|https://books.google.com/books/content?vid=ISBN9784053064394&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053064394.jpg|https://www.gakusan.com/bookimage_s/9784053064394.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>Gakken</span></div>
             <b>きめる!公共政経</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/kageyama-kt-seikei/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山の共テ政経</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053059772.jpg|https://cover.openbd.jp/9784053059772.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山の共テ政経</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053059771.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059771.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053059772.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053059772.jpg|https://books.google.com/books/content?vid=ISBN9784053059772&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053059772.jpg|https://www.gakusan.com/bookimage_s/9784053059772.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>Gakken</span></div>
             <b>蔭山の共テ政経</b>
@@ -295,7 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/saitan-route-kokyoseikei/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>最短ルート政経</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053063558.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053063558.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053063558.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053063557.jpg|https://cover.openbd.jp/9784053063557.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>最短ルート政経</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053063558.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053063558.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053063558.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053063558.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053063558.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053063558.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053063557.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784053063557.jpg|https://books.google.com/books/content?vid=ISBN9784053063557&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053063557.jpg|https://www.gakusan.com/bookimage_s/9784053063557.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>Gakken</span></div>
             <b>最短ルート政経</b>
@@ -307,7 +313,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/hatakeyama-sokai-kogi/" style="--bc:#2E7D9A">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>爽快講義</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865315845.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865315845.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865315845.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865315844.jpg|https://cover.openbd.jp/9784865315844.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>爽快講義</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865315845.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865315845.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865315845.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4865315845.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4865315845.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865315845.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784865315844.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865315844.jpg|https://books.google.com/books/content?vid=ISBN9784865315844&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784865315844.jpg|https://www.gakusan.com/bookimage_s/9784865315844.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">導入</span><span>Z会</span></div>
             <b>爽快講義</b>
@@ -327,7 +333,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/social/books/yamakawa-ichimon-seikei/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>山川一問一答政経</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/463405115X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/463405115X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463405115X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634051157.jpg|https://cover.openbd.jp/9784634051157.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>山川一問一答政経</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/463405115X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/463405115X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463405115X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/463405115X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/463405115X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463405115X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784634051157.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784634051157.jpg|https://books.google.com/books/content?vid=ISBN9784634051157&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784634051157.jpg|https://www.gakusan.com/bookimage_s/9784634051157.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">暗記</span><span>山川出版社</span></div>
             <b>山川一問一答政経</b>
@@ -339,7 +345,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/social/books/shimizu-yogo-kokyoseikei/" style="--bc:#8A6D2F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>清水用語集</b><em>清水書院</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4389219316.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4389219316.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4389219316.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784389219314.jpg|https://cover.openbd.jp/9784389219314.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>清水用語集</b><em>清水書院</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4389219316.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4389219316.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4389219316.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4389219316.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4389219316.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4389219316.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784389219314.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784389219314.jpg|https://books.google.com/books/content?vid=ISBN9784389219314&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784389219314.jpg|https://www.gakusan.com/bookimage_s/9784389219314.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">暗記</span><span>清水書院</span></div>
             <b>清水用語集</b>
@@ -384,6 +390,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="social" data-book-id="omoshiro-toreru-kokyoseikei" data-book-name="面白いほどとれる"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -436,6 +450,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/social/books/">参考書一覧</a>
       <a href="/social/routes/">志望校別ルート</a>
       <a href="/social/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -527,6 +543,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

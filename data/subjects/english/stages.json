@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stages": {
+    "tango": {"label":"単語・語彙","color":"#2E7D9A","short":"単語"},
+    "jukugo": {"label":"熟語・知識問題","color":"#8A6D2F","short":"熟語"},
+    "bunpo": {"label":"文法","color":"#24427C","short":"文法"},
+    "kaishaku": {"label":"英文解釈","color":"#5B4E9E","short":"解釈"},
+    "chobun": {"label":"長文読解","color":"#B5432A","short":"長文"},
+    "eisaku": {"label":"英作文","color":"#2F6E4F","short":"英作"},
+    "listening": {"label":"リスニング","color":"#946200","short":"リス"},
+    "kyotest": {"label":"共通テスト","color":"#0E7C6B","short":"共テ"},
+    "kako": {"label":"過去問・大学別","color":"#3D4657","short":"過去問"}
+  }
+}

@@ -31,11 +31,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
-     送信が先に走らないようにするため）。defer なので描画は止めない -->
-<!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
-     本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
-     defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
@@ -109,7 +115,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>共通テスト実戦問題集 物理(代ゼミ)</b><span>代々木ライブラリー</span></div>
-        <img src="https://images-fe.ssl-images-amazon.com/images/P/4863469365.09.LZZZZZZZ.jpg" alt="共通テスト実戦問題集 物理(代ゼミ)の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863469365.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469365.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784863469365.jpg|https://cover.openbd.jp/9784863469365.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
+        <img src="https://images-fe.ssl-images-amazon.com/images/P/4863469365.09.LZZZZZZZ.jpg" alt="共通テスト実戦問題集 物理(代ゼミ)の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863469365.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469365.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4863469365.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4863469365.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863469365.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784863469365.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784863469365.jpg|https://books.google.com/books/content?vid=ISBN9784863469365&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784863469365.jpg|https://www.gakusan.com/bookimage_s/9784863469365.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">
       </div>
       <div>
         <span class="bk-tag"><i></i>共通テスト — 物理</span>
@@ -247,7 +253,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/science/books/kawai-sogo-butsuri/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト総合問題集 物理(河合・黒本)</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777230914.jpg|https://cover.openbd.jp/9784777230914.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト総合問題集 物理(河合・黒本)</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777230910.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777230910.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777230914.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777230914.jpg|https://books.google.com/books/content?vid=ISBN9784777230914&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777230914.jpg|https://www.gakusan.com/bookimage_s/9784777230914.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>河合出版</span></div>
             <b>共通テスト総合問題集 物理(河合・黒本)</b>
@@ -259,7 +265,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/toshin-jissen-butsuri/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>東進 共通テスト実戦問題集 物理</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890858903.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890858903.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858903.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890858903.jpg|https://cover.openbd.jp/9784890858903.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>東進 共通テスト実戦問題集 物理</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890858903.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890858903.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858903.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890858903.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890858903.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858903.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890858903.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784890858903.jpg|https://books.google.com/books/content?vid=ISBN9784890858903&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890858903.jpg|https://www.gakusan.com/bookimage_s/9784890858903.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>ナガセ(東進ブックス)</span></div>
             <b>東進 共通テスト実戦問題集 物理</b>
@@ -271,7 +277,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/kyogakusha-shinkatei-butsuri/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト新課程攻略問題集 物理（共通テスト赤本プラス）</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325254552.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325254552.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325254552.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325254553.jpg|https://cover.openbd.jp/9784325254553.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト新課程攻略問題集 物理（共通テスト赤本プラス）</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325254552.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325254552.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325254552.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325254552.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325254552.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325254552.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325254553.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325254553.jpg|https://books.google.com/books/content?vid=ISBN9784325254553&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325254553.jpg|https://www.gakusan.com/bookimage_s/9784325254553.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>教学社</span></div>
             <b>共通テスト新課程攻略問題集 物理（共通テスト赤本プラス）</b>
@@ -283,7 +289,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/obunsha-honban-moshi-butsuri/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>本番模試 物理</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354232.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354232.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354232.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010354230.jpg|https://cover.openbd.jp/9784010354230.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>本番模試 物理</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354232.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354232.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354232.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010354232.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010354232.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354232.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010354230.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010354230.jpg|https://books.google.com/books/content?vid=ISBN9784010354230&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010354230.jpg|https://www.gakusan.com/bookimage_s/9784010354230.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>旺文社</span></div>
             <b>本番模試 物理</b>
@@ -295,7 +301,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/mark-kiso-butsuri/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>マーク式基礎問題集 物理</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227154.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227154.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227154.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227150.jpg|https://cover.openbd.jp/9784777227150.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>マーク式基礎問題集 物理</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227154.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227154.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227154.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227154.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227154.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227154.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227150.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777227150.jpg|https://books.google.com/books/content?vid=ISBN9784777227150&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227150.jpg|https://www.gakusan.com/bookimage_s/9784777227150.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>河合出版</span></div>
             <b>マーク式基礎問題集 物理</b>
@@ -307,7 +313,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/b-zen-level-2/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>全レベル問題集 物理 2 共通テストレベル</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353806.jpg|https://cover.openbd.jp/9784010353806.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>全レベル問題集 物理 2 共通テストレベル</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010353805.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353805.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010353806.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784010353806.jpg|https://books.google.com/books/content?vid=ISBN9784010353806&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010353806.jpg|https://www.gakusan.com/bookimage_s/9784010353806.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>旺文社</span></div>
             <b>全レベル問題集 物理 2 共通テストレベル</b>
@@ -327,7 +333,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="bcards">
       <a class="bcard" href="/science/books/zkai-jissen-butsuri/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト実戦模試 物理(Z会・緑本)</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865317333.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865317333.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865317333.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865317336.jpg|https://cover.openbd.jp/9784865317336.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト実戦模試 物理(Z会・緑本)</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865317333.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865317333.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865317333.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4865317333.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4865317333.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865317333.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784865317336.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784865317336.jpg|https://books.google.com/books/content?vid=ISBN9784865317336&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784865317336.jpg|https://www.gakusan.com/bookimage_s/9784865317336.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>Z会</span></div>
             <b>共通テスト実戦模試 物理(Z会・緑本)</b>
@@ -339,7 +345,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/sundai-jissen-butsuri/" style="--bc:#2F6E4F">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト実戦問題集 物理(駿台・青本)</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796165118.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796165118.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796165118.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796165112.jpg|https://cover.openbd.jp/9784796165112.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト実戦問題集 物理(駿台・青本)</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796165118.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796165118.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796165118.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796165118.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796165118.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796165118.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796165112.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784796165112.jpg|https://books.google.com/books/content?vid=ISBN9784796165112&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796165112.jpg|https://www.gakusan.com/bookimage_s/9784796165112.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">共テ</span><span>駿台文庫</span></div>
             <b>共通テスト実戦問題集 物理(駿台・青本)</b>
@@ -351,7 +357,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/kawai-kakomon-review/" style="--bc:#3D4657">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>共通テスト過去問レビュー 物理基礎・物理</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231062.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231062.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231062.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231065.jpg|https://cover.openbd.jp/9784777231065.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>共通テスト過去問レビュー 物理基礎・物理</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231062.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231062.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231062.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777231062.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777231062.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231062.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777231065.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784777231065.jpg|https://books.google.com/books/content?vid=ISBN9784777231065&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777231065.jpg|https://www.gakusan.com/bookimage_s/9784777231065.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">過去問</span><span>河合出版</span></div>
             <b>共通テスト過去問レビュー 物理基礎・物理</b>
@@ -363,7 +369,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </a>
       <a class="bcard" href="/science/books/kyogakusha-kyotest-kako/" style="--bc:#3D4657">
         <div class="bcard__head">
-          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>共通テスト過去問研究 物理(赤本)</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/432527345X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/432527345X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/432527345X.09.LZZZZZZZ.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273455.jpg|https://cover.openbd.jp/9784325273455.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>共通テスト過去問研究 物理(赤本)</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/432527345X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/432527345X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/432527345X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/432527345X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/432527345X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/432527345X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325273455.jpg|https://ndlsearch.ndl.go.jp/thumbnail/9784325273455.jpg|https://books.google.com/books/content?vid=ISBN9784325273455&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325273455.jpg|https://www.gakusan.com/bookimage_s/9784325273455.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">過去問</span><span>教学社</span></div>
             <b>共通テスト過去問研究 物理(赤本)</b>
@@ -408,6 +414,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </script>
       
       <p class="buy__note">Amazon・楽天ブックスへのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="science" data-book-id="yozemi-jissen-butsuri" data-book-name="共通テスト実戦問題集 物理(代ゼミ)"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
@@ -460,6 +474,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/science/books/">参考書一覧</a>
       <a href="/science/routes/">志望校別ルート</a>
       <a href="/science/guides/">参考書の選び方</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
     </div>
@@ -551,6 +567,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
  ]
 }
 </script>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-control.js" defer></script>
 
 </body>
 </html>

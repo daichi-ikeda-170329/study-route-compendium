@@ -6,7 +6,8 @@
  * ここで見るのは「生成しても直らないもの」だけ。文章の質や表記のゆれは
  * build/check-site.mjs が生成後に見る。役割を分けてあるので、両方を流す。
  */
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { isPlaceholder, recordType } from './lib/record-type.mjs';
 import { verificationOf, verifiedFieldIsWellFormed, loadVerification, STATUSES } from './lib/verification.mjs';
 import path from 'node:path';
@@ -41,7 +42,7 @@ const isbnSeen = new Map();
 let total = 0;
 
 for (const s of SUBJECTS) {
-  const d = extractSubject(ROOT, s.dir);
+  const d = loadSubjectData(ROOT, s.dir);
   total += d.books.length;
   const ids = new Set();
 

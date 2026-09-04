@@ -17,7 +17,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
-import { extractSubject, SUBJECTS, SUB_LABELS } from './lib/extract.mjs';
+import { SUBJECTS, SUB_LABELS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 
 /* 検索側（assets/js/search.js）と同じ正規化を使う。
    索引と検索で別々に実装すると、片方だけ直したときに黙って引けなくなる */
@@ -68,7 +69,7 @@ function extraTerms(b, stages, aliases) {
 
 const subjects = [];
 const books = [];
-const data = SUBJECTS.map((s) => extractSubject(ROOT, s.dir));
+const data = SUBJECTS.map((s) => loadSubjectData(ROOT, s.dir));
 const byDir = Object.fromEntries(SUBJECTS.map((s, i) => [s.dir, new Set(data[i].books.map((b) => b.id))]));
 const aliasMap = loadAliases(byDir);
 
