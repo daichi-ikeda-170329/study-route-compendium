@@ -73,41 +73,20 @@ export function extractSubject(rootDir, dir, srcOverride = null) {
   };
 }
 
-/**
- * サイト全体でアフィリエイトを利用しているかを、各科目の CONFIG から判定する。
+/*
+ * アフィリエイト表記の判定は build/lib/load-subject-data.mjs へ移した。
  *
- * 生成ページの広告表記はここを唯一の根拠にする。ID が未設定のうちは
- * 「アフィリエイト広告を利用しています」と書かない（事実に反するため）。
- * ID を入れて再生成すれば、必要な表記が自動で戻る。
- * <script> を実行せずに済むよう、CONFIG の該当行だけを読む。
+ * ここには以前 affiliateEnabled() / amazonEnabled() があり、科目 HTML を
+ * 正規表現で直接読んで ID の有無を見ていた。
+ *
+ *     const tag = src.match(/\bamazonTag:\s*"([^"]*)"/);
+ *
+ * データを HTML の外へ出すと、この正規表現は何にもマッチしなくなり、**例外も警告も
+ * 出さずに戻り値が false になる**。その結果、生成される 1,390 ページから
+ * アフィリエイト開示と Amazon アソシエイトの必須表記がまるごと消える。
+ * 表示崩れではなく規約違反なので、canonical な CONFIG から判定する形へ移した。
+ * **ここに正規表現で読む実装を戻さない。**（test/affiliate-disclosure.test.mjs が固定している）
  */
-let affCache = null;
-export function affiliateEnabled(rootDir) {
-  if (affCache !== null) return affCache;
-  affCache = SUBJECTS.some(s => {
-    const src = fs.readFileSync(path.join(rootDir, s.dir, 'index.html'), 'utf8');
-    const tag = src.match(/\bamazonTag:\s*"([^"]*)"/);
-    const rak = src.match(/\brakutenId:\s*"([^"]*)"/);
-    return Boolean((tag && tag[1]) || (rak && rak[1]));
-  });
-  return affCache;
-}
-
-/**
- * Amazon アソシエイトの ID だけが入っているかを判定する。
- * Amazon の運営規約が求める「適格販売により収入を得ています」の表記は、
- * Amazon に参加しているときだけ出す（楽天だけの状態で出すと事実に反する）。
- */
-let azCache = null;
-export function amazonEnabled(rootDir) {
-  if (azCache !== null) return azCache;
-  azCache = SUBJECTS.some(s => {
-    const src = fs.readFileSync(path.join(rootDir, s.dir, 'index.html'), 'utf8');
-    const tag = src.match(/\bamazonTag:\s*"([^"]*)"/);
-    return Boolean(tag && tag[1]);
-  });
-  return azCache;
-}
 
 /** サイト共通の科目メタ情報。冊数は BOOKS から実測するのでここには持たない */
 export const SUBJECTS = [

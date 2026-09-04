@@ -3,7 +3,8 @@
  */
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SUBJECTS, ORIGIN, X_HANDLE, esc, affiliateEnabled, amazonEnabled } from './extract.mjs';
+import { SUBJECTS, ORIGIN, X_HANDLE, esc } from './extract.mjs';
+import { affiliateEnabled, amazonEnabled } from './load-subject-data.mjs';
 import { ADSENSE, adsenseLoader } from './ads.mjs';
 
 /**
