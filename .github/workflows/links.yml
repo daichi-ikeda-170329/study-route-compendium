@@ -14,6 +14,10 @@ on:
     - cron: '0 18 * * 0'
   workflow_dispatch:
 
+# 読み取りだけ
+permissions:
+  contents: read
+
 jobs:
   links:
     runs-on: ubuntu-latest
@@ -26,3 +30,15 @@ jobs:
 
       - name: 書影と商品ページを確認する
         run: node build/check-links.mjs | tee "$GITHUB_STEP_SUMMARY"
+
+      # 機械可読な結果も残す。持続的な欠損だけを拾って直すときに使う。
+      # **issue は乱造しない。**同じ不備で毎週 issue が増えると読まれなくなるので、
+      # 記録は artifact に置き、直すかどうかは人がまとめて判断する
+      - name: 結果を artifact に残す
+        run: node build/check-links.mjs --json > link-report.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: link-report
+          path: link-report.json
+          retention-days: 90

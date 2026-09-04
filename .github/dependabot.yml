@@ -1,0 +1,28 @@
+# 依存パッケージと GitHub Actions の更新候補を月 1 回作る。
+#
+# **自動マージはしない。** 更新 PR でも test.yml の全検査が走るので、
+# 通ったことを確かめてから人が入れる。壊れる更新を黙って本番へ流さないため。
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+    groups:
+      # 検査まわりはまとめて上げる（別々に来ても同じ検査を回すだけになるため）
+      testing:
+        patterns:
+          - "@playwright/*"
+          - "playwright"
+          - "@axe-core/*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"

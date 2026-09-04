@@ -59,6 +59,10 @@ for (const s of SUBJECTS) {
       .map(d => d.name)
       .sort();
     for (const id of ids) {
+      /* noindex のページは sitemap に載せない。「載せたのに index しない」という
+         食い違いを検索エンジンへ渡さないため（指示書 14.1） */
+      const html = fs.readFileSync(path.join(dir, id, 'index.html'), 'utf8');
+      if (/<meta[^>]*name="robots"[^>]*noindex/i.test(html)) continue;
       add(urls, `${s.dir}/${sub}/${id}`, priority, sub === 'routes' ? 'weekly' : 'monthly');
     }
   }
@@ -80,8 +84,6 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 ${urls.map(u => `  <url>
     <loc>${u.loc}</loc>
     <lastmod>${u.lastmod}</lastmod>
-    <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
   </url>`).join('\n')}
 </urlset>
 `;

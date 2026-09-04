@@ -1,0 +1,34 @@
+name: 不具合の報告
+description: 表示の崩れ、操作できない、保存できないなど
+title: "[不具合] "
+labels: ["不具合"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **セキュリティ上の問題は公開の Issue に書かないでください。**
+        [SECURITY.md](../blob/main/SECURITY.md) の手順で非公開に報告できます。
+  - type: input
+    id: url
+    attributes:
+      label: 対象のページ
+    validations: { required: true }
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現の手順
+      placeholder: |
+        1. /math/ を開く
+        2. 「志望校を入力する」を押す
+        3. …
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes:
+      label: どうなるはずだったか / 実際はどうなったか
+    validations: { required: true }
+  - type: input
+    id: env
+    attributes:
+      label: 環境
+      placeholder: iPhone 15 / Safari、Windows 11 / Chrome 140 など

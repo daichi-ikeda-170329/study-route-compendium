@@ -1,0 +1,32 @@
+name: 参考書の追加のお願い
+description: 収録されていない参考書を知らせてください
+title: "[追加] "
+labels: ["収録"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        主要な出版社の主要シリーズを優先して収録しています。
+        地域限定の教材・塾内専用教材・絶版になった書籍は収録していない場合があります。
+  - type: input
+    id: title
+    attributes:
+      label: 正式書名
+    validations: { required: true }
+  - type: input
+    id: pub
+    attributes:
+      label: 出版社
+    validations: { required: true }
+  - type: input
+    id: isbn
+    attributes:
+      label: ISBN-13
+      description: あれば。無ければ空欄で構いません
+  - type: textarea
+    id: why
+    attributes:
+      label: どんな役割の本か
+      description: |
+        どの段階で、どんな目的に使う本かを書いてください。
+        **難易度や到達偏差値の推定は不要です。**こちらで既存の収録全冊との相対で付けます。

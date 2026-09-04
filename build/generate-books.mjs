@@ -24,6 +24,7 @@ import { degreeTable, bandOf } from './lib/scale.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL, placeholderSearchUrl } from './lib/record-type.mjs';
 import { verificationOf, verificationRows, STATUS_LABEL } from './lib/verification.mjs';
+import { bookIndexable, NOINDEX_META } from './lib/indexing.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -233,6 +234,9 @@ function renderBook(book, ctx) {
   /* 事実として確かめた項目と、編集部が推定した項目を分けて出す。
      verified と「現物を確認した」を同じ意味にしない（build/lib/verification.mjs） */
   const ver = verificationOf(sub.dir, book);
+  /* 固有の価値がまだ無いページは検索結果に載せない。既に流入のある URL を
+     一律に noindex にはしない（build/lib/indexing.mjs） */
+  const idx = bookIndexable(book);
   const bookNode = placeholder ? [] : [
       {
         '@type': 'Book',
@@ -305,7 +309,9 @@ function renderBook(book, ctx) {
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
-${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp/${sub.dir}/${book.id}.png` })}
+${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp/${sub.dir}/${book.id}.png` })}${idx.indexable ? '' : `
+<!-- ${idx.reason}。評価を書けば自動で index へ戻る（build/lib/indexing.mjs） -->
+${NOINDEX_META}`}
 <style>:root{--sc:${st.color || sub.color}}</style>
 </head>
 <body>

@@ -1,12 +1,8 @@
-# テストを push のたびに流す。
+# push と PR のたびに、生成が再現できることと検査が通ることを確かめる。
 #
-# これまでテストは手で流す前提だったが、「流し忘れても気づけない」ものが混ざった。
-# とくに test/mobile-layout.test.mjs が見張っているのは、ブラウザを狭くして開かない限り
-# 気づけない崩れ（2026-09-03 に情報・小論文のタブバーで実際に起きた）なので、
-# 手順書に「流すこと」と書くだけでは足りない。ここで機械的に落とす。
-#
-# サイトの生成と検査は Node 標準だけで動く。**OGP 画像の検査だけが依存パッケージを要る**
-# （SVG のラスタライズを標準ライブラリでは書けないため）。そのために npm ci を挟む。
+# **ここで見るのは「同じ入力から同じ生成物が出るか」。** 生成物に差分が出たら
+# 落とす（開発者が意図を確かめてコミットする）。CI からリポジトリへは push しない。
+# 生成の順序は build/all.mjs が持つので、ここでは並べ直さない。
 name: テスト
 
 on:
@@ -14,6 +10,10 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+
+# 読み取りだけ。生成物を CI から書き戻さない
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -26,37 +26,54 @@ jobs:
           node-version: '22'
           cache: npm
 
-      # 依存を使うのは最後の「OGP 画像が最新か確かめる」だけ（@resvg/resvg-js と sharp）。
-      # ほかのステップは Node 標準だけで動く。バージョンは package-lock.json で固定してある
-      - name: 依存パッケージを入れる（OGP の検査に使う）
+      - name: 依存パッケージを入れる
         run: npm ci
 
-      # 走らせるファイルは README の「テスト」の表と同じ並びにしておく。
-      # テストを増やしたら両方に足す
-      - name: テストを流す
-        run: |
-          node --test \
-            test/share.test.mjs \
-            test/search.test.mjs \
-            test/pace.test.mjs \
-            test/new-books.test.mjs \
-            test/mobile-layout.test.mjs \
-            test/style-guide.test.mjs
+      # データが壊れた状態から 1,390 ページを作らないための関門
+      - name: データを検証する
+        run: npm run check:data
 
-      # データと出力 HTML の検査。非日本語文字の混入・孤立ページ・リンク切れ・
-      # 信頼性ページへのリンク欠落・定型段落の重複などをここで落とす。
-      # 誇張語は警告として出るだけで、ジョブは落とさない
+      - name: ユニットテストを流す
+        run: npm test
+
+      # 文章の検査（非日本語文字の混入・孤立ページ・リンク切れ・定型段落の重複・誇張語）
       - name: サイト全体を検査する
-        run: node build/check-site.mjs
+        run: npm run check:site
 
-      # 科目トップに静的化した図鑑・ルート一覧・講師ルート・学習ガイドが
-      # データとずれていないか。ずれていれば落とす（JS を切った環境と
-      # 検索エンジンだけが古い内容を見ることになるため）
-      - name: 静的化した中身が最新か確かめる
-        run: node build/prerender-tops.mjs --check
+      # ここが本体。生成し直して差分が出たら落とす
+      - name: 生成物が最新か確かめる
+        run: |
+          npm run build
+          git diff --exit-code
 
-      # OGP 画像が最新のデータと一致しているか。冊数や書名を変えたのに
-      # gen-ogp.mjs を流し忘れると、画像だけ古い数字のまま公開されるので落とす。
-      # --check は画像を作らない（ハッシュ台帳と比べるだけ）ので、フォントの取得は要らない
-      - name: OGP 画像が最新か確かめる
-        run: node build/gen-ogp.mjs --check
+      - name: 公開物を検査する
+        run: node --test test/dist.test.mjs
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: 依存パッケージを入れる
+        run: npm ci
+
+      - name: ブラウザを入れる
+        run: npx playwright install --with-deps chromium
+
+      # **HTTP 経由で確かめる。** file:// では絶対パスのリンクと localStorage の
+      # 扱いが本番と変わるので、確かめたことにならない
+      - name: E2E とアクセシビリティ検査を流す
+        run: npm run test:e2e
+
+      - name: 失敗したときの記録を残す
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

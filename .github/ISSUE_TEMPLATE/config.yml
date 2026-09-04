@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: セキュリティ上の問題
+    url: https://github.com/daichi-ikeda-170329/study-route-compendium/security/advisories/new
+    about: 公開の Issue ではなく、GitHub Security Advisory から非公開で報告してください

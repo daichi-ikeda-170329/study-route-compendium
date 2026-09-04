@@ -1,0 +1,20 @@
+name: リンク切れ・書影が出ない
+description: リンクが開けない、書影が表示されないときに使ってください
+title: "[リンク] "
+labels: ["リンク"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: 対象のページ
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes:
+      label: どのリンク・どの画像か
+    validations: { required: true }
+  - type: input
+    id: env
+    attributes:
+      label: 環境
+      placeholder: iPhone / Safari、Windows / Chrome など

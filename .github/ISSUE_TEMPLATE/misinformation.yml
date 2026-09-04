@@ -1,0 +1,40 @@
+name: 誤った情報の報告
+description: 掲載内容が事実と違う場合に使ってください（最優先で対応します）
+title: "[誤情報] "
+labels: ["誤情報"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        誤った情報は受験生の進路に影響します。**このサイトで最優先の不具合**として扱います。
+        なお、難易度・到達目安・想定学習時間は編集部（運営者 1 人）の推定値です。
+        「推定が自分の感覚と違う」という内容も歓迎しますが、その場合は下の「事実の誤り」ではなく
+        「推定への意見」を選んでください。
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 種類
+      options:
+        - 事実の誤り（書名・出版社・ISBN・刊行年・問題数など）
+        - 入試情報の誤り（受験科目・出題範囲・配点など）
+        - 推定への意見（難易度・到達目安・想定学習時間）
+        - その他
+    validations: { required: true }
+  - type: input
+    id: url
+    attributes:
+      label: 対象のページ
+      placeholder: https://route-taizen.com/english/books/nextstage/
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes:
+      label: いま書かれている内容と、正しい内容
+    validations: { required: true }
+  - type: textarea
+    id: source
+    attributes:
+      label: 根拠
+      description: |
+        出版社の公式ページ、書誌データベース、大学の公式発表など、確かめられる出典があれば書いてください。
+        **出典が無くても報告してかまいません。**こちらで確かめます。
