@@ -49,6 +49,14 @@ jobs:
       - name: 公開物を検査する
         run: node --test test/dist.test.mjs
 
+      # 書影の取得元の整合。**外部へ 1 回も出ない**ので必須ゲートにできる。
+      # 実際に取りに行く検査（--live）は links.yml の週次に置いてある
+      - name: 書影の取得元を検査する
+        run: npm run check:covers
+
+      - name: 性能の予算を検査する
+        run: npm run check:budgets
+
   e2e:
     runs-on: ubuntu-latest
     steps:
@@ -63,12 +71,17 @@ jobs:
         run: npm ci
 
       - name: ブラウザを入れる
-        run: npx playwright install --with-deps chromium
+        # cross-browser の spec だけ Firefox / WebKit で回す（e2e/cross-browser.spec.mjs）。
+        # **全 spec を 3 ブラウザへ掛け算しない。** 実行時間が跳ね、落ちても読まれなくなる
+        run: npx playwright install --with-deps chromium firefox webkit
 
       # **HTTP 経由で確かめる。** file:// では絶対パスのリンクと localStorage の
       # 扱いが本番と変わるので、確かめたことにならない
-      - name: E2E とアクセシビリティ検査を流す
-        run: npm run test:e2e
+      - name: E2E とアクセシビリティ検査を流す（Chromium 4 幅）
+        run: npx playwright test --project=desktop-1366 --project=tablet-768 --project=mobile-375 --project=narrow-320
+
+      - name: Firefox と WebKit で主要フローを流す
+        run: npm run test:cross-browser
 
       - name: 失敗したときの記録を残す
         if: failure()

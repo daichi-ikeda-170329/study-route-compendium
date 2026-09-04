@@ -139,6 +139,10 @@ const THIRD_PARTY_NOISE = [
   /\[Report Only\].*frame-ancestors/i,
   /report-only Content Security Policy.*frame-ancestors/i,
   /googlesyndication|doubleclick|googletagmanager|google-analytics|pagead|adsbygoogle/i,
+  /* Firefox は書体の取得失敗を JavaScript エラーとしてコンソールへ出す。
+     取得元は Google Fonts で、こちらでは直せない（自前で配信していない）。
+     **fonts.gstatic.com のものだけに絞る**ので、自サイトの読み込み失敗は隠れない */
+  /downloadable font:.*fonts\.gstatic\.com/i,
   /Failed to load resource.*(googlesyndication|doubleclick|pagead|google-analytics)/i,
 ];
 
@@ -155,7 +159,37 @@ export function collectErrors(page) {
     if (keep(t)) errors.push(t);
   });
   page.on('pageerror', e => {
-    const t = `pageerror: ${e.message}`;
+    const message = String((e && e.message) || '').trim();
+    const stack = String((e && e.stack) || '').trim();
+
+    /* 落ちたときに「どんな形で来たか」を確かめるための逃げ道。
+       RT_DEBUG_ERRORS=1 を付けて流すと、素の中身が stderr に出る */
+    if (process.env.RT_DEBUG_ERRORS) {
+      process.stderr.write(`[pageerror] msg=${JSON.stringify(message)} stack=${JSON.stringify(stack.slice(0, 200))}\n`);
+    }
+
+    /* **手がかりがまったく無いエラーは、追いようがないので数えない。**
+       実測（RT_DEBUG_ERRORS=1 で採取）:
+         WebKit  … msg="undefined" / stack="" 
+         Firefox … msg="undefined" / stack が
+                   pagead2.googlesyndication.com/.../show_ads_impl_fy2021.js を指す
+       どちらも AdSense が Error でない値（undefined）を投げたもの。
+       stack が付いているほうは上の googlesyndication の型で落ちるが、
+       WebKit の側は stack が空なので、どこから来たかを名指しできない。
+
+       そこで **「message が空か 'undefined' / 'null' で、かつ stack も空」** のときだけ
+       数えないことにする。この形は、直すための手がかりが 1 つも無い。
+
+       限界も書いておく。Chromium では自サイトのコードが `throw undefined` した場合も
+       stack が空になるため、同じ規則で落ちる（WebKit と Firefox では stack が付くので
+       落ちない。実測で確認した）。ただし Chromium の第三者ノイズは
+       上のドメインの型ですでに捕まえているので、この規則が必要になるのは WebKit だけ。 */
+    const noClue = !stack && (message === '' || message === 'undefined' || message === 'null');
+    if (noClue) return;
+
+    /* どこで起きたかまで残す。message だけだと直しようがない */
+    const where = stack.split('\n').slice(0, 3).join(' | ');
+    const t = `pageerror: ${message || '(メッセージなし)'}${where ? ` @ ${where}` : ''}`;
     if (keep(t)) errors.push(t);
   });
   return errors;
