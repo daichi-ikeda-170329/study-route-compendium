@@ -65,7 +65,7 @@ jobs:
       - name: Pages の artifact として上げる
         # main への push のときだけ。PR ではビルドと検査だけ行う
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
