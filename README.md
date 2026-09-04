@@ -1104,19 +1104,34 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 
 コードでは完結しない作業。**やっていないものを「やった」と書かない。**
 
-### GitHub Pages の配信元を変える（未実施・要対応）
+### GitHub Pages の配信元（切り替え済み）
 
-いまはリポジトリ直下がそのまま配信されている。`.github/workflows/pages.yml` を
-入れたので、`dist/` だけを配信する形へ切り替えられる。**順番を守ること。**
+`.github/workflows/pages.yml` が作る `dist/` だけを配信している。
+2026-09-04 に切り替わったことを本番で確認済み。
+
+```
+https://route-taizen.com/               200
+https://route-taizen.com/package.json   404
+https://route-taizen.com/build/all.mjs  404
+https://route-taizen.com/test/…         404
+```
+
+以前はリポジトリ直下がそのまま配信されていて、本番から `build/`・`test/`・
+`data/_backup/`・`package.json` を取得できた。
+
+**切り戻すとき**は Settings → Pages → Build and deployment → Source を
+「Deploy from a branch」に戻す。ただしその瞬間からリポジトリ直下が
+再び全部公開されるので、戻すのは配信が止まったときの緊急手段に限る。
+
+**やり直すとき**の順番（一度きりの手順だが、環境を作り直す場合のために残す）。
 
 1. `pages.yml` が入った状態で main へ push する（この時点では配信先は変わらない）
 2. Actions タブで「Pages 公開」が成功していることを確かめる
 3. Settings → Pages → Build and deployment → Source を **GitHub Actions** に変える
-4. 数分後、`https://route-taizen.com/` が dist/ から配信されていることを確かめる
-   （`https://route-taizen.com/package.json` が 404 になれば切り替わっている）
+4. 数分後、上の 404 になるべき URL が 404 を返すことを確かめる
 
 **2 を確かめる前に 3 をやらない。** workflow が失敗する状態で Source を変えると、
-配信が止まる。切り戻すときは Source を「Deploy from a branch」に戻す。
+配信が止まる。
 
 ### Google Search Console
 
