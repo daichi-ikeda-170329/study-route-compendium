@@ -417,6 +417,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .uni-card__map .arw{color:var(--muted-2)}
 .uni-card__note{font-size:12.5px;color:var(--ink-2);line-height:1.75;padding-top:10px;border-top:1px solid var(--line-2)}
 .uni-card__note b{font-weight:800;color:var(--accent-deep)}
+/* 判定の補足（模試の物差しが違うときの注記と、数字の出所） */
+.v-note{font-size:11.5px;color:var(--muted);line-height:1.75;margin:8px 0 0}
+.v-note b{color:var(--ink-2);font-weight:800}
+.v-src{display:block;font-size:10px;color:var(--muted-2);line-height:1.4;margin-top:2px}
+
 /* 志望校モードの「文理・受験科目」確認（assets/js/bunri.js）。
    学部名からの推定は候補として出すだけで、本人が選ぶまでルートを出さない */
 .bnr{margin-top:10px;padding:14px 15px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
@@ -1079,14 +1084,19 @@ gtag('config', 'G-DQ5WFXEFMX');
           <div class="opt-field">
             <label>国語の模試偏差値</label>
             <div class="hen-row">
+              <!-- 模試名は記録として残すが、**偏差値を固定値で換算しない**。
+                   進研 -12・駿台全国 +10 のような一律の加減算は、科目・母集団・回次で
+                   大きく変わるため、実在しない精度を作り出す（指示書 9.1）。
+                   到達目安と直接比べるのは全統記述模試だけにする -->
               <select id="moshiSel" aria-label="偏差値を出した模試の種類">
-                <option value="0">全統模試(河合)</option>
-                <option value="-12">進研模試(ベネッセ)</option>
-                <option value="-3">駿台全国判定模試</option>
-                <option value="10">駿台全国模試(ハイレベル)</option>
-                <option value="2">東進 共通テスト本番レベル</option>
-                <option value="8">東進 難関大本番レベル</option>
-                <option value="-6">学校の実力テスト・校内模試</option>
+                <option value="zento">全統記述模試(河合塾)</option>
+                <option value="kyote_kawai">全統共通テスト模試(河合塾)</option>
+                <option value="shinken">進研模試(ベネッセ)</option>
+                <option value="sundai_hantei">駿台全国判定模試</option>
+                <option value="sundai_zenkoku">駿台全国模試(ハイレベル)</option>
+                <option value="toshin_kyote">東進 共通テスト本番レベル</option>
+                <option value="toshin_nankan">東進 難関大本番レベル</option>
+                <option value="konai">学校の実力テスト・校内模試</option>
               </select>
               <input id="henInput" type="number" min="25" max="85" step="0.1" placeholder="偏差値" aria-label="国語の模試偏差値">
             </div>
@@ -1255,7 +1265,7 @@ gtag('config', 'G-DQ5WFXEFMX');
 <p>目安として、同じ実力でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。</p>
 <h4>分野別に見る</h4>
 <p>国語の模試成績表には、現代文・古文・漢文それぞれの得点率が載っています。総合偏差値より、この内訳を見てください。「漢文が5割」なら数週間の句法学習で10点以上伸びます。「古文が4割」なら単語・文法の土台に戻るサインです。「現代文が安定しない」なら読み方の型を見直す時期です。</p>
-<p>本サイトのルート画面では、模試の種類を選ぶと全統換算の偏差値に直したうえで、志望校の到達目安との差を表示します。</p></div>
+<p>本サイトの到達目安は全統記述模試（河合塾）の帯で付けています。<b>模試のあいだに一律に足し引きできる対応関係はありません</b>ので、当サイトでは他の模試の偏差値を換算しません。全統記述以外を選んだ場合は、目標との差を数字で出さず、完了済みの参考書と自己評価を中心に現在地を判定します。</p></div>
     </article>
     <article class="g-card" id="g10">
       <button class="g-card__head" onclick="toggleGuide(10)" aria-expanded="false">
@@ -2759,7 +2769,7 @@ const GUIDES = [
 <p>目安として、同じ実力でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。</p>
 <h4>分野別に見る</h4>
 <p>国語の模試成績表には、現代文・古文・漢文それぞれの得点率が載っています。総合偏差値より、この内訳を見てください。「漢文が5割」なら数週間の句法学習で10点以上伸びます。「古文が4割」なら単語・文法の土台に戻るサインです。「現代文が安定しない」なら読み方の型を見直す時期です。</p>
-<p>本サイトのルート画面では、模試の種類を選ぶと全統換算の偏差値に直したうえで、志望校の到達目安との差を表示します。</p>`},
+<p>本サイトの到達目安は全統記述模試（河合塾）の帯で付けています。<b>模試のあいだに一律に足し引きできる対応関係はありません</b>ので、当サイトでは他の模試の偏差値を換算しません。全統記述以外を選んだ場合は、目標との差を数字で出さず、完了済みの参考書と自己評価を中心に現在地を判定します。</p>`},
 
 {t:"過去問はいつから始めるべきか",
  s:"国語は大学ごとの形式差が最も大きい科目です",
@@ -3295,7 +3305,7 @@ const QUIZ = [
    **学部名から黙って立てない。** 理系と判定すると二次に国語が無い前提の
    共通テストルートへ切り替わるので、推定で決めると教材列がまるごと変わる */
 const S = {view:"home", tier:null, subj:"all", policy:"omni", level:0,
-           mode:"tier", uni:null, fac:"", moshi:0, hen:null, henAdj:null,
+           mode:"tier", uni:null, fac:"", moshi:"zento", hen:null, henAdj:null,
            done:new Set(), autoLevel:null, bunriConfirmed:null, bunriPicked:null};
 const bookById = id => BOOKS.find(b=>b.id===id);
 const SUBJ_KEYS = ["gendai","kobun","kanbun"];
@@ -3387,9 +3397,37 @@ function levelFromDone(){
   });
   return lv;
 }
+/**
+ * 模試の種類。**固定値での偏差値換算はしない。**
+ *
+ * かつては進研 -12・駿台全国判定 -3・駿台全国 +10・東進 +2/+8・校内 -6 を
+ * 一律に足し引きし、「目標まで +8.0」のような表示を出していた。だが模試間の差は
+ * 科目・母集団・回次で大きく変わり、一律の数値で置き換えられるものではない。
+ * 数字を足した時点で、根拠のない精度が生まれる。
+ *
+ * そこで、サイト内の到達目安（全統記述の帯で付けてある）と直接比べるのは
+ * 全統記述模試だけにし、それ以外は偏差値を目標との差の計算に使わない。
+ * 現在地は完了済み教材と自己評価から見る。
+ *
+ * 将来、実データにもとづく対応関係を登録できるようになったらここに足す。
+ * 偽の換算表を作らないこと。
+ */
+const MOSHI = {
+  zento:          {label:"全統記述模試(河合塾)",        comparable:true},
+  kyote_kawai:    {label:"全統共通テスト模試(河合塾)",  comparable:false},
+  shinken:        {label:"進研模試(ベネッセ)",          comparable:false},
+  sundai_hantei:  {label:"駿台全国判定模試",            comparable:false},
+  sundai_zenkoku: {label:"駿台全国模試(ハイレベル)",    comparable:false},
+  toshin_kyote:   {label:"東進 共通テスト本番レベル",   comparable:false},
+  toshin_nankan:  {label:"東進 難関大本番レベル",       comparable:false},
+  konai:          {label:"学校の実力テスト・校内模試",  comparable:false},
+};
+/** その模試の偏差値を、サイト内の到達目安と直接比べてよいか */
+function moshiComparable(){ return !!(MOSHI[S.moshi] && MOSHI[S.moshi].comparable); }
 function recalcStatus(){
   const raw = S.hen;
-  S.henAdj = (raw==null || isNaN(raw)) ? null : Math.round((raw + (+S.moshi))*10)/10;
+  /* 換算しない。入力された偏差値をそのまま持ち、比べてよいのは全統記述だけ */
+  S.henAdj = (raw==null || isNaN(raw)) ? null : Math.round(raw*10)/10;
   const a = levelFromHen(S.henAdj), b = levelFromDone();
   let lv = null;
   if(a!=null && b!=null) lv = Math.min(3, Math.round((a+b)/2 + 0.01));
@@ -3415,22 +3453,31 @@ function renderVerdict(){
   if(S.henAdj==null && S.done.size===0){ el.classList.remove("on"); el.innerHTML=""; return; }
   const tgt = targetHen();
   const LVN = ["ゼロ〜教科書","入試基礎まで完成","入試標準まで完成","応用まで完成"];
+  /* 目標との差を数字で出してよいのは、到達目安と同じ物差しの模試だけ。
+     ほかの模試の偏差値をそのまま引き算すると、実在しない精度の判定になる */
+  const cmp = moshiComparable();
   let gapHtml = "";
-  if(S.henAdj!=null && tgt){
+  if(S.henAdj!=null && tgt && cmp){
     const gap = Math.max(0, Math.round((tgt - S.henAdj)*10)/10);
     const pct = Math.max(4, Math.min(100, Math.round(S.henAdj / tgt * 100)));
     gapHtml = `<div class="v-item" style="flex:1;min-width:150px"><dt>目標までの差</dt>
       <dd>${gap>0?"+"+gap:"到達"}<small>${gap>0?" 必要":""}</small></dd>
       <div class="gap-bar"><i style="width:${pct}%"></i></div></div>`;
   }
+  const moshiNote = (S.henAdj!=null && !cmp)
+    ? `<p class="v-note">サイト内の到達目安は<b>全統記述模試（河合塾）</b>の帯で付けています。`
+      + `${(MOSHI[S.moshi]||{}).label||"この模試"}との間に、一律に足し引きできる対応関係はありません。`
+      + `模試間の単純換算はできないため、完了済み教材と自己評価を中心に判定します。</p>`
+    : "";
   el.classList.add("on");
   el.innerHTML = `
     <div class="v-row">
-      ${S.henAdj!=null?`<div class="v-item"><dt>全統換算 偏差値</dt><dd>${S.henAdj}</dd></div>`:""}
-      ${tgt?`<div class="v-item"><dt>目標の到達目安</dt><dd>${tgt}</dd></div>`:""}
+      ${S.henAdj!=null?`<div class="v-item"><dt>入力した偏差値</dt><dd>${S.henAdj}</dd><small class="v-src">${(MOSHI[S.moshi]||{}).label||""}</small></div>`:""}
+      ${tgt?`<div class="v-item"><dt>目標の到達目安</dt><dd>${tgt}</dd><small class="v-src">全統記述の帯</small></div>`:""}
       <div class="v-item"><dt>推定される現在地</dt><dd style="font-size:13px;font-family:var(--jp);padding-top:4px">${LVN[S.level]}</dd></div>
       ${gapHtml}
     </div>
+    ${moshiNote}
     <b>この情報をルートに反映しました。</b>${S.done.size?`登録した${S.done.size}冊は<b style="color:var(--ok)">習得済み</b>として表示し、`:""}現在地より下の段階は「スキップ可」として薄く表示しています。${S.henAdj!=null&&tgt&&S.henAdj>=tgt?"すでに目標水準に届いているので、過去問演習と弱点科目の補強を主軸にしてください。":"各科目の「▶ ここから」と表示された1冊から着手してください。科目ごとの得点率に差があれば、弱い科目の段階を手動で下げて構いません。"}`;
 }
 
@@ -4225,7 +4272,7 @@ uniInput.addEventListener("keydown",e=>{
 });
 document.getElementById("facInput").addEventListener("input",e=>{ S.fac=e.target.value; if(S.uni) applyUni(); });
 /* 学習状況 */
-document.getElementById("moshiSel").addEventListener("change",e=>{ S.moshi=+e.target.value; recalcStatus(); });
+document.getElementById("moshiSel").addEventListener("change",e=>{ S.moshi=e.target.value; recalcStatus(); });
 document.getElementById("henInput").addEventListener("input",e=>{
   const v = parseFloat(e.target.value);
   S.hen = (e.target.value==="" || isNaN(v)) ? null : v;

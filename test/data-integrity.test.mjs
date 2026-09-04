@@ -10,6 +10,8 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import { extractSubject, SUBJECTS } from '../build/lib/extract.mjs';
 import { isPlaceholder, recordType } from '../build/lib/record-type.mjs';
 import { ROOT } from './helpers.mjs';
@@ -126,4 +128,64 @@ test('ルート・代替・診断が参照する書籍 id がすべて実在す�
     }
   }
   assert.deepEqual([...new Set(bad)], [], [...new Set(bad)].join('\n'));
+});
+
+/* ============================================================
+   模試の偏差値換算
+
+   進研 -12・駿台全国 +10 のような一律の加減算は、科目・母集団・回次で大きく
+   変わるため、実在しない精度を作り出す。到達目安と直接比べるのは全統記述だけ。
+   ============================================================ */
+
+test('模試の選択肢に固定の換算値が残っていない', () => {
+  const bad = [];
+  for (const s of SUBJECTS) {
+    if (s.catalogOnly) continue;
+    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    const sel = /<select id="moshiSel"[\s\S]*?<\/select>/.exec(src);
+    assert.ok(sel, `${s.dir}: moshiSel が見つからない`);
+    for (const m of sel[0].matchAll(/<option value="(-?\d+)"/g)) {
+      bad.push(`${s.dir}: option value="${m[1]}"（固定換算値）`);
+    }
+  }
+  assert.deepEqual(bad, [], bad.join('\n'));
+});
+
+test('偏差値に模試ごとの数値を足し引きしていない', () => {
+  const bad = [];
+  for (const s of SUBJECTS) {
+    if (s.catalogOnly) continue;
+    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    if (/hen\s*\+\s*\(?\+?S\.moshi/.test(src) || /S\.hen\s*\+\s*S\.moshi/.test(src)) {
+      bad.push(`${s.dir}: 偏差値に S.moshi を足している`);
+    }
+  }
+  assert.deepEqual(bad, [], bad.join('\n'));
+});
+
+test('比べてよい模試は全統記述だけで、ほかは comparable:false', () => {
+  for (const s of SUBJECTS) {
+    if (s.catalogOnly) continue;
+    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    const tbl = /const MOSHI = \{[\s\S]*?\n\};/.exec(src);
+    assert.ok(tbl, `${s.dir}: MOSHI テーブルが無い`);
+    const yes = [...tbl[0].matchAll(/(\w+):\s*\{[^}]*comparable:true/g)].map(m => m[1]);
+    assert.deepEqual(yes, ['zento'], `${s.dir}: 比べてよい模試が ${yes.join(', ')} になっている`);
+  }
+});
+
+test('公開表示に「全統換算」が残っていない', () => {
+  const SKIP = new Set(['.git', 'node_modules', 'dist', 'data']);
+  const bad = [];
+  (function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (SKIP.has(e.name)) continue;
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.name.endsWith('.html') && /全統換算/.test(fs.readFileSync(p, 'utf8'))) {
+        bad.push(path.relative(ROOT, p));
+      }
+    }
+  })(ROOT);
+  assert.deepEqual(bad, [], bad.join('\n'));
 });

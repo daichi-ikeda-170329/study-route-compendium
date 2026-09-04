@@ -417,6 +417,11 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .uni-card__map .arw{color:var(--muted-2)}
 .uni-card__note{font-size:12.5px;color:var(--ink-2);line-height:1.75;padding-top:10px;border-top:1px solid var(--line-2)}
 .uni-card__note b{font-weight:800;color:var(--accent-deep)}
+/* 判定の補足（模試の物差しが違うときの注記と、数字の出所） */
+.v-note{font-size:11.5px;color:var(--muted);line-height:1.75;margin:8px 0 0}
+.v-note b{color:var(--ink-2);font-weight:800}
+.v-src{display:block;font-size:10px;color:var(--muted-2);line-height:1.4;margin-top:2px}
+
 /* 志望校モードの「文理・受験科目」確認（assets/js/bunri.js）。
    学部名からの推定は候補として出すだけで、本人が選ぶまでルートを出さない */
 .bnr{margin-top:10px;padding:14px 15px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
@@ -755,7 +760,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <div class="stat"><b id="stat-unis">160</b><span>収録大学 — 選べる科目まで判定</span></div>
         <div class="stat"><b>6</b><span>科目別ルート — 日本史/世界史/地理/公共/政経/倫理</span></div>
       </div>
-      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-03">2026-09-03</time></p>
+      <p class="page-updated" id="topUpdated">最終更新: <time datetime="2026-09-04">2026-09-04</time></p>
     </div>
 
     <div class="home-block">
@@ -1108,14 +1113,19 @@ gtag('config', 'G-DQ5WFXEFMX');
           <div class="opt-field">
             <label>社会(地歴公民)の模試偏差値</label>
             <div class="hen-row">
+              <!-- 模試名は記録として残すが、**偏差値を固定値で換算しない**。
+                   進研 -12・駿台全国 +10 のような一律の加減算は、科目・母集団・回次で
+                   大きく変わるため、実在しない精度を作り出す（指示書 9.1）。
+                   到達目安と直接比べるのは全統記述模試だけにする -->
               <select id="moshiSel" aria-label="偏差値を出した模試の種類">
-                <option value="0">全統模試(河合)</option>
-                <option value="-12">進研模試(ベネッセ)</option>
-                <option value="-3">駿台全国判定模試</option>
-                <option value="10">駿台全国模試(ハイレベル)</option>
-                <option value="2">東進 共通テスト本番レベル</option>
-                <option value="8">東進 難関大本番レベル</option>
-                <option value="-6">学校の実力テスト・校内模試</option>
+                <option value="zento">全統記述模試(河合塾)</option>
+                <option value="kyote_kawai">全統共通テスト模試(河合塾)</option>
+                <option value="shinken">進研模試(ベネッセ)</option>
+                <option value="sundai_hantei">駿台全国判定模試</option>
+                <option value="sundai_zenkoku">駿台全国模試(ハイレベル)</option>
+                <option value="toshin_kyote">東進 共通テスト本番レベル</option>
+                <option value="toshin_nankan">東進 難関大本番レベル</option>
+                <option value="konai">学校の実力テスト・校内模試</option>
               </select>
               <input id="henInput" type="number" min="25" max="85" step="0.1" placeholder="偏差値" aria-label="社会(地歴公民)の模試偏差値">
             </div>
@@ -1253,7 +1263,7 @@ gtag('config', 'G-DQ5WFXEFMX');
         <span class="g-ttl"><h3>模試の偏差値をどう読むか</h3><span>社会の偏差値は、分野別の得点率を見ないと意味がありません</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>「社会の偏差値55」という情報だけでは、何をすべきかほとんど分かりません。<b>どの模試か</b>と、<b>どの時代・分野で落としているか</b>の2つを見る必要があります。</p><h4>主要模試の難易度と母集団</h4><ul><li><b>進研模試(ベネッセ)</b> — 受験者数が最も多く、偏差値は高めに出る</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。本サイトの到達目安もこれに準拠</li><li><b>駿台全国模試</b> — 難関大志望者中心の母集団で、偏差値は低めに出る</li></ul><p>同じ実力でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。数字を比べるときは必ず模試名を確認してください。</p><h4>分野別に見る</h4><p>社会の模試成績表には時代別・分野別の得点率が載っています。総合偏差値より、この内訳が重要です。「近現代が4割」なら通史の後半が終わっていないサイン、「文化史が3割」なら文化史を別枠で処理する時期、「資料問題だけ落ちる」なら読解演習が足りていません。</p><p>本サイトのルート画面では、模試の種類を選ぶと全統換算の偏差値に直したうえで、志望校の到達目安との差を表示します。既習の参考書を登録すると、現在地より下の段階は「スキップ可」として表示されます。</p></div>
+      <div class="g-body"><p>「社会の偏差値55」という情報だけでは、何をすべきかほとんど分かりません。<b>どの模試か</b>と、<b>どの時代・分野で落としているか</b>の2つを見る必要があります。</p><h4>主要模試の難易度と母集団</h4><ul><li><b>進研模試(ベネッセ)</b> — 受験者数が最も多く、偏差値は高めに出る</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。本サイトの到達目安もこれに準拠</li><li><b>駿台全国模試</b> — 難関大志望者中心の母集団で、偏差値は低めに出る</li></ul><p>同じ実力でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。数字を比べるときは必ず模試名を確認してください。</p><h4>分野別に見る</h4><p>社会の模試成績表には時代別・分野別の得点率が載っています。総合偏差値より、この内訳が重要です。「近現代が4割」なら通史の後半が終わっていないサイン、「文化史が3割」なら文化史を別枠で処理する時期、「資料問題だけ落ちる」なら読解演習が足りていません。</p><p>本サイトの到達目安は全統記述模試（河合塾）の帯で付けています。<b>模試のあいだに一律に足し引きできる対応関係はありません</b>ので、当サイトでは他の模試の偏差値を換算しません。全統記述以外を選んだ場合は、目標との差を数字で出さず、完了済みの参考書と自己評価を中心に現在地を判定します。既習の参考書を登録すると、現在地より下の段階は「スキップ可」として表示されます。</p></div>
     </article>
     <article class="g-card" id="g13">
       <button class="g-card__head" onclick="toggleGuide(13)" aria-expanded="false">
@@ -3093,7 +3103,7 @@ const GUIDES = [
  b:"<p>社会は、大学ごとの出題形式の差が非常に大きい科目です。東大の大論述、一橋の400字×3、京大の300字級、早稲田の教科書外の難語、慶應の史料と論述、MARCHの正誤判定、共通テストの資料読解。同じ科目名でも、要求される力がまったく違います。</p><h4>過去問の2つの役割</h4><p>ひとつは<b>仕上げの演習</b>、もうひとつは<b>設計図の入手</b>です。後者は早ければ早いほど価値があります。</p><ul><li>大問構成・時代/地域の配分が分かる(近現代中心か、前近代も出るか)</li><li>論述の字数と指定語句の有無から、必要な答案作成力の水準が分かる</li><li>史料・図版・統計の比重が分かる</li><li>正誤判定のレベル(教科書内か、教科書外か)が分かる</li></ul><h4>推奨するタイミング</h4><p>高3の春〜夏に<b>1年分だけ</b>時間を計って解いてみてください。目的は点を取ることではなく、ゴールの形を知ることです。そのうえで通史と標準演習が終わった段階(秋以降)から本格的に年度を重ねます。25カ年シリーズがある東大・一橋・京大志望者は、分野別・テーマ別に解けるので早めの着手も有効です。</p><div class=\"g-quote\">私大は学部ごとに形式が大きく異なります。志望学部の赤本を最低3年分、併願学部も1年分ずつは確認してください。</div>"},
 {t:"模試の偏差値をどう読むか",
  s:"社会の偏差値は、分野別の得点率を見ないと意味がありません",
- b:"<p>「社会の偏差値55」という情報だけでは、何をすべきかほとんど分かりません。<b>どの模試か</b>と、<b>どの時代・分野で落としているか</b>の2つを見る必要があります。</p><h4>主要模試の難易度と母集団</h4><ul><li><b>進研模試(ベネッセ)</b> — 受験者数が最も多く、偏差値は高めに出る</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。本サイトの到達目安もこれに準拠</li><li><b>駿台全国模試</b> — 難関大志望者中心の母集団で、偏差値は低めに出る</li></ul><p>同じ実力でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。数字を比べるときは必ず模試名を確認してください。</p><h4>分野別に見る</h4><p>社会の模試成績表には時代別・分野別の得点率が載っています。総合偏差値より、この内訳が重要です。「近現代が4割」なら通史の後半が終わっていないサイン、「文化史が3割」なら文化史を別枠で処理する時期、「資料問題だけ落ちる」なら読解演習が足りていません。</p><p>本サイトのルート画面では、模試の種類を選ぶと全統換算の偏差値に直したうえで、志望校の到達目安との差を表示します。既習の参考書を登録すると、現在地より下の段階は「スキップ可」として表示されます。</p>"},
+ b:"<p>「社会の偏差値55」という情報だけでは、何をすべきかほとんど分かりません。<b>どの模試か</b>と、<b>どの時代・分野で落としているか</b>の2つを見る必要があります。</p><h4>主要模試の難易度と母集団</h4><ul><li><b>進研模試(ベネッセ)</b> — 受験者数が最も多く、偏差値は高めに出る</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。本サイトの到達目安もこれに準拠</li><li><b>駿台全国模試</b> — 難関大志望者中心の母集団で、偏差値は低めに出る</li></ul><p>同じ実力でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。数字を比べるときは必ず模試名を確認してください。</p><h4>分野別に見る</h4><p>社会の模試成績表には時代別・分野別の得点率が載っています。総合偏差値より、この内訳が重要です。「近現代が4割」なら通史の後半が終わっていないサイン、「文化史が3割」なら文化史を別枠で処理する時期、「資料問題だけ落ちる」なら読解演習が足りていません。</p><p>本サイトの到達目安は全統記述模試（河合塾）の帯で付けています。<b>模試のあいだに一律に足し引きできる対応関係はありません</b>ので、当サイトでは他の模試の偏差値を換算しません。全統記述以外を選んだ場合は、目標との差を数字で出さず、完了済みの参考書と自己評価を中心に現在地を判定します。既習の参考書を登録すると、現在地より下の段階は「スキップ可」として表示されます。</p>"},
 {t:"新課程(2025年入試〜)で変わったこと",
  s:"買う前に、その参考書が「探究」対応版かを確認してください",
  b:"<p>2022年度入学生からの新課程により、2025年入試以降の社会は科目構成が変わりました。参考書を選ぶ際は、<b>新課程に対応した版かどうか</b>を必ず確認してください。</p><h4>主な変更点</h4><ul><li><b>科目名の変更</b> — 「日本史B」→「日本史探究」、「世界史B」→「世界史探究」、「地理B」→「地理探究」。共通テストは「歴史総合,日本史探究」「歴史総合,世界史探究」「地理総合,地理探究」という組み合わせで出題されます</li><li><b>「歴史総合」の追加</b> — 日本史・世界史を近現代で横断的に扱う必履修科目。共通テストの歴史科目には歴史総合分野が含まれるため、<b>日本史選択者も世界史の近現代を、世界史選択者も日本史の近現代を</b>ある程度おさえる必要があります</li><li><b>公民の再編</b> — 「現代社会」が廃止され「公共」が必履修に。共通テストは「公共,倫理」「公共,政治・経済」の組み合わせ。旧「倫理,政治・経済」はなくなりました</li><li><b>資料活用型の設問の増加</b> — 探究科目の趣旨を反映し、初見資料の読解・考察を求める設問が全科目で増えています</li></ul><h4>参考書の見分け方</h4><p>共通テスト対策書と教科書準拠教材は<b>2024年以降の改訂版(タイトルに「探究」が入っているもの)</b>を選んでください。一方、私大・二次向けの論述演習書や史料集は課程変更の影響が小さく、刊行年が古くても実用上の問題はほとんどありません。本サイトでは主要シリーズの新課程対応版を収録しています。</p>"}
@@ -4066,7 +4076,7 @@ const QUIZ = [
    推定で決めると必要科目数から違ってしまう */
 const S = {view:"home", tier:null, picks:["nihonshi","seikei"], course:"bun2",
            policy:"omni", level:0, mode:"tier", uni:null, fac:"",
-           moshi:0, hen:null, henAdj:null, done:new Set(), autoLevel:null,
+           moshi:"zento", hen:null, henAdj:null, done:new Set(), autoLevel:null,
            bunriConfirmed:null, bunriPicked:null};
 const bookById = id => BOOKS.find(b=>b.id===id);
 const maxPicks = ()=>{
@@ -4174,9 +4184,37 @@ function levelFromDone(){
   });
   return lv;
 }
+/**
+ * 模試の種類。**固定値での偏差値換算はしない。**
+ *
+ * かつては進研 -12・駿台全国判定 -3・駿台全国 +10・東進 +2/+8・校内 -6 を
+ * 一律に足し引きし、「目標まで +8.0」のような表示を出していた。だが模試間の差は
+ * 科目・母集団・回次で大きく変わり、一律の数値で置き換えられるものではない。
+ * 数字を足した時点で、根拠のない精度が生まれる。
+ *
+ * そこで、サイト内の到達目安（全統記述の帯で付けてある）と直接比べるのは
+ * 全統記述模試だけにし、それ以外は偏差値を目標との差の計算に使わない。
+ * 現在地は完了済み教材と自己評価から見る。
+ *
+ * 将来、実データにもとづく対応関係を登録できるようになったらここに足す。
+ * 偽の換算表を作らないこと。
+ */
+const MOSHI = {
+  zento:          {label:"全統記述模試(河合塾)",        comparable:true},
+  kyote_kawai:    {label:"全統共通テスト模試(河合塾)",  comparable:false},
+  shinken:        {label:"進研模試(ベネッセ)",          comparable:false},
+  sundai_hantei:  {label:"駿台全国判定模試",            comparable:false},
+  sundai_zenkoku: {label:"駿台全国模試(ハイレベル)",    comparable:false},
+  toshin_kyote:   {label:"東進 共通テスト本番レベル",   comparable:false},
+  toshin_nankan:  {label:"東進 難関大本番レベル",       comparable:false},
+  konai:          {label:"学校の実力テスト・校内模試",  comparable:false},
+};
+/** その模試の偏差値を、サイト内の到達目安と直接比べてよいか */
+function moshiComparable(){ return !!(MOSHI[S.moshi] && MOSHI[S.moshi].comparable); }
 function recalcStatus(){
   const raw = S.hen;
-  S.henAdj = (raw==null || isNaN(raw)) ? null : Math.round((raw + (+S.moshi))*10)/10;
+  /* 換算しない。入力された偏差値をそのまま持ち、比べてよいのは全統記述だけ */
+  S.henAdj = (raw==null || isNaN(raw)) ? null : Math.round(raw*10)/10;
   const a = levelFromHen(S.henAdj), b = levelFromDone();
   let lv = null;
   if(a!=null && b!=null) lv = Math.min(3, Math.round((a+b)/2 + 0.01));
@@ -4202,22 +4240,31 @@ function renderVerdict(){
   if(S.henAdj==null && S.done.size===0){ el.classList.remove("on"); el.innerHTML=""; return; }
   const tgt = targetHen();
   const LVN = ["ゼロ〜教科書","入試基礎まで完成","入試標準まで完成","応用まで完成"];
+  /* 目標との差を数字で出してよいのは、到達目安と同じ物差しの模試だけ。
+     ほかの模試の偏差値をそのまま引き算すると、実在しない精度の判定になる */
+  const cmp = moshiComparable();
   let gapHtml = "";
-  if(S.henAdj!=null && tgt){
+  if(S.henAdj!=null && tgt && cmp){
     const gap = Math.max(0, Math.round((tgt - S.henAdj)*10)/10);
     const pct = Math.max(4, Math.min(100, Math.round(S.henAdj / tgt * 100)));
     gapHtml = `<div class="v-item" style="flex:1;min-width:150px"><dt>目標までの差</dt>
       <dd>${gap>0?"+"+gap:"到達"}<small>${gap>0?" 必要":""}</small></dd>
       <div class="gap-bar"><i style="width:${pct}%"></i></div></div>`;
   }
+  const moshiNote = (S.henAdj!=null && !cmp)
+    ? `<p class="v-note">サイト内の到達目安は<b>全統記述模試（河合塾）</b>の帯で付けています。`
+      + `${(MOSHI[S.moshi]||{}).label||"この模試"}との間に、一律に足し引きできる対応関係はありません。`
+      + `模試間の単純換算はできないため、完了済み教材と自己評価を中心に判定します。</p>`
+    : "";
   el.classList.add("on");
   el.innerHTML = `
     <div class="v-row">
-      ${S.henAdj!=null?`<div class="v-item"><dt>全統換算 偏差値</dt><dd>${S.henAdj}</dd></div>`:""}
-      ${tgt?`<div class="v-item"><dt>目標の到達目安</dt><dd>${tgt}</dd></div>`:""}
+      ${S.henAdj!=null?`<div class="v-item"><dt>入力した偏差値</dt><dd>${S.henAdj}</dd><small class="v-src">${(MOSHI[S.moshi]||{}).label||""}</small></div>`:""}
+      ${tgt?`<div class="v-item"><dt>目標の到達目安</dt><dd>${tgt}</dd><small class="v-src">全統記述の帯</small></div>`:""}
       <div class="v-item"><dt>推定される現在地</dt><dd style="font-size:13px;font-family:var(--jp);padding-top:4px">${LVN[S.level]}</dd></div>
       ${gapHtml}
     </div>
+    ${moshiNote}
     <b>この情報をルートに反映しました。</b>${S.done.size?`登録した${S.done.size}冊は<b style="color:var(--ok)">習得済み</b>として表示し、`:""}現在地より下の段階は「スキップ可」として薄く表示しています。${S.henAdj!=null&&tgt&&S.henAdj>=tgt?"すでに目標水準に届いているので、過去問演習と弱点分野(文化史・戦後史・地誌など)の補強を主軸にしてください。":"各科目の「▶ ここから」と表示された1冊から着手してください。社会は通史を一周しないと演習の効果が出ないので、途中から始める場合も通史の抜けを先に確認しましょう。"}`;
 }
 
@@ -5074,7 +5121,7 @@ uniInput.addEventListener("keydown",e=>{
 });
 document.getElementById("facInput").addEventListener("input",e=>{ S.fac=e.target.value; if(S.uni) applyUni(); });
 /* 学習状況 */
-document.getElementById("moshiSel").addEventListener("change",e=>{ S.moshi=+e.target.value; recalcStatus(); });
+document.getElementById("moshiSel").addEventListener("change",e=>{ S.moshi=e.target.value; recalcStatus(); });
 document.getElementById("henInput").addEventListener("input",e=>{
   const v = parseFloat(e.target.value);
   S.hen = (e.target.value==="" || isNaN(v)) ? null : v;
