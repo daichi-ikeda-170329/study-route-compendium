@@ -16,7 +16,7 @@
 | S1 | 公開物と main の一致 | DONE | (このコミット) | `build/check-production.mjs` / `docs/deployment-runbook.md` / `test/production-check.test.mjs` | Pages Source は 2026-09-04 に切替済み。本番検査 19/19 通過。Description 更新のみ OWNER ACTION |
 | S2 | 科目データの読み書き口を 1 本化 | DONE | 016dfe73 / (このコミット) | `build/lib/load-subject-data.mjs` / `test/affiliate-disclosure.test.mjs` / `test/subject-loader.test.mjs` | 生成物は 1 バイトも不変。`check:shape` 通過 |
 | S3 | 科目移行 前半（joho/shoron/math） | DONE | 9d4f6a85 / 4ec7d262 / 8c46c52d / c1d732f3 | `build/migrate-subject.mjs` / `data/subjects/{joho,shoron,math}/` | joho 153,728→97,472 / shoron 225,578→98,211 / math 471,171→143,139 バイト |
-| S4 | 科目移行 後半（science/english/japanese/social） | 未着手 | | | |
+| S4 | 科目移行 後半（science/english/japanese/social） | DONE | 92d09408 / 3 件 / 7f596b06 / 70b07c22 | `data/subjects/*/` / `test/subject-loader.test.mjs` | 7 科目すべて移行。全科目 250KB 予算内（最大 166,782） |
 | S5 | 性能予算の達成 | 未着手 | | | |
 | S6 | 進捗管理 | 未着手 | | | |
 | S7 | 任意の追加質問 | 未着手 | | | |
@@ -40,12 +40,39 @@
 
 ## 次にやること（実行が切れたらここから再開する）
 
-- S4 に着手する。`node build/migrate-subject.mjs science` から始め、
-  english → japanese → social の順に 1 科目 1 コミットで移す。
-- 各科目で次を確かめる: `npm run check:shape` 通過 / 生成物の差分が `<科目>/index.html` だけ /
-  `npm test` fail 0 skipped 0 / `npx playwright test` 通過。
-- 7 科目すべて終わったら、`build/lib/load-subject-data.mjs` の `extractSubject()`
-  フォールバックと `build/lib/extract.mjs` の VM 回収を削除する（指示書 §25）。
+- S5 に着手する。**残っているのは `<style>` の外部化と予算の固定。**
+  Lighthouse の実測で節約見込みの最大は `unused-css-rules`（約 1.2〜1.65 秒）だった。
+  科目トップの `<style>` は 51〜58KB で 7 ページにほぼ同じものが重複している。
+  共通部分を `/assets/css/subject.css` へ出し、ファーストビューに要る分だけ残す。
+- `test/performance-budget.test.mjs` を作る（決定的な検査だけを必須ゲートにする）。
+- S0 と同じ測り方（`npm run audit:performance -- --runs=5 --path=/science/`）で再計測し、
+  改修前と並べて記録する。
+
+## S4 時点の実測（S5 の出発点）
+
+| 科目 | 改修前 | S4 後 | 減 |
+|---|---:|---:|---:|
+| science | 977,442 | 165,157 | −83.1% |
+| social | 874,633 | 166,782 | −80.9% |
+| english | 607,760 | 151,126 | −75.1% |
+| japanese | 586,352 | 151,994 | −74.1% |
+| math | 471,171 | 143,139 | −69.6% |
+| shoron | 225,578 | 98,211 | −56.5% |
+| joho | 153,728 | 97,472 | −36.6% |
+
+**全科目が 250,000 バイトの予算に入った。science は 200,000 バイトの予算にも入っている。**
+
+Lighthouse（localhost / mobile / 5 run 中央値 / 第三者あり）:
+
+| 指標 | S0（改修前） | S4 後 |
+|---|---:|---:|
+| Performance | 47 | 57 |
+| LCP | 12.09s | 9.01〜10.21s |
+| CLS | 0.217 | 0.215 |
+| Best Practices | 77 | 77 |
+
+LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像ではない。
+節約見込みの最大は `unused-css-rules`（約 1.2〜1.65 秒）。**次の一手は CSS。**
 
 ## OWNER ACTION（運営者しかできない。台帳で追跡する）
 
@@ -160,6 +187,25 @@
 
 4. **e2e の対象ページに国語・社会・小論文のトップが入っていなかった。**
    7 科目のうち 4 科目しか見ていなかったので `KEY_PAGES` に足した。
+
+### S4 で決めたこと
+
+1. **`extractSubject()` と `build/migrate-subject.mjs` を削除した（指示書 §25・§26 のとおり）。**
+   移行が終わった時点で、この 2 つは実行できない（データが HTML に無い）。
+   残すと「使えないのに残っているコード」になり、読む人を迷わせる。
+   変換の中身は commit `9d4f6a85`〜`7f596b06` に残っており、
+   `git show 9d4f6a85:build/migrate-subject.mjs` で取り出せる。
+
+2. **フォールバック削除を「本番確認後」まで待たなかった。**
+   指示書 §25 は待ってもよいとしているが、**フォールバックには救済の価値が無い。**
+   データはもう HTML に無いので、落ちても `BOOKS を取り出せなかった` で失敗するだけ。
+   一方で残すと、移行が壊れても黙って通る経路になる。害だけがあるので即削除した。
+
+3. **e2e に `waitForApp()` を入れた。**
+   データが同期スクリプトだった頃は `domcontentloaded` で DOM が確定していたが、
+   いまは fetch のあとに描画する。待たずに測ると描画途中を見てしまい、
+   並行実行の負荷が高いときに axe が落ちた（実際に 1 件）。
+   **テストを緩めたのではなく、測る時点を正した。** そのあと 3 回連続で 188 件 pass。
 
 ### 事実確認済みの前提（作業開始時に実測した）
 
