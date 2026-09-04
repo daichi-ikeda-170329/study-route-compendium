@@ -68,18 +68,11 @@
  },
  "byPriority": {
   "route": {
-   "label": "ルートに採用している教材",
+   "label": "ルートに採用している教材（3 分診断の結果に出るものを含む）",
    "total": 542,
    "unverified": 75,
    "partial": 277,
    "verified": 186
-  },
-  "quiz": {
-   "label": "3 分診断の結果に出る教材",
-   "total": 0,
-   "unverified": 0,
-   "partial": 0,
-   "verified": 0
   },
   "joho": {
    "label": "情報科（市販書が少なく、記載の確度が低い）",
