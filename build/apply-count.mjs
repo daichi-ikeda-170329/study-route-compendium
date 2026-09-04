@@ -214,6 +214,51 @@ function subjectTopRules(total, picks, unis) {
   return rules;
 }
 
+
+/**
+ * フッターの科目別冊数「◯◯ルート大全 / n BOOKS」を、科目 ID と表示値の組で検査する。
+ *
+ * sweep() は「実データに存在する数字か」しか見ないので、**別の科目の正しい冊数を
+ * 別の科目の欄に書いてしまった誤りを素通りさせる**。2026-09 に理科の欄だけが
+ * 375 のまま 5 ファイルに残っていたのがこれ（375 は当時どこかで有効だった値）。
+ * ここでは科目名と数字を組で拾い、その科目の実数と突き合わせる。
+ *
+ * 生成ページのフッターは build/lib/parts.mjs の footer() が唯一の生成元なので、
+ * ずれるのは手書きの 8 枚だけのはずだが、生成し忘れも同じ形で出るので全 HTML を見る。
+ */
+function applyFooterBooks(t, write) {
+  const byJa = new Map(SUBJECTS.map(s => [s.ja, t.subjects[s.dir]]));
+  const re = /(<b>([^<]*?)ルート大全<\/b><span>)([\d,]+)( BOOKS<\/span>)/g;
+  const missing = [];
+  let hits = 0, files = 0, seen = 0;
+
+  for (const file of sweepFiles()) {
+    if (!/\.html$/.test(file)) continue;
+    const src = fs.readFileSync(file, 'utf8');
+    let bad = 0;
+    const out = src.replace(re, (m, pre, ja, num, post) => {
+      seen++;
+      const want = byJa.get(ja);
+      if (want === undefined) {
+        missing.push(`${path.relative(ROOT, file)}: フッターに未知の科目「${ja}」がある`);
+        return m;
+      }
+      if (String(want) === num.replace(/,/g, '')) return m;
+      bad++; hits++;
+      return `${pre}${want}${post}`;
+    });
+    if (bad) {
+      files++;
+      console.log(`  ${path.relative(ROOT, file)}: フッターの科目別冊数を ${bad} 件そろえた`);
+      if (write) fs.writeFileSync(file, out, 'utf8');
+    }
+  }
+  // フッターは全公開 HTML にあるので、1 件も見つからなければ構造が変わっている
+  if (seen < SUBJECTS.length) missing.push(`フッターの科目別冊数が ${seen} 件しか見つからない（構造を変えたなら正規表現も直す）`);
+  if (hits) console.log(`フッターの科目別冊数を ${hits} 箇所そろえた（${files} ファイル）`);
+  return { hits, missing };
+}
+
 /** 科目トップの冊数を書き換える。{hits, missing} を返す */
 function applySubjectTops(t, write) {
   let hits = 0;
@@ -308,8 +353,9 @@ function main() {
   // 科目トップ側だけがずれていることがあるため。下の早期 return より前に置く）
   const tops = applySubjectTops(t, !CHECK);
   const anch = applyAnchors(t, !CHECK);
-  const missing = [...tops.missing, ...anch.missing];
-  const ctxHits = tops.hits + anch.hits;
+  const foot = applyFooterBooks(t, !CHECK);
+  const missing = [...tops.missing, ...anch.missing, ...foot.missing];
+  const ctxHits = tops.hits + anch.hits + foot.hits;
 
   const same = old.total === t.total && SUBJECTS.every(s => old.subjects[s.dir] === t.subjects[s.dir]);
   let hits = 0;

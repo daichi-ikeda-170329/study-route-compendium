@@ -1,0 +1,11 @@
+{
+  "note": "年度・件数の単位など、サイト全体で使う表記の正本。ここだけを直せば手書き HTML と生成物の両方が追従する（build/apply-site-meta.mjs / build/lib/site-meta.mjs）。書名や刊行年は本ごとの事実なので、ここでは扱わない。",
+  "schemaVersion": 1,
+  "admissionYear": 2027,
+  "admissionStatus": "rolling",
+  "admissionLabel": "2027年度入試に向けて順次確認・更新中",
+  "admissionLabelShort": "2027年度に向けて更新中",
+  "curriculumLabel": "新課程",
+  "countUnitLabel": "冊",
+  "noteOnStatus": "admissionStatus は rolling（順次確認・更新中）だけを使う。全件を確認し終えた事実が無い状態で verified へ上げない。「完全対応」と書かないのはそのため。"
+}
