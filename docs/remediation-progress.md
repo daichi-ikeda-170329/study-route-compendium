@@ -21,7 +21,7 @@
 | S6 | 進捗管理 | DONE | a28dc50a | `assets/js/progress.js` / `/progress/` / `test/progress.test.mjs` / `e2e/progress.spec.mjs` | 残り時間の下限・上限に同じ係数。既存キー無傷。ネットワーク流出 0 |
 | S7 | 任意の追加質問 | DONE | 23cf9908 | `assets/js/refine.js` / `e2e/refine.spec.mjs` | スキップ時の結果と共有 URL が完全一致することを HTML 突き合わせで固定 |
 | S8 | 詳細検索 | DONE | cc7e8c0a | `assets/generated/search-facets.json` / `/search/` / `test/search-facets.test.mjs` | v1 索引は 235,925 バイトのまま。欠損を「該当なし」に落とさない |
-| S9 | 書影の出所台帳 | 未着手 | | | |
+| S9 | 書影の出所台帳 | DONE（判断待ち 1 件） | 2eb15283 | `docs/cover-policy.md` / `build/data/cover-*.json` / `test/covers.test.mjs` | resolver を 1 本化（候補は減らさない）。利用条件の確認は OWNER ACTION |
 | S10 | QA・Best Practices・KPI | 未着手 | | | |
 | S11 | 最終検証と報告 | 未着手 | | | |
 
@@ -33,22 +33,24 @@
 | 2 | 進捗管理の拡張 | S6 | DONE |
 | 3 | 任意の追加質問 | S7 | DONE |
 | 4 | 検索の絞り込み拡張 | S8 | DONE |
-| 5 | 書影の出所台帳 | S9 | 未着手 |
+| 5 | 書影の出所台帳 | S9 | DONE（利用条件の確認だけ OWNER ACTION） |
 | 6 | 手動 QA | S10 | 未着手 |
 | 7 | Best Practices 77 の原因分離 | S10 | 未着手 |
 | 8 | KPI 基準値 | S10 | 未着手 |
 
 ## 次にやること（実行が切れたらここから再開する）
 
-- S9 に着手する。書影の出所台帳。
-  `build/data/cover-provider-policies.json` / `build/data/cover-ledger.json` /
-  `build/generate-cover-ledger.mjs` / `build/check-covers.mjs` / `docs/cover-policy.md`。
-- **利用条件を確認できない provider は `enabled: false`。** terms や権利根拠を推測で書かない。
-  規約確認を自動化したと偽らない。
-- offline 検査（policy / ledger の整合）は必須ゲート。live 検査（実際の HTTP）は
-  scheduled / 手動に分ける。外部障害で CI を不安定にしない。
-- 書影の候補生成は `build/lib/cover.mjs` と各科目の `assets/js/subject-<科目>.js` に
-  二重実装がある。共通 resolver を 1 本にする。
+- S10 に着手する。3 つある。
+  1. **Firefox / WebKit の自動 QA。** 現行の Chromium 4 幅は維持し、
+     `e2e/cross-browser.spec.mjs` と `test:cross-browser` を足す。
+     **Playwright の WebKit を「Safari 実機」と書かない。** 実機確認は BLOCKED_EXTERNAL。
+  2. **Best Practices 77 の原因分離。** 既に落ちている audit は
+     `third-party-cookies` と `inspector-issues` の 2 件と分かっている
+     （`docs/baseline-2026-09-05.md` §7）。自サイト由来の修正可能な項目を先に潰し、
+     残差が第三者だけなら `docs/performance-report.md` へ分けて書く。
+  3. **KPI の取込機構。** `build/import-kpi.mjs` / `build/data/kpi-schema.json` /
+     `docs/kpi-import-guide.md` / `docs/kpi-baseline.example.json` /
+     `.gitignore` へ `private/kpi-input/`。**実数の投入は BLOCKED_EXTERNAL。**
 
 ## S4 時点の実測（S5 の出発点）
 
@@ -276,6 +278,29 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
    起動前に届いた画像イベントを `RT_SUBJECT_FLUSH` があとから流すと、
    そのときには図鑑が描き直されていて `closest` が null を返す。
    null を確かめる形にし、画像の読み込み結果は溜めない（`NO_QUEUE`）ようにした。
+
+### S9 で決めたこと
+
+1. **`enabled` と `termsReviewed` を分けた（指示書 §44 からの逸脱）。**
+   §44 のとおり「確認できない provider は `enabled:false`」にすると、
+   **いま出ている 1,390 冊ぶんの書影が全部消える。** 公開中の見た目を大きく変える操作で、
+   運営者の判断が要る（§2「既存の表示を予告なく壊さない」）。
+   逆に `enabled:true` のまま「確認済み」と書けば偽りになる。
+   そこで「いま参照しているか（`enabled`）」と「人が規約を読んだか（`termsReviewed`）」を
+   別のフィールドにし、全部 `enabled:true` / `termsReviewed:false` ＝**事実そのまま**にした。
+   止めるかどうかは運営者が決める。判断の材料は `docs/cover-policy.md` §6。
+
+2. **resolver は「いちばん候補の多い科目」に合わせた。**
+   統一前は 5 通りに分かれていた（社会 10 / 国語 6 / 英語・理科 5 /
+   数学・情報・小論文 3 / 生成側 5）。少ないほうに合わせると、いま表紙が出ている本が
+   出なくなる。多いほうにそろえたので、増えることはあっても減らない。
+
+3. **取得元が想定より多かった。** 指示書 §44 は Amazon / NDL / openBD / 明示 URL の
+   4 つを挙げていたが、実際には **Google Books と学参ドットコム**も使われていた。
+   個別指定（`BOOKS[].cover`）は 16 ホスト。全部 policy と `docs/cover-policy.md` に書いた。
+
+4. **死んだデータを 1 件消した。** `subject-math.js` の `COVERS`（2,340 バイト）は、
+   移行時に「BOOKS へ流し込む文」を canonical データへ取り込んだ時点で参照されなくなっていた。
 
 ### 事実確認済みの前提（作業開始時に実測した）
 
