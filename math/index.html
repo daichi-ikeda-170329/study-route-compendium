@@ -2800,7 +2800,10 @@ const QUIZ = [
      {v:"sokei",b:"早慶",s:"早稲田・慶應(理工含む)",ic:"M6 20V8l6-4 6 4v12M10 20v-6h4v6"},
      {v:"kyutei",b:"地方旧帝",s:"北大・東北・名大・九大など",ic:"M6 20V8l6-4 6 4v12M10 20v-6h4v6"},
      {v:"top",b:"東大・京大・一橋・科学大",s:"最難関国立",ic:"m12 2 2.9 6.3 6.9.6-5.2 4.6 1.5 6.8L12 16.7l-6.1 3.6 1.5-6.8L2.2 8.9l6.9-.6L12 2Z"},
-     {v:"med",b:"国公立医学部",s:"地方医〜旧帝医",ic:"M12 4v16M4 12h16"}
+     {v:"med",b:"国公立医学部",s:"地方医〜旧帝医",ic:"M12 4v16M4 12h16"},
+     /* 末尾に足す。共有 URL は選択肢の並び順（1 始まりの番号）で回答を持つので、
+        既存の選択肢の前や間に挿すと、過去に共有された URL が別の回答として復元される */
+     {v:"shiritsui",b:"私立医学部",s:"慈恵・日医・順天堂ほか",ic:"M12 4v16M4 12h16"}
    ]},
   {q:"Q4 — 現在地",title:"今の学力は?",sub:"「完璧に解ける」レベルで正直に選ぶのがコツ",key:"level",
    opts:[
@@ -3481,7 +3484,8 @@ function renderQuizResult(){
   let tier = a.tier==="top" && a.tier2 ? a.tier2 : (a.tier==="top" ? "top" : a.tier);
   if(a.tier!=="top") tier = a.tier;
   let bunri = a.bunri;
-  if(tier==="med") bunri="ri";
+  /* 医学部（国公立・私立とも）は数III・C が要る。文理の回答に関わらず理系ルートを出す */
+  if(tier==="med" || tier==="shiritsui") bunri="ri";
   const policy = a.time==="long" ? "omni" : a.time==="short" ? "quick" : (["kyote","nikkoma"].includes(tier) ? "quick" : (+a.level>=1 ? "omni" : "quick"));
   const level = +a.level;
   const t = TIERS.find(x=>x.id===tier);
