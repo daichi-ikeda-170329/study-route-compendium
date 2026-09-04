@@ -111,7 +111,9 @@ gtag('config', 'G-DQ5WFXEFMX');
   <summary>難易度 10 段階の意味と、役割との違い</summary>
   <div class="scale__in">
     <p>難易度はサイト全体で共通の <b>1〜10 の 10 段階</b>です。到達目安の偏差値は<b>河合塾全統記述模試の換算値</b>で、進研模試・駿台全国模試の偏差値をそのまま当てると 10 前後ずれます。</p>
-    <div class="scale__tw">
+    <!-- 横に流す領域はキーボードでもスクロールできるようにする（tabindex="0"）。
+         読み上げでは何の表かが分かるよう役割と名前を付ける -->
+    <div class="scale__tw" tabindex="0" role="region" aria-label="難易度と到達目安の対応表（横スクロールできます）">
     <table class="scale__t">
       <thead><tr><th>難易度</th><th>帯</th><th>到達目安</th><th>目安となる志望校・到達点</th></tr></thead>
       <tbody>
@@ -169,7 +171,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       <h2 class="sec">想定学習時間</h2>
       <p>1 冊を最後まで終えるのに必要な総時間の目安です。<b>出版社が公開している数字ではありません。</b>問題数・ページ数・構成と、役割ごとの標準的な処理速度を掛け合わせた編集部の推定値です。</p>
       <p>役割ごとに、次のような処理速度を目安にしています。</p>
-      <div class="tbl-scroll"><div class="tbl-wrap">
+      <div class="tbl-scroll"><div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
         <table class="cmp">
           <thead><tr><th>役割</th><th>数える単位</th><th>1 単位あたりの目安</th></tr></thead>
           <tbody>
@@ -183,7 +185,7 @@ gtag('config', 'G-DQ5WFXEFMX');
       </div></div>
       <p>実際には、解けない問題に詰まる時間・解き直しの回数で大きく変わります。表示している幅（「40〜55h」など）は、この振れ幅を含めたつもりの範囲です。ルート画面では、この時間を積み上げて「1 日に何時間使えるか」から逆算した日程を出しています。</p>
       <p>本の使い方によって、時間の書き方を 4 つに分けています。</p>
-      <div class="tbl-scroll"><div class="tbl-wrap">
+      <div class="tbl-scroll"><div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
         <table class="cmp">
           <thead><tr><th>書き方</th><th>例</th><th>使う本</th></tr></thead>
           <tbody>

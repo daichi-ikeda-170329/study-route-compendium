@@ -110,7 +110,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:21px;letter-spacing:.0
    下に敷いた代替表示（書名と出版社）がそのまま見える。 */
 .rt-cov{position:relative;display:block;flex:none;width:var(--cw,54px);aspect-ratio:5/7;border-radius:3px;overflow:hidden;background:var(--surface-3);box-shadow:var(--sh-s)}
 .rt-cov img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;background:var(--surface-3)}
-.rt-cov__ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:6px 5px;color:#fff;background:var(--cc,var(--sc))}
+.rt-cov__ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:6px 5px;color:#fff;/* 科目色が明るいと白文字のコントラストが落ちる。色の上に暗いレイヤーを必ず重ねて、どの科目でも 4.5:1 を割らないようにする */background-image:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,.52));background-color:var(--cc,var(--sc))}
 .rt-cov__ph b{font-family:var(--serif);font-size:8.5px;font-weight:800;line-height:1.32;letter-spacing:.02em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical}
 .rt-cov__ph em{font-family:var(--mono);font-size:6.5px;font-style:normal;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
@@ -343,3 +343,51 @@ table.scale__t tbody tr.on th,table.scale__t tbody tr.on td{color:var(--accent-d
 /* カード上の確認状態。詳細は書籍ページの「この情報の確かめ方」に出る */
 .bcard__ver{display:inline-block;margin-top:6px;padding:1px 7px;border:1px solid var(--line-d);border-radius:999px;
   font-size:10.5px;font-weight:700;color:var(--muted-2);background:var(--bg);letter-spacing:.02em}
+
+/* ============================================================
+   アクセシビリティの下敷き
+
+   - フォーカスは CSS で消さない。:focus-visible を必ず見えるようにする。
+   - タップ対象は 44x44 CSS px 以上（WCAG 2.2 の Target Size (Minimum)）。
+   - 320px 幅で横スクロールを起こさない。広い中身は自分の枠の中だけで
+     横に流す。ページ全体が横に動くと、ズームした人が本文を追えなくなる。
+   - 動きを減らす設定では不要なアニメーションを止める。
+   ============================================================ */
+
+/* box-shadow のリングだけに頼らず、キーボード操作では必ず輪郭を出す */
+input:focus-visible, select:focus-visible, textarea:focus-visible,
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible,
+[role="button"]:focus-visible, [role="option"]:focus-visible {
+  outline: 2.5px solid var(--indigo, #24427C);
+  outline-offset: 2px;
+}
+
+/* 押せるものは 44px 以上。アイコンだけのボタンが小さくなりやすい */
+.tabbar button, .tabbar a,
+.nav-desktop button, .nav-desktop a,
+.seg-ctrl button,
+.sug [role="option"],
+.opt-list .opt {
+  min-height: 44px;
+}
+.sug [role="option"] { display: flex; align-items: center; gap: 8px; }
+
+/* 320px でページ全体が横に動かないようにする。
+   **overflow-x:hidden で隠さない。** 隠すと原因が残ったまま検査も素通りする。
+   はみ出しやすいのは長い書名・URL・等幅の数字なので、折り返しを許す */
+body { overflow-wrap: anywhere; }
+.mono, code { overflow-wrap: anywhere; }
+img, svg, video, iframe { max-width: 100%; }
+
+/* 表は枠の中だけで横に流す。ページごと動かさない */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll > table { min-width: max-content; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

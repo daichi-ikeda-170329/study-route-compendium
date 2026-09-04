@@ -587,6 +587,54 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cat-index__t small{display:block;font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.6;font-weight:600}
 .cat-index svg{width:16px;height:16px;flex:none;margin-left:auto;color:var(--accent);transition:transform .16s}
 .cat-index:hover svg{transform:translateX(3px)}
+
+/* ============================================================
+   アクセシビリティの下敷き
+
+   - フォーカスは CSS で消さない。:focus-visible を必ず見えるようにする。
+   - タップ対象は 44x44 CSS px 以上（WCAG 2.2 の Target Size (Minimum)）。
+   - 320px 幅で横スクロールを起こさない。広い中身は自分の枠の中だけで
+     横に流す。ページ全体が横に動くと、ズームした人が本文を追えなくなる。
+   - 動きを減らす設定では不要なアニメーションを止める。
+   ============================================================ */
+
+/* box-shadow のリングだけに頼らず、キーボード操作では必ず輪郭を出す */
+input:focus-visible, select:focus-visible, textarea:focus-visible,
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible,
+[role="button"]:focus-visible, [role="option"]:focus-visible {
+  outline: 2.5px solid var(--indigo, #24427C);
+  outline-offset: 2px;
+}
+
+/* 押せるものは 44px 以上。アイコンだけのボタンが小さくなりやすい */
+.tabbar button, .tabbar a,
+.nav-desktop button, .nav-desktop a,
+.seg-ctrl button,
+.sug [role="option"],
+.opt-list .opt {
+  min-height: 44px;
+}
+.sug [role="option"] { display: flex; align-items: center; gap: 8px; }
+
+/* 320px でページ全体が横に動かないようにする。
+   **overflow-x:hidden で隠さない。** 隠すと原因が残ったまま検査も素通りする。
+   はみ出しやすいのは長い書名・URL・等幅の数字なので、折り返しを許す */
+body { overflow-wrap: anywhere; }
+.mono, code { overflow-wrap: anywhere; }
+img, svg, video, iframe { max-width: 100%; }
+
+/* 表は枠の中だけで横に流す。ページごと動かさない */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll > table { min-width: max-content; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 
 <!-- Google AdSense -->

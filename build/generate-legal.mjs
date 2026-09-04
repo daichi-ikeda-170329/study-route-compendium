@@ -52,7 +52,7 @@ function renderBlock(bl) {
   if (bl.ul) return `      <ul>\n${bl.ul.map(li => `        <li>${inline(li)}</li>`).join('\n')}\n      </ul>`;
   if (bl.scale) return `      ${degreeTable({ open: true })}`;
   if (bl.table) {
-    return `      <div class="tbl-scroll"><div class="tbl-wrap">
+    return `      <div class="tbl-scroll"><div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
         <table class="cmp">
           <thead><tr>${bl.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead>
           <tbody>

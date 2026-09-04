@@ -7,9 +7,13 @@
   "scripts": {
     "ogp": "node build/gen-ogp.mjs",
     "ogp:check": "node build/gen-ogp.mjs --check",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "serve": "node build/serve.mjs",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.55.0",
     "@resvg/resvg-js": "2.6.2",
     "sharp": "0.35.4"
   }

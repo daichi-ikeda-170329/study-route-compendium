@@ -68,7 +68,7 @@ function renderBlock(bl, dir) {
     })[c] ?? '—';
     return `      <div class="tbl-scroll">
         <div class="tbl-scroll__hint">横にスクロールできます</div>
-        <div class="tbl-wrap">
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
         <table class="cmp">
           <thead><tr><th>参考書</th>${cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead>
           <tbody>

@@ -620,6 +620,54 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .cat-index__t small{display:block;font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.6;font-weight:600}
 .cat-index svg{width:16px;height:16px;flex:none;margin-left:auto;color:var(--accent);transition:transform .16s}
 .cat-index:hover svg{transform:translateX(3px)}
+
+/* ============================================================
+   アクセシビリティの下敷き
+
+   - フォーカスは CSS で消さない。:focus-visible を必ず見えるようにする。
+   - タップ対象は 44x44 CSS px 以上（WCAG 2.2 の Target Size (Minimum)）。
+   - 320px 幅で横スクロールを起こさない。広い中身は自分の枠の中だけで
+     横に流す。ページ全体が横に動くと、ズームした人が本文を追えなくなる。
+   - 動きを減らす設定では不要なアニメーションを止める。
+   ============================================================ */
+
+/* box-shadow のリングだけに頼らず、キーボード操作では必ず輪郭を出す */
+input:focus-visible, select:focus-visible, textarea:focus-visible,
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible,
+[role="button"]:focus-visible, [role="option"]:focus-visible {
+  outline: 2.5px solid var(--indigo, #24427C);
+  outline-offset: 2px;
+}
+
+/* 押せるものは 44px 以上。アイコンだけのボタンが小さくなりやすい */
+.tabbar button, .tabbar a,
+.nav-desktop button, .nav-desktop a,
+.seg-ctrl button,
+.sug [role="option"],
+.opt-list .opt {
+  min-height: 44px;
+}
+.sug [role="option"] { display: flex; align-items: center; gap: 8px; }
+
+/* 320px でページ全体が横に動かないようにする。
+   **overflow-x:hidden で隠さない。** 隠すと原因が残ったまま検査も素通りする。
+   はみ出しやすいのは長い書名・URL・等幅の数字なので、折り返しを許す */
+body { overflow-wrap: anywhere; }
+.mono, code { overflow-wrap: anywhere; }
+img, svg, video, iframe { max-width: 100%; }
+
+/* 表は枠の中だけで横に流す。ページごと動かさない */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll > table { min-width: max-content; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
@@ -994,7 +1042,7 @@ gtag('config', 'G-DQ5WFXEFMX');
 
   <!-- ============ QUIZ ============ -->
   <section class="view" id="view-quiz">
-    <div class="quiz-shell" id="quizShell"></div>
+    <div class="quiz-shell" id="quizShell" role="region" aria-label="3 分診断" aria-live="polite" tabindex="-1"></div>
   </section>
 
   <!-- ============ ROUTE ============ -->
@@ -1029,8 +1077,8 @@ gtag('config', 'G-DQ5WFXEFMX');
           <div class="uni-field">
             <label for="uniInput">志望大学</label>
             <div class="uni-wrap">
-              <input id="uniInput" type="text" placeholder="大学名を入力(例:東京大学、阪大、waseda、ひろだい)" autocomplete="off" spellcheck="false">
-              <div class="sug" id="uniSug"></div>
+              <input id="uniInput" type="text" placeholder="大学名を入力(例:東京大学、阪大、waseda、ひろだい)" autocomplete="off" spellcheck="false" role="combobox" aria-controls="uniSug" aria-expanded="false" aria-autocomplete="list" aria-haspopup="listbox">
+              <div class="sug" id="uniSug" role="listbox" aria-label="大学の候補"></div>
             </div>
           </div>
           <div class="uni-field">
@@ -1055,24 +1103,24 @@ gtag('config', 'G-DQ5WFXEFMX');
           <div class="opt-field">
             <label>受験タイプ</label>
             <div class="seg-ctrl" id="segBunri">
-              <button data-v="bun" class="on">国公立二次型(記述)</button>
-              <button data-v="ri">私立個別型(マーク)</button>
+              <button data-v="bun" class="on" aria-pressed="true">国公立二次型(記述)</button>
+              <button data-v="ri" aria-pressed="false">私立個別型(マーク)</button>
             </div>
           </div>
           <div class="opt-field">
             <label>学習方針</label>
             <div class="seg-ctrl" id="segPolicy">
-              <button data-v="omni" class="on">王道網羅型</button>
-              <button data-v="quick">時短・精選型</button>
+              <button data-v="omni" class="on" aria-pressed="true">王道網羅型</button>
+              <button data-v="quick" aria-pressed="false">時短・精選型</button>
             </div>
           </div>
           <div class="opt-field">
             <label>今の学力(ここまで習得済み)</label>
             <div class="seg-ctrl compact" id="segLevel">
-              <button data-v="0" class="on">ゼロ〜高校基礎</button>
-              <button data-v="1">入試基礎</button>
-              <button data-v="2">入試標準</button>
-              <button data-v="3">応用まで</button>
+              <button data-v="0" class="on" aria-pressed="true">ゼロ〜高校基礎</button>
+              <button data-v="1" aria-pressed="false">入試基礎</button>
+              <button data-v="2" aria-pressed="false">入試標準</button>
+              <button data-v="3" aria-pressed="false">応用まで</button>
             </div>
           </div>
         </div>
@@ -1105,16 +1153,16 @@ gtag('config', 'G-DQ5WFXEFMX');
           <div class="opt-field">
             <label>これまでにやった参考書<em style="font-style:normal;font-weight:600;color:var(--muted-2);font-size:10.5px;margin-left:5px">複数可</em></label>
             <div class="done-picker">
-              <input id="doneInput" type="text" placeholder="書名で検索して追加(例:ターゲット、ネクステ)" aria-label="すでに終えた参考書を書名で検索して追加" autocomplete="off" spellcheck="false">
-              <div class="sug" id="doneSug"></div>
+              <input id="doneInput" type="text" placeholder="書名で検索して追加(例:ターゲット、ネクステ)" aria-label="すでに終えた参考書を書名で検索して追加" autocomplete="off" spellcheck="false" role="combobox" aria-controls="doneSug" aria-expanded="false" aria-autocomplete="list" aria-haspopup="listbox">
+              <div class="sug" id="doneSug" role="listbox" aria-label="参考書の候補"></div>
             </div>
             <div class="done-chips" id="doneChips"></div>
           </div>
         </div>
-        <div class="verdict" id="statusVerdict"></div>
+        <div class="verdict" id="statusVerdict" role="status" aria-live="polite"></div>
       </div>
 
-      <div id="routeOutput"></div>
+      <div id="routeOutput" role="region" aria-label="参考書ルート" aria-live="polite" aria-busy="false" tabindex="-1"></div>
       <div id="routeShare"></div>
     </div>
   </section>
@@ -3549,7 +3597,12 @@ const VIEWS = ["home","catalog","route","quiz","guide"];
 function go(view){
   S.view = view;
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v.id==="view-"+view));
-  document.querySelectorAll("#navDesktop button, #tabbar button").forEach(b=>b.classList.toggle("active", b.dataset.view===view));
+  document.querySelectorAll("#navDesktop button, #tabbar button").forEach(b=>{
+    const on = b.dataset.view===view;
+    b.classList.toggle("active", on);
+    /* 見た目の色だけでなく、支援技術にも「いまここ」を伝える */
+    if(on) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
+  });
   window.scrollTo({top:0});
   if(view==="quiz" && !quizState.started) startQuiz();
   syncHash(view);
@@ -3846,23 +3899,54 @@ function setMode(m){
 
 /* ---------- university suggest ---------- */
 let sugIdx = -1, sugList = [];
+/* ------------------------------------------------------------
+   候補リストのアクセシビリティ（WAI-ARIA の combobox パターン）
+
+   これまでは上下キーとクリックだけが動き、支援技術には「候補が開いた」ことも
+   「いまどれを選んでいるか」も伝わっていなかった。全体検索（assets/js/search.js）
+   と同じ操作・同じ属性にそろえる。
+   ------------------------------------------------------------ */
+function sugSync(inputId, boxId, idx){
+  const inp = document.getElementById(inputId), box = document.getElementById(boxId);
+  if(!inp || !box) return;
+  const open = box.classList.contains("open");
+  inp.setAttribute("aria-expanded", open ? "true" : "false");
+  const opts = [...box.querySelectorAll('[role="option"]')];
+  opts.forEach((b,i)=>{
+    b.id = boxId + "Opt" + i;
+    b.setAttribute("aria-selected", i===idx ? "true" : "false");
+    b.classList.toggle("cur", i===idx);
+  });
+  if(open && idx>=0 && opts[idx]) inp.setAttribute("aria-activedescendant", opts[idx].id);
+  else inp.removeAttribute("aria-activedescendant");
+}
+
+/** 候補リストを閉じ、支援技術にもそれを伝える */
+function sugClose(inputId, boxId){
+  const box = document.getElementById(boxId);
+  if(box) box.classList.remove("open");
+  sugSync(inputId, boxId, -1);
+}
+
 function renderUniSug(q){
   const box = document.getElementById("uniSug");
   sugList = searchUnis(q); sugIdx = -1;
-  if(!q.trim()){ box.classList.remove("open"); box.innerHTML=""; return; }
+  if(!q.trim()){ box.classList.remove("open"); box.innerHTML=""; sugSync("uniInput","uniSug",-1); return; }
   if(!sugList.length){
     box.classList.add("open");
     box.innerHTML = `<div class="sug-empty">該当する大学が見つかりません。<br>近い難易度の大学名を入れるか、「志望レベルから選ぶ」をご利用ください。</div>`;
+    sugSync("uniInput","uniSug",-1);
     return;
   }
   box.classList.add("open");
-  box.innerHTML = sugList.map((u,i)=>`<button onclick="pickUni(${i})"><b>${u.n}</b><span class="sug-ty">${u.ty}</span><span class="sug-h">目安 ${u.h}</span></button>`).join("");
+  box.innerHTML = sugList.map((u,i)=>`<button type="button" role="option" aria-selected="false" onclick="pickUni(${i})"><b>${u.n}</b><span class="sug-ty">${u.ty}</span><span class="sug-h">目安 ${u.h}</span></button>`).join("");
+  sugSync("uniInput","uniSug",sugIdx);
 }
 function pickUni(i){
   const u = sugList[i]; if(!u) return;
   S.uni = u;
   document.getElementById("uniInput").value = u.n;
-  document.getElementById("uniSug").classList.remove("open");
+  sugClose("uniInput","uniSug");
   applyUni();
 }
 function applyUni(){
@@ -3911,22 +3995,24 @@ function applyUni(){
 }
 
 /* ---------- completed books picker ---------- */
-let doneSugList = [];
+let doneSugList = [], doneSugIdx = -1;
 function renderDoneSug(q){
   const box = document.getElementById("doneSug");
   const n = normQ(q);
-  if(!n){ box.classList.remove("open"); box.innerHTML=""; return; }
+  if(!n){ box.classList.remove("open"); box.innerHTML=""; sugSync("doneInput","doneSug",-1); return; }
   doneSugList = BOOKS.filter(b=>!S.done.has(b.id) && normQ(b.name+b.official+b.pub).includes(n)).slice(0,8);
   box.classList.add("open");
   box.innerHTML = doneSugList.length
-    ? doneSugList.map((b,i)=>`<button onclick="addDone(${i})"><b>${b.name}</b><span class="sug-ty">${STAGES[b.stage].short}</span><span class="sug-h">${b.pub}</span></button>`).join("")
+    ? doneSugList.map((b,i)=>`<button type="button" role="option" aria-selected="false" onclick="addDone(${i})"><b>${b.name}</b><span class="sug-ty">${STAGES[b.stage].short}</span><span class="sug-h">${b.pub}</span></button>`).join("")
     : `<div class="sug-empty">該当する参考書が見つかりません</div>`;
+  doneSugIdx = -1;
+  sugSync("doneInput","doneSug",doneSugIdx);
 }
 function addDone(i){
   const b = doneSugList[i]; if(!b) return;
   S.done.add(b.id);
   const inp = document.getElementById("doneInput");
-  inp.value = ""; document.getElementById("doneSug").classList.remove("open");
+  inp.value = ""; sugClose("doneInput","doneSug");
   renderDoneChips(); recalcStatus(); inp.focus();
 }
 function removeDone(id){ S.done.delete(id); renderDoneChips(); recalcStatus(); }
@@ -3936,10 +4022,23 @@ function renderDoneChips(){
     return `<span class="done-chip">${b.name}<button onclick="removeDone('${id}')" aria-label="削除"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></span>`;
   }).join("");
 }
+/** 二択・多択の切り替えボタンの選択状態を aria-pressed に反映する。
+    見た目のクラス（.on）だけでは支援技術に伝わらないため、描画のたびにそろえる */
+function segAria(){
+  document.querySelectorAll(".seg-ctrl button").forEach(b=>{
+    b.setAttribute("aria-pressed", b.classList.contains("on") ? "true" : "false");
+  });
+}
+
 function wireSeg(id, key, cb){
   document.getElementById(id).addEventListener("click",e=>{
     const b = e.target.closest("button"); if(!b) return;
-    document.querySelectorAll(`#${id} button`).forEach(x=>x.classList.toggle("on",x===b));
+    document.querySelectorAll(`#${id} button`).forEach(x=>{
+      const on = x===b;
+      x.classList.toggle("on",on);
+      /* 選択状態は色だけでなく aria-pressed でも伝える */
+      x.setAttribute("aria-pressed", on ? "true" : "false");
+    });
     S[key] = key==="level" ? +b.dataset.v : b.dataset.v;
     /* 画面上の切り替えを本人が動かしたら、確定した回答として扱う */
     if(key==="bunri"){ S.bunriConfirmed = b.dataset.v; S.bunriPicked = b.dataset.v; }
@@ -4001,6 +4100,8 @@ function paraNodeHTML(p, stepLabel){
  * 志望レベルを選ぶ前や講師未選択の案内だけのときは、共有するものが無い。
  */
 function renderRoute(){
+  /* 状態が変わる経路はすべてここを通る。途中で return する枝より前で同期する */
+  segAria();
   renderRouteBody();
   RTPace.apply();
   const box = document.getElementById("routeShare");
@@ -4165,6 +4266,22 @@ function renderQuiz(){
 }
 function pickOpt(key,v){ quizState.ans[key]=v; renderQuiz(); }
 function nextQuiz(){ quizState.step++; renderQuiz(); }
+/**
+ * 結果を出したあと、見出しへプログラム的にフォーカスを移す。
+ *
+ * キーボードや読み上げで使っている人は、押したボタンの位置に取り残されると
+ * 結果がどこに出たのか分からない。**ページを開いた直後には動かさない**
+ * （読み始めの位置を勝手に奪うため）。呼ぶのは操作の結果としてだけ。
+ */
+function focusResult(sel){
+  try{
+    const el = document.querySelector(sel);
+    if(!el) return;
+    if(!el.hasAttribute("tabindex")) el.setAttribute("tabindex","-1");
+    el.focus({preventScroll:false});
+  }catch(e){ /* フォーカスできなくても内容は読める */ }
+}
+
 function renderQuizResult(){
   const a = quizState.ans;
   let tier = a.tier==="top" && a.tier2 ? a.tier2 : (a.tier==="top" ? "top" : a.tier);
@@ -4211,6 +4328,7 @@ function renderQuizResult(){
       </div>
       ${RTShare.afterResult({tier:t.name, variant:bunri==="bun"?"国公立二次型":"私立個別型", policy:polLabel})}
     </div>`;
+  focusResult("#quizShell .result-hero");
 }
 function applyQuiz(tier,bunri,policy,level){
   S.tier=tier; S.bunri=bunri; S.policy=policy; S.level=level; S.mode="tier"; S.uni=null; S.sensei=null; syncMode();
@@ -4300,11 +4418,15 @@ uniInput.addEventListener("input",e=>{ S.uni=null; renderUniSug(e.target.value);
 uniInput.addEventListener("focus",e=>{ if(e.target.value) renderUniSug(e.target.value); });
 uniInput.addEventListener("keydown",e=>{
   const box = document.getElementById("uniSug");
+  /* Escape は候補が開いていれば必ず閉じる。開いていなければブラウザに任せる */
+  if(e.key==="Escape"){ if(box.classList.contains("open")){ e.preventDefault(); sugClose("uniInput","uniSug"); } return; }
   if(!box.classList.contains("open") || !sugList.length) return;
   if(e.key==="ArrowDown"||e.key==="ArrowUp"){
     e.preventDefault();
     sugIdx = (sugIdx + (e.key==="ArrowDown"?1:-1) + sugList.length) % sugList.length;
-    [...box.querySelectorAll("button")].forEach((b,i)=>b.classList.toggle("cur",i===sugIdx));
+    sugSync("uniInput","uniSug",sugIdx);
+  } else if(e.key==="Home"){ e.preventDefault(); sugIdx=0; sugSync("uniInput","uniSug",sugIdx);
+  } else if(e.key==="End"){ e.preventDefault(); sugIdx=sugList.length-1; sugSync("uniInput","uniSug",sugIdx);
   } else if(e.key==="Enter"){ e.preventDefault(); pickUni(sugIdx>=0?sugIdx:0); }
 });
 document.getElementById("facInput").addEventListener("input",e=>{ S.fac=e.target.value; if(S.uni) applyUni(); });
@@ -4318,10 +4440,19 @@ document.getElementById("henInput").addEventListener("input",e=>{
 const doneInput = document.getElementById("doneInput");
 doneInput.addEventListener("input",e=>renderDoneSug(e.target.value));
 doneInput.addEventListener("focus",e=>{ if(e.target.value) renderDoneSug(e.target.value); });
-doneInput.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); addDone(0); } });
+doneInput.addEventListener("keydown",e=>{
+  const box = document.getElementById("doneSug");
+  if(e.key==="Escape"){ if(box.classList.contains("open")){ e.preventDefault(); sugClose("doneInput","doneSug"); } return; }
+  if(!box.classList.contains("open") || !doneSugList.length) return;
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+    e.preventDefault();
+    doneSugIdx = (doneSugIdx + (e.key==="ArrowDown"?1:-1) + doneSugList.length) % doneSugList.length;
+    sugSync("doneInput","doneSug",doneSugIdx);
+  } else if(e.key==="Enter"){ e.preventDefault(); addDone(doneSugIdx>=0?doneSugIdx:0); }
+});
 document.addEventListener("click",e=>{
-  if(!e.target.closest("#uniSug")&&!e.target.closest("#uniInput")) document.getElementById("uniSug").classList.remove("open");
-  if(!e.target.closest("#doneSug")&&!e.target.closest("#doneInput")) document.getElementById("doneSug").classList.remove("open");
+  if(!e.target.closest("#uniSug")&&!e.target.closest("#uniInput")) sugClose("uniInput","uniSug");
+  if(!e.target.closest("#doneSug")&&!e.target.closest("#doneInput")) sugClose("doneInput","doneSug");
 });
 
 buildFilters();
@@ -4437,7 +4568,7 @@ RTShare.setup({
       if(uni && applySharedUni(uni)) return true;
       selectTier(tk[1]); return true;
     },
-    show: ()=>go("route")
+    show: ()=>{ go("route"); focusResult("#routeOutput"); }
   }
 });
 </script>

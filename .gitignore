@@ -6,3 +6,7 @@ node_modules/
 # ローカル開発用（プレビューサーバー設定）
 .claude/
 build/.cache/
+
+# Playwright の実行結果（生成物）
+test-results/
+playwright-report/
