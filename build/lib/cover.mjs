@@ -5,33 +5,45 @@
  * 参照するだけで、保存も加工もしない。どれも取れない本があるので、
  * 書名と出版社を出す代替表示を必ず画像の下に敷いておく。
  */
+import fs from 'node:fs';
+import path from 'node:path';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 import { esc } from './extract.mjs';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
+
+/**
+ * 候補の作り方は assets/js/cover-resolver.js が持つ。**ここに写さない。**
+ *
+ * 以前はこのファイルと各科目の描画コードに同じような関数が 2 つあり、
+ * 中身が食い違っていた（こちらは Amazon → NDL → openBD の 4 候補、
+ * 科目トップ側は Amazon の 2 候補だけ）。同じ本なのに、書籍ページでは表紙が出て
+ * 科目トップでは出ない差が生まれていた。ブラウザからも Node からも
+ * 同じファイルを読む形にして 1 本化した。
+ */
+const resolver = require(path.join(HERE, '../../assets/js/cover-resolver.js'));
+
+/** 取得元の利用条件。enabled が false の provider は候補に入れない */
+export const COVER_POLICIES = JSON.parse(
+  fs.readFileSync(path.join(HERE, '../data/cover-provider-policies.json'), 'utf8'),
+);
 
 /**
  * 書影の候補 URL を優先順に返す。
  *
  * Amazon は画像を持たない ISBN に対して 43 バイトほどの 1x1 画像を
  * HTTP 200 で返すことがある。この場合 onerror は発火しないので、
- * 表示側で naturalWidth を見て次の候補へ送る（科目ページと同じ方式）。
+ * 表示側で naturalWidth を見て次の候補へ送る。
  */
 export function coverSrcs(b) {
-  // nocover: 商品画像がどこにも無いと確認できた本（未発売など）。
-  // Amazon は画像を持たない ISBN に「書名だけを刷った自動生成画像」を返すことがあり、
-  // これは 1x1 判定にも onerror にも掛からない。候補を空にして代替表示へ落とす。
-  // 科目トップの coverSrcs() にも同じ分岐がある
-  if (b.nocover) return [];
-  const key = b.isbn10 || b.asin;
-  const list = [];
-  if (b.cover) list.push(b.cover);
-  if (key) {
-    list.push(`https://images-fe.ssl-images-amazon.com/images/P/${key}.09.LZZZZZZZ.jpg`);
-    list.push(`https://images-na.ssl-images-amazon.com/images/P/${key}.09.LZZZZZZZ.jpg`);
-  }
-  if (b.isbn13) {
-    list.push(`https://ndlsearch.ndl.go.jp/thumbnail/${b.isbn13}.jpg`);
-    list.push(`https://cover.openbd.jp/${b.isbn13}.jpg`);
-  }
-  return list;
+  return resolver.coverSrcs(b, COVER_POLICIES);
+}
+
+/** その URL がどの provider のものか */
+export function providerOf(url) {
+  return resolver.providerOf(url, COVER_POLICIES);
 }
 
 /**

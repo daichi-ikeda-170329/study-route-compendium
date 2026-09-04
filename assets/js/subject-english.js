@@ -539,23 +539,14 @@ window.addEventListener("hashchange", applyHash);
    国立国会図書館サーチの書影API・openBD(いずれもISBNベースの公開API)を参照します。
    画像の保存・再アップロード・加工は行っていません。 */
 function coverSrcs(b){
-  /* nocover: 商品画像がどこにも無いと確認できた本（未発売など）。
-     Amazon は画像を持たない ISBN に「書名だけを刷った自動生成画像」を返すことがあり、
-     これは 1x1 判定にも onerror にも掛からないので、候補を空にして代替表示へ落とす。
-     生成側は build/lib/cover.mjs が同じ分岐を持つ */
-  if(b.nocover) return [];
-  const key = b.isbn10 || b.asin || "";
-  const list = [];
-  if(b.cover) list.push(b.cover);
-  if(key){
-    list.push(`https://images-fe.ssl-images-amazon.com/images/P/${key}.09.LZZZZZZZ.jpg`);
-    list.push(`https://images-na.ssl-images-amazon.com/images/P/${key}.09.LZZZZZZZ.jpg`);
-  }
-  if(b.isbn13){
-    list.push(`https://ndlsearch.ndl.go.jp/thumbnail/${b.isbn13}.jpg`);
-    list.push(`https://cover.openbd.jp/${b.isbn13}.jpg`);
-  }
-  return list;
+  /* 候補の作り方は assets/js/cover-resolver.js が唯一の正本。**ここに写さない。**
+     以前は 7 科目それぞれが自前の coverSrcs を持ち、中身が 4 通りに分かれていた
+     （数学・情報・小論文は Amazon の 2 候補だけ、社会は 10 候補）。同じ本なのに
+     科目によって表紙が出たり出なかったりしていた。
+     取得元の有効・無効は assets/js/cover-policies.js（生成物）が持つ。 */
+  return (window.RTCoverResolver
+    ? window.RTCoverResolver.coverSrcs(b, window.RT_COVER_POLICIES)
+    : []);
 }
 /* ---------- アフィリエイトリンク ---------- */
 function amazonURL(b){

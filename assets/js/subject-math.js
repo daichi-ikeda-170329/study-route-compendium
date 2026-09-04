@@ -144,42 +144,10 @@ function diffColor(d){
    ADDITIONAL BOOKS II — 速習系・東進系・その他の定番
    ============================================================ */
 
-/* ============================================================
-   COVERS — 書影の直リンク(書店データベースより収集・全書分)
-   ============================================================ */
-const COVERS = {
-"4010349158":"https://m.media-amazon.com/images/I/41GWHF03gEL._SL500_.jpg",
-"4866154233":"https://m.media-amazon.com/images/I/61ZT2XJ0c3L._SL500_.jpg",
-"4866152273":"https://m.media-amazon.com/images/I/51V-KNBtGYL._SL500_.jpg",
-"4402252539":"https://m.media-amazon.com/images/I/31Mc5B0eW2L._SL500_.jpg",
-"4010349182":"https://m.media-amazon.com/images/I/41pe36vQ+7L._SL500_.jpg",
-"4410201050":"https://m.media-amazon.com/images/I/41lHqtXFE-L._SL500_.jpg",
-"4010349212":"https://m.media-amazon.com/images/I/41HCVlMP5CL._SL500_.jpg",
-"4796113606":"https://m.media-amazon.com/images/I/51stpTYrWNL._SL500_.jpg",
-"4860669932":"https://m.media-amazon.com/images/I/41NI0mkRmmL._SL500_.jpg",
-"4887420285":"https://m.media-amazon.com/images/I/51jvEdzWnfL._SL500_.jpg",
-"4887420447":"https://m.media-amazon.com/images/I/61CX2DG2AvL._SL500_.jpg",
-"4325273948":"https://m.media-amazon.com/images/I/41lPNuWMbdL._SL500_.jpg",
-"4325272984":"https://m.media-amazon.com/images/I/41RjCTu5M+L._SL500_.jpg",
-"4325272976":"https://m.media-amazon.com/images/I/41RVjJmPiGL._SL500_.jpg",
-"4866153407":"https://m.media-amazon.com/images/I/61ZajAXU8WL._SL500_.jpg",
-"4866152338":"https://m.media-amazon.com/images/I/51GParA9DAL._SL500_.jpg",
-"4866152346":"https://m.media-amazon.com/images/I/516q21EcY6L._SL500_.jpg",
-"4890859055":"https://m.media-amazon.com/images/I/21t+22v2rkL._SL500_.jpg",
-"488742048X":"https://m.media-amazon.com/images/I/51hiJAmx4DL._SL500_.jpg",
-"4325222995":"https://m.media-amazon.com/images/I/51Zwcx9UtML._SL500_.jpg",
-"4796165045":"https://m.media-amazon.com/images/I/51p9Ea2KlLL._SL500_.jpg",
-"4777231046":"https://m.media-amazon.com/images/I/61xY69McjdL._SL500_.jpg",
-"4887422415":"https://m.media-amazon.com/images/I/51VMqBiFWJL._SL500_.jpg",
-"4325273123":"https://m.media-amazon.com/images/I/41DS4fqH+VL._SL500_.jpg",
-"4890857311":"https://m.media-amazon.com/images/I/51-Z7jxEQrL._SL500_.jpg",
-"4890857036":"https://m.media-amazon.com/images/I/415KQIBaFRL._SL500_.jpg",
-"4890857591":"https://m.media-amazon.com/images/I/41b34o0+JlL._SL500_.jpg",
-"4774178047":"https://m.media-amazon.com/images/I/514kJQDooWL._SL500_.jpg",
-"B0GK6S4JPF":"https://m.media-amazon.com/images/I/616HRupyrGL._SL500_.jpg",
-"B0GRCMMLFF":"https://m.media-amazon.com/images/I/61T1z6qqjJL._SL500_.jpg",
-"B0GVS9HCLV":"https://m.media-amazon.com/images/I/71ZPZxnJPkL._SL500_.jpg"
-};
+/* 書影の直リンクは data/subjects/math/books.json の BOOKS[].cover が正本。
+   以前はここに ISBN10 → URL の対応表（COVERS）を置き、読み込み時に
+   BOOKS へ流し込んでいた。2026-09-05 の移行でその流し込みごと canonical データへ
+   取り込んだので、対応表は参照されないまま残っていた。削除した。 */
 
 
 /* ============================================================
@@ -494,19 +462,14 @@ window.addEventListener("hashchange", applyHash);
    (Amazonアソシエイト・ヘルプ「Amazonが提供している商品画像URLを指定する形でご利用ください」に準拠。
     画像の保存・再アップロード・加工は行っていません) */
 function coverSrcs(b){
-  /* nocover: 商品画像がどこにも無いと確認できた本（未発売など）。
-     Amazon は画像を持たない ISBN に「書名だけを刷った自動生成画像」を返すことがあり、
-     これは 1x1 判定にも onerror にも掛からないので、候補を空にして代替表示へ落とす。
-     生成側は build/lib/cover.mjs が同じ分岐を持つ */
-  if(b.nocover) return [];
-  const key = b.isbn10 || b.asin || "";
-  const list = [];
-  if(b.cover) list.push(b.cover);
-  if(key){
-    list.push(`https://images-fe.ssl-images-amazon.com/images/P/${key}.09.LZZZZZZZ.jpg`);
-    list.push(`https://images-na.ssl-images-amazon.com/images/P/${key}.09.LZZZZZZZ.jpg`);
-  }
-  return list;
+  /* 候補の作り方は assets/js/cover-resolver.js が唯一の正本。**ここに写さない。**
+     以前は 7 科目それぞれが自前の coverSrcs を持ち、中身が 4 通りに分かれていた
+     （数学・情報・小論文は Amazon の 2 候補だけ、社会は 10 候補）。同じ本なのに
+     科目によって表紙が出たり出なかったりしていた。
+     取得元の有効・無効は assets/js/cover-policies.js（生成物）が持つ。 */
+  return (window.RTCoverResolver
+    ? window.RTCoverResolver.coverSrcs(b, window.RT_COVER_POLICIES)
+    : []);
 }
 /* ---------- アフィリエイトリンク ---------- */
 function amazonURL(b){

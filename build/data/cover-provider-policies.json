@@ -1,0 +1,114 @@
+{
+  "note": "書影（表紙画像）の取得元と、その利用条件の確認状況。build/check-covers.mjs が読む。手で編集してよいが、確認していないことを確認したように書かない。",
+  "note2": "enabled は『いまサイトが実際に参照しているか』を表す。**利用条件を確認したという意味ではない。** 確認の状況は termsReviewed で別に持つ。この 2 つを混同すると、確かめていないものを確かめたことにしてしまう。",
+  "note3": "termsUrl / usageBasis / lastReviewedAt は、人が規約を読んで書いたときだけ埋める。**推測で書かない。空のままにしておくほうが正しい。** 詳しくは docs/cover-policy.md。",
+  "schemaVersion": 1,
+  "providers": {
+    "explicit": {
+      "displayName": "個別に指定した URL（BOOKS[].cover）",
+      "hostPatterns": [],
+      "urlTemplate": null,
+      "keyKind": "explicit",
+      "termsUrl": null,
+      "usageBasis": null,
+      "deliveryMode": "remote-hotlink",
+      "lastReviewedAt": null,
+      "termsReviewed": false,
+      "enabled": true,
+      "notes": "上の取得元で取れない本に、出版社の商品画像などを個別に指定したもの。**取得元がばらばらなので、provider としてまとめて扱えない。** どのホストを指しているかは build/data/cover-ledger.json に 1 冊ずつ記録する。ホストごとの確認は運営者が行う（2026-09 時点で 18 ホスト。内訳は docs/cover-policy.md）。"
+    },
+    "amazon": {
+      "displayName": "Amazon（商品画像）",
+      "hostPatterns": [
+        "images-fe.ssl-images-amazon.com",
+        "images-na.ssl-images-amazon.com",
+        "m.media-amazon.com"
+      ],
+      "urlTemplate": "https://images-fe.ssl-images-amazon.com/images/P/<ISBN10 または ASIN>.09.LZZZZZZZ.jpg ほか（.01. 版と m.media-amazon.com を含む計 5 候補）",
+      "keyKind": "isbn10",
+      "termsUrl": null,
+      "usageBasis": null,
+      "deliveryMode": "remote-hotlink",
+      "lastReviewedAt": null,
+      "termsReviewed": false,
+      "enabled": true,
+      "notes": "画像を持たない ISBN に対して 1x1 の画像を HTTP 200 で返すことがある。表示側は naturalWidth<=1 で次の候補へ送る。書名だけを刷った自動生成画像を返す場合は 1x1 判定にも onerror にも掛からないので、その本は BOOKS[].nocover で候補を空にする。"
+    },
+    "gakusan": {
+      "displayName": "学参ドットコム（書影）",
+      "hostPatterns": [
+        "www.gakusan.com"
+      ],
+      "urlTemplate": "https://www.gakusan.com/bookimage/<ISBN13>.jpg（小サイズ版 bookimage_s も試す）",
+      "keyKind": "isbn13",
+      "termsUrl": null,
+      "usageBasis": null,
+      "deliveryMode": "remote-hotlink",
+      "lastReviewedAt": null,
+      "termsReviewed": false,
+      "enabled": true,
+      "notes": "社会の科目トップだけが候補に持っていた。統一の際、候補を減らさないために全科目へそろえた。"
+    },
+    "ndl": {
+      "displayName": "国立国会図書館サーチ（書影）",
+      "hostPatterns": [
+        "ndlsearch.ndl.go.jp"
+      ],
+      "urlTemplate": "https://ndlsearch.ndl.go.jp/thumbnail/<ISBN13>.jpg",
+      "keyKind": "isbn13",
+      "termsUrl": null,
+      "usageBasis": null,
+      "deliveryMode": "remote-hotlink",
+      "lastReviewedAt": null,
+      "termsReviewed": false,
+      "enabled": true,
+      "notes": "書影を持たない ISBN では 404 を返す。"
+    },
+    "googlebooks": {
+      "displayName": "Google Books（書影）",
+      "hostPatterns": [
+        "books.google.com"
+      ],
+      "urlTemplate": "https://books.google.com/books/content?vid=ISBN<ISBN13>&printsec=frontcover&img=1&zoom=1",
+      "keyKind": "isbn13",
+      "termsUrl": null,
+      "usageBasis": null,
+      "deliveryMode": "remote-hotlink",
+      "lastReviewedAt": null,
+      "termsReviewed": false,
+      "enabled": true,
+      "notes": "国語と社会の科目トップだけが候補に持っていた。統一の際、候補を減らさないために全科目へそろえた。"
+    },
+    "openbd": {
+      "displayName": "openBD（書影）",
+      "hostPatterns": [
+        "cover.openbd.jp"
+      ],
+      "urlTemplate": "https://cover.openbd.jp/<ISBN13>.jpg",
+      "keyKind": "isbn13",
+      "termsUrl": null,
+      "usageBasis": null,
+      "deliveryMode": "remote-hotlink",
+      "lastReviewedAt": null,
+      "termsReviewed": false,
+      "enabled": true,
+      "notes": "書影を持たない ISBN では 404 を返す。"
+    },
+    "gakusanSmall": {
+      "displayName": "学参ドットコム（小サイズ書影）",
+      "hostPatterns": [
+        "www.gakusan.com"
+      ],
+      "urlTemplate": "https://www.gakusan.com/bookimage_s/<ISBN13>.jpg",
+      "keyKind": "isbn13",
+      "termsUrl": null,
+      "usageBasis": null,
+      "deliveryMode": "remote-hotlink",
+      "lastReviewedAt": null,
+      "termsReviewed": false,
+      "enabled": true,
+      "notes": "gakusan と同じ提供元。最後の候補として試す。"
+    }
+  },
+  "note4": "providers の並びは assets/js/cover-resolver.js の ORDER と同じにしてある。候補を試す順そのもの。"
+}
