@@ -1,0 +1,114 @@
+{
+ "generatedAt": "2026-09-04",
+ "total": 1390,
+ "byStatus": {
+  "verified": 402,
+  "partial": 727,
+  "unverified": 257,
+  "notApplicable": 4
+ },
+ "bySubject": {
+  "english": {
+   "total": 252,
+   "verified": 86,
+   "partial": 131,
+   "unverified": 34,
+   "notApplicable": 1
+  },
+  "japanese": {
+   "total": 192,
+   "verified": 91,
+   "partial": 67,
+   "unverified": 33,
+   "notApplicable": 1
+  },
+  "math": {
+   "total": 162,
+   "verified": 25,
+   "partial": 90,
+   "unverified": 46,
+   "notApplicable": 1
+  },
+  "science": {
+   "total": 373,
+   "verified": 123,
+   "partial": 174,
+   "unverified": 75,
+   "notApplicable": 1
+  },
+  "social": {
+   "total": 293,
+   "verified": 71,
+   "partial": 166,
+   "unverified": 56,
+   "notApplicable": 0
+  },
+  "joho": {
+   "total": 29,
+   "verified": 4,
+   "partial": 23,
+   "unverified": 2,
+   "notApplicable": 0
+  },
+  "shoron": {
+   "total": 89,
+   "verified": 2,
+   "partial": 76,
+   "unverified": 11,
+   "notApplicable": 0
+  }
+ },
+ "fieldGaps": {
+  "official": 668,
+  "author": 1044,
+  "problems": 1386,
+  "year": 664,
+  "pub": 384,
+  "isbn13": 257
+ },
+ "byPriority": {
+  "route": {
+   "label": "ルートに採用している教材",
+   "total": 542,
+   "unverified": 75,
+   "partial": 277,
+   "verified": 186
+  },
+  "quiz": {
+   "label": "3 分診断の結果に出る教材",
+   "total": 0,
+   "unverified": 0,
+   "partial": 0,
+   "verified": 0
+  },
+  "joho": {
+   "label": "情報科（市販書が少なく、記載の確度が低い）",
+   "total": 29,
+   "unverified": 2,
+   "partial": 23,
+   "verified": 4
+  },
+  "curriculum": {
+   "label": "新課程対応が要確認の教材",
+   "total": 52,
+   "unverified": 25,
+   "partial": 12,
+   "verified": 15
+  },
+  "other": {
+   "label": "その他",
+   "total": 767,
+   "unverified": 155,
+   "partial": 415,
+   "verified": 197
+  }
+ },
+ "duplicateIsbn": [],
+ "mismatchCounts": {
+  "official": 411,
+  "pub": 33,
+  "year": 139
+ },
+ "staleChecks": 0,
+ "textMarkRemaining": 159
+}

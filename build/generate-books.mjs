@@ -23,6 +23,7 @@ import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { degreeTable, bandOf } from './lib/scale.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL, placeholderSearchUrl } from './lib/record-type.mjs';
+import { verificationOf, verificationRows, STATUS_LABEL } from './lib/verification.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -225,19 +226,28 @@ function renderBook(book, ctx) {
   // 枠には Book を出さない。ISBN も刊行年も持たない「1 冊」を構造化データで
   // 主張すると、検索エンジンに実在しない商品を渡すことになる
   const placeholder = isPlaceholder(book);
+  /* 事実として確かめた項目と、編集部が推定した項目を分けて出す。
+     verified と「現物を確認した」を同じ意味にしない（build/lib/verification.mjs） */
+  const ver = verificationOf(sub.dir, book);
   const bookNode = placeholder ? [] : [
       {
         '@type': 'Book',
         '@id': `${url}#book`,
         name: book.official || book.name,
         alternateName: book.name,
-        ...(book.isbn13 ? { isbn: book.isbn13 } : {}),
+        /* 書誌データベースで実在を確かめられた ISBN だけを出す。
+           確かめていない番号を構造化データで主張しない（指示書 14.4） */
+        ...(book.isbn13 && ver.fields.isbn13 && ver.fields.isbn13.status === 'verified'
+          ? { isbn: book.isbn13 } : {}),
         // 著者は openBD で実在を確認できた本にだけ載せる（build/data/authors.json）
         ...(authors.length
           ? { author: authors.map(name => ({ '@type': 'Person', name })) }
           : {}),
         publisher: { '@type': 'Organization', name: book.pub },
-        ...(book.year ? { datePublished: String(book.year) } : {}),
+        /* 刊行年が書誌データベースと食い違う本は出さない。版の違いで年がずれることが
+           多く、どちらが正しいかを確かめていない段階で片方を主張しない */
+        ...(book.year && !(ver.fields.year && ver.fields.year.mismatch)
+          ? { datePublished: String(book.year) } : {}),
         inLanguage: 'ja',
         bookFormat: 'https://schema.org/Paperback',
         about: `大学受験 ${fieldName}`,
@@ -336,6 +346,15 @@ ${spec}
         </dl>
       </div>
       <p class="spec__note">書名・出版社・ISBN・刊行年・問題数は公開されている書誌情報です。難易度・到達目安・想定学習時間は編集部の推定値で、<a href="/methodology/">算出方法</a>を公開しています。</p>
+
+      <div class="verif" data-status="${ver.status}">
+        <p class="verif__t"><b>この情報の確かめ方</b><span class="verif__badge">${esc(STATUS_LABEL[ver.status])}</span></p>
+        <dl class="verif__rows">
+${verificationRows(ver).map(([k, v]) => `          <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
+        </dl>
+${ver.sources.length ? `        <p class="verif__src">出典: ${ver.sources.map(x => `<a href="${esc(x.url)}" rel="nofollow noopener noreferrer" target="_blank">書誌データベース</a>`)[0]}（${esc(ver.sources[0].checkedAt || '確認日未記録')}）</p>` : ''}
+        <p class="verif__note">「確認済み」は公開されている書誌情報と一致したという意味で、<b>編集部が現物を確認したという意味ではありません</b>。判定の基準は<a href="/methodology/">算出方法</a>に書いています。</p>
+      </div>
     </section>
 
     ${prov ? `<section class="block prose">

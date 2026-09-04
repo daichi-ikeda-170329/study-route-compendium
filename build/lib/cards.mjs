@@ -10,6 +10,7 @@ import { esc, clip } from './extract.mjs';
 import { coverBox } from './cover.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './newbooks.mjs';
 import { seriesOf, hensachiPlain } from './series.mjs';
+import { verificationOf } from './verification.mjs';
 
 /**
  * @param {object} b      BOOKS の 1 冊
@@ -32,6 +33,14 @@ export function bookCard(b, sub, stages) {
     : `<span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}／${esc(hensachiPlain(b) || '—')}`
       + `${series ? `<span class="bcard__series">${esc(series.label)}</span>` : ''}</span>`;
 
+  // 書誌情報を確かめきれていない本は、カードの時点でそう分かるようにする。
+  // 詳細（どの項目を確かめたか）は書籍ページの「この情報の確かめ方」に出る。
+  // 色だけで伝えないよう、必ず文字のラベルにする
+  const ver = verificationOf(sub.dir, b);
+  const verBadge = ver.status === 'unverified'
+    ? '<span class="bcard__ver">書誌情報を確認中</span>'
+    : ver.status === 'partial' ? '<span class="bcard__ver">一部情報を確認中</span>' : '';
+
   return `      <a class="bcard" href="/${sub.dir}/books/${b.id}/" style="--bc:${color}">
         <div class="bcard__head">
           ${coverBox(b, { color })}
@@ -42,6 +51,7 @@ export function bookCard(b, sub, stages) {
         </div>
         <p>${esc(clip(b.desc || `${b.pub} から刊行された新刊。評価は準備中です。`, 72))}</p>
         <div class="bcard__foot">${foot}</div>
+        ${verBadge}
       </a>`;
 }
 
