@@ -20,7 +20,7 @@
 | S5 | 性能予算の達成 | DONE（目標一部未達） | a893ad6c / (このコミット) | `docs/performance-report.md` / `test/performance-budget.test.mjs` | バイト予算は達成。Performance 47→53 / SI 7.53s→4.55s。目標 80 / 4.0s / 0.10 は未達で、残因は Google Fonts |
 | S6 | 進捗管理 | DONE | a28dc50a | `assets/js/progress.js` / `/progress/` / `test/progress.test.mjs` / `e2e/progress.spec.mjs` | 残り時間の下限・上限に同じ係数。既存キー無傷。ネットワーク流出 0 |
 | S7 | 任意の追加質問 | DONE | 23cf9908 | `assets/js/refine.js` / `e2e/refine.spec.mjs` | スキップ時の結果と共有 URL が完全一致することを HTML 突き合わせで固定 |
-| S8 | 詳細検索 | 未着手 | | | |
+| S8 | 詳細検索 | DONE | cc7e8c0a | `assets/generated/search-facets.json` / `/search/` / `test/search-facets.test.mjs` | v1 索引は 235,925 バイトのまま。欠損を「該当なし」に落とさない |
 | S9 | 書影の出所台帳 | 未着手 | | | |
 | S10 | QA・Best Practices・KPI | 未着手 | | | |
 | S11 | 最終検証と報告 | 未着手 | | | |
@@ -32,7 +32,7 @@
 | 1 | 科目データの分離 | S1〜S5 | DONE（性能目標は一部未達。`docs/performance-report.md` に実測と残因） |
 | 2 | 進捗管理の拡張 | S6 | DONE |
 | 3 | 任意の追加質問 | S7 | DONE |
-| 4 | 検索の絞り込み拡張 | S8 | 未着手 |
+| 4 | 検索の絞り込み拡張 | S8 | DONE |
 | 5 | 書影の出所台帳 | S9 | 未着手 |
 | 6 | 手動 QA | S10 | 未着手 |
 | 7 | Best Practices 77 の原因分離 | S10 | 未着手 |
@@ -40,15 +40,15 @@
 
 ## 次にやること（実行が切れたらここから再開する）
 
-- S8 に着手する。検索の絞り込み拡張。
-  **`assets/js/book-index.js` を膨らませない**（`test/performance-budget.test.mjs` の
-  300,000 バイト上限が守っている）。出版社・著者・難易度帯・出版年・確認状態は
-  `assets/generated/search-facets.json`（v2）へ入れ、`/search/` でだけ読む。
-- 確認状態は `build/data/verification.json` から取る。**科目データ側へ複製しない。**
-- `/search/` は `noindex,follow`。指示書 §4.4 の 5 項目を全部通す
-  （`ALLOW_DIRS` への `'search'` 追加を忘れない）。
-- **filter 未指定では欠損データも検索対象に含める。** 難易度や著者が不明なものを
-  「該当なし」に落とさず、「不明・確認中」として区別する。
+- S9 に着手する。書影の出所台帳。
+  `build/data/cover-provider-policies.json` / `build/data/cover-ledger.json` /
+  `build/generate-cover-ledger.mjs` / `build/check-covers.mjs` / `docs/cover-policy.md`。
+- **利用条件を確認できない provider は `enabled: false`。** terms や権利根拠を推測で書かない。
+  規約確認を自動化したと偽らない。
+- offline 検査（policy / ledger の整合）は必須ゲート。live 検査（実際の HTTP）は
+  scheduled / 手動に分ける。外部障害で CI を不安定にしない。
+- 書影の候補生成は `build/lib/cover.mjs` と各科目の `assets/js/subject-<科目>.js` に
+  二重実装がある。共通 resolver を 1 本にする。
 
 ## S4 時点の実測（S5 の出発点）
 
