@@ -28,17 +28,23 @@ export const KEY_PAGES = [
  */
 export async function axeCritical(page) {
   /* フェードインの途中で測ると、地色と混ざった中間色をコントラスト不足として拾う
-     （.view の fade は 0.3s）。動きを減らす設定にして最終状態で測る。
-     最終状態の色こそが利用者に見えている色なので、これが正しい測り方。
-     科目トップは 1 枚が 950KB を超えるものがあり、描き終わるまでに時間がかかる。
-     アニメーションが 1 つも走っていないことを確かめてから測る */
+     （.view の fade は 0.3s）。**利用者が実際に見ているのは終わったあとの色**なので、
+     そこで測るのが正しい。
+     
+     待って測る方式では、CI のように 4 つの幅を並行で走らせて負荷が高い環境で
+     取りこぼす（2026-09-04 に実際に 1 件落ちた）。待つのではなく、
+     アニメーションと遷移を止めてから測る。fade は opacity 0 → 1 で、
+     素の状態が 1 なので、止めれば必ず最終状態になる。 */
   await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.addStyleTag({
+    content: '*,*::before,*::after{animation:none!important;transition:none!important}',
+  }).catch(() => { /* 差し込めない場合は下の待ち time で代替する */ });
   await page.waitForLoadState('load').catch(() => {});
   await page.waitForFunction(
     () => document.getAnimations().every(a => a.playState !== 'running'),
-    null, { timeout: 5000 },
+    null, { timeout: 10000 },
   ).catch(() => { /* 取れない環境では時間で待つ */ });
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(300);
   const res = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();
@@ -118,12 +124,22 @@ export function collectErrors(page) {
   return errors;
 }
 
-/** 広告・解析など外部スクリプトを落とす（読み込めない環境の再現） */
+/**
+ * 広告・解析の読み込みを止める。
+ *
+ * **中断（abort）ではなく空の応答を返す。** 中断すると
+ * `Failed to load resource: net::ERR_FAILED` がコンソールエラーとして出て、
+ * 「自分たちのコードのエラーが 0 か」を見る検査と区別できなくなる。
+ * 空応答なら、第三者のスクリプトは何もしないまま静かに終わる。
+ *
+ * 読み込みに失敗する環境そのものを再現したいときは、呼び出し側で
+ * abort する（e2e/a11y.spec.mjs の「広告と解析を読み込めなくても…」）。
+ */
 export async function blockThirdParty(page) {
   await page.route('**/*', route => {
     const u = route.request().url();
-    if (/googletagmanager|google-analytics|googlesyndication|doubleclick|adsbygoogle/.test(u)) {
-      return route.abort();
+    if (/googletagmanager|google-analytics|googlesyndication|doubleclick|adsbygoogle|pagead/.test(u)) {
+      return route.fulfill({ status: 204, body: '', headers: { 'content-type': 'text/plain' } });
     }
     return route.continue();
   });

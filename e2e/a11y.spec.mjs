@@ -5,10 +5,18 @@
  * 幅は playwright.config.mjs の project（320 / 375 / 768 / 1366）で回る。
  */
 import { test } from '@playwright/test';
-import { expect, KEY_PAGES, axeCritical, fmtViolations, horizontalOverflow, collectErrors } from './helpers.mjs';
+import { expect, KEY_PAGES, axeCritical, fmtViolations, horizontalOverflow, collectErrors, blockThirdParty } from './helpers.mjs';
 
 for (const p of KEY_PAGES) {
   test(`${p.name}: axe の重大・深刻な違反が 0`, async ({ page }) => {
+    /* **自動広告を止めてから測る。**
+       AdSense の自動広告は、いつどこに何を差し込むかがこちらの制御外で、
+       読み込む時刻も毎回違う。差し込まれた要素を巻き込んで測ると、
+       同じコードでも結果が変わる（並行実行で負荷が高いと 6 回に 1 回ほど落ちた）。
+       ここで確かめたいのは**自分たちのマークアップ**なので、第三者の枠は外す。
+       広告が入った状態で機能が壊れないことは、下の「広告と解析を読み込めなくても
+       主要機能が動く」と e2e/privacy.spec.mjs が別に見ている。 */
+    await blockThirdParty(page);
     const errors = collectErrors(page);
     await page.goto(p.url, { waitUntil: 'domcontentloaded' });
     const violations = await axeCritical(page);
@@ -17,6 +25,8 @@ for (const p of KEY_PAGES) {
   });
 
   test(`${p.name}: 横方向のオーバーフローが無い`, async ({ page }) => {
+    /* **こちらは広告を止めない。** 広告がページ幅を超えて全体を横に動かすのは
+       利用者に起きる実害なので、検出できるようにしておく（指示書 11.3） */
     await page.goto(p.url, { waitUntil: 'domcontentloaded' });
     const r = await horizontalOverflow(page);
     expect(r.offenders, `${p.url} ではみ出している要素`).toEqual([]);
