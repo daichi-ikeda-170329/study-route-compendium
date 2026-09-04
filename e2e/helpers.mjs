@@ -27,6 +27,29 @@ export const KEY_PAGES = [
 ];
 
 /**
+ * 科目トップの描画が終わるのを待つ。
+ *
+ * 科目データは HTML の外（assets/generated/subjects/）にあり、
+ * assets/js/subject-loader.js が取得してから描画する。取得が終わると
+ * `<html>` に `rt-app-ready` が付く。
+ *
+ * **これを待たずに測ると、描画の途中を見てしまう。**
+ * 以前はデータが同期スクリプトだったので `domcontentloaded` の時点で
+ * DOM が確定していたが、いまは確定していない（2026-09-05 に axe が
+ * 並行実行の負荷で 1 件だけ落ちた）。
+ *
+ * 科目トップ以外（マニフェストを持たないページ）では待たずに進む。
+ */
+export async function waitForApp(page) {
+  const isSubjectTop = await page.evaluate(() => Boolean(window.RT_SUBJECT_ASSETS)).catch(() => false);
+  if (!isSubjectTop) return;
+  await page.waitForFunction(
+    () => document.documentElement.classList.contains('rt-app-ready'),
+    null, { timeout: 15000 },
+  );
+}
+
+/**
  * axe の重大・深刻な違反だけを見る。
  * moderate / minor まで落とすと、色のコントラストの微差で全体が止まり、
  * 本当に操作できない不具合が埋もれる。
@@ -40,6 +63,7 @@ export async function axeCritical(page) {
      取りこぼす（2026-09-04 に実際に 1 件落ちた）。待つのではなく、
      アニメーションと遷移を止めてから測る。fade は opacity 0 → 1 で、
      素の状態が 1 なので、止めれば必ず最終状態になる。 */
+  await waitForApp(page);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.addStyleTag({
     content: '*,*::before,*::after{animation:none!important;transition:none!important}',
@@ -67,6 +91,7 @@ export function fmtViolations(vs) {
  * 自分の枠の中だけで横に流す要素（overflow-x が auto / scroll）は対象外。
  */
 export async function horizontalOverflow(page) {
+  await waitForApp(page);
   return page.evaluate(() => {
     const docW = document.documentElement.clientWidth;
     const out = [];
