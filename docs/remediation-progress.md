@@ -1,6 +1,7 @@
 # 未解決事項の対応状況
 
-最終更新: 2026-09-05 / 対象 SHA: `dabdb86de0f201ecf8d8d26da1f7c9367d179552`（分岐元 `origin/main`）
+最終更新: 2026-09-05 / 分岐元 SHA: `dabdb86de0f201ecf8d8d26da1f7c9367d179552`（`origin/main`）
+最終報告: `docs/remediation-final-report-2026-09-05.md`
 実装指示書: `/Users/ikedadaichi/Downloads/ルート大全未解決事項実装指示書.md`
 作業ブランチ: `fix/unresolved-items`
 
@@ -23,7 +24,7 @@
 | S8 | 詳細検索 | DONE | cc7e8c0a | `assets/generated/search-facets.json` / `/search/` / `test/search-facets.test.mjs` | v1 索引は 235,925 バイトのまま。欠損を「該当なし」に落とさない |
 | S9 | 書影の出所台帳 | DONE（判断待ち 1 件） | 2eb15283 | `docs/cover-policy.md` / `build/data/cover-*.json` / `test/covers.test.mjs` | resolver を 1 本化（候補は減らさない）。利用条件の確認は OWNER ACTION |
 | S10 | QA・Best Practices・KPI | DONE（実機と KPI 実数は BLOCKED_EXTERNAL） | aaf345ea / 741a5a65 / fafc5849 | `docs/qa-report-2026-09-05.md` / `docs/performance-report.md` §5.4 / `docs/kpi-import-guide.md` | BP は第三者遮断で 100。自サイト由来 0 |
-| S11 | 最終検証と報告 | 未着手 | | | |
+| S11 | 最終検証と報告 | DONE | (このコミット) | `docs/remediation-final-report-2026-09-05.md` | 全検証を §55 の順で実行。8 件を DONE / BLOCKED_EXTERNAL で分類 |
 
 ## 未解決事項 8 件との対応
 
@@ -38,11 +39,16 @@
 | 7 | Best Practices 77 の原因分離 | S10 | DONE（自サイト由来 0 と実証） |
 | 8 | KPI 基準値 | S10 | DONE（機構）+ BLOCKED_EXTERNAL（実数の投入） |
 
-## 次にやること（実行が切れたらここから再開する）
+## 次にやること
 
-- S11（最終検証と報告）。指示書 §55 の順で全検査を流し、§58 の書式で最終報告を出す。
-  未解決事項 8 件を DONE / BLOCKED_EXTERNAL / FAILED で分類し、根拠を添える。
-- そのあと `fix/unresolved-items` を push し、PR を作って main へマージする。
+**S0〜S11 は終わった。** 最終報告は `docs/remediation-final-report-2026-09-05.md`。
+
+残っているのは運営者にしかできない 8 件（同報告の OWNER ACTION）。
+とくに次の 3 つは、片付くまでサイトの状態が「未確認のまま」である。
+
+1. 書影の利用条件の確認（`docs/cover-policy.md` §6）
+2. 実機での QA（`docs/qa-report-template.md`）
+3. マージと Pages 反映のあとの `npm run check:production`
 
 ## S4 時点の実測（S5 の出発点）
 

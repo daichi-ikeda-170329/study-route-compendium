@@ -9,12 +9,12 @@
 ## 1. 測り方（S0 から変えていない）
 
 ```bash
-npm run audit:performance -- --runs=9 --path=/science/ --label=after-s5 --port=4187
+npm run audit:performance -- --runs=9 --path=/science/ --label=final-s11 --port=4193
 ```
 
 | 項目 | 値 |
 |---|---|
-| 対象 URL | `http://127.0.0.1:4187/science/`（**localhost。本番ではない**） |
+| 対象 URL | `http://127.0.0.1:4193/science/`（**localhost。本番ではない**） |
 | Lighthouse | 13.4.1 |
 | Chrome | Google Chrome 152.0.7977.76 |
 | form factor | mobile |
@@ -29,33 +29,33 @@ npm run audit:performance -- --runs=9 --path=/science/ --label=after-s5 --port=4
 
 ## 2. 改修前と改修後
 
-証跡: `docs/perf/lighthouse-mobile-with3p-baseline-s0.json` / `…-after-s5.json`
+証跡: `docs/perf/lighthouse-mobile-with3p-baseline-s0.json`（S0・5 run）と
+`docs/perf/lighthouse-mobile-with3p-final-s11.json`（最終・9 run）。
 
-| 指標 | 改修前（S0） | 改修後（S5） | 判定 | 目標 |
+| 指標 | 改修前（S0） | 改修後（最終） | 判定 | 目標 |
 |---|---:|---:|---|---:|
 | Performance | 47 | **53** | 改善（+6） | 80 以上 → **未達** |
-| LCP | 12.09s | **11.06s** | 改善（−1.03s） | 4.0s 以下 → **未達** |
-| CLS | 0.217 | **0.217** | 横ばい（悪化なし） | 0.10 以下 → **未達** |
-| Speed Index | 7.53s | **4.55s** | 改善（−39.6%） | — |
-| Total Blocking Time | 0ms | 19ms | 微増 | — |
+| LCP | 12.09s | **10.99s** | 改善（−1.10s） | 4.0s 以下 → **未達** |
+| CLS | 0.217 | **0.216** | ほぼ横ばい（悪化なし） | 0.10 以下 → **未達** |
+| Speed Index | 7.53s | **4.56s** | 改善（−39.4%） | — |
 | Accessibility | 100 | 100 | 維持 | — |
-| Best Practices | 77 | 77 | 横ばい | S10 で扱う |
+| Best Practices | 77 | 77 | 横ばい（第三者遮断で 100。5.4 節） | — |
 | SEO | 100 | 100 | 維持 | — |
 
-**目標 3 つはいずれも未達である。** 達成したかのように書かない。
+**Performance・LCP・CLS の 3 つはいずれも目標に届いていない。** 達成したかのように書かない。
 何が効いて何が残っているかを 3 節以降に書く。
 
 ### 科目トップの HTML バイト数（決定的な値。ぶれない）
 
 | 科目 | 改修前 | 改修後 | 減 |
 |---|---:|---:|---:|
-| science | 977,442 | 165,181 | −83.1% |
-| social | 874,633 | 166,806 | −80.9% |
-| english | 607,760 | 151,150 | −75.1% |
-| japanese | 586,352 | 152,018 | −74.1% |
-| math | 471,171 | 143,163 | −69.6% |
-| shoron | 225,578 | 98,217 | −56.5% |
-| joho | 153,728 | 97,478 | −36.6% |
+| science | 977,442 | 157,273 | −83.9% |
+| social | 874,633 | 150,361 | −82.8% |
+| english | 607,760 | 143,242 | −76.4% |
+| japanese | 586,352 | 142,418 | −75.7% |
+| math | 471,171 | 136,775 | −71.0% |
+| shoron | 225,578 | 92,022 | −59.2% |
+| joho | 153,728 | 91,063 | −40.8% |
 
 **全科目が 250,000 バイトの予算に入り、理科は 200,000 バイトの予算にも入った。**
 `npm run check:budgets`（`test/performance-budget.test.mjs`）が上限を固定している。
