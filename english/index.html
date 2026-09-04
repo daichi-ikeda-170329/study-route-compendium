@@ -417,6 +417,29 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .uni-card__map .arw{color:var(--muted-2)}
 .uni-card__note{font-size:12.5px;color:var(--ink-2);line-height:1.75;padding-top:10px;border-top:1px solid var(--line-2)}
 .uni-card__note b{font-weight:800;color:var(--accent-deep)}
+/* 志望校モードの「文理・受験科目」確認（assets/js/bunri.js）。
+   学部名からの推定は候補として出すだけで、本人が選ぶまでルートを出さない */
+.bnr{margin-top:10px;padding:14px 15px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+.bnr-lead{font-size:13px;font-weight:700;color:var(--ink);line-height:1.7;margin:0 0 10px}
+.bnr-opts{display:flex;flex-wrap:wrap;gap:8px}
+.bnr-opt{flex:1 1 160px;min-height:44px;display:flex;flex-direction:column;justify-content:center;gap:2px;
+  padding:9px 12px;border:1px solid var(--line);border-radius:3px;background:var(--bg);cursor:pointer;
+  font:inherit;color:var(--ink);text-align:left}
+.bnr-opt b{font-size:12.5px;font-weight:800}
+.bnr-opt span{font-size:11px;color:var(--muted);line-height:1.5}
+.bnr-opt .bnr-hint{font-style:normal;font-size:10px;font-weight:700;color:var(--muted-2);
+  border:1px solid var(--line);border-radius:999px;padding:1px 6px;margin-left:6px;display:inline-block}
+.bnr-opt:hover{border-color:var(--accent)}
+.bnr-opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bnr-opt.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.bnr-opt.on b::before{content:"\2713 ";font-weight:900}
+.bnr-opt--unknown{flex:1 1 100%}
+.bnr-diff{margin-top:10px;padding:10px 12px;border-left:3px solid var(--line-2);background:var(--bg)}
+.bnr-diff p{font-size:12px;color:var(--ink-2);line-height:1.8;margin:0 0 6px}
+.bnr-diff p:last-child{margin-bottom:0}
+.bnr-note{font-size:11.5px;color:var(--muted);line-height:1.7;margin:10px 0 0}
+@media(max-width:420px){.bnr-opt{flex:1 1 100%}}
+
 .fx-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .fx-tag{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:3px;background:var(--accent-soft);color:var(--accent-deep);letter-spacing:.03em}
 /* --- study status --- */
@@ -1354,6 +1377,7 @@ gtag('config', 'G-DQ5WFXEFMX');
   </button>
 </nav>
 
+<script src="/assets/js/bunri.js"></script>
 <script src="/assets/js/share.js"></script>
 <script src="/assets/js/pace.js"></script>
 <script>
@@ -3312,9 +3336,15 @@ const QUIZ = [
 /* ============================================================
    STATE & NAV
    ============================================================ */
+/* bunri（英語では受験タイプ）は志望レベルから選ぶモードでのみ既定値を持つ。
+   画面上の切り替えが常に見えていて、本人が動かせるためである。
+   **志望校モードではこの値を使わない。** かつては国公立なら記述中心、私立なら
+   マーク中心と黙って決めていたが、国公立でもマーク中心の方式、私立でも記述の
+   多い方式があり、入力していない条件を入力したかのように使うことになる。
+   bunriConfirmed は本人が選んだ記録で、大学の設置区分からは立てない */
 const S = {view:"home", tier:null, bunri:"bun", policy:"omni", level:0,
            mode:"tier", uni:null, fac:"", sensei:null, moshi:0, hen:null, henAdj:null,
-           done:new Set(), autoLevel:null};
+           done:new Set(), autoLevel:null, bunriConfirmed:null, bunriPicked:null};
 const bookById = id => BOOKS.find(b=>b.id===id);
 
 /* ============================================================
@@ -3363,7 +3393,9 @@ function isMed(f){ return !!f && MED_RE.test(f) && !MED_NG_RE.test(f); }
 function resolveUni(u, fac){
   if(!u) return null;
   let tier = u.t, hen = u.h, extra = "";
-  let bunri = (u.ty==="私立") ? "ri" : "bun";
+  /* 設置区分からの読み替えは **候補** にとどめる。確定は本人の回答だけ */
+  const suggested = (u.ty==="私立") ? "ri" : "bun";
+  let bunri = S.bunriConfirmed || null;
   const med = isMed(fac);
   if(med){
     if(u.ty==="私立"){ tier = "shiritsui"; hen = Math.max(hen, 59); bunri = "ri"; extra = "医学部医学科は同大の他学部より英語の要求水準が大きく上がります。医系長文・語彙の対策に加え、大学ごとの形式差が非常に大きいため過去問への着手を早めてください。"; }
@@ -3373,8 +3405,24 @@ function resolveUni(u, fac){
     if(fac && !MED_RE.test(fac)){ tier = u.ty==="私立" ? "nikkoma" : "chikoku"; hen = Math.max(40, hen-12); extra="医学科以外の学科として判定しています。"; }
   }
   if(!med && fac && INTL_RE.test(fac)) extra += "国際・外国語系の学部は英語の配点・要求水準が高めです。語彙の2冊目と長文・リスニングの上乗せを推奨します。";
+  if(!bunri){
+    return {needsBunri:true, suggestedBunri:suggested,
+            reason:(u.ty==="私立" ? "私立大学のため、マーク中心と推定しました" : "国公立大学のため、記述中心と推定しました"),
+            tier, hen, med, extra, label:u.n + (fac ? " " + fac.trim() : "")};
+  }
   if(!ROUTES[tier][bunri]) bunri = ROUTES[tier].ri ? "ri" : "bun";
   return {tier, bunri, hen, med, extra, label:u.n + (fac ? " " + fac.trim() : "")};
+}
+
+/** 受験タイプの確認ボタンから呼ばれる。"bun"（記述中心）/ "ri"（マーク中心）/ "unknown" */
+function pickBunri(v){
+  S.bunriPicked = v;
+  S.bunriConfirmed = (v==="bun"||v==="ri") ? v : null;
+  if(S.bunriConfirmed){
+    S.bunri = S.bunriConfirmed;
+    document.querySelectorAll("#segBunri button").forEach(b=>b.classList.toggle("on", b.dataset.v===S.bunri));
+  }
+  applyUni();
 }
 
 /* ============================================================
@@ -3773,11 +3821,29 @@ function pickUni(i){
 function applyUni(){
   const box = document.getElementById("uniResult");
   if(!S.uni){
-    box.innerHTML = `<div class="note-card info" style="margin-top:4px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><p>大学名を入力して候補から選ぶと、その大学の<b>英語の出題傾向</b>(和訳・英作文・リスニング・超長文など)に合わせたルートと重点対策を表示します。学部・学科も入れると、医学部ルートへの切り替えまで自動で行います。</p></div>`;
+    box.innerHTML = `<div class="note-card info" style="margin-top:4px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><p>大学名と学部を手がかりに、登録済みの到達目安と出題傾向から近いレベルの参考書ルートを提案します。個別試験の形式（記述中心 / マーク中心）は最後に確認します。大学・学部・入試方式によって必要科目は異なるため、出願時は公式募集要項を確認してください。</p></div>`;
     document.getElementById("routeOutput").innerHTML = "";
     return;
   }
   const r = resolveUni(S.uni, S.fac);
+  if(r.needsBunri){
+    /* 受験タイプが決まるまではルートを出さない */
+    const t0 = TIERS.find(x=>x.id===r.tier);
+    document.getElementById("routeOutput").innerHTML = "";
+    box.innerHTML = `
+      <div class="uni-card" style="--tc:${t0.color}">
+        <div class="uni-card__top"><h4>${r.label}</h4><span>${S.uni.ty} ・ 英語の到達目安 偏差値 ${r.hen}</span></div>
+        <div class="uni-card__map">
+          <span class="tag">${t0.name} ルート</span><span class="arw">/</span><span>出題形式は未確認</span>
+        </div>
+        <div class="uni-card__note"><b>英語の出題傾向:</b> ${S.uni.no}。${r.extra||""}</div>
+      </div>
+      ${typeof RTBunri!=="undefined"
+        ? RTBunri.promptHTML({kind:"examtype", suggested:r.suggestedBunri, reason:r.reason,
+                              handler:"pickBunri", picked:S.bunriPicked})
+        : `<div class="bnr"><p class="bnr-lead">個別試験の形式を下の「個別最適化」から選ぶと、ルートを表示します。</p></div>`}`;
+    return;
+  }
   S.tier = r.tier; S.bunri = r.bunri; S.sensei = null;
   document.querySelectorAll("#segBunri button").forEach(b=>b.classList.toggle("on", b.dataset.v===r.bunri));
   const t = TIERS.find(x=>x.id===r.tier);
@@ -3828,6 +3894,8 @@ function wireSeg(id, key, cb){
     const b = e.target.closest("button"); if(!b) return;
     document.querySelectorAll(`#${id} button`).forEach(x=>x.classList.toggle("on",x===b));
     S[key] = key==="level" ? +b.dataset.v : b.dataset.v;
+    /* 画面上の切り替えを本人が動かしたら、確定した回答として扱う */
+    if(key==="bunri"){ S.bunriConfirmed = b.dataset.v; S.bunriPicked = b.dataset.v; }
     if(cb) cb();
   });
 }
@@ -4247,6 +4315,30 @@ function applySharedUni(name){
   return true;
 }
 
+
+/**
+ * 共有 URL に大学名（ru）を載せてよいかを判定し、載せてよいときだけ名前を返す。
+ *
+ * 共有 URL は「志望レベル・型・方針・現在地」しか持たない。学部名は個人が
+ * 特定されうるので入れない。ところが受け取り側では大学名から判定をやり直すため、
+ * 学部の入力で志望レベルが動いていた場合（医学部医学科など）、共有先では
+ * 学部なしの判定に戻り、**元の結果と違う教材列が出る**。
+ *
+ * そこでここでは「共有先と同じ初期状態で解き直しても同じ結果になるか」を確かめ、
+ * ならないときは大学名を載せない。載せないときは表示ラベルも志望レベル名になり、
+ * 大学名・学部名は共有文にも出ない。
+ */
+function sharedUniName(){
+  if(!(S.mode==="uni" && S.uni)) return null;
+  const keep = S.bunriConfirmed;
+  /* 受験区分はトークンに載るので、共有先でも同じ値が入る */
+  S.bunriConfirmed = S.bunri;
+  let r = null;
+  try { r = resolveUni(S.uni, ""); } catch(e){ r = null; } finally { S.bunriConfirmed = keep; }
+  if(!r || r.needsBunri) return null;
+  return (r.tier === S.tier && r.bunri === S.bunri) ? S.uni.n : null;
+}
+
 /* 共有 URL に回答が載っていれば、ここで結果画面を復元する */
 RTPace.setup({ today: ()=>new Date() });
 
@@ -4268,7 +4360,7 @@ RTShare.setup({
       }
       const t = TIERS.find(x=>x.id===S.tier);
       if(!t) return null;
-      const uni = (S.mode==="uni" && S.uni) ? S.uni.n : null;
+      const uni = sharedUniName();
       return {
         tokens:["t", t.id, S.bunri, S.policy, String(S.level)],
         uni: uni,
@@ -4292,6 +4384,8 @@ RTShare.setup({
       if(!TIERS.some(x=>x.id===tk[1]) || !ROUTES[tk[1]] || !ROUTES[tk[1]][tk[2]]) return false;
       if(POLICIES_OK.indexOf(tk[3])<0) return false;
       S.level = level; S.autoLevel = null; S.bunri = tk[2]; S.policy = tk[3];
+      /* 受験タイプはトークンに載っている＝共有した人が確定させた値 */
+      S.bunriConfirmed = tk[2]; S.bunriPicked = tk[2];
       syncRouteSegs();
       if(uni && applySharedUni(uni)) return true;
       selectTier(tk[1]); return true;

@@ -124,6 +124,9 @@ export function loadPage(dir) {
     URL, URLSearchParams,
     setTimeout() {}, setInterval() {}, addEventListener() {}, requestAnimationFrame() {},
     RTShare: fakeShare,
+    /* 志望校モードの文理確認（assets/js/bunri.js）。実物を読み込む。
+       スタブに差し替えると「推定を出さない学部名」の判定まで嘘になる */
+    RTBunri: require(path.join(ROOT, 'assets/js/bunri.js')),
     /* ペース表示は DOM を読むだけなので、テストでは何もしない差し替えで足りる */
     RTPace: { setup() {}, apply() {} },
   };
