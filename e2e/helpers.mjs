@@ -82,11 +82,39 @@ export async function horizontalOverflow(page) {
   });
 }
 
-/** コンソールのエラーと未処理の Promise 拒否を集める */
+/**
+ * 第三者（広告・解析）の枠が出すノイズ。**自分たちの不具合ではない。**
+ *
+ * AdSense の iframe は自身の Content-Security-Policy に基づく報告を、
+ * 埋め込み元のコンソールへ出す（`[Report Only] Refused to frame …
+ * frame-ancestors 'self'`）。ネットワークのある環境（CI）でだけ出るので、
+ * 落とすとサイト側の不具合と区別がつかなくなる。
+ *
+ * **ここを緩めるときは慎重に。** 自分たちのコードのエラーまで隠すと、
+ * この検査そのものが意味を失う。パターンは第三者の配信元に限定する。
+ */
+const THIRD_PARTY_NOISE = [
+  /\[Report Only\].*frame-ancestors/i,
+  /googlesyndication|doubleclick|googletagmanager|google-analytics|pagead|adsbygoogle/i,
+  /Failed to load resource.*(googlesyndication|doubleclick|pagead|google-analytics)/i,
+];
+
+/**
+ * コンソールのエラーと未処理の Promise 拒否を集める。
+ * 第三者の広告・解析が出すノイズは除く（上の理由）。
+ */
 export function collectErrors(page) {
   const errors = [];
-  page.on('console', m => { if (m.type() === 'error') errors.push(`console: ${m.text()}`); });
-  page.on('pageerror', e => errors.push(`pageerror: ${e.message}`));
+  const keep = (text) => !THIRD_PARTY_NOISE.some(re => re.test(text));
+  page.on('console', m => {
+    if (m.type() !== 'error') return;
+    const t = `console: ${m.text()}`;
+    if (keep(t)) errors.push(t);
+  });
+  page.on('pageerror', e => {
+    const t = `pageerror: ${e.message}`;
+    if (keep(t)) errors.push(t);
+  });
   return errors;
 }
 

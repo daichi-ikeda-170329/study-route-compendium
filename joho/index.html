@@ -563,8 +563,8 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 /* ---------- Footer: other subjects ---------- */
 .foot-subjects{max-width:1140px;margin:0 auto 22px;padding:0 4px}
 .foot-subjects__t{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--muted-2);margin-bottom:11px;text-align:center;text-transform:uppercase}
-.foot-subjects__list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-@media(min-width:700px){.foot-subjects__list{grid-template-columns:repeat(4,1fr)}}
+.foot-subjects__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media(min-width:700px){.foot-subjects__list{grid-template-columns:repeat(4,minmax(0,1fr))}}
 /* 科目が増減しても崩れないよう、列数ではなく 1 列の下限幅で折り返させる */
 @media(min-width:1000px){.foot-subjects__list{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}}
 .foot-subjects a{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);padding:10px 10px;transition:.16s;text-decoration:none;box-shadow:var(--sh-s)}
@@ -573,7 +573,7 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.0
 .fs-mark{width:26px;height:26px;flex:none;display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:13px;color:#fff;background:var(--fsc);border-radius:3px}
 .fs-txt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
 /* 「小論文ルート大全」（8 字）が 1 行に収まる字幅。ここを広げると折り返す */
-.fs-txt b{font-size:11.5px;font-weight:700;letter-spacing:0;color:var(--ink);white-space:nowrap}
+.fs-txt b{font-size:11.5px;font-weight:700;letter-spacing:0;color:var(--ink);white-space:nowrap;overflow-wrap:anywhere}@media(max-width:420px){.fs-txt b{white-space:normal}}
 .fs-txt span{font-family:var(--mono);font-size:9px;color:var(--muted-2);letter-spacing:.04em;margin-top:2px}
 
 /* ---------- 参考書の詳細ページへの導線 ---------- */
