@@ -1,0 +1,58 @@
+{
+  "note": "KPI として取り込んでよい列と、その型。build/import-kpi.mjs がこの定義だけを通す。手で足すときは docs/kpi-import-guide.md も同時に直す。",
+  "note2": "**個人が特定できる列は受け取らない。** rejectColumns に載っているものが 1 つでも入っていたら、そのファイルはまるごと取り込まない。",
+  "schemaVersion": 1,
+
+  "period": {
+    "days": 28,
+    "note": "3 つのサービスを同じ 28 日間でそろえる。期間が違う数字を並べても比べられない。"
+  },
+
+  "rejectColumns": [
+    "user id", "userid", "user_id", "client id", "clientid", "client_id",
+    "ユーザー id", "ユーザーid",
+    "ip", "ip address", "ipアドレス",
+    "email", "メールアドレス",
+    "query", "検索クエリ", "search query", "search terms", "検索語",
+    "landing page + query string",
+    "device id", "advertising id", "idfa", "gaid",
+    "city", "市区町村", "latitude", "longitude", "緯度", "経度"
+  ],
+  "rejectNote": "検索クエリを外すのは、個人名や志望校を含む語がそのまま残ることがあるため。市区町村・緯度経度は、少数の利用者しかいない地域では個人の特定につながるため。",
+
+  "sources": {
+    "searchConsole": {
+      "displayName": "Google Search Console",
+      "exportHint": "検索パフォーマンス → 日付で 28 日間を指定 → エクスポート（CSV）。**「クエリ」タブではなく「概要」の合計値を使う。**",
+      "metrics": {
+        "clicks": { "type": "integer", "min": 0, "columns": ["clicks", "クリック数"] },
+        "impressions": { "type": "integer", "min": 0, "columns": ["impressions", "表示回数"] },
+        "ctr": { "type": "ratio", "min": 0, "max": 1, "columns": ["ctr", "クリック率"] },
+        "position": { "type": "number", "min": 1, "max": 1000, "columns": ["position", "掲載順位", "平均掲載順位"] }
+      }
+    },
+    "ga4": {
+      "displayName": "Google アナリティクス 4",
+      "exportHint": "レポート → エンゲージメント → 期間を 28 日にして、**集計値**をエクスポートする。ユーザー単位の内訳は含めない。",
+      "metrics": {
+        "sessions": { "type": "integer", "min": 0, "columns": ["sessions", "セッション", "セッション数"] },
+        "engagementRate": { "type": "ratio", "min": 0, "max": 1, "columns": ["engagement rate", "エンゲージメント率"] },
+        "activeUsers": { "type": "integer", "min": 0, "columns": ["active users", "アクティブ ユーザー", "アクティブユーザー数"] }
+      }
+    },
+    "adsense": {
+      "displayName": "Google AdSense",
+      "exportHint": "レポート → 期間を 28 日にしてダウンロード。**サイト単位の合計だけ**を使う。",
+      "metrics": {
+        "pageViews": { "type": "integer", "min": 0, "columns": ["page views", "ページビュー", "ページビュー数"] },
+        "estimatedEarnings": { "type": "currency", "min": 0, "columns": ["estimated earnings", "推定収益額", "見積もり収益額"] },
+        "rpm": { "type": "currency", "min": 0, "columns": ["page rpm", "ページ rpm", "ページRPM"] }
+      }
+    }
+  },
+
+  "currency": {
+    "allowed": ["JPY"],
+    "note": "通貨は 1 つだけを受け取る。混ざると合計が意味を失う。"
+  }
+}

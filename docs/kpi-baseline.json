@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "period": {
+    "start": null,
+    "end": null,
+    "days": 28
+  },
+  "collectedAt": null,
+  "currency": null,
+  "sources": {
+    "searchConsole": {
+      "clicks": null,
+      "impressions": null,
+      "ctr": null,
+      "position": null
+    },
+    "ga4": {
+      "sessions": null,
+      "engagementRate": null,
+      "activeUsers": null
+    },
+    "adsense": {
+      "pageViews": null,
+      "estimatedEarnings": null,
+      "rpm": null
+    }
+  },
+  "notes": [
+    "値の入っていない雛形。実数はまだ取り込んでいない。"
+  ]
+}

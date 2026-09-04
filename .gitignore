@@ -11,3 +11,6 @@ build/.cache/
 test-results/
 playwright-report/
 dist/
+
+# KPI の入力（管理画面から出した集計 CSV）。**リポジトリにも公開物にも入れない**
+private/
