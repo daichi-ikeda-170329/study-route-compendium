@@ -26,6 +26,7 @@ import { isProvisional, provisionalLast, PROVISIONAL_LABEL, loadNewBooks } from 
 import { bookCard } from '../build/lib/cards.mjs';
 import { SUBJECTS } from '../build/lib/extract.mjs';
 import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
+import { subjectAppSource, subjectHtml, subjectMigrated } from './helpers.mjs';
 import { hensachiRange, byDifficultyAsc, byDifficultyDesc } from '../build/lib/rank.mjs';
 import { postF, weightedLen, X_LIMIT } from '../build/gen-x-posts.mjs';
 
@@ -152,7 +153,10 @@ test('科目トップすべてに評価未了の分岐が入っている', () =>
   // 1 枚でも落ちていると、その科目だけ画面に undefined が出る。
   // 科目トップは手書きの HTML で、同じ修正を科目の数だけ当てる形になるため取りこぼしやすい
   for (const s of SUBJECTS) {
-    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    // 移行済み科目では描画コードが assets/js/subject-<科目>.js にある。
+    // CSS は科目トップの <style> に残るので、見る先を分ける
+    const src = subjectAppSource(s.dir);
+    const html = subjectHtml(s.dir);
     assert.ok(src.includes('function isProv(b)'), `${s.dir}: isProv が無い`);
     assert.ok(src.includes('function provLast(a,b)'), `${s.dir}: provLast が無い`);
     assert.ok(src.includes(`const PROV_LABEL = "${PROVISIONAL_LABEL}"`),
@@ -164,8 +168,16 @@ test('科目トップすべてに評価未了の分岐が入っている', () =>
     assert.ok(src.includes('(b.cons||[])'), `${s.dir}: cons の guard が無い`);
     assert.ok(src.includes('function byDiffAsc(a,b)'), `${s.dir}: やさしい順の比較子が無い`);
     assert.ok(src.includes('function byDiffDesc(a,b)'), `${s.dir}: 難しい順の比較子が無い`);
-    assert.ok(src.includes('.bc-prov{'), `${s.dir}: バッジの CSS が無い`);
-    assert.ok(src.includes(BEGIN) && src.includes(END), `${s.dir}: NEW BOOKS のマーカー区間が無い`);
+    assert.ok(html.includes('.bc-prov{'), `${s.dir}: バッジの CSS が無い`);
+    if (subjectMigrated(s.dir)) {
+      // 移行済み科目では新刊は data/subjects/<科目>/books.json へ入る。
+      // マーカー区間は HTML にしか無い仕組みなので、代わりに canonical 側の受け皿を見る
+      assert.ok(!html.includes(BEGIN), `${s.dir}: 移行済みなのに NEW BOOKS のマーカーが残っている`);
+      assert.ok(fs.existsSync(path.join(ROOT, 'data', 'subjects', s.dir, 'books.json')),
+        `${s.dir}: books.json が無い`);
+    } else {
+      assert.ok(src.includes(BEGIN) && src.includes(END), `${s.dir}: NEW BOOKS のマーカー区間が無い`);
+    }
   }
 });
 
@@ -174,7 +186,7 @@ test('科目トップの難易度順は、偏差値まで見て並び、評価�
   // 科目トップの比較子を実際に動かして並びを確かめる。
   // 生成側（build/lib/rank.mjs）と同じ結果になっていなければならない。
   for (const s of SUBJECTS) {
-    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    const src = subjectAppSource(s.dir);
     const i = src.indexOf('function hRange(b){');
     const j = src.indexOf('\n}\n', src.indexOf('function byDiffDesc(a,b){', i));
     assert.ok(i > 0 && j > i, `${s.dir}: 比較子の定義が見つからない`);
@@ -223,7 +235,7 @@ test('生成側の難易度順（build/lib/rank.mjs）も同じ規則で並ぶ',
 test('英語の現在地推定は、評価未了の本を最難関と誤判定しない', () => {
   // bookLv は英語だけが持つ。diff を持たない本をそのまま通すと比較が全部 false になり、
   // 「最難関を終えた人」に化けて診断の現在地が跳ね上がる
-  const src = fs.readFileSync(path.join(ROOT, 'english', 'index.html'), 'utf8');
+  const src = subjectAppSource('english');
   const m = src.match(/function bookLv\(b\)\{[^}]*\}/);
   assert.ok(m, 'bookLv が見つからない');
   const bookLv = vm.runInNewContext(

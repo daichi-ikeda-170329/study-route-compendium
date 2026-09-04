@@ -491,7 +491,7 @@ if (onlyDir && targets.length === 0) {
 
 for (const sub of targets) {
   const d = data[sub.dir];
-  const config = extractConfig(ROOT, sub.dir);
+  const config = d.config;
   const list = onlyId ? d.books.filter(b => b.id === onlyId) : d.books;
   if (onlyId && list.length === 0) {
     console.error(`${sub.dir}: id "${onlyId}" が見つからない`);
@@ -509,12 +509,15 @@ for (const sub of targets) {
 saveDates();
 console.log(`合計 ${written} ページを生成した。`);
 
-/** 科目ページの CONFIG（アフィリエイト ID）を読む */
-function extractConfig(root, dir) {
-  const src = fs.readFileSync(path.join(root, dir, 'index.html'), 'utf8');
-  const pick = (key) => {
-    const m = src.match(new RegExp(`${key}:\\s*"([^"]*)"`));
-    return m ? m[1] : '';
-  };
-  return { amazonTag: pick('amazonTag'), rakutenId: pick('rakutenId') };
-}
+/*
+ * ここには以前 extractConfig() があり、科目 HTML を正規表現で読んで
+ * アフィリエイト ID を取っていた。
+ *
+ *     const m = src.match(new RegExp(`${key}:\\s*"([^"]*)"`));
+ *
+ * CONFIG を HTML の外へ出すと何にもマッチしなくなり、**例外も警告も出さずに空文字**に
+ * なる。その結果、購入リンクから tag= と経路 ID が消え、rel="sponsored" と
+ * 広告リンクの注記も消えた（2026-09-05 に joho の移行で実際に起きた）。
+ * いまは loadSubjectData() の config を使う。**ここに正規表現で読む実装を戻さない。**
+ * test/affiliate-disclosure.test.mjs の「購入リンク」の検査が固定している。
+ */

@@ -398,3 +398,27 @@ img, svg, video, iframe { max-width: 100%; }
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   科目トップのデータ読み込み状態（assets/js/subject-loader.js）
+
+   データは HTML の外（assets/generated/subjects/）にあり、fetch で取る。
+   失敗したときに無限スピナーにしない。再試行と、JS 無しでも辿れる通常リンクを出す。
+   高さを確保して、出入りで版面がずれない（CLS を出さない）ようにする。
+   ============================================================ */
+.rt-load-status{
+  min-height:2.75rem; margin:1rem auto; max-width:min(72rem,92vw);
+  padding:.75rem 1rem; border:1px solid var(--line,#DDD6C9); border-radius:.5rem;
+  background:var(--card,#FFFDF8); font-size:.9375rem; line-height:1.6;
+  display:flex; flex-wrap:wrap; align-items:center; gap:.75rem;
+}
+.rt-load-status[hidden]{display:none}
+.rt-load-status p{margin:0}
+.rt-load-retry,.rt-load-alt{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:44px; min-width:44px; padding:.5rem 1rem;
+  border-radius:.375rem; font:inherit; font-weight:600; text-decoration:none;
+  border:1px solid var(--line,#DDD6C9); background:var(--bg,#F6F4EF); color:inherit; cursor:pointer;
+}
+.rt-load-retry:hover,.rt-load-alt:hover{background:var(--card,#FFFDF8)}
+.rt-load-retry:focus-visible,.rt-load-alt:focus-visible{outline:2px solid currentColor; outline-offset:2px}

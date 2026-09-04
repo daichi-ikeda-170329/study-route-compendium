@@ -90,6 +90,55 @@ export function fileDate(relPath) {
   return recordDate(`file:${relPath}`, stripped);
 }
 
+/**
+ * 科目の「中身が変わった日」。
+ *
+ * `fileDate('<科目>/index.html')` を使ってはいけない。科目データを HTML の外へ
+ * 移した時点でファイルのバイト列が大きく変わり、**読者に見える中身は 1 文字も
+ * 変わっていないのに**、その科目から派生する一覧・おすすめ・ルートの全ページに
+ * 新しい更新日が付く。このファイルの先頭に書いたとおり、それは検索向けの偽更新にあたる。
+ *
+ * そこで日付の根拠を「読者に見える中身」に揃える。
+ *   - 科目 HTML から `<script>` を全部落としたもの（markup と <style>）
+ *   - canonical な科目データ（BOOKS / ROUTES / TIERS / GUIDES / STAGES と大学の件数）
+ *
+ * 配信アセットのハッシュ（`?v=`）やマニフェストは `<script>` の中なので、
+ * 再生成しただけでは日付が動かない。データや文面を直せば動く。
+ *
+ * 台帳のキーを `file:<科目>/index.html` から `subject/<科目>` へ移すとき、
+ * **前のキーの日付を引き継ぐ**（引き継がないと 7 科目すべてが「今日」になる）。
+ */
+export function subjectContentDate(dir, data) {
+  const rel = `${dir}/index.html`;
+  let html = '';
+  try {
+    html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  } catch { /* まだ無いなら空で扱う */ }
+  const markup = html
+    .replace(/<script[\s\S]*?<\/script>/g, '')
+    // 読み込み状態の受け皿は、データを外へ出す仕組みが置く足場で、読者に見える中身ではない
+    .replace(/<div id="rtLoadStatus"[^>]*><\/div>\s*/g, '')
+    .replace(/\d{4}-\d{2}-\d{2}/g, '');
+
+  const value = {
+    markup,
+    books: data.books, routes: data.routes, tiers: data.tiers,
+    guides: data.guides, stages: data.stages, unis: data.unis.length,
+  };
+
+  const key = `subject/${dir}`;
+  if (!ledger.records[key]) {
+    const prev = ledger.records[`file:${rel}`];
+    if (prev) {
+      // 求め方を変えただけ。**いまの中身のハッシュに前の日付を結び付ける**ので、
+      // 切り替えの瞬間に日付が動かない。次に中身が変われば普通に進む
+      ledger.records[key] = { h: hashOf(value), d: prev.d };
+      dirty = true;
+    }
+  }
+  return recordDate(key, value);
+}
+
 /** 台帳を書き戻す。変化が無ければ何もしない（差分を無駄に作らない） */
 export function saveDates() {
   if (!dirty) return;

@@ -17,7 +17,7 @@ import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { adUnit } from './lib/ads.mjs';
-import { fileDate, saveDates } from './lib/updated.mjs';
+import { subjectContentDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -106,8 +106,8 @@ function sideList(steps, bookById, sub, stages) {
 }
 
 function render(sub, d, tier, norm, counts) {
-  // ルートの中身は科目 HTML の ROUTES がすべて。その最終コミット日を更新日にする
-  const updated = fileDate(`${sub.dir}/index.html`);
+  // ルートの中身は科目データの ROUTES がすべて。**読者に見える中身が変わった日**を更新日にする
+  const updated = subjectContentDate(sub.dir, d);
   const bookById = new Map(d.books.map(b => [b.id, b]));
   const url = `${ORIGIN}/${sub.dir}/routes/${tier.id}/`;
   const node = norm[tier.id];
@@ -311,7 +311,7 @@ ${jsonLd(ld)}
 
 /** 科目ごとの志望レベル一覧ページ */
 function renderIndex(sub, d, norm, counts) {
-  const updated = fileDate(`${sub.dir}/index.html`);
+  const updated = subjectContentDate(sub.dir, d);
   const url = `${ORIGIN}/${sub.dir}/routes/`;
   const tiers = d.tiers.filter(t => norm[t.id]);
   const title = `${sub.ja}の志望校別 参考書ルート一覧｜共通テストから最難関まで - ${sub.full}`;

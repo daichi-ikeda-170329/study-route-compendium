@@ -17,7 +17,7 @@ import { tally } from './lib/tally.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { byDifficultyAsc } from './lib/rank.mjs';
-import { fileDate, saveDates } from './lib/updated.mjs';
+import { subjectContentDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -46,7 +46,7 @@ function card(b, sub, stages, t, rank) {
 }
 
 function render(sub, d, counts) {
-  const updated = fileDate(`${sub.dir}/index.html`);
+  const updated = subjectContentDate(sub.dir, d);
   const url = `${ORIGIN}/${sub.dir}/osusume/`;
   const t = tally(d.routes, d.tiers);
 

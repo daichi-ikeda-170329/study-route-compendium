@@ -44,6 +44,30 @@ const stub = () => new Proxy(function () {}, {
 
 export const SUBJECTS = ['english', 'japanese', 'math', 'science', 'social'];
 
+/**
+ * 科目トップの描画・操作コードの中身を返す。
+ *
+ * 移行済みの科目では assets/js/subject-<科目>.js に、未移行の科目では
+ * <科目>/index.html のインライン <script> にある。**どちらでも同じ検査が通るように**
+ * 取得先をここへ 1 本化する。移行のたびにテストを書き換えると、
+ * 「テストが移行に合わせて緩んだのか、実装が正しいのか」が分からなくなる。
+ */
+export function subjectAppSource(dir) {
+  const ext = path.join(ROOT, 'assets', 'js', `subject-${dir}.js`);
+  if (fs.existsSync(ext)) return fs.readFileSync(ext, 'utf8');
+  return fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+}
+
+/** 科目トップの HTML（markup と <style>）。CSS の検査はこちらを見る */
+export function subjectHtml(dir) {
+  return fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+}
+
+/** その科目のデータが data/subjects/ へ移っているか */
+export function subjectMigrated(dir) {
+  return fs.existsSync(path.join(ROOT, 'data', 'subjects', dir, 'books.json'));
+}
+
 /** 科目ページから QUIZ 配列を取り出す */
 export function loadQuiz(dir) {
   const src = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');

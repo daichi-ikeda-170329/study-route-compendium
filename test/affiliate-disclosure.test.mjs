@@ -164,6 +164,82 @@ test('ID があるときは、生成された全書籍ページに開示が出�
   assert.deepEqual(missing.slice(0, 20), [], `${missing.length} 枚で開示が欠けている:\n${missing.slice(0, 20).join('\n')}`);
 });
 
+test('購入リンクにアフィリエイトの経路が残っている', () => {
+  // 開示文（フッター）だけを見ていると取りこぼす。
+  // 2026-09-05 に joho を移行したとき、build/generate-books.mjs が持っていた
+  // **3 つ目の**「科目 HTML を正規表現で読む CONFIG 読み取り」が空文字を返し、
+  // 購入リンクから tag= と楽天の経路 ID、rel="sponsored"、広告リンクの注記が
+  // まとめて消えた。開示文は parts.mjs 経由なので無事で、テストは通ってしまった。
+  const missing = [];
+  let checked = 0;
+  for (const s of SUBJECTS) {
+    const cfg = loadSubjectData(ROOT, s.dir).config;
+    const dir = path.join(ROOT, s.dir, 'books');
+    if (!fs.existsSync(dir)) continue;
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (!e.isDirectory()) continue;
+      const f = path.join(dir, e.name, 'index.html');
+      if (!fs.existsSync(f)) continue;
+      const src = fs.readFileSync(f, 'utf8');
+      const buy = src.slice(src.indexOf('class="buy"'), src.indexOf('buy__note'));
+      if (!buy) continue;
+      // 電子版しか無い等で購入リンクを持たない本があるので、リンクがある本だけ見る
+      if (!/class="az"/.test(buy) && !/class="rk"/.test(buy)) continue;
+      checked++;
+      const where = `${s.dir}/books/${e.name}/`;
+      if (cfg.amazonTag && /class="az"/.test(buy)) {
+        if (!buy.includes(`tag=${cfg.amazonTag}`)) missing.push(`${where} — Amazon の tag= が無い`);
+        if (!/class="az"[^>]*rel="[^"]*sponsored/.test(buy)) missing.push(`${where} — Amazon リンクに rel=sponsored が無い`);
+      }
+      if (cfg.rakutenId && /class="rk"/.test(buy)) {
+        if (!buy.includes(cfg.rakutenId)) missing.push(`${where} — 楽天の経路 ID が無い`);
+        if (!/class="rk"[^>]*rel="[^"]*sponsored/.test(buy)) missing.push(`${where} — 楽天リンクに rel=sponsored が無い`);
+      }
+    }
+  }
+  assert.ok(checked > 1200, `購入リンクを持つ書籍ページが ${checked} 枚しか無い。先に npm run build を流す`);
+  assert.deepEqual(missing.slice(0, 20), [],
+    `${missing.length} 件で購入リンクの経路が欠けている:\n${missing.slice(0, 20).join('\n')}`);
+});
+
+test('広告リンクの注記が、ID がある販売サイトの名前で出ている', () => {
+  const pages = sampleBookPages();
+  for (const p of pages) {
+    if (!/class="az"|class="rk"/.test(p.src)) continue;
+    const note = p.src.slice(p.src.indexOf('buy__note'), p.src.indexOf('buy__note') + 400);
+    if (!AFF) continue;
+    assert.match(note, /広告リンクです/, `${p.rel}: 購入リンクの広告注記が消えている`);
+  }
+});
+
+test('科目 HTML を正規表現で読んで CONFIG を取るコードが build/ に残っていない', () => {
+  // 同じ事故が別のスクリプトで再発しないようにする。
+  // 2026-09 時点で、この読み方は extract.mjs / generate-books.mjs / load-subject-data.mjs の
+  // 3 か所にあった（うち 2 つは移行で壊れた）。
+  const bad = [];
+  const walk = (d) => {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      if (['.cache', 'data', 'content', 'ogp'].includes(e.name)) continue;
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) { walk(p); continue; }
+      if (!e.name.endsWith('.mjs')) continue;
+      const code = stripComments(fs.readFileSync(p, 'utf8'));
+      // 危ないのは「ID のキー名から検索の型を組み立てて、HTML の文字列に当てる」形。
+      // config.amazonTag のように canonical データから読む書き方は問題ない。
+      const buildsPattern = /(?:new RegExp\([^)]*|\/[^\n\/]*)(?:amazonTag|rakutenId)/.test(code);
+      if (buildsPattern && /\.match\(/.test(code)) {
+        bad.push(path.relative(ROOT, p));
+      }
+    }
+  };
+  walk(path.join(ROOT, 'build'));
+  // ポータル（index.html）の CONFIG はまだ HTML にある。generate-legal.mjs はそれを読む。
+  // 科目データの移行とは別の話なので、いまは対象外にする。
+  const allowed = new Set(['build/generate-legal.mjs']);
+  assert.deepEqual(bad.filter(f => !allowed.has(f)), [],
+    `CONFIG は canonical データから読む。HTML を正規表現で読むと、移行したときに黙って空になる:\n${bad.join('\n')}`);
+});
+
 test('開示文に ID そのものが出ていない', () => {
   const cfg = loadSubjectData(ROOT, SUBJECTS[0].dir).config;
   const pages = sampleBookPages(1);
