@@ -18,7 +18,7 @@
 | S3 | 科目移行 前半（joho/shoron/math） | DONE | 9d4f6a85 / 4ec7d262 / 8c46c52d / c1d732f3 | `build/migrate-subject.mjs` / `data/subjects/{joho,shoron,math}/` | joho 153,728→97,472 / shoron 225,578→98,211 / math 471,171→143,139 バイト |
 | S4 | 科目移行 後半（science/english/japanese/social） | DONE | 92d09408 / 3 件 / 7f596b06 / 70b07c22 | `data/subjects/*/` / `test/subject-loader.test.mjs` | 7 科目すべて移行。全科目 250KB 予算内（最大 166,782） |
 | S5 | 性能予算の達成 | DONE（目標一部未達） | a893ad6c / (このコミット) | `docs/performance-report.md` / `test/performance-budget.test.mjs` | バイト予算は達成。Performance 47→53 / SI 7.53s→4.55s。目標 80 / 4.0s / 0.10 は未達で、残因は Google Fonts |
-| S6 | 進捗管理 | 未着手 | | | |
+| S6 | 進捗管理 | DONE | a28dc50a | `assets/js/progress.js` / `/progress/` / `test/progress.test.mjs` / `e2e/progress.spec.mjs` | 残り時間の下限・上限に同じ係数。既存キー無傷。ネットワーク流出 0 |
 | S7 | 任意の追加質問 | 未着手 | | | |
 | S8 | 詳細検索 | 未着手 | | | |
 | S9 | 書影の出所台帳 | 未着手 | | | |
@@ -30,7 +30,7 @@
 | # | 事項 | 担当 CP | 状態 |
 |---|---|---|---|
 | 1 | 科目データの分離 | S1〜S5 | DONE（性能目標は一部未達。`docs/performance-report.md` に実測と残因） |
-| 2 | 進捗管理の拡張 | S6 | 未着手 |
+| 2 | 進捗管理の拡張 | S6 | DONE |
 | 3 | 任意の追加質問 | S7 | 未着手 |
 | 4 | 検索の絞り込み拡張 | S8 | 未着手 |
 | 5 | 書影の出所台帳 | S9 | 未着手 |
@@ -40,12 +40,12 @@
 
 ## 次にやること（実行が切れたらここから再開する）
 
-- S6 に着手する。`assets/js/progress.js`（`rt_learning_progress`）と `/progress/` を作る。
-  **`/progress/` を作るときは指示書 §4.4 の 5 項目を全部通す。**
-  とくに `build/build-public.mjs` の `ALLOW_DIRS` への追加と、
-  `build/generate-sitemap.mjs` からの除外（`noindex,follow` のため）を忘れない。
-- 既存の `rt_saved_routes` / `rt_pace` を壊さないこと。残り時間の計算は
-  `assets/js/pace.js` の下限・上限の幅を維持する（片方だけに進捗を掛けない）。
+- S7 に着手する。`assets/js/refine.js`（診断のあとの任意の追加質問）を作る。
+  **既存の `QUIZ` と共有 URL スキーマを変えない。** 追加質問は結果の**後ろ**に置く
+  独立した層にして、スキップしたときの結果と共有 URL が改修前と完全に一致することを
+  fixture で固定する。
+- 追加回答を URL にも解析にも入れない。共有ボタンに「共有されるのは基礎診断の結果で、
+  端末内の追加回答と進捗は含まれません」と出す。
 
 ## S4 時点の実測（S5 の出発点）
 
@@ -230,6 +230,28 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
 4. **性能目標 3 つは未達。達成と書かない。**
    Performance 53（目標 80）/ LCP 11.06s（目標 4.0s）/ CLS 0.217（目標 0.10）。
    バイト予算（全科目 250,000 未満・理科 200,000 未満）は達成。
+
+### S6 で決めたこと
+
+1. **コミットを 2 つに分けず 1 つにした（指示書 §35 からの逸脱）。**
+   指示書は「ストア」と「週次＋JSON 入出力」を分ける想定だが、`/progress/` の画面は
+   ストア無しでは空で、ストアは画面無しでは操作できない。片方だけのコミットは
+   単独でテストを通せないので、1 つにまとめた。
+
+2. **操作部品は科目ごとの描画コードへ書かず、後から差し込む形にした。**
+   ルートは描き直されるたびに HTML が作り直される。`assets/js/subject-<科目>.js` 5 本へ
+   同じ操作部品を書くと必ずずれるので、`assets/js/progress-control.js` が
+   `.climb-node[data-book-id]` を見つけて差し込み、`MutationObserver` で描き直しに追従する。
+
+3. **e2e に `waitForApp()` を広げた。**
+   `flows.spec.mjs` と `privacy.spec.mjs` も `domcontentloaded` の直後に科目アプリを
+   操作していた。データが同期スクリプトだった頃はそれで確定していたが、いまは fetch のあと。
+   並行実行の負荷が高いときに落ちた（実際に 1 件）。**測る時点を正した**だけで、
+   検査の中身は緩めていない。そのあと 3 回連続で 240 件 pass。
+
+4. **進捗に解析イベントを足さなかった。**
+   指示書 §4.2 が「進捗・追加回答・インポート内容は端末内だけ」としているので、
+   `docs/analytics-events.md` と `EVENTS` は触っていない。
 
 ### 事実確認済みの前提（作業開始時に実測した）
 
