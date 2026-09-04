@@ -14,6 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { SUBJECTS } from '../build/lib/extract.mjs';
 import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
+import { subjectAppSource, subjectHtml } from './helpers.mjs';
 import { isPlaceholder, recordType } from '../build/lib/record-type.mjs';
 import { ROOT } from './helpers.mjs';
 
@@ -142,7 +143,7 @@ test('模試の選択肢に固定の換算値が残っていない', () => {
   const bad = [];
   for (const s of SUBJECTS) {
     if (s.catalogOnly) continue;
-    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    const src = subjectHtml(s.dir);          // 模試の選択肢は markup 側にある
     const sel = /<select id="moshiSel"[\s\S]*?<\/select>/.exec(src);
     assert.ok(sel, `${s.dir}: moshiSel が見つからない`);
     for (const m of sel[0].matchAll(/<option value="(-?\d+)"/g)) {
@@ -156,7 +157,7 @@ test('偏差値に模試ごとの数値を足し引きしていない', () => {
   const bad = [];
   for (const s of SUBJECTS) {
     if (s.catalogOnly) continue;
-    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    const src = subjectAppSource(s.dir);     // 計算は描画コード側にある
     if (/hen\s*\+\s*\(?\+?S\.moshi/.test(src) || /S\.hen\s*\+\s*S\.moshi/.test(src)) {
       bad.push(`${s.dir}: 偏差値に S.moshi を足している`);
     }
@@ -167,7 +168,7 @@ test('偏差値に模試ごとの数値を足し引きしていない', () => {
 test('比べてよい模試は全統記述だけで、ほかは comparable:false', () => {
   for (const s of SUBJECTS) {
     if (s.catalogOnly) continue;
-    const src = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    const src = subjectAppSource(s.dir);     // MOSHI テーブルは描画コード側にある
     const tbl = /const MOSHI = \{[\s\S]*?\n\};/.exec(src);
     assert.ok(tbl, `${s.dir}: MOSHI テーブルが無い`);
     const yes = [...tbl[0].matchAll(/(\w+):\s*\{[^}]*comparable:true/g)].map(m => m[1]);

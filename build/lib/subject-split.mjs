@@ -30,6 +30,27 @@
 /** 外へ出すデータ定数。UNI_RAW は UNIS の圧縮表現で、展開後だけを持つ */
 export const DATA_CONSTS = ['CONFIG', 'STAGES', 'ROUTES', 'BOOKS', 'UNI_RAW', 'UNIS', 'TIERS', 'GUIDES'];
 
+/**
+ * 宣言のあとでデータを足し引きしている行頭の文。**これも外へ出す。**
+ *
+ * 科目 HTML には宣言のあとに、こういう文が置かれている。
+ *
+ *     BOOKS.push({...}, {...});              追加収録
+ *     TIERS.push({id:"shiritsui", ...});      志望レベルの追加
+ *     ROUTES.shiritsui = { ... };             ルートの追加
+ *     ROUTES.kyote.ri = ROUTES.kyote.bun;     文理で同じルートを使い回す
+ *     BOOKS.forEach(b => { ... });            isbn10 の補完・書影の割り当て
+ *
+ * `extractSubject()` は vm 上で script を最後まで走らせるので、**これらの結果は
+ * すでに canonical データに入っている**。app 側に残すと、起動のたびに同じ追加が
+ * もう一度走る。`BOOKS.push` と `TIERS.push` は**冪等でないので件数が増える**
+ * （2026-09-05 の math の移行で、162 件のはずの BOOKS が実行時に 256 件へ増えた）。
+ *
+ * `check:shape` はデータそのものを見るので、この事故を捕まえられない。
+ * build/migrate-subject.mjs が、生成した app を実際に走らせて件数の変化を見る。
+ */
+export const DATA_MUTATIONS = DATA_CONSTS;
+
 /** app 側から window へ載せ直す、関数以外の名前。あるものだけ載せる */
 export const EXPOSED_STATE = ['S', 'QUIZ', 'SENSEIS', 'SUBJ', 'SUBJ_KEYS', 'OTHER_SUBJECTS'];
 
@@ -89,6 +110,16 @@ export function splitScript(code) {
     }
   }
 
+  // 宣言のあとの追加・補完（BOOKS.push / TIERS.push / ROUTES.x = … / BOOKS.forEach）。
+  // 結果は canonical データに入っているので、app 側には残さない
+  for (const name of DATA_MUTATIONS) {
+    const re = new RegExp(`^${name}[.\\[]`, 'gm');
+    let m;
+    while ((m = re.exec(code))) {
+      cuts.push({ name: `${name}(変更)`, start: m.index, end: statementEnd(code, m.index) });
+    }
+  }
+
   // 新刊の注入区間。データ側（books.json）へ移るので app からは外す
   const BEGIN = '/* NEW BOOKS — 自動生成。build/apply-new-books.mjs が書き換える。手で編集しない */';
   const END = '/* /NEW BOOKS */';
@@ -132,10 +163,31 @@ export function topLevelBindings(code) {
  * @param {string} dir 科目ディレクトリ名
  * @param {string} app splitScript() が返した app コード
  */
+/**
+ * `var X = (typeof X !== "undefined" && X) || { …no-op… };` という防御の書き方を拾う。
+ *
+ * 科目トップは共通スクリプト（assets/js/share.js・pace.js）が読めなかったときに
+ * 画面が落ちないよう、この形で受け皿を用意している。グローバル直下に書いてあるうちは
+ * `typeof X` が既に読み込まれた本物を指すので問題ない。
+ *
+ * **ところが関数で包むと `var X` が関数スコープになり、入口では必ず undefined になる。**
+ * すると条件が常に偽になり、**本物ではなく no-op スタブが選ばれる**。
+ * 例外も警告も出ないまま、共有 URL の生成・診断の復元・学習ペースの表示が黙って死ぬ
+ * （2026-09-05 の math の移行で実際に起きた。test/share.test.mjs が捕まえた）。
+ *
+ * そこで包む前に window から橋渡しして、元と同じ意味に戻す。
+ */
+export function bridgedGlobals(code) {
+  return [...new Set(
+    [...code.matchAll(/^var ([A-Za-z_$][\w$]*) = \(typeof \1 !== ["']undefined["']/gm)].map(m => m[1]),
+  )];
+}
+
 export function buildAppFile(dir, app) {
   const fns = topLevelFunctions(app);
   const bindings = topLevelBindings(app);
   const state = EXPOSED_STATE.filter(n => bindings.has(n));
+  const bridged = bridgedGlobals(app);
 
   // 「公開前にここだけ書き換えてください」の案内は、CONFIG が JSON へ移った時点で嘘になる
   const cleaned = app.replace(
@@ -146,6 +198,16 @@ export function buildAppFile(dir, app) {
   // function 宣言は巻き上げ済みなので、本体より先に載せられる。
   // 本体の途中で例外が出ても onclick が死なないよう、**先に**載せる。
   const exposeFns = fns.map(n => `window.${n} = ${n};`).join(' ');
+
+  /* 共通スクリプトのグローバルを window から橋渡しする。
+     これが無いと `var X = (typeof X !== "undefined" && X) || {no-op}` が
+     必ず no-op を選び、共有・診断・ペースが黙って死ぬ */
+  const bridge = bridged.length
+    ? `\n/* 共通スクリプトのグローバルを window から受け取る（自動生成）。\n`
+      + `   これが無いと下の \`var X = (typeof X !== "undefined" && X) || …\` が\n`
+      + `   関数スコープの undefined を見て、本物ではなく no-op を選んでしまう。 */\n`
+      + bridged.map(n => `var ${n} = window.${n};`).join('\n')
+    : '';
   // const / let は巻き上げの対象外（一時的死角）なので、本体のあとで載せる
   const exposeState = state
     .map(n => `  try { window.${n} = ${n}; } catch (e) { /* まだ宣言に達していない名前は飛ばす */ }`)
@@ -173,7 +235,7 @@ var TIERS  = DATA.tiers;
 var GUIDES = DATA.guides;
 var UNIS   = DATA.unis;
 var BOOKS  = DATA.books;
-
+${bridge}
 /* HTML のインライン属性（onclick="go('catalog')" など）から呼ばれる名前を window へ載せ直す。
    function 宣言は巻き上げ済みなので本体より先に載せられる。本体の途中で例外が出ても
    画面の操作が死なないよう、あえてここで載せる。以下は自動生成。 */

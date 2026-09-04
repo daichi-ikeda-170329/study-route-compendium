@@ -116,9 +116,18 @@ function collect(src, dir) {
   const ctx = {
     console: { log: noop, warn: noop, error: noop },
     document: doc,
-    window: { addEventListener: noop, location: { hash: '', href: '', search: '' }, matchMedia: () => ({ matches: false, addEventListener: noop }) },
     /* 科目トップは共通スクリプトのグローバル（share.js / pace.js / bunri.js）を参照する。
-       事前描画では使わないので、何を呼んでも落ちない代替を置く */
+       事前描画では使わないので、何を呼んでも落ちない代替を置く。
+       **window にも同じものを置く。** 移行済み科目の app は
+       `var RTShare = window.RTShare;` で受け取るため（build/lib/subject-split.mjs の
+       bridgedGlobals を見る）。ここを忘れると、事前描画のときだけ no-op になる */
+    window: {
+      addEventListener: noop, location: { hash: '', href: '', search: '' },
+      matchMedia: () => ({ matches: false, addEventListener: noop }),
+      RTShare: { setup: noop, beforeQuiz: () => '', beforeResult: () => '', afterResult: () => '', routeBlock: () => '' },
+      RTPace: { setup: noop, apply: noop },
+      RTBunri: { needsAsk: () => false, ask: () => '' },
+    },
     RTShare: { setup: noop, beforeQuiz: () => '', beforeResult: () => '', afterResult: () => '', routeBlock: () => '' },
     RTPace: { setup: noop, apply: noop },
     RTBunri: { needsAsk: () => false, ask: () => '' },

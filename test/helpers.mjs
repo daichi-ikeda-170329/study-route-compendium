@@ -12,6 +12,7 @@ import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const { loadSubjectData } = await import('../build/lib/load-subject-data.mjs');
 
 /** localStorage を差し替えたうえで share.js を新しく読み込む */
 export function loadShare({ localStorage } = {}) {
@@ -68,8 +69,9 @@ export function subjectMigrated(dir) {
   return fs.existsSync(path.join(ROOT, 'data', 'subjects', dir, 'books.json'));
 }
 
-/** 科目ページから QUIZ 配列を取り出す */
+/** 科目ページから QUIZ 配列を取り出す。移行済み科目では外部の app JS から取る */
 export function loadQuiz(dir) {
+  if (subjectMigrated(dir)) return loadPage(dir).ctx.QUIZ;
   const src = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
   const scripts = [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
   const ctx = {
@@ -110,8 +112,11 @@ export function allAnswerCombos(quiz) {
  * 到達する。ルート共有の encode / apply を実際に動かして確かめるために使う。
  */
 export function loadPage(dir) {
+  const migrated = subjectMigrated(dir);
   const src = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
-  const scripts = [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
+  const scripts = migrated
+    ? [fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8')]
+    : [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
 
   const captured = {};
   const noop = () => '';
@@ -140,9 +145,32 @@ export function loadPage(dir) {
     construct: () => domStub(),
   });
 
+  /**
+   * window だけは「書いた値を覚える」代替にする。
+   *
+   * 移行済み科目の app は `window.RT_SUBJECT_APP = function (DATA) {…}` を定義し、
+   * トップレベルの関数も window へ載せ直す。素の Proxy スタブだと set が
+   * 捨てられてしまい、あとから読めない。書いた値は覚え、書いていない名前だけ
+   * スタブを返す。
+   */
+  const windowStub = (seed = {}) => {
+    const own = { ...seed };
+    return new Proxy(own, {
+      get: (t, k) => {
+        if (k in t) return t[k];
+        if (k === Symbol.toPrimitive) return () => '';
+        if (typeof k === 'symbol') return undefined;
+        return domStub();
+      },
+      set: (t, k, v) => { t[k] = v; return true; },
+      has: () => true,
+    });
+  };
+
   const ctx = {
     console: { log() {}, warn() {}, error() {} },
-    document: domStub(), window: domStub(), localStorage: domStub(), navigator: domStub(),
+    document: domStub(), window: windowStub({ RTShare: fakeShare, RTPace: { setup() {}, apply() {} } }),
+    localStorage: domStub(), navigator: domStub(),
     location: domStub(), history: domStub(),
     dataLayer: [],
     URL, URLSearchParams,
@@ -155,9 +183,37 @@ export function loadPage(dir) {
     RTPace: { setup() {}, apply() {} },
   };
   ctx.globalThis = ctx;
+  ctx.self = ctx;
   vm.createContext(ctx);
 
-  /* トップレベルの const / function は vm の外から見えないので globalThis に移す */
+  if (migrated) {
+    /* 移行済み科目では、描画コードは外部ファイルにあり、データは
+       data/subjects/<科目>/ にある。実行時と同じ形（RT_SUBJECT_APP(DATA)）で走らせる。 */
+    for (const code of scripts) {
+      try { vm.runInContext(code, ctx, { timeout: 30000 }); } catch (e) { if (process.env.RT_DEBUG) console.error(dir, e); }
+    }
+    const d = loadSubjectData(ROOT, dir);
+    const DATA = {
+      config: d.config, stages: d.stages, tiers: d.tiers,
+      routes: d.routes, unis: d.unis, guides: d.guides, books: d.books,
+    };
+    if (typeof ctx.window.RT_SUBJECT_APP !== 'function') {
+      throw new Error(`${dir}: assets/js/subject-${dir}.js が RT_SUBJECT_APP を定義していない`);
+    }
+    try { ctx.window.RT_SUBJECT_APP(DATA); } catch (e) { if (process.env.RT_DEBUG) console.error(dir, e); }
+    if (!captured.cfg) throw new Error(`${dir}: RTShare.setup に到達しなかった`);
+
+    /* 呼び出し側は ctx.TIERS / ctx.S / ctx.selectTier のように読む。
+       app は window へ載せ直しているので、window の中身とデータを重ねて返す。
+       **同じ参照**を返すので、テストが ctx.S を書き換えれば app 側にも効く。 */
+    const merged = Object.assign(Object.create(null), ctx, ctx.window, {
+      BOOKS: DATA.books, UNIS: DATA.unis, TIERS: DATA.tiers, ROUTES: DATA.routes,
+      GUIDES: DATA.guides, STAGES: DATA.stages, CONFIG: DATA.config,
+    });
+    return { ctx: merged, cfg: captured.cfg };
+  }
+
+  /* 未移行の科目。トップレベルの const / function は vm の外から見えないので globalThis に移す */
   const wanted = ['BOOKS', 'UNIS', 'TIERS', 'ROUTES', 'STAGES', 'SENSEIS', 'SUBJ', 'SUBJ_KEYS', 'S'];
   const constRe = new RegExp(`\\bconst (${wanted.join('|')})\\s*=`, 'g');
   const fnRe = /^function (selectTier|selectSensei|setSubj|toggleSubj|setCourse|setMode|go)\(/gm;

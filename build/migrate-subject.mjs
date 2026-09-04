@@ -23,6 +23,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData, isMigrated, writeCanonicalFile, clearSubjectCache } from './lib/load-subject-data.mjs';
@@ -54,6 +55,75 @@ function bootstrap(dir) {
 <script src="/assets/js/subject-loader.js" defer></` + `script>`;
 }
 
+/**
+ * 切り出した app を実際に走らせて、**データの件数が変わらない**ことを確かめる。
+ *
+ * 科目 HTML には宣言のあとに `BOOKS.push(...)` や `TIERS.push(...)` が置かれている。
+ * `extractSubject()` は vm 上で最後まで走らせるので、その結果はすでに canonical
+ * データに入っている。app 側にも残すと起動のたびにもう一度足され、件数が増える。
+ *
+ * **`npm run check:shape` はこの事故を捕まえない。** あちらが見るのは canonical
+ * データそのもので、実行時に何が起きるかは見ていない。2026-09-05 の math の移行で
+ * BOOKS が実行時に 162 件から 256 件へ増えたのを、事前描画の差分で気づいた。
+ * 気づける仕組みをここに置く。
+ */
+function assertNoDataDrift(dir, appFile, data) {
+  const noop = () => {};
+  const stub = () => new Proxy(function () {}, {
+    get: (t, k) => (k === Symbol.toPrimitive ? () => '' : (typeof k === 'symbol' ? undefined : stub())),
+    set: () => true, apply: () => stub(), construct: () => stub(),
+  });
+  const ctx = {
+    console: { log: noop, warn: noop, error: noop },
+    document: stub(),
+    /* 移行済み app は `var RTShare = window.RTShare;` で受け取る（bridgedGlobals） */
+    window: {
+      RTShare: { setup: noop, beforeQuiz: () => '', beforeResult: () => '', afterResult: () => '', routeBlock: () => '' },
+      RTPace: { setup: noop, apply: noop },
+      RTBunri: { needsAsk: () => false, ask: () => '' },
+    },
+    localStorage: stub(), navigator: stub(),
+    location: stub(), history: stub(), dataLayer: [],
+    URL, URLSearchParams, Math, Date, JSON, Intl,
+    setTimeout: noop, setInterval: noop, clearTimeout: noop,
+    addEventListener: noop, requestAnimationFrame: noop,
+    RTShare: { setup: noop, beforeQuiz: () => '', beforeResult: () => '', afterResult: () => '', routeBlock: () => '' },
+    RTPace: { setup: noop, apply: noop },
+    RTBunri: { needsAsk: () => false, ask: () => '' },
+  };
+  ctx.globalThis = ctx;
+  ctx.self = ctx;
+  vm.createContext(ctx);
+  vm.runInContext(appFile, ctx, { timeout: 30000 });
+
+  const DATA = {
+    config: data.config, stages: data.stages, tiers: [...data.tiers],
+    routes: JSON.parse(JSON.stringify(data.routes)), unis: [...data.unis],
+    guides: [...data.guides], books: [...data.books],
+  };
+  const before = {
+    books: DATA.books.length, tiers: DATA.tiers.length, unis: DATA.unis.length,
+    guides: DATA.guides.length, routes: Object.keys(DATA.routes).length,
+  };
+  try {
+    ctx.window.RT_SUBJECT_APP(DATA);
+  } catch {
+    // 末尾の初期化が DOM に触れて落ちるのは想定内。件数を変える文はそれより前にある
+  }
+  const after = {
+    books: DATA.books.length, tiers: DATA.tiers.length, unis: DATA.unis.length,
+    guides: DATA.guides.length, routes: Object.keys(DATA.routes).length,
+  };
+  for (const k of Object.keys(before)) {
+    if (before[k] !== after[k]) {
+      throw new Error(
+        `${dir}: 起動すると ${k} が ${before[k]} → ${after[k]} に変わる。`
+        + ` 宣言のあとの ${k.toUpperCase()} への追加が app 側に残っている`
+        + `（build/lib/subject-split.mjs の DATA_MUTATIONS を見る）`);
+    }
+  }
+}
+
 for (const dir of dirs) {
   const sub = SUBJECTS.find(s => s.dir === dir);
   if (!sub) throw new Error(`科目 ${dir} は SUBJECTS に無い`);
@@ -76,6 +146,7 @@ for (const dir of dirs) {
   }
 
   const appFile = buildAppFile(dir, app);
+  assertNoDataDrift(dir, appFile, data);
   const nextHtml = html.slice(0, main[0].start) + bootstrap(dir) + html.slice(main[0].end);
 
   const canonical = {
