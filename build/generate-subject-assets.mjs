@@ -42,10 +42,19 @@ const MANIFEST_END = '</' + 'script>';
  * データが届く前に押されると `openModal is not defined` になるので、
  * マニフェストと同じインライン script で「呼び出しを覚えておくだけの関数」を先に置き、
  * 起動後に本物へ差し替えて溜まった呼び出しを流す。
+ *
+ * **画像の読み込み結果は溜めない。** `covLoad` / `covErr` は
+ * `<img onload>` / `<img onerror>` から呼ばれる。起動前に届いた分をあとから流すと、
+ * そのときには図鑑が描き直されていて、渡された img はもう画面に無い。
+ * 「押されたのに効かない」利用者の操作とは性質が違うので、落としてよい
+ * （描き直しで新しい img に付け直される）。
  */
+const NO_QUEUE = new Set(['covLoad', 'covErr']);
+
 function shim(apiNames) {
+  const queued = apiNames.filter(n => !NO_QUEUE.has(n));
   return `window.RT_SUBJECT_QUEUE=[];`
-    + `(${JSON.stringify(apiNames)}).forEach(function(n){`
+    + `(${JSON.stringify(queued)}).forEach(function(n){`
     + `if(window[n])return;`
     + `window[n]=function(){window.RT_SUBJECT_QUEUE.push([n,[].slice.call(arguments)])};`
     + `window[n].__rtStub=1});`

@@ -438,3 +438,28 @@ img, svg, video, iframe { max-width: 100%; }
 .rt-prog__pct[hidden]{display:none}
 .rt-prog--compact{margin-top:8px;font-size:12.5px}
 .rt-prog--compact .rt-prog__sel,.rt-prog--compact .rt-prog__num{padding:6px 8px}
+
+/* ============================================================
+   診断のあとの任意の追加質問（assets/js/refine.js）
+
+   結果の後ろに置く独立した層。閉じても結果と共有リンクは変わらない。
+   ============================================================ */
+.rt-refine{margin-top:18px;border:1px solid var(--line-2);border-radius:8px;background:var(--card)}
+.rt-refine__summary{padding:14px 16px;font-weight:700;cursor:pointer;min-height:44px;display:flex;align-items:center}
+.rt-refine__summary:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
+.rt-refine__body{padding:0 16px 16px;font-size:13.5px;line-height:1.8}
+.rt-refine__lead{color:var(--ink-2)}
+.rt-refine__sec{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2)}
+.rt-refine__sec h4{font-weight:800;font-size:14.5px;margin-bottom:4px}
+.rt-refine__note{color:var(--muted);font-size:12.5px;line-height:1.75}
+.rt-refine__row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:10px}
+.rt-refine__row label{font-weight:700;color:var(--ink-2)}
+.rt-refine__row select,.rt-refine__row input{min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit;background:var(--bg);color:inherit}
+.rt-refine__row input[type="number"]{width:6em}
+.rt-refine__row select:focus-visible,.rt-refine__row input:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.rt-refine__btn{min-height:44px;padding:10px 16px;border-radius:6px;border:1px solid var(--line);background:var(--bg);font:inherit;font-weight:700;cursor:pointer;color:inherit}
+.rt-refine__btn:hover{background:var(--surface-2)}
+.rt-refine__btn:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.rt-refine__applied{margin-top:14px;padding:12px 14px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line-2)}
+.rt-refine__applied ul{margin:6px 0 0;padding-left:1.2em}
+.rt-refine__applied li{margin-top:4px}

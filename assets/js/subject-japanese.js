@@ -508,7 +508,7 @@ function covErr(img){
   const srcs = (img.dataset.srcs||"").split("|");
   const next = (+img.dataset.s) + 1;
   if(next < srcs.length){ img.dataset.s = String(next); img.src = srcs[next]; }
-  else { img.classList.add("hide"); img.closest(".bcov").classList.add("fb"); }
+  else { img.classList.add("hide"); const w = img.closest(".bcov"); if(w) w.classList.add("fb"); }
 }
 
 /* ============================================================

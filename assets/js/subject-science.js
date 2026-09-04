@@ -541,12 +541,17 @@ function coverHTML(b){
   if(!srcs.length) return `<div class="bcov fb">${fb}</div>`;
   return `<div class="bcov"><img src="${srcs[0]}" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="${srcs.join("|")}" data-s="0" onload="covLoad(this)" onerror="covErr(this)">${fb}</div>`;
 }
-function covLoad(img){ if(img.naturalWidth<=1) covErr(img); else img.closest(".bcov").classList.add("ok"); }
+/* 書影の枠は、描き直しで入れ替わっていることがある（起動前に届いた読み込み完了を
+   あとから処理する場合など）。closest が null を返しうるので必ず確かめる */
+function covLoad(img){
+  if(img.naturalWidth<=1){ covErr(img); return; }
+  const w = img.closest(".bcov"); if(w) w.classList.add("ok");
+}
 function covErr(img){
   const srcs = (img.dataset.srcs||"").split("|");
   const next = (+img.dataset.s) + 1;
   if(next < srcs.length){ img.dataset.s = String(next); img.src = srcs[next]; }
-  else { img.classList.add("hide"); img.closest(".bcov").classList.add("fb"); }
+  else { img.classList.add("hide"); const w = img.closest(".bcov"); if(w) w.classList.add("fb"); }
 }
 
 /* ============================================================
