@@ -1,0 +1,58 @@
+# 公開サイトが、いまの main と同じものを配信しているかを確かめる。
+#
+# **必須ゲートにしない。** ネットワークと CDN のキャッシュに左右されるので、
+# push のたびに赤くすると本当の不具合に気づけなくなる。手動と週次でだけ流す。
+#
+# 終了コードの意味（build/check-production.mjs の先頭コメントと同じ）
+#   0 … 一致  /  1 … 食い違い（直す対象）  /  2 … 未検査（届かなかった）
+# 2 を成功として扱わない。「まだ確かめていない」とサマリに書く。
+name: 公開状態の確認
+
+on:
+  schedule:
+    # 毎週月曜 04:00 JST（UTC 19:00 日曜）。links.yml の 1 時間後
+    - cron: '0 19 * * 0'
+  workflow_dispatch:
+    inputs:
+      url:
+        description: '検査する配信元（既定は https://route-taizen.com）'
+        required: false
+        default: 'https://route-taizen.com'
+
+# 読み取りだけ。**CI から main へ push しない**
+permissions:
+  contents: read
+
+jobs:
+  production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: 公開サイトを検査する
+        id: check
+        run: |
+          set +e
+          node build/check-production.mjs --url="${{ github.event.inputs.url || 'https://route-taizen.com' }}" | tee out.txt
+          code=${PIPESTATUS[0]}
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          set -e
+          {
+            echo "### 公開状態の確認"
+            echo ""
+            case "$code" in
+              0) echo "**一致している。**" ;;
+              1) echo "**食い違っている。** \`docs/deployment-runbook.md\` を見る。" ;;
+              *) echo "**未検査。** ネットワークで届かなかった。成功ではない。" ;;
+            esac
+            echo ""
+            echo '```'
+            cat out.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          # 食い違い（1）だけを失敗にする。未検査（2）で赤くしない
+          if [ "$code" = "1" ]; then exit 1; fi
