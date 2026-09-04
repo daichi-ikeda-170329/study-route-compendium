@@ -15,7 +15,7 @@
 | S0 | 基準の固定と進捗台帳 | DONE | (このコミット) | `docs/baseline-2026-09-05.md` / `docs/perf/lighthouse-mobile-with3p-baseline-s0.json` | localhost が本番値を再現することを確認 |
 | S1 | 公開物と main の一致 | DONE | (このコミット) | `build/check-production.mjs` / `docs/deployment-runbook.md` / `test/production-check.test.mjs` | Pages Source は 2026-09-04 に切替済み。本番検査 19/19 通過。Description 更新のみ OWNER ACTION |
 | S2 | 科目データの読み書き口を 1 本化 | DONE | 016dfe73 / (このコミット) | `build/lib/load-subject-data.mjs` / `test/affiliate-disclosure.test.mjs` / `test/subject-loader.test.mjs` | 生成物は 1 バイトも不変。`check:shape` 通過 |
-| S3 | 科目移行 前半（joho/shoron/math） | 未着手 | | | |
+| S3 | 科目移行 前半（joho/shoron/math） | DONE | 9d4f6a85 / 4ec7d262 / 8c46c52d / c1d732f3 | `build/migrate-subject.mjs` / `data/subjects/{joho,shoron,math}/` | joho 153,728→97,472 / shoron 225,578→98,211 / math 471,171→143,139 バイト |
 | S4 | 科目移行 後半（science/english/japanese/social） | 未着手 | | | |
 | S5 | 性能予算の達成 | 未着手 | | | |
 | S6 | 進捗管理 | 未着手 | | | |
@@ -40,13 +40,12 @@
 
 ## 次にやること（実行が切れたらここから再開する）
 
-- S3 に着手する。`build/generate-subject-assets.mjs`（`data/subjects/` から配信アセットと
-  内容ハッシュを作り、科目 HTML の `RT_SUBJECT_ASSETS` を書き換える）と
-  `assets/js/subject-loader.js`（遅延ローダ）を作る。`build/all.mjs` の `STEPS` では
-  `generate-search` の直前に入れる。
-- そのあと joho → shoron → math の順に 1 科目 1 コミットで移す。
-  各科目で `npm run check:shape` が通ること（＝中身が変わっていない証明）を先に確かめる。
-- **変換は必ずスクリプトで行い、同じコミットに含める。** 手でコピーしない。
+- S4 に着手する。`node build/migrate-subject.mjs science` から始め、
+  english → japanese → social の順に 1 科目 1 コミットで移す。
+- 各科目で次を確かめる: `npm run check:shape` 通過 / 生成物の差分が `<科目>/index.html` だけ /
+  `npm test` fail 0 skipped 0 / `npx playwright test` 通過。
+- 7 科目すべて終わったら、`build/lib/load-subject-data.mjs` の `extractSubject()`
+  フォールバックと `build/lib/extract.mjs` の VM 回収を削除する（指示書 §25）。
 
 ## OWNER ACTION（運営者しかできない。台帳で追跡する）
 
@@ -133,6 +132,34 @@
    マーカー区間は HTML にしか無いので使えない。`new-books.json` に載っている id を
    既存書からいったん全部除き、末尾へ入れ直す。何度流しても同じ結果になり、
    並び順もマーカー区間が BOOKS 末尾にある現行の見え方と揃う。
+
+### S3 で決めたこと・見つけたこと
+
+1. **app JS の外部化を S5 ではなく移行と同時に行った。**
+   指示書は §28.1（S5）で app JS を外へ出すことになっているが、app コードは
+   `BOOKS` などをスコープに閉じ込めて参照している。データだけ先に外へ出すと、
+   その間ずっと壊れた状態になる。**両方を同じコミットで動かすほうが安全**なので、
+   `build/migrate-subject.mjs` が同時に行う。S5 は `<style>` の外部化と予算の固定に使う。
+
+2. **アセットの取得は「初期表示のあとに 5 本まとめて」にした。**
+   指示書 §21 はタブを開いたときに `books` / `routes` / `unis` を個別に取る表を
+   示しているが、科目 app は同期前提の 1 スコープなので、タブ単位の遅延にすると
+   7 本の app それぞれで描画の入口を書き換えることになり、事故の面が広がる。
+   LCP を決めているのは事前描画済みのカードと CSS で、そこはどちらの案でも同じ。
+   **アセットはファイル単位に分けてあるので、必要になればタブ単位の遅延へ進める。**
+   効果は S5 の実測で確かめて報告する。
+
+3. **移行で 3 つの事故を見つけた。いずれも「黙って壊れる」形だった。**
+   - `build/generate-books.mjs` の `extractConfig()`（HTML 正規表現）→ 購入リンクから
+     アフィリエイト経路と `rel="sponsored"` が消える。指示書 §3.4 が挙げていない 3 か所目。
+   - 宣言のあとの `BOOKS.push(...)` / `TIERS.push(...)` が app に残る → 起動時に件数が増える
+     （math で 162 → 256）。`check:shape` では捕まらない。
+   - `var RTShare = (typeof RTShare !== "undefined" && RTShare) || {no-op}` が
+     関数スコープになり no-op に落ちる → 共有・診断・ペースが黙って死ぬ。
+   3 つとも、再発を捕まえる検査を同じコミットに入れた。
+
+4. **e2e の対象ページに国語・社会・小論文のトップが入っていなかった。**
+   7 科目のうち 4 科目しか見ていなかったので `KEY_PAGES` に足した。
 
 ### 事実確認済みの前提（作業開始時に実測した）
 
