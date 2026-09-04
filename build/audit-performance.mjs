@@ -225,7 +225,10 @@ async function main() {
         ];
         if (PRESET === 'desktop') lhArgs.push('--preset=desktop');
         else lhArgs.push('--form-factor=mobile', '--throttling-method=simulate', '--screenEmulation.mobile');
-        if (BLOCK_3P) lhArgs.push(`--blocked-url-patterns=${THIRD_PARTY_PATTERNS.join(',')}`);
+        /* **1 つの引数へカンマで並べない。** Lighthouse はこの指定を配列として受け取るので、
+           カンマ区切りで渡すと「カンマを含む 1 個のパターン」と解釈され、何も遮断されない
+           （2026-09-05 に、遮断したはずなのに Best Practices が 77 のままで気づいた）。 */
+        if (BLOCK_3P) for (const pat of THIRD_PARTY_PATTERNS) lhArgs.push(`--blocked-url-patterns=${pat}`);
 
         process.stderr.write(`  ${url} run ${i}/${RUNS} … `);
         const r = spawnSync('npx', lhArgs, {

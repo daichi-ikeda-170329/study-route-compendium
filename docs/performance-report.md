@@ -162,6 +162,57 @@ IBM Plex Mono 400/500/600/700）を読み込んでいる。CSS 全体の `font-w
 **どの重みも使われている**（どの書体に効いているかまでは静的に確定できない）。
 使っていない面が特定できないので削らなかった。
 
+## 5.4 Best Practices 77 の切り分け（S10）
+
+**自サイト由来の修正可能な失敗は 0。** 残差はすべて広告・解析の第三者 cookie。
+
+### 測り方
+
+```bash
+npm run audit:performance -- --runs=5 --path=/science/ --label=s10-with3p --port=4191
+npm run audit:performance -- --runs=5 --path=/science/ --label=s10-no3p --port=4192 --block-third-party
+```
+
+`--block-third-party` は googletagmanager / google-analytics / googlesyndication /
+doubleclick / adsbygoogle / pagead を遮断する。**Google Fonts は遮断しない**
+（書体はサイトの見た目そのもので、解析や広告とは性質が違う）。
+
+### 結果（証跡: `docs/perf/lighthouse-mobile-*-s10-*.json`）
+
+| 条件 | Best Practices | 落ちた audit | Performance | LCP | CLS |
+|---|---:|---|---:|---:|---:|
+| 第三者あり | **77**（5 run すべて 77） | `third-party-cookies` / `inspector-issues` | 53 | 11.14s | 0.215 |
+| 第三者を遮断 | **100**（5 run すべて 100） | **なし** | 58 | 8.86s | 0.215 |
+
+### 落ちていた audit の中身
+
+どちらも同じ 1 件の cookie が原因だった。
+
+| audit | 重み | 中身 |
+|---|---:|---|
+| `third-party-cookies` | 5 | `googleads.g.doubleclick.net` が置く `test_cookie` |
+| `inspector-issues` | 1 | 同じ cookie についての Chrome DevTools の Issue |
+
+**自サイトの console error・mixed content・壊れた画像・非推奨 API・cookie 設定不備は 0 件。**
+直せる余地がこちら側に無いことは、遮断すると 5 run すべて 100 になることで示せる。
+
+### CLS は第三者ではない
+
+第三者を遮断しても CLS は 0.215 のまま（遮断前 0.215）。
+**CLS の原因は広告ではなく書体の差し替え**である（4.1 節）。混同しない。
+
+### この項目の完了条件について
+
+実装指示書 §51 は「77 を必ず 90 へ上げる」ことを完了条件にしていない。
+**「自サイト由来の修正可能な失敗が 0、第三者残差が再現可能な形で分離・記録されている」**
+が条件で、それは満たしている。
+
+第三者サービス（AdSense / GA4）を続けるかどうかは運営判断である。
+**cookie 警告を消すためだけにサービスを削除しない。**
+CMP や Consent Mode を入れるかどうかも、対象地域と運営者の同意方針を確かめたうえでの判断で、
+こちらでは決めない（`README.md` の「同意管理（CMP）」に未判断のまま置いてある）。
+**見せかけの同意バナーは作らない。法的適合を断定しない。**
+
 ## 6. 運営者に判断してもらいたいこと（OWNER ACTION）
 
 **目標 3 つの未達は、いずれも Google Fonts に帰着する。** ここから先は
