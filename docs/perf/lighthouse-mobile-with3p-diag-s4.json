@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-09-04T16:34:32.674Z",
+  "commit": "92d09408d70880d6355f5b4e7dbf8758c389b080",
+  "lighthouseVersion": "13.4.1",
+  "chromeVersion": "Google Chrome 152.0.7977.76",
+  "target": "localhost (build/serve.mjs, .)",
+  "baseUrl": "http://127.0.0.1:4184",
+  "formFactor": "mobile",
+  "throttling": "simulate (lighthouse mobile default)",
+  "thirdParty": "allowed",
+  "runs": 1,
+  "pages": [
+    {
+      "path": "/science/",
+      "url": "http://127.0.0.1:4184/science/",
+      "runs": [
+        {
+          "performance": 57,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 8408.989706869837,
+          "fcpMs": 3489.284204824381,
+          "cls": 0.21609520450362796,
+          "tbtMs": 0,
+          "speedIndexMs": 3489.284204824381,
+          "ttiMs": 8408.989706869837,
+          "transferBytes": 2821945
+        }
+      ],
+      "median": {
+        "performance": 57,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 8408.99,
+        "fcpMs": 3489.284,
+        "cls": 0.216,
+        "tbtMs": 0,
+        "speedIndexMs": 3489.284,
+        "ttiMs": 8408.99,
+        "transferBytes": 2821945
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 2.9
+          },
+          {
+            "label": "Element render delay",
+            "ms": 275.7
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 1200
+          },
+          {
+            "id": "unminified-javascript",
+            "title": "Minify JavaScript",
+            "savingsMs": 450
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 300
+          },
+          {
+            "id": "unminified-css",
+            "title": "Minify CSS",
+            "savingsMs": 150
+          }
+        ]
+      }
+    }
+  ]
+}

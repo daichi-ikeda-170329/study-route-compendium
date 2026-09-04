@@ -124,6 +124,35 @@ function pick(report) {
   };
 }
 
+/**
+ * LCP になった要素と、改善余地の大きい項目を拾う。
+ *
+ * 「遅い」だけでは次の一手が決まらない。**何が LCP なのか**（自サイトの文字か、
+ * 第三者の画像か）と、Lighthouse が挙げる節約見込みの大きい順を残す。
+ */
+function diagnostics(report) {
+  const a = report.audits || {};
+  /* Lighthouse 13 では LCP の要素は lcp-breakdown-insight の details に入る
+     （旧 largest-contentful-paint-element は無くなっている）。
+     取れなかったときは null のままにして、推測で埋めない。 */
+  const items = a['lcp-breakdown-insight']?.details?.items || [];
+  const node = items.find(x => x.type === 'node') || null;
+  const breakdown = items.find(x => x.type === 'table')?.items || [];
+
+  const opportunities = Object.values(a)
+    .filter(x => x && x.details && typeof x.details.overallSavingsMs === 'number' && x.details.overallSavingsMs >= 50)
+    .sort((x, y) => y.details.overallSavingsMs - x.details.overallSavingsMs)
+    .slice(0, 8)
+    .map(x => ({ id: x.id, title: x.title, savingsMs: Math.round(x.details.overallSavingsMs) }));
+
+  return {
+    lcpElement: node ? String(node.snippet || '').slice(0, 160) : null,
+    lcpSelector: node ? String(node.selector || '').slice(0, 160) : null,
+    lcpBreakdown: breakdown.map(x => ({ label: x.label, ms: Math.round((x.duration || 0) * 10) / 10 })),
+    opportunities,
+  };
+}
+
 /** best-practices の落ちている audit を、原因の切り分け用に列挙する */
 function failedAudits(report, categoryId) {
   const cat = (report.categories || {})[categoryId];
@@ -215,6 +244,7 @@ async function main() {
         path: p, url, runs,
         median: med,
         failedBestPractices: lastReport ? failedAudits(lastReport, 'best-practices') : [],
+        diagnostics: lastReport ? diagnostics(lastReport) : null,
       });
     }
   } finally {
@@ -258,6 +288,20 @@ function toMarkdown(r) {
     const m = p.median;
     L.push(`| **中央値** | **${m.performance}** | **${m.accessibility}** | **${m.bestPractices}** | **${m.seo}** | **${round(m.lcpMs / 1000, 2)}** | **${round(m.cls, 3)}** | **${round(m.tbtMs, 0)}** | **${round(m.speedIndexMs / 1000, 2)}** |`);
     L.push('');
+    if (p.diagnostics) {
+      L.push('### 診断（最終 run）');
+      L.push('');
+      L.push(`- LCP になった要素: ${p.diagnostics.lcpElement ? '`' + p.diagnostics.lcpElement.replace(/`/g, '') + '`' : '取得できず'}`);
+      if (p.diagnostics.lcpSelector) L.push(`- その位置: \`${p.diagnostics.lcpSelector}\``);
+      if (p.diagnostics.lcpBreakdown.length) {
+        L.push(`- LCP の内訳: ${p.diagnostics.lcpBreakdown.map(x => `${x.label} ${x.ms}ms`).join(' / ')}`);
+      }
+      if (p.diagnostics.opportunities.length) {
+        L.push('- 節約見込みの大きい順:');
+        for (const o of p.diagnostics.opportunities) L.push(`  - \`${o.id}\` ${o.title} — 約 ${o.savingsMs}ms`);
+      }
+      L.push('');
+    }
     if (p.failedBestPractices.length) {
       L.push('### Best Practices で落ちた audit（最終 run）');
       L.push('');
