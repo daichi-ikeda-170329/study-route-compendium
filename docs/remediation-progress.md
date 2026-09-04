@@ -17,7 +17,7 @@
 | S2 | 科目データの読み書き口を 1 本化 | DONE | 016dfe73 / (このコミット) | `build/lib/load-subject-data.mjs` / `test/affiliate-disclosure.test.mjs` / `test/subject-loader.test.mjs` | 生成物は 1 バイトも不変。`check:shape` 通過 |
 | S3 | 科目移行 前半（joho/shoron/math） | DONE | 9d4f6a85 / 4ec7d262 / 8c46c52d / c1d732f3 | `build/migrate-subject.mjs` / `data/subjects/{joho,shoron,math}/` | joho 153,728→97,472 / shoron 225,578→98,211 / math 471,171→143,139 バイト |
 | S4 | 科目移行 後半（science/english/japanese/social） | DONE | 92d09408 / 3 件 / 7f596b06 / 70b07c22 | `data/subjects/*/` / `test/subject-loader.test.mjs` | 7 科目すべて移行。全科目 250KB 予算内（最大 166,782） |
-| S5 | 性能予算の達成 | 未着手 | | | |
+| S5 | 性能予算の達成 | DONE（目標一部未達） | a893ad6c / (このコミット) | `docs/performance-report.md` / `test/performance-budget.test.mjs` | バイト予算は達成。Performance 47→53 / SI 7.53s→4.55s。目標 80 / 4.0s / 0.10 は未達で、残因は Google Fonts |
 | S6 | 進捗管理 | 未着手 | | | |
 | S7 | 任意の追加質問 | 未着手 | | | |
 | S8 | 詳細検索 | 未着手 | | | |
@@ -29,7 +29,7 @@
 
 | # | 事項 | 担当 CP | 状態 |
 |---|---|---|---|
-| 1 | 科目データの分離 | S1〜S5 | 進行中（S1 完了） |
+| 1 | 科目データの分離 | S1〜S5 | DONE（性能目標は一部未達。`docs/performance-report.md` に実測と残因） |
 | 2 | 進捗管理の拡張 | S6 | 未着手 |
 | 3 | 任意の追加質問 | S7 | 未着手 |
 | 4 | 検索の絞り込み拡張 | S8 | 未着手 |
@@ -40,13 +40,12 @@
 
 ## 次にやること（実行が切れたらここから再開する）
 
-- S5 に着手する。**残っているのは `<style>` の外部化と予算の固定。**
-  Lighthouse の実測で節約見込みの最大は `unused-css-rules`（約 1.2〜1.65 秒）だった。
-  科目トップの `<style>` は 51〜58KB で 7 ページにほぼ同じものが重複している。
-  共通部分を `/assets/css/subject.css` へ出し、ファーストビューに要る分だけ残す。
-- `test/performance-budget.test.mjs` を作る（決定的な検査だけを必須ゲートにする）。
-- S0 と同じ測り方（`npm run audit:performance -- --runs=5 --path=/science/`）で再計測し、
-  改修前と並べて記録する。
+- S6 に着手する。`assets/js/progress.js`（`rt_learning_progress`）と `/progress/` を作る。
+  **`/progress/` を作るときは指示書 §4.4 の 5 項目を全部通す。**
+  とくに `build/build-public.mjs` の `ALLOW_DIRS` への追加と、
+  `build/generate-sitemap.mjs` からの除外（`noindex,follow` のため）を忘れない。
+- 既存の `rt_saved_routes` / `rt_pace` を壊さないこと。残り時間の計算は
+  `assets/js/pace.js` の下限・上限の幅を維持する（片方だけに進捗を掛けない）。
 
 ## S4 時点の実測（S5 の出発点）
 
@@ -80,6 +79,7 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
 |---|---|---|---|---|---|
 | 1 | GitHub リポジトリの Description が `参考書1,052冊` のまま（実際は 1,390 冊） | 対象リポジトリの admin | `gh repo edit daichi-ikeda-170329/study-route-compendium --description "大学受験の参考書を科目・目的別に整理し、学習ルートと進捗管理を提供する静的サイト"` | `gh repo view --json description` の出力に `1,052` が含まれない | 未実施 |
 | 2 | GitHub リポジトリの Topics が未設定 | 同上 | `gh repo edit daichi-ikeda-170329/study-route-compendium --add-topic static-site --add-topic github-pages --add-topic education --add-topic japanese` | `gh repo view --json repositoryTopics` が `null` でない | 未実施 |
+| 3 | 書体の読み込み方針。CLS 0.217 の原因は Google Fonts の差し替えで、`&display=swap` を `&display=optional` にすればほぼ 0 になる。ただし**初回訪問・回線が遅いときに指定の書体が出なくなる**（代替は Hiragino / Yu Gothic / Noto Sans JP） | 権限は不要。**見た目の判断** | `rg 'display=swap'` で全箇所（手書き HTML 9 枚と `build/lib/parts.mjs`）を出し、`display=optional` へ変えて `npm run build` | `npm run audit:performance -- --runs=9 --path=/science/` の CLS 中央値が 0.10 以下 | 未判断 |
 
 **1 と 2 は手元の `gh` に `repo` scope があるので技術的には実行できる。**
 ただし公開リポジトリの外向き設定を変える操作なので、実行前に運営者の可否を確認する。
@@ -206,6 +206,30 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
    いまは fetch のあとに描画する。待たずに測ると描画途中を見てしまい、
    並行実行の負荷が高いときに axe が落ちた（実際に 1 件）。
    **テストを緩めたのではなく、測る時点を正した。** そのあと 3 回連続で 188 件 pass。
+
+### S5 で決めたこと
+
+1. **`<style>` の外部化はしなかった（指示書 §28.2 からの逸脱）。**
+   実測が支持しなかった。インライン `<style>` は `render-blocking-insight` に挙がらず、
+   ネットワークの critical path に乗っていない。外へ出すと描画ブロックのリクエストが
+   1 本増える（指示書 §28.2 自身が「かえって悪化しうる」と書いている）。
+   バイト予算は外部化せずに達成済み。理由と実測は `docs/performance-report.md` §5.1。
+
+2. **代わりに `defer` を入れた。これが最も効いた。**
+   自前のスクリプト 4 本（share / pace / bunri / analytics）が描画をブロックしていた。
+   合計 4,676ms（5 本）→ 2,889ms（Google Fonts の 1 本のみ）。
+   Speed Index が 7.53s → 4.55s（−39.6%）。
+
+3. **Google Fonts は触らなかった。** 残る唯一の描画ブロック（2,889ms / 207,854 バイト）で、
+   CLS 0.217 の原因でもある（Lighthouse の `cls-culprits-insight` が挙げる原因は
+   すべて `Web font`）。非同期化すると CLS が悪化し、受入条件「CLS が S0 より悪化していない」に反する。
+   両立には `display=optional` への変更か自前配信が要るが、どちらも
+   **初回訪問者に見せる書体が変わる**ので、見た目の判断として運営者へ回した
+   （`docs/performance-report.md` §6、下の OWNER ACTION 3）。
+
+4. **性能目標 3 つは未達。達成と書かない。**
+   Performance 53（目標 80）/ LCP 11.06s（目標 4.0s）/ CLS 0.217（目標 0.10）。
+   バイト予算（全科目 250,000 未満・理科 200,000 未満）は達成。
 
 ### 事実確認済みの前提（作業開始時に実測した）
 
