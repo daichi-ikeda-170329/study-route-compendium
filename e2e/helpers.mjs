@@ -22,6 +22,7 @@ export const KEY_PAGES = [
   { url: '/english/books/nextstage/', name: '書籍ページ' },
   { url: '/english/books/', name: '参考書一覧' },
   { url: '/math/routes/top/', name: '志望校別ルート' },
+  { url: '/search/', name: '詳細検索' },
   { url: '/progress/', name: '学習の記録' },
   { url: '/privacy/', name: 'プライバシー' },
   { url: '/methodology/', name: '算出方法' },
@@ -131,7 +132,12 @@ export async function horizontalOverflow(page) {
  * この検査そのものが意味を失う。パターンは第三者の配信元に限定する。
  */
 const THIRD_PARTY_NOISE = [
+  /* frame-ancestors の report-only 違反。広告の iframe を入れたときに Chrome が出す。
+     表記が 2 通りある（"[Report Only]" と "report-only Content Security Policy"）ので
+     両方を拾う。**report-only であることを条件に入れて**、
+     自サイトの本当の CSP 違反まで隠さないようにする */
   /\[Report Only\].*frame-ancestors/i,
+  /report-only Content Security Policy.*frame-ancestors/i,
   /googlesyndication|doubleclick|googletagmanager|google-analytics|pagead|adsbygoogle/i,
   /Failed to load resource.*(googlesyndication|doubleclick|pagead|google-analytics)/i,
 ];

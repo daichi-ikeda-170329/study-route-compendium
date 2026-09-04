@@ -463,3 +463,11 @@ img, svg, video, iframe { max-width: 100%; }
 .rt-refine__applied{margin-top:14px;padding:12px 14px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line-2)}
 .rt-refine__applied ul{margin:6px 0 0;padding-left:1.2em}
 .rt-refine__applied li{margin-top:4px}
+
+/* 検索候補の末尾に置く詳細検索への導線（assets/js/search.js）。
+   候補（role="option"）ではないので、listbox の数に含めない */
+.rt-search__more{display:flex;flex-direction:column;gap:2px;padding:12px 14px;min-height:44px;
+  border-top:1px solid var(--line-2);font-size:13px;font-weight:700;text-decoration:none;color:inherit}
+.rt-search__more span{font-weight:400;font-size:11.5px;color:var(--muted-2)}
+.rt-search__more:hover{background:var(--surface-2)}
+.rt-search__more:focus-visible{outline:2px solid currentColor;outline-offset:-2px}

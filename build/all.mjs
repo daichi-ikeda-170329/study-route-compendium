@@ -45,6 +45,8 @@ const STEPS = [
   { name: '法務・信頼性ページ',    script: 'generate-legal.mjs',    checkArgs: null },
   { name: '学習の記録ページ',      script: 'generate-progress.mjs', checkArgs: null },
   { name: '科目の配信アセット',    script: 'generate-subject-assets.mjs', checkArgs: ['--check'] },
+  { name: '検索の絞り込み索引',    script: 'generate-search-facets.mjs',   checkArgs: ['--check'] },
+  { name: '詳細検索ページ',        script: 'generate-search-page.mjs',     checkArgs: null },
   { name: '検索インデックス',      script: 'generate-search.mjs',   checkArgs: null },
   { name: '科目トップの事前描画',  script: 'prerender-tops.mjs',    checkArgs: ['--check'] },
   { name: '収録冊数',              script: 'apply-count.mjs',       checkArgs: ['--check'] },

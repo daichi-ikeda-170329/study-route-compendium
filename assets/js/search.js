@@ -208,6 +208,13 @@
         + '<span class="rt-search__txt"><b>' + esc(b[2]) + "</b><span>" + esc(meta) + "</span></span>"
         + "</button>";
     }).join("");
+    /* 候補の末尾に詳細検索への導線を足す。**ここは候補（option）ではない**ので
+       role="option" を付けず、listbox の外に置く（読み上げが件数を数え違えるため）。
+       ヘッダー検索は書名の候補出しに徹して軽いままにし、出版社・著者・難易度帯・
+       刊行年・確認状態での絞り込みは /search/ が別の索引で受け持つ。 */
+    pop.insertAdjacentHTML("beforeend",
+      '<a class="rt-search__more" href="/search/">詳細検索で絞り込む'
+      + '<span>出版社・著者・難易度帯・刊行年・確認状態</span></a>');
     open();
   }
 

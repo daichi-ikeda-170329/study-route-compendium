@@ -277,6 +277,7 @@ ${curDir ? `      <a href="/${curDir}/">参考書図鑑</a>
       <a href="/${curDir}/guides/">参考書の選び方</a>`}` : `      <a href="/#subjects">科目から選ぶ</a>
       <a href="/#catalog">参考書から探す</a>
       <a href="/guides/">参考書の選び方</a>`}
+      <a href="/search/">詳細検索</a>
       <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
       <a href="https://x.com/${X_HANDLE}" target="_blank" rel="noopener noreferrer me">X @${X_HANDLE}</a>
