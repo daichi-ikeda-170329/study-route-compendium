@@ -56,13 +56,22 @@ const EXTERNAL_BASE = ARGS.some(a => a.startsWith('--base='));
 const COMMIT = arg('commit', process.env.GITHUB_SHA || null);
 
 /**
- * 第三者ドメイン。--block-third-party で遮断する。
- * e2e/helpers.mjs の blockThirdParty() と同じ考え方（自サイト以外を止める）。
+ * 遮断する第三者。**解析と広告だけを止める。**
+ *
+ * e2e/helpers.mjs の blockThirdParty() と同じ範囲にそろえてある
+ * （googletagmanager / google-analytics / googlesyndication / doubleclick /
+ *   adsbygoogle / pagead）。
+ *
+ * **Google Fonts（fonts.googleapis.com / fonts.gstatic.com）は含めない。**
+ * ここで見たいのは「解析と広告を外したら何が残るか」であって、
+ * 書体はサイトの見た目そのものなので外す対象ではない。
+ * 実際、以前 `*gstatic.com*` を入れていたときは書体の取得が止まったまま
+ * ページが落ち着かず、LCP が 24 秒になって計測が壊れていた。
  */
 const THIRD_PARTY_PATTERNS = [
   '*googletagmanager.com*', '*google-analytics.com*', '*analytics.google.com*',
   '*googlesyndication.com*', '*googleadservices.com*', '*doubleclick.net*',
-  '*adtrafficquality.google*', '*google.com/ads*', '*gstatic.com*',
+  '*adtrafficquality.google*', '*pagead*', '*adsbygoogle*',
 ];
 
 /** 実行できるかを先に確かめる。無いなら「未実施」で終える */

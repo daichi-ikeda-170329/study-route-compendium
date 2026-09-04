@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-09-04T17:01:02.775Z",
+  "commit": "b92680f7d76b3255c0f287032c18f46232af63cf",
+  "lighthouseVersion": "13.4.1",
+  "chromeVersion": "Google Chrome 152.0.7977.76",
+  "target": "localhost (build/serve.mjs, .)",
+  "baseUrl": "http://127.0.0.1:4185",
+  "formFactor": "mobile",
+  "throttling": "simulate (lighthouse mobile default)",
+  "thirdParty": "blocked",
+  "runs": 5,
+  "pages": [
+    {
+      "path": "/science/",
+      "url": "http://127.0.0.1:4185/science/",
+      "runs": [
+        {
+          "performance": 56,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 9609.481047710224,
+          "fcpMs": 3447.085694590713,
+          "cls": 0.21566148647778927,
+          "tbtMs": 0,
+          "speedIndexMs": 4062.6065789803147,
+          "ttiMs": 9609.481047710226,
+          "transferBytes": 2846101
+        },
+        {
+          "performance": 55,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 23467.034347761444,
+          "fcpMs": 16438.675597761456,
+          "cls": 0.0003754637701914432,
+          "tbtMs": 0,
+          "speedIndexMs": 16438.675597761456,
+          "ttiMs": 23467.034347761444,
+          "transferBytes": 2824318
+        },
+        {
+          "performance": 55,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 23611.992485442788,
+          "fcpMs": 16540.213485442786,
+          "cls": 0.0007523725724661462,
+          "tbtMs": 0,
+          "speedIndexMs": 16540.213485442786,
+          "ttiMs": 23611.992485442788,
+          "transferBytes": 2822102
+        },
+        {
+          "performance": 55,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 8858.257891467669,
+          "fcpMs": 4190.421827335962,
+          "cls": 0.21548002621558743,
+          "tbtMs": 0,
+          "speedIndexMs": 4190.421827335962,
+          "ttiMs": 8858.257891467669,
+          "transferBytes": 2821875
+        },
+        {
+          "performance": 55,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 23764.94944459351,
+          "fcpMs": 16590.94469459351,
+          "cls": 0,
+          "tbtMs": 0,
+          "speedIndexMs": 16590.94469459351,
+          "ttiMs": 23764.94944459351,
+          "transferBytes": 2822007
+        }
+      ],
+      "median": {
+        "performance": 55,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 23467.034,
+        "fcpMs": 16438.676,
+        "cls": 0.001,
+        "tbtMs": 0,
+        "speedIndexMs": 16438.676,
+        "ttiMs": 23467.034,
+        "transferBytes": 2822102
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ],
+      "diagnostics": {
+        "lcpElement": "<p class=\"lead\">",
+        "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+        "lcpBreakdown": [
+          {
+            "label": "Time to first byte",
+            "ms": 0.9
+          },
+          {
+            "label": "Element render delay",
+            "ms": 1633
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "savingsMs": 2680
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "savingsMs": 2650
+          },
+          {
+            "id": "unminified-css",
+            "title": "Minify CSS",
+            "savingsMs": 170
+          },
+          {
+            "id": "unminified-javascript",
+            "title": "Minify JavaScript",
+            "savingsMs": 160
+          }
+        ]
+      }
+    }
+  ]
+}

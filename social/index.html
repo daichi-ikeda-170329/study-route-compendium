@@ -34,7 +34,7 @@
 <!-- 解析イベントの送信口。**defer を付けない。** 科目トップの share.js は
      本文中の同期スクリプトで、読み込み直後に共有 URL の復元を記録する。
      defer にするとその時点でまだ読めておらず、記録が落ちる -->
-<script src="/assets/js/analytics.js"></script>
+<script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
 <style>
 :root{
@@ -1421,9 +1421,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
   </button>
 </nav>
 
-<script src="/assets/js/bunri.js"></script>
-<script src="/assets/js/share.js"></script>
-<script src="/assets/js/pace.js"></script>
+<script src="/assets/js/bunri.js" defer></script>
+<script src="/assets/js/share.js" defer></script>
+<script src="/assets/js/pace.js" defer></script>
 <div id="rtLoadStatus" class="rt-load-status" role="status" aria-live="polite" hidden></div>
 <script>/* RT_SUBJECT_ASSETS — build/generate-subject-assets.mjs が書き換える。手で編集しない */window.RT_SUBJECT_ASSETS={"v":1,"subject":"social","files":{"core":"/assets/generated/subjects/social.core.json?v=8582dd790a","books":"/assets/generated/subjects/social.books.json?v=22d513e0bd","routes":"/assets/generated/subjects/social.routes.json?v=ae730ff27b","unis":"/assets/generated/subjects/social.unis.json?v=325e2c21ea","guides":"/assets/generated/subjects/social.guides.json?v=565f788664"},"bytes":{"core":2359,"books":338295,"routes":106030,"unis":134065,"guides":24743}};window.RT_SUBJECT_QUEUE=[];(["catGroups","isProv","provLast","hRange","byDiffAsc","byDiffDesc","diffColor","normQ","searchUnis","facBunri","isMed","resolveUni","pickBunri","levelFromHen","levelFromDone","moshiComparable","recalcStatus","targetHen","renderVerdict","go","syncHash","applyHash","coverSrcs","amazonURL","rakutenURL","coverHTML","covLoad","covErr","buildFilters","setFilter","bookCardHTML","renderCatalog","findConnections","openModal","closeModal","buildRoutePicker","selectTier","availNow","toggleSubj","setCourse","renderSubjBar","syncMode","setMode","sugSync","sugClose","renderUniSug","pickUni","subjBadge","applyUni","renderDoneSug","addDone","removeDone","renderDoneChips","segAria","wireSeg","subjectPlan","nodeHTML","renderRoute","renderRouteBody","renderHome","startQuiz","activeQuizSteps","renderQuiz","pickOpt","nextQuiz","quizPicks","focusResult","renderQuizResult","applyQuiz","renderGuide","toggleGuide","trapFocusables","modalOpened","modalClosed","openBox","syncRouteSegs","pickMask","applySharedUni","sharedUniName"]).forEach(function(n){if(window[n])return;window[n]=function(){window.RT_SUBJECT_QUEUE.push([n,[].slice.call(arguments)])};window[n].__rtStub=1});window.RT_SUBJECT_FLUSH=function(){var q=window.RT_SUBJECT_QUEUE;window.RT_SUBJECT_QUEUE=[];q.forEach(function(c){var f=window[c[0]];if(typeof f==="function"&&!f.__rtStub)f.apply(null,c[1])})};</script>
 <script src="/assets/js/subject-social.js?v=d05e7be098" defer></script>

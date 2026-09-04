@@ -22,6 +22,7 @@
     "validate": "npm run build && npm test && npm run test:e2e",
     "check:shape": "node build/snapshot-subject-data.mjs --check",
     "snapshot": "node build/snapshot-subject-data.mjs",
+    "check:budgets": "node --test test/performance-budget.test.mjs",
     "check:production": "node build/check-production.mjs",
     "audit:performance": "node build/audit-performance.mjs --commit=$(git rev-parse HEAD 2>/dev/null || echo unknown)"
   },
