@@ -22,7 +22,7 @@
 | S7 | 任意の追加質問 | DONE | 23cf9908 | `assets/js/refine.js` / `e2e/refine.spec.mjs` | スキップ時の結果と共有 URL が完全一致することを HTML 突き合わせで固定 |
 | S8 | 詳細検索 | DONE | cc7e8c0a | `assets/generated/search-facets.json` / `/search/` / `test/search-facets.test.mjs` | v1 索引は 235,925 バイトのまま。欠損を「該当なし」に落とさない |
 | S9 | 書影の出所台帳 | DONE（判断待ち 1 件） | 2eb15283 | `docs/cover-policy.md` / `build/data/cover-*.json` / `test/covers.test.mjs` | resolver を 1 本化（候補は減らさない）。利用条件の確認は OWNER ACTION |
-| S10 | QA・Best Practices・KPI | 未着手 | | | |
+| S10 | QA・Best Practices・KPI | DONE（実機と KPI 実数は BLOCKED_EXTERNAL） | aaf345ea / 741a5a65 / fafc5849 | `docs/qa-report-2026-09-05.md` / `docs/performance-report.md` §5.4 / `docs/kpi-import-guide.md` | BP は第三者遮断で 100。自サイト由来 0 |
 | S11 | 最終検証と報告 | 未着手 | | | |
 
 ## 未解決事項 8 件との対応
@@ -34,23 +34,15 @@
 | 3 | 任意の追加質問 | S7 | DONE |
 | 4 | 検索の絞り込み拡張 | S8 | DONE |
 | 5 | 書影の出所台帳 | S9 | DONE（利用条件の確認だけ OWNER ACTION） |
-| 6 | 手動 QA | S10 | 未着手 |
-| 7 | Best Practices 77 の原因分離 | S10 | 未着手 |
-| 8 | KPI 基準値 | S10 | 未着手 |
+| 6 | 手動 QA | S10 | DONE（自動）+ BLOCKED_EXTERNAL（実機） |
+| 7 | Best Practices 77 の原因分離 | S10 | DONE（自サイト由来 0 と実証） |
+| 8 | KPI 基準値 | S10 | DONE（機構）+ BLOCKED_EXTERNAL（実数の投入） |
 
 ## 次にやること（実行が切れたらここから再開する）
 
-- S10 に着手する。3 つある。
-  1. **Firefox / WebKit の自動 QA。** 現行の Chromium 4 幅は維持し、
-     `e2e/cross-browser.spec.mjs` と `test:cross-browser` を足す。
-     **Playwright の WebKit を「Safari 実機」と書かない。** 実機確認は BLOCKED_EXTERNAL。
-  2. **Best Practices 77 の原因分離。** 既に落ちている audit は
-     `third-party-cookies` と `inspector-issues` の 2 件と分かっている
-     （`docs/baseline-2026-09-05.md` §7）。自サイト由来の修正可能な項目を先に潰し、
-     残差が第三者だけなら `docs/performance-report.md` へ分けて書く。
-  3. **KPI の取込機構。** `build/import-kpi.mjs` / `build/data/kpi-schema.json` /
-     `docs/kpi-import-guide.md` / `docs/kpi-baseline.example.json` /
-     `.gitignore` へ `private/kpi-input/`。**実数の投入は BLOCKED_EXTERNAL。**
+- S11（最終検証と報告）。指示書 §55 の順で全検査を流し、§58 の書式で最終報告を出す。
+  未解決事項 8 件を DONE / BLOCKED_EXTERNAL / FAILED で分類し、根拠を添える。
+- そのあと `fix/unresolved-items` を push し、PR を作って main へマージする。
 
 ## S4 時点の実測（S5 の出発点）
 
@@ -301,6 +293,35 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
 
 4. **死んだデータを 1 件消した。** `subject-math.js` の `COVERS`（2,340 バイト）は、
    移行時に「BOOKS へ流し込む文」を canonical データへ取り込んだ時点で参照されなくなっていた。
+
+### S10 で決めたこと・分かったこと
+
+1. **Best Practices 77 は、自サイト由来 0 と実証できた。**
+   広告・解析を遮断すると **5 run すべて 100**、落ちた audit 0 件。
+   落ちていた 2 件（`third-party-cookies` / `inspector-issues`）は、どちらも
+   `googleads.g.doubleclick.net` の `test_cookie` 1 つが原因だった。
+
+2. **遮断の指定が効いていなかったのを直した。**
+   `--blocked-url-patterns` をカンマ区切りで 1 つの引数にまとめると、
+   「カンマを含む 1 個のパターン」と解釈されて何も遮断されない。
+   気づいたのは「遮断したはずなのに Best Practices が 77 のまま」だったため。
+   **効いていない遮断で「第三者のせい」と結論づけずに済んだ。**
+
+3. **CLS は第三者ではない。** 遮断しても 0.215 のままで、Lighthouse が挙げる原因は
+   すべて Web font。S5 の判断（書体は触らず運営者へ回す）と整合する。
+
+4. **cross-browser は全 spec を掛け算しない。**
+   4 幅 × 3 ブラウザにすると実行時間が跳ね、落ちても読まれなくなる。
+   差が出るところだけを `e2e/cross-browser.spec.mjs` に集めた。
+
+5. **`pageerror: undefined` の切り分けに 3 手かけた。**
+   1 手目（stack を出す）2 手目（中身が空なら落とす）では足りず、
+   3 手目で `RT_DEBUG_ERRORS=1` を足して**素の中身を採って**から規則を決めた。
+   推測で 3 回目の修正をしなかったのが正解だった（実際は message が
+   文字列 `"undefined"` で、空文字ではなかった）。
+
+6. **KPI は機構だけを作り、実数は入れていない。**
+   雛形はすべて `null`。`docs/kpi-baseline.example.json` には「実数ではない」と明記した。
 
 ### 事実確認済みの前提（作業開始時に実測した）
 
