@@ -889,7 +889,7 @@ function nodeHTML(s, i, st0, startIdx, b, extraCls){
   const altHtml = s.alts && s.alts.length ? `<div class="cn-info__alt"><b>代替:</b> ${s.alts.map(a=>{
     const ab=bookById(a); return `<button onclick="event.stopPropagation();openModal('${a}')">${ab.name}</button>`;
   }).join(" / ")}</div>` : "";
-  return `<div class="climb-node${cls}${extraCls||""}" data-h="${b.h}" data-hours="${String(b.hours||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;")}">
+  return `<div class="climb-node${cls}${extraCls||""}" data-book-id="${b.id}" data-subject-id="japanese" data-h="${b.h}" data-hours="${String(b.hours||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;")}">
     <div class="cn-marker"><div class="cn-step">${st0==="done"?"✓":i+1}</div><div class="cn-lvl">${LVL_NAME[s.lvl]}</div></div>
     <div class="cn-card" onclick="openModal('${b.id}')">
       ${badge}
@@ -958,7 +958,7 @@ function renderRouteBody(){
       <div class="para-head"><div class="para-head__spacer"></div><b>‖ ${SUBJ[sk].label}と並行して進める</b></div>
       ${plan.para.map(p=>{
         const b = bookById(p.id); const st = STAGES[b.stage];
-        return `<div class="climb-node para">
+        return `<div class="climb-node para" data-book-id="${b.id}" data-subject-id="japanese">
           <div class="cn-marker"><div class="cn-step">並行</div></div>
           <div class="cn-card" onclick="openModal('${b.id}')">
             <div class="cn-card__cover">${coverHTML(b)}</div>

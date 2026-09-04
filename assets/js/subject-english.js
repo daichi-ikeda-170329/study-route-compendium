@@ -972,7 +972,7 @@ function climbNodeHTML(s, i, st0, startIdx){
   const altHtml = s.alts && s.alts.length ? `<div class="cn-info__alt"><b>代替:</b> ${s.alts.map(a=>{
     const ab=bookById(a); return ab?`<button onclick="event.stopPropagation();openModal('${a}')">${ab.name}</button>`:"";
   }).filter(Boolean).join(" / ")}</div>` : "";
-  return `<div class="climb-node${cls}" data-h="${b.h}" data-hours="${String(b.hours||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;")}">
+  return `<div class="climb-node${cls}" data-book-id="${b.id}" data-subject-id="english" data-h="${b.h}" data-hours="${String(b.hours||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;")}">
     <div class="cn-marker"><div class="cn-step">${st0==="done"?"✓":i+1}</div><div class="cn-lvl">${["導入","基礎","標準","応用","過去問"][s.lvl]}</div></div>
     <div class="cn-card" onclick="openModal('${b.id}')">
       ${badge}
@@ -993,7 +993,7 @@ function climbNodeHTML(s, i, st0, startIdx){
 function paraNodeHTML(p, stepLabel){
   const b = bookById(p.id); if(!b) return "";
   const st = STAGES[b.stage];
-  return `<div class="climb-node para">
+  return `<div class="climb-node para" data-book-id="${b.id}" data-subject-id="english">
     <div class="cn-marker"><div class="cn-step">${stepLabel}</div></div>
     <div class="cn-card" onclick="openModal('${b.id}')">
       <div class="cn-card__cover">${coverHTML(b)}</div>

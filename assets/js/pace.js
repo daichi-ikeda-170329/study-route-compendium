@@ -356,6 +356,30 @@
    * .subj-head が分野の区切り。区切りが 1 つも無い科目（英語・数学）は全体で 1 つの分野。
    * 並行教材（.climb-node.para）と、済み・スキップの段は日程に数えない。
    */
+  /**
+   * この端末に残っている進捗を、その段の想定時間へ反映する。
+   *
+   * **幅を壊さない。** 下限・標準・上限の 3 本すべてに**同じ係数**を掛ける。
+   * 片方だけに掛けると、幅そのものが嘘になる。
+   *
+   * 係数は assets/js/progress.js が決める（完了 0 / 学習中は 1−p/100 /
+   * 進捗率が不明・保留・未着手は 1）。progress.js を読み込んでいない画面では
+   * 何もしない（係数 1 と同じ）。
+   */
+  function applyProgress(el, band) {
+    var P = global.RTProgress;
+    if (!P || typeof P.factorFor !== "function") return band;
+    var bookId = el.getAttribute("data-book-id");
+    var subjectId = el.getAttribute("data-subject-id");
+    if (!bookId || !subjectId) return band;
+    var f = P.factorFor(subjectId, bookId);
+    if (f === 1) return band;
+    return {
+      min: band.min * f, mid: band.mid * f, max: band.max * f,
+      unverified: band.unverified, done: f === 0
+    };
+  }
+
   function readTracks(climb) {
     var tracks = [{ final: false, nodes: [] }];
     var kids = climb.children;
@@ -370,11 +394,20 @@
       var h = parseFloat(el.getAttribute("data-h"));
       var band = parseBand(el.getAttribute("data-hours"), h);
       if (band.unverified) {
-        /* 想定時間が数値で書かれていない。日程には入れないが、件数は数える */
+        /* 想定時間が数値で書かれていない。日程には入れないが、件数は数える。
+           **進捗を付けてもここの扱いは変えない。**「合計は下限」の断りが要る点は同じ */
         tracks[tracks.length - 1].nodes.push({ el: el, band: band, skip: true });
         continue;
       }
       if (!(h > 0)) continue;
+      band = applyProgress(el, band);
+      if (band.done) {
+        /* この端末で「完了」にした本。残り時間は 0 なので日程から外す。
+           画面上は .active のままなので、二重に控除することはない
+           （pace が数えるのは .active だけで、S.done の本は最初から入らない） */
+        tracks[tracks.length - 1].nodes.push({ el: el, band: band, skip: false, finished: true });
+        continue;
+      }
       tracks[tracks.length - 1].nodes.push({ el: el, band: band, skip: false });
     }
     return tracks.filter(function (t) { return t.nodes.length; });
@@ -530,6 +563,13 @@
       counted.forEach(function (n, ni) {
         var info = n.el.querySelector(".cn-info");
         if (!info) return;
+        if (n.finished) {
+          var doneSpan = doc.createElement("span");
+          doneSpan.className = "cn-due";
+          doneSpan.textContent = "この端末で完了にしています";
+          info.appendChild(doneSpan);
+          return;
+        }
         var lo = p.min.byTrack[ti] && p.min.byTrack[ti][ni];
         var hi = p.max.byTrack[ti] && p.max.byTrack[ti][ni];
         var txt = rangeLabel(lo, hi);

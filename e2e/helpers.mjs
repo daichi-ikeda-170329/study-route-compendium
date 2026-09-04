@@ -22,6 +22,7 @@ export const KEY_PAGES = [
   { url: '/english/books/nextstage/', name: '書籍ページ' },
   { url: '/english/books/', name: '参考書一覧' },
   { url: '/math/routes/top/', name: '志望校別ルート' },
+  { url: '/progress/', name: '学習の記録' },
   { url: '/privacy/', name: 'プライバシー' },
   { url: '/methodology/', name: '算出方法' },
 ];

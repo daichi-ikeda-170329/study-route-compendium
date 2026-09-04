@@ -422,3 +422,19 @@ img, svg, video, iframe { max-width: 100%; }
 }
 .rt-load-retry:hover,.rt-load-alt:hover{background:var(--card,#FFFDF8)}
 .rt-load-retry:focus-visible,.rt-load-alt:focus-visible{outline:2px solid currentColor; outline-offset:2px}
+
+/* ============================================================
+   参考書 1 冊の状態（assets/js/progress-control.js）
+
+   記録はこの端末の中だけ。ネットワークへは出ない。
+   タップ対象は 44x44 以上、色だけで状態を伝えない（文字も出す）。
+   ============================================================ */
+.rt-prog{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:10px;font-size:13px}
+.rt-prog__label{font-weight:700;color:var(--ink-2)}
+.rt-prog__sel,.rt-prog__num{min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit;background:var(--bg);color:inherit}
+.rt-prog__num{width:5.5em}
+.rt-prog__sel:focus-visible,.rt-prog__num:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.rt-prog__pct{display:inline-flex;align-items:center;gap:6px}
+.rt-prog__pct[hidden]{display:none}
+.rt-prog--compact{margin-top:8px;font-size:12.5px}
+.rt-prog--compact .rt-prog__sel,.rt-prog--compact .rt-prog__num{padding:6px 8px}

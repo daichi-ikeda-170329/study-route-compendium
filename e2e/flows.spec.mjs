@@ -5,7 +5,7 @@
  * 「受験情報が外へ出ていないか」を実ブラウザで確かめる。
  */
 import { test } from '@playwright/test';
-import { expect, collectErrors } from './helpers.mjs';
+import { expect, collectErrors, waitForApp } from './helpers.mjs';
 
 /** ナビは幅で出し分かれるので、見えているほうを押す */
 const nav = (page, view) => page.locator(`button[data-view="${view}"]:visible`).first();
@@ -13,6 +13,7 @@ const nav = (page, view) => page.locator(`button[data-view="${view}"]:visible`).
 test('3 分診断を最初から結果までキーボードだけで終えられる', async ({ page }) => {
   const errors = collectErrors(page);
   await page.goto('/math/#quiz', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await expect(page.locator('#view-quiz')).toBeVisible();
 
   /* 選択肢にフォーカスして Enter、次に「次へ」へフォーカスして Enter。
@@ -36,6 +37,7 @@ test('3 分診断を最初から結果までキーボードだけで終えられ
 
 test('結果が出たら、結果の見出しへフォーカスが移る', async ({ page }) => {
   await page.goto('/math/#quiz', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   for (let step = 0; step < 8; step++) {
     if (await page.locator('#quizShell .result-hero').count()) break;
     const opt = page.locator('#quizShell .opt').first();
@@ -56,6 +58,7 @@ test('結果が出たら、結果の見出しへフォーカスが移る', async
 
 test('大学の候補を上下キーと Enter で選べる', async ({ page }) => {
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.locator('button[data-m="uni"]').click();
 
   const input = page.locator('#uniInput');
@@ -80,6 +83,7 @@ test('大学の候補を上下キーと Enter で選べる', async ({ page }) =>
 
 test('Escape で候補が閉じ、入力欄から離脱できる', async ({ page }) => {
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.locator('button[data-m="uni"]').click();
   const input = page.locator('#uniInput');
   await input.click();
@@ -93,6 +97,7 @@ test('Escape で候補が閉じ、入力欄から離脱できる', async ({ page
 
 test('大学名だけではルートを出さず、受験科目の確認を求める', async ({ page }) => {
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.locator('button[data-m="uni"]').click();
   await page.locator('#uniInput').fill('東京大学');
   await page.locator('#uniSug [role="option"]').first().click();
@@ -108,6 +113,7 @@ test('大学名だけではルートを出さず、受験科目の確認を求�
 
 test('「まだ分からない」を選んでも、片方のルートを断定しない', async ({ page }) => {
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.locator('button[data-m="uni"]').click();
   await page.locator('#uniInput').fill('東京大学');
   await page.locator('#uniSug [role="option"]').first().click();
@@ -118,6 +124,7 @@ test('「まだ分からない」を選んでも、片方のルートを断定�
 
 test('ペースの見込みが幅で出る', async ({ page }) => {
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.locator('#routePicker .rpick').first().click();
   await expect(page.locator('#routeOutput .climb')).toBeVisible();
   const pace = page.locator('.pace');
@@ -131,6 +138,7 @@ test('ペースの見込みが幅で出る', async ({ page }) => {
 
 test('保存・復元・削除がこの端末の中だけで動く', async ({ page }) => {
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.locator('#routePicker .rpick').first().click();
   await expect(page.locator('#routeOutput .climb')).toBeVisible();
 
@@ -145,6 +153,7 @@ test('保存・復元・削除がこの端末の中だけで動く', async ({ pa
 test('旧い共有 URL を開いても同じルートが出る', async ({ page }) => {
   const errors = collectErrors(page);
   await page.goto('/math/?rv=1&r=t.top.ri.omni.1', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await expect(page.locator('#routeOutput .climb')).toBeVisible();
   expect(errors).toEqual([]);
 });
@@ -153,6 +162,7 @@ test('壊れた共有 URL でも例外を出さず、素の状態で開く', asy
   const errors = collectErrors(page);
   for (const q of ['?rv=1&r=', '?rv=9&r=t.top.ri.omni.1', '?v=1&a=zzz', '#<script>', '?r=' + 'x'.repeat(500)]) {
     await page.goto(`/math/${q}`, { waitUntil: 'domcontentloaded' });
+    await waitForApp(page);
     await expect(page.locator('#view-home, #view-route')).not.toHaveCount(0);
   }
   expect(errors).toEqual([]);
@@ -160,6 +170,7 @@ test('壊れた共有 URL でも例外を出さず、素の状態で開く', asy
 
 test('旧い形式の保存データを読み込める', async ({ page }) => {
   await page.goto('/math/', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.evaluate(() => {
     // v1 のペース設定（year と hours だけを持つ形）
     window.localStorage.setItem('rt_pace', JSON.stringify({ year: 2027, hours: 3 }));

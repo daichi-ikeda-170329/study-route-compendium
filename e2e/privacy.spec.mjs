@@ -5,7 +5,7 @@
  * 実際に走らせるとどうなるかは別なので、ここで通信そのものを見る。
  */
 import { test } from '@playwright/test';
-import { expect } from './helpers.mjs';
+import { expect, waitForApp } from './helpers.mjs';
 
 /** 外へ出てはいけない値。診断・志望校入力で実際に使う */
 const SECRETS = ['東京大学', '医学部医学科', '62.5', 'nextstage'];
@@ -26,6 +26,7 @@ function watchRequests(page) {
 test('志望校・学部・偏差値・既習教材がネットワークへ出ない', async ({ page }) => {
   const reqs = watchRequests(page);
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
 
   await page.locator('button[data-m="uni"]').click();
   await page.locator('#uniInput').fill('東京大学');
@@ -59,6 +60,7 @@ test('GA4 へ送るページ URL に共有パラメータが入らない', async
      origin + pathname に差し替えてある。ここではその設定が生きているかを見る */
   await page.goto('/math/?rv=1&r=t.top.ri.omni.1&ru=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6#route',
     { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   const loc = await page.evaluate(() => {
     const conf = (window.dataLayer || []).find(a => a[0] === 'config');
     return conf && conf[2] && conf[2].page_location;
@@ -73,6 +75,7 @@ test('共有リンクを復元したらアドレスバーから共有パラメ�
   /* 広告や解析はページ URL をそのまま受け取る。復元し終えたら落としておく */
   await page.goto('/math/?rv=1&r=t.top.ri.omni.1&ru=%E6%9D%B1%E4%BA%AC%E5%A4%A7%E5%AD%A6#route',
     { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await expect(page.locator('#routeOutput .climb')).toBeVisible();
   const url = page.url();
   expect(url, '共有パラメータが残っている').not.toContain('r=t.top');
@@ -81,6 +84,7 @@ test('共有リンクを復元したらアドレスバーから共有パラメ�
 
 test('診断の回答列も復元後にアドレスバーから消える', async ({ page }) => {
   await page.goto('/math/?v=1&a=2.5.4.2.2', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await expect(page.locator('#quizShell .result-hero')).toBeVisible();
   expect(page.url(), '回答列が残っている').not.toContain('a=2.5.4.2.2');
 });
@@ -88,6 +92,7 @@ test('診断の回答列も復元後にアドレスバーから消える', async
 test('保存したルートは localStorage の中だけに残る', async ({ page }) => {
   const reqs = watchRequests(page);
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.locator('#routePicker .rpick').first().click();
   await expect(page.locator('#routeOutput .climb')).toBeVisible();
   const save = page.locator('button', { hasText: '保存' }).first();
@@ -106,6 +111,7 @@ test('保存したルートは localStorage の中だけに残る', async ({ pag
 
 test('解析イベントは allowlist を通ったものだけになる', async ({ page }) => {
   await page.goto('/math/', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   const r = await page.evaluate(() => window.RTAnalytics.sanitize('affiliate_click', {
     subject_id: 'math', book_id: 'ao', store: 'amazon',
     university: '東京大学', hensachi: 62,
@@ -122,6 +128,7 @@ test('広告を読み込めなくても、ルートの作成と保存が最後�
     return route.continue();
   });
   await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
   await page.locator('#routePicker .rpick').first().click();
   await expect(page.locator('#routeOutput .climb')).toBeVisible();
   await expect(page.locator('.pace')).toBeVisible();

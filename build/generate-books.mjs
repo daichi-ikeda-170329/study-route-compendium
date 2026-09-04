@@ -452,6 +452,14 @@ ${bookCards(next.list, sub, stages)}
       <p class="buy__note">${aff ? `${affStores}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。` : ''}価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
     </section>
 
+    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="${esc(sub.dir)}" data-book-id="${esc(book.id)}" data-book-name="${esc(book.name)}"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
+    </section>
+
     <div class="cta">
       <h2>${esc(book.name)}は、あなたのルートの何冊目か</h2>
       <p>1 冊単位で選ぶより、志望校までの並びの中で位置を決めたほうが迷いません。${esc(sub.full)}では、志望校と現在地から ${counts[sub.dir]} 冊の中を通る道を組み立てられます。</p>
@@ -466,6 +474,9 @@ ${bookCards(next.list, sub, stages)}
 ${footer(sub.dir, counts)}
 
 ${jsonLd(ld)}
+
+<script src="/assets/js/progress.js" defer></` + `script>
+<script src="/assets/js/progress-control.js" defer></` + `script>
 
 </body>
 </html>

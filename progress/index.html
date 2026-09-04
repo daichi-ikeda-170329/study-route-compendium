@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学習の記録｜この端末だけに残る進み具合 - ルート大全</title>
+<meta name="description" content="読んでいる参考書の状態（未着手・学習中・完了・保留）をこの端末の中だけに記録します。サーバーへは送らず、JSON で取り出しと取り込みができます。">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/progress/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="学習の記録｜この端末だけに残る進み具合 - ルート大全">
+<meta property="og:description" content="読んでいる参考書の状態（未着手・学習中・完了・保留）をこの端末の中だけに記録します。サーバーへは送らず、JSON で取り出しと取り込みができます。">
+<meta property="og:url" content="https://route-taizen.com/progress/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="学習の記録｜この端末だけに残る進み具合 - ルート大全">
+<meta name="twitter:description" content="読んでいる参考書の状態（未着手・学習中・完了・保留）をこの端末の中だけに記録します。サーバーへは送らず、JSON で取り出しと取り込みができます。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#2F6E4F}
+.pg-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:18px 0}
+.pg-sum div{background:var(--card);border:1px solid var(--line-2);border-radius:6px;padding:12px 14px}
+.pg-sum dt{font-size:11.5px;color:var(--muted-2);font-family:var(--mono);letter-spacing:.06em}
+.pg-sum dd{font-size:22px;font-weight:800;margin-top:2px}
+.pg-list{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.pg-row{background:var(--card);border:1px solid var(--line-2);border-radius:6px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.pg-row__name{font-weight:700;flex:1 1 220px;min-width:0;overflow-wrap:anywhere}
+.pg-row__sub{font-size:11.5px;color:var(--muted-2);font-family:var(--mono)}
+.pg-row__st{font-size:12.5px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid var(--line)}
+.pg-row__st[data-st="in_progress"]{background:#EAF2FB;border-color:#9DBEE3;color:#1B3E6B}
+.pg-row__st[data-st="completed"]{background:#E9F4EE;border-color:#9CCDB1;color:#1D5236}
+.pg-row__st[data-st="on_hold"]{background:#F6F1E6;border-color:#D8C79E;color:#5C4A1E}
+.pg-row__st[data-st="not_started"]{background:var(--surface-3);color:var(--ink-2)}
+.pg-row__loc{font-size:12.5px;color:var(--ink-2);flex-basis:100%}
+.pg-actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.pg-btn{min-height:44px;min-width:44px;padding:10px 16px;border-radius:6px;border:1px solid var(--line);background:var(--bg);font:inherit;font-weight:700;cursor:pointer;color:inherit;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.pg-btn:hover{background:var(--card)}
+.pg-btn:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.pg-btn--danger{border-color:#B5432A;color:#8C2437}
+.pg-note{background:var(--surface-2);border:1px solid var(--line-2);border-radius:6px;padding:12px 14px;font-size:13px;line-height:1.8;margin:14px 0}
+.pg-empty{padding:22px 16px;text-align:center;color:var(--muted);font-size:14px}
+.pg-goal{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
+.pg-goal input,.pg-goal select{min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit;background:var(--bg);color:inherit}
+.pg-pick{background:var(--card);border:1px solid var(--line-2);border-radius:6px;padding:12px 14px;margin:8px 0}
+.pg-pick b{display:block;margin-bottom:2px}
+.pg-diff{font-family:var(--mono);font-size:12.5px;line-height:1.9}
+.pg-live{min-height:1.6em}
+@media(max-width:520px){.pg-row{gap:6px 10px}}
+</style>
+</head>
+<body>
+
+<div class="pr-bar">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</div>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/">
+      <div class="logo__mark" aria-hidden="true">全</div>
+      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="https://route-taizen.com/">ルート大全</a>
+    <span class="sep">/</span><b>学習の記録</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Progress</div>
+      <h1 class="art-h1">学習の記録</h1>
+      <p class="art-lead">読んでいる参考書の状態を、<b>この端末の中だけ</b>に記録します。アカウントは要りません。サーバーへは何も送らないので、ブラウザのデータを消すと記録も消えます。大切な記録は下の「JSON で取り出す」で控えを取ってください。</p>
+    </div>
+
+    <div id="pgStatus" class="pg-live" role="status" aria-live="polite"></div>
+
+    <section class="block">
+      <h2 class="sec">いまの状態</h2>
+      <dl class="pg-sum" id="pgSummary"></dl>
+    </section>
+
+    <section class="block">
+      <h2 class="sec">今週みるところ</h2>
+      <p>記録した中から、<b>学習中を先に、次に未着手</b>の順で最大 3 件を出します。並び方は決まっているので、開くたびに変わることはありません。</p>
+      <div id="pgWeekly"></div>
+      <div class="pg-goal">
+        <label for="pgGoalValue">週の目標</label>
+        <input id="pgGoalValue" type="number" min="1" max="10000" step="1" inputmode="numeric" style="width:7em">
+        <label for="pgGoalUnit" class="visually-hidden">単位</label>
+        <select id="pgGoalUnit">
+          <option value="hours">時間</option>
+          <option value="pages">ページ</option>
+          <option value="questions">問</option>
+          <option value="chapters">章</option>
+        </select>
+        <button type="button" class="pg-btn" id="pgGoalSave">目標を保存</button>
+        <button type="button" class="pg-btn" id="pgGoalClear">目標を消す</button>
+      </div>
+      <p class="pg-note">週の目標は<b>目安</b>です。届かなかった週があっても、それ自体は問題ではありません。体調や学校の予定で使える時間は動きます。記録は「いまどこにいるか」を確かめるためのもので、できなかったことを数えるためのものではありません。</p>
+    </section>
+
+    <section class="block">
+      <h2 class="sec">記録している参考書</h2>
+      <div id="pgList" class="pg-list"></div>
+    </section>
+
+    <section class="block">
+      <h2 class="sec">取り出しと取り込み</h2>
+      <p>記録は JSON で取り出せます。別の端末へ移すときや、ブラウザのデータを消す前の控えに使ってください。<b>取り出した中身に、診断の回答・検索した言葉・解析の ID は入りません。</b></p>
+      <div class="pg-actions">
+        <button type="button" class="pg-btn" id="pgExport">JSON で取り出す</button>
+        <label class="pg-btn" for="pgImportFile">JSON を読み込む</label>
+        <input id="pgImportFile" type="file" accept="application/json,.json" aria-label="取り込む JSON ファイルを選ぶ" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
+      </div>
+      <div id="pgImportPreview"></div>
+      <p class="pg-note">読み込むときは、<b>先に件数と差分を表示します</b>。そこで「既存へ統合」か「置き換え」を選ぶまで、いまの記録は変わりません。掲載していない参考書の ID は件数だけ出して取り込みません。</p>
+    </section>
+
+    <section class="block">
+      <h2 class="sec">記録を消す</h2>
+      <p>消えるのは<b>学習の記録だけ</b>です。保存したルート（<code>rt_saved_routes</code>）と学習ペースの設定（<code>rt_pace</code>）は残ります。</p>
+      <div class="pg-actions">
+        <button type="button" class="pg-btn pg-btn--danger" id="pgClear">学習の記録をすべて消す</button>
+      </div>
+      <div id="pgClearConfirm"></div>
+    </section>
+
+    <div class="note">
+      <h3>記録の付け方</h3>
+      <p>参考書の状態は、各科目の<b>参考書図鑑</b>と<b>書籍ページ</b>から変えられます。<a href="/english/">英語</a> ／ <a href="/japanese/">国語</a> ／ <a href="/math/">数学</a> ／ <a href="/science/">理科</a> ／ <a href="/social/">社会</a> ／ <a href="/joho/">情報</a> ／ <a href="/shoron/">小論文</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/#subjects">科目から選ぶ</a>
+      <a href="/#catalog">参考書から探す</a>
+      <a href="/guides/">参考書の選び方</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/progress/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "学習の記録"
+    }
+   ]
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/progress/#webpage",
+   "url": "https://route-taizen.com/progress/",
+   "name": "学習の記録｜この端末だけに残る進み具合 - ルート大全",
+   "description": "読んでいる参考書の状態（未着手・学習中・完了・保留）をこの端末の中だけに記録します。サーバーへは送らず、JSON で取り出しと取り込みができます。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/progress/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+<script>window.RT_PROGRESS_SUBJECTS=[{"id":"english","label":"英語","color":"#B5432A"},{"id":"japanese","label":"国語","color":"#8A6D2F"},{"id":"math","label":"数学","color":"#24427C"},{"id":"science","label":"理科","color":"#2F6E4F"},{"id":"social","label":"社会","color":"#5B4E9E"},{"id":"joho","label":"情報","color":"#1F6E7A"},{"id":"shoron","label":"小論文","color":"#8E3B5E"}];</script>
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/progress-page.js" defer></script>
+
+</body>
+</html>
