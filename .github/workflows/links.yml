@@ -37,7 +37,7 @@ jobs:
       - name: 結果を artifact に残す
         run: node build/check-links.mjs --json > link-report.json
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: link-report
           path: link-report.json
