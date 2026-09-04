@@ -12,14 +12,14 @@
  * スクリプトが科目 HTML へ文字列で書き込んでいる。読み口と書き口を先に 1 本化して
  * おかないと、科目を 1 つ移すたびに 25 か所以上を直すことになり、必ず取りこぼす。
  *
- * ## 移行中の振る舞い
+ * ## 読む先は data/subjects/<科目>/ だけ
  *
- *   data/subjects/<科目>/ がある … そこから読む（移行済み）
- *   無い                        … extractSubject() へ落とす（未移行）
+ * 移行中は「無ければ科目 HTML へ落とす」フォールバックを持っていたが、
+ * 7 科目すべてを移し終えた 2026-09-05 に削除した（実装指示書 §25）。
  *
- * **フォールバックは移行中だけの仕組み。** 7 科目すべてを移し終えたら削除する。
- * 戻り値の形は `extractSubject()` と完全に同じにする。違っていたら
- * `build/data/subject-snapshot.json` との突き合わせ（`npm run check:shape`）が落ちる。
+ * **落とし先を残すと、移行が壊れても黙って古い HTML を読んで通ってしまう。**
+ * しかもデータはもう HTML に無いので、落ちても救いにならない。
+ * 足りないファイルがあれば、その場で落とす。
  *
  * ## 広告表記の判定をここへ移した理由（重要）
  *
@@ -37,7 +37,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { extractSubject, SUBJECTS } from './extract.mjs';
+import { SUBJECTS } from './extract.mjs';
 import { validateCanonicalFile } from './validate-subject-data.mjs';
 
 /** data/subjects/<科目>/ に置くファイルと、戻り値のどのキーに載るか */
@@ -100,53 +100,44 @@ function assertNoFunctions(value, where) {
 const cache = new Map();
 
 /**
- * 科目データを読む。戻り値の形は `extractSubject()` と同じ。
+ * 科目データを読む。
  *
  * @param {string} rootDir リポジトリのルート
  * @param {string} dir     科目ディレクトリ名
  * @param {object} [opts]
- * @param {string} [opts.srcOverride] 未移行科目で、ファイルの代わりに読む HTML。
- *   `build/apply-new-books.mjs` が「新刊を注入する前の状態」を基準にするために使う。
  * @param {boolean} [opts.fresh] キャッシュを使わない
  */
 export function loadSubjectData(rootDir, dir, opts = {}) {
-  const { srcOverride = null, fresh = false } = opts;
-  if (srcOverride) return extractSubject(rootDir, dir, srcOverride);
+  const { fresh = false } = opts;
 
   const key = `${rootDir}::${dir}`;
   if (!fresh && cache.has(key)) return cache.get(key);
 
-  let data;
-  if (isMigrated(rootDir, dir)) {
-    const missing = CANONICAL_FILES
-      .map(f => f.file)
-      .filter(f => !fs.existsSync(path.join(subjectDir(rootDir, dir), f)));
-    if (missing.length) {
-      // 中途半端な状態で古い HTML へ落ちると、「移したつもりで移っていない」に気づけない
-      throw new Error(`${dir}: 移行が途中。足りない: ${missing.join(', ')}`);
-    }
-
-    const books = readJson(rootDir, dir, 'books.json');
-    const unis = readJson(rootDir, dir, 'universities.json');
-    const routes = readJson(rootDir, dir, 'routes.json');
-    const guides = readJson(rootDir, dir, 'guides.json');
-    const stages = readJson(rootDir, dir, 'stages.json');
-    const config = readJson(rootDir, dir, 'config.json');
-
-    data = {
-      dir,
-      books: books.books,
-      stages: stages.stages,
-      tiers: routes.tiers,
-      routes: routes.routes,
-      unis: unis.universities,
-      guides: guides.guides,
-      config: config.config,
-    };
-    assertNoFunctions(data, `data/subjects/${dir}`);
-  } else {
-    data = extractSubject(rootDir, dir);
+  const missing = CANONICAL_FILES
+    .map(f => f.file)
+    .filter(f => !fs.existsSync(path.join(subjectDir(rootDir, dir), f)));
+  if (missing.length) {
+    throw new Error(`${dir}: data/subjects/${dir}/ が足りない — ${missing.join(', ')}`);
   }
+
+  const books = readJson(rootDir, dir, 'books.json');
+  const unis = readJson(rootDir, dir, 'universities.json');
+  const routes = readJson(rootDir, dir, 'routes.json');
+  const guides = readJson(rootDir, dir, 'guides.json');
+  const stages = readJson(rootDir, dir, 'stages.json');
+  const config = readJson(rootDir, dir, 'config.json');
+
+  const data = {
+    dir,
+    books: books.books,
+    stages: stages.stages,
+    tiers: routes.tiers,
+    routes: routes.routes,
+    unis: unis.universities,
+    guides: guides.guides,
+    config: config.config,
+  };
+  assertNoFunctions(data, `data/subjects/${dir}`);
 
   if (!fresh) cache.set(key, data);
   return data;

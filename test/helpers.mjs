@@ -2,7 +2,8 @@
  * テスト用のヘルパー。
  *
  * share.js はブラウザ向けの素のスクリプトなので、Node からは CommonJS として読み込む。
- * 科目ページの QUIZ は build/lib/extract.mjs と同じ方式（vm 上で <script> を実行）で取り出す。
+ * 科目ページの描画コードは assets/js/subject-<科目>.js にあり、データは
+ * data/subjects/<科目>/ にある。実行時と同じ形（RT_SUBJECT_APP(DATA)）で vm 上に組み立てる。
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -48,15 +49,13 @@ export const SUBJECTS = ['english', 'japanese', 'math', 'science', 'social'];
 /**
  * 科目トップの描画・操作コードの中身を返す。
  *
- * 移行済みの科目では assets/js/subject-<科目>.js に、未移行の科目では
- * <科目>/index.html のインライン <script> にある。**どちらでも同じ検査が通るように**
- * 取得先をここへ 1 本化する。移行のたびにテストを書き換えると、
- * 「テストが移行に合わせて緩んだのか、実装が正しいのか」が分からなくなる。
+ * 2026-09-05 に 7 科目すべてを移したので、置き場所は
+ * assets/js/subject-<科目>.js だけ。**取得先をここへ 1 本化する。**
+ * 各テストが自分でパスを組み立てると、置き場所が変わるたびに
+ * 「テストが実装に合わせて緩んだのか」が分からなくなる。
  */
 export function subjectAppSource(dir) {
-  const ext = path.join(ROOT, 'assets', 'js', `subject-${dir}.js`);
-  if (fs.existsSync(ext)) return fs.readFileSync(ext, 'utf8');
-  return fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+  return fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8');
 }
 
 /** 科目トップの HTML（markup と <style>）。CSS の検査はこちらを見る */
@@ -64,29 +63,16 @@ export function subjectHtml(dir) {
   return fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
 }
 
-/** その科目のデータが data/subjects/ へ移っているか */
+/** その科目のデータが data/subjects/ にあるか。7 科目すべて true のはず */
 export function subjectMigrated(dir) {
   return fs.existsSync(path.join(ROOT, 'data', 'subjects', dir, 'books.json'));
 }
 
-/** 科目ページから QUIZ 配列を取り出す。移行済み科目では外部の app JS から取る */
+/** 科目ページの QUIZ 配列。描画コード（assets/js/subject-<科目>.js）から取る */
 export function loadQuiz(dir) {
-  if (subjectMigrated(dir)) return loadPage(dir).ctx.QUIZ;
-  const src = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
-  const scripts = [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
-  const ctx = {
-    console: { log() {}, warn() {}, error() {} },
-    document: stub(), window: stub(), localStorage: stub(), navigator: stub(),
-    location: stub(), history: stub(),
-    setTimeout() {}, setInterval() {}, addEventListener() {}, requestAnimationFrame() {},
-  };
-  ctx.globalThis = ctx;
-  vm.createContext(ctx);
-  for (const code of scripts) {
-    try { vm.runInContext(code.replace(/\bconst (QUIZ)\s*=/g, 'globalThis.$1 ='), ctx, { timeout: 30000 }); } catch { /* DOM 依存の初期化が落ちるのは想定内 */ }
-  }
-  if (!Array.isArray(ctx.QUIZ) || ctx.QUIZ.length === 0) throw new Error(`${dir}: QUIZ を取り出せなかった`);
-  return ctx.QUIZ;
+  const q = loadPage(dir).ctx.QUIZ;
+  if (!Array.isArray(q) || q.length === 0) throw new Error(`${dir}: QUIZ を取り出せなかった`);
+  return q;
 }
 
 /**

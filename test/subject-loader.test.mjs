@@ -1,15 +1,15 @@
 /**
  * build/lib/load-subject-data.mjs の検査。
  *
- * ここは科目データの**唯一の読み書き口**なので、次の 3 つを固定する。
+ * ここは科目データの**唯一の読み書き口**なので、次の 4 つを固定する。
  *
- *   1. 未移行（HTML）と移行済み（JSON）で、戻り値が 1 バイトも違わない
- *   2. 移行が途中（ファイルが欠けている）なら、黙って古い HTML へ落ちずに落ちる
+ *   1. canonical ファイルへ書き出して読み直しても、中身が 1 バイトも変わらない
+ *   2. ファイルが欠けていたら、黙って別の場所を読まずにその場で落ちる
  *   3. canonical データに関数を混ぜられない
+ *   4. 科目 HTML へ落ちる経路が残っていない
  *
- * 1 が本体。ここが崩れると「移したつもりで中身が変わっていた」に気づけない。
- * `npm run check:shape` も同じことを見ているが、あちらは実データ 1 本での比較なので、
- * ここでは HTML と JSON を**同時に**用意して直接突き合わせる。
+ * 4 が要。落とし先を残すと、移行が壊れても黙って通ってしまう。
+ * しかもデータはもう HTML に無いので、落ちても救いにならない。
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -25,12 +25,8 @@ import {
 import { canonical } from '../build/lib/validate-subject-data.mjs';
 
 /**
- * 値を比べるための正規形。
- *
- * `assert.deepStrictEqual` をそのまま使えない。`extractSubject()` は vm 上で
- * script を実行するので、返ってくる配列やオブジェクトは**別 realm の prototype** を
- * 持つ。`deepStrictEqual` は prototype も比べるため、中身が 1 バイトも違わなくても
- * 落ちる。ここで見たいのは中身なので、キー順を揃えた JSON 文字列で比べる。
+ * 値を比べるための正規形。キー順を揃えた JSON 文字列にする。
+ * 見たいのは中身なので、オブジェクトの同一性や prototype は問わない。
  */
 const norm = v => JSON.stringify(canonical(v));
 
@@ -62,22 +58,23 @@ function makeMigratedRoot(dirs = SUBJECTS.map(s => s.dir), skipFiles = []) {
   return tmp;
 }
 
-test('HTML から読んだ結果と JSON から読んだ結果が一致する', () => {
+test('canonical ファイルへ書き出して読み直しても中身が変わらない', () => {
+  // 書式（serializeCanonical）と読み口（loadSubjectData）が食い違うと、
+  // apply-book-text / apply-new-books が書き戻すたびに中身が少しずつ壊れる
   const tmp = makeMigratedRoot();
   try {
     for (const s of SUBJECTS) {
       clearSubjectCache();
-      const fromHtml = loadSubjectData(ROOT, s.dir, { fresh: true });
+      const original = loadSubjectData(ROOT, s.dir, { fresh: true });
       clearSubjectCache();
-      const fromJson = loadSubjectData(tmp, s.dir, { fresh: true });
-      if (norm(fromJson) !== norm(fromHtml)) {
+      const roundTrip = loadSubjectData(tmp, s.dir, { fresh: true });
+      if (norm(roundTrip) !== norm(original)) {
         // 落ちたときに「どこが」を読めるようにする
-        assert.deepEqual(JSON.parse(norm(fromJson)), JSON.parse(norm(fromHtml)),
-          `${s.dir}: 移行の前後で中身が変わっている`);
-        assert.fail(`${s.dir}: 移行の前後で中身が変わっている（正規形が一致しない）`);
+        assert.deepEqual(JSON.parse(norm(roundTrip)), JSON.parse(norm(original)),
+          `${s.dir}: 書き出して読み直すと中身が変わる`);
+        assert.fail(`${s.dir}: 書き出して読み直すと中身が変わる（正規形が一致しない）`);
       }
-      // キーの集合も揃っていること（形が同じでないと消費側が壊れる）
-      assert.deepEqual(Object.keys(fromJson).sort(), Object.keys(fromHtml).sort(), `${s.dir}: 戻り値のキーが違う`);
+      assert.deepEqual(Object.keys(roundTrip).sort(), Object.keys(original).sort(), `${s.dir}: 戻り値のキーが違う`);
     }
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
@@ -95,13 +92,40 @@ test('isMigrated は books.json の有無で決まる', () => {
   }
 });
 
-test('移行が途中なら、黙って HTML へ落ちずに落ちる', () => {
-  // books.json はあるが routes.json が無い状態。ここで古い HTML を読みに行くと、
-  // 「移したつもりで移っていない」に気づけないまま生成が通ってしまう
+test('7 科目すべてが data/subjects/ から読まれている', () => {
+  for (const s of SUBJECTS) {
+    assert.equal(isMigrated(ROOT, s.dir), true, `${s.dir}: data/subjects/${s.dir}/ が無い`);
+  }
+});
+
+test('科目 HTML にデータ定数が残っていない', () => {
+  const left = [];
+  for (const s of SUBJECTS) {
+    const html = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    for (const name of ['BOOKS', 'ROUTES', 'UNIS', 'UNI_RAW', 'GUIDES', 'TIERS', 'STAGES']) {
+      if (new RegExp(`^const ${name}\\s*=`, 'm').test(html)) left.push(`${s.dir}: const ${name}`);
+    }
+  }
+  assert.deepEqual(left, [], `科目 HTML にデータが残っている:\n${left.join('\n')}`);
+});
+
+test('科目データの読み口に、科目 HTML へのフォールバックが残っていない', () => {
+  // 落とし先を残すと、移行が壊れても黙って古い HTML を読んで通ってしまう。
+  // しかもデータはもう HTML に無いので、落ちても救いにならない
+  const src = stripComments(fs.readFileSync(path.join(ROOT, 'build/lib/load-subject-data.mjs'), 'utf8'));
+  const legacy = 'extract' + 'Subject';
+  assert.ok(!src.includes(legacy), `ローダーが ${legacy}() へ落ちる経路を持っている`);
+  assert.ok(!/index\.html/.test(src), 'ローダーが科目 HTML を読んでいる');
+});
+
+test('canonical ファイルが欠けていたら、その場で落ちる', () => {
+  // books.json はあるが routes.json が無い状態。ここで黙って別の場所を読みに行くと、
+  // 「移したつもりで移っていない」に気づけないまま生成が通ってしまう。
+  // 2026-09-05 に科目 HTML へのフォールバックを削除したので、落ちるのが正しい
   const tmp = makeMigratedRoot(['math'], ['routes.json']);
   try {
     clearSubjectCache();
-    assert.throws(() => loadSubjectData(tmp, 'math', { fresh: true }), /移行が途中.*routes\.json/);
+    assert.throws(() => loadSubjectData(tmp, 'math', { fresh: true }), /足りない.*routes\.json/);
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
     clearSubjectCache();
