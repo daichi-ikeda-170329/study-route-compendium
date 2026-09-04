@@ -21,7 +21,8 @@
     "test:e2e": "playwright test",
     "validate": "npm run build && npm test && npm run test:e2e",
     "check:shape": "node build/snapshot-subject-data.mjs --check",
-    "snapshot": "node build/snapshot-subject-data.mjs"
+    "snapshot": "node build/snapshot-subject-data.mjs",
+    "audit:performance": "node build/audit-performance.mjs --commit=$(git rev-parse HEAD 2>/dev/null || echo unknown)"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

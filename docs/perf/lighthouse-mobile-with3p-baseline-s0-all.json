@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-09-04T15:44:14.809Z",
+  "commit": "dabdb86de0f201ecf8d8d26da1f7c9367d179552",
+  "lighthouseVersion": "13.4.1",
+  "chromeVersion": "Google Chrome 152.0.7977.76",
+  "target": "localhost (build/serve.mjs, .)",
+  "baseUrl": "http://127.0.0.1:4182",
+  "formFactor": "mobile",
+  "throttling": "simulate (lighthouse mobile default)",
+  "thirdParty": "allowed",
+  "runs": 1,
+  "pages": [
+    {
+      "path": "/",
+      "url": "http://127.0.0.1:4182/",
+      "runs": [
+        {
+          "performance": 74,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 4023.111797764395,
+          "fcpMs": 2720.1677977643953,
+          "cls": 0.19174010425948584,
+          "tbtMs": 0,
+          "speedIndexMs": 2720.1677977643953,
+          "ttiMs": 4023.1117977643953,
+          "transferBytes": 1891452
+        }
+      ],
+      "median": {
+        "performance": 74,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 4023.112,
+        "fcpMs": 2720.168,
+        "cls": 0.192,
+        "tbtMs": 0,
+        "speedIndexMs": 2720.168,
+        "ttiMs": 4023.112,
+        "transferBytes": 1891452
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "path": "/english/",
+      "url": "http://127.0.0.1:4182/english/",
+      "runs": [
+        {
+          "performance": 50,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 8093.296949999998,
+          "fcpMs": 5718.293949999998,
+          "cls": 0.22931987054560482,
+          "tbtMs": 0,
+          "speedIndexMs": 5718.293949999998,
+          "ttiMs": 8093.296949999998,
+          "transferBytes": 2598454
+        }
+      ],
+      "median": {
+        "performance": 50,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 8093.297,
+        "fcpMs": 5718.294,
+        "cls": 0.229,
+        "tbtMs": 0,
+        "speedIndexMs": 5718.294,
+        "ttiMs": 8093.297,
+        "transferBytes": 2598454
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "path": "/japanese/",
+      "url": "http://127.0.0.1:4182/japanese/",
+      "runs": [
+        {
+          "performance": 50,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 8914.609500000002,
+          "fcpMs": 5578.049000000002,
+          "cls": 0.22357660939986904,
+          "tbtMs": 0,
+          "speedIndexMs": 5578.049000000002,
+          "ttiMs": 8914.609500000002,
+          "transferBytes": 2341681
+        }
+      ],
+      "median": {
+        "performance": 50,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 8914.61,
+        "fcpMs": 5578.049,
+        "cls": 0.224,
+        "tbtMs": 0,
+        "speedIndexMs": 5578.049,
+        "ttiMs": 8914.61,
+        "transferBytes": 2341681
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "path": "/math/",
+      "url": "http://127.0.0.1:4182/math/",
+      "runs": [
+        {
+          "performance": 51,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 7196.9058,
+          "fcpMs": 5748.8238,
+          "cls": 0.2198386998704305,
+          "tbtMs": 0,
+          "speedIndexMs": 5748.8238,
+          "ttiMs": 7196.9058,
+          "transferBytes": 2304061
+        }
+      ],
+      "median": {
+        "performance": 51,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 7196.906,
+        "fcpMs": 5748.824,
+        "cls": 0.22,
+        "tbtMs": 0,
+        "speedIndexMs": 5748.824,
+        "ttiMs": 7196.906,
+        "transferBytes": 2304061
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "path": "/social/",
+      "url": "http://127.0.0.1:4182/social/",
+      "runs": [
+        {
+          "performance": 44,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 21476.79325,
+          "fcpMs": 18555.981999999996,
+          "cls": 0.22452004043237397,
+          "tbtMs": 0,
+          "speedIndexMs": 18555.981999999996,
+          "ttiMs": 21498.868375,
+          "transferBytes": 2706386
+        }
+      ],
+      "median": {
+        "performance": 44,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 21476.793,
+        "fcpMs": 18555.982,
+        "cls": 0.225,
+        "tbtMs": 0,
+        "speedIndexMs": 18555.982,
+        "ttiMs": 21498.868,
+        "transferBytes": 2706386
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "path": "/joho/",
+      "url": "http://127.0.0.1:4182/joho/",
+      "runs": [
+        {
+          "performance": 59,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 5335.728521212502,
+          "fcpMs": 4047.4645212125015,
+          "cls": 0.2342900833122542,
+          "tbtMs": 0,
+          "speedIndexMs": 4047.4645212125015,
+          "ttiMs": 5335.728521212502,
+          "transferBytes": 1706739
+        }
+      ],
+      "median": {
+        "performance": 59,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 5335.729,
+        "fcpMs": 4047.465,
+        "cls": 0.234,
+        "tbtMs": 0,
+        "speedIndexMs": 4047.465,
+        "ttiMs": 5335.729,
+        "transferBytes": 1706739
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "path": "/shoron/",
+      "url": "http://127.0.0.1:4182/shoron/",
+      "runs": [
+        {
+          "performance": 61,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 5628.4468,
+          "fcpMs": 3468.8488,
+          "cls": 0.21811610852408464,
+          "tbtMs": 0,
+          "speedIndexMs": 3468.8488,
+          "ttiMs": 5628.4468,
+          "transferBytes": 1701308
+        }
+      ],
+      "median": {
+        "performance": 61,
+        "accessibility": 100,
+        "bestPractices": 77,
+        "seo": 100,
+        "lcpMs": 5628.447,
+        "fcpMs": 3468.849,
+        "cls": 0.218,
+        "tbtMs": 0,
+        "speedIndexMs": 3468.849,
+        "ttiMs": 5628.447,
+        "transferBytes": 1701308
+      },
+      "failedBestPractices": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0
+        }
+      ]
+    }
+  ]
+}
