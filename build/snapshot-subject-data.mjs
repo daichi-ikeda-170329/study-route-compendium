@@ -17,7 +17,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { validateSubjectData, canonical } from './lib/validate-subject-data.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -31,7 +32,7 @@ export function snapshot() {
   const out = { schemaVersion: 1, subjects: {} };
   const problems = [];
   for (const s of SUBJECTS) {
-    const d = extractSubject(ROOT, s.dir);
+    const d = loadSubjectData(ROOT, s.dir);
     problems.push(...validateSubjectData(s.dir, d));
     out.subjects[s.dir] = {
       counts: {
@@ -62,7 +63,7 @@ function main() {
     const dir = path.join(ROOT, 'build', '.cache', 'subject-dump');
     fs.mkdirSync(dir, { recursive: true });
     for (const s of SUBJECTS) {
-      const d = extractSubject(ROOT, s.dir);
+      const d = loadSubjectData(ROOT, s.dir);
       fs.writeFileSync(path.join(dir, `${s.dir}.json`), `${JSON.stringify(canonical(d), null, 1)}\n`);
     }
     console.log(`build/.cache/subject-dump/ に全文を書き出した（git には入らない）`);

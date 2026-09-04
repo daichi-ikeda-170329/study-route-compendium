@@ -24,7 +24,8 @@ import fs from 'fs';
 import path from 'path';
 import vm from 'vm';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -62,7 +63,7 @@ const TARGETS = [
  * （＝読者にとって中身が変わった日）を台帳から引く。
  */
 function topUpdated(dir) {
-  const d = extractSubject(ROOT, dir);
+  const d = loadSubjectData(ROOT, dir);
   return recordDate(`top/${dir}`, {
     books: d.books, routes: d.routes, tiers: d.tiers, guides: d.guides, unis: d.unis.length,
   });

@@ -32,7 +32,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { tally } from './lib/tally.mjs';
 import { searchName, withAuthor } from './lib/booktitle.mjs';
 
@@ -56,7 +57,7 @@ function truth() {
   let total = 0, covers = 0, nonHensachi = 0, shorthand = 0, withAuthorCount = 0;
 
   for (const s of SUBJECTS) {
-    const d = extractSubject(ROOT, s.dir);
+    const d = loadSubjectData(ROOT, s.dir);
     subjects[s.dir] = d.books.length;
     unis[s.dir] = d.unis.length;
     d.unis.forEach(u => uniNames.add(u.n));

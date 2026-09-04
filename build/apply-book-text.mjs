@@ -16,6 +16,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { isMigrated, loadSubjectData, writeSubjectBooks } from './lib/load-subject-data.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'data/_rewrite/books-text-rewrite-2026-09-03.json');
@@ -45,6 +46,29 @@ let total = 0, changed = 0;
 
 for (const [dir, books] of Object.entries(data.subjects)) {
   if (only.length && !only.includes(dir)) continue;
+
+  /* 移行済み科目は canonical データを直接書き換える。
+     HTML の文字列置換（波括弧の対応を数える方式）は、まだ HTML に BOOKS が
+     残っている科目のためだけに残す。**両方に書かない。** */
+  if (isMigrated(ROOT, dir)) {
+    const cur = loadSubjectData(ROOT, dir).books;
+    let hit = 0;
+    const next = cur.map(b => {
+      const text = books[b.id];
+      if (!text) return b;
+      total++;
+      const updated = { ...b, desc: String(text.desc), bestFor: String(text.bestFor),
+                        pros: text.pros.map(String), cons: text.cons.map(String) };
+      if (JSON.stringify(updated) !== JSON.stringify(b)) { changed++; hit++; }
+      return updated;
+    });
+    const unknown = Object.keys(books).filter(id => !cur.some(b => b.id === id));
+    if (unknown.length) throw new Error(`${dir}: canonical データに無い id — ${unknown.join(', ')}`);
+    if (!CHECK) writeSubjectBooks(ROOT, dir, next);
+    console.log(`${dir}: ${hit} / ${Object.keys(books).length} 冊を書き換え（canonical）${CHECK ? '（--check のため保存しない）' : ''}`);
+    continue;
+  }
+
   const file = path.join(ROOT, dir, 'index.html');
   let src = fs.readFileSync(file, 'utf8');
   let hit = 0;

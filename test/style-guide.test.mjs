@@ -55,10 +55,11 @@ test('禁止語の除外は、語の一部として実在するものに限る',
 });
 
 test('BANNED_ALLOW は、収録している書名に載らないものだけを持つ', async () => {
-  const { SUBJECTS, extractSubject } = await import('../build/lib/extract.mjs');
+  const { SUBJECTS } = await import('../build/lib/extract.mjs');
+  const { loadSubjectData } = await import('../build/lib/load-subject-data.mjs');
   const names = new Set();
   for (const s of SUBJECTS) {
-    for (const b of extractSubject(ROOT, s.dir).books) {
+    for (const b of loadSubjectData(ROOT, s.dir).books) {
       if (b.name) names.add(String(b.name));
       if (b.official) names.add(String(b.official));
     }

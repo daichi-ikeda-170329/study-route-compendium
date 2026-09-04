@@ -14,7 +14,7 @@
 |---|---|---|---|---|---|
 | S0 | 基準の固定と進捗台帳 | DONE | (このコミット) | `docs/baseline-2026-09-05.md` / `docs/perf/lighthouse-mobile-with3p-baseline-s0.json` | localhost が本番値を再現することを確認 |
 | S1 | 公開物と main の一致 | DONE | (このコミット) | `build/check-production.mjs` / `docs/deployment-runbook.md` / `test/production-check.test.mjs` | Pages Source は 2026-09-04 に切替済み。本番検査 19/19 通過。Description 更新のみ OWNER ACTION |
-| S2 | 科目データの読み書き口を 1 本化 | 未着手 | | | |
+| S2 | 科目データの読み書き口を 1 本化 | DONE | 016dfe73 / (このコミット) | `build/lib/load-subject-data.mjs` / `test/affiliate-disclosure.test.mjs` / `test/subject-loader.test.mjs` | 生成物は 1 バイトも不変。`check:shape` 通過 |
 | S3 | 科目移行 前半（joho/shoron/math） | 未着手 | | | |
 | S4 | 科目移行 後半（science/english/japanese/social） | 未着手 | | | |
 | S5 | 性能予算の達成 | 未着手 | | | |
@@ -40,9 +40,13 @@
 
 ## 次にやること（実行が切れたらここから再開する）
 
-- S2 に着手する。`build/lib/load-subject-data.mjs`（科目データの唯一の読み書き口）を作り、
-  §3.3 の 21 スクリプト・7 テストを `extractSubject()` から差し替える。**この時点では 1 科目も移さない。**
-- その前に `test/affiliate-disclosure.test.mjs` を書いて、開示文の出力を先に固定する（指示書 §15.3）。
+- S3 に着手する。`build/generate-subject-assets.mjs`（`data/subjects/` から配信アセットと
+  内容ハッシュを作り、科目 HTML の `RT_SUBJECT_ASSETS` を書き換える）と
+  `assets/js/subject-loader.js`（遅延ローダ）を作る。`build/all.mjs` の `STEPS` では
+  `generate-search` の直前に入れる。
+- そのあと joho → shoron → math の順に 1 科目 1 コミットで移す。
+  各科目で `npm run check:shape` が通ること（＝中身が変わっていない証明）を先に確かめる。
+- **変換は必ずスクリプトで行い、同じコミットに含める。** 手でコピーしない。
 
 ## OWNER ACTION（運営者しかできない。台帳で追跡する）
 
@@ -107,6 +111,28 @@
    拾って `check:counts` が落ちたので、理由付きで登録した。**テストは緩めていない。**
    もう 1 件（`test/production-check.test.mjs` の `1,390冊`）は ignore に足さず、
    期待値を `count-state.json` から組み立てる形に書き直して解消した。
+
+### S2 で決めたこと
+
+1. **`extractSubject()` の直接呼び出しを 0 にした。**
+   `build/` 19 本と `test/` 7 本を `loadSubjectData()` へ差し替え、残っていないことを
+   `test/subject-loader.test.mjs` の「科目データの読み口が 1 本だけになっている」で固定した。
+   `build/lib/extract.mjs` と `build/lib/load-subject-data.mjs` だけが例外。
+
+2. **移行が途中の科目は、黙って HTML へ落とさず落とす。**
+   `books.json` はあるが `routes.json` が無いような状態でフォールバックすると、
+   「移したつもりで移っていない」に気づけないまま生成が通る。ローダーは全 6 ファイルの
+   存在を確かめ、欠けていれば例外にする。
+
+3. **戻り値の比較に `assert.deepStrictEqual` を使わない。**
+   `extractSubject()` は vm 上で script を実行するので、返る配列は**別 realm の prototype** を
+   持つ。`deepStrictEqual` は prototype も比べるため、中身が同一でも落ちる。
+   キー順を揃えた JSON 文字列（`canonical()` 経由）で比べる。
+
+4. **`apply-new-books` の canonical 側の冪等性は「id を除いて入れ直す」で作った。**
+   マーカー区間は HTML にしか無いので使えない。`new-books.json` に載っている id を
+   既存書からいったん全部除き、末尾へ入れ直す。何度流しても同じ結果になり、
+   並び順もマーカー区間が BOOKS 末尾にある現行の見え方と揃う。
 
 ### 事実確認済みの前提（作業開始時に実測した）
 

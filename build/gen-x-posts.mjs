@@ -28,7 +28,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS, SUB_LABELS, ORIGIN } from './lib/extract.mjs';
+import { SUBJECTS, SUB_LABELS, ORIGIN } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { tally } from './lib/tally.mjs';
 import { searchName } from './lib/booktitle.mjs';
 import { isProvisional, loadNewBooks } from './lib/newbooks.mjs';
@@ -545,7 +546,7 @@ function main() {
   }
 
   const data = {};
-  for (const s of SUBJECTS) data[s.dir] = extractSubject(ROOT, s.dir);
+  for (const s of SUBJECTS) data[s.dir] = loadSubjectData(ROOT, s.dir);
 
   const rec = readUsed();
   const month = `${y}-${mm}`;

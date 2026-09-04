@@ -20,7 +20,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { isPlaceholder } from './lib/record-type.mjs';
 import { FACT_FIELDS, recordKey } from './lib/verification.mjs';
 
@@ -207,7 +208,7 @@ function compare(book, got) {
 async function main() {
   const books = [];
   for (const s of SUBJECTS) {
-    for (const b of extractSubject(ROOT, s.dir).books) {
+    for (const b of loadSubjectData(ROOT, s.dir).books) {
       books.push({ dir: s.dir, b });
     }
   }

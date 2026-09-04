@@ -26,7 +26,8 @@
  */
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { coverSrcs } from './lib/cover.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -87,7 +88,7 @@ async function run(items, fn) {
 
 const books = [];
 for (const s of SUBJECTS) {
-  for (const b of extractSubject(ROOT, s.dir).books) books.push({ dir: s.dir, b });
+  for (const b of loadSubjectData(ROOT, s.dir).books) books.push({ dir: s.dir, b });
 }
 const targets = LIMIT ? books.slice(0, LIMIT) : books;
 console.log(`${targets.length} 冊を確認する`);

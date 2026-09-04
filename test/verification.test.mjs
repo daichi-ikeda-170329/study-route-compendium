@@ -12,7 +12,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { extractSubject, SUBJECTS } from '../build/lib/extract.mjs';
+import { SUBJECTS } from '../build/lib/extract.mjs';
+import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
 import { isPlaceholder } from '../build/lib/record-type.mjs';
 import {
   verificationOf, loadVerification, verifiedFieldIsWellFormed,
@@ -20,7 +21,7 @@ import {
 } from '../build/lib/verification.mjs';
 import { ROOT } from './helpers.mjs';
 
-const DATA = SUBJECTS.map(s => ({ sub: s, ...extractSubject(ROOT, s.dir) }));
+const DATA = SUBJECTS.map(s => ({ sub: s, ...loadSubjectData(ROOT, s.dir) }));
 const ALL = DATA.flatMap(d => d.books.map(b => ({ b, dir: d.sub.dir })));
 const LEDGER = loadVerification();
 

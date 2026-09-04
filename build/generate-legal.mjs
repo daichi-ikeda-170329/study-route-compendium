@@ -17,7 +17,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { extractSubject, SUBJECTS, ORIGIN, X_HANDLE, esc, clip } from './lib/extract.mjs';
+import { SUBJECTS, ORIGIN, X_HANDLE, esc, clip } from './lib/extract.mjs';
+import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, GA_ID } from './lib/parts.mjs';
 import { ADSENSE, adUnit } from './lib/ads.mjs';
 import { degreeTable } from './lib/scale.mjs';
@@ -253,7 +254,7 @@ const counts = {};
 let total = 0;
 const uniNames = new Set();
 for (const s of SUBJECTS) {
-  const d = extractSubject(ROOT, s.dir);
+  const d = loadSubjectData(ROOT, s.dir);
   counts[s.dir] = d.books.length;
   total += d.books.length;
   d.unis.forEach(u => uniNames.add(u.n));

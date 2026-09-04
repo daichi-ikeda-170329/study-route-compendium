@@ -24,7 +24,8 @@ import { fileURLToPath } from 'node:url';
 import { serializeBook, replaceBlock } from '../build/apply-new-books.mjs';
 import { isProvisional, provisionalLast, PROVISIONAL_LABEL, loadNewBooks } from '../build/lib/newbooks.mjs';
 import { bookCard } from '../build/lib/cards.mjs';
-import { SUBJECTS, extractSubject } from '../build/lib/extract.mjs';
+import { SUBJECTS } from '../build/lib/extract.mjs';
+import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
 import { hensachiRange, byDifficultyAsc, byDifficultyDesc } from '../build/lib/rank.mjs';
 import { postF, weightedLen, X_LIMIT } from '../build/gen-x-posts.mjs';
 
@@ -239,7 +240,7 @@ test('英語の現在地推定は、評価未了の本を最難関と誤判定�
    F 型（新刊速報）
    ============================================================ */
 
-const EN_STAGES = extractSubject(ROOT, 'english').stages;
+const EN_STAGES = loadSubjectData(ROOT, 'english').stages;
 
 test('F 型は難易度も向いている人も書かない', () => {
   const p = postF({ ...PROV, subjects: '単語1500' }, SUB, EN_STAGES);
@@ -287,7 +288,7 @@ test('調査先の出版社名は、実際の収録データの表記と一致�
 
   const pubs = new Set();
   for (const s of SUBJECTS) {
-    for (const b of extractSubject(ROOT, s.dir).books) pubs.add(b.pub);
+    for (const b of loadSubjectData(ROOT, s.dir).books) pubs.add(b.pub);
   }
   const unknown = publishers
     .flatMap(p => [p.name, ...(p.aliases || [])])
