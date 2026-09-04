@@ -29,9 +29,16 @@ export const KEY_PAGES = [
 export async function axeCritical(page) {
   /* フェードインの途中で測ると、地色と混ざった中間色をコントラスト不足として拾う
      （.view の fade は 0.3s）。動きを減らす設定にして最終状態で測る。
-     最終状態の色こそが利用者に見えている色なので、これが正しい測り方 */
+     最終状態の色こそが利用者に見えている色なので、これが正しい測り方。
+     科目トップは 1 枚が 950KB を超えるものがあり、描き終わるまでに時間がかかる。
+     アニメーションが 1 つも走っていないことを確かめてから測る */
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.waitForTimeout(350);
+  await page.waitForLoadState('load').catch(() => {});
+  await page.waitForFunction(
+    () => document.getAnimations().every(a => a.playState !== 'running'),
+    null, { timeout: 5000 },
+  ).catch(() => { /* 取れない環境では時間で待つ */ });
+  await page.waitForTimeout(400);
   const res = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();

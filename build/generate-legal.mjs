@@ -16,7 +16,6 @@
  */
 import fs from 'fs';
 import path from 'path';
-import { execFileSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { extractSubject, SUBJECTS, ORIGIN, X_HANDLE, esc, clip } from './lib/extract.mjs';
 import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, GA_ID } from './lib/parts.mjs';
@@ -69,34 +68,22 @@ ${bl.table.rows.map(r => `            <tr>${r.map((c, i) => (i ? `<td>${inline(c
    ============================================================ */
 
 /** データ・生成物に触ったコミットだけを拾う。docs/ や README だけの変更は載せない */
-const CHANGELOG_PATHS = [
-  'english', 'japanese', 'math', 'science', 'social', 'joho', 'shoron',
-  'guides', 'build', 'assets', 'index.html', '404.html',
-];
-
-function changelogEntries(limit = 80) {
-  let raw = '';
-  try {
-    raw = execFileSync('git', [
-      'log', `-${limit}`, '--no-merges', '--date=short', '--format=%cs\t%s', '--', ...CHANGELOG_PATHS,
-    ], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
-  } catch {
-    return [];
-  }
-  const byDate = new Map();
-  for (const line of raw.split('\n')) {
-    const [date, ...rest] = line.split('\t');
-    const subject = rest.join('\t').trim();
-    if (!date || !subject) continue;
-    // 読者にとって意味のないコミットは落とす（自動コミット・作業中の保存）
-    if (/（自動）$/.test(subject) || /^chore: 冊数の表記/.test(subject)) continue;
-    const msg = subject.replace(/^(feat|fix|refactor|docs|test|chore|perf|ci)(\([^)]*\))?:\s*/, '');
-    if (/^auto-save\b/i.test(msg) || /^wip\b/i.test(msg)) continue;
-    if (!byDate.has(date)) byDate.set(date, []);
-    const arr = byDate.get(date);
-    if (!arr.includes(msg)) arr.push(msg);
-  }
-  return [...byDate.entries()].map(([date, items]) => ({ date, items }));
+/**
+ * 更新履歴。**git のコミット履歴からは作らない。**
+ *
+ * 以前は直近 80 コミットの件名を並べていたが、それは開発の作業記録であって、
+ * 受験生にとっての更新履歴ではない（「共通ライブラリに切り出す」と書かれても
+ * 自分に何が変わったのか分からない）。しかも、履歴を生成 → コミット →
+ * その コミットが履歴に載る、で終わらない循環になっていた。
+ *
+ * いまは build/data/changelog.json を正本にする。受験生に影響する追加・訂正・
+ * 年度更新だけを、受験生の言葉で書く（指示書 10.6）。
+ */
+function changelogEntries() {
+  const file = path.join(ROOT, 'build', 'data', 'changelog.json');
+  if (!fs.existsSync(file)) return [];
+  const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
+  return (raw.entries || []).filter(e => e.date && Array.isArray(e.items) && e.items.length);
 }
 
 /* ============================================================
