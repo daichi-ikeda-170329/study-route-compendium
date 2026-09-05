@@ -94,7 +94,7 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
 | 4 | 実機での QA（macOS/iOS/iPadOS Safari・実機 Firefox） | 実機 | `docs/qa-report-YYYY-MM-DD.md` の「実機での確認」表が埋まる | **未実施。** この環境に実機が無い |
 | 5 | KPI の実数を入れる | Search Console / GA4 / AdSense の管理画面 | `docs/kpi-baseline.json` の値が `null` でなくなる | **未実施。** 手順は `docs/kpi-import-guide.md` |
 | 6 | 書体の読み込み方針 | 見た目の判断 | — | **判断は不要になった。** `display=optional` は効かないと実測で確定（CLS 0.216→0.213）。代わりに Google Fonts のスタイルシートを非同期化し、LCP 10.99s→6.91s / Performance 53→66。`docs/performance-report.md` 2.1・4.2・5.2 |
-| 7 | 本番の性能を信頼できる方法で測る | — | どちらかの数字を `docs/performance-report.md` へ追記 | **未実施。** 2026-09-05 に PageSpeed Insights を試したが、API の日次上限（`pagespeedonline.googleapis.com` の匿名枠）に当たって測れなかった。**枠が戻ってから再試行する** |
+| 7 | 本番の性能を信頼できる方法で測る | — | どちらかの数字を `docs/performance-report.md` へ追記 | **一部完了。** 反映後の本番を 5 run 測り `docs/performance-report.md` 6.6 に記録した（中央値 Performance 69 / LCP 5.50s / CLS 0.216。**目標 3 つとも未達**）。ただし**機械 1 台の値でばらつきが大きい**。PageSpeed Insights は匿名 API の日次上限で実行できなかった。**実利用者の値は Search Console の Core Web Vitals（CrUX）で見る** — これは運営者の作業 |
 | 8 | 同意管理（CMP）の方針 | 対象地域と同意方針の判断 | — | **未判断。** Best Practices の残差は AdSense の第三者 cookie 1 件 |
 
 **1 と 2 は 2026-09-05 に実行した**（池田さんから「そちらでできることは全て許可する」の指示を受けたため）。
