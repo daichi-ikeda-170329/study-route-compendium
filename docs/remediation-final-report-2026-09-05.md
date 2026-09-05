@@ -220,6 +220,11 @@ Lighthouse が挙げる原因はすべて Web font で、広告・解析では�
 
 ## OWNER ACTION
 
+> **この節は 2026-09-05 の報告時点の記録。**
+> その後 `chore/owner-actions` で 1・2・6 を実施し、3 の下調べと `ndl` の停止を行った。
+> **いまの状態は `docs/remediation-progress.md` の OWNER ACTION 表が正本。**
+
+
 1. **GitHub リポジトリの Description を実態に合わせる。**
    いま `ルート大全 — 大学受験の参考書1,052冊を科目別に図鑑化・ルート化した無料サイト` で、
    実際の 1,390 冊と食い違う。手元の `gh` に `repo` scope はあるが、

@@ -58,15 +58,42 @@ test('生成側と画面側が同じ候補を返す', () => {
   assert.deepEqual(coverSrcs(b), resolver.coverSrcs(b, COVER_POLICIES));
 });
 
-test('科目トップで候補が減っていない（統一前の最大と同じ数）', () => {
+test('候補の作り方が減っていない（統一前の最大と同じ数）', () => {
   /* 統一前、社会だけが 10 候補を持ち、数学・情報・小論文は 3 候補だった。
      いちばん多いものへそろえたので、ISBN が両方ある本では 10 候補になるはず。
-     ここが減ると、いま表紙が出ている本が出なくなる */
+     ここが減ると、いま表紙が出ている本が出なくなる。
+
+     **数える相手は「全 provider を有効にしたときの候補数」。** 実際の運用では
+     停止した provider（例: 書影 API が終了した ndl）があるので、現在の候補数を
+     直に 10 と突き合わせると、止めるたびにこの検査を書き換えることになる。
+     それでは「黙って減っていないか」を見張る役目を果たせない。
+     resolver の候補生成そのものが痩せたときにだけ落ちる形にしてある。 */
   const b = { isbn10: '4010346485', isbn13: '9784010346488' };
-  assert.equal(coverSrcs(b).length, 10);
-  const withCover = coverSrcs({ ...b, cover: 'https://example.invalid/x.jpg' });
+  const all = JSON.parse(JSON.stringify(COVER_POLICIES));
+  for (const p of Object.values(all.providers)) p.enabled = true;
+
+  assert.equal(resolver.coverSrcs(b, all).length, 10);
+  const withCover = resolver.coverSrcs({ ...b, cover: 'https://example.invalid/x.jpg' }, all);
   assert.equal(withCover.length, 11);
   assert.equal(withCover[0], 'https://example.invalid/x.jpg', '個別指定が先頭に来ていない');
+});
+
+test('止めた取得元には、止めた理由が書いてある', () => {
+  /* enabled:false は「候補から消える」＝表紙が出なくなりうる操作。
+     理由の書かれていない停止は、あとから残すべきか外すべきか判断できない */
+  for (const [id, p] of Object.entries(COVER_POLICIES.providers)) {
+    if (p.enabled) continue;
+    assert.ok(p.notes && p.notes.length > 30,
+      `${id}: enabled:false なのに notes に理由が書かれていない`);
+  }
+});
+
+test('停止中の取得元を「利用条件が未確認」に数えない', () => {
+  /* 運営者の完了判定は「未確認 0 件」。候補に入らない provider を混ぜると
+     到達できなくなり、本当に確認すべき取得元が埋もれる */
+  const src = fs.readFileSync(path.join(ROOT, 'build/check-covers.mjs'), 'utf8');
+  assert.match(src, /p\.enabled\s*&&\s*!p\.termsReviewed/,
+    'check-covers.mjs が未確認件数から停止中の provider を除いていない');
 });
 
 test('nocover の本は候補を持たない', () => {

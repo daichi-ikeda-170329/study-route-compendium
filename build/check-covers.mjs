@@ -65,7 +65,13 @@ function offlineChecks() {
         + ' **規約を読んだのなら、その根拠を書く。** 読んでいないなら termsReviewed を false に戻す');
     }
     if (p.termsReviewed && !p.lastReviewedAt) bad(`policy ${id}: termsReviewed が true なのに lastReviewedAt が空`);
-    if (!p.termsReviewed) {
+    /* **停止中の取得元は「未確認」に数えない。** enabled:false の provider は候補に入らないので、
+       規約を読んでも読まなくても公開物は変わらない。ここに混ぜると、運営者の完了判定
+       （未確認 0 件）が永久に達成できなくなり、確認すべき取得元が埋もれる。
+       停止していることは別行で必ず出す（黙って消さない）。 */
+    if (!p.enabled) {
+      warn.push(`${id}（${p.displayName}）: **停止中**（enabled:false）。候補に入らない`);
+    } else if (!p.termsReviewed) {
       warn.push(`${id}（${p.displayName}）: 利用条件が未確認。docs/cover-policy.md の OWNER ACTION`);
     }
   }
@@ -224,7 +230,11 @@ if (problems.length) {
   console.error(`\n書影の取得元の整合で ${problems.length} 件見つかった`);
   process.exit(1);
 }
-console.log(`書影の取得元は整合している（未確認の取得元 ${warn.length} 件は上のとおり）`);
+/* 運営者の完了判定はこの数を見る。**停止中の取得元を混ぜない。**
+   混ぜると「未確認 0 件」に到達できず、判定が意味を失う */
+const unreviewed = Object.values(COVER_POLICIES.providers)
+  .filter(p => p.enabled && !p.termsReviewed).length;
+console.log(`書影の取得元は整合している（利用条件が未確認の取得元 ${unreviewed} 件。詳細は上）`);
 
 if (LIVE) {
   const counts = await liveChecks();
