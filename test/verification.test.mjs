@@ -110,7 +110,16 @@ test('状態のラベルは色に頼らず文字で読める', () => {
   }
 });
 
-test('公開ページに確認状況ブロックが必ず出る', () => {
+/**
+ * 2026-09-05 に「この情報の確かめ方」ブロックを書籍ページから外した。
+ * 1,390 枚すべてに同じ定型文と「確認中」の並びが出ており、AdSense に
+ * 有用性の低いコンテンツとして扱われたためである。
+ *
+ * 台帳（verification.json）と、それを使った構造化データの出し分けは残す。
+ * **確かめていない ISBN を出さない**という下の検査が本体で、
+ * 画面に出す・出さないはその手段でしかない。
+ */
+test('確認状況ブロックを書籍ページに出さない', () => {
   const files = [];
   for (const s of SUBJECTS) {
     const dir = path.join(ROOT, s.dir, 'books');
@@ -119,8 +128,24 @@ test('公開ページに確認状況ブロックが必ず出る', () => {
     }
   }
   assert.ok(files.length > 1000, `書籍ページが ${files.length} 枚しかない`);
-  const missing = files.filter(f => !fs.readFileSync(f, 'utf8').includes('この情報の確かめ方'));
-  assert.equal(missing.length, 0, `確認状況が無いページ: ${missing.slice(0, 5).join(', ')}`);
+  const found = files.filter(f => fs.readFileSync(f, 'utf8').includes('この情報の確かめ方'));
+  assert.equal(found.length, 0, `確認状況ブロックが復活しているページ: ${found.slice(0, 5).join(', ')}`);
+});
+
+/**
+ * 難易度の定義表（degreeTable）も同じ理由で書籍ページから外し、1 行の
+ * degreeLine に置き換えた。表の全文は /methodology/ が正本。
+ */
+test('難易度の定義表を書籍ページに出さない', () => {
+  const files = [];
+  for (const s of SUBJECTS) {
+    const dir = path.join(ROOT, s.dir, 'books');
+    for (const d of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (d.isDirectory()) files.push(path.join(dir, d.name, 'index.html'));
+    }
+  }
+  const found = files.filter(f => fs.readFileSync(f, 'utf8').includes('難易度 10 段階の意味と、役割との違い'));
+  assert.equal(found.length, 0, `定義表が復活しているページ: ${found.slice(0, 5).join(', ')}`);
 });
 
 test('確かめていない ISBN を Book の構造化データに出さない', () => {

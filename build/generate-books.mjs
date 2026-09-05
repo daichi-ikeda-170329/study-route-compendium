@@ -21,10 +21,10 @@ import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { byDifficultyAsc } from './lib/rank.mjs';
 import { nextStages } from './lib/flow.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
-import { degreeTable, bandOf } from './lib/scale.mjs';
+import { degreeLine, bandOf } from './lib/scale.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL, placeholderSearchUrl } from './lib/record-type.mjs';
-import { verificationOf, verificationRows, STATUS_LABEL } from './lib/verification.mjs';
+import { verificationOf } from './lib/verification.mjs';
 import { bookIndexable, NOINDEX_META } from './lib/indexing.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -363,20 +363,6 @@ ${spec}
         </dl>
       </div>
       <p class="spec__note">書名・出版社・ISBN・刊行年・問題数は公開されている書誌情報です。難易度・到達目安・想定学習時間は編集部の推定値で、<a href="/methodology/">算出方法</a>を公開しています。</p>
-
-      <!-- 難易度の定義表（build/lib/scale.mjs）と同じく折りたたみで置く。
-           確認状態そのものは summary のバッジで閉じたままでも読めるので、
-           内訳を見たい人だけが開けばよい -->
-      <details class="verif" data-status="${ver.status}">
-        <summary class="verif__t"><b>この情報の確かめ方</b><span class="verif__badge">${esc(STATUS_LABEL[ver.status])}</span></summary>
-        <div class="verif__in">
-        <dl class="verif__rows">
-${verificationRows(ver).map(([k, v]) => `          <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
-        </dl>
-${ver.sources.length ? `        <p class="verif__src">出典: ${ver.sources.map(x => `<a href="${esc(x.url)}" rel="nofollow noopener noreferrer" target="_blank">書誌データベース</a>`)[0]}（${esc(ver.sources[0].checkedAt || '確認日未記録')}）</p>` : ''}
-        <p class="verif__note">「確認済み」は公開されている書誌情報と一致したという意味で、<b>編集部が現物を確認したという意味ではありません</b>。判定の基準は<a href="/methodology/">算出方法</a>に書いています。</p>
-        </div>
-      </details>
     </section>
 
     ${prov ? `<section class="block prose">
@@ -391,7 +377,7 @@ ${ver.sources.length ? `        <p class="verif__src">出典: ${ver.sources.map(
       <p><b>${esc(book.bestFor)}</b>に向いた一冊です。</p>
       ${position ? `<p>${esc(position)}</p>` : ''}
       ${series ? `<p>${esc(series.note)}</p>` : ''}
-      ${degreeTable({ current: book.diff })}
+      ${degreeLine(book.diff)}
     </section>${adUnit('inArticle')}
 
     <div class="pc-grid">

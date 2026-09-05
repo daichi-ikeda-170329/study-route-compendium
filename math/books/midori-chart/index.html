@@ -148,27 +148,6 @@ gtag('config', 'G-DQ5WFXEFMX', {
         </dl>
       </div>
       <p class="spec__note">書名・出版社・ISBN・刊行年・問題数は公開されている書誌情報です。難易度・到達目安・想定学習時間は編集部の推定値で、<a href="/methodology/">算出方法</a>を公開しています。</p>
-
-      <!-- 難易度の定義表（build/lib/scale.mjs）と同じく折りたたみで置く。
-           確認状態そのものは summary のバッジで閉じたままでも読めるので、
-           内訳を見たい人だけが開けばよい -->
-      <details class="verif" data-status="partial">
-        <summary class="verif__t"><b>この情報の確かめ方</b><span class="verif__badge">一部情報を確認中</span></summary>
-        <div class="verif__in">
-        <dl class="verif__rows">
-          <div><dt>ISBN</dt><dd>書誌データベースで実在を確認済み（2026-09-04 確認）</dd></div>
-          <div><dt>正式書名</dt><dd>書誌データベースの表記「大学入学共通テスト対策数学1A+2BC」と一致しないため確認中です（版・副題の書き方の違いを含みます）</dd></div>
-          <div><dt>出版社</dt><dd>書誌データベースと一致（2026-09-04 確認）</dd></div>
-          <div><dt>刊行年</dt><dd>書誌データベースと一致（2026-09-04 確認）</dd></div>
-          <div><dt>著者</dt><dd>書誌データベースに記載が見つからず、未登録です</dd></div>
-          <div><dt>問題数・構成</dt><dd>確認中</dd></div>
-          <div><dt>難易度・到達目安・想定学習時間</dt><dd>ルート大全による推定（出典のある数値ではありません）</dd></div>
-          <div><dt>現物確認</dt><dd>未登録</dd></div>
-        </dl>
-        <p class="verif__src">出典: <a href="https://api.openbd.jp/v1/get?isbn=9784410106385" rel="nofollow noopener noreferrer" target="_blank">書誌データベース</a>（2026-09-04）</p>
-        <p class="verif__note">「確認済み」は公開されている書誌情報と一致したという意味で、<b>編集部が現物を確認したという意味ではありません</b>。判定の基準は<a href="/methodology/">算出方法</a>に書いています。</p>
-        </div>
-      </details>
     </section>
 
     <section class="block prose">
@@ -177,54 +156,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <p><b>共テ配点が高い国公立志望者</b>に向いた一冊です。</p>
       <p>数学の「共通テスト」には 16 冊を収録しています。難易度 5 の緑チャートは、そのうちやさしいほうにあたります（この役割で難易度が 5 より下の本は 4 冊）。</p>
       
-      <details class="scale">
-  <summary>難易度 10 段階の意味と、役割との違い</summary>
-  <div class="scale__in">
-    <p>難易度はサイト全体で共通の <b>1〜10 の 10 段階</b>です。到達目安の偏差値は<b>河合塾全統記述模試の換算値</b>で、進研模試・駿台全国模試の偏差値をそのまま当てると 10 前後ずれます。</p>
-    <!-- 横に流す領域はキーボードでもスクロールできるようにする（tabindex="0"）。
-         読み上げでは何の表かが分かるよう役割と名前を付ける -->
-    <div class="scale__tw" tabindex="0" role="region" aria-label="難易度と到達目安の対応表（横スクロールできます）">
-    <table class="scale__t">
-      <thead><tr><th>難易度</th><th>帯</th><th>到達目安</th><th>目安となる志望校・到達点</th></tr></thead>
-      <tbody>
-      <tr>
-        <th>1</th><td>教科書・導入</td><td>〜40</td><td>中学内容の復習から高校の入口</td>
-      </tr>
-      <tr>
-        <th>2</th><td>教科書・導入</td><td>38〜45</td><td>教科書の例題が自力で追える段階</td>
-      </tr>
-      <tr>
-        <th>3</th><td>基礎固め</td><td>42〜52</td><td>共通テストの基礎、日東駒専・産近甲龍の入口</td>
-      </tr>
-      <tr>
-        <th>4</th><td>基礎固め</td><td>45〜57</td><td>共通テスト 6〜7 割、日東駒専・産近甲龍</td>
-      </tr>
-      <tr class="on">
-        <th>5</th><td>入試標準</td><td>50〜62</td><td>共通テスト 7〜8 割、地方国公立・中堅私大</td>
-      </tr>
-      <tr>
-        <th>6</th><td>入試標準</td><td>55〜65</td><td>MARCH・関関同立、地方国公立の二次</td>
-      </tr>
-      <tr>
-        <th>7</th><td>難関大</td><td>58〜68</td><td>早慶・上智、地方旧帝</td>
-      </tr>
-      <tr>
-        <th>8</th><td>難関大</td><td>62〜70</td><td>早慶の上位学部、旧帝大</td>
-      </tr>
-      <tr>
-        <th>9</th><td>最難関</td><td>65〜73</td><td>東大・京大、国公立医学部</td>
-      </tr>
-      <tr>
-        <th>10</th><td>最難関</td><td>68〜</td><td>東大・京大で差がつく問題まで</td>
-      </tr>
-      </tbody>
-    </table>
-    </div>
-    <p class="scale__note"><b>難易度と役割は別の軸です。</b>役割は「その本が学習のどの工程を担当するか」で、次の 5 段階に分かれます。同じ難易度でも役割が違えば使う時期が変わります。</p>
-    <ul class="scale__roles"><li><b>導入</b> — 教科書の内容を、話し言葉に近い説明でゼロから入れ直す本</li><li><b>網羅</b> — その科目で出る型を一通り並べ、辞書のように引ける本</li><li><b>標準</b> — 入試で実際に問われる形に直した、標準レベルの演習書</li><li><b>応用</b> — 難関大の入試問題を素材にした、上位レベルの演習書</li><li><b>実戦</b> — 共通テスト・志望校の過去問など、本番の形式で通す本</li></ul>
-    <p class="scale__note">数字の決め方と、到達目安・想定学習時間の出し方は<a href="/methodology/">データの作り方</a>に書いています。</p>
-  </div>
-</details>
+      <p class="scale__line">難易度 <b>5 / 10</b> は「入試標準」の帯です。10 段階それぞれの意味と、役割（導入・網羅・標準・応用・実戦）との違いは<a href="/methodology/">データの作り方</a>にまとめています。</p>
     </section>
 
     <div class="pc-grid">
