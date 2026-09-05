@@ -3804,14 +3804,16 @@
    }
   },
   "english:akahon": {
-   "providers": [],
+   "providers": [
+    "amazon"
+   ],
    "keys": {
     "isbn10": null,
     "isbn13": null,
     "asin": null
    },
-   "explicitHost": null,
-   "nocover": true,
+   "explicitHost": "m.media-amazon.com",
+   "nocover": false,
    "availability": {
     "status": "unchecked",
     "httpStatus": null,
@@ -8095,14 +8097,16 @@
    }
   },
   "japanese:akahon": {
-   "providers": [],
+   "providers": [
+    "amazon"
+   ],
    "keys": {
     "isbn10": null,
     "isbn13": null,
     "asin": null
    },
-   "explicitHost": null,
-   "nocover": true,
+   "explicitHost": "m.media-amazon.com",
+   "nocover": false,
    "availability": {
     "status": "unchecked",
     "httpStatus": null,
@@ -12614,14 +12618,16 @@
    }
   },
   "math:akahon": {
-   "providers": [],
+   "providers": [
+    "amazon"
+   ],
    "keys": {
     "isbn10": null,
     "isbn13": null,
     "asin": null
    },
-   "explicitHost": null,
-   "nocover": true,
+   "explicitHost": "m.media-amazon.com",
+   "nocover": false,
    "availability": {
     "status": "unchecked",
     "httpStatus": null,
@@ -23833,14 +23839,16 @@
    }
   },
   "science:akahon": {
-   "providers": [],
+   "providers": [
+    "amazon"
+   ],
    "keys": {
     "isbn10": null,
     "isbn13": null,
     "asin": null
    },
-   "explicitHost": null,
-   "nocover": true,
+   "explicitHost": "m.media-amazon.com",
+   "nocover": false,
    "availability": {
     "status": "unchecked",
     "httpStatus": null,

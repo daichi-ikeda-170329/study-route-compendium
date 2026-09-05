@@ -20,6 +20,13 @@
  * `onerror` は発火しないので、表示側が `naturalWidth <= 1` を見て次の候補へ送る。
  * 書名だけを刷った自動生成画像を返す場合はそれにも掛からないので、
  * その本は `BOOKS[].nocover` で候補を空にする。
+ *
+ * ## 枠に添える見本の書影
+ *
+ * ルート上の枠（`recordType: 'routePlaceholder'`）は特定の商品ではないので ISBN も
+ * `cover` も持たない。それでも一覧やルートに 1 枚も画像が無いと、そこだけ代替表示に
+ * なって浮く。`BOOKS[].coverExample` は**その枠がどんな本を指すかを示す見本**で、
+ * 購入リンクや JSON-LD には一切影響しない。
  */
 (function (global) {
   'use strict';
@@ -35,7 +42,11 @@
    */
   var BUILDERS = {
     explicit: function (b) {
-      return b.cover ? [b.cover] : [];
+      // cover は「その本そのもの」の書影。coverExample は**ルート上の枠に添える見本**で、
+      // 枠は特定の商品ではないので cover を持てない（build/lib/record-type.mjs）。
+      // 見本であることは alt と枠の注意書きで伝える。
+      if (b.cover) return [b.cover];
+      return b.coverExample ? [b.coverExample] : [];
     },
     amazon: function (b) {
       var key = b.isbn10 || b.asin;

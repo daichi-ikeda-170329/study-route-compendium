@@ -149,8 +149,12 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </div>
       <p class="spec__note">書名・出版社・ISBN・刊行年・問題数は公開されている書誌情報です。難易度・到達目安・想定学習時間は編集部の推定値で、<a href="/methodology/">算出方法</a>を公開しています。</p>
 
-      <div class="verif" data-status="partial">
-        <p class="verif__t"><b>この情報の確かめ方</b><span class="verif__badge">一部情報を確認中</span></p>
+      <!-- 難易度の定義表（build/lib/scale.mjs）と同じく折りたたみで置く。
+           確認状態そのものは summary のバッジで閉じたままでも読めるので、
+           内訳を見たい人だけが開けばよい -->
+      <details class="verif" data-status="partial">
+        <summary class="verif__t"><b>この情報の確かめ方</b><span class="verif__badge">一部情報を確認中</span></summary>
+        <div class="verif__in">
         <dl class="verif__rows">
           <div><dt>ISBN</dt><dd>書誌データベースで実在を確認済み（2026-09-04 確認）</dd></div>
           <div><dt>正式書名</dt><dd>書誌データベースの表記「物理問題集All in ONE : 為近の物理基礎&amp;物理」と一致しないため確認中です（版・副題の書き方の違いを含みます）</dd></div>
@@ -163,7 +167,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         </dl>
         <p class="verif__src">出典: <a href="https://api.openbd.jp/v1/get?isbn=9784053043276" rel="nofollow noopener noreferrer" target="_blank">書誌データベース</a>（2026-09-04）</p>
         <p class="verif__note">「確認済み」は公開されている書誌情報と一致したという意味で、<b>編集部が現物を確認したという意味ではありません</b>。判定の基準は<a href="/methodology/">算出方法</a>に書いています。</p>
-      </div>
+        </div>
+      </details>
     </section>
 
     <section class="block prose">

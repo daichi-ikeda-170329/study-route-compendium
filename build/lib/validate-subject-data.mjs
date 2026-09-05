@@ -28,7 +28,7 @@ const TYPES = {
   problems: 'string', hours: 'string', h: 'number', style: 'string',
   subjects: 'string', sub: 'string', bunri: 'string',
   desc: 'string', bestFor: 'string', recordType: 'string',
-  basic: 'boolean', nocover: 'boolean',
+  basic: 'boolean', nocover: 'boolean', cover: 'string', coverExample: 'string',
   pros: 'array', cons: 'array', unis: 'array', alts: 'array',
   fb: 'object',
 };
@@ -77,6 +77,9 @@ export function validateSubjectData(dir, data) {
       for (const f of [...BOOK_ONLY, 'isbn10', 'asin', 'cover']) {
         if (b[f] !== undefined) bad(`${key}: ルート上の枠が ${f} を持っている`);
       }
+    } else if (b.coverExample !== undefined) {
+      // coverExample は枠に添える見本。実在の 1 冊はその本自身の書影（cover）を使う
+      bad(`${key}: 実在の本が coverExample を持っている（見本ではなく cover を使う）`);
     }
     if (b.stage && data.stages && !data.stages[b.stage]) {
       bad(`${key}.stage: STAGES に無い「${b.stage}」`);

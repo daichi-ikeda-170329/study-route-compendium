@@ -61,8 +61,9 @@ function buildLedger() {
           isbn13: b.isbn13 || null,
           asin: b.asin || null,
         },
-        // BOOKS[].cover で個別に指定しているか。指定先のホストだけを持つ
-        explicitHost: b.cover ? hostOf(b.cover) : null,
+        // BOOKS[].cover（実在の本）／BOOKS[].coverExample（枠の見本）で個別に
+        // 指定しているか。指定先のホストだけを持つ
+        explicitHost: b.cover ? hostOf(b.cover) : (b.coverExample ? hostOf(b.coverExample) : null),
         // どこにも画像が無いと確認した本
         nocover: Boolean(b.nocover),
         // 到達確認の結果。build/check-covers.mjs --live が書く。**推測で埋めない**

@@ -232,6 +232,12 @@ function renderBook(book, ctx) {
   // 枠には Book を出さない。ISBN も刊行年も持たない「1 冊」を構造化データで
   // 主張すると、検索エンジンに実在しない商品を渡すことになる
   const placeholder = isPlaceholder(book);
+  /* 枠の書影は「その本の表紙」ではなく見本（BOOKS[].coverExample）なので、
+     読み上げでも見本と分かる alt を付ける。ここで嘘を書くと、枠を特定の商品と
+     取り違えさせることになる（build/lib/record-type.mjs） */
+  const coverAlt = placeholder
+    ? `${book.name}の見本として置いた、大学赤本シリーズ「東京大学（理科）」の表紙`
+    : `${book.name}の表紙`;
   /* 事実として確かめた項目と、編集部が推定した項目を分けて出す。
      verified と「現物を確認した」を同じ意味にしない（build/lib/verification.mjs） */
   const ver = verificationOf(sub.dir, book);
@@ -328,7 +334,7 @@ ${header(sub)}
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>${esc(book.name)}</b><span>${esc(book.pub)}</span></div>
-        ${covers.length ? `<img src="${esc(covers[0])}" alt="${esc(book.name)}の表紙" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="${esc(covers.join('|'))}" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">` : ''}
+        ${covers.length ? `<img src="${esc(covers[0])}" alt="${esc(coverAlt)}" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="${esc(covers.join('|'))}" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">` : ''}
       </div>
       <div>
         <span class="bk-tag"><i></i>${esc(st.label)}${subLabel ? ` — ${esc(subLabel)}` : ''}</span>
@@ -358,14 +364,19 @@ ${spec}
       </div>
       <p class="spec__note">書名・出版社・ISBN・刊行年・問題数は公開されている書誌情報です。難易度・到達目安・想定学習時間は編集部の推定値で、<a href="/methodology/">算出方法</a>を公開しています。</p>
 
-      <div class="verif" data-status="${ver.status}">
-        <p class="verif__t"><b>この情報の確かめ方</b><span class="verif__badge">${esc(STATUS_LABEL[ver.status])}</span></p>
+      <!-- 難易度の定義表（build/lib/scale.mjs）と同じく折りたたみで置く。
+           確認状態そのものは summary のバッジで閉じたままでも読めるので、
+           内訳を見たい人だけが開けばよい -->
+      <details class="verif" data-status="${ver.status}">
+        <summary class="verif__t"><b>この情報の確かめ方</b><span class="verif__badge">${esc(STATUS_LABEL[ver.status])}</span></summary>
+        <div class="verif__in">
         <dl class="verif__rows">
 ${verificationRows(ver).map(([k, v]) => `          <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
         </dl>
 ${ver.sources.length ? `        <p class="verif__src">出典: ${ver.sources.map(x => `<a href="${esc(x.url)}" rel="nofollow noopener noreferrer" target="_blank">書誌データベース</a>`)[0]}（${esc(ver.sources[0].checkedAt || '確認日未記録')}）</p>` : ''}
         <p class="verif__note">「確認済み」は公開されている書誌情報と一致したという意味で、<b>編集部が現物を確認したという意味ではありません</b>。判定の基準は<a href="/methodology/">算出方法</a>に書いています。</p>
-      </div>
+        </div>
+      </details>
     </section>
 
     ${prov ? `<section class="block prose">

@@ -97,6 +97,21 @@ test('ルート上の枠は ISBN・ASIN・単一年版を持たない', () => {
   assert.deepEqual(bad, [], bad.join('\n'));
 });
 
+/* 見本の書影（coverExample）は枠のためだけのもの。実在の 1 冊がこれを持つと、
+   その本の表紙でないものを表紙として出すことになる（build/lib/record-type.mjs） */
+test('見本の書影は枠だけが持ち、実在の本は自分の cover を使う', () => {
+  const bad = [];
+  for (const { b, dir } of ALL) {
+    if (b.coverExample && !isPlaceholder(b)) {
+      bad.push(`${dir}:${b.id} は実在の本なのに coverExample を持つ`);
+    }
+    if (b.coverExample && b.cover) {
+      bad.push(`${dir}:${b.id} が cover と coverExample の両方を持つ`);
+    }
+  }
+  assert.deepEqual(bad, [], bad.join('\n'));
+});
+
 test('ルート上の枠は少なくとも 1 件あり、ルートから参照されている', () => {
   const ph = ALL.filter(({ b }) => isPlaceholder(b));
   assert.ok(ph.length > 0, '枠が 1 件も無い。recordType の分岐が死んでいないか確かめる');

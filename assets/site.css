@@ -330,11 +330,22 @@ table.scale__t tbody tr.on th,table.scale__t tbody tr.on td{color:var(--accent-d
 /* ============================================================
    確認状況（build/lib/verification.mjs）
 
-   事実として確かめた項目と、編集部が推定した項目を分けて常時見せる。
+   事実として確かめた項目と、編集部が推定した項目を分けて出す。
    **色だけで状態を伝えない。**ラベルの文字で読めるようにしてある。
+
+   本体は折りたたみ（難易度の定義表 .scale と同じ作り）。閉じていても
+   summary のバッジで状態は読めるので、内訳が要る人だけが開く。
    ============================================================ */
-.verif{margin-top:14px;padding:13px 15px;border:1px solid var(--line);border-radius:4px;background:var(--surface-2,var(--surface))}
-.verif__t{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 9px;font-size:12.5px;color:var(--ink)}
+.verif{margin-top:14px;border:1px solid var(--line);border-radius:4px;background:var(--surface-2,var(--surface))}
+.verif > summary{list-style:none;cursor:pointer;padding:12px 38px 12px 15px;position:relative;transition:.15s}
+.verif > summary::-webkit-details-marker{display:none}
+.verif > summary:hover{background:var(--surface)}
+.verif > summary::after{content:"";position:absolute;right:16px;top:16px;width:7px;height:7px;
+  border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:.2s}
+.verif[open] > summary::after{transform:rotate(-135deg);top:19px}
+.verif[open] > summary{border-bottom:1px solid var(--line-2)}
+.verif__in{padding:12px 15px 13px}
+.verif__t{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0;font-size:12.5px;color:var(--ink)}
 .verif__badge{font-size:11px;font-weight:800;letter-spacing:.03em;padding:2px 8px;border-radius:999px;
   border:1px solid var(--line-d);color:var(--ink-2);background:var(--bg)}
 .verif[data-status="verified"] .verif__badge{border-color:var(--ok,#2F6E4F);color:var(--ok,#2F6E4F)}
