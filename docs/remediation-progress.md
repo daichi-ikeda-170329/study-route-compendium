@@ -43,12 +43,16 @@
 
 **S0〜S11 は終わった。** 最終報告は `docs/remediation-final-report-2026-09-05.md`。
 
-残っているのは運営者にしかできない 8 件（同報告の OWNER ACTION）。
-とくに次の 3 つは、片付くまでサイトの状態が「未確認のまま」である。
+**2026-09-05 追記。** OWNER ACTION 8 件のうち、こちらで片付けられる分を実施した
+（GitHub の Description と Topics、書体の方針、`ndl` の停止、利用条件の下調べ）。
+**いまの状態は下の OWNER ACTION 表が正本。**
 
-1. 書影の利用条件の確認（`docs/cover-policy.md` §6）
+運営者にしかできないものとして残っているのは 4 件。
+
+1. 書影の利用条件の確認（`docs/cover-policy.md` 6・8 節）
 2. 実機での QA（`docs/qa-report-template.md`）
-3. マージと Pages 反映のあとの `npm run check:production`
+3. KPI の実数投入（`docs/kpi-import-guide.md`）
+4. 同意管理（CMP）の方針
 
 ## S4 時点の実測（S5 の出発点）
 
@@ -76,17 +80,25 @@ Lighthouse（localhost / mobile / 5 run 中央値 / 第三者あり）:
 LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像ではない。
 節約見込みの最大は `unused-css-rules`（約 1.2〜1.65 秒）。**次の一手は CSS。**
 
-## OWNER ACTION（運営者しかできない。台帳で追跡する）
+## OWNER ACTION（運営者しかできない。**この表が正本**）
 
-| # | 内容 | 必要な権限 | 手順 | 完了判定 | 状態 |
-|---|---|---|---|---|---|
-| 1 | GitHub リポジトリの Description が `参考書1,052冊` のまま（実際は 1,390 冊） | 対象リポジトリの admin | `gh repo edit daichi-ikeda-170329/study-route-compendium --description "大学受験の参考書を科目・目的別に整理し、学習ルートと進捗管理を提供する静的サイト"` | `gh repo view --json description` の出力に `1,052` が含まれない | 未実施 |
-| 2 | GitHub リポジトリの Topics が未設定 | 同上 | `gh repo edit daichi-ikeda-170329/study-route-compendium --add-topic static-site --add-topic github-pages --add-topic education --add-topic japanese` | `gh repo view --json repositoryTopics` が `null` でない | 未実施 |
-| 3 | 書体の読み込み方針。CLS 0.217 の原因は Google Fonts の差し替えで、`&display=swap` を `&display=optional` にすればほぼ 0 になる。ただし**初回訪問・回線が遅いときに指定の書体が出なくなる**（代替は Hiragino / Yu Gothic / Noto Sans JP） | 権限は不要。**見た目の判断** | `rg 'display=swap'` で全箇所（手書き HTML 9 枚と `build/lib/parts.mjs`）を出し、`display=optional` へ変えて `npm run build` | `npm run audit:performance -- --runs=9 --path=/science/` の CLS 中央値が 0.10 以下 | 未判断 |
+最終更新: 2026-09-05（`chore/owner-actions`）。
+最終報告 `docs/remediation-final-report-2026-09-05.md` の OWNER ACTION 節は、
+2026-09-05 時点の記録として残してある。**いまの状態はこの表を見る。**
 
-**1 と 2 は手元の `gh` に `repo` scope があるので技術的には実行できる。**
-ただし公開リポジトリの外向き設定を変える操作なので、実行前に運営者の可否を確認する。
-確認が取れたら実行し、この表を「実施済み」に書き換える。**確認前に「更新した」と書かない。**
+| # | 内容 | 必要な権限 | 完了判定 | 状態 |
+|---|---|---|---|---|
+| 1 | GitHub の Description が `参考書1,052冊` のまま（実際は 1,390 冊） | リポジトリ admin | `gh repo view --json description` に `1,052` が出ない | **完了**（2026-09-05）。実行後の値は「大学受験の参考書を科目・目的別に整理し、学習ルートと進捗管理を提供する静的サイト」 |
+| 2 | GitHub の Topics が未設定 | 同上 | `gh repo view --json repositoryTopics` が `null` でない | **完了**（2026-09-05）。`static-site` / `github-pages` / `education` / `japanese` |
+| 3 | 書影の利用条件の確認 | 法務・運営の判断 | `npm run check:covers` の「利用条件が未確認の取得元」が 0 件 | **未実施（6 件）。** 下調べは `docs/cover-policy.md` 8 節に置いた。`ndl` は API 終了のため停止済みで対象外 |
+| 4 | 実機での QA（macOS/iOS/iPadOS Safari・実機 Firefox） | 実機 | `docs/qa-report-YYYY-MM-DD.md` の「実機での確認」表が埋まる | **未実施。** この環境に実機が無い |
+| 5 | KPI の実数を入れる | Search Console / GA4 / AdSense の管理画面 | `docs/kpi-baseline.json` の値が `null` でなくなる | **未実施。** 手順は `docs/kpi-import-guide.md` |
+| 6 | 書体の読み込み方針 | 見た目の判断 | — | **判断は不要になった。** `display=optional` は効かないと実測で確定（CLS 0.216→0.213）。代わりに Google Fonts のスタイルシートを非同期化し、LCP 10.99s→6.91s / Performance 53→66。`docs/performance-report.md` 2.1・4.2・5.2 |
+| 7 | 本番の性能を信頼できる方法で測る | — | どちらかの数字を `docs/performance-report.md` へ追記 | **未実施。** 2026-09-05 に PageSpeed Insights を試したが、API の日次上限（`pagespeedonline.googleapis.com` の匿名枠）に当たって測れなかった。**枠が戻ってから再試行する** |
+| 8 | 同意管理（CMP）の方針 | 対象地域と同意方針の判断 | — | **未判断。** Best Practices の残差は AdSense の第三者 cookie 1 件 |
+
+**1 と 2 は 2026-09-05 に実行した**（池田さんから「そちらでできることは全て許可する」の指示を受けたため）。
+実行前は「公開リポジトリの外向き設定なので確認を取る」として保留していた。
 
 ## 引き継ぎメモ
 

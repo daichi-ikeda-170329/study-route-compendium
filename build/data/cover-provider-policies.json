@@ -15,7 +15,7 @@
       "lastReviewedAt": null,
       "termsReviewed": false,
       "enabled": true,
-      "notes": "上の取得元で取れない本に、出版社の商品画像などを個別に指定したもの。**取得元がばらばらなので、provider としてまとめて扱えない。** どのホストを指しているかは build/data/cover-ledger.json に 1 冊ずつ記録する。ホストごとの確認は運営者が行う（2026-09 時点で 18 ホスト。内訳は docs/cover-policy.md）。"
+      "notes": "上の取得元で取れない本に、出版社の商品画像などを個別に指定したもの。**取得元がばらばらなので、provider としてまとめて扱えない。** どのホストを指しているかは build/data/cover-ledger.json に 1 冊ずつ記録する。ホストごとの確認は運営者が行う（2026-09 時点で 16 ホスト。内訳は docs/cover-policy.md）。"
     },
     "amazon": {
       "displayName": "Amazon（商品画像）",
@@ -61,8 +61,8 @@
       "deliveryMode": "remote-hotlink",
       "lastReviewedAt": null,
       "termsReviewed": false,
-      "enabled": true,
-      "notes": "書影を持たない ISBN では 404 を返す。"
+      "enabled": false,
+      "notes": "**2026-03-31 に書影 API が終了した。** データ提供元である出版情報登録センター（JPRO）の利用規約改定に伴うもので、国立国会図書館の告知は https://ndlsearch.ndl.go.jp/news/20251217 。2026-09-05 に 25 冊で実測したところ 25 件すべてが HTTP 403 を返し、実ブラウザ（Chromium）でも同じだった。取れない候補を残しても表示は変わらないが、死んだ宛先に毎回 request を出すことになるので enabled: false にした。**利用条件の確認とは別の理由で止めている。** termsReviewed は false のまま。"
     },
     "googlebooks": {
       "displayName": "Google Books（書影）",

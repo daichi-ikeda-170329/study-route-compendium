@@ -45,6 +45,20 @@ npm run audit:performance -- --runs=9 --path=/science/ --label=final-s11 --port=
 **Performance・LCP・CLS の 3 つはいずれも目標に届いていない。** 達成したかのように書かない。
 何が効いて何が残っているかを 3 節以降に書く。
 
+### 2.1 Google Fonts を非同期化したあと（2026-09-05 追記）
+
+証跡: `docs/perf/lighthouse-mobile-with3p-font-async.json`（9 run）。測り方は 1 節と同じ。
+
+| 指標 | 改修前（S0） | 上の「最終」 | **非同期化の後** | 目標 |
+|---|---:|---:|---:|---:|
+| Performance | 47 | 53 | **66** | 80 以上 → **未達** |
+| LCP | 12.09s | 10.99s | **6.91s** | 4.0s 以下 → **未達** |
+| CLS | 0.217 | 0.216 | **0.216** | 0.10 以下 → **未達** |
+| Speed Index | 7.53s | 4.56s | **2.41s** | — |
+
+**3 つの目標はどれも依然として未達。** LCP は 12.09s → 6.91s（−43%）まで来たが 4.0s には遠く、
+CLS は動いていない。経緯と残因は 4 節と 5.2 節。
+
 ### 科目トップの HTML バイト数（決定的な値。ぶれない）
 
 | 科目 | 改修前 | 改修後 | 減 |
@@ -106,17 +120,27 @@ https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;90
 日本語の書体は文字数が多いため、Google Fonts は `unicode-range` で 100 以上の
 サブセットに分けて配信する。そのため**スタイルシート自体が 207KB** ある。
 
-### 4.1 CLS 0.217 も同じ原因
+> **2026-09-05 追記。** この 2,889ms の描画ブロックは 5.2 の非同期化で無くなった。
+> 4 節と 4.1・4.2 は**非同期化する前**の状態を記録したもので、原因の切り分けとして残してある。
+> 非同期化したあとの数値は 2.1 節。
 
-Lighthouse の `cls-culprits-insight` は、ずれた要素ごとに原因を挙げる。
-**列挙された原因はすべて `Web font`** で、`fonts.gstatic.com` の `.woff2` が並ぶ。
+### 4.1 CLS 0.217 の内訳（2026-09-05 に訂正）
 
-| ずれた要素 | スコア | Lighthouse が挙げた原因 |
-|---|---:|---|
-| `body > main.app-main` | 0.2126 | （下の各要素の移動が合算されたもの） |
-| `div.hero__main > h1` | 0.0017 | Web font（Zen Kaku Gothic New / Shippori Mincho B1） |
-| `div.hero > div.stat-row` | 0.0008 | Web font（同上） |
-| `body > div#prBar` | 0.0004 + 0.0003 | Web font（IBM Plex Mono / Zen Kaku Gothic New ほか） |
+> **この節は 2026-09-05 に書き直した。**
+> それまでここには「CLS の原因はすべて Web font」と書いてあったが、**誤りだった。**
+> `cls-culprits-insight` が原因を挙げているのは全体の 1.5% にあたる 0.0032 だけで、
+> 残る 98% を占める `main.app-main` の 0.2126 には**原因が 1 つも挙がっていない**。
+> 「原因欄が空の行」を、原因が挙がっている行と同じ理由で説明してしまっていた。
+> 実際に切り分けた結果を下に置く。
+
+Lighthouse の `cls-culprits-insight` が挙げる内訳（`docs/perf/` の最新 run）。
+
+| ずれた要素 | スコア | 全体に占める割合 | Lighthouse が挙げた原因 |
+|---|---:|---:|---|
+| `body > main.app-main` | 0.2126 | **98.0%** | **挙がっていない** |
+| `body > div#prBar` | 0.0020 | 0.9% | Web font（Zen Kaku Gothic New ほか） |
+| `div.hero__main > h1` | 0.0012 | 0.6% | Web font（同上） |
+| 合計 | 0.2169 | 100% | |
 
 **広告や解析ではない。** 解析・広告だけを遮断して測っても CLS は変わらなかった
 （`docs/perf/lighthouse-mobile-no3p-s4-no3p.json`）。
@@ -124,6 +148,36 @@ Lighthouse の `cls-culprits-insight` は、ずれた要素ごとに原因を挙
 書影が原因でもない。`.bcov{aspect-ratio:.71}` と `.bcov img{width:100%;height:100%}` で
 箱が先に決まっており、画像が届いても版面は動かない
 （`test/performance-budget.test.mjs` の「科目トップの画像は、読み込む前から場所が決まっている」が固定）。
+
+### 4.2 切り分けの実測（2026-09-05）
+
+Playwright（Chromium 151・412×823・`layout-shift` を PerformanceObserver で合算）で、
+遮断する対象を変えて測った。
+
+| 条件 | CLS |
+|---|---:|
+| 通常 | 0.217 |
+| `fonts.googleapis.com` を遮断（**CSS ごと**止める） | **0.000** |
+| `fonts.gstatic.com` だけ遮断（書体ファイルだけ止め、CSS は通す） | 0.213 |
+| 自前 JS だけ遮断 | 0.059 |
+
+**書体ファイルを止めても CLS は減らない。CSS を止めると 0 になる。**
+つまり「書体が差し替わったこと（swap）」ではなく、
+**Google Fonts のスタイルシートが描画をブロックしていること**が引き金になっている。
+描画がそこまで待たされるあいだに版面の計算が 1 度確定し、
+その後に版面が組み直されて `main.app-main` 全体がずれる。
+
+`font-display` を書き換えても効かないことも確かめた（同じ測り方、CSS を差し替えて計測）。
+
+| `font-display` | CLS |
+|---|---:|
+| `swap`（現状） | 0.216 |
+| `optional` | 0.213 |
+| `block` | 0.213 |
+| `fallback` | 0.213 |
+
+**減った 0.003 は、4.1 の表で Web font が原因と挙がっている分とちょうど一致する。**
+`display=optional` は「font の swap による 0.003」だけを消し、98% には触れない。
 
 ## 5. ここで**やらなかった**こと と、その理由
 
@@ -143,14 +197,48 @@ Lighthouse の `cls-culprits-insight` は、ずれた要素ごとに原因を挙
 規則単位で分割すると、カスケードの順序が変わって見た目が壊れる恐れがある。
 **バイト予算を満たしている以上、見た目の回帰を賭ける利得が無い。**
 
-### 5.2 Google Fonts の非同期化
+### 5.2 Google Fonts の非同期化 → **2026-09-05 に実施した**
 
-**やっていない。CLS が悪化するため。**
+> **この節も書き直した。** ここには「CLS が悪化するのでやらない」と書いてあったが、
+> その根拠は 4.1 の誤った原因特定に乗っていた。9 run で実測したところ
+> **CLS は悪化せず、LCP が 4 秒縮んだ**ので、判断を撤回して実施した。
 
-`media="print"` → `onload` で非同期にすると FCP と LCP は縮むが、
-書体の差し替え（swap）がさらに遅い時点で起きる。4.1 のとおり CLS の原因は
-まさにこの swap なので、いま 0.217 の CLS が悪化する。
-指示書の受入条件「CLS が S0 より悪化していない」に反する。
+`media="print"` → `onload="this.media='all'"` で、Google Fonts のスタイルシートを
+描画ブロックから外した。**書体そのものは今までどおり読み込む**（Chromium で
+`document.fonts.check('700 30px "Zen Kaku Gothic New"')` が `true` になることを確認済み）。
+
+実測（localhost / mobile / 9 run 中央値。証跡 `docs/perf/lighthouse-mobile-with3p-font-async.json`）。
+
+| 指標 | 非同期化の前 | 非同期化の後 | |
+|---|---:|---:|---|
+| Performance | 53 | **66** | +13 |
+| LCP | 10.99s | **6.91s** | −37% |
+| Speed Index | 4.56s | **2.41s** | −47% |
+| CLS | 0.216 | **0.216** | 変わらず（中央値） |
+| Best Practices | 77 | 77 | 変わらず |
+
+**引き換えに、初回訪問で書体が入れ替わるのが見える（FOUT）。**
+最初の描画は Hiragino / Yu Gothic / Noto Sans JP で行われ、
+Google Fonts が届いた時点で Zen Kaku Gothic New と Shippori Mincho B1 に切り替わる。
+以前は「切り替わるまで待って一度で描く」動きだった。
+
+**CLS は中央値では動かないが、run ごとに 2 つの値へ割れる**（9 run のうち
+4 run が 0.002〜0.004、5 run が 0.216）。版面の組み直しと初回描画のどちらが先に来るかの
+競争になっているためで、非同期化がこれを悪化させてはいない
+（非同期化の前は 9 run すべてが 0.213〜0.217 だった）。
+
+JavaScript が無効な環境では `media="print"` のままになり、書体は当たらない。
+そのときは代替の書体で表示される（版面は崩れない）。
+
+### 5.2.1 元に戻すには
+
+`build/lib/parts.mjs` と手書き 9 ページ（`index.html`・`404.html`・科目トップ 7 枚）の `<link>` を次に戻して `npm run build`。
+
+```
+<link href="…&display=swap" rel="stylesheet">
+```
+
+`rg 'onload="this.media' --glob '!dist/**'` で全箇所が出る。
 
 ### 5.3 読み込む字体の重みを減らす
 
@@ -218,31 +306,36 @@ CMP や Consent Mode を入れるかどうかも、対象地域と運営者の�
 **目標 3 つの未達は、いずれも Google Fonts に帰着する。** ここから先は
 「見た目をどこまで守るか」の判断なので、こちらでは決めない。
 
-### 6.1 `display=swap` を `display=optional` にするか
+### 6.1 `display=optional` にするか → **判断は不要になった（試して、効かなかった）**
 
-科目トップとポータルの `<head>` にある Google Fonts の URL の末尾、
-`&display=swap` を `&display=optional` に変える（手書き HTML 9 枚と
-`build/lib/parts.mjs` の `head()`。`rg 'display=swap'` で全箇所が出る）。
+2026-09-05 に実測した。**`display=optional` は CLS をほとんど動かさない**
+（0.216 → 0.213。9 run すべてで同じ）。Performance も LCP も変わらなかった。
+4.2 のとおり CLS の 98% は書体の差し替えとは別の原因なので、
+**「初回訪問者に指定の書体を見せない」代償を払う理由が無い。**
 
-| | いま（`swap`） | `optional` にすると |
-|---|---|---|
-| 初回訪問・回線が遅いとき | 代替書体で表示 → あとで Zen Kaku Gothic New へ差し替え | 代替書体のまま（差し替えない） |
-| 2 回目以降（キャッシュ済み） | Zen Kaku Gothic New | Zen Kaku Gothic New |
-| CLS | 0.217（差し替えでずれる） | ほぼ 0 になる見込み |
+したがって `display=swap` のまま残した。証跡は
+`docs/perf/lighthouse-mobile-with3p-font-optional.json`（9 run）。
 
-代替書体は `"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,"Noto Sans JP"`
-（`assets/site.css` の `--jp`）で、いずれも標準的な日本語書体。
-**初回訪問者に指定の書体を見せることと、版面が動かないことのどちらを取るか**の判断になる。
+代わりに 5.2 の非同期化を入れた。こちらは LCP を 4 秒縮める。
 
-完了判定: 変更後に `npm run audit:performance -- --runs=9 --path=/science/` を流し、
-CLS の中央値が 0.10 以下になること。
+### 6.2 書体を自前で配信するか — **いまも判断待ち**
 
-### 6.2 書体を自前で配信するか
+`fonts.googleapis.com` を止めて測ると、上限がどこにあるかが見える
+（localhost / mobile / 5 run。`--blocked-url-patterns` で CSS ごと遮断）。
 
-Google Fonts をやめて自前で配信すれば、外部への往復 2 回（`fonts.googleapis.com` と
-`fonts.gstatic.com`）が消える。ただし日本語書体はサブセット化しないと数 MB になるため、
-サブセット生成と更新の仕組みを持つことになる。**規模が大きいので、6.1 を試したうえで
-それでも足りないときの選択肢。**
+| 指標 | 非同期化の後（いま） | Google Fonts を完全に止めた場合 |
+|---|---:|---:|
+| Performance | 66 | **74** |
+| LCP | 6.91s | **6.93s** |
+| Speed Index | 2.41s | **2.50s** |
+| CLS | 0.216 | **0.000**（5 run 中 3 run。残り 2 run は 0.213） |
+
+**非同期化でほぼ上限まで来ている。** 残る差は Performance 8 点で、
+その大半は「Zen Kaku Gothic New と Shippori Mincho B1 を表示しない」ことの対価。
+
+自前配信にすれば「書体は出したまま、外部への往復 2 回を消す」ことができるが、
+日本語書体はサブセット化しないと数 MB になるので、サブセット生成と更新の仕組みを持つことになる。
+**規模が大きいので、非同期化の効果を本番で確かめてから判断するのが順当。**
 
 ## 6.5 本番での計測について（2026-09-05・マージ後）
 
