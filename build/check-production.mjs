@@ -101,6 +101,55 @@ async function expectNotFound(pathname) {
     `HTTP ${r.status}${r.status === 200 ? ' — リポジトリ直下が配信されている' : ''}`);
 }
 
+/**
+ * **リダイレクトを踏まずに 200 が返る**ことを確かめる。
+ *
+ * GitHub Pages は実在するディレクトリを末尾スラッシュ無しで要求されると 301 を返す。
+ * 貼った側は最終的に同じページへ着くので手元では気づかないが、Search Console には
+ * 「ページにインデックスに登録されなかった理由 → ページにリダイレクトがあります」として
+ * 溜まり、クロールを 1 往復ずつ無駄にする。sitemap に載せる URL は 1 回で 200 になること。
+ */
+async function expectNoRedirect(pathname, label = pathname) {
+  const url = `${BASE}${pathname}`;
+  try {
+    const res = await fetch(url, {
+      redirect: 'manual',
+      signal: AbortSignal.timeout(TIMEOUT),
+      headers: { 'user-agent': UA, 'cache-control': 'no-cache' },
+    });
+    const loc = res.headers.get('location');
+    record(`${label} がリダイレクト無しで 200`, res.status === 200,
+      res.status === 200 ? 'HTTP 200' : `HTTP ${res.status}${loc ? ` → ${loc}` : ''}`);
+  } catch (e) {
+    unreachable++;
+    record(`${label} がリダイレクト無しで 200`, null, 'ネットワークで届かなかった');
+  }
+}
+
+/**
+ * **意図したリダイレクトだけが存在する**ことを確かめる。
+ *
+ * http:// と www. は GitHub Pages が正規ホストへ 301 で送る。これは正しい状態で、
+ * 消すことはできない（消したら重複ホストが 200 で並ぶ方が悪い）。Search Console の
+ * 「ページにリダイレクトがあります」に少数残るのはこの 2 件が理由になり得るので、
+ * 「壊れたのか、想定どおりか」をここで切り分けられるようにしておく。
+ */
+async function expectRedirect(url, wantPrefix) {
+  try {
+    const res = await fetch(url, {
+      redirect: 'manual',
+      signal: AbortSignal.timeout(TIMEOUT),
+      headers: { 'user-agent': UA, 'cache-control': 'no-cache' },
+    });
+    const loc = res.headers.get('location') || '';
+    const ok = (res.status === 301 || res.status === 308) && loc.startsWith(wantPrefix);
+    record(`${url} が ${wantPrefix} へ 301`, ok, `HTTP ${res.status}${loc ? ` → ${loc}` : ''}`);
+  } catch (e) {
+    unreachable++;
+    record(`${url} が ${wantPrefix} へ 301`, null, 'ネットワークで届かなかった');
+  }
+}
+
 async function main() {
   console.log(`公開サイトを検査する: ${BASE}`);
   console.log('（読み取りだけ。書き込みも送信もしない）\n');
@@ -148,7 +197,18 @@ async function main() {
     await expectOk(p);
   }
 
-  // 7. キャッシュの状況を記録する（判定はしない。反映待ちの切り分け用）
+  // 7. sitemap の代表 URL が 1 回で 200 になる（リダイレクトを挟まない）
+  for (const p of ['/', '/science/', '/english/books/', '/about/', '/changelog/']) {
+    await expectNoRedirect(p);
+  }
+
+  // 8. ホスト正規化の 301 だけが残っている。BASE を差し替えたときは飛ばす
+  if (BASE === 'https://route-taizen.com') {
+    await expectRedirect('http://route-taizen.com/', 'https://route-taizen.com/');
+    await expectRedirect('https://www.route-taizen.com/', 'https://route-taizen.com/');
+  }
+
+  // 9. キャッシュの状況を記録する（判定はしない。反映待ちの切り分け用）
   if (top) {
     console.log(`\nキャッシュ: cache-control=${top.cacheControl ?? '(無し)'} age=${top.age ?? '(無し)'}`);
   }

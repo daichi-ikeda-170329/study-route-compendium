@@ -1145,12 +1145,19 @@ https://route-taizen.com/test/…         404
 
 ### Google Search Console
 
+未登録の理由ごとの読み方（どれがこちらの不備で、どれが待つだけか）は
+`docs/search-console-indexing.md` にまとめてある。**件数を見て慌てる前にそちらを読む。**
+
 - [ ] 所有権の確認（DNS の TXT か、`2d7e64a…txt` のファイル）
 - [ ] `https://route-taizen.com/sitemap.xml` を送信
 - [ ] カバレッジで index 登録の状況と、除外の理由を確認
+- [ ] 「ページにリダイレクトがあります」に出ている URL を書き出し、
+      `docs/search-console-indexing.md` の 3 種類のどれかを判定する
+      （`http://` と `www.` はホスト正規化。**正しい状態なので消さない**）
 - [ ] 主要クエリの表示回数・CTR・平均掲載順位をページ単位で確認
 - [ ] リッチリザルト検査で、書籍ページのパンくずと `Book` を確認
 - [ ] 数値を `docs/kpi-plan.md` の基準値欄へ記入（**推測で埋めない**）
+- [ ] 実測した件数を `docs/search-console-indexing.md` の「4. 実測の記録」へ 1 行足す
 
 ### Google アナリティクス 4
 

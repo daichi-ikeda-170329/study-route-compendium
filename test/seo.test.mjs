@@ -64,6 +64,53 @@ test('sitemap の URL はすべて実在するページを指す', () => {
   assert.deepEqual(bad.slice(0, 10), [], bad.slice(0, 10).join('\n'));
 });
 
+/**
+ * ここから 3 件は「リダイレクトを自分で作らない」ための検査。
+ *
+ * GitHub Pages は実在するディレクトリを末尾スラッシュ無しで要求されると 301 を返し、
+ * `http://` と `www.` も正規ホストへ 301 で送る。最終的に同じページへ着くので
+ * 手元では気づかないが、Search Console には「ページにリダイレクトがあります」として
+ * 溜まり、クロールを 1 往復ずつ無駄にする。判断の背景は
+ * docs/search-console-indexing.md を見る。
+ */
+
+test('内部リンクは末尾スラッシュ付き（本番で 301 にならない）', () => {
+  const dirs = new Set(HTML.map(f => `/${rel(f).replace(/index\.html$/, '')}`));
+  const bad = [];
+  for (const f of HTML) {
+    const markup = fs.readFileSync(f, 'utf8')
+      .replace(/<script[\s\S]*?<\/script>/g, '')
+      .replace(/<style[\s\S]*?<\/style>/g, '');
+    for (const m of markup.matchAll(/href="(\/[^"#?]*)"/g)) {
+      const href = m[1];
+      if (href.endsWith('/') || /\.[a-z0-9]+$/i.test(href)) continue;
+      if (dirs.has(`${href}/`)) bad.push(`${rel(f)}: ${href}（${href}/ のはず）`);
+    }
+  }
+  assert.deepEqual(bad.slice(0, 10), [], bad.slice(0, 10).join('\n'));
+});
+
+test('自サイトを http:// や www. で指していない（本番で 301 になる）', () => {
+  const bad = [];
+  for (const f of HTML) {
+    const markup = fs.readFileSync(f, 'utf8')
+      .replace(/<script[\s\S]*?<\/script>/g, '')
+      .replace(/<style[\s\S]*?<\/style>/g, '');
+    for (const m of markup.matchAll(/(?:href|content)="(https?:\/\/(?:www\.)?route-taizen\.com[^"]*)"/g)) {
+      const u = m[1];
+      if (u.startsWith('http://') || u.startsWith('https://www.')) bad.push(`${rel(f)}: ${u}`);
+    }
+  }
+  assert.deepEqual(bad.slice(0, 10), [], bad.slice(0, 10).join('\n'));
+});
+
+test('sitemap の URL は正規ホストで、末尾スラッシュが付いている', () => {
+  const xml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+  const bad = locs.filter(u => !u.startsWith(`${ORIGIN}/`) || !u.endsWith('/'));
+  assert.deepEqual(bad.slice(0, 10), [], bad.slice(0, 10).join('\n'));
+});
+
 test('title がページごとに固有である（重大な重複が無い）', () => {
   const seen = new Map();
   for (const f of HTML) {
