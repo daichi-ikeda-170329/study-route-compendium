@@ -19,9 +19,11 @@ import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { tally } from './lib/tally.mjs';
 import { isPlaceholder } from './lib/record-type.mjs';
 import { verificationOf, loadVerification, UNVERIFIED_MARK, FACT_FIELDS } from './lib/verification.mjs';
+import { recordDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STDOUT = process.argv.includes('--stdout');
+// 「いま」が要るのは確認日の古さを測るときだけ。**生成日には使わない**（下の generatedAt）
 const TODAY = new Date().toISOString().slice(0, 10);
 const STALE_DAYS = 365;
 
@@ -103,8 +105,7 @@ function main() {
     };
   }
 
-  const json = {
-    generatedAt: TODAY,
+  const body = {
     total: rows.length,
     byStatus, bySubject, fieldGaps, byPriority,
     duplicateIsbn: dupIsbn.map(([isbn, keys]) => ({ isbn, keys })),
@@ -113,13 +114,20 @@ function main() {
     textMarkRemaining: rows.filter(r => r.textMark).length,
   };
 
+  // 生成日は**中身が変わった日**。実行日を書くと、データを一切変えていない日に
+  // 生成し直しただけで差分が出て、CI の「生成物が最新か確かめる」
+  // （`node build/all.mjs && git diff --exit-code`）が翌日以降ずっと落ちる。
+  // 更新日を中身のハッシュから決めるのは build/lib/updated.mjs の方針と同じ。
+  const generatedAt = recordDate('report:data-quality', body);
+  const json = { generatedAt, ...body };
+
   const pct = (n) => `${Math.round((n / rows.length) * 1000) / 10}%`;
   const md = [
     '# データ品質レポート',
     '',
     '生成物。`node build/report-data-quality.mjs` が作る。手で編集しない。',
     '',
-    `- 生成日: ${TODAY}`,
+    `- 生成日: ${generatedAt}`,
     `- 収録レコード: ${rows.length} 件`,
     '',
     '## 確認状態',
@@ -184,6 +192,7 @@ function main() {
   fs.mkdirSync(path.join(ROOT, 'docs'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, 'docs', 'data-quality.md'), md);
   fs.writeFileSync(path.join(ROOT, 'docs', 'data-quality.json'), `${JSON.stringify(json, null, 1)}\n`);
+  saveDates();
   console.log(`docs/data-quality.md と .json を書いた（${rows.length} 件 / verified ${byStatus.verified} / partial ${byStatus.partial} / unverified ${byStatus.unverified}）`);
 }
 

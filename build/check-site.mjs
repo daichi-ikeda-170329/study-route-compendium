@@ -447,11 +447,31 @@ function checkHtml(files) {
     if (badCjk.length) err(at, `簡体字が混ざっている: ${badCjk.join('')}`);
 
     // 内部リンク切れ（ページ単位。アンカーは見ない）
+    //
+    // **末尾スラッシュの有無も見る。** GitHub Pages は実在するディレクトリを
+    // 末尾スラッシュ無しで要求されると 301 を返す（/about → /about/）。
+    // 貼った側は同じページに着くので手元では気づかないが、Search Console には
+    // 「ページにリダイレクトがあります」として溜まり、クロールを 1 往復無駄にする。
+    // リンク切れと同じ扱いで落とす。
     for (const m of markup.matchAll(/href="(\/[^"#?]*)"/g)) {
       const href = m[1];
       if (href.startsWith('/assets/') || /\.[a-z0-9]+$/i.test(href)) continue;
       const target = href.endsWith('/') ? href : `${href}/`;
-      if (!allPaths.has(target)) err(at, `内部リンク切れ: ${href}`);
+      if (!allPaths.has(target)) { err(at, `内部リンク切れ: ${href}`); continue; }
+      if (!href.endsWith('/')) err(at, `内部リンクに末尾スラッシュが無い（本番で 301 になる）: ${href}`);
+    }
+
+    // 自サイトを絶対 URL で指すとき（canonical・og:url・JSON-LD・本文のリンク）も同じ。
+    // 併せて、リダイレクト元になるホスト表記そのものを禁じる。
+    // http:// と www. は GitHub Pages が正規ホストへ 301 で送るため、
+    // 自分のページから貼ると自分でリダイレクトを作ることになる
+    for (const m of markup.matchAll(/(?:href|content)="(https?:\/\/(?:www\.)?route-taizen\.com[^"#?]*)"/g)) {
+      const url = m[1];
+      if (url.startsWith('http://')) { err(at, `自サイトへのリンクが http://（本番で 301 になる）: ${url}`); continue; }
+      if (url.startsWith('https://www.')) { err(at, `自サイトへのリンクが www.（本番で 301 になる）: ${url}`); continue; }
+      const p = url.slice(ORIGIN.length);
+      if (p.startsWith('/assets/') || /\.[a-z0-9]+$/i.test(p)) continue;
+      if (!p.endsWith('/')) err(at, `自サイトへの絶対リンクに末尾スラッシュが無い（本番で 301 になる）: ${url}`);
     }
 
     // 最終更新日
@@ -509,6 +529,48 @@ function checkOrphans(files) {
 }
 
 /* ============================================================
+   5. sitemap.xml
+   ============================================================ */
+
+/**
+ * sitemap.xml に、**そのまま取りに行って 200 が返る URL だけ**が載っている状態を守る。
+ *
+ * ここに 301 になる URL（末尾スラッシュ無し・http://・www.）を 1 件でも入れると、
+ * Search Console の「ページにリダイレクトがあります」に直結する。sitemap は
+ * クローラーが最初に読む一覧なので、リンクの貼り間違いより影響が大きい。
+ *
+ * 併せて、noindex を付けていないのに sitemap から漏れているページも拾う。
+ * 生成の取りこぼしはここでしか気づけない。
+ */
+function checkSitemap(files) {
+  const at = 'sitemap.xml';
+  const file = path.join(ROOT, 'sitemap.xml');
+  if (!fs.existsSync(file)) { err(at, '存在しない'); return; }
+  const xml = fs.readFileSync(file, 'utf8');
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+  if (!locs.length) { err(at, '<loc> が 1 件も無い'); return; }
+
+  const seen = new Set();
+  for (const u of locs) {
+    if (seen.has(u)) { err(at, `同じ URL が 2 回載っている: ${u}`); continue; }
+    seen.add(u);
+    if (!u.startsWith(`${ORIGIN}/`)) { err(at, `正規のホストで書かれていない（本番で 301 になる）: ${u}`); continue; }
+    const p = u.slice(ORIGIN.length);
+    if (!p.endsWith('/')) { err(at, `末尾スラッシュが無い（本番で 301 になる）: ${u}`); continue; }
+    if (!fs.existsSync(path.join(ROOT, p, 'index.html'))) err(at, `指しているページが無い（本番で 404 になる）: ${u}`);
+  }
+
+  // 逆向き。noindex でないページは載っているはず
+  for (const f of files) {
+    const r = rel(f);
+    if (r === '404.html') continue;
+    if (/<meta name="robots" content="[^"]*noindex/.test(fs.readFileSync(f, 'utf8'))) continue;
+    const u = r === 'index.html' ? `${ORIGIN}/` : `${ORIGIN}/${path.dirname(r)}/`;
+    if (!seen.has(u)) err(at, `noindex でないのに載っていない: ${u}`);
+  }
+}
+
+/* ============================================================
    実行
    ============================================================ */
 
@@ -520,6 +582,7 @@ checkHours();
 checkText();
 checkHtml(files);
 checkOrphans(files);
+checkSitemap(files);
 
 if (warns.length) {
   console.log(`\n警告 ${warns.length} 件（落とさない）`);
