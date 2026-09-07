@@ -620,6 +620,18 @@ AdSense のポリシー違反になるため、ラベルで明確に分ける。
 - 承認後は、管理画面の「自動広告」を使うか、広告ユニットを作って `--in-article` / `--bottom` に渡すかを選ぶ。
   自動広告は全画面広告（ビネット）を差し込むことがあるので、入れる場合は管理画面で個別に切る
 
+#### 2026-09-05 の不承認と、そのとき打った手
+
+**「有用性の低いコンテンツ」で不承認になった。** 原因は生成ページの共通テンプレートが本文量の
+過半を占めていたこと。対応として「この情報の確かめ方」ブロックを全ページから削除し、
+1 ページあたりの共通テンプレートを **2,195 → 1,317 字（−40%）**、オリジナル比率を
+**47% → 60%** にした（`28955d2ac`）。
+
+**再審査はまだ申請していない。** 申請前に判断すべき点が 1 つ残っている。
+**1 冊あたりのオリジナル文は 200 字のままで、ここは今回の対応で変わっていない。**
+効き目が大きいのは**記事を 13 → 25 本に増やす**ことなので、記事を足してから
+再審査に出すかどうかを決める。
+
 ## 新刊の掲載
 
 新しく発売された参考書と、サイトに載っていない既刊を随時足すための仕組み。
@@ -1181,12 +1193,14 @@ https://route-taizen.com/test/…         404
 
 ### リポジトリの説明
 
-**未実施。** 2026-09-05 時点の Description は
+**実施済み（2026-09-05）。** それまでの Description は
 `ルート大全 — 大学受験の参考書1,052冊を科目別に図鑑化・ルート化した無料サイト` で、
-実際の 1,390 冊と食い違っている。これはサイトの生成物ではなく GitHub の設定なので、
-`npm run build` では直らない。
+実際の 1,390 冊と食い違っていた。これはサイトの生成物ではなく GitHub の設定なので、
+`npm run build` では直らない。冊数を書かない文面に変え、Topics も併せて設定した
+（2026-09-08 に `gh repo view` で反映を再確認済み。Topics は
+`education` / `github-pages` / `japanese` / `static-site` の 4 つ）。
 
-- [ ] Description を実態に合わせる。冊数を書かない案（増えるたびに古くなるため）:
+- [x] Description を実態に合わせる。冊数を書かない案（増えるたびに古くなるため）:
 
       ```bash
       gh repo edit daichi-ikeda-170329/study-route-compendium \
@@ -1195,7 +1209,7 @@ https://route-taizen.com/test/…         404
 
       完了判定: `gh repo view --json description` の出力に `1,052` が含まれないこと。
 
-- [ ] Topics を実態に合わせる。
+- [x] Topics を実態に合わせる。
 
       ```bash
       gh repo edit daichi-ikeda-170329/study-route-compendium \
@@ -1224,7 +1238,7 @@ https://route-taizen.com/test/…         404
 | Cloudflare DNS | 有効 | 権威 DNS。`darwin` / `yolanda`.ns.cloudflare.com | Cloudflare ダッシュボード |
 | Google Search Console | 所有権確認メタ設置済み。**サイトマップの送信は未了** | インデックス登録・検索順位の把握 | ポータルと科目トップの `<head>`。送信する URL は `https://route-taizen.com/sitemap.xml` |
 | Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`） | アクセス解析 | 手書き HTML 9 件（ポータル・科目トップ 7 枚・404）と `build/lib/parts.mjs` の `analytics()` |
-| Google AdSense | ID 設置済み・**審査待ち**（`ca-pub-4704595822429716`） | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
+| Google AdSense | ID 設置済み・**審査に落ちた**（`ca-pub-4704595822429716`）。2026-09-05 に「ポリシー違反：有用性の低いコンテンツ」の通知。**再審査は未申請**（「[審査に出すときの注意](#審査に出すときの注意)」を参照） | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
 | 楽天アフィリエイト | 導入済み | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.rakutenId` |
 | Amazon アソシエイト | 導入済み（`routetaizen-22`） | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.amazonTag` |
 | IndexNow | 通知済み | Bing・Yahoo・DuckDuckGo・Yandex への即時インデックス通知 | サイト直下の `<キー>.txt` と `build/submit-indexnow.mjs` |
