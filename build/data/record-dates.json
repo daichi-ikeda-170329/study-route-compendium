@@ -1010,7 +1010,7 @@
    "d": "2026-09-03"
   },
   "file:build/content/articles.mjs": {
-   "h": "df72984b72c8",
+   "h": "9ec178acb65f",
    "d": "2026-09-08"
   },
   "file:build/content/legal.mjs": {
@@ -1025,12 +1025,24 @@
    "h": "df9cc48d0ff3",
    "d": "2026-09-08"
   },
+  "file:english/guides/eisaku-comparison/index.html": {
+   "h": "89e1eaf80ef1",
+   "d": "2026-09-08"
+  },
   "file:english/guides/index.html": {
-   "h": "b7f8deadd753",
+   "h": "75e2397dfdcc",
    "d": "2026-09-08"
   },
   "file:english/guides/kaishaku-comparison/index.html": {
    "h": "23c62ba08f9a",
+   "d": "2026-09-08"
+  },
+  "file:english/guides/kyotest-eigo-jikan/index.html": {
+   "h": "0343c2dc495b",
+   "d": "2026-09-08"
+  },
+  "file:english/guides/listening-start/index.html": {
+   "h": "a2df76c805e8",
    "d": "2026-09-08"
   },
   "file:english/guides/tango-comparison/index.html": {
@@ -1046,11 +1058,23 @@
    "d": "2026-09-08"
   },
   "file:guides/index.html": {
-   "h": "0076a5749078",
+   "h": "ade06ddc9e44",
+   "d": "2026-09-08"
+  },
+  "file:guides/kakomon-timing/index.html": {
+   "h": "58d7ec35a2d1",
    "d": "2026-09-08"
   },
   "file:guides/route-hours/index.html": {
    "h": "ff3ee9e163fb",
+   "d": "2026-09-08"
+  },
+  "file:guides/shuukai-sekkei/index.html": {
+   "h": "4f2a64a8224a",
+   "d": "2026-09-08"
+  },
+  "file:japanese/guides/gendaibun-goi/index.html": {
+   "h": "007f9a70735f",
    "d": "2026-09-08"
   },
   "file:japanese/guides/gendaibun-start/index.html": {
@@ -1058,7 +1082,11 @@
    "d": "2026-09-08"
   },
   "file:japanese/guides/index.html": {
-   "h": "009261863e2b",
+   "h": "2a15a4aa6bf1",
+   "d": "2026-09-08"
+  },
+  "file:japanese/guides/kanbun-start/index.html": {
+   "h": "d4f0caea0c89",
    "d": "2026-09-08"
   },
   "file:japanese/guides/kobun-start/index.html": {
@@ -1073,12 +1101,20 @@
    "h": "bb5adcaf36c1",
    "d": "2026-09-04"
   },
+  "file:math/guides/bunkei-sugaku/index.html": {
+   "h": "a339910cf203",
+   "d": "2026-09-08"
+  },
+  "file:math/guides/bunyabetsu-kyoka/index.html": {
+   "h": "94287ba10de8",
+   "d": "2026-09-08"
+  },
   "file:math/guides/enshu-comparison/index.html": {
    "h": "1cc51c72ad1b",
    "d": "2026-09-08"
   },
   "file:math/guides/index.html": {
-   "h": "6815994706f0",
+   "h": "57e87248cf5b",
    "d": "2026-09-08"
   },
   "file:math/guides/moura-comparison/index.html": {
@@ -1094,11 +1130,19 @@
    "d": "2026-09-08"
   },
   "file:science/guides/index.html": {
-   "h": "5eaacdc1ba37",
+   "h": "22ce8a7e7019",
    "d": "2026-09-08"
   },
   "file:science/guides/kagaku-route/index.html": {
    "h": "57fb6cfb458a",
+   "d": "2026-09-08"
+  },
+  "file:science/guides/rika-select/index.html": {
+   "h": "765508b8a076",
+   "d": "2026-09-08"
+  },
+  "file:science/guides/seibutsu-route/index.html": {
+   "h": "d82b1bddec75",
    "d": "2026-09-08"
   },
   "file:science/index.html": {
@@ -1109,8 +1153,12 @@
    "h": "c4d05bddd74d",
    "d": "2026-09-04"
   },
+  "file:social/guides/chiri-route/index.html": {
+   "h": "77e8e3e9b855",
+   "d": "2026-09-08"
+  },
   "file:social/guides/index.html": {
-   "h": "bd97160e9d57",
+   "h": "355247f87553",
    "d": "2026-09-08"
   },
   "file:social/guides/nihonshi-route/index.html": {
@@ -1119,6 +1167,10 @@
   },
   "file:social/guides/sekaishi-route/index.html": {
    "h": "141deee824f3",
+   "d": "2026-09-08"
+  },
+  "file:social/guides/shakai-select/index.html": {
+   "h": "346f28c06e64",
    "d": "2026-09-08"
   },
   "file:social/index.html": {

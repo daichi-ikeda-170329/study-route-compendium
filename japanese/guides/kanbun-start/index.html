@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漢文の始め方｜句法から演習までの最短ルート - 国語ルート大全</title>
+<meta name="description" content="漢文の参考書を、句法の入門書・ドリル・演習書の3層に分けて選び方を整理。早覚え速答法とヤマのヤマの違い、共通テストのみの場合と二次で漢文が出る場合の分岐、始める時期の目安をまとめます。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/japanese/guides/kanbun-start/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="漢文の始め方｜句法から演習までの最短ルート - 国語ルート大全">
+<meta property="og:description" content="漢文の参考書を、句法の入門書・ドリル・演習書の3層に分けて選び方を整理。早覚え速答法とヤマのヤマの違い、共通テストのみの場合と二次で漢文が出る場合の分岐、始める時期の目安をまとめます。">
+<meta property="og:url" content="https://route-taizen.com/japanese/guides/kanbun-start/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp-japanese.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="漢文の始め方｜句法から演習までの最短ルート - 国語ルート大全">
+<meta name="twitter:description" content="漢文の参考書を、句法の入門書・ドリル・演習書の3層に分けて選び方を整理。早覚え速答法とヤマのヤマの違い、共通テストのみの場合と二次で漢文が出る場合の分岐、始める時期の目安をまとめます。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp-japanese.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#8A6D2F}
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 22px;margin-top:26px;box-shadow:var(--sh-s)}
+.toc h2{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:.05em;margin-bottom:11px}
+.toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:2px}
+.toc li{counter-increment:t;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:center}
+.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-weight:600}
+/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。
+   gap を詰めたぶんを min-height で取り、行の見た目は変えない。 */
+.toc a{color:var(--ink-2);font-weight:700;transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.toc a:hover{color:var(--accent-deep)}
+/* 表は幅を超えたら中だけ横スクロールさせる。画面が狭いと「切れている」と
+   誤解されやすいので、スクロールできることを画面幅で出し分けて明示する。 */
+.tbl-scroll{margin:22px 0}
+.tbl-scroll__hint{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);margin-bottom:7px;align-items:center;gap:7px}
+.tbl-scroll__hint::before{content:"";width:14px;height:1.5px;background:var(--line-d)}
+@media(max-width:860px){.tbl-scroll__hint{display:flex}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp tbody th a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/" aria-current="page">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/japanese/">
+      <div class="logo__mark" aria-hidden="true">国</div>
+      <div class="logo__txt"><b>国語ルート大全</b><span>JAPANESE ROUTE</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta">
+      <a href="/japanese/#catalog">参考書図鑑</a>
+      <a href="/">全科目</a>
+      <a class="primary" href="/japanese/#route">ルートを作る</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/japanese/">国語ルート大全</a>
+    <span class="sep">/</span><a href="/japanese/guides/">解説記事</a>
+    <span class="sep">/</span><b>漢文の始め方 — 最も少ない時間で点になる分野の攻略順</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Guide</div>
+      <h1 class="art-h1">漢文の始め方 — 最も少ない時間で点になる分野の攻略順</h1>
+      <div class="art-meta">
+        <span>公開 2026-09-08</span>
+        
+        <span>ルート大全 編集部</span>
+      </div>
+      <p class="art-lead">国語の 3 分野の中で、<b>投入した時間に対して最も早く点になるのが漢文</b>です。理由は単純で、覚える量が圧倒的に少ないからです。古文が単語・文法・読解・常識と 4 層あるのに対して、漢文は句法と少しの重要語で読み始められます。にもかかわらず、最後まで手つかずで残されることが多い分野でもあります。この記事では、漢文をどの順で、どこまでやるかを整理します。</p>
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <h2>この記事の内容</h2>
+      <ol>
+        <li><a href="#s1">漢文が「安い」理由</a></li>
+        <li><a href="#s2">1冊目 — 句法の入門書を選ぶ</a></li>
+        <li><a href="#s3">2冊目 — 句法を手で定着させる</a></li>
+        <li><a href="#s4">3冊目 — 演習は志望校で分岐する</a></li>
+        <li><a href="#s5">いつ始めて、いつ終わらせるか</a></li>
+      </ol>
+    </nav>
+
+    <section class="block prose" id="s1">
+      <h2 class="sec">漢文が「安い」理由</h2>
+      <p>漢文の学習は、大きく 3 つの層でできています。<b>返り点などの訓読のルール、句法、そして読解の演習。</b>このうち、覚えなければならない知識に当たるのは最初の 2 つで、量はどちらも多くありません。</p>
+      <p>古文と比べると差がはっきりします。古文は単語帳を 1 冊仕上げ、助動詞の活用と識別を身につけ、古典常識を入れ、そのうえで読解演習に入ります。漢文は句法を一通り押さえた時点で、入試問題の文章が読める状態に近づきます。</p>
+      <p>つまり漢文は、<b>短期で完成させて、あとは維持するだけの分野に変えられる</b>ということです。共通テストでしか使わない受験生にとっては、ここを早く終わらせて他科目に時間を回すのが最も合理的な運用になります。</p>
+      <div class="note" style="margin:22px 0"><h3>後回しにするコストが大きい</h3><p>漢文を後回しにしていい理由は 1 つもありません。<b>着手が遅れると、句法を入れ終わる前に本番が来ます。</b>逆に、夏までに句法を終えていれば、あとは演習を薄く続けるだけで維持できます。優先順位ではなく着手の早さで差がつく分野です。</p></div>
+    </section>
+
+    <section class="block prose" id="s2">
+      <h2 class="sec">1冊目 — 句法の入門書を選ぶ</h2>
+      <p>最初の 1 冊は、句法を体系的に扱う講義系の本になります。ここでの選択が、その後の時間の使い方をほぼ決めます。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/japanese/books/okamoto-3h-kanbun/">岡本のたった3時間で漢文句法</a></th><td>1 / 10</td><td>〜55(超入門)</td><td>動画授業付き</td><td>3〜6h</td><td>漢文に初めて触れ句法の全体像を先に知りたい人</td></tr>
+            <tr><th scope="row"><a href="/japanese/books/hayaoboe/">漢文早覚え速答法</a></th><td>2 / 10</td><td>40〜62</td><td>310頁/句法10公式</td><td>10〜15h</td><td>短時間で共テ・私大の漢文を読めるようにしたい人</td></tr>
+            <tr><th scope="row"><a href="/japanese/books/yama/">漢文ヤマのヤマ</a></th><td>2 / 10</td><td>40〜65</td><td>194頁/重要句法66</td><td>12〜18h</td><td>最初の1冊で句法を体系的に固めたい人</td></tr>
+            <tr><th scope="row"><a href="/japanese/books/okamoto-kanbun/">岡本梨奈の漢文 読み方&amp;解き方</a></th><td>2 / 10</td><td>〜60(導入)</td><td>336頁/句法+演習</td><td>15〜20h</td><td>知識ゼロから1冊で共テ・入試基礎まで進めたい人</td></tr>
+            <tr><th scope="row"><a href="/japanese/books/miwa-kyoshitsu/">三羽邦美の漢文教室</a></th><td>3 / 10</td><td>45〜65</td><td>256頁</td><td>18〜25h</td><td>漢文を体系的に深く学びたい国公立志望者</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p>性格の違いを整理します。</p>
+      <ul>
+        <li><b><a href="/japanese/books/hayaoboe/">漢文早覚え速答法</a>は、割り切りの本です。</b> 覚える句法を絞り、共通テストと私大で問われる形に最短で届かせる構成になっています。時間がない人、漢文が共通テストのみの理系にはこれが噛み合います。</li>
+        <li><b><a href="/japanese/books/yama/">漢文ヤマのヤマ</a>は、体系の本です。</b> 句法を漏れなく並べ、演習も付いています。国公立の二次で漢文が出る人や、早い時期から始められる人向けです。</li>
+        <li><b><a href="/japanese/books/okamoto-3h-kanbun/">岡本のたった3時間で漢文句法</a>は、全体像を先に見る本です。</b> これ 1 冊で完結させるより、短時間で地図を作ってから他の本に入る使い方が向いています。</li>
+        <li><b><a href="/japanese/books/miwa-kyoshitsu/">三羽邦美の漢文教室</a>は、理屈から入る本です。</b> なぜその読み方になるかを説明するので、暗記が続かないタイプに向きます。</li>
+      </ul>
+      <p><b>2 冊目の入門書は要りません。</b>1 冊を決めたら、それを繰り返してください。漢文で複数の入門書を買うのは、最も典型的な時間の浪費です。</p>
+    </section>
+
+    <section class="block prose" id="s3">
+      <h2 class="sec">2冊目 — 句法を手で定着させる</h2>
+      <p>講義系を読んだだけでは、句法は使える状態になりません。読んで理解することと、白文や書き下しを見て構造が浮かぶことの間には差があります。ここを埋めるのがドリル型の教材です。</p>
+      <div class="bcards" style="margin:20px 0">
+      <a class="bcard" href="/japanese/books/stepup10/" style="--bc:#8A6D2F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート10 漢文句形ドリル</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/487725577X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/487725577X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/487725577X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/487725577X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/487725577X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/487725577X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784877255770.jpg|https://books.google.com/books/content?vid=ISBN9784877255770&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784877255770.jpg|https://www.gakusan.com/bookimage_s/9784877255770.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">知識</span><span>河合出版</span></div>
+            <b>ステップアップノート10 漢文句形ドリル</b>
+          </div>
+        </div>
+        <p>句形を10項目の書き込みドリルで定着させる問題集（河合出版）。33項目のジャンプアップノートより項目が粗く、後半の演習問題で入試形式に慣れる。…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
+        
+      </a>
+      <a class="bcard" href="/japanese/books/jumpup-kanbun/" style="--bc:#8A6D2F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ジャンプアップノート 漢文句法</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354135.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354135.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354135.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010354135.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010354135.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354135.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010354131.jpg|https://books.google.com/books/content?vid=ISBN9784010354131&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010354131.jpg|https://www.gakusan.com/bookimage_s/9784010354131.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">知識</span><span>旺文社</span></div>
+            <b>ジャンプアップノート 漢文句法</b>
+          </div>
+        </div>
+        <p>33項目の書き込み式で句法を定着させるドリルの2024年三訂版（旺文社）。10項目のステップアップノート10より項目が細かく、新課程の共テ形式…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
+        
+      </a>
+      <a class="bcard" href="/japanese/books/kanbun-10drill/" style="--bc:#8A6D2F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古典文法10題ドリル 漢文編</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/479611548X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/479611548X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/479611548X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/479611548X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/479611548X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/479611548X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796115483.jpg|https://books.google.com/books/content?vid=ISBN9784796115483&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796115483.jpg|https://www.gakusan.com/bookimage_s/9784796115483.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">知識</span><span>駿台文庫</span></div>
+            <b>古典文法10題ドリル 漢文編</b>
+          </div>
+        </div>
+        <p>1項目10題ずつで句法を小刻みに定着させる駿台のドリル（駿台文庫）。同じ句法ドリルのステップアップノート10と役割は同じで、チャレンジ問題で入…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
+        
+      </a>
+      </div>
+      <p>このタイプの本は薄く、短期間で終わります。<b>講義系と並行して進めるのが最も効率的です。</b>1 章読んだらその範囲のドリルを解く、という運用にすると、読んだだけで終わる状態を防げます。</p>
+      <p>学校で<a href="/japanese/books/hissei/">漢文必携</a>のような教材を配られているなら、それをドリル代わりに使って構いません。<b>同じ役割の本を買い足す必要はありません。</b></p>
+    </section>
+
+    <section class="block prose" id="s4">
+      <h2 class="sec">3冊目 — 演習は志望校で分岐する</h2>
+      <p>句法が入ったら演習に移ります。ここから先は、<b>漢文をどこまで必要とするかで進む道が変わります。</b></p>
+      <h3>共通テストのみで使う場合</h3>
+      <p>マーク形式の演習に絞ります。文章そのものは標準的なので、設問の処理に慣れることが目的になります。</p>
+      <div class="bcards" style="margin:20px 0">
+      <a class="bcard" href="/japanese/books/mark-kiso-kan/" style="--bc:#2F6E4F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>マーク式基礎問題集 漢文</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477722337X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477722337X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722337X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/477722337X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/477722337X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722337X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777223374.jpg|https://books.google.com/books/content?vid=ISBN9784777223374&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777223374.jpg|https://www.gakusan.com/bookimage_s/9784777223374.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>河合出版</span></div>
+            <b>マーク式基礎問題集 漢文</b>
+          </div>
+        </div>
+        <p>共テ形式の漢文演習書（河合出版）。句形ドリル・演習・予想問題の3部で、本番より少し易しいレベルから形式に慣れる。本番に近い難度の短期攻略と違い…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／45〜60</span></div>
+        
+      </a>
+      <a class="bcard" href="/japanese/books/kyote-kanbun-sugowaza/" style="--bc:#2F6E4F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト漢文のスゴ技</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046066679.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046066679.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046066679.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046066679.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046066679.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046066679.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046066671.jpg|https://books.google.com/books/content?vid=ISBN9784046066671&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046066671.jpg|https://www.gakusan.com/bookimage_s/9784046066671.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>KADOKAWA</span></div>
+            <b>共通テスト漢文のスゴ技</b>
+          </div>
+        </div>
+        <p>「7つの急所」に絞って10時間で共テ漢文を仕上げる速習書の2024年改訂版（KADOKAWA）。設問別のコツを整理する満点のコツより範囲を絞り…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／45〜65</span></div>
+        
+      </a>
+      <a class="bcard" href="/japanese/books/tanki-kyote-kanbun/" style="--bc:#2F6E4F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>短期攻略 共通テスト漢文</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796123962.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796123962.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796123962.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796123962.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796123962.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796123962.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796123969.jpg|https://books.google.com/books/content?vid=ISBN9784796123969&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796123969.jpg|https://www.gakusan.com/bookimage_s/9784796123969.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>駿台文庫</span></div>
+            <b>短期攻略 共通テスト漢文</b>
+          </div>
+        </div>
+        <p>厳選8題で共テ漢文を本番レベルに仕上げる駿台の共テ演習書の2024年改訂版。本番より易しいマーク式基礎問題集と違い、本番に近い難度で高得点層の…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／50〜65</span></div>
+        
+      </a>
+      </div>
+      <p><b>ここで止めて構いません。</b>共通テストでしか使わないのに二次向けの記述演習に進むのは、配点に見合わない投資です。</p>
+      <h3>国公立二次・私大で漢文が出る場合</h3>
+      <p>記述と、より長い文章の読解が必要になります。演習書を 1 冊挟んでください。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/japanese/books/dojo-kiso/">漢文道場 基礎編</a></th><td>3 / 10</td><td>45〜60</td><td>本体168頁+別冊128頁</td><td>15〜20h</td><td>句法を覚えて最初の演習書を探す人</td></tr>
+            <tr><th scope="row"><a href="/japanese/books/dojo/">漢文道場 入門から実戦まで</a></th><td>5 / 10</td><td>50〜68</td><td>本体224頁+別冊80頁</td><td>20〜30h</td><td>漢文を1冊で入試レベルまで仕上げたい人</td></tr>
+            <tr><th scope="row"><a href="/japanese/books/jissen-hyojun-kanbun/">実戦演習 標準漢文</a></th><td>5 / 10</td><td>50〜65</td><td>29題/128頁</td><td>12〜18h</td><td>標準レベルの漢文演習を短期で追加したい人</td></tr>
+            <tr><th scope="row"><a href="/japanese/books/tokuten-kan/">得点奪取 漢文</a></th><td>6 / 10</td><td>55〜68</td><td>200頁/典型4+演習</td><td>18〜25h</td><td>国公立二次の漢文記述を対策する人</td></tr>
+            <tr><th scope="row"><a href="/japanese/books/seisen-kan/">入試精選問題集 漢文</a></th><td>6 / 10</td><td>55〜68</td><td>30題/196頁</td><td>20〜28h</td><td>難関大の漢文の演習量を確保したい人</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p><a href="/japanese/books/dojo/">漢文道場</a>は、入門から実戦までを 1 冊で通す設計です。句法を終えた直後から入れて、そのまま二次レベルまで持ち上がります。記述対策を厚くしたいなら<a href="/japanese/books/tokuten-kan/">得点奪取 漢文</a>を足してください。</p>
+    </section>
+
+    <section class="block prose" id="s5">
+      <h2 class="sec">いつ始めて、いつ終わらせるか</h2>
+      <p>時期の目安を書きます。ただし、<b>これは締切であって開始日ではありません。</b>早く始めるぶんには何の問題もありません。</p>
+      <ul>
+        <li><b>句法の入門書は、遅くとも高3の夏まで</b>に 1 周を終えます。ここが遅れると、演習の時間が取れません。</li>
+        <li><b>ドリルは入門書と並行</b>して、同じ時期に終わらせます。</li>
+        <li><b>演習は秋以降</b>でも間に合います。共通テストのみなら、直前期に形式へ慣れる時間があれば足ります。</li>
+      </ul>
+      <p>漢文は、<b>一度仕上げても放置すると句法が抜けます。</b>週に 1 題でいいので、演習を切らさないでください。維持のコストは低く、週に 30 分程度で足ります。</p>
+      <p>古文との順番を聞かれることがありますが、<b>同時並行で構いません。</b>むしろ古文のほうが完成に時間がかかるので、古文を主に進めながら、漢文を週に数コマ差し込む形が現実的です。古文の進め方は<a href="/japanese/guides/kobun-start/">古文の始め方</a>にまとめました。</p>
+    </section>
+
+    <div class="cta">
+      <h2>国語3分野の並びを確認する</h2>
+      <p>漢文をいつ始めていつ終えるかは、現代文・古文の進み具合と合わせて決まります。志望校と現在地を選ぶと、3 分野を並行させた並びが出ます。</p>
+      <div class="cta__btns">
+        <a class="p" href="/japanese/">国語のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="g" href="/japanese/books/">参考書一覧を見る</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F" aria-current="page">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/japanese/">参考書図鑑</a>
+      <a href="/japanese/books/">参考書一覧</a>
+      <a href="/japanese/routes/">志望校別ルート</a>
+      <a href="/japanese/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/japanese/guides/kanbun-start/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "国語ルート大全",
+     "item": "https://route-taizen.com/japanese/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/japanese/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "漢文の始め方 — 最も少ない時間で点になる分野の攻略順",
+     "item": "https://route-taizen.com/japanese/guides/kanbun-start/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "@id": "https://route-taizen.com/japanese/guides/kanbun-start/#article",
+   "headline": "漢文の始め方 — 最も少ない時間で点になる分野の攻略順",
+   "description": "漢文の参考書を、句法の入門書・ドリル・演習書の3層に分けて選び方を整理。早覚え速答法とヤマのヤマの違い、共通テストのみの場合と二次で漢文が出る場合の分岐、始める時期の目安をまとめます。",
+   "inLanguage": "ja",
+   "datePublished": "2026-09-08",
+   "dateModified": "2026-09-08",
+   "author": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "mainEntityOfPage": "https://route-taizen.com/japanese/guides/kanbun-start/",
+   "about": {
+    "@type": "Thing",
+    "name": "大学受験 国語の参考書選び"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/japanese/guides/kanbun-start/#webpage",
+   "url": "https://route-taizen.com/japanese/guides/kanbun-start/",
+   "name": "漢文の始め方｜句法から演習までの最短ルート - 国語ルート大全",
+   "description": "漢文の参考書を、句法の入門書・ドリル・演習書の3層に分けて選び方を整理。早覚え速答法とヤマのヤマの違い、共通テストのみの場合と二次で漢文が出る場合の分岐、始める時期の目安をまとめます。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/japanese/guides/kanbun-start/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>

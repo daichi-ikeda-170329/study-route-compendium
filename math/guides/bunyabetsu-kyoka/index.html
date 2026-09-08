@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分野別参考書の使い方｜確率・整数だけ落とす人へ - 数学ルート大全</title>
+<meta name="description" content="数学の特定分野だけ苦手な場合に使う分野別参考書の選び方。確率・整数・ベクトル・微積分の分野別問題集を比較し、いつ使うべきか、使ってはいけない状態はどれかを整理します。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/math/guides/bunyabetsu-kyoka/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="分野別参考書の使い方｜確率・整数だけ落とす人へ - 数学ルート大全">
+<meta property="og:description" content="数学の特定分野だけ苦手な場合に使う分野別参考書の選び方。確率・整数・ベクトル・微積分の分野別問題集を比較し、いつ使うべきか、使ってはいけない状態はどれかを整理します。">
+<meta property="og:url" content="https://route-taizen.com/math/guides/bunyabetsu-kyoka/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp-math.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="分野別参考書の使い方｜確率・整数だけ落とす人へ - 数学ルート大全">
+<meta name="twitter:description" content="数学の特定分野だけ苦手な場合に使う分野別参考書の選び方。確率・整数・ベクトル・微積分の分野別問題集を比較し、いつ使うべきか、使ってはいけない状態はどれかを整理します。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp-math.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#24427C}
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 22px;margin-top:26px;box-shadow:var(--sh-s)}
+.toc h2{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:.05em;margin-bottom:11px}
+.toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:2px}
+.toc li{counter-increment:t;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:center}
+.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-weight:600}
+/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。
+   gap を詰めたぶんを min-height で取り、行の見た目は変えない。 */
+.toc a{color:var(--ink-2);font-weight:700;transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.toc a:hover{color:var(--accent-deep)}
+/* 表は幅を超えたら中だけ横スクロールさせる。画面が狭いと「切れている」と
+   誤解されやすいので、スクロールできることを画面幅で出し分けて明示する。 */
+.tbl-scroll{margin:22px 0}
+.tbl-scroll__hint{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);margin-bottom:7px;align-items:center;gap:7px}
+.tbl-scroll__hint::before{content:"";width:14px;height:1.5px;background:var(--line-d)}
+@media(max-width:860px){.tbl-scroll__hint{display:flex}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp tbody th a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/" aria-current="page">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/math/">
+      <div class="logo__mark" aria-hidden="true">数</div>
+      <div class="logo__txt"><b>数学ルート大全</b><span>MATHEMATICS ROUTE</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta">
+      <a href="/math/#catalog">参考書図鑑</a>
+      <a href="/">全科目</a>
+      <a class="primary" href="/math/#route">ルートを作る</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/math/">数学ルート大全</a>
+    <span class="sep">/</span><a href="/math/guides/">解説記事</a>
+    <span class="sep">/</span><b>分野別参考書の使い方 — 確率・整数だけ落とす人へ</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Guide</div>
+      <h1 class="art-h1">分野別参考書の使い方 — 確率・整数だけ落とす人へ</h1>
+      <div class="art-meta">
+        <span>公開 2026-09-08</span>
+        
+        <span>ルート大全 編集部</span>
+      </div>
+      <p class="art-lead">模試の結果を見ると、数学の失点が特定の分野に固まっていることがあります。確率だけ落ちる。整数が出ると手が止まる。こういうとき、<b>総合的な問題集をもう 1 冊やっても、その分野が出てくる回数は数問しかありません。</b>分野別の参考書は、この偏りを直すための道具です。ただし使いどころを間違えると、時間だけを消費します。この記事では、分野別参考書を使っていい条件と、分野ごとの選び方を整理します。</p>
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <h2>この記事の内容</h2>
+      <ol>
+        <li><a href="#s1">分野別参考書を使っていい条件</a></li>
+        <li><a href="#s2">確率・場合の数</a></li>
+        <li><a href="#s3">整数</a></li>
+        <li><a href="#s4">ベクトル・微積分・その他</a></li>
+        <li><a href="#s5">分野別対策に使っていい時間の上限</a></li>
+      </ol>
+    </nav>
+
+    <section class="block prose" id="s1">
+      <h2 class="sec">分野別参考書を使っていい条件</h2>
+      <p>先に条件を書きます。<b>次の 2 つを満たしていない状態で分野別の本に入ってはいけません。</b></p>
+      <ul>
+        <li><b>網羅系または基礎レベルの問題集を一通り終えている。</b> 分野別の本は、その分野の典型解法を知っている前提で書かれています。ゼロから学ぶ本ではありません。</li>
+        <li><b>失点がその分野に偏っていることを、模試や過去問で確認している。</b> 「なんとなく苦手」ではなく、実際に落としているかどうかです。</li>
+      </ul>
+      <p>この 2 つを満たさない状態で分野別の本を買うと、<b>手つかずの分野が他に残ったまま、1 分野だけ突出する</b>という歪んだ状態になります。入試は総合点で決まるので、これは損な配分です。</p>
+      <div class="note" style="margin:22px 0"><h3>苦手意識ではなく得点率で決める</h3><p>「苦手だと思っている分野」と「実際に落としている分野」は一致しません。苦手意識は、初めて習ったときの印象に引きずられます。模試の分野別成績を見て、<b>得点率が低い順に並べてから</b>手をつける分野を決めてください。</p></div>
+    </section>
+
+    <section class="block prose" id="s2">
+      <h2 class="sec">確率・場合の数</h2>
+      <p>文系・理系を問わず、最も分野別対策の需要が大きいのが確率です。理由は、<b>確率だけ他の分野と使う頭が違う</b>からです。公式を当てはめるのではなく、事象の数え方を毎回設計し直す必要があります。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/math/books/sakata/">坂田アキラの面白いほどわかる本</a></th><td>3 / 10</td><td>40〜55</td><td>講義+例題 約380頁/巻</td><td>各巻25〜40h</td><td>特定分野で完全につまずいた人</td></tr>
+            <tr><th scope="row"><a href="/math/books/ukaru-kakuritsu/">合格る確率+場合の数</a></th><td>6 / 10</td><td>55〜68</td><td>頻出パターン網羅型</td><td>40〜55h</td><td>確率を体系的に固めたい中堅〜難関志望者</td></tr>
+            <tr><th scope="row"><a href="/math/books/hatto-kakuritsu/">ハッとめざめる確率</a></th><td>7 / 10</td><td>55〜70</td><td>講義+例題(288頁)</td><td>40〜60h</td><td>確率に苦手意識がある中堅〜難関志望者</td></tr>
+            <tr><th scope="row"><a href="/math/books/bunyabetsu-baai/">分野別標準問題精講 場合の数・確率</a></th><td>7 / 10</td><td>57〜65</td><td>86問(288頁)</td><td>40〜55h</td><td>確率を演習で入試レベルに引き上げたい人</td></tr>
+            <tr><th scope="row"><a href="/math/books/tankyu-kakuritsu/">解法の探求・確率</a></th><td>8 / 10</td><td>62〜72</td><td>基礎・演習・発展の3部</td><td>45〜65h</td><td>確率を最難関レベルまで仕上げたい人</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <ul>
+        <li><b>基礎の段階で完全に詰まっている</b> → <a href="/math/books/sakata/">坂田アキラの面白いほどわかる本</a>。手順を細かく追う構成なので、何をしているか分からない状態から抜けられます。</li>
+        <li><b>典型問題は解けるが、設定が変わると崩れる</b> → <a href="/math/books/ukaru-kakuritsu/">合格る確率+場合の数</a>または<a href="/math/books/hatto-kakuritsu/">ハッとめざめる確率</a>。数え方の原理から組み立て直す本です。</li>
+        <li><b>難関大で確率を得点源にしたい</b> → <a href="/math/books/bunyabetsu-baai/">分野別標準問題精講 場合の数・確率</a>、さらに上を狙うなら<a href="/math/books/tankyu-kakuritsu/">解法の探求・確率</a>。</li>
+      </ul>
+      <p><b>確率は、解いた問題数より「なぜその数え方を選んだか」を言語化した回数で伸びます。</b>答えが合っていても、別の数え方でも同じ答えになることを確認してください。</p>
+    </section>
+
+    <section class="block prose" id="s3">
+      <h2 class="sec">整数</h2>
+      <p>整数問題は、出す大学と出さない大学がはっきり分かれます。<b>京大・一橋大・東大のように頻出の大学を受けるなら対策が要り、出ない大学なら後回しで構いません。</b>この判断を先にしてください。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/math/books/sasaki-seisu/">佐々木隆宏の整数問題が面白いほどとける本</a></th><td>6 / 10</td><td>55〜68</td><td>体系別講義+チェック問題</td><td>35〜50h</td><td>整数問題の型を初めて学ぶ人</td></tr>
+            <tr><th scope="row"><a href="/math/books/bunyabetsu-seisu/">分野別標準問題精講 整数</a></th><td>7 / 10</td><td>57〜70</td><td>66テーマ+演習</td><td>40〜60h</td><td>志望校頻出の整数を集中強化したい人</td></tr>
+            <tr><th scope="row"><a href="/math/books/master-seisu/">マスター・オブ・整数</a></th><td>8 / 10</td><td>60〜70</td><td>約200題(4部構成)</td><td>50〜70h</td><td>整数が頻出の京大・一橋・東大志望者</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <ul>
+        <li><b>整数問題の型を初めて学ぶ</b> → <a href="/math/books/sasaki-seisu/">佐々木隆宏の整数問題が面白いほどとける本</a>。使う道具（余りで分類する、因数分解する、不等式で絞る）を一通り並べてくれます。</li>
+        <li><b>型は知っているが本番で使えない</b> → <a href="/math/books/bunyabetsu-seisu/">分野別標準問題精講 整数</a>。志望校頻出レベルの演習量が確保できます。</li>
+        <li><b>整数を武器にする</b> → <a href="/math/books/master-seisu/">マスター・オブ・整数</a>。最難関向けで、ここまで要る受験生は多くありません。</li>
+      </ul>
+      <p>整数は<b>道具の数が少ない分野</b>です。使える手が数種類しかないので、それを全部試す習慣がつけば急に解けるようになります。ここは投資対効果が高い領域です。</p>
+    </section>
+
+    <section class="block prose" id="s4">
+      <h2 class="sec">ベクトル・微積分・その他</h2>
+      <p>新課程では数Cにベクトルが入り、扱いが変わりました。ベクトルは<b>計算の道具としては単純だが、図形の状況を式に翻訳するところでつまずく</b>分野です。</p>
+      <div class="bcards" style="margin:20px 0">
+      <a class="bcard" href="/math/books/shida/" style="--bc:#946200">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>志田晶の面白いほどわかる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046068833.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046068833.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046068833.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046068833.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046068833.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046068833.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046068835.jpg|https://books.google.com/books/content?vid=ISBN9784046068835&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046068835.jpg|https://www.gakusan.com/bookimage_s/9784046068835.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">分野別</span><span>KADOKAWA</span></div>
+            <b>志田晶の面白いほどわかる本</b>
+          </div>
+        </div>
+        <p>志田晶による数Cベクトルの講義書（KADOKAWA、2025年改訂第2版、336頁）。同帯の坂田アキラの面白いほどわかる本が途中式を省かない講…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／50〜60</span></div>
+        
+      </a>
+      <a class="bcard" href="/math/books/bunyabetsu-hyojun-mondai-seiko-vector/" style="--bc:#946200">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>数学 ベクトル 分野別標準問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401035268X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401035268X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035268X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/401035268X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/401035268X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035268X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352687.jpg|https://books.google.com/books/content?vid=ISBN9784010352687&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352687.jpg|https://www.gakusan.com/bookimage_s/9784010352687.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">分野別</span><span>旺文社</span></div>
+            <b>数学 ベクトル 分野別標準問題精講</b>
+          </div>
+        </div>
+        <p>旺文社「分野別標準問題精講」のベクトル編で、入試標準〜応用の記述問題集。同じベクトルを扱う数学の真髄 -ベクトル-が講義中心なのに対し、こちら…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／55〜68</span></div>
+        
+      </a>
+      <a class="bcard" href="/math/books/shinzui-v/" style="--bc:#946200">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>数学の真髄 -ベクトル-</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859667.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859667.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859667.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890859667.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890859667.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859667.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859665.jpg|https://books.google.com/books/content?vid=ISBN9784890859665&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859665.jpg|https://www.gakusan.com/bookimage_s/9784890859665.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">分野別</span><span>ナガセ(東進)</span></div>
+            <b>数学の真髄 -ベクトル-</b>
+          </div>
+        </div>
+        <p>一次独立などの原理からベクトルを組み立て直す分野講義書（ナガセ、2024年、講義+精選例題）。数学の真髄 -論理・写像-の続巻で、同帯の志田晶…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／58〜70</span></div>
+        <span class="bcard__ver">一部情報を確認中</span>
+      </a>
+      </div>
+      <p>理系の微分積分は、分野別対策の価値が特に高い領域です。<b>数IIIの微積は配点が大きく、出題される大学がほぼ確実に出す</b>ためです。計算量が多いので、速度と正確さを別に鍛える必要があります。</p>
+      <div class="bcards" style="margin:20px 0">
+      <a class="bcard" href="/math/books/kiso-gokui/" style="--bc:#946200">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>微積分/基礎の極意</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887420293.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420293.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887420298.jpg|https://books.google.com/books/content?vid=ISBN9784887420298&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887420298.jpg|https://www.gakusan.com/bookimage_s/9784887420298.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">分野別</span><span>東京出版</span></div>
+            <b>微積分/基礎の極意</b>
+          </div>
+        </div>
+        <p>栗田哲也による数III微積分の計算力と本質理解を3部（計算演習+入試演習）で鍛える分野研究書（東京出版、2000年）。同じ東京出版の解法の探求…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span>難易度 8／58〜70</span></div>
+        <span class="bcard__ver">書誌情報を確認中</span>
+      </a>
+      <a class="bcard" href="/math/books/ukaru-keisan3/" style="--bc:#8A6D2F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>合格る計算 数学III・C</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578243443.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243443.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578243441.jpg|https://books.google.com/books/content?vid=ISBN9784578243441&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578243441.jpg|https://www.gakusan.com/bookimage_s/9784578243441.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">計算</span><span>文英堂</span></div>
+            <b>合格る計算 数学III・C</b>
+          </div>
+        </div>
+        <p>広瀬和之による数III・Cの計算処理に特化した約120テーマの練習書（文英堂、2024年）。合格る計算 数学I・A・II・B・Cの続巻で、同じ…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／50〜67</span></div>
+        <span class="bcard__ver">一部情報を確認中</span>
+      </a>
+      <a class="bcard" href="/math/books/kaiho-no-tankyu-bisekibun/" style="--bc:#B5432A">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>解法の探求・微積分 微積分の原則から発展へ</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4887421516.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4887421516.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887421516.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4887421516.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887421516.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887421516.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887421516.jpg|https://books.google.com/books/content?vid=ISBN9784887421516&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887421516.jpg|https://www.gakusan.com/bookimage_s/9784887421516.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">応用</span><span>東京出版</span></div>
+            <b>解法の探求・微積分 微積分の原則から発展へ</b>
+          </div>
+        </div>
+        <p>微積分の原則から発展的な処理までテーマ別に扱う東京出版の応用問題集（2009年）。同じ東京出版の微積分/基礎の極意が計算演習から入るのに対し、…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span>難易度 8／60〜75</span></div>
+        <span class="bcard__ver">書誌情報を確認中</span>
+      </a>
+      </div>
+      <p>ここで注意すべきは、<b>計算力の問題を解法の問題と混同しない</b>ことです。方針は立つのに答えが合わない場合、必要なのは分野別問題集ではなく計算練習です。<a href="/math/books/ukaru-keisan3/">合格る計算 数学III・C</a>のような本を挟むほうが早く直ります。</p>
+    </section>
+
+    <section class="block prose" id="s5">
+      <h2 class="sec">分野別対策に使っていい時間の上限</h2>
+      <p>最後に、時間配分の話をします。<b>分野別の本は、総合演習の代わりにはなりません。</b>入試は複数分野から出題され、どの分野の問題かを判断するところから始まります。分野別の本は「これは確率の問題です」と教えてくれた状態で解くので、その判断の練習になりません。</p>
+      <p>実務的な目安はこうです。</p>
+      <ul>
+        <li><b>1 分野につき、投入するのは 2 〜 3 週間まで。</b> それを超えるなら、その分野の基礎が抜けている可能性が高いので、網羅系の該当章に戻ってください。</li>
+        <li><b>同時に手をつける分野は 1 つ。</b> 2 つ以上を並行すると、どちらも中途半端になります。</li>
+        <li><b>分野別を終えたら必ず総合演習に戻る。</b> 分野が分かっている状態でしか解けないままだと、本番で使えません。</li>
+      </ul>
+      <p>自分の志望校がどの分野を頻出させているかは、<a href="/univ/">志望校から探す</a>の大学別ページで確認できます。<b>出ない分野の強化に時間を使わない</b>のが、分野別対策で最も重要な判断です。</p>
+    </section>
+
+    <div class="cta">
+      <h2>分野別対策を並びのどこに入れるか</h2>
+      <p>分野別の本は、網羅系と総合演習の間か、演習書を終えたあとの補強として入ります。志望校と現在地を選ぶと、いま優先すべき本が並びとして出ます。</p>
+      <div class="cta__btns">
+        <a class="p" href="/math/">数学のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="g" href="/math/books/">参考書一覧を見る</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C" aria-current="page">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/math/">参考書図鑑</a>
+      <a href="/math/books/">参考書一覧</a>
+      <a href="/math/routes/">志望校別ルート</a>
+      <a href="/math/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/math/guides/bunyabetsu-kyoka/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "数学ルート大全",
+     "item": "https://route-taizen.com/math/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/math/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "分野別参考書の使い方 — 確率・整数だけ落とす人へ",
+     "item": "https://route-taizen.com/math/guides/bunyabetsu-kyoka/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "@id": "https://route-taizen.com/math/guides/bunyabetsu-kyoka/#article",
+   "headline": "分野別参考書の使い方 — 確率・整数だけ落とす人へ",
+   "description": "数学の特定分野だけ苦手な場合に使う分野別参考書の選び方。確率・整数・ベクトル・微積分の分野別問題集を比較し、いつ使うべきか、使ってはいけない状態はどれかを整理します。",
+   "inLanguage": "ja",
+   "datePublished": "2026-09-08",
+   "dateModified": "2026-09-08",
+   "author": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "mainEntityOfPage": "https://route-taizen.com/math/guides/bunyabetsu-kyoka/",
+   "about": {
+    "@type": "Thing",
+    "name": "大学受験 数学の参考書選び"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/math/guides/bunyabetsu-kyoka/#webpage",
+   "url": "https://route-taizen.com/math/guides/bunyabetsu-kyoka/",
+   "name": "分野別参考書の使い方｜確率・整数だけ落とす人へ - 数学ルート大全",
+   "description": "数学の特定分野だけ苦手な場合に使う分野別参考書の選び方。確率・整数・ベクトル・微積分の分野別問題集を比較し、いつ使うべきか、使ってはいけない状態はどれかを整理します。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/math/guides/bunyabetsu-kyoka/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>

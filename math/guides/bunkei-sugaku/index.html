@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文系数学のルート｜網羅系のあとに何をやるか - 数学ルート大全</title>
+<meta name="description" content="文系数学の参考書ルートを、網羅系を終えたあとの選択肢から整理。文系の数学 重要事項完全習得編・実戦力向上編、文系数学の良問プラチカ、最重要問題100の違いと、志望校別の選び分けをまとめます。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/math/guides/bunkei-sugaku/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="文系数学のルート｜網羅系のあとに何をやるか - 数学ルート大全">
+<meta property="og:description" content="文系数学の参考書ルートを、網羅系を終えたあとの選択肢から整理。文系の数学 重要事項完全習得編・実戦力向上編、文系数学の良問プラチカ、最重要問題100の違いと、志望校別の選び分けをまとめます。">
+<meta property="og:url" content="https://route-taizen.com/math/guides/bunkei-sugaku/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp-math.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="文系数学のルート｜網羅系のあとに何をやるか - 数学ルート大全">
+<meta name="twitter:description" content="文系数学の参考書ルートを、網羅系を終えたあとの選択肢から整理。文系の数学 重要事項完全習得編・実戦力向上編、文系数学の良問プラチカ、最重要問題100の違いと、志望校別の選び分けをまとめます。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp-math.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#24427C}
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 22px;margin-top:26px;box-shadow:var(--sh-s)}
+.toc h2{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:.05em;margin-bottom:11px}
+.toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:2px}
+.toc li{counter-increment:t;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:center}
+.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-weight:600}
+/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。
+   gap を詰めたぶんを min-height で取り、行の見た目は変えない。 */
+.toc a{color:var(--ink-2);font-weight:700;transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.toc a:hover{color:var(--accent-deep)}
+/* 表は幅を超えたら中だけ横スクロールさせる。画面が狭いと「切れている」と
+   誤解されやすいので、スクロールできることを画面幅で出し分けて明示する。 */
+.tbl-scroll{margin:22px 0}
+.tbl-scroll__hint{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);margin-bottom:7px;align-items:center;gap:7px}
+.tbl-scroll__hint::before{content:"";width:14px;height:1.5px;background:var(--line-d)}
+@media(max-width:860px){.tbl-scroll__hint{display:flex}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp tbody th a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/" aria-current="page">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/math/">
+      <div class="logo__mark" aria-hidden="true">数</div>
+      <div class="logo__txt"><b>数学ルート大全</b><span>MATHEMATICS ROUTE</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta">
+      <a href="/math/#catalog">参考書図鑑</a>
+      <a href="/">全科目</a>
+      <a class="primary" href="/math/#route">ルートを作る</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/math/">数学ルート大全</a>
+    <span class="sep">/</span><a href="/math/guides/">解説記事</a>
+    <span class="sep">/</span><b>文系数学のルート — 網羅系のあとに何をやるか</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Guide</div>
+      <h1 class="art-h1">文系数学のルート — 網羅系のあとに何をやるか</h1>
+      <div class="art-meta">
+        <span>公開 2026-09-08</span>
+        
+        <span>ルート大全 編集部</span>
+      </div>
+      <p class="art-lead">文系の数学は、理系と同じ本を薄めたものではありません。<b>出題範囲が狭く、頻出テーマが偏っている</b>ぶん、対策の設計が変わります。それにもかかわらず、文系の受験生が理系向けの分厚い演習書を買ってしまう場面をよく見ます。この記事では、網羅系を終えたあと文系がどこへ進むべきかを、演習書の性格の違いから整理します。</p>
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <h2>この記事の内容</h2>
+      <ol>
+        <li><a href="#s1">文系数学の特徴は「範囲が狭く、深い」</a></li>
+        <li><a href="#s2">網羅系のあとに来る4冊を比べる</a></li>
+        <li><a href="#s3">志望校レベル別の選び分け</a></li>
+        <li><a href="#s4">文系で数学を武器にするか、逃げ切るか</a></li>
+      </ol>
+    </nav>
+
+    <section class="block prose" id="s1">
+      <h2 class="sec">文系数学の特徴は「範囲が狭く、深い」</h2>
+      <p>文系の入試数学は、数III・Cを含みません。範囲が狭いということは、<b>同じテーマが繰り返し出るということ</b>です。微分積分、確率、数列、ベクトル、整数。大学ごとの偏りはありますが、出るところはおおむね決まっています。</p>
+      <p>これは有利な条件です。範囲が狭ければ、頻出テーマを潰し切る現実的な計画が立てられます。理系のように「範囲を一周するだけで年が明ける」ということが起きません。</p>
+      <p>その代わり、<b>1 テーマあたりの掘り下げは深くなります。</b>同じ確率でも、文系の上位校では設定を読み替える力を試す出題が出ます。典型問題を覚えただけでは足りず、条件が変わったときに同じ道具を使えるかが問われる。ここが文系数学の勝負どころです。</p>
+      <div class="note" style="margin:22px 0"><h3>理系用の本を買わない</h3><p>文系数学の対策で最も多い失敗は、<b>理系向けの演習書を選んでしまう</b>ことです。表紙に文系・理系の区別が書かれていない本も多く、収録問題に数IIIが混ざっていて、解けない問題を飛ばしながら進むことになります。買う前に対象範囲を確認してください。</p></div>
+    </section>
+
+    <section class="block prose" id="s2">
+      <h2 class="sec">網羅系のあとに来る4冊を比べる</h2>
+      <p>網羅系（チャート式やFocus Gold、基礎問題精講）を終えたあと、文系が選ぶ演習書は限られています。主要な選択肢を並べます。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/math/books/bunkei-juyo/">文系の数学 重要事項完全習得編</a></th><td>5 / 10</td><td>50〜60</td><td>例題152+演習120</td><td>60〜80h</td><td>文系で入試標準を効率よく固めたい人</td></tr>
+            <tr><th scope="row"><a href="/math/books/bunkei-jissen/">文系の数学 実戦力向上編</a></th><td>6 / 10</td><td>55〜65</td><td>例題+演習 約110題</td><td>50〜70h</td><td>MARCH上位〜旧帝文系を狙う人</td></tr>
+            <tr><th scope="row"><a href="/math/books/bunkei-kakushin/">文系数学 入試の核心</a></th><td>6 / 10</td><td>55〜65</td><td>103題(1回2題×50回)</td><td>50〜70h</td><td>文系で標準演習を計画的に進めたい人</td></tr>
+            <tr><th scope="row"><a href="/math/books/saijuyo-bun/">文系数学 最重要問題100</a></th><td>6 / 10</td><td>55〜65</td><td>100題(336頁)</td><td>55〜75h</td><td>文系で最頻出だけを確実に押さえたい人</td></tr>
+            <tr><th scope="row"><a href="/math/books/bunkei-platica/">文系数学の良問プラチカ</a></th><td>8 / 10</td><td>60〜70</td><td>159題</td><td>70〜90h</td><td>東大・一橋・旧帝・早慶の文系志望者</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p>この表から読み取れる構造は次のとおりです。</p>
+      <ul>
+        <li><b>「文系の数学」シリーズは 2 段構え。</b> <a href="/math/books/bunkei-juyo/">重要事項完全習得編</a>で入試標準の型を入れ、<a href="/math/books/bunkei-jissen/">実戦力向上編</a>で難度を上げます。同じ編集方針で続くので、接続でつまずきにくいのが利点です。</li>
+        <li><b><a href="/math/books/bunkei-kakushin/">文系数学 入試の核心</a>は計画性重視。</b> 取り組む順番と分量が設計されていて、独学で進度を管理しやすい構成です。</li>
+        <li><b><a href="/math/books/saijuyo-bun/">文系数学 最重要問題100</a>は絞り込み型。</b> 頻出テーマだけを確実に押さえたい人、時間が足りない人向けです。</li>
+        <li><b><a href="/math/books/bunkei-platica/">文系数学の良問プラチカ</a>は最上位。</b> 東大・一橋・旧帝・早慶の文系を狙う段階で入ります。</li>
+      </ul>
+      <p><b>ここに並ぶ本を 2 冊も 3 冊もやる必要はありません。</b>志望校のレベルに合う 1 冊を選び、完全に仕上げるのが正解です。</p>
+    </section>
+
+    <section class="block prose" id="s3">
+      <h2 class="sec">志望校レベル別の選び分け</h2>
+      <h3>中堅私大・地方国公立まで</h3>
+      <p>網羅系を終えていれば、<a href="/math/books/bunkei-juyo/">文系の数学 重要事項完全習得編</a>か<a href="/math/books/bunkei-kakushin/">文系数学 入試の核心</a>のどちらか 1 冊で足ります。ここから先の本は、この層の入試では出題頻度が低いテーマを含むので、費用対効果が落ちます。</p>
+      <p>時間が足りないなら<a href="/math/books/saijuyo-bun/">文系数学 最重要問題100</a>に絞ってください。<b>収録テーマを削ってあるぶん、1 冊を終えられる確率が上がります。</b></p>
+      <h3>MARCH・関関同立から旧帝文系</h3>
+      <p><a href="/math/books/bunkei-juyo/">重要事項完全習得編</a>を終えたあと、<a href="/math/books/bunkei-jissen/">実戦力向上編</a>に進む形が標準です。同じシリーズで続けると、解法の書き方が揃っているぶん負担が小さくなります。</p>
+      <div class="bcards" style="margin:20px 0">
+      <a class="bcard" href="/math/books/bunkei-juyo/" style="--bc:#5B4E9E">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>文系の数学 重要事項完全習得編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777228665.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228665.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228669.jpg|https://books.google.com/books/content?vid=ISBN9784777228669&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228669.jpg|https://www.gakusan.com/bookimage_s/9784777228669.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">標準</span><span>河合出版</span></div>
+            <b>文系の数学 重要事項完全習得編</b>
+          </div>
+        </div>
+        <p>文系入試頻出の重要事項を例題152題と演習120題で網羅する標準演習書（河合出版、改訂版）。同帯のチョイス新標準問題集が文理共通なのに対し、こ…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／50〜60</span></div>
+        
+      </a>
+      <a class="bcard" href="/math/books/bunkei-jissen/" style="--bc:#5B4E9E">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>文系の数学 実戦力向上編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231461.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231461.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231461.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777231461.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777231461.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231461.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777231461.jpg|https://books.google.com/books/content?vid=ISBN9784777231461&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777231461.jpg|https://www.gakusan.com/bookimage_s/9784777231461.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">標準</span><span>河合出版</span></div>
+            <b>文系の数学 実戦力向上編</b>
+          </div>
+        </div>
+        <p>文系の数学 重要事項完全習得編の続編にあたる実戦演習書（河合出版）。入試標準〜やや難の約110題で記述力と応用力を養う。同帯の文系数学 入試の…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 6／55〜65</span></div>
+        
+      </a>
+      </div>
+      <h3>東大・京大・一橋・早慶の文系</h3>
+      <p><a href="/math/books/bunkei-platica/">文系数学の良問プラチカ</a>が定番です。ただし<b>これは網羅系の直後に入る本ではありません。</b>入試標準レベルの演習書を 1 冊挟んでから入ってください。挟まずに入ると、解けない問題が続いて手が止まります。</p>
+      <p>一橋大のように数学の配点が重い大学を受ける場合は、プラチカのあとに過去問へ移り、頻出分野（整数・確率・微分積分）を個別に強化する段階が加わります。分野別の強化については<a href="/math/guides/bunyabetsu-kyoka/">分野別参考書の使い方</a>にまとめました。</p>
+    </section>
+
+    <section class="block prose" id="s4">
+      <h2 class="sec">文系で数学を武器にするか、逃げ切るか</h2>
+      <p>戦略として、はっきり分かれる判断があります。<b>数学を得点源にするのか、足を引っ張らない水準で止めるのか。</b>これを決めないまま参考書を選ぶと、中途半端な難度の本を積むことになります。</p>
+      <ul>
+        <li><b>得点源にする。</b> 数学の配点が高い大学（一橋大など）や、他科目に不安がある場合の選択です。標準演習のあとに上位の演習書と過去問を積み、頻出分野を個別に潰します。時間の投資は大きくなります。</li>
+        <li><b>逃げ切る。</b> 私大文系で数学が選択科目の 1 つである場合や、社会・国語で稼げる場合の選択です。網羅系と標準演習を 1 冊ずつで止め、余った時間を他科目に回します。<b>この判断は逃げではなく、配点に対する合理的な資源配分です。</b></li>
+      </ul>
+      <p>判断の材料は、志望校の配点と過去問の難度です。<a href="/univ/">志望校から探す</a>の大学別ページで、その大学が数学に何を求めているかを確認してから決めてください。</p>
+      <p><b>どちらを選んでも、網羅系を仕上げる工程は省けません。</b>そこを飛ばして演習書に入ると、解法の在庫がないまま応用問題に当たることになり、どちらの戦略も成立しなくなります。</p>
+    </section>
+
+    <div class="cta">
+      <h2>文系数学の並びを確認する</h2>
+      <p>網羅系から演習書、過去問までの並びは、志望校レベルによって変わります。志望校と現在地を選ぶと、文系のトラックだけを抜き出した並びが出ます。</p>
+      <div class="cta__btns">
+        <a class="p" href="/math/">数学のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="g" href="/math/books/">参考書一覧を見る</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C" aria-current="page">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/math/">参考書図鑑</a>
+      <a href="/math/books/">参考書一覧</a>
+      <a href="/math/routes/">志望校別ルート</a>
+      <a href="/math/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/math/guides/bunkei-sugaku/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "数学ルート大全",
+     "item": "https://route-taizen.com/math/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/math/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "文系数学のルート — 網羅系のあとに何をやるか",
+     "item": "https://route-taizen.com/math/guides/bunkei-sugaku/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "@id": "https://route-taizen.com/math/guides/bunkei-sugaku/#article",
+   "headline": "文系数学のルート — 網羅系のあとに何をやるか",
+   "description": "文系数学の参考書ルートを、網羅系を終えたあとの選択肢から整理。文系の数学 重要事項完全習得編・実戦力向上編、文系数学の良問プラチカ、最重要問題100の違いと、志望校別の選び分けをまとめます。",
+   "inLanguage": "ja",
+   "datePublished": "2026-09-08",
+   "dateModified": "2026-09-08",
+   "author": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "mainEntityOfPage": "https://route-taizen.com/math/guides/bunkei-sugaku/",
+   "about": {
+    "@type": "Thing",
+    "name": "大学受験 数学の参考書選び"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/math/guides/bunkei-sugaku/#webpage",
+   "url": "https://route-taizen.com/math/guides/bunkei-sugaku/",
+   "name": "文系数学のルート｜網羅系のあとに何をやるか - 数学ルート大全",
+   "description": "文系数学の参考書ルートを、網羅系を終えたあとの選択肢から整理。文系の数学 重要事項完全習得編・実戦力向上編、文系数学の良問プラチカ、最重要問題100の違いと、志望校別の選び分けをまとめます。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/math/guides/bunkei-sugaku/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>

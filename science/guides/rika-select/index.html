@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理科はどの科目を選ぶか｜物理・化学・生物の作りの違い - 理科ルート大全</title>
+<meta name="description" content="大学受験の理科の科目選択を、物理・化学・生物・地学の性格の違いから整理。得点の安定性、必要な学習時間の形、志望学部による受験科目の指定、途中で変更できる期限までをまとめます。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/science/guides/rika-select/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="理科はどの科目を選ぶか｜物理・化学・生物の作りの違い - 理科ルート大全">
+<meta property="og:description" content="大学受験の理科の科目選択を、物理・化学・生物・地学の性格の違いから整理。得点の安定性、必要な学習時間の形、志望学部による受験科目の指定、途中で変更できる期限までをまとめます。">
+<meta property="og:url" content="https://route-taizen.com/science/guides/rika-select/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp-science.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="理科はどの科目を選ぶか｜物理・化学・生物の作りの違い - 理科ルート大全">
+<meta name="twitter:description" content="大学受験の理科の科目選択を、物理・化学・生物・地学の性格の違いから整理。得点の安定性、必要な学習時間の形、志望学部による受験科目の指定、途中で変更できる期限までをまとめます。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp-science.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#2F6E4F}
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 22px;margin-top:26px;box-shadow:var(--sh-s)}
+.toc h2{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:.05em;margin-bottom:11px}
+.toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:2px}
+.toc li{counter-increment:t;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:center}
+.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-weight:600}
+/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。
+   gap を詰めたぶんを min-height で取り、行の見た目は変えない。 */
+.toc a{color:var(--ink-2);font-weight:700;transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.toc a:hover{color:var(--accent-deep)}
+/* 表は幅を超えたら中だけ横スクロールさせる。画面が狭いと「切れている」と
+   誤解されやすいので、スクロールできることを画面幅で出し分けて明示する。 */
+.tbl-scroll{margin:22px 0}
+.tbl-scroll__hint{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);margin-bottom:7px;align-items:center;gap:7px}
+.tbl-scroll__hint::before{content:"";width:14px;height:1.5px;background:var(--line-d)}
+@media(max-width:860px){.tbl-scroll__hint{display:flex}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp tbody th a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/" aria-current="page">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/science/">
+      <div class="logo__mark" aria-hidden="true">理</div>
+      <div class="logo__txt"><b>理科ルート大全</b><span>SCIENCE ROUTE</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta">
+      <a href="/science/#catalog">参考書図鑑</a>
+      <a href="/">全科目</a>
+      <a class="primary" href="/science/#route">ルートを作る</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/science/">理科ルート大全</a>
+    <span class="sep">/</span><a href="/science/guides/">解説記事</a>
+    <span class="sep">/</span><b>理科はどの科目を選ぶか — 物理・化学・生物の作りの違い</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Choose</div>
+      <h1 class="art-h1">理科はどの科目を選ぶか — 物理・化学・生物の作りの違い</h1>
+      <div class="art-meta">
+        <span>公開 2026-09-08</span>
+        
+        <span>ルート大全 編集部</span>
+      </div>
+      <p class="art-lead">理科の科目選択は、受験勉強の中で<b>最も取り返しがつきにくい判断</b>の 1 つです。英語や数学は途中で方針を変えても積み上げが残りますが、理科を途中で変えると、それまでの時間の多くが消えます。しかも判断を迫られるのは、まだ各科目の中身をよく知らない高 1 の段階です。この記事では、3 科目の作りの違いを、参考書のデータからできるだけ客観的に整理します。</p>
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <h2>この記事の内容</h2>
+      <ol>
+        <li><a href="#s1">まず確認すること — 選べない場合がある</a></li>
+        <li><a href="#s2">3科目の作りの違い</a></li>
+        <li><a href="#s3">判断の順番</a></li>
+        <li><a href="#s4">地学という選択肢</a></li>
+        <li><a href="#s5">途中で変えられるか</a></li>
+      </ol>
+    </nav>
+
+    <section class="block prose" id="s1">
+      <h2 class="sec">まず確認すること — 選べない場合がある</h2>
+      <p>好みの前に、<b>制約から確認してください。</b>志望する大学・学部によっては、受験できる理科の科目が指定されています。工学系で物理が必須になっている大学、医療系で特定の科目を求める大学があります。</p>
+      <p><b>この確認を後回しにすると、選択そのものが無効になります。</b>必ず募集要項で、志望校と併願候補の指定を確かめてください。第一志望だけでなく、併願校で使えるかまで見る必要があります。</p>
+      <p><a href="/univ/">志望校から探す</a>の大学別ページでは、その大学の科目ごとの出題傾向を確認できます。ただし<b>受験できる科目の指定そのものは、必ず大学が公表する最新の募集要項で確認してください。</b>入試制度は年度で変わります。</p>
+      <div class="note" style="margin:22px 0"><h3>理科基礎と専門科目</h3><p>理科基礎（物理基礎・化学基礎・生物基礎・地学基礎）と専門科目は別の科目です。文系で共通テストに理科基礎を使う場合と、理系で専門科目を使う場合では、必要な学習量が大きく違います。この記事は主に理系の専門科目の選択を扱っています。</p></div>
+    </section>
+
+    <section class="block prose" id="s2">
+      <h2 class="sec">3科目の作りの違い</h2>
+      <p>制約がなく選べる場合、判断材料になるのは科目の作りの違いです。それぞれの「基礎を固める 1 冊」を並べると、性格の差が見えます。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/science/books/essence-rikigaku/">物理のエッセンス 力学・波動</a></th><td>4 / 10</td><td>45〜60</td><td>例題+問題 約200題</td><td>30〜40h</td><td>教科書を終えて入試物理を始める受験生</td></tr>
+            <tr><th scope="row"><a href="/science/books/kiso-seiko/">化学 基礎問題精講</a></th><td>5 / 10</td><td>50〜62</td><td>必修問題+演習問題 約200題</td><td>40〜60h</td><td>独学で入試基礎を固めたい受験生</td></tr>
+            <tr><th scope="row"><a href="/science/books/kiso-mondai-seiko/">生物 基礎問題精講</a></th><td>5 / 10</td><td>48〜65</td><td>必修問題 約100題+演習</td><td>40〜60h</td><td>入試の典型問題を一通り身につけたい理系生</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p>数字の背景にある構造の違いを説明します。</p>
+      <h3>物理 — 覚えることは少なく、使い方が難しい</h3>
+      <p>物理は、覚える法則の数が理科の中で最も少ない科目です。その代わり、<b>少ない法則を状況に応じて組み合わせる</b>ことが求められます。だから、理解が追いつくまでは点が動かず、理解した後で一気に上がるという伸び方をします。</p>
+      <p>この性質は、<b>得点の上限が高く、下限が低い</b>ことを意味します。完成すれば安定して高得点を取れますが、途中で止まると壊滅的な点になります。</p>
+      <h3>化学 — 3分野が別の科目のように分かれている</h3>
+      <p>化学は、理論・無機・有機という 3 つの分野で必要な力が違います。理論は計算、無機は整理された暗記、有機は構造決定というパズルです。<b>分野ごとに得意不得意が出るぶん、どこかで必ず稼げる</b>という安定性があります。</p>
+      <p>多くの理系受験生が化学を選ぶのは、この安定性と、受験できる大学の幅の広さが理由です。詳しくは<a href="/science/guides/kagaku-route/">化学の参考書の選び方</a>に書きました。</p>
+      <h3>生物 — 覚える量は多く、上限は抑えられがち</h3>
+      <p>生物は、覚える量が 3 科目で最も多くなります。一方で、<b>初期の点は取りやすい</b>科目です。用語を覚えた段階で共通テストの一定水準までは届きます。</p>
+      <p>ただし上位帯では、初見の実験を読む考察問題が中心になり、ここで差がつきます。また、<b>計算問題の比重が小さいぶん、満点近くを狙いにくい</b>という指摘もあります。生物の対策は<a href="/science/guides/seibutsu-route/">生物の参考書の選び方</a>にまとめました。</p>
+    </section>
+
+    <section class="block prose" id="s3">
+      <h2 class="sec">判断の順番</h2>
+      <p>実務的には、次の順で決めるのが安全です。</p>
+      <ul>
+        <li><b>1. 志望校・併願校の指定を確認する。</b> 選べないなら、そこで決まります。</li>
+        <li><b>2. 学校で開講されているかを確認する。</b> 独学は可能ですが、授業と実験がある科目のほうが負担は小さくなります。特に地学は開講していない高校が多く、教材も限られます。</li>
+        <li><b>3. 数学の得意不得意で判断する。</b> 物理は数学の道具立てをそのまま使います。数学で式変形が苦にならないなら物理は相性がよく、数学で手が止まるタイプなら生物のほうが安定します。</li>
+        <li><b>4. 残り時間で判断する。</b> 高 3 から本格的に始める場合、伸びが遅れて出る物理は不利になりがちです。逆に高 1・高 2 から積める人には、上限の高い物理が有利に働きます。</li>
+      </ul>
+      <p><b>「暗記が得意だから生物」という決め方は、精度が低い判断です。</b>生物の上位帯は暗記ではなく考察で決まるからです。同様に「計算が得意だから物理」も雑で、物理で問われるのは計算力よりも状況を式に翻訳する力です。</p>
+    </section>
+
+    <section class="block prose" id="s4">
+      <h2 class="sec">地学という選択肢</h2>
+      <p>地学は、選べる場合には有力な選択肢です。共通テストのみで理科を使う場合、<b>地学基礎は学習量が小さく、短期で仕上げやすい</b>科目とされています。</p>
+      <div class="bcards" style="margin:20px 0">
+      <a class="bcard" href="/science/books/aoki-hajitei-chigaku/" style="--bc:#2E7D9A">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>青木の地学基礎をはじめからていねいに</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/489085987X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085987X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859870.jpg|https://books.google.com/books/content?vid=ISBN9784890859870&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859870.jpg|https://www.gakusan.com/bookimage_s/9784890859870.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">導入</span><span>東進ブックス(ナガセ)</span></div>
+            <b>青木の地学基礎をはじめからていねいに</b>
+          </div>
+        </div>
+        <p>地学基礎を語り口調で一周する入門講義書。全15講と確認問題で構成する。同じ入門帯の安藤雅彦 地学基礎 講義の実況中継より図と板書風のまとめが多…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 2／40〜58</span></div>
+        
+      </a>
+      <a class="bcard" href="/science/books/kimeru-chigaku-kiso/" style="--bc:#2F6E4F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>きめる!共通テスト地学基礎</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053058074.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053058074.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053058074.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053058074.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053058074.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053058074.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053058072.jpg|https://books.google.com/books/content?vid=ISBN9784053058072&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053058072.jpg|https://www.gakusan.com/bookimage_s/9784053058072.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>Gakken</span></div>
+            <b>きめる!共通テスト地学基礎</b>
+          </div>
+        </div>
+        <p>共通テスト向けに講義と演習を一体にした一冊。各テーマの末尾に共テ形式の確認問題が付き、別冊のまとめで直前の総復習ができる。同帯の地学基礎の点数…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
+        
+      </a>
+      <a class="bcard" href="/science/books/omoshiroi-chigaku-kiso/" style="--bc:#2F6E4F">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>地学基礎の点数が面白いほどとれる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046063645.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046063645.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046063645.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046063645.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046063645.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046063645.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046063649.jpg|https://books.google.com/books/content?vid=ISBN9784046063649&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046063649.jpg|https://www.gakusan.com/bookimage_s/9784046063649.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>KADOKAWA</span></div>
+            <b>地学基礎の点数が面白いほどとれる本</b>
+          </div>
+        </div>
+        <p>共通テストで問われる知識を過去問の分析にもとづいて整理した講義書。各節末に過去問ベースの確認問題が付く。きめる!共通テスト地学基礎より情報量が…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
+        
+      </a>
+      </div>
+      <p>ただし、専門科目としての地学には制約があります。<b>受験できる大学が限られ、参考書と問題集の選択肢も他科目に比べて少ない</b>という現実的な問題です。収録している冊数を見ても、他の 3 科目とは差があります。</p>
+      <p>文系が共通テストで理科基礎を使う場合や、理系でも地学が指定されている場合を除けば、専門科目としての地学は慎重に判断してください。</p>
+    </section>
+
+    <section class="block prose" id="s5">
+      <h2 class="sec">途中で変えられるか</h2>
+      <p>結論から言うと、<b>変えられる期限は思っているより早い</b>です。理科は範囲が広く、一から積み直すのに相応の時間がかかります。</p>
+      <p>判断の目安はこうです。</p>
+      <ul>
+        <li><b>高2の途中まで</b> — 変更は現実的です。基礎的な範囲しか進んでいないので、失う時間は限定的です。</li>
+        <li><b>高3の春</b> — 変更するなら最後の機会です。他科目の仕上げと並行して一から積むことになるので、覚悟が要ります。</li>
+        <li><b>高3の夏以降</b> — 原則として変えるべきではありません。いま選んでいる科目の完成度を上げるほうが、確実に点になります。</li>
+      </ul>
+      <p><b>「今の科目が苦手だから変える」は、多くの場合うまくいきません。</b>苦手の原因が科目との相性ではなく、学習の進め方や着手の遅さにあることが多いためです。変更を考える前に、その科目のルートのどこで止まっているかを確認してください。</p>
+    </section>
+
+    <div class="cta">
+      <h2>選んだ科目のルートを見る</h2>
+      <p>科目を決めたら、次は並びです。志望校と現在地を選ぶと、その科目のルートだけを抜き出した並びが出ます。物理・化学・生物・地学それぞれで用意しています。</p>
+      <div class="cta__btns">
+        <a class="p" href="/science/">理科のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="g" href="/science/books/">参考書一覧を見る</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F" aria-current="page">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/science/">参考書図鑑</a>
+      <a href="/science/books/">参考書一覧</a>
+      <a href="/science/routes/">志望校別ルート</a>
+      <a href="/science/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/science/guides/rika-select/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "理科ルート大全",
+     "item": "https://route-taizen.com/science/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/science/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "理科はどの科目を選ぶか — 物理・化学・生物の作りの違い",
+     "item": "https://route-taizen.com/science/guides/rika-select/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "@id": "https://route-taizen.com/science/guides/rika-select/#article",
+   "headline": "理科はどの科目を選ぶか — 物理・化学・生物の作りの違い",
+   "description": "大学受験の理科の科目選択を、物理・化学・生物・地学の性格の違いから整理。得点の安定性、必要な学習時間の形、志望学部による受験科目の指定、途中で変更できる期限までをまとめます。",
+   "inLanguage": "ja",
+   "datePublished": "2026-09-08",
+   "dateModified": "2026-09-08",
+   "author": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "mainEntityOfPage": "https://route-taizen.com/science/guides/rika-select/",
+   "about": {
+    "@type": "Thing",
+    "name": "大学受験 理科の参考書選び"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/science/guides/rika-select/#webpage",
+   "url": "https://route-taizen.com/science/guides/rika-select/",
+   "name": "理科はどの科目を選ぶか｜物理・化学・生物の作りの違い - 理科ルート大全",
+   "description": "大学受験の理科の科目選択を、物理・化学・生物・地学の性格の違いから整理。得点の安定性、必要な学習時間の形、志望学部による受験科目の指定、途中で変更できる期限までをまとめます。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/science/guides/rika-select/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>

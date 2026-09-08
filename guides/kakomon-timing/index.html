@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>過去問はいつから始めるか｜逆算すると秋では遅い - ルート大全</title>
+<meta name="description" content="大学受験の過去問をいつ始めるべきかを、必要な年数と1年分あたりの所要時間から逆算。実力がついてから解くべきという通説の問題点、共通テストと二次・私大での扱いの違いを整理します。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/guides/kakomon-timing/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="過去問はいつから始めるか｜逆算すると秋では遅い - ルート大全">
+<meta property="og:description" content="大学受験の過去問をいつ始めるべきかを、必要な年数と1年分あたりの所要時間から逆算。実力がついてから解くべきという通説の問題点、共通テストと二次・私大での扱いの違いを整理します。">
+<meta property="og:url" content="https://route-taizen.com/guides/kakomon-timing/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="過去問はいつから始めるか｜逆算すると秋では遅い - ルート大全">
+<meta name="twitter:description" content="大学受験の過去問をいつ始めるべきかを、必要な年数と1年分あたりの所要時間から逆算。実力がついてから解くべきという通説の問題点、共通テストと二次・私大での扱いの違いを整理します。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#24427C}
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 22px;margin-top:26px;box-shadow:var(--sh-s)}
+.toc h2{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:.05em;margin-bottom:11px}
+.toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:2px}
+.toc li{counter-increment:t;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:center}
+.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-weight:600}
+/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。
+   gap を詰めたぶんを min-height で取り、行の見た目は変えない。 */
+.toc a{color:var(--ink-2);font-weight:700;transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.toc a:hover{color:var(--accent-deep)}
+/* 表は幅を超えたら中だけ横スクロールさせる。画面が狭いと「切れている」と
+   誤解されやすいので、スクロールできることを画面幅で出し分けて明示する。 */
+.tbl-scroll{margin:22px 0}
+.tbl-scroll__hint{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);margin-bottom:7px;align-items:center;gap:7px}
+.tbl-scroll__hint::before{content:"";width:14px;height:1.5px;background:var(--line-d)}
+@media(max-width:860px){.tbl-scroll__hint{display:flex}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp tbody th a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/">
+      <div class="logo__mark" aria-hidden="true">全</div>
+      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/guides/">解説記事</a>
+    <span class="sep">/</span><b>過去問はいつから始めるか — 逆算すると秋では遅いことがある</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Basics</div>
+      <h1 class="art-h1">過去問はいつから始めるか — 逆算すると秋では遅いことがある</h1>
+      <div class="art-meta">
+        <span>公開 2026-09-08</span>
+        
+        <span>ルート大全 編集部</span>
+      </div>
+      <p class="art-lead">過去問は「実力がついてから解くもの」と言われます。もっともらしく聞こえますが、この考え方で進めると<b>過去問に入る前に受験が来ます</b>。実力がつくのを待っていると、着手はどこまでも後ろにずれるからです。この記事では、必要な年数と 1 年分あたりの時間から逆算して、いつ始めるべきかを具体的に出します。</p>
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <h2>この記事の内容</h2>
+      <ol>
+        <li><a href="#s1">「実力がついてから」の何が問題か</a></li>
+        <li><a href="#s2">必要な年数から逆算する</a></li>
+        <li><a href="#s3">現実的な時期の置き方</a></li>
+        <li><a href="#s4">過去問の使い方 — 点数を見るのは目的ではない</a></li>
+        <li><a href="#s5">それでも間に合わないと感じたら</a></li>
+      </ol>
+    </nav>
+
+    <section class="block prose" id="s1">
+      <h2 class="sec">「実力がついてから」の何が問題か</h2>
+      <p>この助言には根拠があります。基礎ができていない状態で過去問を解くと、ほとんど解けず、解説を読んでも理解できません。素材を無駄にするうえ、自信も失います。ここまでは正しい。</p>
+      <p>問題は、<b>「実力がついた」の判定基準がないこと</b>です。基準がないので、多くの受験生は「もう少し仕上げてから」を繰り返します。その結果、着手が 11 月、12 月とずれ込み、<b>解く年数が足りないまま本番を迎えます。</b></p>
+      <p>もう 1 つ、より重要な問題があります。過去問は、実力を測る道具であると同時に、<b>何を仕上げるべきかを教えてくれる資料</b>です。志望校がどの分野をどの形式で出すかを知らないまま参考書を進めるのは、地図を見ずに歩くのと同じです。</p>
+      <div class="note" style="margin:22px 0"><h3>偵察と演習を分ける</h3><p><b>「1年分だけ早い時期に解く」と「本格的な演習を始める」は別の話です。</b>前者は方向を確認するための偵察で、解けなくても構いません。後者は仕上げの作業です。この 2 つを分けて考えると、着手の判断が楽になります。</p></div>
+    </section>
+
+    <section class="block prose" id="s2">
+      <h2 class="sec">必要な年数から逆算する</h2>
+      <p>具体的に計算します。仮に第一志望を 10 年分、併願校を 3 校それぞれ 3 年分とすると、19 年分です。1 年分を解いて復習するまでにかかる時間は、科目数にもよりますが、国公立型なら 1 日仕事になります。</p>
+      <p><b>復習の時間を含めるのがポイントです。</b>解くだけなら試験時間ぶんで済みますが、間違えた問題を分析し、該当分野に戻って埋め直す時間まで含めると、解答時間の 2 倍から 3 倍が必要になります。この工程を飛ばすと、過去問は「点数を知るだけの作業」になり、点は上がりません。</p>
+      <p>ここに共通テストの対策が重なります。共通テストの過去問と予想問題も、10 回分以上は解くことになる。<b>12 月と 1 月は、ほぼ共通テストに占有されます。</b></p>
+      <p>つまり、二次・私大の過去問に使える期間は、実質的に<b>秋から 12 月前半まで</b>と、<b>共通テスト後の 3 週間程度</b>です。この枠に 19 年分は入りません。だから、着手はもっと前に置く必要があります。</p>
+    </section>
+
+    <section class="block prose" id="s3">
+      <h2 class="sec">現実的な時期の置き方</h2>
+      <p>逆算した結果を、時期ごとに整理します。<b>これは目安であって、進度が早い人はもっと前倒しできます。</b></p>
+      <ul>
+        <li><b>高3の春から夏 — 1年分だけ解く（偵察）。</b> 解けなくて構いません。目的は、出題形式・分量・時間配分・頻出分野を知ることです。ここで得た情報が、その後の参考書選びを変えます。</li>
+        <li><b>夏の終わりから秋 — 科目ごとに着手。</b> すべての科目を同時に始める必要はありません。仕上がった科目から順に過去問へ移します。<b>英語だけ先に始める、というのは正しい進め方です。</b></li>
+        <li><b>秋から12月 — 本格的な演習。</b> 第一志望を中心に、年度を通しで解きます。この時期に「まだ早い」と感じても始めてください。感じ方ではなく、残り日数で判断します。</li>
+        <li><b>共通テスト後 — 併願校と第一志望の詰め。</b> 期間が短いので、ここで初めて過去問を開く状態にはしないでください。</li>
+      </ul>
+      <p><b>科目ごとに着手時期がずれるのは正常です。</b>全科目が同時に仕上がることはありません。仕上がった科目を待たせるほうが損です。</p>
+    </section>
+
+    <section class="block prose" id="s4">
+      <h2 class="sec">過去問の使い方 — 点数を見るのは目的ではない</h2>
+      <p>過去問を解いたあとにやることを、順番に書きます。ここが本体です。</p>
+      <ul>
+        <li><b>間違えた問題を分類する。</b> 知識が無かったのか、知識はあったが使えなかったのか、時間が足りなかったのか。原因の種類で、次にやることが変わります。</li>
+        <li><b>知識が無かったものは、参考書のどこに載っているかを特定する。</b> 載っていないなら、その大学の要求水準が手持ちの本を超えています。1 段上の本が必要かどうかの判断材料になります。</li>
+        <li><b>時間が足りなかったものは、配分を記録する。</b> どの大問で予定より何分オーバーしたかを書き残します。原因はたいてい同じ大問に集中します。</li>
+        <li><b>同じ年度を、時期を空けてもう一度解く。</b> 初見では測れなかったことが測れます。</li>
+      </ul>
+      <p><b>点数そのものは、判断材料としては弱い情報です。</b>年度によって難度が違い、合格最低点も動きます。見るべきは点数ではなく、失点の内訳です。</p>
+      <p>志望校がどの分野をどの形式で出すかは、<a href="/univ/">志望校から探す</a>の大学別ページでも科目ごとに整理しています。<b>過去問を解く前に傾向を知っておくと、1 年分から得られる情報量が増えます。</b></p>
+    </section>
+
+    <section class="block prose" id="s5">
+      <h2 class="sec">それでも間に合わないと感じたら</h2>
+      <p>逆算した結果、明らかに時間が足りないという結論が出ることがあります。そのときにやることは、過去問を諦めることではありません。<b>参考書の側を削ります。</b></p>
+      <p>判断の順番はこうなります。</p>
+      <ul>
+        <li><b>まだ手をつけていない参考書を減らす。</b> 冊数を削って、過去問の時間を確保します。過去問は、志望校に直結する唯一の素材です。</li>
+        <li><b>年数を減らす。</b> 10 年分が無理なら 5 年分にします。ただし<b>第一志望は最低でも 3 年分</b>は通してください。形式に慣れないまま本番に行くのは避けます。</li>
+        <li><b>科目に優先順位をつける。</b> 配点の高い科目、伸びしろのある科目から過去問に時間を割きます。全科目を均等に扱う必要はありません。</li>
+      </ul>
+      <p>ルート全体にどれだけの時間が必要かは<a href="/guides/route-hours/">参考書ルートは何時間かかるか</a>で計算しました。<b>持ち時間と比べて足りないなら、削るのは過去問ではなく参考書のほうです。</b></p>
+    </section>
+
+    <div class="cta">
+      <h2>残りの参考書と過去問の時間を配分する</h2>
+      <p>過去問に使う時間を確保するには、参考書側で何が残っているかを把握する必要があります。志望校と現在地を選ぶと、ここから先に通る本だけが並びとして出ます。</p>
+      <div class="cta__btns">
+        <a class="p" href="/#subjects">科目を選んで始める<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="g" href="/#catalog">参考書一覧を見る</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/#subjects">科目から選ぶ</a>
+      <a href="/#catalog">参考書から探す</a>
+      <a href="/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/guides/kakomon-timing/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "過去問はいつから始めるか — 逆算すると秋では遅いことがある",
+     "item": "https://route-taizen.com/guides/kakomon-timing/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "@id": "https://route-taizen.com/guides/kakomon-timing/#article",
+   "headline": "過去問はいつから始めるか — 逆算すると秋では遅いことがある",
+   "description": "大学受験の過去問をいつ始めるべきかを、必要な年数と1年分あたりの所要時間から逆算。実力がついてから解くべきという通説の問題点、共通テストと二次・私大での扱いの違いを整理します。",
+   "inLanguage": "ja",
+   "datePublished": "2026-09-08",
+   "dateModified": "2026-09-08",
+   "author": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "mainEntityOfPage": "https://route-taizen.com/guides/kakomon-timing/"
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/guides/kakomon-timing/#webpage",
+   "url": "https://route-taizen.com/guides/kakomon-timing/",
+   "name": "過去問はいつから始めるか｜逆算すると秋では遅い - ルート大全",
+   "description": "大学受験の過去問をいつ始めるべきかを、必要な年数と1年分あたりの所要時間から逆算。実力がついてから解くべきという通説の問題点、共通テストと二次・私大での扱いの違いを整理します。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/guides/kakomon-timing/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>
