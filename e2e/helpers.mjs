@@ -27,6 +27,11 @@ export const KEY_PAGES = [
   { url: '/univ/', name: '志望校一覧' },
   { url: '/univ/waseda/', name: '大学別ページ' },
   { url: '/guides/route-hours/', name: 'データ記事' },
+  /* 記事のジャンル分けで増えた 2 種類のページ。入口は記事ページと別の作りで、
+     ランキング記事は順位表・部門カードという新しい部品を持つので、
+     既存の記事 1 枚だけでは検査が届かない */
+  { url: '/guides/', name: '記事ジャンルの入口' },
+  { url: '/guides/hajime-no-issatsu/', name: '部門別ランキング記事' },
   { url: '/search/', name: '詳細検索' },
   { url: '/progress/', name: '学習の記録' },
   { url: '/privacy/', name: 'プライバシー' },

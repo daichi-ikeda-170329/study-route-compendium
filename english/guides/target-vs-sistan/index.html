@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ターゲット1900 vs シス単 vs LEAP - 英語ルート大全</title>
+<meta name="description" content="受験の主力になる英単語帳3冊を、収録データと覚え方の設計から比べます。掲載語数ではなく、何を手がかりに覚えるかで選び分けます。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/english/guides/target-vs-sistan/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="ターゲット1900 vs シス単 vs LEAP - 英語ルート大全">
+<meta property="og:description" content="受験の主力になる英単語帳3冊を、収録データと覚え方の設計から比べます。掲載語数ではなく、何を手がかりに覚えるかで選び分けます。">
+<meta property="og:url" content="https://route-taizen.com/english/guides/target-vs-sistan/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp-english.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="ターゲット1900 vs シス単 vs LEAP - 英語ルート大全">
+<meta name="twitter:description" content="受験の主力になる英単語帳3冊を、収録データと覚え方の設計から比べます。掲載語数ではなく、何を手がかりに覚えるかで選び分けます。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp-english.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#B5432A}
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 22px;margin-top:26px;box-shadow:var(--sh-s)}
+.toc h2{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:.05em;margin-bottom:11px}
+.toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:2px}
+.toc li{counter-increment:t;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:center}
+.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-weight:600}
+/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。
+   gap を詰めたぶんを min-height で取り、行の見た目は変えない。 */
+.toc a{color:var(--ink-2);font-weight:700;transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.toc a:hover{color:var(--accent-deep)}
+/* 表は幅を超えたら中だけ横スクロールさせる。画面が狭いと「切れている」と
+   誤解されやすいので、スクロールできることを画面幅で出し分けて明示する。 */
+.tbl-scroll{margin:22px 0}
+.tbl-scroll__hint{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);margin-bottom:7px;align-items:center;gap:7px}
+.tbl-scroll__hint::before{content:"";width:14px;height:1.5px;background:var(--line-d)}
+@media(max-width:860px){.tbl-scroll__hint{display:flex}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp tbody th a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+.art-cat{margin-top:12px;font-size:12px}
+.art-cat a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+/* 順位表。順位の数字はモノスペースで、桁がそろって見えるようにする */
+.rk{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:22px;background:var(--sc);color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.02em}
+table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
+.vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
+.vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
+.vs__mark{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--muted-2);background:var(--surface-2);padding:7px 0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+@media(min-width:760px){
+  .vs--2{grid-template-columns:1fr auto 1fr}
+  .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
+  .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
+}
+.vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
+.vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
+.vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
+.vs__spec{margin-top:13px;display:flex;flex-direction:column;gap:5px}
+.vs__spec div{display:flex;gap:10px;font-size:12.5px;line-height:1.6}
+.vs__spec dt{flex:0 0 5.5em;color:var(--muted);font-size:11.5px;padding-top:1px}
+.vs__spec dd{color:var(--ink-2);flex:1}
+.vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
+.vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+.vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
+.vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
+.vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
+/* 部門別。1 部門 1 枚のカードで、色は科目のテーマカラー */
+.awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
+@media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
+.award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
+.award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
+.award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
+.award__meta{font-size:11.5px;color:var(--muted-2);margin-top:7px;line-height:1.7}
+.award__why{font-size:12.5px;color:var(--ink-2);margin-top:9px;line-height:1.85}
+/* 分布の棒。数字と割合は同じ行に文字で出しているので、棒は装飾に徹する */
+.hbar{display:block;height:9px;min-width:1px;width:var(--w);background:var(--sc);opacity:.55}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/" aria-current="page">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/english/">
+      <div class="logo__mark" aria-hidden="true">英</div>
+      <div class="logo__txt"><b>英語ルート大全</b><span>ENGLISH ROUTE</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta">
+      <a href="/english/#catalog">参考書図鑑</a>
+      <a href="/">全科目</a>
+      <a class="primary" href="/english/#route">ルートを作る</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/english/">英語ルート大全</a>
+    <span class="sep">/</span><a href="/english/guides/">解説記事</a>
+    <span class="sep">/</span><b>ターゲット1900 vs シス単 vs LEAP — 覚え方の設計が違う3冊</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Versus</div>
+      <h1 class="art-h1">ターゲット1900 vs シス単 vs LEAP — 覚え方の設計が違う3冊</h1>
+      <p class="art-cat"><a href="/guides/versus/">徹底比較</a> の記事</p>
+      <div class="art-meta">
+        <span>公開 2026-09-09</span>
+        <span>更新 <time datetime="2026-09-08">2026-09-08</time></span>
+        <span>ルート大全 編集部</span>
+      </div>
+      <p class="art-lead">受験で主力になる英単語帳は、<a href="/english/books/target1900/">ターゲット1900</a>・<a href="/english/books/sistan/">システム英単語</a>・<a href="/english/books/leap/">必携英単語LEAP</a>の 3 冊に集約されます。どれを選んでも到達する語彙水準は近く、<b>差が出るのは覚え方の設計</b>です。この記事ではそこだけを比べます。</p>
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <h2>この記事の内容</h2>
+      <ol>
+        <li><a href="#s1">3冊を並べる</a></li>
+        <li><a href="#s2">覚え方の設計を分ける</a></li>
+        <li><a href="#s3">選び分けの基準</a></li>
+        <li><a href="#s4">乗り換えていいのはどんなときか</a></li>
+      </ol>
+    </nav>
+
+    <section class="block prose" id="s1">
+      <h2 class="sec">3冊を並べる</h2>
+      <div class="vs vs--3">
+        <div class="vs__col">
+          <div class="vs__pub">旺文社</div>
+          <b class="vs__name"><a href="/english/books/target1900/">英単語ターゲット1900</a></b>
+          <dl class="vs__spec">
+            <div><dt>難易度</dt><dd>6 / 10</dd></div>
+            <div><dt>到達目安</dt><dd>55〜70</dd></div>
+            <div><dt>分量</dt><dd>1900語(でる順)</dd></div>
+            <div><dt>想定時間</dt><dd>毎日30分×4〜6か月</dd></div>
+          </dl>
+          <ul class="vs__pros"><li>でる順×一語一義で周回が速い</li><li>共テ〜難関大まで1冊で届く</li><li>アプリ・音声・準拠問題集がそろう</li></ul>
+          <ul class="vs__cons"><li>多義語・派生語はやや弱い</li><li>文脈で覚えたい人には向かない</li></ul>
+        </div>
+        <div class="vs__mark" aria-hidden="true">VS</div>
+        <div class="vs__col">
+          <div class="vs__pub">駿台文庫</div>
+          <b class="vs__name"><a href="/english/books/sistan/">システム英単語</a></b>
+          <dl class="vs__spec">
+            <div><dt>難易度</dt><dd>6 / 10</dd></div>
+            <div><dt>到達目安</dt><dd>55〜70</dd></div>
+            <div><dt>分量</dt><dd>見出し約2000語+多義語</dd></div>
+            <div><dt>想定時間</dt><dd>毎日30分×4〜6か月</dd></div>
+          </dl>
+          <ul class="vs__pros"><li>ミニマルフレーズで実戦で使える形になる</li><li>多義語の章が厚く実戦で効く</li><li>入試データに基づく頻出順</li></ul>
+          <ul class="vs__cons"><li>フレーズ暗記の負荷はある</li><li>最難関の語彙はパス単準1級などで補う</li></ul>
+        </div>
+        <div class="vs__mark" aria-hidden="true">VS</div>
+        <div class="vs__col">
+          <div class="vs__pub">数研出版</div>
+          <b class="vs__name"><a href="/english/books/leap/">必携英単語LEAP</a></b>
+          <dl class="vs__spec">
+            <div><dt>難易度</dt><dd>6 / 10</dd></div>
+            <div><dt>到達目安</dt><dd>52〜68</dd></div>
+            <div><dt>分量</dt><dd>2300語(4パート構成)</dd></div>
+            <div><dt>想定時間</dt><dd>毎日30分×5〜6か月</dd></div>
+          </dl>
+          <ul class="vs__pros"><li>発信語彙と受信語彙の区別が明確</li><li>語源・イメージの解説が丁寧</li><li>英作文にそのまま活きる</li></ul>
+          <ul class="vs__cons"><li>語数が多く完走に時間がかかる</li><li>でる順ではなく配列が合わない人もいる</li></ul>
+        </div>
+      </div>
+      <p class="vs__verdict">到達目安はほぼ同じ帯です。<b>掲載語数の多い順に強い、という関係ではありません。</b></p>
+    </section>
+
+    <section class="block prose" id="s2">
+      <h2 class="sec">覚え方の設計を分ける</h2>
+      <h3>ターゲット1900 — 1語1義から入る</h3>
+      <p><a href="/english/books/target1900/">ターゲット1900</a>は、1 語につき代表的な意味を 1 つ置く形が基本です。<b>覚える単位が小さいので、進捗が測りやすい</b>という利点があります。1 日 100 語といった区切り方がしやすく、周回の設計が立てやすい構成です。</p>
+      <p>一方で、単語を単体で覚えるため、文章のなかでの使われ方は別に補う必要があります。長文演習と並行するのが前提になります。</p>
+      <h3>システム英単語 — ミニマルフレーズで覚える</h3>
+      <p><a href="/english/books/sistan/">システム英単語</a>は、単語を短いフレーズの形で示します。<b>その語がよく一緒に使われる形ごと覚える</b>設計で、読解で出会ったときの反応が速くなります。</p>
+      <p>逆に、フレーズごと覚えるぶん 1 語あたりの情報量が増えます。「単語だけ速く回したい」という使い方には向きません。</p>
+      <h3>LEAP — 使い方の情報を多く載せる</h3>
+      <p><a href="/english/books/leap/">必携英単語LEAP</a>は、語法や使い分けの情報を厚めに載せています。<b>英作文で使う語を選ぶときに参照できる</b>のが特徴で、単語帳と語法集の中間に位置します。</p>
+      <p>そのぶん 1 ページの情報量が多く、通読の負担は 3 冊のなかで高めです。</p>
+    </section>
+
+    <section class="block prose" id="s3">
+      <h2 class="sec">選び分けの基準</h2>
+      <ul>
+        <li><b>とにかく語数を早く確保したい</b> → <a href="/english/books/target1900/">ターゲット1900</a>。区切りが明確で、周回の計画が立てやすい構成です。</li>
+        <li><b>長文で単語が出てきても反応できない</b> → <a href="/english/books/sistan/">システム英単語</a>。フレーズごと入れる設計が効きます。</li>
+        <li><b>英作文でも使う語を増やしたい</b> → <a href="/english/books/leap/">必携英単語LEAP</a>。語法の情報が最も多い 1 冊です。</li>
+        <li><b>1,900 語級を開いて手が止まった</b> → 1 段下に落とします。判断は<a href="/english/guides/tango-comparison/">英単語帳はどれを選ぶか</a>に書きました。</li>
+      </ul>
+      <div class="bcards" style="margin:20px 0">
+      <a class="bcard" href="/english/books/target1400/" style="--bc:#2E7D9A">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1400</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346471.jpg|https://books.google.com/books/content?vid=ISBN9784010346471&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346471.jpg|https://www.gakusan.com/bookimage_s/9784010346471.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">単語</span><span>旺文社</span></div>
+            <b>英単語ターゲット1400</b>
+          </div>
+        </div>
+        <p>共通テスト〜中堅私大レベルの頻出1,400語をでる順で収録した単語帳（5訂版）。同帯のシス単Basicがフレーズで覚えさせるのに対し、一語一義…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／45〜58</span></div>
+        <span class="bcard__ver">一部情報を確認中</span>
+      </a>
+      <a class="bcard" href="/english/books/sistan-basic/" style="--bc:#2E7D9A">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語Basic</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111417.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111416.jpg|https://books.google.com/books/content?vid=ISBN9784796111416&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111416.jpg|https://www.gakusan.com/bookimage_s/9784796111416.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">単語</span><span>駿台文庫</span></div>
+            <b>システム英単語Basic</b>
+          </div>
+        </div>
+        <p>シス単の語彙を基礎側に寄せた入門版で、1,500語と多義語170を扱う（5訂版）。同帯のターゲット1400が一語一義のリスト型なのに対し、中学…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／42〜55</span></div>
+        <span class="bcard__ver">一部情報を確認中</span>
+      </a>
+      <a class="bcard" href="/english/books/leap-basic/" style="--bc:#2E7D9A">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>必携英単語LEAP Basic</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410144332.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410144332.jpg|https://books.google.com/books/content?vid=ISBN9784410144332&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410144332.jpg|https://www.gakusan.com/bookimage_s/9784410144332.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">単語</span><span>数研出版</span></div>
+            <b>必携英単語LEAP Basic</b>
+          </div>
+        </div>
+        <p>LEAPの基礎版で、高校基礎〜共テレベルの1,600語+300語を扱う（2025年改訂）。同帯のターゲット1400がでる順なのに対し、「使える…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／42〜55</span></div>
+        <span class="bcard__ver">一部情報を確認中</span>
+      </a>
+      </div>
+    </section>
+
+    <section class="block prose" id="s4">
+      <h2 class="sec">乗り換えていいのはどんなときか</h2>
+      <p>単語帳の乗り換えは、原則として損です。<b>覚えた語と新しい本の掲載語は大きく重なる</b>ので、乗り換えた時点で重複部分をもう一度やり直すことになります。</p>
+      <p>乗り換えてよいのは次の場合だけです。</p>
+      <ul>
+        <li><b>開いた時点で 8 割以上が未知語だった。</b> 帯が合っていないので、1 段下の本に落とします。</li>
+        <li><b>逆に、8 割以上をすでに知っていた。</b> 上の帯に進みます。</li>
+      </ul>
+      <p>それ以外の理由、たとえば「友達が別の本を使っている」「新しい本のほうが評判がよい」は乗り換えの根拠になりません。<b>手元の 1 冊の到達度を上げるほうが、必ず速く終わります。</b></p>
+    </section>
+
+    <div class="cta">
+      <h2>単語帳のあと、どこへ進むか</h2>
+      <p>単語帳は単体で完結しません。志望校と現在地を選ぶと、文法・解釈・長文へどうつなぐかが並びで出ます。</p>
+      <div class="cta__btns">
+        <a class="p" href="/english/">英語のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="g" href="/english/books/">参考書一覧を見る</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A" aria-current="page">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/english/">参考書図鑑</a>
+      <a href="/english/books/">参考書一覧</a>
+      <a href="/english/routes/">志望校別ルート</a>
+      <a href="/english/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/english/guides/target-vs-sistan/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "英語ルート大全",
+     "item": "https://route-taizen.com/english/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/english/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "ターゲット1900 vs シス単 vs LEAP — 覚え方の設計が違う3冊",
+     "item": "https://route-taizen.com/english/guides/target-vs-sistan/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "@id": "https://route-taizen.com/english/guides/target-vs-sistan/#article",
+   "headline": "ターゲット1900 vs シス単 vs LEAP — 覚え方の設計が違う3冊",
+   "description": "受験の主力になる英単語帳3冊を、収録データと覚え方の設計から比べます。掲載語数ではなく、何を手がかりに覚えるかで選び分けます。",
+   "inLanguage": "ja",
+   "datePublished": "2026-09-09",
+   "dateModified": "2026-09-08",
+   "author": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "mainEntityOfPage": "https://route-taizen.com/english/guides/target-vs-sistan/",
+   "about": {
+    "@type": "Thing",
+    "name": "大学受験 英語の参考書選び"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/english/guides/target-vs-sistan/#webpage",
+   "url": "https://route-taizen.com/english/guides/target-vs-sistan/",
+   "name": "ターゲット1900 vs シス単 vs LEAP - 英語ルート大全",
+   "description": "受験の主力になる英単語帳3冊を、収録データと覚え方の設計から比べます。掲載語数ではなく、何を手がかりに覚えるかで選び分けます。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/english/guides/target-vs-sistan/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>

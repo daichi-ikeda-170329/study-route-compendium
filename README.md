@@ -22,17 +22,17 @@
 
 | 科目 | ディレクトリ | 収録冊数 | 志望レベル | 記事 | テーマカラー |
 |---|---|---|---|---|---|
-| 英語 | `english/` | 252 | 9 | 4 | `#B5432A` |
-| 国語 | `japanese/` | 192 | 8 | 2 | `#8A6D2F` |
-| 数学 | `math/` | 162 | 9 | 2 | `#24427C` |
-| 理科 | `science/` | 373 | 8 | 2 | `#2F6E4F` |
-| 社会 | `social/` | 293 | 8 | 2 | `#5B4E9E` |
+| 英語 | `english/` | 252 | 9 | 12 | `#B5432A` |
+| 国語 | `japanese/` | 192 | 8 | 6 | `#8A6D2F` |
+| 数学 | `math/` | 162 | 9 | 7 | `#24427C` |
+| 理科 | `science/` | 373 | 8 | 8 | `#2F6E4F` |
+| 社会 | `social/` | 293 | 8 | 6 | `#5B4E9E` |
 | 情報 | `joho/` | 29 | — | — | `#1F6E7A` |
 | 小論文 | `shoron/` | 89 | — | — | `#8E3B5E` |
-| 全科目共通 | `guides/` | — | — | 2 | — |
-| 合計 | — | 1,390 | 42 | 14 | — |
+| 全科目共通 | `guides/` | — | — | 14 | — |
+| 合計 | — | 1,390 | 42 | 53 | — |
 
-公開ページ数は `sitemap.xml` の URL 数と一致する（`rg -c "<loc>" sitemap.xml` で数える。2026-09-08 時点で 1,644）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
+公開ページ数は `sitemap.xml` の URL 数と一致する（`rg -c "<loc>" sitemap.xml` で数える。2026-09-09 時点で 1,689）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
 
 ## ディレクトリ構成
 
@@ -45,7 +45,10 @@
 | `<科目>/books/<id>/index.html` | 参考書 1 冊の詳細ページ | 生成 |
 | `<科目>/routes/index.html` | 志望レベル一覧 | 生成 |
 | `<科目>/routes/<tier>/index.html` | 志望レベル別ルート | 生成 |
+| `<科目>/guides/index.html` | その科目の記事一覧（ジャンルで区切る） | 生成 |
 | `<科目>/guides/<slug>/index.html` | 解説記事 | 生成 |
+| `guides/index.html` | ジャンルの入口 | 生成 |
+| `guides/<ジャンル>/index.html` | ジャンル別の記事一覧（科目をまたぐ） | 生成 |
 | `guides/<slug>/index.html` | 科目に属さない解説記事 | 生成 |
 | `univ/index.html` | 志望校から探す（大学 160 校の一覧） | 生成（`generate-universities.mjs`） |
 | `univ/<slug>/index.html` | 大学 1 校の全科目まとめ（出題形式・目標偏差値・参考書ルート・過去問） | 同上 |
@@ -236,6 +239,7 @@ node build/generate-books.mjs math ao
 | `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 |
 | `build/lib/updated.mjs` | 最終更新日。git のコミット日と、レコード単位のハッシュ台帳 |
 | `build/content/articles.mjs` | 解説記事の本文 |
+| `build/content/article-categories.mjs` | 解説記事のジャンル（`/guides/<ジャンル>/` の正本） |
 | `build/content/legal.mjs` | 信頼性ページの本文 |
 
 `ROUTES` の階層は、ルートを持つ 5 科目で共通で `ROUTES[志望レベル][トラック][方針]`。トラックだけが科目で違う（英語・数学は `bun`/`ri`、国語は `gendai`/`kobun`/`kanbun`、理科は `butsuri`/`kagaku`/`seibutsu`/`chigaku`、社会は `nihonshi`/`sekaishi`/…）。
@@ -248,21 +252,47 @@ node build/generate-books.mjs math ao
 | `final` | 最後の仕上げ。同上 |
 | `basic` | 理科基礎（文系・共テのみ）のルート。理科の `kyote` だけが持ち、科目トップでのみ使う |
 
+### 記事のジャンル
+
+記事は 6 つのジャンルに分かれ、`build/content/article-categories.mjs` がその正本になる。記事 1 本ごとに `category` を必ず持たせる（持たない記事はビルドが止まる）。
+
+| ページ | 中身 |
+|---|---|
+| `/guides/` | ジャンルの入口。どのジャンルに何本あるかだけを見せる |
+| `/guides/<ジャンル>/` | そのジャンルの記事を科目をまたいで集める |
+| `/<科目>/guides/` | その科目の記事をジャンルで区切って並べる |
+
+ジャンル id は URL の一部になるので、次の 2 つを守る。どちらもビルド時に検出できないもの（後者）を含むので、`article-categories.mjs` の冒頭に理由を書いてある。
+
+- **科目に属さない記事の slug と重ならないこと。** 重なると同じパスに 2 枚書き出すことになるため、`generate-articles.mjs` が突き合わせて落とす
+- **`build/check-site.mjs` の `SKIP_DIRS`（`data` / `docs` / `test` など）と同じ名前にしないこと。** あちらは深さに関係なくその名前のディレクトリを飛ばすので、`/guides/data/` にすると検査だけがそのページを見なくなる
+
+記事ページのアイブロウ（`Versus` / `Ranking` など）はジャンルから出る。記事側に書かせない（書かせるとジャンルと表示がずれる）。
+
 ### 記事を追加する
 
-`build/content/articles.mjs` の `ARTICLES` に追加して `generate-articles.mjs` を実行する。決まりごとが 3 つある。
+`build/content/articles.mjs` の `ARTICLES` に追加して `generate-articles.mjs` を実行する。決まりごとが 4 つある。
 
 - 難易度・問題数・想定学習時間・到達目安は本文に書かず、`bookTable` ブロックで `BOOKS` から引く。記事とデータがずれるのを構造的に防ぐため
 - 本文中の `[[id]]` または `[[id|表示名]]` はその書籍の個別ページへのリンクになる。id が `BOOKS` に無ければビルドが止まる
-- 記事を追加したら、ポータル `index.html` の「参考書の選び方を読む」セクションにも手でリンクを足す
+- `category` を必ず付ける。値は `build/content/article-categories.mjs` の id
+- **順位を人が付けるブロック（`rankTable` / `awards`）を使うときは、何を基準に並べたのかを地の文に書く。** 書かないと、データから機械的に出た順位（`dataRank` / `pubRank`）と読者が区別できない
+
+ポータル `index.html` の「参考書の読みものを読む」セクションはジャンルへのリンクなので、記事を 1 本足すたびに手で直す必要はない。看板として出したい記事があるときだけ足す。
 
 #### 本文で使える記法
 
 | 記法 | 出力 | 落ちる条件 |
 |---|---|---|
-| `[[id]]` / `[[id\|表示名]]` | 書籍ページへのリンク | id が `BOOKS` に無い |
-| `{{/path/\|表示名}}` | サイト内の他のページへのリンク | パスが `/…/` の形でない、または `path/index.html` が実在しない |
+| `[[id]]` / `[[id\|表示名]]` | その記事の科目の書籍ページへのリンク | id が `BOOKS` に無い |
+| `[[科目:id]]` / `[[科目:id\|表示名]]` | 別の科目の書籍ページへのリンク | 同上。**科目に属さない記事はこの形で書く** |
+| `{{/path/\|表示名}}` | サイト内の他のページへのリンク | パスが `/…/` の形でない、かつこの実行で書き出すページでもない |
 | `**強調**` | `<b>` | — |
+
+`{{…}}` の実在確認は、ディスク上のファイルに加えて**この実行で書き出す記事ページ**も見る。
+記事どうしのリンクを `ARTICLES` の並び順に関係なく張れるようにするため
+（ディスクだけを見ていると、配列の後ろにある記事へ前の記事からリンクした瞬間、
+まっさらな状態からのビルドが落ちる）。
 
 本文は `esc()` を通すので、**記事に生の `<a>` を書いても文字列として出る。**
 サイト内リンクは必ず `{{…}}` で書く。実在確認をビルド時に通すためで、
@@ -277,6 +307,24 @@ node build/generate-books.mjs math ao
 |---|---|
 | `{ routeHoursTotal: { combo: 'bun'\|'ri', hoursPerDay } }` | 志望レベル別の総冊数・総時間・1 日あたり時間で割った月数 |
 | `{ routeHoursBySubject: { tier, combo } }` | 1 つの志望レベルを科目別に割った内訳と割合 |
+| `{ dataRank: { dirs, by: 'h'\|'diff'\|'year', order, limit, stages, excludeStages, subs } }` | 条件に合う本を指定の項目で並べた順位表 |
+| `{ pubRank: { dirs, limit, … } }` | 出版社ごとの収録冊数と割合 |
+| `{ hist: { by: 'diff'\|'year', dirs, … } }` | 難易度または刊行年代の分布 |
+| `{ stageTally: { dir, excludeStages, subs } }` | 役割ごとの冊数・想定学習時間の中央値・難易度の幅 |
+
+比較・ランキング向けのブロックは、**順位を人が付けるもの**（`rankTable` / `awards`）と
+**データから機械的に並ぶもの**（`dataRank` / `pubRank` / `hist` / `stageTally`）を型として分けてある。
+読者が「これは誰が決めた順位か」を取り違えないようにするため。
+
+| ブロック | 出るもの |
+|---|---|
+| `{ versus: [id, id(, id)], dir, verdict }` | 2〜3 冊を並べた一騎打ち。強み・注意点は `pros` / `cons` から出る |
+| `{ rankTable: [{ id, dir, note }], columns, rankLabel, whyLabel, caption }` | 人が付けた順位と、その理由 |
+| `{ awards: [{ title, dir, id, reason }] }` | 部門別。科目をまたいでよい |
+
+`hist` / `pubRank` / `stageTally` の冊数セルは**単位の「冊」を付けずに数字だけを出す**（単位は列見出しに置く）。
+「◯◯◯冊」と書くと `build/apply-count.mjs` の `sweep()` が「実データに無い冊数」として拾う。
+分布の度数や出版社別の内訳は収録冊数そのものではないので、`count-ignore.json` に登録する筋のものでもない。
 
 **科目・トラックが 1 つでも欠けている志望レベルは行ごと落とす。**部分的な合計を出すと、
 読んだ人はそれを全科目の合計として受け取る（医学部は国語のルートを持たないため出ない）。

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理のエッセンス vs 宇宙一 vs 秘伝 - 理科ルート大全</title>
+<meta name="description" content="物理の最初の1冊でよく比較される3冊を、収録データと役割の違いから比べます。同じ「入門」でも、担っている役割が違います。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/science/guides/essence-vs-uchuichi/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="物理のエッセンス vs 宇宙一 vs 秘伝 - 理科ルート大全">
+<meta property="og:description" content="物理の最初の1冊でよく比較される3冊を、収録データと役割の違いから比べます。同じ「入門」でも、担っている役割が違います。">
+<meta property="og:url" content="https://route-taizen.com/science/guides/essence-vs-uchuichi/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp-science.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="物理のエッセンス vs 宇宙一 vs 秘伝 - 理科ルート大全">
+<meta name="twitter:description" content="物理の最初の1冊でよく比較される3冊を、収録データと役割の違いから比べます。同じ「入門」でも、担っている役割が違います。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp-science.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#2F6E4F}
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 22px;margin-top:26px;box-shadow:var(--sh-s)}
+.toc h2{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:.05em;margin-bottom:11px}
+.toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:2px}
+.toc li{counter-increment:t;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:center}
+.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-weight:600}
+/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。
+   gap を詰めたぶんを min-height で取り、行の見た目は変えない。 */
+.toc a{color:var(--ink-2);font-weight:700;transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.toc a:hover{color:var(--accent-deep)}
+/* 表は幅を超えたら中だけ横スクロールさせる。画面が狭いと「切れている」と
+   誤解されやすいので、スクロールできることを画面幅で出し分けて明示する。 */
+.tbl-scroll{margin:22px 0}
+.tbl-scroll__hint{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);margin-bottom:7px;align-items:center;gap:7px}
+.tbl-scroll__hint::before{content:"";width:14px;height:1.5px;background:var(--line-d)}
+@media(max-width:860px){.tbl-scroll__hint{display:flex}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp tbody th a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+.art-cat{margin-top:12px;font-size:12px}
+.art-cat a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+/* 順位表。順位の数字はモノスペースで、桁がそろって見えるようにする */
+.rk{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:22px;background:var(--sc);color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.02em}
+table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
+.vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
+.vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
+.vs__mark{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--muted-2);background:var(--surface-2);padding:7px 0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+@media(min-width:760px){
+  .vs--2{grid-template-columns:1fr auto 1fr}
+  .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
+  .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
+}
+.vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
+.vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
+.vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
+.vs__spec{margin-top:13px;display:flex;flex-direction:column;gap:5px}
+.vs__spec div{display:flex;gap:10px;font-size:12.5px;line-height:1.6}
+.vs__spec dt{flex:0 0 5.5em;color:var(--muted);font-size:11.5px;padding-top:1px}
+.vs__spec dd{color:var(--ink-2);flex:1}
+.vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
+.vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+.vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
+.vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
+.vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
+/* 部門別。1 部門 1 枚のカードで、色は科目のテーマカラー */
+.awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
+@media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
+.award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
+.award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
+.award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
+.award__meta{font-size:11.5px;color:var(--muted-2);margin-top:7px;line-height:1.7}
+.award__why{font-size:12.5px;color:var(--ink-2);margin-top:9px;line-height:1.85}
+/* 分布の棒。数字と割合は同じ行に文字で出しているので、棒は装飾に徹する */
+.hbar{display:block;height:9px;min-width:1px;width:var(--w);background:var(--sc);opacity:.55}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/" aria-current="page">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/science/">
+      <div class="logo__mark" aria-hidden="true">理</div>
+      <div class="logo__txt"><b>理科ルート大全</b><span>SCIENCE ROUTE</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta">
+      <a href="/science/#catalog">参考書図鑑</a>
+      <a href="/">全科目</a>
+      <a class="primary" href="/science/#route">ルートを作る</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/science/">理科ルート大全</a>
+    <span class="sep">/</span><a href="/science/guides/">解説記事</a>
+    <span class="sep">/</span><b>物理の入り口はどれか — エッセンス・宇宙一・秘伝の物理</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Versus</div>
+      <h1 class="art-h1">物理の入り口はどれか — エッセンス・宇宙一・秘伝の物理</h1>
+      <p class="art-cat"><a href="/guides/versus/">徹底比較</a> の記事</p>
+      <div class="art-meta">
+        <span>公開 2026-09-09</span>
+        <span>更新 <time datetime="2026-09-08">2026-09-08</time></span>
+        <span>ルート大全 編集部</span>
+      </div>
+      <p class="art-lead">物理の 1 冊目として名前が挙がるのが<a href="/science/books/essence-rikigaku/">物理のエッセンス</a>・<a href="/science/books/uchu-rikigaku/">宇宙一わかりやすい高校物理</a>・<a href="/science/books/hiden-rikigaku/">秘伝の物理講義</a>です。<b>この 3 冊は同じ帯ではありません。</b>役割が違うので、比べる前に何をする本なのかを分ける必要があります。</p>
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <h2>この記事の内容</h2>
+      <ol>
+        <li><a href="#s1">3冊を並べる</a></li>
+        <li><a href="#s2">役割の違いを先に分ける</a></li>
+        <li><a href="#s3">エッセンスの前に説明の本は要るか</a></li>
+        <li><a href="#s4">説明の本を何冊も買わない</a></li>
+      </ol>
+    </nav>
+
+    <section class="block prose" id="s1">
+      <h2 class="sec">3冊を並べる</h2>
+      <div class="vs vs--3">
+        <div class="vs__col">
+          <div class="vs__pub">Gakken</div>
+          <b class="vs__name"><a href="/science/books/uchu-rikigaku/">宇宙一わかりやすい高校物理 力学・波動</a></b>
+          <dl class="vs__spec">
+            <div><dt>難易度</dt><dd>1 / 10</dd></div>
+            <div><dt>到達目安</dt><dd>〜50</dd></div>
+            <div><dt>分量</dt><dd>講義+確認問題 約100題</dd></div>
+            <div><dt>想定時間</dt><dd>20〜30h</dd></div>
+          </dl>
+          <ul class="vs__pros"><li>イラスト中心で読み進めやすい</li><li>物理基礎と物理を区別せず学べる</li><li>別冊の確認問題で読みっぱなしにならない</li></ul>
+          <ul class="vs__cons"><li>厚く情報密度は低め</li><li>入試レベルの問題は扱わない</li></ul>
+        </div>
+        <div class="vs__mark" aria-hidden="true">VS</div>
+        <div class="vs__col">
+          <div class="vs__pub">Gakken</div>
+          <b class="vs__name"><a href="/science/books/hiden-rikigaku/">秘伝の物理講義 力学・波動</a></b>
+          <dl class="vs__spec">
+            <div><dt>難易度</dt><dd>3 / 10</dd></div>
+            <div><dt>到達目安</dt><dd>45〜60</dd></div>
+            <div><dt>分量</dt><dd>講義+例題 約80題</dd></div>
+            <div><dt>想定時間</dt><dd>30〜40h</dd></div>
+          </dl>
+          <ul class="vs__pros"><li>無料の動画講義と連動して独学しやすい</li><li>公式の導出や物理的意味を省略しない</li><li>入試標準レベルまで見据えた説明</li></ul>
+          <ul class="vs__cons"><li>分厚く読み切るのに時間がかかる</li><li>分量に対して価格が高い</li></ul>
+        </div>
+        <div class="vs__mark" aria-hidden="true">VS</div>
+        <div class="vs__col">
+          <div class="vs__pub">河合出版</div>
+          <b class="vs__name"><a href="/science/books/essence-rikigaku/">物理のエッセンス 力学・波動</a></b>
+          <dl class="vs__spec">
+            <div><dt>難易度</dt><dd>4 / 10</dd></div>
+            <div><dt>到達目安</dt><dd>45〜60</dd></div>
+            <div><dt>分量</dt><dd>例題+問題 約200題</dd></div>
+            <div><dt>想定時間</dt><dd>30〜40h</dd></div>
+          </dl>
+          <ul class="vs__pros"><li>要点整理と問題が直結している</li><li>典型問題が幅広く押さえられる</li><li>良問の風・名問の森へ接続できる</li></ul>
+          <ul class="vs__cons"><li>説明が簡潔で完全な初学者には不親切</li><li>解説の行間が広く独学で詰まりやすい</li></ul>
+        </div>
+      </div>
+      <p class="vs__verdict">難易度が 3 冊で段になっています。<b>宇宙一と秘伝は説明の本、エッセンスは問題を解く本</b>という違いがあり、並列に選ぶものではありません。</p>
+    </section>
+
+    <section class="block prose" id="s2">
+      <h2 class="sec">役割の違いを先に分ける</h2>
+      <h3>宇宙一 — 現象の絵を作る</h3>
+      <p><a href="/science/books/uchu-rikigaku/">宇宙一わかりやすい高校物理</a>は、図とたとえで現象のイメージを作る本です。<b>式に入る前に何が起きているのかを掴む</b>段を担います。物理を選択したばかりの時期、あるいは公式は知っているのに問題が解けない状態で使います。</p>
+      <h3>秘伝の物理講義 — 講義として通す</h3>
+      <p><a href="/science/books/hiden-rikigaku/">秘伝の物理講義</a>は、説明の分量がより多く、動画と併用する形になっています。<b>独学で物理を最初から通す</b>場合に、宇宙一より一段詳しい説明が要るならこちらです。</p>
+      <h3>エッセンス — 型を手に入れる</h3>
+      <p><a href="/science/books/essence-rikigaku/">物理のエッセンス</a>は、解法の型を身につけるための問題集です。<b>説明を読む本ではなく、解く本</b>なので、現象のイメージが無い状態で開くと解説が足りないと感じます。</p>
+      <p>ここから、順番が決まります。<b>説明の本 → エッセンス</b>であって、逆ではありません。</p>
+    </section>
+
+    <section class="block prose" id="s3">
+      <h2 class="sec">エッセンスの前に説明の本は要るか</h2>
+      <p>要るかどうかは、学校の授業をどれだけ使えているかで決まります。</p>
+      <ul>
+        <li><b>学校の授業が理解できている</b> → エッセンスから入れます。説明の本は不要です。</li>
+        <li><b>授業についていけていない・独学</b> → <a href="/science/books/uchu-rikigaku/">宇宙一</a>か<a href="/science/books/hiden-rikigaku/">秘伝</a>を先に通します。</li>
+        <li><b>エッセンスを開いて解説が不足に感じた</b> → 説明の本に戻ります。エッセンスが悪いのではなく、段が 1 つ抜けています。</li>
+      </ul>
+      <p>エッセンスからあとの並び（良問の風・名問の森）と、その代替は<a href="/science/guides/butsuri-route/">物理の参考書はどう組むか</a>にまとめました。</p>
+      <div class="bcards" style="margin:20px 0">
+      <a class="bcard" href="/science/books/ryomon-kaze/" style="--bc:#5B4E9E">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>良問の風</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227251.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227251.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227259.jpg|https://books.google.com/books/content?vid=ISBN9784777227259&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227259.jpg|https://www.gakusan.com/bookimage_s/9784777227259.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">標準</span><span>河合出版</span></div>
+            <b>良問の風</b>
+          </div>
+        </div>
+        <p>浜島清利による入試標準の問題集（河合出版・2023年三訂版）。標準問題約150題を分野別に収録し、エッセンスの考え方をそのまま当てはめて解ける…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／52〜62</span></div>
+        
+      </a>
+      <a class="bcard" href="/science/books/meimon-mori-1/" style="--bc:#B5432A">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>名問の森 力学・熱・波動I</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477722726X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477722726X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722726X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/477722726X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/477722726X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722726X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227266.jpg|https://books.google.com/books/content?vid=ISBN9784777227266&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227266.jpg|https://www.gakusan.com/bookimage_s/9784777227266.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">応用</span><span>河合出版</span></div>
+            <b>名問の森 力学・熱・波動I</b>
+          </div>
+        </div>
+        <p>浜島清利による難関大向け問題集の前半巻（河合出版・2024年四訂版）。力学・熱・波動Iの約70題を、設問ごとに考え方を示す解説で扱う。良問の風…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／60〜70</span></div>
+        <span class="bcard__ver">一部情報を確認中</span>
+      </a>
+      <a class="bcard" href="/science/books/kosei-kiso/" style="--bc:#24427C">
+        <div class="bcard__head">
+          <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>物理 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352558.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352558.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352558.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352558.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352558.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352558.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352557.jpg|https://books.google.com/books/content?vid=ISBN9784010352557&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352557.jpg|https://www.gakusan.com/bookimage_s/9784010352557.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
+          <div class="bcard__meta">
+            <div class="bcard__top"><span class="bcard__stage">基礎</span><span>旺文社</span></div>
+            <b>物理 基礎問題精講</b>
+          </div>
+        </div>
+        <p>問題精講シリーズの基礎編、2023年の五訂版。入試基礎〜標準の典型を約110題に絞り、「精講」で要点を示してから解答を置く。同帯の物理のエッセ…</p>
+        <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／48〜60</span></div>
+        
+      </a>
+      </div>
+    </section>
+
+    <section class="block prose" id="s4">
+      <h2 class="sec">説明の本を何冊も買わない</h2>
+      <p>説明の本は読んでいるあいだ理解できるので、<b>進んでいる感覚が得られます。</b>そのため何冊も買いたくなりますが、説明の本を 2 冊読んでも解ける問題は増えません。</p>
+      <p>判断はこうです。1 冊読み終えたら、次は説明の本ではなく問題集に移ります。詰まったら<b>その分野だけ</b>説明の本に戻ります。全部を読み直す必要はありません。</p>
+      <div class="note" style="margin:22px 0"><h3>読む時間より解く時間</h3><p>物理は、公式を覚えた量ではなく、状況を式に翻訳できる回数で伸びます。読んでいる時間が長くなっているなら、それは問題集に移る合図です。</p></div>
+    </section>
+
+    <div class="cta">
+      <h2>物理の並びを確認する</h2>
+      <p>説明の本・型の本・演習書がそれぞれどこに入るかは、志望校で変わります。志望校と現在地を選ぶと並びが出ます。</p>
+      <div class="cta__btns">
+        <a class="p" href="/science/">理科のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="g" href="/science/books/">参考書一覧を見る</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F" aria-current="page">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/science/">参考書図鑑</a>
+      <a href="/science/books/">参考書一覧</a>
+      <a href="/science/routes/">志望校別ルート</a>
+      <a href="/science/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/science/guides/essence-vs-uchuichi/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "理科ルート大全",
+     "item": "https://route-taizen.com/science/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/science/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "物理の入り口はどれか — エッセンス・宇宙一・秘伝の物理",
+     "item": "https://route-taizen.com/science/guides/essence-vs-uchuichi/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "@id": "https://route-taizen.com/science/guides/essence-vs-uchuichi/#article",
+   "headline": "物理の入り口はどれか — エッセンス・宇宙一・秘伝の物理",
+   "description": "物理の最初の1冊でよく比較される3冊を、収録データと役割の違いから比べます。同じ「入門」でも、担っている役割が違います。",
+   "inLanguage": "ja",
+   "datePublished": "2026-09-09",
+   "dateModified": "2026-09-08",
+   "author": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "mainEntityOfPage": "https://route-taizen.com/science/guides/essence-vs-uchuichi/",
+   "about": {
+    "@type": "Thing",
+    "name": "大学受験 理科の参考書選び"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/science/guides/essence-vs-uchuichi/#webpage",
+   "url": "https://route-taizen.com/science/guides/essence-vs-uchuichi/",
+   "name": "物理のエッセンス vs 宇宙一 vs 秘伝 - 理科ルート大全",
+   "description": "物理の最初の1冊でよく比較される3冊を、収録データと役割の違いから比べます。同じ「入門」でも、担っている役割が違います。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/science/guides/essence-vs-uchuichi/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>

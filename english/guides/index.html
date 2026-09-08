@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>英語の参考書の選び方・比較記事一覧 - 英語ルート大全</title>
-<meta name="description" content="大学受験英語の参考書について、似た本の違いと選び分けを解説した記事の一覧（7 本）。">
+<title>英語の参考書の比較・ランキング記事一覧 - 英語ルート大全</title>
+<meta name="description" content="大学受験英語の参考書について、似た本の違い・目的別ランキング・積む順番を解説した記事の一覧（12 本）。">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#F6F4EF">
 <meta name="format-detection" content="telephone=no">
@@ -12,16 +12,16 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ルート大全">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="英語の参考書の選び方・比較記事一覧 - 英語ルート大全">
-<meta property="og:description" content="大学受験英語の参考書について、似た本の違いと選び分けを解説した記事の一覧（7 本）。">
+<meta property="og:title" content="英語の参考書の比較・ランキング記事一覧 - 英語ルート大全">
+<meta property="og:description" content="大学受験英語の参考書について、似た本の違い・目的別ランキング・積む順番を解説した記事の一覧（12 本）。">
 <meta property="og:url" content="https://route-taizen.com/english/guides/">
 <meta property="og:image" content="https://route-taizen.com/assets/ogp-english.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@route_taizen">
-<meta name="twitter:title" content="英語の参考書の選び方・比較記事一覧 - 英語ルート大全">
-<meta name="twitter:description" content="大学受験英語の参考書について、似た本の違いと選び分けを解説した記事の一覧（7 本）。">
+<meta name="twitter:title" content="英語の参考書の比較・ランキング記事一覧 - 英語ルート大全">
+<meta name="twitter:description" content="大学受験英語の参考書について、似た本の違い・目的別ランキング・積む順番を解説した記事の一覧（12 本）。">
 <meta name="twitter:image" content="https://route-taizen.com/assets/ogp-english.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -64,12 +64,33 @@ gtag('config', 'G-DQ5WFXEFMX', {
 :root{--sc:#B5432A}
 .ggrid{display:grid;grid-template-columns:1fr;gap:11px;margin-top:22px}
 @media(min-width:700px){.ggrid{grid-template-columns:repeat(2,1fr)}}
-.gcard{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--sc);padding:18px 19px 16px;box-shadow:var(--sh-s);transition:.16s;display:flex;flex-direction:column}
-.gcard:hover{transform:translateY(-3px);box-shadow:var(--sh-m);border-color:var(--line-d);border-top-color:var(--sc)}
-.gcard__no{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px}
+.gcard{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--gs,var(--sc));padding:18px 19px 16px;box-shadow:var(--sh-s);transition:.16s;display:flex;flex-direction:column}
+.gcard:hover{transform:translateY(-3px);box-shadow:var(--sh-m);border-color:var(--line-d);border-top-color:var(--gs,var(--sc))}
+.gcard__no{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px;display:flex;gap:9px;align-items:center}
+.gcard__sub{color:var(--muted-2);letter-spacing:.06em;text-transform:none;padding-left:9px;border-left:1px solid var(--line-d)}
 .gcard b{font-family:var(--serif);font-weight:800;font-size:16.5px;letter-spacing:.02em;line-height:1.45;color:var(--ink)}
 .gcard p{font-size:12.5px;color:var(--muted);margin-top:9px;line-height:1.8;flex:1}
 .gcard__foot{font-family:var(--mono);font-size:10px;color:var(--muted-2);margin-top:13px;padding-top:10px;border-top:1px dashed var(--line);letter-spacing:.06em}
+/* ジャンルの入口カード。記事カードと見分けが付くよう、左に色の帯を置く */
+.cgrid{display:grid;grid-template-columns:1fr;gap:11px;margin-top:22px}
+@media(min-width:640px){.cgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.cgrid{grid-template-columns:repeat(3,1fr)}}
+.ccard{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 20px 17px;box-shadow:var(--sh-s);transition:.16s;display:flex;flex-direction:column}
+.ccard:hover{transform:translateY(-3px);box-shadow:var(--sh-m);border-color:var(--line-d);border-left-color:var(--sc)}
+.ccard__en{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase}
+.ccard b{font-family:var(--serif);font-weight:800;font-size:19px;letter-spacing:.02em;line-height:1.4;color:var(--ink);margin-top:8px}
+.ccard p{font-size:12.5px;color:var(--muted);margin-top:9px;line-height:1.85;flex:1}
+.ccard__n{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:13px;padding-top:10px;border-top:1px dashed var(--line);letter-spacing:.06em}
+/* ジャンルの横並びナビ。科目別一覧とジャンル一覧の両方に置く */
+.gnav{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.gnav a{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;background:var(--surface);border:1px solid var(--line);font-size:12px;font-weight:700;color:var(--ink-2);transition:.14s}
+.gnav a:hover{border-color:var(--sc);color:var(--sc)}
+.gnav a[aria-current="page"]{background:var(--sc);border-color:var(--sc);color:#fff}
+.gsec{margin-top:34px}
+.gsec__h{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.gsec__h h2{font-family:var(--serif);font-weight:800;font-size:19px;letter-spacing:.02em}
+.gsec__h span{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);letter-spacing:.06em}
+.gsec__lead{font-size:12.5px;color:var(--muted);line-height:1.9;margin-top:11px}
 </style>
 </head>
 <body>
@@ -122,52 +143,135 @@ gtag('config', 'G-DQ5WFXEFMX', {
 
   <div class="block" style="margin-top:26px">
     <div class="eyebrow">Guides</div>
-    <h1 class="sec" style="font-size:29px">英語の参考書の選び方</h1>
-    <p class="sec-lead">英語でよく比較される参考書について、何が違うのか・どちらを選ぶべきかを整理した記事です。難易度や問題数は英語ルート大全に収録しているデータをそのまま参照しています。</p>
+    <h1 class="sec" style="font-size:29px">英語の参考書の読みもの</h1>
+    <p class="sec-lead">英語でよく比較される参考書の違い、目的別のランキング、積む順番をまとめた記事 12 本です。難易度や問題数は英語ルート大全に収録しているデータをそのまま参照しています。</p>
+    <nav class="gnav" aria-label="ジャンル">
+      <a href="#versus">徹底比較</a>
+      <a href="#ranking">ランキング</a>
+      <a href="#stats">データで見る</a>
+      <a href="#route">科目別ルート</a>
+      <a href="#basics">進め方の基本</a>
+    </nav>
+  </div>
+
+  <div class="block gsec" id="versus">
+    <div class="gsec__h"><h2>徹底比較</h2><span>Versus — 8本</span></div>
+    <p class="gsec__lead">よく並べて語られる参考書を 2 冊・3 冊に絞り、収録データの難易度・問題数・想定学習時間と、本の作りの違いから選び分けを出します。</p>
     <div class="ggrid">
-      <a class="gcard" href="/english/guides/tango-comparison/">
-        <div class="gcard__no">Compare</div>
+      <a class="gcard" href="/english/guides/tango-comparison/" style="--gs:#B5432A">
+        <div class="gcard__no">Versus</div>
         <b>英単語帳はどれを選ぶか — ターゲット1900・シス単・LEAP・鉄壁の違い</b>
         <p>英単語帳は種類が多く、どれも「これ 1 冊で足りる」と書かれています。実際には**掲載語数と、単語をどう覚えさせる作りになっているか**が違い、そこが合う・合わないを分けます。この記事では収…</p>
         <span class="gcard__foot">2026-08-21</span>
       </a>
-      <a class="gcard" href="/english/guides/bunpo-comparison/">
-        <div class="gcard__no">Compare</div>
+      <a class="gcard" href="/english/guides/bunpo-comparison/" style="--gs:#B5432A">
+        <div class="gcard__no">Versus</div>
         <b>英文法はどれをやるか — Next Stage・Vintage・スクランブルと、その前にやる本</b>
         <p>英文法の本は「理解するための本」と「問題を解く本」の 2 種類があり、この区別を知らずに買うと順番を間違えます。さらに問題集のほうは、Next Stage・Vintage・スクランブル・UP…</p>
         <span class="gcard__foot">2026-08-21</span>
       </a>
-      <a class="gcard" href="/english/guides/kaishaku-comparison/">
-        <div class="gcard__no">Compare</div>
+      <a class="gcard" href="/english/guides/kaishaku-comparison/" style="--gs:#B5432A">
+        <div class="gcard__no">Versus</div>
         <b>英文解釈はなぜ必要か — 入門70・基礎100・ポレポレの違いと進む順</b>
         <p>単語も覚えた、文法問題も解ける。なのに長文になると読めない。この状態のとき、足りていないのはたいてい**英文解釈**です。1 文の構造を正確に取る訓練で、多くの受験生が飛ばしてしまう工程でも…</p>
         <span class="gcard__foot">2026-08-21</span>
       </a>
-      <a class="gcard" href="/english/guides/chobun-comparison/">
-        <div class="gcard__no">Compare</div>
+      <a class="gcard" href="/english/guides/chobun-comparison/" style="--gs:#B5432A">
+        <div class="gcard__no">Versus</div>
         <b>英語長文はどれをやるか — The Rules・ソリューション・やっておきたいの違い</b>
         <p>長文問題集はレベル別のシリーズが多く、The Rules・ソリューション・ポラリス・やっておきたいと横並びに見えます。実際に違うのは**解説が「読み方」まで踏み込むかどうか**です。ここを基…</p>
         <span class="gcard__foot">2026-08-21</span>
       </a>
-      <a class="gcard" href="/english/guides/eisaku-comparison/">
-        <div class="gcard__no">Compare</div>
+      <a class="gcard" href="/english/guides/eisaku-comparison/" style="--gs:#B5432A">
+        <div class="gcard__no">Versus</div>
         <b>英作文の参考書の選び方 — 和文英訳と自由英作文は別の練習が要る</b>
         <p>英作文は、ほとんどの受験生が最後に手をつけて、最後まで終わらない分野です。理由ははっきりしていて、**答えが 1 つに決まらないので、自分で採点できない**からです。ただし「採点できない」と…</p>
         <span class="gcard__foot">2026-09-08</span>
       </a>
-      <a class="gcard" href="/english/guides/listening-start/">
-        <div class="gcard__no">Guide</div>
+      <a class="gcard" href="/english/guides/target-vs-sistan/" style="--gs:#B5432A">
+        <div class="gcard__no">Versus</div>
+        <b>ターゲット1900 vs シス単 vs LEAP — 覚え方の設計が違う3冊</b>
+        <p>受験で主力になる英単語帳は、ターゲット1900・システム英単語・必携英単語LEAPの 3 冊に集約されます。どれを選んでも到達する語彙水準は近く、**差が出るのは覚え方の設計**です。この記…</p>
+        <span class="gcard__foot">2026-09-09</span>
+      </a>
+      <a class="gcard" href="/english/guides/nextstage-vs-vintage/" style="--gs:#B5432A">
+        <div class="gcard__no">Versus</div>
+        <b>Next Stage vs Vintage vs スクランブル — 中身はどれだけ違うのか</b>
+        <p>英文法の総合問題集として並べられるのが、Next Stage・Vintage・スクランブルの 3 冊です。この記事は、**3 冊の差がどれくらいあるのかを確かめる**ことから始めます。差が小…</p>
+        <span class="gcard__foot">2026-09-09</span>
+      </a>
+      <a class="gcard" href="/english/guides/porepore-vs-gijutsu100/" style="--gs:#B5432A">
+        <div class="gcard__no">Versus</div>
+        <b>ポレポレ vs 技術100 vs 英文熟考 下 — 上位解釈書の分かれ道</b>
+        <p>基礎の解釈書を終えたあと、次にどれを置くかで挙がるのがポレポレ英文読解プロセス50・英文解釈の技術100・英文熟考 下です。**どれも同じ帯ですが、何を読ませようとしているかが違います。**…</p>
+        <span class="gcard__foot">2026-09-09</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="block gsec" id="ranking">
+    <div class="gsec__h"><h2>ランキング</h2><span>Ranking — 1本</span></div>
+    <p class="gsec__lead">「最初の 1 冊」「短い時間で終わる本」のように、目的をひとつ決めてから順位を付けた記事です。順位の基準は各記事の冒頭に必ず書いています。</p>
+    <div class="ggrid">
+      <a class="gcard" href="/english/guides/tango-ranking/" style="--gs:#B5432A">
+        <div class="gcard__no">Ranking</div>
+        <b>英単語帳ランキング — 目的別に 9 部門で選ぶ</b>
+        <p>英単語帳は収録数が最も多い分野で、選択肢が多すぎて決まらなくなりがちです。この記事では**目的を先に決めてから 1 冊を選ぶ**形に整理しました。部門ごとに 1 冊ずつ挙げ、選んだ理由を添え…</p>
+        <span class="gcard__foot">2026-09-09</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="block gsec" id="stats">
+    <div class="gsec__h"><h2>データで見る</h2><span>Data — 1本</span></div>
+    <p class="gsec__lead">収録している参考書のデータを数え直して分かることをまとめた記事です。順位も数字も、記事を書いた人の記憶ではなくデータから毎回計算しています。</p>
+    <div class="ggrid">
+      <a class="gcard" href="/english/guides/eigo-jikan-haibun/" style="--gs:#B5432A">
+        <div class="gcard__no">Data</div>
+        <b>英語の時間配分 — 役割ごとに何時間を要求されるのか</b>
+        <p>英語は役割が多い科目です。単語・熟語・文法・解釈・長文・英作文・リスニング。**どこにどれだけ時間を配るかを決めないと、単語だけで半年が過ぎます。**この記事では、役割ごとの冊数と想定学習時…</p>
+        <span class="gcard__foot">2026-09-09</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="block gsec" id="route">
+    <div class="gsec__h"><h2>科目別ルート</h2><span>Route — 1本</span></div>
+    <p class="gsec__lead">1 科目をどの順で積むかをまとめた記事です。役割ごとに 1 冊ずつ置いていく形で、抜けと重なりが出ないようにします。</p>
+    <div class="ggrid">
+      <a class="gcard" href="/english/guides/listening-start/" style="--gs:#B5432A">
+        <div class="gcard__no">Route</div>
         <b>リスニングはいつ始めるか — 対策本の選び方と毎日の回し方</b>
         <p>共通テストの英語は、リーディングとリスニングという 2 つの試験に分かれています。換算の比率は大学ごとに違いますが、**リスニングを捨てて成立する配点ではありません**。それでも後回しにされ…</p>
         <span class="gcard__foot">2026-09-08</span>
       </a>
-      <a class="gcard" href="/english/guides/kyotest-eigo-jikan/">
-        <div class="gcard__no">Guide</div>
+    </div>
+  </div>
+
+  <div class="block gsec" id="basics">
+    <div class="gsec__h"><h2>進め方の基本</h2><span>Basics — 1本</span></div>
+    <p class="gsec__lead">科目をまたいで共通する、参考書の冊数・周回・過去問の入れ方といった土台の話です。どの科目から読んでも同じことが言えます。</p>
+    <div class="ggrid">
+      <a class="gcard" href="/english/guides/kyotest-eigo-jikan/" style="--gs:#B5432A">
+        <div class="gcard__no">Basics</div>
         <b>共通テスト英語で時間が足りない — 速読の前に疑う3つのこと</b>
         <p>共通テストの英語リーディングは、**発音・アクセントや文法の単独問題が姿を消し、すべて読解の形式**になりました。その結果、最も多い失点理由が「解けなかった」ではなく「最後まで到達しなかった…</p>
         <span class="gcard__foot">2026-09-08</span>
       </a>
     </div>
+  </div>
+
+  <div class="block gsec">
+    <div class="gsec__h"><h2>ほかの科目・ジャンルから探す</h2><span>MORE</span></div>
+    <p class="gsec__lead">科目をまたいだ比較やランキングは、ジャンル別の一覧にまとめてあります。</p>
+    <nav class="gnav" aria-label="ジャンル">
+      <a href="/guides/versus/">徹底比較（17）</a>
+      <a href="/guides/ranking/">ランキング（9）</a>
+      <a href="/guides/stats/">データで見る（5）</a>
+      <a href="/guides/choose/">選び方（6）</a>
+      <a href="/guides/route/">科目別ルート（11）</a>
+      <a href="/guides/basics/">進め方の基本（5）</a>
+    </nav>
   </div>
 </main>
 
@@ -265,8 +369,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
    "@type": "CollectionPage",
    "@id": "https://route-taizen.com/english/guides/#webpage",
    "url": "https://route-taizen.com/english/guides/",
-   "name": "英語の参考書の選び方・比較記事一覧 - 英語ルート大全",
-   "description": "大学受験英語の参考書について、似た本の違いと選び分けを解説した記事の一覧（7 本）。",
+   "name": "英語の参考書の比較・ランキング記事一覧 - 英語ルート大全",
+   "description": "大学受験英語の参考書について、似た本の違い・目的別ランキング・積む順番を解説した記事の一覧（12 本）。",
    "inLanguage": "ja",
    "isPartOf": {
     "@id": "https://route-taizen.com/#website"

@@ -1010,7 +1010,7 @@
    "d": "2026-09-03"
   },
   "file:build/content/articles.mjs": {
-   "h": "9ec178acb65f",
+   "h": "1298b84e7457",
    "d": "2026-09-08"
   },
   "file:build/content/legal.mjs": {
@@ -1026,11 +1026,11 @@
    "d": "2026-09-08"
   },
   "file:english/guides/eisaku-comparison/index.html": {
-   "h": "89e1eaf80ef1",
+   "h": "aa4861157633",
    "d": "2026-09-08"
   },
   "file:english/guides/index.html": {
-   "h": "75e2397dfdcc",
+   "h": "74ae7ebbc03c",
    "d": "2026-09-08"
   },
   "file:english/guides/kaishaku-comparison/index.html": {
@@ -1038,11 +1038,11 @@
    "d": "2026-09-08"
   },
   "file:english/guides/kyotest-eigo-jikan/index.html": {
-   "h": "0343c2dc495b",
+   "h": "aa39635d9b56",
    "d": "2026-09-08"
   },
   "file:english/guides/listening-start/index.html": {
-   "h": "a2df76c805e8",
+   "h": "5c02ec08a2c8",
    "d": "2026-09-08"
   },
   "file:english/guides/tango-comparison/index.html": {
@@ -1053,28 +1053,52 @@
    "h": "fec61b3c4d30",
    "d": "2026-09-04"
   },
+  "file:guides/basics/index.html": {
+   "h": "a8286c7d9e9e",
+   "d": "2026-09-08"
+  },
+  "file:guides/choose/index.html": {
+   "h": "179588ee3982",
+   "d": "2026-09-08"
+  },
   "file:guides/how-many-books/index.html": {
    "h": "3fb694a536e9",
    "d": "2026-09-08"
   },
   "file:guides/index.html": {
-   "h": "ade06ddc9e44",
+   "h": "fde2e2d3b42a",
    "d": "2026-09-08"
   },
   "file:guides/kakomon-timing/index.html": {
-   "h": "58d7ec35a2d1",
+   "h": "002948ef996d",
+   "d": "2026-09-08"
+  },
+  "file:guides/ranking/index.html": {
+   "h": "1235ff191998",
    "d": "2026-09-08"
   },
   "file:guides/route-hours/index.html": {
-   "h": "ff3ee9e163fb",
+   "h": "adc12496f8fe",
+   "d": "2026-09-08"
+  },
+  "file:guides/route/index.html": {
+   "h": "e55cea3da902",
    "d": "2026-09-08"
   },
   "file:guides/shuukai-sekkei/index.html": {
-   "h": "4f2a64a8224a",
+   "h": "76ba84d06001",
+   "d": "2026-09-08"
+  },
+  "file:guides/stats/index.html": {
+   "h": "882e1a3009cd",
+   "d": "2026-09-08"
+  },
+  "file:guides/versus/index.html": {
+   "h": "2f5d8761a0d8",
    "d": "2026-09-08"
   },
   "file:japanese/guides/gendaibun-goi/index.html": {
-   "h": "007f9a70735f",
+   "h": "e4ace4e83a6c",
    "d": "2026-09-08"
   },
   "file:japanese/guides/gendaibun-start/index.html": {
@@ -1082,11 +1106,11 @@
    "d": "2026-09-08"
   },
   "file:japanese/guides/index.html": {
-   "h": "2a15a4aa6bf1",
+   "h": "32bb228cd3f1",
    "d": "2026-09-08"
   },
   "file:japanese/guides/kanbun-start/index.html": {
-   "h": "d4f0caea0c89",
+   "h": "0a666065bbdb",
    "d": "2026-09-08"
   },
   "file:japanese/guides/kobun-start/index.html": {
@@ -1102,11 +1126,11 @@
    "d": "2026-09-04"
   },
   "file:math/guides/bunkei-sugaku/index.html": {
-   "h": "a339910cf203",
+   "h": "dcbfe324f337",
    "d": "2026-09-08"
   },
   "file:math/guides/bunyabetsu-kyoka/index.html": {
-   "h": "94287ba10de8",
+   "h": "1846f5663e3f",
    "d": "2026-09-08"
   },
   "file:math/guides/enshu-comparison/index.html": {
@@ -1114,7 +1138,7 @@
    "d": "2026-09-08"
   },
   "file:math/guides/index.html": {
-   "h": "57e87248cf5b",
+   "h": "3b9d2524c7b9",
    "d": "2026-09-08"
   },
   "file:math/guides/moura-comparison/index.html": {
@@ -1130,7 +1154,7 @@
    "d": "2026-09-08"
   },
   "file:science/guides/index.html": {
-   "h": "22ce8a7e7019",
+   "h": "1813e7e940c0",
    "d": "2026-09-08"
   },
   "file:science/guides/kagaku-route/index.html": {
@@ -1138,11 +1162,11 @@
    "d": "2026-09-08"
   },
   "file:science/guides/rika-select/index.html": {
-   "h": "765508b8a076",
+   "h": "0b87b933b15b",
    "d": "2026-09-08"
   },
   "file:science/guides/seibutsu-route/index.html": {
-   "h": "d82b1bddec75",
+   "h": "190728895eea",
    "d": "2026-09-08"
   },
   "file:science/index.html": {
@@ -1154,11 +1178,11 @@
    "d": "2026-09-04"
   },
   "file:social/guides/chiri-route/index.html": {
-   "h": "77e8e3e9b855",
+   "h": "46261a040a3f",
    "d": "2026-09-08"
   },
   "file:social/guides/index.html": {
-   "h": "355247f87553",
+   "h": "326a9b282d56",
    "d": "2026-09-08"
   },
   "file:social/guides/nihonshi-route/index.html": {
@@ -1170,7 +1194,7 @@
    "d": "2026-09-08"
   },
   "file:social/guides/shakai-select/index.html": {
-   "h": "346f28c06e64",
+   "h": "e258da56eb21",
    "d": "2026-09-08"
   },
   "file:social/index.html": {

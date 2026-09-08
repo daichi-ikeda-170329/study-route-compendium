@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>選び方の記事一覧（6本） - ルート大全</title>
+<meta name="description" content="大学受験の参考書についての「選び方」記事 6 本。何を先に決めるかから整理する。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/guides/choose/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="選び方の記事一覧（6本） - ルート大全">
+<meta property="og:description" content="大学受験の参考書についての「選び方」記事 6 本。何を先に決めるかから整理する。">
+<meta property="og:url" content="https://route-taizen.com/guides/choose/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="選び方の記事一覧（6本） - ルート大全">
+<meta name="twitter:description" content="大学受験の参考書についての「選び方」記事 6 本。何を先に決めるかから整理する。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#24427C}
+.ggrid{display:grid;grid-template-columns:1fr;gap:11px;margin-top:22px}
+@media(min-width:700px){.ggrid{grid-template-columns:repeat(2,1fr)}}
+.gcard{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--gs,var(--sc));padding:18px 19px 16px;box-shadow:var(--sh-s);transition:.16s;display:flex;flex-direction:column}
+.gcard:hover{transform:translateY(-3px);box-shadow:var(--sh-m);border-color:var(--line-d);border-top-color:var(--gs,var(--sc))}
+.gcard__no{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px;display:flex;gap:9px;align-items:center}
+.gcard__sub{color:var(--muted-2);letter-spacing:.06em;text-transform:none;padding-left:9px;border-left:1px solid var(--line-d)}
+.gcard b{font-family:var(--serif);font-weight:800;font-size:16.5px;letter-spacing:.02em;line-height:1.45;color:var(--ink)}
+.gcard p{font-size:12.5px;color:var(--muted);margin-top:9px;line-height:1.8;flex:1}
+.gcard__foot{font-family:var(--mono);font-size:10px;color:var(--muted-2);margin-top:13px;padding-top:10px;border-top:1px dashed var(--line);letter-spacing:.06em}
+/* ジャンルの入口カード。記事カードと見分けが付くよう、左に色の帯を置く */
+.cgrid{display:grid;grid-template-columns:1fr;gap:11px;margin-top:22px}
+@media(min-width:640px){.cgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.cgrid{grid-template-columns:repeat(3,1fr)}}
+.ccard{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 20px 17px;box-shadow:var(--sh-s);transition:.16s;display:flex;flex-direction:column}
+.ccard:hover{transform:translateY(-3px);box-shadow:var(--sh-m);border-color:var(--line-d);border-left-color:var(--sc)}
+.ccard__en{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase}
+.ccard b{font-family:var(--serif);font-weight:800;font-size:19px;letter-spacing:.02em;line-height:1.4;color:var(--ink);margin-top:8px}
+.ccard p{font-size:12.5px;color:var(--muted);margin-top:9px;line-height:1.85;flex:1}
+.ccard__n{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:13px;padding-top:10px;border-top:1px dashed var(--line);letter-spacing:.06em}
+/* ジャンルの横並びナビ。科目別一覧とジャンル一覧の両方に置く */
+.gnav{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.gnav a{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;background:var(--surface);border:1px solid var(--line);font-size:12px;font-weight:700;color:var(--ink-2);transition:.14s}
+.gnav a:hover{border-color:var(--sc);color:var(--sc)}
+.gnav a[aria-current="page"]{background:var(--sc);border-color:var(--sc);color:#fff}
+.gsec{margin-top:34px}
+.gsec__h{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.gsec__h h2{font-family:var(--serif);font-weight:800;font-size:19px;letter-spacing:.02em}
+.gsec__h span{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);letter-spacing:.06em}
+.gsec__lead{font-size:12.5px;color:var(--muted);line-height:1.9;margin-top:11px}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/">
+      <div class="logo__mark" aria-hidden="true">全</div>
+      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/guides/">解説記事</a>
+    <span class="sep">/</span><b>選び方</b>
+  </nav>
+
+  <div class="block" style="margin-top:26px">
+    <div class="eyebrow">Choose</div>
+    <h1 class="sec" style="font-size:29px">選び方</h1>
+    <p class="sec-lead">科目の選択や、持ち時間・現在地から本を決めるための記事です。個別の書名より先に、決め方の順番をそろえます。</p>
+    <nav class="gnav" aria-label="ジャンル">
+      <a href="/guides/versus/">徹底比較（17）</a>
+      <a href="/guides/ranking/">ランキング（9）</a>
+      <a href="/guides/stats/">データで見る（5）</a>
+      <a href="/guides/choose/" aria-current="page">選び方（6）</a>
+      <a href="/guides/route/">科目別ルート（11）</a>
+      <a href="/guides/basics/">進め方の基本（5）</a>
+    </nav>
+    <div class="ggrid">
+      <a class="gcard" href="/japanese/guides/gendaibun-goi/" style="--gs:#8A6D2F">
+        <div class="gcard__no">Choose<span class="gcard__sub">国語</span></div>
+        <b>現代文の語彙・漢字はどこまでやるか — キーワード集と漢字集の選び方</b>
+        <p>現代文の勉強で扱いに困るのが、キーワード集と漢字集です。**やらなくても解けることがある一方、やらないと読めない文章がある。**この曖昧さのせいで、後回しにされるか、逆に時間をかけすぎるかの…</p>
+        <span class="gcard__foot">2026-09-08</span>
+      </a>
+      <a class="gcard" href="/science/guides/rika-select/" style="--gs:#2F6E4F">
+        <div class="gcard__no">Choose<span class="gcard__sub">理科</span></div>
+        <b>理科はどの科目を選ぶか — 物理・化学・生物の作りの違い</b>
+        <p>理科の科目選択は、受験勉強の中で**最も取り返しがつきにくい判断**の 1 つです。英語や数学は途中で方針を変えても積み上げが残りますが、理科を途中で変えると、それまでの時間の多くが消えます…</p>
+        <span class="gcard__foot">2026-09-08</span>
+      </a>
+      <a class="gcard" href="/social/guides/shakai-select/" style="--gs:#5B4E9E">
+        <div class="gcard__no">Choose<span class="gcard__sub">社会</span></div>
+        <b>社会はどの科目を選ぶか — 日本史・世界史・地理・公民の決め方</b>
+        <p>社会の科目選択は、**受験勉強の総時間を最も大きく左右する判断**です。同じ志望校でも、選ぶ科目によって必要な時間が変わります。それにもかかわらず、「なんとなく好きだから」「学校で取ったから…</p>
+        <span class="gcard__foot">2026-09-08</span>
+      </a>
+      <a class="gcard" href="/guides/kaburi-check/">
+        <div class="gcard__no">Choose<span class="gcard__sub">全科目</span></div>
+        <b>その2冊、かぶっていませんか — 買う前の確認</b>
+        <p>参考書が増えるのに成績が動かないとき、原因は量ではなく**重複**にあります。同じ役割の本を 2 冊持つと、扱う内容の大半が重なるので、2 冊目に払った時間はほとんど新しいものを生みません。…</p>
+        <span class="gcard__foot">2026-09-09</span>
+      </a>
+      <a class="gcard" href="/guides/dokugaku-set/">
+        <div class="gcard__no">Choose<span class="gcard__sub">全科目</span></div>
+        <b>独学の最小セット — 質問できない前提で本を選ぶ</b>
+        <p>独学で受験勉強をする場合、参考書選びの基準が変わります。**分からない箇所を人に聞けない**という条件が加わるからです。この記事では、その条件のもとで何を優先するかを整理し、科目ごとに最小の…</p>
+        <span class="gcard__foot">2026-09-09</span>
+      </a>
+      <a class="gcard" href="/guides/nokori-jikan-select/">
+        <div class="gcard__no">Choose<span class="gcard__sub">全科目</span></div>
+        <b>残り時間から絞る — 何を捨てるかを先に決める</b>
+        <p>参考書選びは足し算で考えられがちです。あれもこれも入れたくなり、結果として全部が中途半端になります。この記事では逆に、**使える時間を先に確定させ、そこに入らない本を落とす**手順を書きます。</p>
+        <span class="gcard__foot">2026-09-09</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/#subjects">科目から選ぶ</a>
+      <a href="/#catalog">参考書から探す</a>
+      <a href="/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/guides/choose/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "選び方",
+     "item": "https://route-taizen.com/guides/choose/"
+    }
+   ]
+  },
+  {
+   "@type": "CollectionPage",
+   "@id": "https://route-taizen.com/guides/choose/#webpage",
+   "url": "https://route-taizen.com/guides/choose/",
+   "name": "選び方の記事一覧（6本） - ルート大全",
+   "description": "大学受験の参考書についての「選び方」記事 6 本。何を先に決めるかから整理する。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/guides/choose/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>
