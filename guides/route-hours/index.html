@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参考書ルートは何時間かかるか｜志望校別に計算した - ルート大全</title>
+<meta name="description" content="大学受験の参考書ルートを最後まで進めるのに必要な時間を、収録1,390冊の想定学習時間から志望校レベル別に合計しました。文系・理系別、王道網羅型と時短・精選型の2通りで比較します。">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/guides/route-hours/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="参考書ルートは何時間かかるか｜志望校別に計算した - ルート大全">
+<meta property="og:description" content="大学受験の参考書ルートを最後まで進めるのに必要な時間を、収録1,390冊の想定学習時間から志望校レベル別に合計しました。文系・理系別、王道網羅型と時短・精選型の2通りで比較します。">
+<meta property="og:url" content="https://route-taizen.com/guides/route-hours/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="参考書ルートは何時間かかるか｜志望校別に計算した - ルート大全">
+<meta name="twitter:description" content="大学受験の参考書ルートを最後まで進めるのに必要な時間を、収録1,390冊の想定学習時間から志望校レベル別に合計しました。文系・理系別、王道網羅型と時短・精選型の2通りで比較します。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#24427C}
+.art-head{padding:26px 0 0}
+.art-h1{font-family:var(--serif);font-weight:800;font-size:28px;line-height:1.4;letter-spacing:.02em;margin-top:12px}
+@media(min-width:760px){.art-h1{font-size:36px}}
+.art-meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.06em}
+.art-lead{font-size:15px;color:var(--ink-2);line-height:2;margin-top:20px;max-width:68ch}
+.toc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sc);padding:19px 22px;margin-top:26px;box-shadow:var(--sh-s)}
+.toc h2{font-family:var(--serif);font-weight:800;font-size:14px;letter-spacing:.05em;margin-bottom:11px}
+.toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:2px}
+.toc li{counter-increment:t;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:center}
+.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-weight:600}
+/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。
+   gap を詰めたぶんを min-height で取り、行の見た目は変えない。 */
+.toc a{color:var(--ink-2);font-weight:700;transition:.15s;display:inline-flex;align-items:center;min-height:26px}
+.toc a:hover{color:var(--accent-deep)}
+/* 表は幅を超えたら中だけ横スクロールさせる。画面が狭いと「切れている」と
+   誤解されやすいので、スクロールできることを画面幅で出し分けて明示する。 */
+.tbl-scroll{margin:22px 0}
+.tbl-scroll__hint{display:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2);margin-bottom:7px;align-items:center;gap:7px}
+.tbl-scroll__hint::before{content:"";width:14px;height:1.5px;background:var(--line-d)}
+@media(max-width:860px){.tbl-scroll__hint{display:flex}}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface);-webkit-overflow-scrolling:touch}
+table.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px}
+table.cmp th,table.cmp td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;white-space:nowrap;border-bottom:1px solid var(--line)}
+table.cmp tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+table.cmp tbody th a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
+table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
+table.cmp td{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/">
+      <div class="logo__mark" aria-hidden="true">全</div>
+      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
+  </div>
+</header>
+
+<main class="wrap wrap--read">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><a href="/guides/">解説記事</a>
+    <span class="sep">/</span><b>参考書ルートは何時間かかるか — 志望校レベル別に計算した</b>
+  </nav>
+
+  <article>
+    <div class="art-head">
+      <div class="eyebrow">Data</div>
+      <h1 class="art-h1">参考書ルートは何時間かかるか — 志望校レベル別に計算した</h1>
+      <div class="art-meta">
+        <span>公開 2026-09-08</span>
+        
+        <span>ルート大全 編集部</span>
+      </div>
+      <p class="art-lead">参考書ルートを見ると本が並んでいますが、<b>それを全部やるのに何時間かかるのかは、どこにも書かれていません。</b>冊数は数えられても、時間は数えられない。だから「間に合うのか」に答えられないまま本を買うことになります。このページでは、収録している 1,390 冊それぞれの想定学習時間を、志望校レベルごとのルートに沿って合計しました。数字はすべてデータから毎回計算し直しているので、本の内容が変われば表も変わります。</p>
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <h2>この記事の内容</h2>
+      <ol>
+        <li><a href="#s1">先に結論 — 王道網羅型は高3の1年に入らない</a></li>
+        <li><a href="#s2">時短・精選型を選ぶと、どれだけ減るか</a></li>
+        <li><a href="#s3">どの科目が重いのか</a></li>
+        <li><a href="#s4">数字の出どころ</a></li>
+        <li><a href="#s5">自分の志望校で見る</a></li>
+      </ol>
+    </nav>
+
+    <section class="block prose" id="s1">
+      <h2 class="sec">先に結論 — 王道網羅型は高3の1年に入らない</h2>
+      <p>まず文系の合計です。英語・数学（文系）・国語（現代文＋古文＋漢文）・社会 1 科目という、私大文系から国公立文系までを想定した組み合わせで計算しています。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <caption>文系の組み合わせ（英語・数学（文系）・国語（現代文＋古文＋漢文）・社会 1 科目（日本史））で計算した合計。1 日あたり 3 時間で割った月数を併記しています。</caption>
+          <thead><tr><th>志望レベル</th><th>王道網羅型</th><th>1日3hなら</th><th>時短・精選型</th><th>1日3hなら</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">共通テスト対策</th><td>56冊 / 1,693時間</td><td>18.6か月</td><td>44冊 / 1,313時間</td><td>14.4か月</td></tr>
+            <tr><th scope="row">日東駒専・産近甲龍</th><td>46冊 / 1,872時間</td><td>20.5か月</td><td>39冊 / 1,496時間</td><td>16.4か月</td></tr>
+            <tr><th scope="row">MARCH・関関同立</th><td>52冊 / 2,108時間</td><td>23.1か月</td><td>46冊 / 1,771時間</td><td>19.4か月</td></tr>
+            <tr><th scope="row">地方国公立</th><td>58冊 / 2,284時間</td><td>25か月</td><td>51冊 / 2,056時間</td><td>22.5か月</td></tr>
+            <tr><th scope="row">早慶・上智</th><td>59冊 / 2,822時間</td><td>30.9か月</td><td>51冊 / 2,166時間</td><td>23.8か月</td></tr>
+            <tr><th scope="row">地方旧帝</th><td>61冊 / 2,633時間</td><td>28.9か月</td><td>54冊 / 2,061時間</td><td>22.6か月</td></tr>
+            <tr><th scope="row">東大・京大・一橋・科学大</th><td>68冊 / 3,403時間</td><td>37.3か月</td><td>57冊 / 2,605時間</td><td>28.6か月</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p>次に理系です。英語・数学（理系）・国語・理科 2 科目の組み合わせです。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <caption>理系の組み合わせ（英語・数学（理系）・国語（現代文＋古文＋漢文）・理科 2 科目（物理＋化学））で計算した合計。1 日あたり 3 時間で割った月数を併記しています。</caption>
+          <thead><tr><th>志望レベル</th><th>王道網羅型</th><th>1日3hなら</th><th>時短・精選型</th><th>1日3hなら</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">共通テスト対策</th><td>64冊 / 2,002時間</td><td>22か月</td><td>49冊 / 1,517時間</td><td>16.6か月</td></tr>
+            <tr><th scope="row">日東駒専・産近甲龍</th><td>55冊 / 2,316時間</td><td>25.4か月</td><td>46冊 / 1,860時間</td><td>20.4か月</td></tr>
+            <tr><th scope="row">MARCH・関関同立</th><td>62冊 / 2,836時間</td><td>31.1か月</td><td>53冊 / 2,356時間</td><td>25.8か月</td></tr>
+            <tr><th scope="row">地方国公立</th><td>69冊 / 2,854時間</td><td>31.3か月</td><td>59冊 / 2,450時間</td><td>26.9か月</td></tr>
+            <tr><th scope="row">早慶・上智</th><td>72冊 / 3,423時間</td><td>37.5か月</td><td>61冊 / 2,704時間</td><td>29.6か月</td></tr>
+            <tr><th scope="row">地方旧帝</th><td>73冊 / 3,274時間</td><td>35.9か月</td><td>62冊 / 2,599時間</td><td>28.5か月</td></tr>
+            <tr><th scope="row">東大・京大・一橋・科学大</th><td>84冊 / 4,431時間</td><td>48.6か月</td><td>68冊 / 3,375時間</td><td>37か月</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p><b>「1日3hなら」の列を見てください。</b>どの志望レベルでも、王道網羅型は 1 日 3 時間で 1 年に収まりません。最難関にいたっては、3 時間を確保し続けても 3 年以上かかります。</p>
+      <p>ここから言えることは 1 つです。<b>上位校のルートは、高 3 の 1 年で消化する前提では作られていません。</b>高 1・高 2 のうちに導入と網羅の段階を終えている人が、高 3 で演習に入るという時間配分になっています。高 3 の春から同じルートをなぞろうとすると、必ずどこかで破綻します。</p>
+      <div class="note" style="margin:22px 0"><h3>足していないもの</h3><p>この合計に含まれていないものがあります。<b>復習の周回</b>（想定学習時間は 1 周ぶんの目安です）、<b>模試や過去問演習のうちルートに本として載っていない時間</b>、<b>学校の授業と課題</b>。したがってここに出ている数字は下限に近く、「これだけやれば受かる」ではなく「少なくともこれだけは要る」と読んでください。</p></div>
+    </section>
+
+    <section class="block prose" id="s2">
+      <h2 class="sec">時短・精選型を選ぶと、どれだけ減るか</h2>
+      <p>上の表には 2 つの並びが載っています。王道網羅型は抜けを作らずに積み上げる並び、時短・精選型は冊数を絞って要点だけを通す並びです。同じ志望レベルでも、選ぶ並びで総時間が変わります。</p>
+      <p><b>減り幅は志望レベルに比例しません。</b>最も大きいのは最難関で、上位レベルは網羅系や応用演習が厚く、1 冊減らすだけで数百時間が動きます。一方で中位の志望レベルには、2 つの並びの差が小さいものもあります。もともと通る本が絞ってあり、削れる余地が残っていないためです。<b>自分の志望レベルの行で、2 つの「1日3hなら」を見比べてください。</b></p>
+      <p>判断の順番はこうなります。</p>
+      <ul>
+        <li><b>残り時間を先に数える。</b> 受験までの月数 × 1 日に使える時間 × 30 で、持ち時間の総量が出ます。</li>
+        <li><b>表の数字と比べる。</b> 王道網羅型が入らないなら、時短・精選型を見ます。</li>
+        <li><b>それでも入らないなら、志望レベルではなく科目配分を見直す。</b> 全科目を均等に削るのではなく、配点の高い科目を残します。</li>
+      </ul>
+      <p><b>時短・精選型は手を抜く並びではありません。</b>同じ到達点へ、通る本を減らして向かう並びです。ただし 1 冊あたりの負荷は上がるので、前提となる基礎ができていることが条件になります。</p>
+    </section>
+
+    <section class="block prose" id="s3">
+      <h2 class="sec">どの科目が重いのか</h2>
+      <p>総時間だけを見ても手の打ちようがないので、科目別に割ります。早慶・上智を目指す文系の内訳です。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <caption>早慶・上智（文系・王道網羅型）を科目別に割ったもの。英語・数学（文系）・国語（現代文＋古文＋漢文）・社会 1 科目（日本史）で計算しています。</caption>
+          <thead><tr><th>科目</th><th>冊数</th><th>想定学習時間</th><th>全体に占める割合</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/english/routes/sokei/">英語</a></th><td>11冊</td><td>720時間</td><td>26%</td></tr>
+            <tr><th scope="row"><a href="/math/routes/sokei/">数学</a></th><td>5冊</td><td>710時間</td><td>25%</td></tr>
+            <tr><th scope="row"><a href="/japanese/routes/sokei/">国語</a></th><td>30冊</td><td>947時間</td><td>34%</td></tr>
+            <tr><th scope="row"><a href="/social/routes/sokei/">社会</a></th><td>13冊</td><td>445時間</td><td>16%</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p>同じレベルの理系も出します。理科 2 科目が入るぶん、構成が変わります。</p>
+      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <caption>早慶・上智（理系・王道網羅型）を科目別に割ったもの。英語・数学（理系）・国語（現代文＋古文＋漢文）・理科 2 科目（物理＋化学）で計算しています。</caption>
+          <thead><tr><th>科目</th><th>冊数</th><th>想定学習時間</th><th>全体に占める割合</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="/english/routes/sokei/">英語</a></th><td>11冊</td><td>720時間</td><td>21%</td></tr>
+            <tr><th scope="row"><a href="/math/routes/sokei/">数学</a></th><td>7冊</td><td>830時間</td><td>24%</td></tr>
+            <tr><th scope="row"><a href="/japanese/routes/sokei/">国語</a></th><td>30冊</td><td>947時間</td><td>28%</td></tr>
+            <tr><th scope="row"><a href="/science/routes/sokei/">理科</a></th><td>24冊</td><td>926時間</td><td>27%</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <p>文系と理系で、時間を食う科目が違います。文系は国語（現代文・古文・漢文の 3 分野を別々に積む）が最も大きく、理系は数学と理科 2 科目で全体のほぼ半分になります。</p>
+      <p><b>この割合は、どの科目から手をつけるかの判断材料になります。</b>割合の大きい科目は、後回しにすると取り返しがつきません。逆に割合の小さい科目は、直前期に集中して詰めても間に合う可能性があります。</p>
+    </section>
+
+    <section class="block prose" id="s4">
+      <h2 class="sec">数字の出どころ</h2>
+      <p>透明にしておきます。この記事の数字は、次の手順で毎回計算し直しています。</p>
+      <ul>
+        <li><b>1 冊ごとの想定学習時間</b>を、収録 1,390 冊それぞれに持たせています。算出のしかたは<a href="/methodology/">データの作り方</a>に書いています。</li>
+        <li><b>志望校レベル別のルート</b>に並ぶ本を、並行して進める本と最後の仕上げまで含めて集め、id で重複を除きます。</li>
+        <li>その本の想定学習時間を合計します。<b>記事の本文に数字を転記していない</b>ので、データを直せば表も同時に変わります。</li>
+      </ul>
+      <p>想定学習時間は<b>編集部の推定値</b>であって、実測値ではありません。同じ本でも、既習範囲の量や 1 日の集中度で実際にかかる時間は変わります。<b>絶対値ではなく、ルートどうしの比較と、持ち時間との突き合わせに使ってください。</b></p>
+      <div class="note" style="margin:22px 0"><h3>載せていない志望レベル</h3><p>医学部のルートは、この表に載せていません。国語のルートが医学部の志望レベルを持たないため、全科目の合計が出せないからです。<b>部分的な合計を全科目の合計として出さない</b>という方針で、行ごと省いています。</p></div>
+    </section>
+
+    <section class="block prose" id="s5">
+      <h2 class="sec">自分の志望校で見る</h2>
+      <p>ここに出したのは志望校レベル単位の合計です。実際には、同じ「早慶」でも学部によって使う科目と配点が変わります。大学別のページでは、その大学で各科目に何が問われるかと、対応するルートを一緒に見られます。</p>
+      <p><a href="/univ/">志望校から探す</a>から大学名を選ぶか、各科目の志望校別ルートで並びそのものを確認してください。</p>
+    </section>
+
+    <div class="cta">
+      <h2>残り時間から逆算する</h2>
+      <p>ここで出した総時間は、すべてを王道網羅型で進めた場合の量です。実際には、いま終えている段階から先だけを数えれば足ります。各科目の 3 分診断で現在地を入れると、そこから先の並びだけが出ます。</p>
+      <div class="cta__btns">
+        <a class="p" href="/#subjects">科目を選んで始める<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="g" href="/#catalog">参考書一覧を見る</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/#subjects">科目から選ぶ</a>
+      <a href="/#catalog">参考書から探す</a>
+      <a href="/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/guides/route-hours/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "解説記事",
+     "item": "https://route-taizen.com/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "参考書ルートは何時間かかるか — 志望校レベル別に計算した",
+     "item": "https://route-taizen.com/guides/route-hours/"
+    }
+   ]
+  },
+  {
+   "@type": "Article",
+   "@id": "https://route-taizen.com/guides/route-hours/#article",
+   "headline": "参考書ルートは何時間かかるか — 志望校レベル別に計算した",
+   "description": "大学受験の参考書ルートを最後まで進めるのに必要な時間を、収録1,390冊の想定学習時間から志望校レベル別に合計しました。文系・理系別、王道網羅型と時短・精選型の2通りで比較します。",
+   "inLanguage": "ja",
+   "datePublished": "2026-09-08",
+   "dateModified": "2026-09-08",
+   "author": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "ルート大全 編集部",
+    "url": "https://route-taizen.com/"
+   },
+   "mainEntityOfPage": "https://route-taizen.com/guides/route-hours/"
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/guides/route-hours/#webpage",
+   "url": "https://route-taizen.com/guides/route-hours/",
+   "name": "参考書ルートは何時間かかるか｜志望校別に計算した - ルート大全",
+   "description": "大学受験の参考書ルートを最後まで進めるのに必要な時間を、収録1,390冊の想定学習時間から志望校レベル別に合計しました。文系・理系別、王道網羅型と時短・精選型の2通りで比較します。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/guides/route-hours/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+</body>
+</html>

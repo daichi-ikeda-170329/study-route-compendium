@@ -29,10 +29,10 @@
 | 社会 | `social/` | 293 | 8 | 2 | `#5B4E9E` |
 | 情報 | `joho/` | 29 | — | — | `#1F6E7A` |
 | 小論文 | `shoron/` | 89 | — | — | `#8E3B5E` |
-| 全科目共通 | `guides/` | — | — | 1 | — |
-| 合計 | — | 1,390 | 42 | 13 | — |
+| 全科目共通 | `guides/` | — | — | 2 | — |
+| 合計 | — | 1,390 | 42 | 14 | — |
 
-公開ページ数は `sitemap.xml` の URL 数と一致する（`rg -c "<loc>" sitemap.xml` で数える。2026-09-03 時点で 1,476）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
+公開ページ数は `sitemap.xml` の URL 数と一致する（`rg -c "<loc>" sitemap.xml` で数える。2026-09-08 時点で 1,644）。冊数は各科目の `BOOKS` 配列（`BOOKS.push()` による追加分を含む）の要素数と一致する。
 
 ## ディレクトリ構成
 
@@ -47,6 +47,8 @@
 | `<科目>/routes/<tier>/index.html` | 志望レベル別ルート | 生成 |
 | `<科目>/guides/<slug>/index.html` | 解説記事 | 生成 |
 | `guides/<slug>/index.html` | 科目に属さない解説記事 | 生成 |
+| `univ/index.html` | 志望校から探す（大学 160 校の一覧） | 生成（`generate-universities.mjs`） |
+| `univ/<slug>/index.html` | 大学 1 校の全科目まとめ（出題形式・目標偏差値・参考書ルート・過去問） | 同上 |
 | `about/index.html` | 運営者情報 | 生成（`generate-legal.mjs`） |
 | `methodology/index.html` | データの作り方（難易度・到達目安・学習時間の算出方法） | 同上 |
 | `privacy/index.html` | プライバシーポリシー | 同上 |
@@ -72,6 +74,7 @@
 | `build/` | 生成スクリプト | 手で編集 |
 | `build/lib/ads.mjs` | Google AdSense の ID・広告枠。広告の出力はここ 1 か所で決まる | `apply-adsense.mjs` が書き換える |
 | `build/lib/flow.mjs` | 役割どうしの接続表。「次に進む本」の生成はここが正本 | 手で編集 |
+| `build/lib/route-hours.mjs` | ルート 1 本ぶんの冊数と想定学習時間の集計。記事の表はここから作る | 手で編集 |
 | `build/lib/scale.mjs` | 難易度 10 段階の定義と、その表示コンポーネント | 手で編集 |
 | `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 | 手で編集 |
 | `build/lib/words.mjs` | 禁止語・要注意語の一覧。`docs/style-guide.md` 2 節と同じものを持つ | 手で編集 |
@@ -90,6 +93,7 @@
 | `data/_rewrite/` | 書き換え後の説明文。`build/apply-book-text.mjs` が流し込む入力 | 手で編集 |
 | `docs/style-guide.md` | 文章のスタイルガイド。`check-site.mjs` がこの一部を機械で検査する | 手で編集 |
 | `build/data/aliases.json` | 参考書のあだ名（「ネクステ」など）。検索の索引に混ぜる | 手で編集 |
+| `build/data/university-slugs.json` | 大学別ページの URL スラッグ台帳。**公開後に slug を変えない** | 手で編集 |
 | `build/data/new-books.json` | 掲載を承認した新刊。ここに残っている数が「評価の残作業」 | 手で編集 |
 | `build/data/publishers.json` | 新刊を調べに行く出版社と URL。`name` は `BOOKS[].pub` と一致させる | 手で編集 |
 | `build/data/count-state.json` | 前回書き込んだ冊数。置換対象を一意に決めるために持つ | 生成（`apply-count.mjs`） |
@@ -127,22 +131,29 @@ npm run build -- --no-ogp  # OGP 画像を飛ばす（依存パッケージが�
 
 | 順 | ステップ | スクリプト |
 |---:|---|---|
-| 1 | データ検証（**ここで落ちたら先を作らない**） | `build/check-data.mjs` |
-| 2 | 年度表記を `build/data/site-meta.json` にそろえる | `build/apply-site-meta.mjs` |
-| 3 | 検索ボックスの CSS を全ページへ配る | `build/apply-search-style.mjs` |
-| 4 | 参考書の詳細ページ 1,390 件 | `build/generate-books.mjs` |
-| 5 | 参考書一覧 7 件 | `build/generate-index.mjs` |
-| 6 | 参考書おすすめ 5 件 | `build/generate-picks.mjs` |
-| 7 | 志望校別ルート 47 件 | `build/generate-routes.mjs` |
-| 8 | 解説記事 19 件 | `build/generate-articles.mjs` |
-| 9 | 信頼性ページ 6 件 | `build/generate-legal.mjs` |
-| 10 | 検索の索引 | `build/generate-search.mjs` |
-| 11 | 科目トップの静的化 | `build/prerender-tops.mjs` |
-| 12 | 冊数の表記を実数に合わせる | `build/apply-count.mjs` |
-| 13 | `sitemap.xml`（作り終えたページだけを載せる） | `build/generate-sitemap.mjs` |
-| 13 | データ品質レポート | `build/report-data-quality.mjs` |
-| 14 | OGP 画像 | `build/gen-ogp.mjs` |
-| 15 | 公開用 `dist/` | `build/build-public.mjs` |
+| 1 | データ検証 | `build/check-data.mjs` |
+| 2 | 科目データの形 | `build/snapshot-subject-data.mjs` |
+| 3 | 年度表記 | `build/apply-site-meta.mjs` |
+| 4 | 検索ボックスの CSS | `build/apply-search-style.mjs` |
+| 5 | 書籍ページ | `build/generate-books.mjs` |
+| 6 | 索引・おすすめ | `build/generate-index.mjs` |
+| 7 | おすすめ | `build/generate-picks.mjs` |
+| 8 | 志望校別ルート | `build/generate-routes.mjs` |
+| 9 | 大学別ページ | `build/generate-universities.mjs` |
+| 10 | 解説記事 | `build/generate-articles.mjs` |
+| 11 | 法務・信頼性ページ | `build/generate-legal.mjs` |
+| 12 | 学習の記録ページ | `build/generate-progress.mjs` |
+| 13 | 科目の配信アセット | `build/generate-subject-assets.mjs` |
+| 14 | 書影の出所台帳 | `build/generate-cover-ledger.mjs` |
+| 15 | 検索の絞り込み索引 | `build/generate-search-facets.mjs` |
+| 16 | 詳細検索ページ | `build/generate-search-page.mjs` |
+| 17 | 検索インデックス | `build/generate-search.mjs` |
+| 18 | 科目トップの事前描画 | `build/prerender-tops.mjs` |
+| 19 | 収録冊数 | `build/apply-count.mjs` |
+| 20 | sitemap | `build/generate-sitemap.mjs` |
+| 21 | データ品質レポート | `build/report-data-quality.mjs` |
+| 22 | OGP 画像 | `build/gen-ogp.mjs` |
+| 23 | 公開用 dist/ | `build/build-public.mjs` |
 
 **`generate-sitemap.mjs` は生成のあと**。lastmod を各ページの `<time datetime>` から拾うので、
 先に流すと 1 世代古い日付が入る。**`prerender-tops.mjs` は `generate-*` のあと**で、
@@ -245,6 +256,32 @@ node build/generate-books.mjs math ao
 - 本文中の `[[id]]` または `[[id|表示名]]` はその書籍の個別ページへのリンクになる。id が `BOOKS` に無ければビルドが止まる
 - 記事を追加したら、ポータル `index.html` の「参考書の選び方を読む」セクションにも手でリンクを足す
 
+#### 本文で使える記法
+
+| 記法 | 出力 | 落ちる条件 |
+|---|---|---|
+| `[[id]]` / `[[id\|表示名]]` | 書籍ページへのリンク | id が `BOOKS` に無い |
+| `{{/path/\|表示名}}` | サイト内の他のページへのリンク | パスが `/…/` の形でない、または `path/index.html` が実在しない |
+| `**強調**` | `<b>` | — |
+
+本文は `esc()` を通すので、**記事に生の `<a>` を書いても文字列として出る。**
+サイト内リンクは必ず `{{…}}` で書く。実在確認をビルド時に通すためで、
+死んだリンクや末尾スラッシュ欠け（本番で 301 になる）を記事から出さない。
+
+#### 集計を出すブロック
+
+冊数や時間の合計も本文に転記しない。`build/lib/route-hours.mjs` が
+`ROUTES` と `BOOKS[].h` から毎回計算し直す。
+
+| ブロック | 出るもの |
+|---|---|
+| `{ routeHoursTotal: { combo: 'bun'\|'ri', hoursPerDay } }` | 志望レベル別の総冊数・総時間・1 日あたり時間で割った月数 |
+| `{ routeHoursBySubject: { tier, combo } }` | 1 つの志望レベルを科目別に割った内訳と割合 |
+
+**科目・トラックが 1 つでも欠けている志望レベルは行ごと落とす。**部分的な合計を出すと、
+読んだ人はそれを全科目の合計として受け取る（医学部は国語のルートを持たないため出ない）。
+想定学習時間を持たない本が混ざっていたらビルドを止める。
+
 ### 画面を URL で指す
 
 科目トップは単一 HTML の SPA だが、5 つの画面はそれぞれハッシュで指せる。ポータルや外部からの直リンクの宛先になるので、画面を増やしたら `VIEWS` に足す。
@@ -258,6 +295,49 @@ node build/generate-books.mjs math ao
 | `#guide` | 学習ガイド |
 
 `go()` が `replaceState` で URL を書き換える。履歴には積まない。この SPA は「戻る」を画面遷移として扱っていないため、`pushState` にすると戻るたびに 1 画面ずつ遡ることになり、サイトを離れられなくなる。
+
+## 大学別ページ
+
+`/univ/<slug>/` に大学 1 校ぶんのページを 160 枚、`/univ/` に一覧を 1 枚生成する
+（`build/generate-universities.mjs`）。
+
+**なぜ作ったか。** 受験生が検索するのは「早稲田 英語 参考書」であって
+「早慶上智 英語 参考書ルート」ではない。2026-09-08 まで、このサイトの URL は
+志望レベル（`sokei` / `march` / `nikkoma` …）単位でしか立っておらず、
+大学名を持つページが 1 枚も無かった。同じ時点の Search Console の上位クエリ 11 件も
+すべて「〈参考書名〉 レベル」型で、大学名のクエリは 1 件も入っていない。
+
+材料は既にあった。`data/subjects/<科目>/universities.json` の `no`（出題形式）と
+`h`（目標偏差値）が、5 科目それぞれに手書きで入っている。URL に出していなかっただけである。
+
+### 中身
+
+| 節 | 出所 |
+|---|---|
+| 科目ごとの目標偏差値の表 | `universities.json` の `h`（科目ごとに値が違う） |
+| 科目ごとの出題形式 | 同 `no`。**このページの主役** |
+| ルートで最初に使う本（科目あたり 5 冊まで） | `routes.json` の該当 tier から、トラックを持ち回りで拾う |
+| 過去問 | 大学名を検索語に入れた Amazon / 楽天の検索結果 |
+| 同じ志望レベルの大学 | 台帳（内部リンク） |
+
+### 守ること
+
+- **5 科目すべてのデータが揃っている大学だけをページにする。** 理科だけの 21 校
+  （九州工業大学など）は固有テキストが 140 字前後しかない。台帳に入れると生成が落ちる
+- **参考書のリストを 5 冊より増やさない。** 増やすと、志望レベルが同じ大学どうしで
+  ページの大半が一致する。固有テキスト（`no` の 5 科目合計）は 160 校すべてで 400 字以上
+  あるので、比率を保つ
+- **`build/data/university-slugs.json` の `slug` を公開後に変えない。** 変えると
+  公開済みの URL が 404 になる。エイリアスから正規表現で導出しないのはこのため
+
+### 大学を 1 校足すとき
+
+1. 5 科目すべての `data/subjects/<科目>/universities.json` に追加する
+2. `build/data/university-slugs.json` に `{ "slug", "name", "tier" }` を足す
+3. `npm run build`
+
+台帳とデータが食い違うと**生成が落ちる**（黙って飛ばさない）。5 科目そろっているのに
+台帳へ書き忘れた場合も落ちる。
 
 ## 参考書検索（全ページ共通）
 

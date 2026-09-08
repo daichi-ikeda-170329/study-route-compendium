@@ -22,6 +22,11 @@ export const KEY_PAGES = [
   { url: '/english/books/nextstage/', name: '書籍ページ' },
   { url: '/english/books/', name: '参考書一覧' },
   { url: '/math/routes/top/', name: '志望校別ルート' },
+  /* 大学別ページは 161 枚を 1 つのテンプレートから作るので、代表 1 枚と
+     一覧 1 枚を見れば全枚数の作りを検査できる */
+  { url: '/univ/', name: '志望校一覧' },
+  { url: '/univ/waseda/', name: '大学別ページ' },
+  { url: '/guides/route-hours/', name: 'データ記事' },
   { url: '/search/', name: '詳細検索' },
   { url: '/progress/', name: '学習の記録' },
   { url: '/privacy/', name: 'プライバシー' },

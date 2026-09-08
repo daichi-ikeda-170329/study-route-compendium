@@ -19,6 +19,15 @@ import { coverBox } from './lib/cover.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { subjectContentDate, saveDates } from './lib/updated.mjs';
 
+/* 大学名 → /univ/<slug>/ の対応。台帳に載っている大学だけをリンクにする
+   （載っていない大学はページが無いので、素のテキストのまま出す） */
+const UNIV_SLUG = new Map(
+  JSON.parse(fs.readFileSync(path.join(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'),
+    'build', 'data', 'university-slugs.json'), 'utf8'))
+    .universities.map(u => [u.name, u.slug]),
+);
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 /** トラックキーの表示名。分野コードは SUB_LABELS と共通 */
@@ -238,7 +247,9 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/${sub.ogp || `ogp-${sub.di
 .rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.unis span{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
+.unis span,.unis a{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
+.unis a{transition:.15s}
+.unis a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);color:var(--accent-deep)}
 </style>
 </head>
 <body>
@@ -275,9 +286,12 @@ ${sections}
   ${unis.length ? `<section class="block">
     <div class="eyebrow">Target</div>
     <h2 class="sec">この志望レベルに含まれる大学</h2>
-    <p class="sec-lead">${esc(sub.full)}が「${esc(tier.name)}」として扱っている大学です。同じ大学でも学部・方式で必要な到達点は変わります。個別の出題傾向は${esc(sub.full)}のルート画面で大学名を入れると確認できます。</p>
+    <p class="sec-lead">${esc(sub.full)}が「${esc(tier.name)}」として扱っている大学です。同じ大学でも学部・方式で必要な到達点は変わります。大学名を押すと、その大学の全科目の出題形式と参考書ルートを見られます。</p>
     <div class="unis">
-${unis.slice(0, 60).map(u => `      <span>${esc(u.n)}</span>`).join('\n')}
+${unis.slice(0, 60).map(u => {
+    const slug = UNIV_SLUG.get(u.n);
+    return `      ${slug ? `<a href="/univ/${slug}/">${esc(u.n)}</a>` : `<span>${esc(u.n)}</span>`}`;
+  }).join('\n')}
     </div>
     ${unis.length > 60 ? `<p class="sec-lead" style="margin-top:12px">ほか ${unis.length - 60} 校</p>` : ''}
   </section>` : ''}

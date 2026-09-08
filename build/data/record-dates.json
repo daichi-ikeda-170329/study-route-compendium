@@ -1010,56 +1010,60 @@
    "d": "2026-09-03"
   },
   "file:build/content/articles.mjs": {
-   "h": "aa03fe7a50e4",
-   "d": "2026-08-21"
+   "h": "df72984b72c8",
+   "d": "2026-09-08"
   },
   "file:build/content/legal.mjs": {
    "h": "86b59f8908eb",
    "d": "2026-09-04"
   },
   "file:english/guides/bunpo-comparison/index.html": {
-   "h": "fb6c96e404f1",
-   "d": "2026-09-05"
+   "h": "37d9d306dfc5",
+   "d": "2026-09-08"
   },
   "file:english/guides/chobun-comparison/index.html": {
-   "h": "9bf64cfd4aa1",
-   "d": "2026-09-05"
+   "h": "df9cc48d0ff3",
+   "d": "2026-09-08"
   },
   "file:english/guides/index.html": {
-   "h": "edb9f6aed421",
-   "d": "2026-09-05"
+   "h": "b7f8deadd753",
+   "d": "2026-09-08"
   },
   "file:english/guides/kaishaku-comparison/index.html": {
-   "h": "2a8e03f74222",
-   "d": "2026-09-05"
+   "h": "23c62ba08f9a",
+   "d": "2026-09-08"
   },
   "file:english/guides/tango-comparison/index.html": {
-   "h": "8c5c8e5daa03",
-   "d": "2026-09-05"
+   "h": "d41e1c3bc036",
+   "d": "2026-09-08"
   },
   "file:english/index.html": {
    "h": "fec61b3c4d30",
    "d": "2026-09-04"
   },
   "file:guides/how-many-books/index.html": {
-   "h": "a65620e06da8",
-   "d": "2026-09-05"
+   "h": "3fb694a536e9",
+   "d": "2026-09-08"
   },
   "file:guides/index.html": {
-   "h": "ec17fb42acc3",
-   "d": "2026-09-05"
+   "h": "0076a5749078",
+   "d": "2026-09-08"
+  },
+  "file:guides/route-hours/index.html": {
+   "h": "ff3ee9e163fb",
+   "d": "2026-09-08"
   },
   "file:japanese/guides/gendaibun-start/index.html": {
-   "h": "bbf2a5c6f135",
-   "d": "2026-09-05"
+   "h": "dfe466fd4ff2",
+   "d": "2026-09-08"
   },
   "file:japanese/guides/index.html": {
-   "h": "c466e425ae1f",
-   "d": "2026-09-05"
+   "h": "009261863e2b",
+   "d": "2026-09-08"
   },
   "file:japanese/guides/kobun-start/index.html": {
-   "h": "0ebdca716445",
-   "d": "2026-09-05"
+   "h": "da46a5563259",
+   "d": "2026-09-08"
   },
   "file:japanese/index.html": {
    "h": "e6cb791391dd",
@@ -1070,32 +1074,32 @@
    "d": "2026-09-04"
   },
   "file:math/guides/enshu-comparison/index.html": {
-   "h": "ecf9717fe1e4",
-   "d": "2026-09-05"
+   "h": "1cc51c72ad1b",
+   "d": "2026-09-08"
   },
   "file:math/guides/index.html": {
-   "h": "c677fb381b6e",
-   "d": "2026-09-05"
+   "h": "6815994706f0",
+   "d": "2026-09-08"
   },
   "file:math/guides/moura-comparison/index.html": {
-   "h": "fe7e827b2762",
-   "d": "2026-09-05"
+   "h": "276a6bbaf4fc",
+   "d": "2026-09-08"
   },
   "file:math/index.html": {
    "h": "aa2c215c4194",
    "d": "2026-09-04"
   },
   "file:science/guides/butsuri-route/index.html": {
-   "h": "9eb3ad2402ed",
-   "d": "2026-09-05"
+   "h": "b02d3e64a56c",
+   "d": "2026-09-08"
   },
   "file:science/guides/index.html": {
-   "h": "7fa81570fa2d",
-   "d": "2026-09-05"
+   "h": "5eaacdc1ba37",
+   "d": "2026-09-08"
   },
   "file:science/guides/kagaku-route/index.html": {
-   "h": "c1349d60c055",
-   "d": "2026-09-05"
+   "h": "57fb6cfb458a",
+   "d": "2026-09-08"
   },
   "file:science/index.html": {
    "h": "7c4665501cb9",
@@ -1106,16 +1110,16 @@
    "d": "2026-09-04"
   },
   "file:social/guides/index.html": {
-   "h": "1aa4a9db517f",
-   "d": "2026-09-05"
+   "h": "bd97160e9d57",
+   "d": "2026-09-08"
   },
   "file:social/guides/nihonshi-route/index.html": {
-   "h": "5e915377fccc",
-   "d": "2026-09-05"
+   "h": "261b7614090e",
+   "d": "2026-09-08"
   },
   "file:social/guides/sekaishi-route/index.html": {
-   "h": "776dd8a0fc2f",
-   "d": "2026-09-05"
+   "h": "141deee824f3",
+   "d": "2026-09-08"
   },
   "file:social/index.html": {
    "h": "5d04183650eb",
@@ -5678,32 +5682,32 @@
    "d": "2026-09-03"
   },
   "subject/english": {
-   "h": "34b5aad39296",
-   "d": "2026-09-05"
+   "h": "75aca4e4936c",
+   "d": "2026-09-08"
   },
   "subject/japanese": {
-   "h": "8d98cf9bbf9c",
-   "d": "2026-09-05"
+   "h": "735b991eacee",
+   "d": "2026-09-08"
   },
   "subject/joho": {
-   "h": "2b42aa0ce05c",
-   "d": "2026-09-05"
+   "h": "a7df38c86225",
+   "d": "2026-09-08"
   },
   "subject/math": {
-   "h": "67a17d422c76",
-   "d": "2026-09-05"
+   "h": "3a81d79cee4e",
+   "d": "2026-09-08"
   },
   "subject/science": {
-   "h": "2818f65a6547",
-   "d": "2026-09-05"
+   "h": "a2cc6c8a109f",
+   "d": "2026-09-08"
   },
   "subject/shoron": {
-   "h": "7513329373f1",
-   "d": "2026-09-05"
+   "h": "c364c45306c7",
+   "d": "2026-09-08"
   },
   "subject/social": {
-   "h": "d9380fbca91b",
-   "d": "2026-09-05"
+   "h": "995defc8ae9d",
+   "d": "2026-09-08"
   },
   "top/english": {
    "h": "3ff80c628dec",
@@ -5732,6 +5736,650 @@
   "top/social": {
    "h": "ac43c8f66b40",
    "d": "2026-09-04"
+  },
+  "univ/aichi": {
+   "h": "726d702a87a7",
+   "d": "2026-09-08"
+  },
+  "univ/aichi-med": {
+   "h": "4d6f32396db6",
+   "d": "2026-09-08"
+  },
+  "univ/aiu": {
+   "h": "040221f4f78a",
+   "d": "2026-09-08"
+  },
+  "univ/aizu": {
+   "h": "31fe357f3e73",
+   "d": "2026-09-08"
+  },
+  "univ/akita": {
+   "h": "7a9500d7dae8",
+   "d": "2026-09-08"
+  },
+  "univ/aoyama": {
+   "h": "2f07da8135ce",
+   "d": "2026-09-08"
+  },
+  "univ/asahikawa": {
+   "h": "eaa3bf5da122",
+   "d": "2026-09-08"
+  },
+  "univ/asia": {
+   "h": "10770b6df64d",
+   "d": "2026-09-08"
+  },
+  "univ/chiba": {
+   "h": "cf62ae9abf46",
+   "d": "2026-09-08"
+  },
+  "univ/chibakodai": {
+   "h": "724bb7527efb",
+   "d": "2026-09-08"
+  },
+  "univ/chukyo": {
+   "h": "41983a878154",
+   "d": "2026-09-08"
+  },
+  "univ/chuo": {
+   "h": "08cf0c219deb",
+   "d": "2026-09-08"
+  },
+  "univ/daito": {
+   "h": "5083e968ad75",
+   "d": "2026-09-08"
+  },
+  "univ/dendai": {
+   "h": "110a8e12c751",
+   "d": "2026-09-08"
+  },
+  "univ/dokkyo": {
+   "h": "5c6bd07c1151",
+   "d": "2026-09-08"
+  },
+  "univ/dokkyomed": {
+   "h": "e816e9e22014",
+   "d": "2026-09-08"
+  },
+  "univ/doshisha": {
+   "h": "93fbdb85d42c",
+   "d": "2026-09-08"
+  },
+  "univ/ehime": {
+   "h": "41d98b1ed483",
+   "d": "2026-09-08"
+  },
+  "univ/fmu": {
+   "h": "4d3e3dcf63c0",
+   "d": "2026-09-08"
+  },
+  "univ/fujita": {
+   "h": "b17931879955",
+   "d": "2026-09-08"
+  },
+  "univ/fukui": {
+   "h": "6600e7ba8008",
+   "d": "2026-09-08"
+  },
+  "univ/fukuoka": {
+   "h": "28bce14ad17e",
+   "d": "2026-09-08"
+  },
+  "univ/fukushima": {
+   "h": "783eb537debe",
+   "d": "2026-09-08"
+  },
+  "univ/fun": {
+   "h": "65933f34169d",
+   "d": "2026-09-08"
+  },
+  "univ/gakugei": {
+   "h": "9b94850b081a",
+   "d": "2026-09-08"
+  },
+  "univ/gakushuin": {
+   "h": "ea7b750973c5",
+   "d": "2026-09-08"
+  },
+  "univ/gifu": {
+   "h": "ccef8aad30d5",
+   "d": "2026-09-08"
+  },
+  "univ/gunma": {
+   "h": "2f4b1cee162a",
+   "d": "2026-09-08"
+  },
+  "univ/hamamatsu": {
+   "h": "57d3f5b8a1ee",
+   "d": "2026-09-08"
+  },
+  "univ/handai": {
+   "h": "0d0cf54b1c30",
+   "d": "2026-09-08"
+  },
+  "univ/hirodai": {
+   "h": "d770d1564e75",
+   "d": "2026-09-08"
+  },
+  "univ/hirosaki": {
+   "h": "b1fbdaa10186",
+   "d": "2026-09-08"
+  },
+  "univ/hitotsubashi": {
+   "h": "7b2a5d0d0b1a",
+   "d": "2026-09-08"
+  },
+  "univ/hokudai": {
+   "h": "f286ec9adcbf",
+   "d": "2026-09-08"
+  },
+  "univ/hosei": {
+   "h": "660ce5490b54",
+   "d": "2026-09-08"
+  },
+  "univ/hoshi": {
+   "h": "2888b311374d",
+   "d": "2026-09-08"
+  },
+  "univ/hyogo-med": {
+   "h": "d7fac1b02667",
+   "d": "2026-09-08"
+  },
+  "univ/ibaraki": {
+   "h": "3951ca7ae96b",
+   "d": "2026-09-08"
+  },
+  "univ/icu": {
+   "h": "b63ad3cdd81f",
+   "d": "2026-09-08"
+  },
+  "univ/index": {
+   "h": "a6e81eb40571",
+   "d": "2026-09-08"
+  },
+  "univ/iuhw": {
+   "h": "10beaec015c3",
+   "d": "2026-09-08"
+  },
+  "univ/iwate": {
+   "h": "a3ab52dde943",
+   "d": "2026-09-08"
+  },
+  "univ/iwate-med": {
+   "h": "b065fa968de5",
+   "d": "2026-09-08"
+  },
+  "univ/jichi": {
+   "h": "03da650154e2",
+   "d": "2026-09-08"
+  },
+  "univ/jikei": {
+   "h": "63870f1cb0af",
+   "d": "2026-09-08"
+  },
+  "univ/juntendo": {
+   "h": "5ea887938e5d",
+   "d": "2026-09-08"
+  },
+  "univ/jwu": {
+   "h": "93c38ff9c43e",
+   "d": "2026-09-08"
+  },
+  "univ/kagawa": {
+   "h": "95803014447a",
+   "d": "2026-09-08"
+  },
+  "univ/kagoshima": {
+   "h": "18692910d4da",
+   "d": "2026-09-08"
+  },
+  "univ/kaiyodai": {
+   "h": "d0ff486dc707",
+   "d": "2026-09-08"
+  },
+  "univ/kanagawa": {
+   "h": "47053e02e1b2",
+   "d": "2026-09-08"
+  },
+  "univ/kanazawa": {
+   "h": "bd00fe1b892f",
+   "d": "2026-09-08"
+  },
+  "univ/kanazawa-med": {
+   "h": "f2a7baec2737",
+   "d": "2026-09-08"
+  },
+  "univ/kansai": {
+   "h": "87bc2dd76314",
+   "d": "2026-09-08"
+  },
+  "univ/kawasaki-med": {
+   "h": "abd2c6f70fec",
+   "d": "2026-09-08"
+  },
+  "univ/keio": {
+   "h": "a00f5df3dc34",
+   "d": "2026-09-08"
+  },
+  "univ/kindai": {
+   "h": "01ad1bbbd6b7",
+   "d": "2026-09-08"
+  },
+  "univ/kit": {
+   "h": "c572f6849112",
+   "d": "2026-09-08"
+  },
+  "univ/kitakyu": {
+   "h": "ec707dad6fa2",
+   "d": "2026-09-08"
+  },
+  "univ/kitami": {
+   "h": "4252eb5da7c3",
+   "d": "2026-09-08"
+  },
+  "univ/kitasato": {
+   "h": "491c0295f8b4",
+   "d": "2026-09-08"
+  },
+  "univ/kmu": {
+   "h": "960bf82689cd",
+   "d": "2026-09-08"
+  },
+  "univ/kobe": {
+   "h": "cfcca3d0327d",
+   "d": "2026-09-08"
+  },
+  "univ/kochi": {
+   "h": "4394b4e34de3",
+   "d": "2026-09-08"
+  },
+  "univ/kogakuin": {
+   "h": "2f73b7e0e5a8",
+   "d": "2026-09-08"
+  },
+  "univ/kokugakuin": {
+   "h": "8f5a599d3911",
+   "d": "2026-09-08"
+  },
+  "univ/kokushikan": {
+   "h": "7f2d7e981a12",
+   "d": "2026-09-08"
+  },
+  "univ/komazawa": {
+   "h": "d03540cc98cd",
+   "d": "2026-09-08"
+  },
+  "univ/konan": {
+   "h": "781620b28939",
+   "d": "2026-09-08"
+  },
+  "univ/kpu": {
+   "h": "8fd3837535dc",
+   "d": "2026-09-08"
+  },
+  "univ/kpum": {
+   "h": "1c1492bef61c",
+   "d": "2026-09-08"
+  },
+  "univ/kumadai": {
+   "h": "14169bb39d1d",
+   "d": "2026-09-08"
+  },
+  "univ/kurume": {
+   "h": "0508cea09c9d",
+   "d": "2026-09-08"
+  },
+  "univ/kwansei": {
+   "h": "c7294123340d",
+   "d": "2026-09-08"
+  },
+  "univ/kyodai": {
+   "h": "b8d5ccc2b933",
+   "d": "2026-09-08"
+  },
+  "univ/kyorin": {
+   "h": "870d3224b667",
+   "d": "2026-09-08"
+  },
+  "univ/kyosan": {
+   "h": "aa83dbc7c966",
+   "d": "2026-09-08"
+  },
+  "univ/kyudai": {
+   "h": "ffae72fa3801",
+   "d": "2026-09-08"
+  },
+  "univ/marianna": {
+   "h": "191e3f913386",
+   "d": "2026-09-08"
+  },
+  "univ/meidai": {
+   "h": "bfbb03aa1a22",
+   "d": "2026-09-08"
+  },
+  "univ/meiji": {
+   "h": "25a54d3e1944",
+   "d": "2026-09-08"
+  },
+  "univ/meijigakuin": {
+   "h": "f66f913d36a7",
+   "d": "2026-09-08"
+  },
+  "univ/meijo": {
+   "h": "7307c28102f3",
+   "d": "2026-09-08"
+  },
+  "univ/meiyaku": {
+   "h": "fa984b4fd271",
+   "d": "2026-09-08"
+  },
+  "univ/mie": {
+   "h": "62e0a3156ee0",
+   "d": "2026-09-08"
+  },
+  "univ/miyazaki": {
+   "h": "b0d4f7c10659",
+   "d": "2026-09-08"
+  },
+  "univ/muroran": {
+   "h": "ecbc434ed8a8",
+   "d": "2026-09-08"
+  },
+  "univ/musashi": {
+   "h": "7ca4d6f79dda",
+   "d": "2026-09-08"
+  },
+  "univ/nagasaki": {
+   "h": "6dc2d5ff0e25",
+   "d": "2026-09-08"
+  },
+  "univ/nagoyacu": {
+   "h": "7d99ea11e01d",
+   "d": "2026-09-08"
+  },
+  "univ/nanzan": {
+   "h": "639547a98010",
+   "d": "2026-09-08"
+  },
+  "univ/nara-med": {
+   "h": "270cbc981cf1",
+   "d": "2026-09-08"
+  },
+  "univ/narawu": {
+   "h": "79114bc798f3",
+   "d": "2026-09-08"
+  },
+  "univ/nihon": {
+   "h": "1ac7664c7576",
+   "d": "2026-09-08"
+  },
+  "univ/niigata": {
+   "h": "da131f49a52b",
+   "d": "2026-09-08"
+  },
+  "univ/nitech": {
+   "h": "12491334f7cb",
+   "d": "2026-09-08"
+  },
+  "univ/nms": {
+   "h": "bb44d39cc247",
+   "d": "2026-09-08"
+  },
+  "univ/nodai": {
+   "h": "004df0a8f1cf",
+   "d": "2026-09-08"
+  },
+  "univ/nokodai": {
+   "h": "d19d05a23ba4",
+   "d": "2026-09-08"
+  },
+  "univ/obihiro": {
+   "h": "f78f3db44db3",
+   "d": "2026-09-08"
+  },
+  "univ/ochanomizu": {
+   "h": "41e038fa9230",
+   "d": "2026-09-08"
+  },
+  "univ/oita": {
+   "h": "cdfed017b2e9",
+   "d": "2026-09-08"
+  },
+  "univ/okadai": {
+   "h": "965efa8fbb3f",
+   "d": "2026-09-08"
+  },
+  "univ/ompu": {
+   "h": "c4e9d2d007ae",
+   "d": "2026-09-08"
+  },
+  "univ/osakametro": {
+   "h": "2a54754dabc2",
+   "d": "2026-09-08"
+  },
+  "univ/otaru": {
+   "h": "9289a99c07b1",
+   "d": "2026-09-08"
+  },
+  "univ/pu-kumamoto": {
+   "h": "a8ca19bb4541",
+   "d": "2026-09-08"
+  },
+  "univ/rikkyo": {
+   "h": "e2d47ddb613b",
+   "d": "2026-09-08"
+  },
+  "univ/ritsumei": {
+   "h": "184296b8dd8f",
+   "d": "2026-09-08"
+  },
+  "univ/ryukoku": {
+   "h": "ef3a5b7462a0",
+   "d": "2026-09-08"
+  },
+  "univ/ryukyu": {
+   "h": "e8c3b79ea6dc",
+   "d": "2026-09-08"
+  },
+  "univ/saga": {
+   "h": "0757b3048235",
+   "d": "2026-09-08"
+  },
+  "univ/saidai": {
+   "h": "3517cd1377fe",
+   "d": "2026-09-08"
+  },
+  "univ/saitama-med": {
+   "h": "53bf54f21640",
+   "d": "2026-09-08"
+  },
+  "univ/sapporomed": {
+   "h": "9773018db0cc",
+   "d": "2026-09-08"
+  },
+  "univ/seijo": {
+   "h": "fd6ef361760f",
+   "d": "2026-09-08"
+  },
+  "univ/seikei": {
+   "h": "30d04a5d38eb",
+   "d": "2026-09-08"
+  },
+  "univ/seinan": {
+   "h": "efcd71b302b3",
+   "d": "2026-09-08"
+  },
+  "univ/senshu": {
+   "h": "565216d2f4c6",
+   "d": "2026-09-08"
+  },
+  "univ/shibaura": {
+   "h": "530c2e2ecd4f",
+   "d": "2026-09-08"
+  },
+  "univ/shiga": {
+   "h": "dadb9d7b09fd",
+   "d": "2026-09-08"
+  },
+  "univ/shiga-med": {
+   "h": "53358f595559",
+   "d": "2026-09-08"
+  },
+  "univ/shimane": {
+   "h": "e1c78f648f20",
+   "d": "2026-09-08"
+  },
+  "univ/shinshu": {
+   "h": "89633a523963",
+   "d": "2026-09-08"
+  },
+  "univ/shizuoka": {
+   "h": "2ce19220ebd1",
+   "d": "2026-09-08"
+  },
+  "univ/showa": {
+   "h": "981d1242875e",
+   "d": "2026-09-08"
+  },
+  "univ/sophia": {
+   "h": "a46da73ebbbf",
+   "d": "2026-09-08"
+  },
+  "univ/tcu": {
+   "h": "ae432c3e3ac6",
+   "d": "2026-09-08"
+  },
+  "univ/tcue": {
+   "h": "f814c1ff1920",
+   "d": "2026-09-08"
+  },
+  "univ/teikyo": {
+   "h": "dd72e521e879",
+   "d": "2026-09-08"
+  },
+  "univ/tmu": {
+   "h": "177e72b8cf0f",
+   "d": "2026-09-08"
+  },
+  "univ/todai": {
+   "h": "3d1e6d4fa555",
+   "d": "2026-09-08"
+  },
+  "univ/toho": {
+   "h": "a5c81c937449",
+   "d": "2026-09-08"
+  },
+  "univ/tohoku": {
+   "h": "866bcb965aee",
+   "d": "2026-09-08"
+  },
+  "univ/tohoku-mpu": {
+   "h": "4db13524e433",
+   "d": "2026-09-08"
+  },
+  "univ/tokai": {
+   "h": "80ef560db9bb",
+   "d": "2026-09-08"
+  },
+  "univ/tokushima": {
+   "h": "d66bccf7c977",
+   "d": "2026-09-08"
+  },
+  "univ/tokyo-med": {
+   "h": "d294286fb96f",
+   "d": "2026-09-08"
+  },
+  "univ/tokyotech": {
+   "h": "aef01bff991e",
+   "d": "2026-09-08"
+  },
+  "univ/tottori": {
+   "h": "f52f5a2671e3",
+   "d": "2026-09-08"
+  },
+  "univ/toyaku": {
+   "h": "23a05cc34192",
+   "d": "2026-09-08"
+  },
+  "univ/toyama": {
+   "h": "1d7577dd2e97",
+   "d": "2026-09-08"
+  },
+  "univ/toyo": {
+   "h": "135f2a7cb41b",
+   "d": "2026-09-08"
+  },
+  "univ/tsuda": {
+   "h": "e78b1b477d89",
+   "d": "2026-09-08"
+  },
+  "univ/tsukuba": {
+   "h": "b6657be41f11",
+   "d": "2026-09-08"
+  },
+  "univ/tsuru": {
+   "h": "74835456e9fe",
+   "d": "2026-09-08"
+  },
+  "univ/tus": {
+   "h": "12a2bf56c226",
+   "d": "2026-09-08"
+  },
+  "univ/twcu": {
+   "h": "715fdb27375d",
+   "d": "2026-09-08"
+  },
+  "univ/u-shizuoka": {
+   "h": "baea010a8813",
+   "d": "2026-09-08"
+  },
+  "univ/uec": {
+   "h": "a5b18190575c",
+   "d": "2026-09-08"
+  },
+  "univ/uhyogo": {
+   "h": "aed8be495b60",
+   "d": "2026-09-08"
+  },
+  "univ/uoeh": {
+   "h": "651e7fe9f443",
+   "d": "2026-09-08"
+  },
+  "univ/utsunomiya": {
+   "h": "29e9162f99ef",
+   "d": "2026-09-08"
+  },
+  "univ/wakayama": {
+   "h": "974e21ff8643",
+   "d": "2026-09-08"
+  },
+  "univ/wakayama-med": {
+   "h": "f54e416ad4fd",
+   "d": "2026-09-08"
+  },
+  "univ/waseda": {
+   "h": "516a28da034f",
+   "d": "2026-09-08"
+  },
+  "univ/yamagata": {
+   "h": "d792ac2f29a0",
+   "d": "2026-09-08"
+  },
+  "univ/yamaguchi": {
+   "h": "2ee5dabb0c24",
+   "d": "2026-09-08"
+  },
+  "univ/yamanashi": {
+   "h": "e8daa2bba5d0",
+   "d": "2026-09-08"
+  },
+  "univ/ycu": {
+   "h": "77a8f2694a60",
+   "d": "2026-09-08"
+  },
+  "univ/yokokoku": {
+   "h": "49009f916e76",
+   "d": "2026-09-08"
   }
  }
 }
