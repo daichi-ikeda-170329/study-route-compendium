@@ -18,6 +18,7 @@ import { bookCards } from './lib/cards.mjs';
 import { ARTICLES } from './content/articles.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { fileDate, saveDates } from './lib/updated.mjs';
+import { COMBOS, POLICIES, comboTotal, routeTotal, tracksOf, monthsAt } from './lib/route-hours.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -40,9 +41,34 @@ function bookLink(dir, id, label) {
   return `<a href="/${dir}/books/${b.id}/">${esc(label || b.name)}</a>`;
 }
 
-/** 本文中の [[id]] / [[id|表示名]] を書籍ページへのリンクに変換する */
+/**
+ * サイト内リンク。`{{/methodology/|データの作り方}}` の形で書く。
+ *
+ * 本文は `esc()` を通すので、記事側に生の `<a>` を書いても文字列として出てしまう。
+ * かといって素通しにすると本文から任意の HTML を入れられる。そこで
+ * **パスと表示名だけを受け取り、リンクはここで組み立てる。**
+ *
+ * パスは `/…/` の形（末尾スラッシュ必須。無いと本番で 301 になる）で、
+ * **実在するページでなければビルドを止める。**記事から死んだリンクを出さないため。
+ */
+function siteLink(href, label) {
+  if (!/^\/[a-z0-9/_-]*\/$/i.test(href)) {
+    throw new Error(`siteLink: パスの形が不正（/…/ で書く）: ${href}`);
+  }
+  const file = path.join(ROOT, href, 'index.html');
+  if (!fs.existsSync(file)) throw new Error(`siteLink: 実在しないページ: ${href}`);
+  return `<a href="${href}">${esc(label)}</a>`;
+}
+
+/**
+ * 本文中の記法を HTML に変換する。
+ *   [[id]] / [[id|表示名]]        書籍ページへのリンク
+ *   {{/path/|表示名}}             サイト内の他のページへのリンク
+ *   **強調**                      <b>
+ */
 function inline(text, dir) {
   return esc(text)
+    .replace(/\{\{(\/[^|{}]*)\|([^{}]+)\}\}/g, (_, href, label) => siteLink(href, label))
     .replace(/\[\[([a-z0-9_-]+)(?:\|([^\]]+))?\]\]/gi, (_, id, label) => bookLink(dir, id, label))
     .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
 }
@@ -87,6 +113,82 @@ ${books.map(b => `            <tr><th scope="row">${bookLink(d, b.id)}</th>${col
     const list = bl.books.map(id => lookup(d, id, 'books'));
     return bookCards(list, sub, data[d].stages, 'margin:20px 0');
   }
+  /* 志望レベル別の総学習時間。**記事本文に数字を書かない**ための表で、
+     BOOKS の h と ROUTES から毎回計算し直す（build/lib/route-hours.mjs）。
+
+     科目・トラックが 1 つでも欠けている志望レベルは行ごと落とす。
+     部分的な合計を出すと、読んだ人はそれを全科目の合計だと受け取る。 */
+  if (bl.routeHoursTotal) {
+    const combo = COMBOS.find(c => c.id === bl.routeHoursTotal.combo);
+    if (!combo) throw new Error(`routeHoursTotal: 知らない組み合わせ ${bl.routeHoursTotal.combo}`);
+    const perDay = bl.routeHoursTotal.hoursPerDay || 3;
+    const rows = [];
+    for (const t of data.english.tiers) {
+      const omni = comboTotal(data, combo, t.id, 'omni');
+      const quick = comboTotal(data, combo, t.id, 'quick');
+      if (omni.missingTracks.length || quick.missingTracks.length) continue;
+      if (!omni.books || !quick.books) continue;
+      if (omni.missing || quick.missing) {
+        throw new Error(`routeHoursTotal: ${combo.id}/${t.id} に想定学習時間を持たない本がある`);
+      }
+      rows.push({ t, omni, quick });
+    }
+    if (!rows.length) throw new Error(`routeHoursTotal: ${combo.id} に出せる行が無い`);
+    return `      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <caption>${esc(combo.label)}の組み合わせ（${esc(combo.note)}）で計算した合計。1 日あたり ${perDay} 時間で割った月数を併記しています。</caption>
+          <thead><tr><th>志望レベル</th><th>王道網羅型</th><th>1日${perDay}hなら</th><th>時短・精選型</th><th>1日${perDay}hなら</th></tr></thead>
+          <tbody>
+${rows.map(r => `            <tr><th scope="row">${esc(r.t.name)}</th>`
+      + `<td>${r.omni.books}冊 / ${r.omni.hours.toLocaleString('en-US')}時間</td>`
+      + `<td>${monthsAt(r.omni.hours, perDay)}か月</td>`
+      + `<td>${r.quick.books}冊 / ${r.quick.hours.toLocaleString('en-US')}時間</td>`
+      + `<td>${monthsAt(r.quick.hours, perDay)}か月</td></tr>`).join('\n')}
+          </tbody>
+        </table>
+        </div>
+      </div>`;
+  }
+
+  /* 1 つの志望レベルを科目別に割った表。どの科目が重いかを見せる */
+  if (bl.routeHoursBySubject) {
+    const { tier, combo: comboId } = bl.routeHoursBySubject;
+    const combo = COMBOS.find(c => c.id === comboId);
+    if (!combo) throw new Error(`routeHoursBySubject: 知らない組み合わせ ${comboId}`);
+    const tierDef = data.english.tiers.find(t => t.id === tier);
+    if (!tierDef) throw new Error(`routeHoursBySubject: 知らない志望レベル ${tier}`);
+
+    const rows = [];
+    for (const part of combo.parts) {
+      const sub = SUBJECTS.find(x => x.dir === part.dir);
+      let books = 0, hours = 0;
+      for (const track of part.tracks) {
+        const t = routeTotal(data[part.dir], tier, track, 'omni');
+        if (!t) throw new Error(`routeHoursBySubject: ${part.dir}/${track} の ${tier} が無い`);
+        if (t.missing) throw new Error(`routeHoursBySubject: ${part.dir}/${track} に想定学習時間を持たない本がある`);
+        books += t.books; hours += t.hours;
+      }
+      rows.push({ name: sub.ja, books, hours, href: `/${part.dir}/routes/${tier}/` });
+    }
+    const total = rows.reduce((a, r) => a + r.hours, 0);
+    return `      <div class="tbl-scroll">
+        <div class="tbl-scroll__hint">横にスクロールできます</div>
+        <div class="tbl-wrap" tabindex="0" role="region" aria-label="表（横スクロールできます）">
+        <table class="cmp">
+          <caption>${esc(tierDef.name)}（${esc(combo.label)}・王道網羅型）を科目別に割ったもの。${esc(combo.note)}で計算しています。</caption>
+          <thead><tr><th>科目</th><th>冊数</th><th>想定学習時間</th><th>全体に占める割合</th></tr></thead>
+          <tbody>
+${rows.map(r => `            <tr><th scope="row"><a href="${r.href}">${esc(r.name)}</a></th>`
+      + `<td>${r.books}冊</td><td>${r.hours.toLocaleString('en-US')}時間</td>`
+      + `<td>${Math.round(r.hours / total * 100)}%</td></tr>`).join('\n')}
+          </tbody>
+        </table>
+        </div>
+      </div>`;
+  }
+
   throw new Error(`未知のブロック: ${JSON.stringify(bl).slice(0, 100)}`);
 }
 

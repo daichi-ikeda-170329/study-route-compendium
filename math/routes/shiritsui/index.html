@@ -100,7 +100,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.unis span{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
+.unis span,.unis a{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
+.unis a{transition:.15s}
+.unis a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);color:var(--accent-deep)}
 </style>
 </head>
 <body>
@@ -156,7 +158,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="eyebrow">Route by target</div>
     <h1 class="sec" style="font-size:29px">私立医学部の数学参考書ルート</h1>
     <p class="sec-lead">慈恵・日医・順天堂ほかを目指す人に向けた数学の並びです。導入から過去問まで、10冊の中から「何を・どの順で」やるかを理系別にまとめています。すでに終えた段階は飛ばして構いません。</p>
-    <p class="page-updated">最終更新: <time datetime="2026-09-05">2026-09-05</time></p>
+    <p class="page-updated">最終更新: <time datetime="2026-09-08">2026-09-08</time></p>
     <dl class="tier-head">
       <div><dt>目標</dt><dd>私立医学部 合格</dd></div>
       <div><dt>想定レベル</dt><dd>偏差値 59〜68</dd></div>
@@ -333,30 +335,30 @@ gtag('config', 'G-DQ5WFXEFMX', {
   <section class="block">
     <div class="eyebrow">Target</div>
     <h2 class="sec">この志望レベルに含まれる大学</h2>
-    <p class="sec-lead">数学ルート大全が「私立医学部」として扱っている大学です。同じ大学でも学部・方式で必要な到達点は変わります。個別の出題傾向は数学ルート大全のルート画面で大学名を入れると確認できます。</p>
+    <p class="sec-lead">数学ルート大全が「私立医学部」として扱っている大学です。同じ大学でも学部・方式で必要な到達点は変わります。大学名を押すと、その大学の全科目の出題形式と参考書ルートを見られます。</p>
     <div class="unis">
-      <span>東京慈恵会医科大学</span>
-      <span>日本医科大学</span>
-      <span>順天堂大学</span>
-      <span>昭和医科大学</span>
-      <span>東京医科大学</span>
-      <span>関西医科大学</span>
-      <span>大阪医科薬科大学</span>
-      <span>兵庫医科大学</span>
-      <span>久留米大学</span>
-      <span>藤田医科大学</span>
-      <span>愛知医科大学</span>
-      <span>川崎医科大学</span>
-      <span>国際医療福祉大学</span>
-      <span>杏林大学</span>
-      <span>聖マリアンナ医科大学</span>
-      <span>埼玉医科大学</span>
-      <span>獨協医科大学</span>
-      <span>自治医科大学</span>
-      <span>岩手医科大学</span>
-      <span>東北医科薬科大学</span>
-      <span>金沢医科大学</span>
-      <span>産業医科大学</span>
+      <a href="/univ/jikei/">東京慈恵会医科大学</a>
+      <a href="/univ/nms/">日本医科大学</a>
+      <a href="/univ/juntendo/">順天堂大学</a>
+      <a href="/univ/showa/">昭和医科大学</a>
+      <a href="/univ/tokyo-med/">東京医科大学</a>
+      <a href="/univ/kmu/">関西医科大学</a>
+      <a href="/univ/ompu/">大阪医科薬科大学</a>
+      <a href="/univ/hyogo-med/">兵庫医科大学</a>
+      <a href="/univ/kurume/">久留米大学</a>
+      <a href="/univ/fujita/">藤田医科大学</a>
+      <a href="/univ/aichi-med/">愛知医科大学</a>
+      <a href="/univ/kawasaki-med/">川崎医科大学</a>
+      <a href="/univ/iuhw/">国際医療福祉大学</a>
+      <a href="/univ/kyorin/">杏林大学</a>
+      <a href="/univ/marianna/">聖マリアンナ医科大学</a>
+      <a href="/univ/saitama-med/">埼玉医科大学</a>
+      <a href="/univ/dokkyomed/">獨協医科大学</a>
+      <a href="/univ/jichi/">自治医科大学</a>
+      <a href="/univ/iwate-med/">岩手医科大学</a>
+      <a href="/univ/tohoku-mpu/">東北医科薬科大学</a>
+      <a href="/univ/kanazawa-med/">金沢医科大学</a>
+      <a href="/univ/uoeh/">産業医科大学</a>
     </div>
     
   </section>
@@ -425,6 +427,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/math/books/">参考書一覧</a>
       <a href="/math/routes/">志望校別ルート</a>
       <a href="/math/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
       <a href="/search/">詳細検索</a>
       <a href="/progress/">学習の記録</a>
       <a href="/#faq">よくある質問</a>
@@ -499,7 +502,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
   },
   {
    "@type": "WebPage",
-   "dateModified": "2026-09-05",
+   "dateModified": "2026-09-08",
    "@id": "https://route-taizen.com/math/routes/shiritsui/#webpage",
    "url": "https://route-taizen.com/math/routes/shiritsui/",
    "name": "私立医学部の数学参考書ルート｜慈恵・日医・順天堂ほか - 数学ルート大全",

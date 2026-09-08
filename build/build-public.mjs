@@ -42,6 +42,8 @@ const ALLOW_DIRS = [
   'progress',
   /* 詳細検索（noindex,follow）。ここへ足し忘れると、生成はされるのに本番で 404 になる */
   'search',
+  /* 大学別ページ（/univ/…）。ここへ足し忘れると、生成はされるのに本番で 404 になる */
+  'univ',
   ...SUBJECTS.map(s => s.dir),
 ];
 

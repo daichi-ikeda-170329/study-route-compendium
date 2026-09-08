@@ -285,6 +285,7 @@ table.cmp thead th{background:var(--surface-2);font-size:11px;color:var(--muted)
 table.cmp tbody th{font-weight:700;color:var(--ink)}
 table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none}
 table.cmp td{color:var(--ink-2)}
+table.cmp caption{caption-side:top;text-align:left;font-size:11.5px;color:var(--muted);line-height:1.75;padding:0 2px 10px}
 
 /* ---------- 難易度スケールの定義表（build/lib/scale.mjs） ----------
    難易度の数字を見た人が、その場で意味を確かめられる位置に置く共通コンポーネント。

@@ -42,6 +42,7 @@ const STEPS = [
   { name: '索引・おすすめ',        script: 'generate-index.mjs',    checkArgs: null },
   { name: 'おすすめ',              script: 'generate-picks.mjs',    checkArgs: null },
   { name: '志望校別ルート',        script: 'generate-routes.mjs',   checkArgs: null },
+  { name: '大学別ページ',          script: 'generate-universities.mjs', checkArgs: null },
   { name: '解説記事',              script: 'generate-articles.mjs', checkArgs: null },
   { name: '法務・信頼性ページ',    script: 'generate-legal.mjs',    checkArgs: null },
   { name: '学習の記録ページ',      script: 'generate-progress.mjs', checkArgs: null },

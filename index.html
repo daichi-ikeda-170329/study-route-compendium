@@ -317,6 +317,9 @@ img, svg, video, iframe { max-width: 100%; }
 .rt-search__more:hover{background:var(--surface-2,#F6F4EF)}
 .rt-search__more:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
 /* rt-search:end */
+.univ-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:18px;box-shadow:var(--sh-s)}
+.univ-grid a{background:var(--surface);padding:12px 15px;font-size:13px;font-weight:700;color:var(--ink);transition:.15s;line-height:1.5}
+.univ-grid a:hover{background:var(--surface-2);color:var(--accent-deep)}
 </style>
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
@@ -560,6 +563,48 @@ gtag('config', 'G-DQ5WFXEFMX', {
     </div>
   </section>
 
+  <!-- ============ UNIVERSITIES ============ -->
+  <section class="block" id="universities">
+    <div class="eyebrow">Routes by university</div>
+    <h2 class="sec">志望校から選ぶ</h2>
+    <p class="sec-lead">志望校がもう決まっているなら、大学名から入るのが早道です。大学ごとに、英語・国語・数学・理科・社会でそれぞれ何が問われるか（出題の形式・分量・記述の有無）と、そこへ届くまでに使う参考書の順番を 1 ページにまとめています。同じ「早慶」でも、早稲田は学部ごとに現代文と古文・漢文の構成が変わり、慶應は一般選抜に国語の科目試験がなく小論文を課します。こうした違いは志望レベルの一括りでは見えません。全 160 校を収録しています。</p>
+    <div class="univ-grid">
+      <a href="/univ/todai/">東京大学</a>
+      <a href="/univ/kyodai/">京都大学</a>
+      <a href="/univ/hitotsubashi/">一橋大学</a>
+      <a href="/univ/tokyotech/">東京科学大学</a>
+      <a href="/univ/handai/">大阪大学</a>
+      <a href="/univ/meidai/">名古屋大学</a>
+      <a href="/univ/tohoku/">東北大学</a>
+      <a href="/univ/kyudai/">九州大学</a>
+      <a href="/univ/hokudai/">北海道大学</a>
+      <a href="/univ/kobe/">神戸大学</a>
+      <a href="/univ/tsukuba/">筑波大学</a>
+      <a href="/univ/chiba/">千葉大学</a>
+      <a href="/univ/yokokoku/">横浜国立大学</a>
+      <a href="/univ/waseda/">早稲田大学</a>
+      <a href="/univ/keio/">慶應義塾大学</a>
+      <a href="/univ/sophia/">上智大学</a>
+      <a href="/univ/tus/">東京理科大学</a>
+      <a href="/univ/meiji/">明治大学</a>
+      <a href="/univ/aoyama/">青山学院大学</a>
+      <a href="/univ/rikkyo/">立教大学</a>
+      <a href="/univ/chuo/">中央大学</a>
+      <a href="/univ/hosei/">法政大学</a>
+      <a href="/univ/doshisha/">同志社大学</a>
+      <a href="/univ/ritsumei/">立命館大学</a>
+      <a href="/univ/kwansei/">関西学院大学</a>
+      <a href="/univ/kansai/">関西大学</a>
+      <a href="/univ/nihon/">日本大学</a>
+      <a href="/univ/toyo/">東洋大学</a>
+      <a href="/univ/komazawa/">駒澤大学</a>
+      <a href="/univ/senshu/">専修大学</a>
+      <a href="/univ/kindai/">近畿大学</a>
+      <a href="/univ/seikei/">成蹊大学</a>
+    </div>
+    <p class="sec-lead" style="margin-top:16px"><a href="/univ/">志望校から探す — 160校の一覧を見る</a></p>
+  </section>
+
   <!-- ============ ROUTES ============ -->
   <section class="block" id="routes">
     <div class="eyebrow">Routes by target</div>
@@ -658,6 +703,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <a href="/social/guides/nihonshi-route/" style="--gc:#5B4E9E"><b>日本史はどう組むか</b><small>通史・用語・演習の3層と一問一答の使いどころ</small></a>
       <a href="/social/guides/sekaishi-route/" style="--gc:#5B4E9E"><b>世界史はどう組むか</b><small>タテの流れとヨコのつながりを両立させる</small></a>
       <a href="/guides/how-many-books/" style="--gc:#1B2233"><b>参考書は何冊やるべきか</b><small>買いすぎを防ぐ考え方</small></a>
+      <a href="/guides/route-hours/" style="--gc:#1B2233"><b>ルートは何時間かかるか</b><small>志望校レベル別に合計した実数</small></a>
     </div>
   </section>
 

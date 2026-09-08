@@ -68,6 +68,18 @@ for (const s of SUBJECTS) {
   }
 }
 
+/* 大学別ページ（/univ/…）。志望校名で検索する人が最初に着くページなので、
+   科目トップに次ぐ優先度で載せる */
+const univRoot = path.join(ROOT, 'univ');
+if (fs.existsSync(path.join(univRoot, 'index.html'))) add(urls, 'univ', '0.9', 'weekly');
+if (fs.existsSync(univRoot)) {
+  const slugs = fs.readdirSync(univRoot, { withFileTypes: true })
+    .filter(d => d.isDirectory() && fs.existsSync(path.join(univRoot, d.name, 'index.html')))
+    .map(d => d.name)
+    .sort();
+  for (const slug of slugs) add(urls, `univ/${slug}`, '0.8', 'weekly');
+}
+
 // 科目に属さない記事（/guides/…）
 const rootGuides = path.join(ROOT, 'guides');
 if (fs.existsSync(path.join(rootGuides, 'index.html'))) add(urls, 'guides', '0.8', 'weekly');
