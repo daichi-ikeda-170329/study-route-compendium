@@ -289,6 +289,34 @@ img, svg, video, iframe { max-width: 100%; }
     scroll-behavior: auto !important;
   }
 }
+/* rt-search:start — build/apply-search-style.mjs が assets/js/search.js の STYLE から書き込む。手で編集しない */
+:root{--rt-search-css:1}
+.app-header__in{flex-wrap:wrap}
+.rt-search{position:relative;flex:1 1 100%;order:9;min-width:0}
+@media(min-width:1100px){.rt-search{flex:0 1 250px;order:0;min-width:170px}}
+.rt-search__in{display:flex;align-items:center;gap:8px;height:38px;padding:0 12px;border:1px solid var(--line-d,#D8D4C8);border-radius:6px;background:var(--surface,#fff);transition:.15s}
+.rt-search__in:focus-within{border-color:var(--sc,#24427C);box-shadow:0 0 0 3px rgba(36,66,124,.09)}
+.rt-search__in>svg{flex:none;color:var(--muted-2,#8B8578)}
+.rt-search input{flex:1;min-width:0;border:0;outline:0;background:none;font-family:inherit;font-size:13px;color:var(--ink,#22242B);-webkit-appearance:none;appearance:none}
+.rt-search input::-webkit-search-cancel-button{-webkit-appearance:none}
+.rt-search input::placeholder{color:var(--muted-2,#8B8578)}
+.rt-search__pop{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:90;background:var(--surface,#fff);border:1px solid var(--line-d,#D8D4C8);border-radius:6px;box-shadow:0 18px 40px rgba(30,28,24,.16);max-height:min(64vh,430px);overflow-y:auto;overscroll-behavior:contain}
+.rt-search__pop.open{display:block}
+@media(min-width:1100px){.rt-search__pop{width:380px}}
+.rt-search__hit{display:flex;align-items:flex-start;gap:10px;width:100%;padding:10px 13px;border:0;border-top:1px solid var(--line-2,#EDEAE1);background:none;text-align:left;font-family:inherit;cursor:pointer}
+.rt-search__hit:first-child{border-top:0}
+.rt-search__hit.cur,.rt-search__hit:hover{background:var(--surface-2,#F6F4EF)}
+.rt-search__mark{flex:none;width:22px;height:22px;margin-top:1px;border-radius:3px;color:#fff;background:var(--mc,#22242B);display:grid;place-items:center;font-size:11px;font-weight:700}
+.rt-search__txt{min-width:0;flex:1}
+.rt-search__txt b{display:block;font-size:13px;font-weight:700;line-height:1.45;color:var(--ink,#22242B)}
+.rt-search__txt span{display:block;margin-top:2px;font-size:10.5px;color:var(--muted,#6F6A5E);letter-spacing:.02em}
+.rt-search__note{padding:13px;font-size:12px;line-height:1.6;color:var(--muted,#6F6A5E)}
+.rt-search__note b{font-weight:700;color:var(--ink-2,#3A3D46)}
+.rt-search__more{display:flex;flex-direction:column;gap:2px;padding:12px 14px;min-height:44px;border-top:1px solid var(--line-2,#EDEAE1);font-size:13px;font-weight:700;text-decoration:none;color:inherit}
+.rt-search__more span{font-weight:400;font-size:11.5px;color:var(--muted-2,#8B8578)}
+.rt-search__more:hover{background:var(--surface-2,#F6F4EF)}
+.rt-search__more:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
+/* rt-search:end */
 </style>
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
@@ -310,7 +338,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 </head>
 <body>
 
-<div class="pr-bar" id="prBar">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</div>
+<aside class="pr-bar" id="prBar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
 
 <nav class="xbar" aria-label="科目切り替え">
   <div class="xbar__in">

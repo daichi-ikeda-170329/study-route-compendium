@@ -7,8 +7,11 @@
  * 設計の要点
  *  - 索引（/assets/js/book-index.js）は最初に検索欄へ触れたときに読み込む。
  *    全ページに置く常設 UI なので、使わない人に 30KB 超を配らないため。
- *  - 見た目の CSS はこのファイルから 1 度だけ差し込む。手書き HTML（ポータル・
- *    科目トップ・404）は site.css を読まないため、共通の置き場がここしかない。
+ *  - 見た目の CSS の正本はこのファイルの STYLE。ただし**配るのは JS からではない**。
+ *    build/apply-search-style.mjs が STYLE から assets/site.css と手書き HTML 9 枚へ
+ *    同じ中身を書き込み、描画をブロックする CSS として先に届ける。JS から差し込むと
+ *    ヘッダーが 1 行→2 行に組み直されて版面全体がずれる（CLS 0.213）。
+ *    下の injectStyle() は、その書き込みが無いページのための保険として残してある。
  *  - 画面に出す文字列は索引由来のものだけ。入力値はエスケープしたうえで
  *    「該当なし」の表示にしか使わない。
  */
@@ -32,6 +35,9 @@
      ============================================================ */
 
   var STYLE = [
+    /* この 1 行が読めるかどうかで「CSS が先に届いているか」を判定する。
+       build/apply-search-style.mjs が書き込んだ側にも同じ行が入る */
+    ":root{--rt-search-css:1}",
     /* 検索欄は狭い画面でヘッダーの 2 行目に回る。ヘッダー側の折り返しもここで面倒を見る
        （手書き HTML 9 枚と site.css に同じ 1 行を配ると、片方だけ直し忘れる） */
     ".app-header__in{flex-wrap:wrap}",
@@ -58,12 +64,28 @@
     ".rt-search__txt b{display:block;font-size:13px;font-weight:700;line-height:1.45;color:var(--ink,#22242B)}",
     ".rt-search__txt span{display:block;margin-top:2px;font-size:10.5px;color:var(--muted,#6F6A5E);letter-spacing:.02em}",
     ".rt-search__note{padding:13px;font-size:12px;line-height:1.6;color:var(--muted,#6F6A5E)}",
-    ".rt-search__note b{font-weight:700;color:var(--ink-2,#3A3D46)}"
+    ".rt-search__note b{font-weight:700;color:var(--ink-2,#3A3D46)}",
+    /* 候補の末尾に置く詳細検索への導線。候補（role="option"）ではないので
+       listbox の数に含めない。**全ページに要る** —— site.css だけに置いていた
+       ときは、site.css を読まない手書き HTML 9 枚で素の inline のまま出ていた */
+    ".rt-search__more{display:flex;flex-direction:column;gap:2px;padding:12px 14px;min-height:44px;border-top:1px solid var(--line-2,#EDEAE1);font-size:13px;font-weight:700;text-decoration:none;color:inherit}",
+    ".rt-search__more span{font-weight:400;font-size:11.5px;color:var(--muted-2,#8B8578)}",
+    ".rt-search__more:hover{background:var(--surface-2,#F6F4EF)}",
+    ".rt-search__more:focus-visible{outline:2px solid currentColor;outline-offset:-2px}"
   ].join("\n");
+
+  /** CSS が先に届いているか。届いていれば JS から差し込まない（差し込むと版面がずれる） */
+  function styleAlreadyDelivered() {
+    try {
+      var v = global.getComputedStyle(doc.documentElement).getPropertyValue("--rt-search-css");
+      return String(v).trim() === "1";
+    } catch (e) { return false; }
+  }
 
   function injectStyle() {
     try {
       if (doc.getElementById("rt-search-style")) return;
+      if (styleAlreadyDelivered()) return;
       var el = doc.createElement("style");
       el.id = "rt-search-style";
       el.textContent = STYLE;
@@ -303,6 +325,8 @@
   var RTSearch = {
     /** 索引側と検索側を同じ形にそろえる正規化。build/generate-search.mjs もこれを使う */
     normalize: normalize,
+    /* 見た目の CSS の正本。build/apply-search-style.mjs が配る */
+    style: STYLE,
     /* テストと手動確認のために内部を出す。画面側からは使わない */
     _search: search,
     _state: function () { return indexState; }

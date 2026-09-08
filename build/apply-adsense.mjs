@@ -43,7 +43,7 @@ const LOADER_RE = /<!-- Google AdSense -->\n<script async src="https:\/\/pagead2
  * 広告ユニットを 1 つも置いていない状態でも事実に反しないため。
  */
 const PR_SENTENCE = 'また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。';
-const PR_BAR_RE = /(<div class="pr-bar" id="prBar">)([\s\S]*?)(<\/div>)/;
+const PR_BAR_RE = /(<aside class="pr-bar" id="prBar"[^>]*>)([\s\S]*?)(<\/aside>)/;
 
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
