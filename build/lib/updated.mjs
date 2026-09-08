@@ -42,6 +42,22 @@ function load() {
 const ledger = load();
 let dirty = false;
 
+/**
+ * 機械が配る中身を落とす。**読者に見える中身が変わった日**を出すための前処理。
+ *
+ * いまのところ 1 つだけ:
+ *   - `rt-search:start`〜`rt-search:end`（build/apply-search-style.mjs が
+ *     assets/js/search.js の STYLE から 10 ファイルへ同じ中身を書き込む区間）
+ *
+ * この区間はページごとの中身ではなく配り方である。ここを勘定に入れると、
+ * 検索ボックスの CSS を 1 行直しただけで 7 科目すべての更新日が進み、
+ * そこから派生する一覧・おすすめ・ルートの全ページに新しい日付が付く。
+ * このファイルの先頭に書いたとおり、それは検索向けの偽更新にあたる。
+ */
+function stripManaged(html) {
+  return html.replace(/\/\* rt-search:start[\s\S]*?rt-search:end \*\/\n?/g, '');
+}
+
 /** レコードの中身から短いハッシュを作る。キーの並び順に依存しないようにする */
 function hashOf(value) {
   const stable = JSON.stringify(value, (k, v) =>
@@ -86,7 +102,7 @@ export function fileDate(relPath) {
   }
   /* 更新日そのものが中身に含まれると、日付が入るたびにハッシュが変わって
      毎回「今日」になる。日付らしき並びを外してから比べる */
-  const stripped = content.replace(/\d{4}-\d{2}-\d{2}/g, '');
+  const stripped = stripManaged(content).replace(/\d{4}-\d{2}-\d{2}/g, '');
   return recordDate(`file:${relPath}`, stripped);
 }
 
@@ -114,7 +130,7 @@ export function subjectContentDate(dir, data) {
   try {
     html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
   } catch { /* まだ無いなら空で扱う */ }
-  const markup = html
+  const markup = stripManaged(html)
     .replace(/<script[\s\S]*?<\/script>/g, '')
     // 読み込み状態の受け皿は、データを外へ出す仕組みが置く足場で、読者に見える中身ではない
     .replace(/<div id="rtLoadStatus"[^>]*><\/div>\s*/g, '')

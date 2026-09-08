@@ -96,6 +96,10 @@ gtag('config', '${id}', {
 /**
  * ページ最上部の広告表記。掲載しているものだけを名指しする。
  * アフィリエイトも AdSense も無い状態では出さない（未参加の表記を出さないため）。
+ *
+ * **<aside> にする。** <div> のままだと本文がランドマークの外に置かれ、
+ * 支援技術の「見出し・領域の一覧」からこの表記だけが漏れる
+ * （axe の region 規則が全ページで moderate 違反を出していた）。
  */
 function prBarText() {
   const aff = AFF
@@ -105,7 +109,7 @@ function prBarText() {
     ? `${AFF ? 'また、' : ''}Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。`
     : '';
   if (!aff && !ads) return '';
-  return `<div class="pr-bar">当サイトは${aff}${ads}</div>\n\n`;
+  return `<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは${aff}${ads}</aside>\n\n`;
 }
 
 /** 広告表示バー（ID 設定時のみ）+ 科目切り替えバー */

@@ -97,6 +97,14 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
 | 7 | 本番の性能を信頼できる方法で測る | — | どちらかの数字を `docs/performance-report.md` へ追記 | **一部完了。** 反映後の本番を 5 run 測り `docs/performance-report.md` 6.6 に記録した（中央値 Performance 69 / LCP 5.50s / CLS 0.216。**目標 3 つとも未達**）。ただし**機械 1 台の値でばらつきが大きい**。PageSpeed Insights は匿名 API の日次上限で実行できなかった。**実利用者の値は Search Console の Core Web Vitals（CrUX）で見る** — これは運営者の作業 |
 | 8 | 同意管理（CMP）の方針 | 対象地域と同意方針の判断 | — | **未判断。** Best Practices の残差は AdSense の第三者 cookie 1 件 |
 
+**2026-09-08 追記（7 の前提が変わった）。** CLS の原因は Google Fonts ではなく、
+`assets/js/search.js` が実行時に差し込んでいたヘッダー検索ボックスの CSS だった。
+描画をブロックする CSS として配り直した結果、`/science/` の CLS は **0.216 → 0.004**
+（5 run すべて 0.003〜0.004）になり、**目標 0.10 は達成した**。
+Performance は 66 → 76、LCP は 6.93s で横ばい。切り分けと数値は
+`docs/performance-report.md` 9 節。**LCP と Performance は引き続き未達**で、
+実利用者の値を Search Console の Core Web Vitals で見る作業（7）はそのまま残る。
+
 **1 と 2 は 2026-09-05 に実行した**（池田さんから「そちらでできることは全て許可する」の指示を受けたため）。
 実行前は「公開リポジトリの外向き設定なので確認を取る」として保留していた。
 

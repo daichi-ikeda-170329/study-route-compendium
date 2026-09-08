@@ -161,6 +161,10 @@ Playwright（Chromium 151・412×823・`layout-shift` を PerformanceObserver �
 | `fonts.gstatic.com` だけ遮断（書体ファイルだけ止め、CSS は通す） | 0.213 |
 | 自前 JS だけ遮断 | 0.059 |
 
+> **2026-09-08 追記。この節の結論は、いまのコードには当てはまらない。**
+> 引き金は Google Fonts ではなく、`assets/js/search.js` が実行時に差し込んでいた
+> ヘッダー検索ボックスの CSS だった。切り分けと修正後の数値は 9 節。
+
 **書体ファイルを止めても CLS は減らない。CSS を止めると 0 になる。**
 つまり「書体が差し替わったこと（swap）」ではなく、
 **Google Fonts のスタイルシートが描画をブロックしていること**が引き金になっている。
@@ -431,3 +435,117 @@ PageSpeed Insights も 2026-09-05 に試したが、匿名 API の日次上限
 - 数値は必ず `npm run audit:performance` の出力から写す。手で書き換えない。
 - 測り方（対象 URL・実行回数・throttling・第三者の扱い）を変えたら、変えたことを明記する。
 - **未達を達成と書かない。** 目標に届いていないなら、届いていないと書く。
+
+---
+
+## 9. CLS の原因の取り違え（2026-09-08）
+
+### 何が起きていたか
+
+4.2 節は「CLS の引き金は Google Fonts のスタイルシートが描画をブロックしていること」と
+結論づけていた。**現行のコードで測り直したところ、そうではなかった。**
+
+引き金は `assets/js/search.js` だった。ヘッダー検索ボックスの CSS を、このスクリプトが
+実行時に `<style>` を作って `<head>` へ差し込んでいた（手書き HTML 9 枚が
+`assets/site.css` を読まないため、全ページ共通の置き場が JS しか無かった）。
+
+CSS が届く前のヘッダーは、検索欄がロゴの横に並ぶ 1 行になっている。
+`.rt-search{flex:1 1 100%;order:9}` が効いた瞬間に検索欄が 2 行目へ回り、
+ヘッダーが約 35px 高くなって、`main.app-main` から下が丸ごとずれる。
+これが 4.1 節の表で「原因が挙がっていない」まま 98% を占めていた
+`body > main.app-main` の 0.2126 の正体である。
+
+### 切り分け（Playwright / Chromium・412×823・`layout-shift` を PerformanceObserver で合算）
+
+回線と CPU を絞って測った（latency 150ms / 1.6Mbps / CPU 4x）。
+
+| 条件 | CLS | いちばん大きいずれの発生源 |
+|---|---:|---|
+| 通常 | 0.2225 | `#rtSearch` 114→164px・`.logo` 41→36px・`main.app-main` が 34px 下へ |
+| `fonts.googleapis.com` を遮断 | 0.2169 | 同じ |
+| `/assets/js/**` を遮断 | 0.0569 | ヘッダーのずれが消える |
+| `/assets/generated/**` だけ遮断 | 0.2204 | 同じ |
+
+**書体を止めても減らず、自前 JS を止めると消える。** 4.2 節の測り方と結論が食い違うのは、
+4.2 が書体のスタイルシートを描画ブロックのまま測った時点の記録で、その後 5.2 節で
+非同期化したあとに測り直していなかったためである。
+
+### 直し方
+
+CSS の正本は `search.js` の `STYLE` のまま残し、**配り方だけ変えた。**
+`build/apply-search-style.mjs` が `STYLE` を読んで
+
+- `assets/site.css` の末尾（生成ページ 1,476 枚はこれを `<link>` で読む）
+- 手書き HTML 9 枚のインライン `<style>` の末尾
+
+へ、`rt-search:start`〜`rt-search:end` のマーカーで挟んだ同じ中身を書き込む。
+どちらも描画をブロックするので、最初の描画から正しい版面になる。
+`search.js` 側の差し込みは、書き込みが無いページのための保険として残した
+（配布物に入れた `:root{--rt-search-css:1}` が読めれば差し込まない）。
+
+ずれは `npm run check:search-style`（`build/all.mjs --check` にも入っている）で落ちる。
+配布物と `STYLE` の一致は `test/search-style.test.mjs` が固定する。
+
+### 修正後（`npm run audit:performance -- --runs=5 --path=/science/`・1 節と同じ測り方）
+
+証跡: `docs/perf/lighthouse-mobile-with3p-after-search-css.json`（5 run）。
+
+| 指標 | 非同期化の後（2.1 節） | **この修正の後** | 目標 |
+|---|---:|---:|---:|
+| Performance | 66 | **76** | 80 以上 → **未達** |
+| LCP | 6.91s | 6.93s（横ばい） | 4.0s 以下 → **未達** |
+| CLS | 0.216 | **0.004** | 0.10 以下 → **達成** |
+| Speed Index | 2.41s | 2.35s | — |
+| Accessibility | 100 | 100 | — |
+| SEO | 100 | 100 | — |
+
+5 run すべてで Performance 76 / CLS 0.003〜0.004 と、ばらつきがほとんど無い。
+
+**LCP と Performance は依然として未達。** 達成したのは CLS だけである。
+
+### LCP について分かったこと（未解決）
+
+この修正では LCP は動かなかった。追加で測って分かったのは次のとおり。
+
+| 対象ページ | Performance | LCP | LCP になった要素 |
+|---|---:|---:|---|
+| `/`（ポータル） | 100 | 1.39s | `p.lead` |
+| `/about/` | 100 | 1.35s | `p` |
+| `/science/routes/kyote/` | 99 | 1.80s | `p.sec-lead` |
+| `/science/books/` | 57 | 5.55s | `p.sec-lead` |
+| `/science/` | 76 | 6.93s | `p.lead` |
+
+（`--runs=1`。証跡はローカルの一時ファイルで、`docs/perf/` へは残していない）
+
+- **未達なのは科目トップと参考書一覧の 2 種類だけ**で、ほかのページ種別はすでに 99〜100。
+- どちらも LCP 要素はテキストで、Lighthouse の内訳は
+  `Time to first byte 6.4ms / Element render delay 65.7ms`（合計 72ms）にしかならない。
+  同じ run の `observedLargestContentfulPaint` は **79ms**。
+  6.93s は Lantern（`--throttling-method=simulate`）の推定値である。
+- **Google Fonts でもなく、広告でもない。** 6.2 節が示すとおり書体を完全に止めても
+  LCP は 6.91→6.93s で動かず、今回 `--block-third-party` で広告・解析を遮断して
+  測っても 7.21s（3 run すべて同じ）と、むしろ悪化した。
+- 相関しているのはページの重さである。`/science/books/` は HTML が 875KB、
+  `/science/` は HTML 160KB に加えて表示直後に科目アセット 686KB を取りに行く。
+
+**したがって「LCP の残因は Google Fonts」という 4 節の見出しは、いまのコードでは成り立たない。**
+次に確かめるべきは、この 6.9s が実利用者にも起きているかどうかで、それは
+Search Console の Core Web Vitals（CrUX）で見る（`docs/remediation-progress.md` の OWNER ACTION 7）。
+**Lantern の推定値だけを根拠に、重さを削る大工事へ進まない。**
+
+### 手を付けなかった案（数値だけ置く）
+
+`/科目/books/` の HTML の 35%（`/science/books/` で 307KB）は、書影 1 枚ごとに埋め込んだ
+候補 URL 9 本（`data-srcs`）と、全画像で同一の `onload` / `onerror` 属性が占めている。
+`assets/js/cover-resolver.js` が同じ候補を組み立てられるので、ISBN だけを持たせて
+実行時に組み直せば減らせる。
+
+| 施策 | raw | gzip |
+|---|---:|---:|
+| 現状（`/science/books/`） | 875,236B | 79,981B |
+| `data-srcs` を外す | 636,546B | 60,082B（−19.9KB） |
+| `onload`/`onerror` を外す | 806,205B | 77,941B（−2.0KB） |
+
+**実施していない。** 書影の候補列は `build/check-covers.mjs` が HTML の `data-srcs` から
+読み取って取得元を監査しており、失敗しても画面に出ないまま書影だけが消える。
+効果（gzip で約 20KB・一覧ページ 7 枚）に対して壊れ方が静かなので、運営者の判断を待つ。

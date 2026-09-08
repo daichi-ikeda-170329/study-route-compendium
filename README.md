@@ -76,6 +76,7 @@
 | `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 | 手で編集 |
 | `build/lib/words.mjs` | 禁止語・要注意語の一覧。`docs/style-guide.md` 2 節と同じものを持つ | 手で編集 |
 | `build/lib/updated.mjs` | 最終更新日。レコードの中身が変わった日を台帳で持つ | 手で編集 |
+| `build/apply-search-style.mjs` | 検索ボックスの CSS を `search.js` の `STYLE` から `site.css` と手書き HTML 9 枚へ配る | 手で編集 |
 | `build/apply-book-text.mjs` | `data/_rewrite/` の説明文を各科目トップの `BOOKS` に流し込む | 手で編集 |
 | `build/gen-ogp.mjs` | OGP 画像の生成。`--check` でデータとのずれを落とす | 手で編集 |
 | `build/ogp/` | OGP の SVG テンプレートと、ラスタライズに使うフォントの用意 | 手で編集 |
@@ -128,16 +129,17 @@ npm run build -- --no-ogp  # OGP 画像を飛ばす（依存パッケージが�
 |---:|---|---|
 | 1 | データ検証（**ここで落ちたら先を作らない**） | `build/check-data.mjs` |
 | 2 | 年度表記を `build/data/site-meta.json` にそろえる | `build/apply-site-meta.mjs` |
-| 3 | 参考書の詳細ページ 1,390 件 | `build/generate-books.mjs` |
-| 4 | 参考書一覧 7 件 | `build/generate-index.mjs` |
-| 5 | 参考書おすすめ 5 件 | `build/generate-picks.mjs` |
-| 6 | 志望校別ルート 47 件 | `build/generate-routes.mjs` |
-| 7 | 解説記事 19 件 | `build/generate-articles.mjs` |
-| 8 | 信頼性ページ 6 件 | `build/generate-legal.mjs` |
-| 9 | 検索の索引 | `build/generate-search.mjs` |
-| 10 | 科目トップの静的化 | `build/prerender-tops.mjs` |
-| 11 | 冊数の表記を実数に合わせる | `build/apply-count.mjs` |
-| 12 | `sitemap.xml`（作り終えたページだけを載せる） | `build/generate-sitemap.mjs` |
+| 3 | 検索ボックスの CSS を全ページへ配る | `build/apply-search-style.mjs` |
+| 4 | 参考書の詳細ページ 1,390 件 | `build/generate-books.mjs` |
+| 5 | 参考書一覧 7 件 | `build/generate-index.mjs` |
+| 6 | 参考書おすすめ 5 件 | `build/generate-picks.mjs` |
+| 7 | 志望校別ルート 47 件 | `build/generate-routes.mjs` |
+| 8 | 解説記事 19 件 | `build/generate-articles.mjs` |
+| 9 | 信頼性ページ 6 件 | `build/generate-legal.mjs` |
+| 10 | 検索の索引 | `build/generate-search.mjs` |
+| 11 | 科目トップの静的化 | `build/prerender-tops.mjs` |
+| 12 | 冊数の表記を実数に合わせる | `build/apply-count.mjs` |
+| 13 | `sitemap.xml`（作り終えたページだけを載せる） | `build/generate-sitemap.mjs` |
 | 13 | データ品質レポート | `build/report-data-quality.mjs` |
 | 14 | OGP 画像 | `build/gen-ogp.mjs` |
 | 15 | 公開用 `dist/` | `build/build-public.mjs` |
@@ -261,7 +263,7 @@ node build/generate-books.mjs math ao
 
 すべてのページのヘッダーに検索ボックスがある（`#rtSearch`）。7 科目 1,390 冊を横断して探し、選ぶとその参考書の詳細ページ（`/<科目>/books/<id>/`）へ移動する。
 
-- 処理は `assets/js/search.js`。見た目の CSS もこのファイルから差し込む。手書き HTML（ポータル・科目トップ・404）は `site.css` を読まないため、共通の置き場がここしかない
+- 処理は `assets/js/search.js`。見た目の CSS の**正本もこのファイルの `STYLE`** だが、配るのは JS からではない。`build/apply-search-style.mjs` が `STYLE` を読んで `assets/site.css` と手書き HTML 9 枚（ポータル・科目トップ 7 枚・404）へ `rt-search:start`〜`rt-search:end` のマーカー付きで書き込み、**描画をブロックする CSS として先に届ける**。JS から差し込んでいたときは、CSS が効いた瞬間にヘッダーが 1 行から 2 行へ組み直されて 本文が 35px 下へずれ、**CLS 0.213**（科目トップ全体の 98%）を出していた。マーカーの中は手で編集しない（直すのは `STYLE`）。ずれは `npm run check:search-style` で落ちる
 - 索引は `assets/js/book-index.js`（`build/generate-search.mjs` が生成）。**最初に検索欄へ触れた時点で読み込む**。全ページに置く常設 UI なので、使わない人に 30KB 超を配らないため
 - 突き合わせるのは書名・正式名・出版社・収録範囲・分野・役割・あだ名
 - マークアップは 11 か所に同じものを置いてある（`build/lib/parts.mjs` の `header()` と `portalHeader()`、ポータル `index.html`、科目トップ 7 枚、`404.html`）。直すときは `rg 'id="rtSearch"'` で全箇所を出す
@@ -453,6 +455,7 @@ npm run build            # 生成
 git diff --exit-code     # 生成物が最新か
 npm run test:e2e         # E2E とアクセシビリティ（320/375/768/1366px）
 npm run check:counts     # 収録冊数
+npm run check:search-style  # 検索ボックスの CSS が全ページへ配られているか
 ```
 
 **E2E は HTTP 経由で走る**（`build/serve.mjs` が静的配信する）。`file://` で開いた

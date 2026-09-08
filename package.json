@@ -11,6 +11,7 @@
     "check:counts": "node build/apply-count.mjs --check",
     "check:generated": "node build/all.mjs --check",
     "check:site": "node build/check-site.mjs",
+    "check:search-style": "node build/apply-search-style.mjs --check",
     "check:links": "node build/check-links.mjs",
     "report:quality": "node build/report-data-quality.mjs",
     "fetch:verification": "node build/fetch-verification.mjs",
