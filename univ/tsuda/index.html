@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>津田塾大学の参考書ルート｜全科目の出題傾向と対策 - ルート大全</title>
-<meta name="description" content="津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。">
+<meta name="description" content="津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#F6F4EF">
 <meta name="format-detection" content="telephone=no">
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="ルート大全">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="津田塾大学の参考書ルート｜全科目の出題傾向と対策 - ルート大全">
-<meta property="og:description" content="津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。">
+<meta property="og:description" content="津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。">
 <meta property="og:url" content="https://route-taizen.com/univ/tsuda/">
 <meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@route_taizen">
 <meta name="twitter:title" content="津田塾大学の参考書ルート｜全科目の出題傾向と対策 - ルート大全">
-<meta name="twitter:description" content="津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。">
+<meta name="twitter:description" content="津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。">
 <meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -69,19 +69,39 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .unav{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
 .unav a{background:var(--surface);border:1px solid var(--line);padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--ink-2);transition:.15s;box-shadow:var(--sh-s)}
 .unav a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--line-d)}
-.usec{border-left:3px solid var(--sc)}
+/* 科目の色の縦線と本文の間。ここを 0 にすると、線のすぐ横から文字が始まって窮屈に見える。
+   左の余白は縦線の太さ（3px）とは別に取る */
+.usec{border-left:3px solid var(--sc);padding:2px 0 4px 16px}
+@media(min-width:700px){.usec{padding-left:22px}}
 .ufacts{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:16px}
 .ufacts div{background:var(--surface);padding:14px 17px}
 .ufacts dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
-.usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:20px}
-.ubooks{list-style:none;margin-top:11px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
+.usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
+.upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
+.upoints li{background:var(--surface);padding:13px 16px}
+.upoints b{display:block;font-size:12.5px;font-weight:800;color:var(--sc);letter-spacing:.02em}
+.upoints span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.9;margin-top:5px}
+.ubooks{list-style:none;margin-top:12px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
 @media(min-width:720px){.ubooks{grid-template-columns:repeat(2,1fr)}}
-.ubooks a{display:block;background:var(--surface);padding:12px 15px;transition:.15s}
-.ubooks a:hover{background:var(--surface-2)}
-.ubooks b{display:block;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.5;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px}
-.ubooks span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:4px;letter-spacing:.03em}
-.usec__more{margin-top:16px;font-size:13px;line-height:1.8}
+.ubook{display:flex;gap:13px;background:var(--surface);padding:13px 15px}
+.ubook__cov{flex:none;--cw:52px;display:block}
+.ubook__body{min-width:0}
+.ubook__tag{display:block;font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.04em}
+.ubook__name{display:block;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.5;margin-top:3px;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px}
+.ubook__name:hover{color:var(--accent-deep)}
+.ubook__meta{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:4px;letter-spacing:.03em}
+.ubook__why{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.7;margin-top:6px}
+.ubook__note{display:block;font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:4px}
+.unote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--indigo);padding:17px 20px;margin-top:16px}
+.unote p{font-size:13px;color:var(--ink-2);line-height:1.95}
+.unote dl{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:14px}
+.unote dl>div{background:var(--surface);padding:12px 15px}
+.unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
+.unote__sub{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.8}
+.usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
 .uhensa{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-s)}
@@ -147,7 +167,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
   <div class="block" style="margin-top:26px">
     <div class="eyebrow">University</div>
     <h1 class="sec" style="font-size:29px">津田塾大学の参考書ルート</h1>
-    <p class="sec-lead">津田塾大学（私立／難関私大）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何が問われ、どの参考書をどの順で進めるかをまとめたページです。学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
+    <p class="sec-lead">津田塾大学（私立／難関私大）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何がどう問われるかと、その出題に噛み合う参考書をまとめたページです。学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
     <p class="page-updated">最終更新: <time datetime="2026-09-08">2026-09-08</time></p>
     <dl class="uhead">
       <div><dt>志望レベル</dt><dd>MARCH・関関同立</dd></div>
@@ -156,6 +176,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div><dt>最も高い到達度が要る科目</dt><dd>国語</dd></div>
     </dl>
     <div class="unav">
+      <a href="#exam">入試の組み立て</a>
       <a href="#sub-english">英語</a>
       <a href="#sub-japanese">国語</a>
       <a href="#sub-math">数学</a>
@@ -192,6 +213,21 @@ gtag('config', 'G-DQ5WFXEFMX', {
   </script>
   </div>
 
+  <section class="block" id="exam">
+    <div class="eyebrow">Exam format</div>
+    <h2 class="sec">津田塾大学の入試はどう組み立てられているか</h2>
+    <p class="sec-lead">科目別の対策に入る前に、津田塾大学の入試がどういう形で行われるかを押さえておきます。ここが分かっていないと、同じ大学の別方式の過去問を解いて手応えを取り違えます。</p>
+    <div class="unote">
+      <p>私立大学は、同じ大学でも入試方式によって問題そのものが変わります。学部別日程は学部ごとに作られた独自問題で、出題傾向も時間配分もそこで決まります。全学部統一方式は複数学部を 1 つの問題で選抜するため標準的な構成になりやすく、取りこぼしが直接響きます。共通テスト利用方式は個別試験を課さない代わりに高い得点率が必要です。下の科目別の説明にある「試験の構成」は方式ごとに書き分けてあるので、受ける方式を決めてから読んでください。</p>
+      <dl>
+        <div><dt>個別試験（二次）の国語</dt><dd>課されます。<span class="unote__sub">学芸学部A方式 国語 60分 現代文中心(学科により古文を含む)/総合政策学部は英語+国語(現代文)/理系学科(数学・情報科学)は国語なし</span></dd></div>
+        <div><dt>個別試験（二次）の理科</dt><dd>課されません。</dd></div>
+        <div><dt>個別試験（二次）の社会</dt><dd>課されます。<span class="unote__sub">地歴1科目 60分程度(学芸学部A方式は英語・国語または数学に加え『歴史総合,日本史探究』『歴史総合,世界史探究』から1を選択。国際関係学科では公民系を選べる場合がある)</span></dd></div>
+      </dl>
+      <p style="margin-top:12px">英語と数学は、学部・学科によって課されるかどうかも配点も大きく変わるため、ここでは可否を出していません。科目別の説明と募集要項で確認してください。</p>
+    </div>
+  </section>
+
   <section class="block">
     <div class="eyebrow">Target level</div>
     <h2 class="sec">科目ごとの目標</h2>
@@ -210,16 +246,78 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="eyebrow">ENGLISH</div>
       <h2 class="sec">津田塾大学の英語</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>長文読解中心で記述(説明・英作文)を含む私大には珍しい国公立型。読解の精度と記述力が問われる</dd></div>
+        <div><dt>出題の特徴</dt><dd>長文読解中心で記述(説明・英作文)を含む私大には珍しい国公立型。読解の精度と記述力が問われる</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 55 前後／和訳・記述・英作文</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">津田塾大学の英語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>和訳・記述</b><span>構文を正確に取れているかがそのまま採点対象になる。長文演習の量を増やす前に、英文解釈の型を 1 冊で固めるほうが結果的に速い。</span></li>
+        <li><b>長文の分量・速読</b><span>読む速度は語彙と構文が固まってから伸びる。時間を計った演習に切り替え、1 題あたりの持ち時間を先に決めてから解く。</span></li>
+      </ul>
+      <h3 class="usec__h3">津田塾大学におすすめの参考書</h3>
+      <p class="usec__note">MARCH・関関同立の英語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は英語のルートを見てください。</p>
       <ul class="ubooks">
-        <li><a href="/english/books/oiwa/"><b>大岩のいちばんはじめの英文法</b><span>文系／導入／難易度 1</span></a></li>
-        <li><a href="/english/books/nextstage/"><b>Next Stage 英文法・語法問題</b><span>文系／文法網羅／難易度 5</span></a></li>
-        <li><a href="/english/books/vintage/"><b>Vintage 英文法・語法</b><span>理系／文法網羅／難易度 5</span></a></li>
-        <li><a href="/english/books/gijutsu70/"><b>入門英文解釈の技術70</b><span>文系／解釈／難易度 4</span></a></li>
-        <li><a href="/english/books/hijii-dokkai-hisshu/"><b>読解のための英文法(必修編)</b><span>理系／解釈／難易度 3</span></a></li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/essentials100/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>The Essentials 英語長文 必修英文100</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401035027X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401035027X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035027X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/401035027X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/401035027X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035027X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010350270.jpg|https://books.google.com/books/content?vid=ISBN9784010350270&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010350270.jpg|https://www.gakusan.com/bookimage_s/9784010350270.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">理系／英文解釈</span>
+            <a class="ubook__name" href="/english/books/essentials100/">The Essentials 英語長文 必修英文100</a>
+            <span class="ubook__meta">旺文社／難易度 5／55〜65</span>
+            <span class="ubook__why">解釈→長文／GMARCHの対策として収録／「和訳・記述」に対応／「長文の分量・速読」に対応</span>
+            <span class="ubook__note">頻出構文100本で橋渡し</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/rules2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>The Rules 英語長文問題集2</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010348569.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348569.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010348567.jpg|https://books.google.com/books/content?vid=ISBN9784010348567&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010348567.jpg|https://www.gakusan.com/bookimage_s/9784010348567.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">文系／長文読解</span>
+            <a class="ubook__name" href="/english/books/rules2/">The Rules 英語長文問題集2</a>
+            <span class="ubook__meta">旺文社／難易度 4／50〜58</span>
+            <span class="ubook__why">長文／GMARCHの対策として収録／「長文の分量・速読」に対応</span>
+            <span class="ubook__note">標準長文をルールで攻略</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/sokudoku-jukugo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>速読英熟語</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/486531587X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/486531587X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/486531587X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784865315875.jpg|https://books.google.com/books/content?vid=ISBN9784865315875&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784865315875.jpg|https://www.gakusan.com/bookimage_s/9784865315875.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">熟語・知識問題</span>
+            <a class="ubook__name" href="/english/books/sokudoku-jukugo/">速読英熟語</a>
+            <span class="ubook__meta">Z会／難易度 6／52〜68</span>
+            <span class="ubook__why">GMARCHの対策として収録／「長文の分量・速読」に対応</span>
+            <span class="ubook__note">熟語+音読素材として毎日</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/nextstage/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>Next Stage 英文法・語法問題</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342431181.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342431181.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342431180.jpg|https://books.google.com/books/content?vid=ISBN9784342431180&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342431180.jpg|https://www.gakusan.com/bookimage_s/9784342431180.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">文法</span>
+            <a class="ubook__name" href="/english/books/nextstage/">Next Stage 英文法・語法問題</a>
+            <span class="ubook__meta">桐原書店／難易度 5／50〜62</span>
+            <span class="ubook__why">文法網羅／GMARCHの対策として収録</span>
+            <span class="ubook__note">記述型でも文法の網羅は土台になる</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/sistan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111379.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111379.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111379.jpg|https://books.google.com/books/content?vid=ISBN9784796111379&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111379.jpg|https://www.gakusan.com/bookimage_s/9784796111379.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">単語・語彙</span>
+            <a class="ubook__name" href="/english/books/sistan/">システム英単語</a>
+            <span class="ubook__meta">駿台文庫／難易度 6／55〜70</span>
+            <span class="ubook__why">GMARCHの対策として収録</span>
+            <span class="ubook__note">単語1冊を10周。ミニマルフレーズで即戦力に</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/sekaiichi-eisaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>世界一わかりやすい英作文の授業</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046043229.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046043229.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046043229.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046043229.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046043229.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046043229.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046043221.jpg|https://books.google.com/books/content?vid=ISBN9784046043221&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046043221.jpg|https://www.gakusan.com/bookimage_s/9784046043221.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">文系／英作文</span>
+            <a class="ubook__name" href="/english/books/sekaiichi-eisaku/">世界一わかりやすい英作文の授業</a>
+            <span class="ubook__meta">KADOKAWA／難易度 4／45〜58</span>
+            <span class="ubook__why">英作文／GMARCHの対策として収録</span>
+
+          </div>
+        </li>
       </ul>
       <p class="usec__more"><a href="/english/routes/march/">MARCH・関関同立の英語参考書ルート（全19冊）を見る</a><span class="usec__tracks">文系・理系別に用意しています</span></p>
     </section>
@@ -228,33 +326,162 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="eyebrow">JAPANESE</div>
       <h2 class="sec">津田塾大学の国語</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>記述式中心で、現代文は評論を素材に内容説明・要約を数十字で書かせる設問が多く、私大の中では記述力重視。古文は英語英文・国際関係では出題されないか軽く、日本語・多文化コミュニケーション系で古文を含む(要確認)。漢文なし。読解力と文章作成力を問う国公立型の対策が有効。</dd></div>
+        <div><dt>試験の構成</dt><dd>学芸学部A方式 国語 60分 現代文中心(学科により古文を含む)/総合政策学部は英語+国語(現代文)/理系学科(数学・情報科学)は国語なし</dd></div>
+        <div><dt>出題の特徴</dt><dd>記述式中心で、現代文は評論を素材に内容説明・要約を数十字で書かせる設問が多く、私大の中では記述力重視。古文は英語英文・国際関係では出題されないか軽く、日本語・多文化コミュニケーション系で古文を含む(要確認)。漢文なし。読解力と文章作成力を問う国公立型の対策が有効。</dd></div>
+        <div><dt>出題される分野</dt><dd>現代文が出題されます。古文は学部・入試方式によって扱いが変わります。漢文は出題されません。</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 56 前後</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
-      <ul class="ubooks">
-        <li><a href="/japanese/books/funaguchi-zero/"><b>船口のゼロから読み解く最強の現代文</b><span>現代文／読解法／難易度 2</span></a></li>
-        <li><a href="/japanese/books/tomii-bunpo/"><b>富井の古典文法をはじめからていねいに</b><span>古文／文法講義／難易度 2</span></a></li>
-        <li><a href="/japanese/books/yama/"><b>漢文ヤマのヤマ</b><span>漢文／句法講義／難易度 2</span></a></li>
-        <li><a href="/japanese/books/access-kihon/"><b>入試現代文へのアクセス 基本編</b><span>現代文／基礎演習／難易度 3</span></a></li>
-        <li><a href="/japanese/books/tomii-dokkai/"><b>富井の古文読解をはじめからていねいに</b><span>古文／読解講義／難易度 3</span></a></li>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">津田塾大学の国語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>記述・論述</b><span>設問の条件（字数・要素・指示語の処理）を満たせているかで点が決まる。解答を書いたあとに、模範解答と要素単位で照合する手順を固定する。</span></li>
+        <li><b>古文</b><span>古文は単語と文法を先に固めないと、読解演習の効率が上がらない。単語 300 語程度と助動詞・敬語を短期間で通してから読解に入る。</span></li>
+        <li><b>漢文</b><span>句法と重要語は量が少なく、短期間で得点源にできる。独立問題として出るのか古文との融合なのかで必要量が変わる。</span></li>
+        <li><b>評論の抽象度</b><span>抽象度の高い評論は、語彙不足と論理の追えなさが同時に効いて崩れる。設問を解く前に、段落ごとの要点を一言でまとめる練習を挟む。</span></li>
       </ul>
-      <p class="usec__more"><a href="/japanese/routes/march/">MARCH・関関同立の国語参考書ルート（全33冊）を見る</a><span class="usec__tracks">現代文・古文・漢文別に用意しています</span></p>
+      <h3 class="usec__h3">津田塾大学におすすめの参考書</h3>
+      <p class="usec__note">MARCH・関関同立の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は国語のルートを見てください。</p>
+      <ul class="ubooks">
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/shutoken-nankan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>首都圏「難関」私大古文演習</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777212491.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777212491.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777212491.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777212491.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777212491.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777212491.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777212491.jpg|https://books.google.com/books/content?vid=ISBN9784777212491&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777212491.jpg|https://www.gakusan.com/bookimage_s/9784777212491.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">古文／応用・記述</span>
+            <a class="ubook__name" href="/japanese/books/shutoken-nankan/">首都圏「難関」私大古文演習</a>
+            <span class="ubook__meta">河合出版／難易度 7／58〜68</span>
+            <span class="ubook__why">応用演習／GMARCH上位の対策として収録／「記述・論述」に対応／「古文」に対応</span>
+            <span class="ubook__note">上位学部・早稲田併願はここまで</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/stepup-trial/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート30 古典文法トレーニング</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777228738.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228738.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228737.jpg|https://books.google.com/books/content?vid=ISBN9784777228737&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228737.jpg|https://www.gakusan.com/bookimage_s/9784777228737.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">古文／単語・文法・句法</span>
+            <a class="ubook__name" href="/japanese/books/stepup-trial/">ステップアップノート30 古典文法トレーニング</a>
+            <span class="ubook__meta">河合出版／難易度 4／48〜65</span>
+            <span class="ubook__why">GMARCHの対策として収録／「古文」に対応</span>
+            <span class="ubook__note">識別問題を得点源に</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/access-hatten/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>入試現代文へのアクセス 発展編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777213595.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213595.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777213597.jpg|https://books.google.com/books/content?vid=ISBN9784777213597&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777213597.jpg|https://www.gakusan.com/bookimage_s/9784777213597.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">現代文／入試標準</span>
+            <a class="ubook__name" href="/japanese/books/access-hatten/">入試現代文へのアクセス 発展編</a>
+            <span class="ubook__meta">河合出版／難易度 5／52〜62</span>
+            <span class="ubook__why">標準演習／GMARCHの対策として収録／「評論の抽象度」に対応</span>
+            <span class="ubook__note">MARCHレベルの評論・小説</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/kobun-jotatsu45/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>古文上達 基礎編 読解と演習45</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860662873.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860662873.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860662873.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4860662873.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4860662873.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860662873.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784860662875.jpg|https://books.google.com/books/content?vid=ISBN9784860662875&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784860662875.jpg|https://www.gakusan.com/bookimage_s/9784860662875.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">古文／基礎演習</span>
+            <a class="ubook__name" href="/japanese/books/kobun-jotatsu45/">古文上達 基礎編 読解と演習45</a>
+            <span class="ubook__meta">Z会／難易度 3／45〜58</span>
+            <span class="ubook__why">基礎演習／GMARCHの対策として収録／「古文」に対応</span>
+            <span class="ubook__note">文法+読解45回</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/tomii-dokkai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>富井の古文読解をはじめからていねいに</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890853162.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890853162.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890853162.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890853162.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890853162.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890853162.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890853168.jpg|https://books.google.com/books/content?vid=ISBN9784890853168&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890853168.jpg|https://www.gakusan.com/bookimage_s/9784890853168.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">古文／導入・講義</span>
+            <a class="ubook__name" href="/japanese/books/tomii-dokkai/">富井の古文読解をはじめからていねいに</a>
+            <span class="ubook__meta">東進ブックス(ナガセ)／難易度 3／45〜58</span>
+            <span class="ubook__why">読解講義／GMARCHの対策として収録／「古文」に対応</span>
+            <span class="ubook__note">読む技術を体系的に</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/polaris-g2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>現代文ポラリス 2 標準レベル</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046022213.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046022213.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046022213.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046022213.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046022213.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046022213.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046022219.jpg|https://books.google.com/books/content?vid=ISBN9784046022219&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046022219.jpg|https://www.gakusan.com/bookimage_s/9784046022219.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">現代文／入試標準</span>
+            <a class="ubook__name" href="/japanese/books/polaris-g2/">現代文ポラリス 2 標準レベル</a>
+            <span class="ubook__meta">KADOKAWA／難易度 5／52〜62</span>
+            <span class="ubook__why">標準演習／GMARCHの対策として収録／「評論の抽象度」に対応</span>
+            <span class="ubook__note">過去問ベースで解法プロセスを確認</span>
+          </div>
+        </li>
+      </ul>
+      <p class="usec__more"><a href="/japanese/routes/march/">MARCH・関関同立の国語参考書ルート（全33冊）を見る</a><span class="usec__tracks">現代文・古文別に用意しています。古文は学部・入試方式によって扱いが変わります</span></p>
     </section>
 
     <section class="block usec" id="sub-math" style="--sc:#24427C">
       <div class="eyebrow">MATHEMATICS</div>
       <h2 class="sec">津田塾大学の数学</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>標準レベル。数学科は証明の比重が高い</dd></div>
+        <div><dt>出題の特徴</dt><dd>標準レベル。数学科は証明の比重が高い</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 53 前後</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">津田塾大学の数学の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>記述・証明</b><span>答案の書き方まで採点される。解けたかどうかで止めず、模範解答と自分の答案を論理の飛びで比べる。添削を受けられる環境があると速い。</span></li>
+        <li><b>標準問題の完成度</b><span>難問より、典型問題を落とさないことで差が付く形式。網羅系を 1 冊決め、解法を再現できるかで周回する。</span></li>
+      </ul>
+      <h3 class="usec__h3">津田塾大学におすすめの参考書</h3>
+      <p class="usec__note">MARCH・関関同立の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は数学のルートを見てください。</p>
       <ul class="ubooks">
-        <li><a href="/math/books/ao/"><b>青チャート</b><span>文系／網羅／難易度 6</span></a></li>
-        <li><a href="/math/books/bunkei-juyo/"><b>文系の数学 重要事項完全習得編</b><span>文系／標準演習／難易度 5</span></a></li>
-        <li><a href="/math/books/hyomon/"><b>標準問題精講</b><span>理系／標準演習／難易度 7</span></a></li>
-        <li><a href="/math/books/bunkei-jissen/"><b>文系の数学 実戦力向上編</b><span>文系／応用演習／難易度 6</span></a></li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/bunkei-juyo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>文系の数学 重要事項完全習得編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777228665.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777228665.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228665.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228669.jpg|https://books.google.com/books/content?vid=ISBN9784777228669&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228669.jpg|https://www.gakusan.com/bookimage_s/9784777228669.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">文系／入試標準</span>
+            <a class="ubook__name" href="/math/books/bunkei-juyo/">文系の数学 重要事項完全習得編</a>
+            <span class="ubook__meta">河合出版／難易度 5／50〜60</span>
+            <span class="ubook__why">標準演習／GMARCHの対策として収録／「標準問題の完成度」に対応</span>
+            <span class="ubook__note">文系頻出の入試標準を固める</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/ao/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>青チャート</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410105787.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410105784.jpg|https://books.google.com/books/content?vid=ISBN9784410105784&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410105784.jpg|https://www.gakusan.com/bookimage_s/9784410105784.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">網羅・基礎</span>
+            <a class="ubook__name" href="/math/books/ao/">青チャート</a>
+            <span class="ubook__meta">数研出版／難易度 6／50〜67</span>
+            <span class="ubook__why">網羅／GMARCHの対策として収録／「標準問題の完成度」に対応</span>
+            <span class="ubook__note">難関私大を見据えた解法の辞書を作る</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/ukaru-keisan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>合格る計算 数学I・A・II・B・C</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578243435.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243435.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578243434.jpg|https://books.google.com/books/content?vid=ISBN9784578243434&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578243434.jpg|https://www.gakusan.com/bookimage_s/9784578243434.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">計算力</span>
+            <a class="ubook__name" href="/math/books/ukaru-keisan/">合格る計算 数学I・A・II・B・C</a>
+            <span class="ubook__meta">文英堂／難易度 3／45〜65(全レベル)</span>
+
+            <span class="ubook__note">計算の工夫を並行して習得</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/ki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>黄チャート</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410107178.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410107178.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410107178.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410107178.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410107178.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410107178.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410107177.jpg|https://books.google.com/books/content?vid=ISBN9784410107177&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410107177.jpg|https://www.gakusan.com/bookimage_s/9784410107177.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">文系／網羅・基礎</span>
+            <a class="ubook__name" href="/math/books/ki/">黄チャート</a>
+            <span class="ubook__meta">数研出版／難易度 5／45〜62</span>
+            <span class="ubook__why">網羅／GMARCHの対策として収録／「標準問題の完成度」に対応</span>
+
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/hyomon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>標準問題精講</b><em>旺文社</em></span><img src="https://m.media-amazon.com/images/I/41HCVlMP5CL._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41HCVlMP5CL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349212.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349212.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010349212.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349212.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349212.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010349212.jpg|https://books.google.com/books/content?vid=ISBN9784010349212&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010349212.jpg|https://www.gakusan.com/bookimage_s/9784010349212.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">入試標準</span>
+            <a class="ubook__name" href="/math/books/hyomon/">標準問題精講</a>
+            <span class="ubook__meta">旺文社／難易度 7／55〜65</span>
+            <span class="ubook__why">標準演習／GMARCHの対策として収録／「標準問題の完成度」に対応</span>
+            <span class="ubook__note">精選標準問題で実戦力を付ける</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/juyo-mondai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>実戦 数学重要問題集(理系)</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410142321.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410142321.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410142321.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410142321.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410142321.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410142321.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410142321.jpg|https://books.google.com/books/content?vid=ISBN9784410142321&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410142321.jpg|https://www.gakusan.com/bookimage_s/9784410142321.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">理系／入試標準</span>
+            <a class="ubook__name" href="/math/books/juyo-mondai/">実戦 数学重要問題集(理系)</a>
+            <span class="ubook__meta">数研出版／難易度 6／55〜65</span>
+            <span class="ubook__why">過去問／GMARCH理系の対策として収録／「標準問題の完成度」に対応</span>
+
+          </div>
+        </li>
       </ul>
       <p class="usec__more"><a href="/math/routes/march/">MARCH・関関同立の数学参考書ルート（全10冊）を見る</a><span class="usec__tracks">文系・理系別に用意しています</span></p>
     </section>
@@ -263,36 +490,160 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="eyebrow">SCIENCE</div>
       <h2 class="sec">津田塾大学の理科</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>理科は個別試験で課されない。数学科・情報科学科を含め一般選抜は英語・数学(・国語)で選抜。共テ利用方式で理科(理科基礎を含む)を選択科目として使える場合があり、その場合は共テ理科基礎レベルの対策で足りる。</dd></div>
+        <div><dt>出題の特徴</dt><dd>理科は個別試験で課されない。数学科・情報科学科を含め一般選抜は英語・数学(・国語)で選抜。共テ利用方式で理科(理科基礎を含む)を選択科目として使える場合があり、その場合は共テ理科基礎レベルの対策で足りる。</dd></div>
+        <div><dt>出題される分野</dt><dd>物理・化学・生物・地学は出題されません。</dd></div>
+        <div><dt>学部ごとの科目指定</dt><dd>学芸学部数学科・情報科学科は英語+数学、個別に理科なし</dd></div>
+        <div><dt>文系学部の場合</dt><dd>文系学部は個別に理科なし。共テ利用方式で理科基礎等を選択可</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 0 前後</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
+      <h3 class="usec__h3">津田塾大学におすすめの参考書</h3>
+      <p class="usec__note">共通テスト対策の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は理科のルートを見てください。</p>
       <ul class="ubooks">
-        <li><a href="/science/books/uchu-rikigaku/"><b>宇宙一わかりやすい高校物理 力学・波動</b><span>物理／導入講義／難易度 1</span></a></li>
-        <li><a href="/science/books/uchu-riron/"><b>宇宙一わかりやすい高校化学 理論化学</b><span>化学／理論導入／難易度 2</span></a></li>
-        <li><a href="/science/books/yokuwakaru-kiso-seibutsu/"><b>よくわかる高校生物基礎+生物</b><span>生物／導入講義／難易度 3</span></a></li>
-        <li><a href="/science/books/aoki-hajitei-chigaku/"><b>青木の地学基礎をはじめからていねいに</b><span>地学／導入講義／難易度 2</span></a></li>
-        <li><a href="/science/books/uchu-denjiki/"><b>宇宙一わかりやすい高校物理 電磁気・熱・原子</b><span>物理／導入講義／難易度 1</span></a></li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/aoki-hajitei-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>青木の地学基礎をはじめからていねいに</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/489085987X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085987X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859870.jpg|https://books.google.com/books/content?vid=ISBN9784890859870&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859870.jpg|https://www.gakusan.com/bookimage_s/9784890859870.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">地学／導入・講義</span>
+            <a class="ubook__name" href="/science/books/aoki-hajitei-chigaku/">青木の地学基礎をはじめからていねいに</a>
+            <span class="ubook__meta">東進ブックス(ナガセ)／難易度 2／40〜58</span>
+            <span class="ubook__why">導入講義／共通テスト全般の対策として収録</span>
+            <span class="ubook__note">先に地学基礎の範囲を固め、地球内部・大気・宇宙の全体像をつかむ。</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/ichimon-ittou/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>物理 一問一答 完全版</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890858016.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858016.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890858019.jpg|https://books.google.com/books/content?vid=ISBN9784890858019&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890858019.jpg|https://www.gakusan.com/bookimage_s/9784890858019.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">物理／知識・図録・一問一答</span>
+            <a class="ubook__name" href="/science/books/ichimon-ittou/">物理 一問一答 完全版</a>
+            <span class="ubook__meta">ナガセ(東進ブックス)／難易度 3／45〜60</span>
+            <span class="ubook__why">共通テストの対策として収録</span>
+            <span class="ubook__note">原子・熱の知識事項を移動時間に回し、用語と単位の取りこぼしを防ぐ</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/b-zen-level-2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>全レベル問題集 物理 2 共通テストレベル</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010353805.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010353805.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353805.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010353806.jpg|https://books.google.com/books/content?vid=ISBN9784010353806&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010353806.jpg|https://www.gakusan.com/bookimage_s/9784010353806.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">物理／共通テスト</span>
+            <a class="ubook__name" href="/science/books/b-zen-level-2/">全レベル問題集 物理 2 共通テストレベル</a>
+            <span class="ubook__meta">旺文社／難易度 4／48〜58</span>
+            <span class="ubook__why">共テ対策／共通テストの対策として収録</span>
+            <span class="ubook__note">共通テスト形式に慣れ、グラフ読み取りと実験考察の設問を重点的に解く</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/graph-data-yomikata/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>生物・生物基礎のグラフ・データの読み方が1冊でしっかりわかる本</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230355.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230355.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230355.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230355.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230355.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230355.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230357.jpg|https://books.google.com/books/content?vid=ISBN9784761230357&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230357.jpg|https://www.gakusan.com/bookimage_s/9784761230357.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">生物／入試標準</span>
+            <a class="ubook__name" href="/science/books/graph-data-yomikata/">生物・生物基礎のグラフ・データの読み方が1冊でしっかりわかる本</a>
+            <span class="ubook__meta">かんき出版／難易度 4／48〜65</span>
+            <span class="ubook__why">共通テストの対策として収録</span>
+            <span class="ubook__note">共テ頻出のグラフ・データ問題の読み取り手順を、週二テーマずつ習得する。</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/kawai-kako-review-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>共通テスト過去問レビュー 地学基礎・地学</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777231097.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231097.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777231096.jpg|https://books.google.com/books/content?vid=ISBN9784777231096&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777231096.jpg|https://www.gakusan.com/bookimage_s/9784777231096.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">地学／過去問</span>
+            <a class="ubook__name" href="/science/books/kawai-kako-review-chigaku/">共通テスト過去問レビュー 地学基礎・地学</a>
+            <span class="ubook__meta">河合出版／難易度 4／48〜68</span>
+            <span class="ubook__why">過去問／共通テスト全般の対策として収録</span>
+            <span class="ubook__note">本試・追試を年度順に解き、時間配分と失点分野を毎回記録する。</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/lead-light-butsuri/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート 物理</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410260871.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410260871.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410260872.jpg|https://books.google.com/books/content?vid=ISBN9784410260872&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410260872.jpg|https://www.gakusan.com/bookimage_s/9784410260872.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">物理／基礎演習</span>
+            <a class="ubook__name" href="/science/books/lead-light-butsuri/">リードLightノート 物理</a>
+            <span class="ubook__meta">数研出版／難易度 3／42〜55</span>
+            <span class="ubook__why">基礎演習</span>
+            <span class="ubook__note">基本例題を自力で完答できるまで、間違えた問題に印を付けて3周する</span>
+          </div>
+        </li>
       </ul>
-      <p class="usec__more"><a href="/science/routes/kyote/">MARCH・関関同立の理科参考書ルート（全40冊）を見る</a><span class="usec__tracks">物理・化学・生物・地学別に用意しています</span></p>
+      <p class="usec__more"><a href="/science/routes/kyote/">共通テスト対策の理科参考書ルート（全40冊）を見る</a><span class="usec__tracks">物理・化学・生物・地学別に用意しています</span></p>
     </section>
 
     <section class="block usec" id="sub-social" style="--sc:#5B4E9E">
       <div class="eyebrow">SOCIAL STUDIES</div>
       <h2 class="sec">津田塾大学の社会</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>英語の配点が突出して高い大学のため社会は相対的に比重が軽いが、合格ラインが高く取りこぼしは許されない。出題は教科書準拠の標準的な内容で、マークと記述の併用。世界史は欧米近現代史と国際関係史、日本史は近現代の政治・外交と女性史・社会史に関わるテーマが出やすい。難問は少ない代わりに用語の正確な記述が求められるため、漢字表記まで含めた暗記の精度が重要。まず英語を仕上げ、社会は標準問題集と過去問で8割を安定させる配分がよい。(要確認)</dd></div>
+        <div><dt>試験の構成</dt><dd>地歴1科目 60分程度(学芸学部A方式は英語・国語または数学に加え『歴史総合,日本史探究』『歴史総合,世界史探究』から1を選択。国際関係学科では公民系を選べる場合がある)</dd></div>
+        <div><dt>出題の特徴</dt><dd>英語の配点が突出して高い大学のため社会は相対的に比重が軽いが、合格ラインが高く取りこぼしは許されない。出題は教科書準拠の標準的な内容で、マークと記述の併用。世界史は欧米近現代史と国際関係史、日本史は近現代の政治・外交と女性史・社会史に関わるテーマが出やすい。難問は少ない代わりに用語の正確な記述が求められるため、漢字表記まで含めた暗記の精度が重要。まず英語を仕上げ、社会は標準問題集と過去問で8割を安定させる配分がよい。(要確認)</dd></div>
+        <div><dt>出題される分野</dt><dd>日本史・世界史が出題されます。政治・経済は学部・入試方式によって扱いが変わります。地理・公共・倫理は出題されません。</dd></div>
+        <div><dt>共通テスト</dt><dd>共通テストで必要なのは文系は1科目です。</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 55 前後</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
-      <ul class="ubooks">
-        <li><a href="/social/books/jikkyo-nihonshi-1/"><b>実況中継①</b><span>日本史／通史講義(古代)／難易度 5</span></a></li>
-        <li><a href="/social/books/jikkyo-sekaishi-1/"><b>実況中継①</b><span>世界史／通史講義①／難易度 5</span></a></li>
-        <li><a href="/social/books/chiri-murase-keito/"><b>村瀬 系統地理</b><span>地理／系統地理の導入／難易度 3</span></a></li>
-        <li><a href="/social/books/kageyama-kt-kokyo/"><b>蔭山の共テ公共</b><span>公共／公共の要点整理／難易度 4</span></a></li>
-        <li><a href="/social/books/kageyama-omoshiro-seikei/"><b>蔭山面白いほど</b><span>政治・経済／網羅講義／難易度 5</span></a></li>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">津田塾大学の社会の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>用語・一問一答</b><span>用語の精度が直接得点になる形式。書いて答える出題があるなら、読めるだけでなく漢字で書けるところまで詰める。</span></li>
+        <li><b>マーク式・共通テスト</b><span>資料の読み取りに比重が移った形式なので、知識だけでは頭打ちになる。時間を計った演習で処理速度を上げる。</span></li>
       </ul>
-      <p class="usec__more"><a href="/social/routes/march/">MARCH・関関同立の社会参考書ルート（全80冊）を見る</a><span class="usec__tracks">日本史・世界史・地理・公共・政治・経済・倫理別に用意しています</span></p>
+      <h3 class="usec__h3">津田塾大学におすすめの参考書</h3>
+      <p class="usec__note">MARCH・関関同立の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は社会のルートを見てください。</p>
+      <ul class="ubooks">
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/ganso-nendai-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>元祖 年代暗記法</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010344202.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010344202.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010344202.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010344202.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010344202.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010344202.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010344200.jpg|https://books.google.com/books/content?vid=ISBN9784010344200&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010344200.jpg|https://www.gakusan.com/bookimage_s/9784010344200.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">世界史／用語・暗記</span>
+            <a class="ubook__name" href="/social/books/ganso-nendai-sekaishi/">元祖 年代暗記法</a>
+            <span class="ubook__meta">旺文社／難易度 4／50〜65</span>
+            <span class="ubook__why">GMARCHの対策として収録／「用語・一問一答」に対応</span>
+            <span class="ubook__note">年代整序・同年出来事の失点を潰す</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/markshiki-kiso-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>マーク式基礎政経</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227375.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227375.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227375.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227375.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227375.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227375.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227372.jpg|https://books.google.com/books/content?vid=ISBN9784777227372&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227372.jpg|https://www.gakusan.com/bookimage_s/9784777227372.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">政治・経済／基礎演習</span>
+            <a class="ubook__name" href="/social/books/markshiki-kiso-seikei/">マーク式基礎政経</a>
+            <span class="ubook__meta">河合出版／難易度 5／50〜62</span>
+            <span class="ubook__why">マーク演習／GMARCHの対策として収録／「マーク式・共通テスト」に対応</span>
+            <span class="ubook__note">講義と過去問の間の段差を埋める</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/historia-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>HISTORIA</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061148.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061148.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061148.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053061148.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053061148.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061148.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053061140.jpg|https://books.google.com/books/content?vid=ISBN9784053061140&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053061140.jpg|https://www.gakusan.com/bookimage_s/9784053061140.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">日本史／入試標準</span>
+            <a class="ubook__name" href="/social/books/historia-nihonshi/">HISTORIA</a>
+            <span class="ubook__meta">Gakken／難易度 7／58〜70</span>
+            <span class="ubook__why">標準演習／GMARCHの対策として収録／「用語・一問一答」に対応</span>
+            <span class="ubook__note">演習と暗記の往復を仕組みで回す</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/shosetsu-nihonshi-kyokasho/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>詳説日本史</b><em>山川出版社</em></span><img src="https://www.gakusan.com/bookimage/9784634701212.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784634701212.jpg|https://images-fe.ssl-images-amazon.com/images/P/4634701219.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634701219.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4634701219.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4634701219.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634701219.01.LZZZZZZZ.jpg|https://books.google.com/books/content?vid=ISBN9784634701212&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784634701212.jpg|https://www.gakusan.com/bookimage_s/9784634701212.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">日本史／教科書</span>
+            <a class="ubook__name" href="/social/books/shosetsu-nihonshi-kyokasho/">詳説日本史</a>
+            <span class="ubook__meta">山川出版社／難易度 4／50〜70(通読)</span>
+            <span class="ubook__why">教科書精読／GMARCHの対策として収録</span>
+            <span class="ubook__note">出題の基準そのものを脚注まで通読</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/yamakawa-zuroku-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>詳説世界史図録</b><em>山川出版社</em></span><img src="https://www.gakusan.com/bookimage/9784634045156.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784634045156.jpg|https://images-fe.ssl-images-amazon.com/images/P/463404515X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463404515X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/463404515X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/463404515X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/463404515X.01.LZZZZZZZ.jpg|https://books.google.com/books/content?vid=ISBN9784634045156&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784634045156.jpg|https://www.gakusan.com/bookimage_s/9784634045156.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">世界史／資料・図説</span>
+            <a class="ubook__name" href="/social/books/yamakawa-zuroku-sekaishi/">詳説世界史図録</a>
+            <span class="ubook__meta">山川出版社／難易度 4／全レベル(全期間)</span>
+            <span class="ubook__why">GMARCHの対策として収録</span>
+            <span class="ubook__note">文化史の作品を写真で押さえる</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/jikkyo-nihonshi-1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継①</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688326.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688326.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688326.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4875688326.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4875688326.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688326.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784875688327.jpg|https://books.google.com/books/content?vid=ISBN9784875688327&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784875688327.jpg|https://www.gakusan.com/bookimage_s/9784875688327.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">日本史／導入・講義</span>
+            <a class="ubook__name" href="/social/books/jikkyo-nihonshi-1/">実況中継①</a>
+            <span class="ubook__meta">語学春秋社／難易度 5／50〜70</span>
+            <span class="ubook__why">通史講義(古代)／GMARCHの対策として収録</span>
+            <span class="ubook__note">教科書の行間まで埋めて土台を厚くする</span>
+          </div>
+        </li>
+      </ul>
+      <p class="usec__more"><a href="/social/routes/march/">MARCH・関関同立の社会参考書ルート（全80冊）を見る</a><span class="usec__tracks">日本史・世界史・政治・経済別に用意しています。政治・経済は学部・入試方式によって扱いが変わります</span></p>
     </section>
 
   <section class="block">
@@ -430,7 +781,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
    "@type": "Article",
    "@id": "https://route-taizen.com/univ/tsuda/#article",
    "headline": "津田塾大学の参考書ルート",
-   "description": "津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。",
+   "description": "津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。",
    "inLanguage": "ja",
    "author": {
     "@type": "Organization",
@@ -452,7 +803,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
    "@id": "https://route-taizen.com/univ/tsuda/#webpage",
    "url": "https://route-taizen.com/univ/tsuda/",
    "name": "津田塾大学の参考書ルート｜全科目の出題傾向と対策 - ルート大全",
-   "description": "津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。",
+   "description": "津田塾大学（難関私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。",
    "inLanguage": "ja",
    "isPartOf": {
     "@id": "https://route-taizen.com/#website"

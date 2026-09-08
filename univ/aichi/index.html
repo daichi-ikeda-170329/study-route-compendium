@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>愛知大学の参考書ルート｜全科目の出題傾向と対策 - ルート大全</title>
-<meta name="description" content="愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。">
+<meta name="description" content="愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#F6F4EF">
 <meta name="format-detection" content="telephone=no">
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="ルート大全">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:title" content="愛知大学の参考書ルート｜全科目の出題傾向と対策 - ルート大全">
-<meta property="og:description" content="愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。">
+<meta property="og:description" content="愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。">
 <meta property="og:url" content="https://route-taizen.com/univ/aichi/">
 <meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@route_taizen">
 <meta name="twitter:title" content="愛知大学の参考書ルート｜全科目の出題傾向と対策 - ルート大全">
-<meta name="twitter:description" content="愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。">
+<meta name="twitter:description" content="愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。">
 <meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -69,19 +69,39 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .unav{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
 .unav a{background:var(--surface);border:1px solid var(--line);padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--ink-2);transition:.15s;box-shadow:var(--sh-s)}
 .unav a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--line-d)}
-.usec{border-left:3px solid var(--sc)}
+/* 科目の色の縦線と本文の間。ここを 0 にすると、線のすぐ横から文字が始まって窮屈に見える。
+   左の余白は縦線の太さ（3px）とは別に取る */
+.usec{border-left:3px solid var(--sc);padding:2px 0 4px 16px}
+@media(min-width:700px){.usec{padding-left:22px}}
 .ufacts{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:16px}
 .ufacts div{background:var(--surface);padding:14px 17px}
 .ufacts dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
-.usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:20px}
-.ubooks{list-style:none;margin-top:11px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
+.usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
+.upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
+.upoints li{background:var(--surface);padding:13px 16px}
+.upoints b{display:block;font-size:12.5px;font-weight:800;color:var(--sc);letter-spacing:.02em}
+.upoints span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.9;margin-top:5px}
+.ubooks{list-style:none;margin-top:12px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
 @media(min-width:720px){.ubooks{grid-template-columns:repeat(2,1fr)}}
-.ubooks a{display:block;background:var(--surface);padding:12px 15px;transition:.15s}
-.ubooks a:hover{background:var(--surface-2)}
-.ubooks b{display:block;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.5;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px}
-.ubooks span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:4px;letter-spacing:.03em}
-.usec__more{margin-top:16px;font-size:13px;line-height:1.8}
+.ubook{display:flex;gap:13px;background:var(--surface);padding:13px 15px}
+.ubook__cov{flex:none;--cw:52px;display:block}
+.ubook__body{min-width:0}
+.ubook__tag{display:block;font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.04em}
+.ubook__name{display:block;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.5;margin-top:3px;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px}
+.ubook__name:hover{color:var(--accent-deep)}
+.ubook__meta{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:4px;letter-spacing:.03em}
+.ubook__why{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.7;margin-top:6px}
+.ubook__note{display:block;font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:4px}
+.unote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--indigo);padding:17px 20px;margin-top:16px}
+.unote p{font-size:13px;color:var(--ink-2);line-height:1.95}
+.unote dl{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:14px}
+.unote dl>div{background:var(--surface);padding:12px 15px}
+.unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
+.unote__sub{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.8}
+.usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
 .uhensa{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-s)}
@@ -147,7 +167,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
   <div class="block" style="margin-top:26px">
     <div class="eyebrow">University</div>
     <h1 class="sec" style="font-size:29px">愛知大学の参考書ルート</h1>
-    <p class="sec-lead">愛知大学（私立／中堅私大）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何が問われ、どの参考書をどの順で進めるかをまとめたページです。学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
+    <p class="sec-lead">愛知大学（私立／中堅私大）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何がどう問われるかと、その出題に噛み合う参考書をまとめたページです。学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
     <p class="page-updated">最終更新: <time datetime="2026-09-08">2026-09-08</time></p>
     <dl class="uhead">
       <div><dt>志望レベル</dt><dd>日東駒専・産近甲龍</dd></div>
@@ -156,6 +176,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div><dt>最も高い到達度が要る科目</dt><dd>国語</dd></div>
     </dl>
     <div class="unav">
+      <a href="#exam">入試の組み立て</a>
       <a href="#sub-english">英語</a>
       <a href="#sub-japanese">国語</a>
       <a href="#sub-math">数学</a>
@@ -192,6 +213,21 @@ gtag('config', 'G-DQ5WFXEFMX', {
   </script>
   </div>
 
+  <section class="block" id="exam">
+    <div class="eyebrow">Exam format</div>
+    <h2 class="sec">愛知大学の入試はどう組み立てられているか</h2>
+    <p class="sec-lead">科目別の対策に入る前に、愛知大学の入試がどういう形で行われるかを押さえておきます。ここが分かっていないと、同じ大学の別方式の過去問を解いて手応えを取り違えます。</p>
+    <div class="unote">
+      <p>私立大学は、同じ大学でも入試方式によって問題そのものが変わります。学部別日程は学部ごとに作られた独自問題で、出題傾向も時間配分もそこで決まります。全学部統一方式は複数学部を 1 つの問題で選抜するため標準的な構成になりやすく、取りこぼしが直接響きます。共通テスト利用方式は個別試験を課さない代わりに高い得点率が必要です。下の科目別の説明にある「試験の構成」は方式ごとに書き分けてあるので、受ける方式を決めてから読んでください。</p>
+      <dl>
+        <div><dt>個別試験（二次）の国語</dt><dd>課されます。<span class="unote__sub">一般入試前期・M方式 60分 現代文2+古文1(文学部は漢文を含む場合あり)</span></dd></div>
+        <div><dt>個別試験（二次）の理科</dt><dd>課されません。<span class="unote__sub">一般選抜:理科の出題なし</span></dd></div>
+        <div><dt>個別試験（二次）の社会</dt><dd>課されます。<span class="unote__sub">地歴・公民1科目 60分(日本史探究・世界史探究・地理探究・公共,政治・経済から1)</span></dd></div>
+      </dl>
+      <p style="margin-top:12px">英語と数学は、学部・学科によって課されるかどうかも配点も大きく変わるため、ここでは可否を出していません。科目別の説明と募集要項で確認してください。</p>
+    </div>
+  </section>
+
   <section class="block">
     <div class="eyebrow">Target level</div>
     <h2 class="sec">科目ごとの目標</h2>
@@ -210,16 +246,80 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="eyebrow">ENGLISH</div>
       <h2 class="sec">愛知大学の英語</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>基礎〜標準のマーク型</dd></div>
+        <div><dt>出題の特徴</dt><dd>基礎〜標準のマーク型</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 48 前後／文法・語彙・速読</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">愛知大学の英語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>長文の分量・速読</b><span>読む速度は語彙と構文が固まってから伸びる。時間を計った演習に切り替え、1 題あたりの持ち時間を先に決めてから解く。</span></li>
+        <li><b>文法・語法の独立問題</b><span>独立した大問として出る場合、知識の穴がそのまま失点になる。網羅系を 1 冊に決めて周回し、間違えた項目だけ総合英語に戻って読む。</span></li>
+        <li><b>語彙・熟語</b><span>語彙が足りないと読解でも英作文でも手が止まる。単語帳は途中で替えず、1 冊を回数で仕上げる。</span></li>
+        <li><b>マーク式・共通テスト</b><span>マーク式は取りこぼしがそのまま響く。時間内に全問へ到達する形式演習を重ね、迷った問題を捨てる基準を決めておく。</span></li>
+      </ul>
+      <h3 class="usec__h3">愛知大学におすすめの参考書</h3>
+      <p class="usec__note">日東駒専・産近甲龍の英語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は英語のルートを見てください。</p>
       <ul class="ubooks">
-        <li><a href="/english/books/oiwa/"><b>大岩のいちばんはじめの英文法</b><span>文系／導入／難易度 1</span></a></li>
-        <li><a href="/english/books/nextstage/"><b>Next Stage 英文法・語法問題</b><span>文系／文法網羅／難易度 5</span></a></li>
-        <li><a href="/english/books/hijii-dokkai-hisshu/"><b>読解のための英文法(必修編)</b><span>文系／解釈／難易度 3</span></a></li>
-        <li><a href="/english/books/rules1/"><b>The Rules 英語長文問題集1</b><span>文系／長文／難易度 3</span></a></li>
-        <li><a href="/english/books/rules2/"><b>The Rules 英語長文問題集2</b><span>文系／長文演習／難易度 4</span></a></li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/nextstage/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>Next Stage 英文法・語法問題</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342431181.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342431181.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342431180.jpg|https://books.google.com/books/content?vid=ISBN9784342431180&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342431180.jpg|https://www.gakusan.com/bookimage_s/9784342431180.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">文法</span>
+            <a class="ubook__name" href="/english/books/nextstage/">Next Stage 英文法・語法問題</a>
+            <span class="ubook__meta">桐原書店／難易度 5／50〜62</span>
+            <span class="ubook__why">文法網羅／日東駒専の対策として収録／「文法・語法の独立問題」に対応／「マーク式・共通テスト」に対応</span>
+            <span class="ubook__note">マーク式の文法問題は得点源になる</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/hijii-dokkai-hisshu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>読解のための英文法(必修編)</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/404605056X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/404605056X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404605056X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046050564.jpg|https://books.google.com/books/content?vid=ISBN9784046050564&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046050564.jpg|https://www.gakusan.com/bookimage_s/9784046050564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">英文解釈</span>
+            <a class="ubook__name" href="/english/books/hijii-dokkai-hisshu/">読解のための英文法(必修編)</a>
+            <span class="ubook__meta">KADOKAWA／難易度 3／45〜58</span>
+            <span class="ubook__why">解釈／日東駒専の対策として収録／「文法・語法の独立問題」に対応</span>
+            <span class="ubook__note">SVOCを振って読む型を作る</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/rules1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>The Rules 英語長文問題集1</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010348550.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010348550.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348550.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010348550.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010348550.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348550.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010348550.jpg|https://books.google.com/books/content?vid=ISBN9784010348550&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010348550.jpg|https://www.gakusan.com/bookimage_s/9784010348550.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">長文読解</span>
+            <a class="ubook__name" href="/english/books/rules1/">The Rules 英語長文問題集1</a>
+            <span class="ubook__meta">旺文社／難易度 3／45〜55</span>
+            <span class="ubook__why">長文／日東駒専の対策として収録／「長文の分量・速読」に対応</span>
+            <span class="ubook__note">読解ルールを装備して演習開始</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/target1400/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1400</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346471.jpg|https://books.google.com/books/content?vid=ISBN9784010346471&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346471.jpg|https://www.gakusan.com/bookimage_s/9784010346471.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">理系／単語・語彙</span>
+            <a class="ubook__name" href="/english/books/target1400/">英単語ターゲット1400</a>
+            <span class="ubook__meta">旺文社／難易度 4／45〜58</span>
+            <span class="ubook__why">日東駒専の対策として収録／「語彙・熟語」に対応</span>
+            <span class="ubook__note">まずは1400。余裕があれば1900へ</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/target1000/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>英熟語ターゲット1000</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346493.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346493.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346493.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346495.jpg|https://books.google.com/books/content?vid=ISBN9784010346495&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346495.jpg|https://www.gakusan.com/bookimage_s/9784010346495.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">熟語・知識問題</span>
+            <a class="ubook__name" href="/english/books/target1000/">英熟語ターゲット1000</a>
+            <span class="ubook__meta">旺文社／難易度 5／50〜65</span>
+            <span class="ubook__why">日東駒専の対策として収録／「語彙・熟語」に対応</span>
+            <span class="ubook__note">熟語は夏までに1冊</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/english/books/rules2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>The Rules 英語長文問題集2</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010348569.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010348569.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010348569.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010348567.jpg|https://books.google.com/books/content?vid=ISBN9784010348567&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010348567.jpg|https://www.gakusan.com/bookimage_s/9784010348567.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">長文読解</span>
+            <a class="ubook__name" href="/english/books/rules2/">The Rules 英語長文問題集2</a>
+            <span class="ubook__meta">旺文社／難易度 4／50〜58</span>
+            <span class="ubook__why">長文演習／日東駒専の対策として収録／「長文の分量・速読」に対応</span>
+            <span class="ubook__note">本番レベルの長文で仕上げ</span>
+          </div>
+        </li>
       </ul>
       <p class="usec__more"><a href="/english/routes/nikkoma/">日東駒専・産近甲龍の英語参考書ルート（全12冊）を見る</a><span class="usec__tracks">文系・理系別に用意しています</span></p>
     </section>
@@ -228,32 +328,162 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="eyebrow">JAPANESE</div>
       <h2 class="sec">愛知大学の国語</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>全問マークで現代文2題(評論+随筆・小説)+古文1題。現代文は語彙・漢字・空欄補充・内容一致の標準的設問、古文は文法・口語訳・内容把握が中心。漢文は文学部のみ選択出題(要確認)。法・経済・経営・国際コミュニケーション・地域政策は現古のみ。標準問題で高得点勝負になる。</dd></div>
+        <div><dt>試験の構成</dt><dd>一般入試前期・M方式 60分 現代文2+古文1(文学部は漢文を含む場合あり)</dd></div>
+        <div><dt>出題の特徴</dt><dd>全問マークで現代文2題(評論+随筆・小説)+古文1題。現代文は語彙・漢字・空欄補充・内容一致の標準的設問、古文は文法・口語訳・内容把握が中心。漢文は文学部のみ選択出題(要確認)。法・経済・経営・国際コミュニケーション・地域政策は現古のみ。標準問題で高得点勝負になる。</dd></div>
+        <div><dt>出題される分野</dt><dd>現代文・古文が出題されます。漢文は学部・入試方式によって扱いが変わります。</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 51 前後</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
-      <ul class="ubooks">
-        <li><a href="/japanese/books/funaguchi-zero/"><b>船口のゼロから読み解く最強の現代文</b><span>現代文／読解法／難易度 2</span></a></li>
-        <li><a href="/japanese/books/tomii-bunpo/"><b>富井の古典文法をはじめからていねいに</b><span>古文／文法講義／難易度 2</span></a></li>
-        <li><a href="/japanese/books/yama/"><b>漢文ヤマのヤマ</b><span>漢文／句法講義／難易度 2</span></a></li>
-        <li><a href="/japanese/books/access-kihon/"><b>入試現代文へのアクセス 基本編</b><span>現代文／基礎演習／難易度 3</span></a></li>
-        <li><a href="/japanese/books/tomii-dokkai/"><b>富井の古文読解をはじめからていねいに</b><span>古文／読解講義／難易度 3</span></a></li>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">愛知大学の国語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>古文</b><span>古文は単語と文法を先に固めないと、読解演習の効率が上がらない。単語 300 語程度と助動詞・敬語を短期間で通してから読解に入る。</span></li>
+        <li><b>漢文</b><span>句法と重要語は量が少なく、短期間で得点源にできる。独立問題として出るのか古文との融合なのかで必要量が変わる。</span></li>
+        <li><b>漢字・語彙</b><span>現代文の語彙は読解の速度にも効く。漢字と評論用語を別冊で用意し、毎日少量ずつ進める。</span></li>
+        <li><b>評論の抽象度</b><span>抽象度の高い評論は、語彙不足と論理の追えなさが同時に効いて崩れる。設問を解く前に、段落ごとの要点を一言でまとめる練習を挟む。</span></li>
+        <li><b>マーク式・共通テスト</b><span>選択肢の切り方には型がある。本文の根拠と選択肢の言い換えを一対一で対応させる読み方を、解説の詳しい問題集で身につける。</span></li>
       </ul>
-      <p class="usec__more"><a href="/japanese/routes/nikkoma/">日東駒専・産近甲龍の国語参考書ルート（全25冊）を見る</a><span class="usec__tracks">現代文・古文・漢文別に用意しています</span></p>
+      <h3 class="usec__h3">愛知大学におすすめの参考書</h3>
+      <p class="usec__note">日東駒専・産近甲龍の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は国語のルートを見てください。</p>
+      <ul class="ubooks">
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/kotoba-chikara/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ことばはちからダ!</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4877256113.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4877256113.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877256113.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4877256113.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4877256113.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877256113.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784877256111.jpg|https://books.google.com/books/content?vid=ISBN9784877256111&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784877256111.jpg|https://www.gakusan.com/bookimage_s/9784877256111.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">現代文／単語・文法・句法</span>
+            <a class="ubook__name" href="/japanese/books/kotoba-chikara/">ことばはちからダ!</a>
+            <span class="ubook__meta">河合出版／難易度 2／40〜60</span>
+            <span class="ubook__why">日東駒専の対策として収録／「漢字・語彙」に対応／「評論の抽象度」に対応</span>
+            <span class="ubook__note">評論の概念語を最小限で</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/kobun-jotatsu45/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>古文上達 基礎編 読解と演習45</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860662873.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860662873.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860662873.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4860662873.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4860662873.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860662873.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784860662875.jpg|https://books.google.com/books/content?vid=ISBN9784860662875&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784860662875.jpg|https://www.gakusan.com/bookimage_s/9784860662875.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">古文／基礎演習</span>
+            <a class="ubook__name" href="/japanese/books/kobun-jotatsu45/">古文上達 基礎編 読解と演習45</a>
+            <span class="ubook__meta">Z会／難易度 3／45〜58</span>
+            <span class="ubook__why">基礎演習／日東駒専の対策として収録／「古文」に対応</span>
+            <span class="ubook__note">文法+読解を45回で固める</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/tomii-dokkai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>富井の古文読解をはじめからていねいに</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890853162.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890853162.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890853162.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890853162.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890853162.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890853162.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890853168.jpg|https://books.google.com/books/content?vid=ISBN9784890853168&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890853168.jpg|https://www.gakusan.com/bookimage_s/9784890853168.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">古文／導入・講義</span>
+            <a class="ubook__name" href="/japanese/books/tomii-dokkai/">富井の古文読解をはじめからていねいに</a>
+            <span class="ubook__meta">東進ブックス(ナガセ)／難易度 3／45〜58</span>
+            <span class="ubook__why">読解講義／日東駒専の対策として収録／「古文」に対応</span>
+            <span class="ubook__note">文法を読解につなげる</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/chuken-shidai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>中堅私大古文演習</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4877254226.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4877254226.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877254226.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4877254226.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4877254226.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877254226.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784877254223.jpg|https://books.google.com/books/content?vid=ISBN9784877254223&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784877254223.jpg|https://www.gakusan.com/bookimage_s/9784877254223.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">古文／入試標準</span>
+            <a class="ubook__name" href="/japanese/books/chuken-shidai/">中堅私大古文演習</a>
+            <span class="ubook__meta">河合出版／難易度 4／48〜58</span>
+            <span class="ubook__why">私大演習／日東駒専の対策として収録／「古文」に対応</span>
+            <span class="ubook__note">中堅私大の形式で仕上げ。知識問題も対策</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/polaris-k1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>古文ポラリス 1 基礎レベル</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046022175.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046022175.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046022175.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046022175.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046022175.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046022175.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046022172.jpg|https://books.google.com/books/content?vid=ISBN9784046022172&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046022172.jpg|https://www.gakusan.com/bookimage_s/9784046022172.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">古文／基礎演習</span>
+            <a class="ubook__name" href="/japanese/books/polaris-k1/">古文ポラリス 1 基礎レベル</a>
+            <span class="ubook__meta">KADOKAWA／難易度 3／45〜55</span>
+            <span class="ubook__why">基礎演習／日東駒専の対策として収録／「古文」に対応</span>
+            <span class="ubook__note">日東駒専の過去問で全文解説を確認</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/japanese/books/zenlevel-kan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>全レベル問題集 漢文</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353600.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353600.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353600.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010353600.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010353600.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353600.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010353608.jpg|https://books.google.com/books/content?vid=ISBN9784010353608&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010353608.jpg|https://www.gakusan.com/bookimage_s/9784010353608.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">漢文／基礎演習</span>
+            <a class="ubook__name" href="/japanese/books/zenlevel-kan/">全レベル問題集 漢文</a>
+            <span class="ubook__meta">旺文社／難易度 3／40〜65(3段階)</span>
+            <span class="ubook__why">仕上げ演習／日東駒専の対策として収録／「漢文」に対応</span>
+            <span class="ubook__note">「3 私大・国公立大レベル」で仕上げ</span>
+          </div>
+        </li>
+      </ul>
+      <p class="usec__more"><a href="/japanese/routes/nikkoma/">日東駒専・産近甲龍の国語参考書ルート（全25冊）を見る</a><span class="usec__tracks">現代文・古文・漢文別に用意しています。漢文は学部・入試方式によって扱いが変わります</span></p>
     </section>
 
     <section class="block usec" id="sub-math" style="--sc:#24427C">
       <div class="eyebrow">MATHEMATICS</div>
       <h2 class="sec">愛知大学の数学</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>基礎〜標準レベル</dd></div>
+        <div><dt>出題の特徴</dt><dd>基礎〜標準レベル</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 48 前後</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">愛知大学の数学の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>標準問題の完成度</b><span>難問より、典型問題を落とさないことで差が付く形式。網羅系を 1 冊決め、解法を再現できるかで周回する。</span></li>
+      </ul>
+      <h3 class="usec__h3">愛知大学におすすめの参考書</h3>
+      <p class="usec__note">日東駒専・産近甲龍の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は数学のルートを見てください。</p>
       <ul class="ubooks">
-        <li><a href="/math/books/yasashiko/"><b>やさしい高校数学</b><span>文系／導入／難易度 1</span></a></li>
-        <li><a href="/math/books/ki/"><b>黄チャート</b><span>文系／網羅／難易度 5</span></a></li>
-        <li><a href="/math/books/choice/"><b>チョイス新標準問題集</b><span>文系／標準演習／難易度 5</span></a></li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/shiro/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>白チャート</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410102079.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410102079.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410102079.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410102079.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410102079.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410102079.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410102073.jpg|https://books.google.com/books/content?vid=ISBN9784410102073&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410102073.jpg|https://www.gakusan.com/bookimage_s/9784410102073.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">網羅・基礎</span>
+            <a class="ubook__name" href="/math/books/shiro/">白チャート</a>
+            <span class="ubook__meta">数研出版／難易度 3／35〜55</span>
+            <span class="ubook__why">網羅／日東駒専の対策として収録／「標準問題の完成度」に対応</span>
+
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/hissu101/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>落とせない必須101題</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230886.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230886.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230886.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230886.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230886.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230886.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230883.jpg|https://books.google.com/books/content?vid=ISBN9784761230883&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230883.jpg|https://www.gakusan.com/bookimage_s/9784761230883.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">入試標準</span>
+            <a class="ubook__name" href="/math/books/hissu101/">落とせない必須101題</a>
+            <span class="ubook__meta">かんき出版／難易度 4／48〜57</span>
+            <span class="ubook__why">標準演習／日東駒専の対策として収録／「標準問題の完成度」に対応</span>
+
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/dragon-drill/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ドラゴン桜式 数学力ドリル</b><em>講談社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4065273226.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4065273226.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4065273226.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4065273226.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4065273226.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4065273226.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784065273227.jpg|https://books.google.com/books/content?vid=ISBN9784065273227&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784065273227.jpg|https://www.gakusan.com/bookimage_s/9784065273227.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">文系／計算力</span>
+            <a class="ubook__name" href="/math/books/dragon-drill/">ドラゴン桜式 数学力ドリル</a>
+            <span class="ubook__meta">講談社／難易度 2／35〜50</span>
+            <span class="ubook__why">日東駒専の対策として収録</span>
+            <span class="ubook__note">計算体力づくりに毎日10分</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/yasashiko/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>やさしい高校数学</b><em>学研</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053054699.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053054699.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053054692.jpg|https://books.google.com/books/content?vid=ISBN9784053054692&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053054692.jpg|https://www.gakusan.com/bookimage_s/9784053054692.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">導入・講義</span>
+            <a class="ubook__name" href="/math/books/yasashiko/">やさしい高校数学</a>
+            <span class="ubook__meta">学研／難易度 1／〜50(導入)</span>
+            <span class="ubook__why">導入／日東駒専の対策として収録</span>
+            <span class="ubook__note">苦手ならここから。教科書理解を最優先</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/hajihaji/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>初めから始める数学</b><em>マセマ出版社</em></span><img src="https://m.media-amazon.com/images/I/61ZT2XJ0c3L._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/61ZT2XJ0c3L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4866154233.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866154233.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4866154233.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4866154233.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4866154233.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784866154237.jpg|https://books.google.com/books/content?vid=ISBN9784866154237&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784866154237.jpg|https://www.gakusan.com/bookimage_s/9784866154237.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">導入・講義</span>
+            <a class="ubook__name" href="/math/books/hajihaji/">初めから始める数学</a>
+            <span class="ubook__meta">マセマ出版社／難易度 2／〜50(超入門)</span>
+            <span class="ubook__why">導入／日東駒専の対策として収録</span>
+
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/math/books/choice/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>チョイス新標準問題集</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227286.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227286.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227286.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227280.jpg|https://books.google.com/books/content?vid=ISBN9784777227280&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227280.jpg|https://www.gakusan.com/bookimage_s/9784777227280.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">入試標準</span>
+            <a class="ubook__name" href="/math/books/choice/">チョイス新標準問題集</a>
+            <span class="ubook__meta">河合出版／難易度 5／50〜60</span>
+            <span class="ubook__why">標準演習／「標準問題の完成度」に対応</span>
+            <span class="ubook__note">A問題→B問題で入試形式に慣れる</span>
+          </div>
+        </li>
       </ul>
       <p class="usec__more"><a href="/math/routes/nikkoma/">日東駒専・産近甲龍の数学参考書ルート（全9冊）を見る</a><span class="usec__tracks">文系・理系別に用意しています</span></p>
     </section>
@@ -262,36 +492,168 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div class="eyebrow">SCIENCE</div>
       <h2 class="sec">愛知大学の理科</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>理系学部を持たない文系総合大学で、個別試験に理科は出題されない。共通テスト利用方式で理科を選択科目として使える場合があるが、理科基礎2科目で十分。理科の学習は共通テスト対策(理科基礎の教科書レベル)のみでよく、参考書ルートは共テ基礎編に限定してよい。</dd></div>
+        <div><dt>試験の構成</dt><dd>一般選抜:理科の出題なし</dd></div>
+        <div><dt>出題の特徴</dt><dd>理系学部を持たない文系総合大学で、個別試験に理科は出題されない。共通テスト利用方式で理科を選択科目として使える場合があるが、理科基礎2科目で十分。理科の学習は共通テスト対策(理科基礎の教科書レベル)のみでよく、参考書ルートは共テ基礎編に限定してよい。</dd></div>
+        <div><dt>出題される分野</dt><dd>物理・化学・生物・地学は出題されません。</dd></div>
+        <div><dt>学部ごとの科目指定</dt><dd>理系学部なし(法・経済・経営・現代中国・国際コミュニケーション・文・地域政策)</dd></div>
+        <div><dt>文系学部の場合</dt><dd>一般選抜は英・国・地歴公民/数学で理科なし。共テ利用は理科(基礎2科目または発展1科目)を選択科目として利用可(要確認)</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 0 前後</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
-      <ul class="ubooks">
-        <li><a href="/science/books/uchu-rikigaku/"><b>宇宙一わかりやすい高校物理 力学・波動</b><span>物理／導入講義／難易度 1</span></a></li>
-        <li><a href="/science/books/uchu-riron/"><b>宇宙一わかりやすい高校化学 理論化学</b><span>化学／理論導入／難易度 2</span></a></li>
-        <li><a href="/science/books/yokuwakaru-kiso-seibutsu/"><b>よくわかる高校生物基礎+生物</b><span>生物／導入講義／難易度 3</span></a></li>
-        <li><a href="/science/books/aoki-hajitei-chigaku/"><b>青木の地学基礎をはじめからていねいに</b><span>地学／導入講義／難易度 2</span></a></li>
-        <li><a href="/science/books/uchu-denjiki/"><b>宇宙一わかりやすい高校物理 電磁気・熱・原子</b><span>物理／導入講義／難易度 1</span></a></li>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">愛知大学の理科の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>時間配分</b><span>2 科目まとめて時間が与えられる形式では、科目ごとの持ち時間を自分で決める必要がある。時間を計った通し演習で配分を先に固定する。</span></li>
       </ul>
-      <p class="usec__more"><a href="/science/routes/kyote/">日東駒専・産近甲龍の理科参考書ルート（全40冊）を見る</a><span class="usec__tracks">物理・化学・生物・地学別に用意しています</span></p>
+      <h3 class="usec__h3">愛知大学におすすめの参考書</h3>
+      <p class="usec__note">共通テスト対策の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は理科のルートを見てください。</p>
+      <ul class="ubooks">
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/kawai-kako-review-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>共通テスト過去問レビュー 地学基礎・地学</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777231097.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777231097.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777231097.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777231096.jpg|https://books.google.com/books/content?vid=ISBN9784777231096&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777231096.jpg|https://www.gakusan.com/bookimage_s/9784777231096.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">地学／過去問</span>
+            <a class="ubook__name" href="/science/books/kawai-kako-review-chigaku/">共通テスト過去問レビュー 地学基礎・地学</a>
+            <span class="ubook__meta">河合出版／難易度 4／48〜68</span>
+            <span class="ubook__why">過去問／共通テスト全般の対策として収録／「時間配分」に対応</span>
+            <span class="ubook__note">本試・追試を年度順に解き、時間配分と失点分野を毎回記録する。</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/kawai-sogo-butsuri/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト総合問題集 物理(河合・黒本)</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777230910.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777230910.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777230910.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777230914.jpg|https://books.google.com/books/content?vid=ISBN9784777230914&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777230914.jpg|https://www.gakusan.com/bookimage_s/9784777230914.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">物理／共通テスト</span>
+            <a class="ubook__name" href="/science/books/kawai-sogo-butsuri/">共通テスト総合問題集 物理(河合・黒本)</a>
+            <span class="ubook__meta">河合出版／難易度 5／50〜62</span>
+            <span class="ubook__why">実戦演習／共通テストの対策として収録／「時間配分」に対応</span>
+            <span class="ubook__note">時間を計って本番形式で解き、失点した分野を講義本に戻って毎回潰す</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/aoki-hajitei-chigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>青木の地学基礎をはじめからていねいに</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/489085987X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085987X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859870.jpg|https://books.google.com/books/content?vid=ISBN9784890859870&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859870.jpg|https://www.gakusan.com/bookimage_s/9784890859870.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">地学／導入・講義</span>
+            <a class="ubook__name" href="/science/books/aoki-hajitei-chigaku/">青木の地学基礎をはじめからていねいに</a>
+            <span class="ubook__meta">東進ブックス(ナガセ)／難易度 2／40〜58</span>
+            <span class="ubook__why">導入講義／共通テスト全般の対策として収録</span>
+            <span class="ubook__note">先に地学基礎の範囲を固め、地球内部・大気・宇宙の全体像をつかむ。</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/ichimon-ittou/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>物理 一問一答 完全版</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890858016.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890858016.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890858016.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890858019.jpg|https://books.google.com/books/content?vid=ISBN9784890858019&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890858019.jpg|https://www.gakusan.com/bookimage_s/9784890858019.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">物理／知識・図録・一問一答</span>
+            <a class="ubook__name" href="/science/books/ichimon-ittou/">物理 一問一答 完全版</a>
+            <span class="ubook__meta">ナガセ(東進ブックス)／難易度 3／45〜60</span>
+            <span class="ubook__why">共通テストの対策として収録</span>
+            <span class="ubook__note">原子・熱の知識事項を移動時間に回し、用語と単位の取りこぼしを防ぐ</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/graph-data-yomikata/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>生物・生物基礎のグラフ・データの読み方が1冊でしっかりわかる本</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230355.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230355.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230355.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230355.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230355.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230355.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230357.jpg|https://books.google.com/books/content?vid=ISBN9784761230357&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230357.jpg|https://www.gakusan.com/bookimage_s/9784761230357.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">生物／入試標準</span>
+            <a class="ubook__name" href="/science/books/graph-data-yomikata/">生物・生物基礎のグラフ・データの読み方が1冊でしっかりわかる本</a>
+            <span class="ubook__meta">かんき出版／難易度 4／48〜65</span>
+            <span class="ubook__why">共通テストの対策として収録</span>
+            <span class="ubook__note">共テ頻出のグラフ・データ問題の読み取り手順を、週二テーマずつ習得する。</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/science/books/lead-light-butsuri/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>リードLightノート 物理</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410260871.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410260871.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410260871.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410260872.jpg|https://books.google.com/books/content?vid=ISBN9784410260872&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410260872.jpg|https://www.gakusan.com/bookimage_s/9784410260872.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">物理／基礎演習</span>
+            <a class="ubook__name" href="/science/books/lead-light-butsuri/">リードLightノート 物理</a>
+            <span class="ubook__meta">数研出版／難易度 3／42〜55</span>
+            <span class="ubook__why">基礎演習</span>
+            <span class="ubook__note">基本例題を自力で完答できるまで、間違えた問題に印を付けて3周する</span>
+          </div>
+        </li>
+      </ul>
+      <p class="usec__more"><a href="/science/routes/kyote/">共通テスト対策の理科参考書ルート（全40冊）を見る</a><span class="usec__tracks">物理・化学・生物・地学別に用意しています</span></p>
     </section>
 
     <section class="block usec" id="sub-social" style="--sc:#5B4E9E">
       <div class="eyebrow">SOCIAL STUDIES</div>
       <h2 class="sec">愛知大学の社会</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>法・経済・経営・現代中国・国際コミュニケーション・文・地域政策などで地歴公民1科目を課し、日本史探究・世界史探究・地理探究・公共,政治・経済の4分野から選択できる。マーク式中心で大問3〜4題。日本史は史料と文化史、世界史はアジア地域史と近現代、地理は統計・地形図の読図が頻出。前期入試とM方式で難度差は小さいが分量が多く、通史の完成を早め過去問で処理速度を上げることが重要。</dd></div>
+        <div><dt>試験の構成</dt><dd>地歴・公民1科目 60分(日本史探究・世界史探究・地理探究・公共,政治・経済から1)</dd></div>
+        <div><dt>出題の特徴</dt><dd>法・経済・経営・現代中国・国際コミュニケーション・文・地域政策などで地歴公民1科目を課し、日本史探究・世界史探究・地理探究・公共,政治・経済の4分野から選択できる。マーク式中心で大問3〜4題。日本史は史料と文化史、世界史はアジア地域史と近現代、地理は統計・地形図の読図が頻出。前期入試とM方式で難度差は小さいが分量が多く、通史の完成を早め過去問で処理速度を上げることが重要。</dd></div>
+        <div><dt>出題される分野</dt><dd>日本史・世界史・地理・政治・経済が出題されます。公共・倫理は出題されません。</dd></div>
+        <div><dt>共通テスト</dt><dd>共通テストで必要なのは文系は1科目、理系は1科目です。</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 51 前後</dd></div>
       </dl>
-      <h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
-      <ul class="ubooks">
-        <li><a href="/social/books/kyokasho-yasashii-nihonshi/"><b>教科書よりやさしい</b><span>日本史／導入／難易度 2</span></a></li>
-        <li><a href="/social/books/kyokasho-yasashii-sekaishi/"><b>教科書よりやさしい世界史</b><span>世界史／超入門／難易度 2</span></a></li>
-        <li><a href="/social/books/chiri-murase-keito/"><b>村瀬 系統地理</b><span>地理／系統地理の導入／難易度 3</span></a></li>
-        <li><a href="/social/books/shimizu-kokyo-teinei/"><b>公共をはじめから</b><span>公共／公共の導入／難易度 3</span></a></li>
-        <li><a href="/social/books/kageyama-omoshiro-seikei/"><b>蔭山面白いほど</b><span>政治・経済／網羅講義／難易度 5</span></a></li>
+      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">愛知大学の社会の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+        <li><b>史料・資料の読み取り</b><span>資料集は「読むもの」ではなく「引くもの」として使う。演習で出た資料を必ず資料集で確認する往復を習慣にする。</span></li>
+        <li><b>通史・因果の理解</b><span>用語を先に詰めても、因果がつながっていないと論述にも正誤判定にも使えない。講義系で流れを通してから暗記に入る。</span></li>
+        <li><b>文化史</b><span>文化史は後回しにされやすく、そのまま失点になりやすい分野。通史とは別に時間を取って一気に片付ける。</span></li>
+        <li><b>マーク式・共通テスト</b><span>資料の読み取りに比重が移った形式なので、知識だけでは頭打ちになる。時間を計った演習で処理速度を上げる。</span></li>
       </ul>
-      <p class="usec__more"><a href="/social/routes/nikkoma/">日東駒専・産近甲龍の社会参考書ルート（全64冊）を見る</a><span class="usec__tracks">日本史・世界史・地理・公共・政治・経済・倫理別に用意しています</span></p>
+      <h3 class="usec__h3">愛知大学におすすめの参考書</h3>
+      <p class="usec__note">日東駒専・産近甲龍の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は社会のルートを見てください。</p>
+      <ul class="ubooks">
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/jidai-nagare-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>時代と流れで覚える</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578241653.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578241653.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578241653.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578241653.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578241653.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578241653.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578241652.jpg|https://books.google.com/books/content?vid=ISBN9784578241652&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578241652.jpg|https://www.gakusan.com/bookimage_s/9784578241652.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">日本史／用語・暗記</span>
+            <a class="ubook__name" href="/social/books/jidai-nagare-nihonshi/">時代と流れで覚える</a>
+            <span class="ubook__meta">文英堂／難易度 5／50〜65</span>
+            <span class="ubook__why">日東駒専の対策として収録／「史料・資料の読み取り」に対応／「通史・因果の理解」に対応</span>
+            <span class="ubook__note">年表と地図で用語の位置を固定する</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/kimeru-kokyoseikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>きめる!公共政経</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053064392.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053064392.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053064392.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053064394.jpg|https://books.google.com/books/content?vid=ISBN9784053064394&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053064394.jpg|https://www.gakusan.com/bookimage_s/9784053064394.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">政治・経済／導入・講義</span>
+            <a class="ubook__name" href="/social/books/kimeru-kokyoseikei/">きめる!公共政経</a>
+            <span class="ubook__meta">Gakken／難易度 4／〜共テ8割</span>
+            <span class="ubook__why">網羅講義／日東駒専の対策として収録／「通史・因果の理解」に対応／「マーク式・共通テスト」に対応</span>
+
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/omoshiroi-kyotest-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>面白いほどとれる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404606238X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404606238X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404606238X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/404606238X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/404606238X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404606238X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046062383.jpg|https://books.google.com/books/content?vid=ISBN9784046062383&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046062383.jpg|https://www.gakusan.com/bookimage_s/9784046062383.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">世界史／共通テスト</span>
+            <a class="ubook__name" href="/social/books/omoshiroi-kyotest-sekaishi/">面白いほどとれる本</a>
+            <span class="ubook__meta">KADOKAWA／難易度 4／共テ0〜9割</span>
+            <span class="ubook__why">通史講義(前半)／日東駒専の対策として収録／「通史・因果の理解」に対応／「マーク式・共通テスト」に対応</span>
+
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/speedmaster-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>スピードマスター</b><em>山川出版社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4634032260.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4634032260.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634032260.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4634032260.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4634032260.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4634032260.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784634032262.jpg|https://books.google.com/books/content?vid=ISBN9784634032262&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784634032262.jpg|https://www.gakusan.com/bookimage_s/9784634032262.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">世界史／基礎演習</span>
+            <a class="ubook__name" href="/social/books/speedmaster-sekaishi/">スピードマスター</a>
+            <span class="ubook__meta">山川出版社／難易度 3／〜55(基礎)</span>
+            <span class="ubook__why">基礎演習／日東駒専の対策として収録／「通史・因果の理解」に対応</span>
+            <span class="ubook__note">教科書の骨だけを30日で通して穴を出す</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/zoomup-seikei-shiryo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#0E7C6B"><span class="rt-cov__ph"><b>ズームアップ政経</b><em>実教出版</em></span><img src="https://www.gakusan.com/bookimage/9784407367935.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://www.gakusan.com/bookimage/9784407367935.jpg|https://images-fe.ssl-images-amazon.com/images/P/4407367938.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407367938.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4407367938.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4407367938.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4407367938.01.LZZZZZZZ.jpg|https://books.google.com/books/content?vid=ISBN9784407367935&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784407367935.jpg|https://www.gakusan.com/bookimage_s/9784407367935.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">政治・経済／資料・図説</span>
+            <a class="ubook__name" href="/social/books/zoomup-seikei-shiryo/">ズームアップ政経</a>
+            <span class="ubook__meta">実教出版／難易度 5／全レベル</span>
+            <span class="ubook__why">日東駒専の対策として収録／「史料・資料の読み取り」に対応</span>
+            <span class="ubook__note">見開き完結の資料集で毎日1テーマ確認</span>
+          </div>
+        </li>
+        <li class="ubook">
+          <a class="ubook__cov" href="/social/books/zenlevel-sekaishi-3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>全レベル③ 私大標準</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353708.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353708.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353708.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010353708.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010353708.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353708.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010353707.jpg|https://books.google.com/books/content?vid=ISBN9784010353707&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010353707.jpg|https://www.gakusan.com/bookimage_s/9784010353707.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+          <div class="ubook__body">
+            <span class="ubook__tag">世界史／入試標準</span>
+            <a class="ubook__name" href="/social/books/zenlevel-sekaishi-3/">全レベル③ 私大標準</a>
+            <span class="ubook__meta">旺文社／難易度 6／55〜63</span>
+            <span class="ubook__why">私大形式／日東駒専の対策として収録／「マーク式・共通テスト」に対応</span>
+            <span class="ubook__note">中堅私大のマーク式で選択肢の切り方を学ぶ</span>
+          </div>
+        </li>
+      </ul>
+      <p class="usec__more"><a href="/social/routes/nikkoma/">日東駒専・産近甲龍の社会参考書ルート（全64冊）を見る</a><span class="usec__tracks">日本史・世界史・地理・政治・経済別に用意しています</span></p>
     </section>
 
   <section class="block">
@@ -441,7 +803,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
    "@type": "Article",
    "@id": "https://route-taizen.com/univ/aichi/#article",
    "headline": "愛知大学の参考書ルート",
-   "description": "愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。",
+   "description": "愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。",
    "inLanguage": "ja",
    "author": {
     "@type": "Organization",
@@ -463,7 +825,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
    "@id": "https://route-taizen.com/univ/aichi/#webpage",
    "url": "https://route-taizen.com/univ/aichi/",
    "name": "愛知大学の参考書ルート｜全科目の出題傾向と対策 - ルート大全",
-   "description": "愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。",
+   "description": "愛知大学（中堅私大）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、その出題に合わせて選んだおすすめの参考書をまとめています。",
    "inLanguage": "ja",
    "isPartOf": {
     "@id": "https://route-taizen.com/#website"

@@ -28,8 +28,22 @@
  * **薄いページを増やさないための線引き（守ること）**
  *   - 5 科目すべてのデータが揃っている大学だけを出す。理科だけの 21 校
  *     （九州工業大学など。固有テキストが 140 字前後）は**ページにしない**
- *   - 参考書のリストは「主な参考書」の 5 冊までに絞る。ここを増やすと、
- *     同じ志望レベルの大学どうしでページの大半が一致してしまう
+ *   - 参考書は志望レベルのルートから**その大学の出題に噛み合うものだけ**を選ぶ
+ *     （`build/lib/uni-picks.mjs`）。ルートの先頭から順に取ると、同じ志望レベルの
+ *     大学が全部同じ並びになってしまう
+ *
+ * ## 出題の説明は、データにある分をすべて出す（2026-09-08 の改訂）
+ *
+ * 初版は `no`（出題形式）と `h`（目標偏差値）しか出していなかった。だが
+ * `universities.json` には、読者が先に知りたい事実がほかにも入っている。
+ *
+ *   国語   `time` 学部別の試験時間と現古漢の構成 / `k` `kan` 古文・漢文の要否 / `ri` 理系での扱い
+ *   理科   `time` 試験時間と配点 / `fix` 学部ごとの科目指定 / `med` 医学科の条件 / `bun` 文系学部の扱い
+ *   社会   `time` 試験時間 / 科目別の選択可否 / `n2` 二次の科目数 / `kyote_bun` `kyote_ri` 共通テストの科目数
+ *
+ * これらは診断（assets/js/subject-*.js）では使われていたのに、ページには
+ * 出ていなかった。**私立の方式差も、医学部医学科の別扱いも、ここに書いてある。**
+ * 値の読み方は各科目の `resolveUni()` と同じにする（食い違わせない）。
  *
  * ## slug は台帳で固定する
  *
@@ -46,6 +60,8 @@ import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, shar
 import { adUnit } from './lib/ads.mjs';
 import { isPlaceholder, placeholderSearchUrl } from './lib/record-type.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
+import { coverBox } from './lib/cover.mjs';
+import { matchFeatures, recommendBooks, availableTracks } from './lib/uni-picks.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -79,8 +95,8 @@ function tierRank(t) {
   return Number.isFinite(n) ? n : 99;
 }
 
-/** 1 校あたりに出す「主な参考書」の上限。増やすと同レベルの大学どうしが似てくる */
-const MAX_BOOKS_PER_SUBJECT = 5;
+/** 1 科目あたりに出すおすすめ参考書の上限 */
+const MAX_BOOKS_PER_SUBJECT = 6;
 
 /* ============================================================
    データの読み込み
@@ -152,45 +168,38 @@ function resolveUniversities() {
 }
 
 /* ============================================================
-   ルートから「主な参考書」を拾う
+   その大学におすすめの参考書
    ============================================================ */
 
 /**
- * その志望レベルのルートで最初に使う本を、トラックを横断して拾う。
+ * 志望レベルのルートに載っている本の中から、**その大学の出題に噛み合うもの**を選ぶ。
  *
- * トラックの先頭から順に 1 冊ずつ取る（総当たりではなく持ち回り）。
- * 文系だけ・日本史だけが並ぶのを避けて、どの選択でも 1 冊は目に入るようにする。
- *
- * **トラック名を必ず添える。** 社会は日本史と世界史の両方に「実況中継①」があり、
- * 理科は地学まで並ぶ。トラック名が無いと、同じ書名が 2 行続いたり、
- * 自分が選ばない科目の本が理由なく混ざっているように見える。
+ * 選び方の中身は build/lib/uni-picks.mjs にある。ここでは
+ *   1. その大学で選べる科目だけにトラックを絞り（理科の地学が不可、社会の倫理が不可など）
+ *   2. 出題説明から特徴語を取り出し
+ *   3. 特徴・`BOOKS[].unis` のタグ・目標偏差値でスコアを付けて上位を取る
+ * という順で呼ぶ。
  *
  * **ルート上の枠（志望校の過去問）は入れない。** 特定の商品ではないうえ、
  * このページには大学名の入った過去問の節を別に置いてある。
  */
-function mainBooks(d, tierId) {
+function pickBooks(d, sub, u, tierId, isMed) {
   const node = d.routes[tierId] || {};
-  const tracks = Object.keys(node)
+  const allTracks = Object.keys(node)
     .filter(k => !NON_TRACK.has(k) && node[k])
     .sort((a, b) => trackRank(a) - trackRank(b));
 
-  const seqs = tracks.map(k => ({ track: k, steps: node[k].omni || node[k].quick || [] }));
-  const bookById = new Map(d.books.map(b => [b.id, b]));
-  const picked = [];
-  const used = new Set();
+  const { keep, limited } = availableTracks(sub.dir, u, allTracks);
+  const features = matchFeatures(sub.dir, uniText(u));
+  const books = recommendBooks({
+    d, uni: u, tierId, tracks: keep, features, isMed, max: MAX_BOOKS_PER_SUBJECT,
+  });
+  return { books, tracks: keep, allTracks, limited, features };
+}
 
-  for (let i = 0; picked.length < MAX_BOOKS_PER_SUBJECT && i < 12; i++) {
-    for (const seq of seqs) {
-      if (picked.length >= MAX_BOOKS_PER_SUBJECT) break;
-      const step = seq.steps[i];
-      if (!step || used.has(step.id)) continue;
-      const b = bookById.get(step.id);
-      if (!b || isPlaceholder(b)) continue;
-      used.add(step.id);
-      picked.push({ book: b, role: step.role || '', track: seq.track });
-    }
-  }
-  return { books: picked, tracks };
+/** 特徴語を探す対象。**データにある文字列だけ**を連結する（推測を混ぜない） */
+function uniText(u) {
+  return [u.no, u.time, u.fix, u.med, u.bun, ...(u.fx || [])].filter(Boolean).join(' ');
 }
 
 /** その志望レベルのルートが収録している総冊数（重複を除く） */
@@ -237,6 +246,114 @@ function kakomonLinks(name, config) {
 }
 
 /* ============================================================
+   入試方式の違い（国公立 / 私立 / 医学部）
+   ============================================================ */
+
+/** perSubject から 1 科目を引く。5 件しか無いので線形で足りる */
+const bySub = (perSubject, dir) => perSubject.find(p => p.sub.dir === dir);
+
+/**
+ * 区分ごとの、入試の組み立ての違い。
+ *
+ * ここに書くのは**どの大学にも当てはまる一般的な事実**だけにする。
+ * 大学固有の話は `universities.json` の `time` / `fix` / `med` にしか無いので、
+ * 固有の記述はそちらを出す（作文で埋めない）。
+ */
+const KIND_NOTES = {
+  国立: '国公立大学は、共通テストと個別試験（二次）の二段構えです。共通テストは科目数が多い代わりに'
+    + '出題形式が固定されていて、個別試験は科目が絞られる代わりに記述の比重が上がります。'
+    + 'どちらの配点が重いかは学部・日程で変わるので、募集要項の配点表を先に見てから、'
+    + '下の科目別の説明を読んでください。',
+  公立: '公立大学も共通テストと個別試験の二段構えですが、個別試験の科目数を絞る大学が多く、'
+    + '共通テストの比重が国立より重くなりやすい傾向があります。中期日程を実施する大学もあるため、'
+    + '日程と配点を募集要項で確認したうえで、下の科目別の説明を読んでください。',
+  私立: '私立大学は、同じ大学でも入試方式によって問題そのものが変わります。学部別日程は'
+    + '学部ごとに作られた独自問題で、出題傾向も時間配分もそこで決まります。全学部統一方式は'
+    + '複数学部を 1 つの問題で選抜するため標準的な構成になりやすく、取りこぼしが直接響きます。'
+    + '共通テスト利用方式は個別試験を課さない代わりに高い得点率が必要です。'
+    + '下の科目別の説明にある「試験の構成」は方式ごとに書き分けてあるので、'
+    + '受ける方式を決めてから読んでください。',
+};
+
+/**
+ * 医学部医学科の別扱い。
+ *
+ * 判定材料は 2 つだけで、どちらもデータに書いてあるもの。
+ *   - 理科の `med`（医学科の科目指定。書いてある＝医学科がある）
+ *   - 志望レベルが med / shiritsui（医学部単科大学として登録されている）
+ *
+ * **大学名に「医」が入るかどうかでは判定しない。** 医療系学部だけを持つ大学まで
+ * 巻き込み、医学科向けの参考書が並んでしまう。
+ */
+function medicalInfo(perSubject) {
+  const sc = bySub(perSubject, 'science');
+  const ja = bySub(perSubject, 'japanese');
+  const so = bySub(perSubject, 'social');
+  const tierMed = perSubject.some(p => p.u.t === 'med' || p.u.t === 'shiritsui');
+  const med = sc && sc.u.med ? sc.u.med : '';
+  if (!med && !tierMed) return null;
+
+  const notes = [];
+  if (med) notes.push({ dt: '理科の科目指定（医学科）', dd: med });
+  if (ja && ja.u.ri === 2) notes.push({ dt: '国語（医学科）', dd: '理系学部で唯一、医学部医学科には個別試験の国語が課されます。' });
+  if (so && so.u.ri === 2) notes.push({ dt: '社会（医学科）', dd: '理系学部で唯一、医学部医学科には個別試験の社会が課されます。' });
+  return { tierMed, notes };
+}
+
+/**
+ * 個別試験（二次）でその科目が課されるか。
+ * 値の読み方は各科目の診断（assets/js/subject-*.js の resolveUni）と同じ。
+ * 英語・数学は可否を持つフィールドが無いので**行に出さない**（推測で埋めない）。
+ */
+function secondStageRows(perSubject) {
+  const rows = [];
+  const ja = bySub(perSubject, 'japanese');
+  const sc = bySub(perSubject, 'science');
+  const so = bySub(perSubject, 'social');
+  if (ja) rows.push({ name: '国語', has: ja.u.g !== 0, time: ja.u.time || '' });
+  if (sc) rows.push({ name: '理科', has: sc.u.need !== 0, time: sc.u.time || '' });
+  if (so) rows.push({ name: '社会', has: so.u.n2 !== 0, time: so.u.time || '' });
+  return rows;
+}
+
+/** 科目内で選べる分野（古文・漢文／物理・化学…／日本史・世界史…）の可否 */
+const AVAIL_MAP = {
+  japanese: [['gendai', u => 1], ['kobun', u => u.k], ['kanbun', u => u.kan]],
+  science:  [['butsuri', u => u.p], ['kagaku', u => u.c], ['seibutsu', u => u.b], ['chigaku', u => u.g]],
+  social:   [['nihonshi', u => u.nihonshi], ['sekaishi', u => u.sekaishi], ['chiri', u => u.chiri],
+             ['kokyo', u => u.kokyo], ['seikei', u => u.seikei], ['rinri', u => u.rinri]],
+};
+
+/** 「日本史・世界史・地理が出題されます。公民は出題されません。」を作る */
+function availNote(dir, u) {
+  const rows = AVAIL_MAP[dir];
+  if (!rows) return '';
+  const ok = [], some = [], no = [];
+  for (const [k, f] of rows) {
+    const v = f(u);
+    const label = TRACK_LABELS[k] || k;
+    if (v === 2) some.push(label);
+    else if (v) ok.push(label);
+    else no.push(label);
+  }
+  const parts = [];
+  if (ok.length) parts.push(`${ok.join('・')}が出題されます`);
+  if (some.length) parts.push(`${some.join('・')}は学部・入試方式によって扱いが変わります`);
+  if (no.length) parts.push(`${no.join('・')}は出題されません`);
+  return parts.length ? `${parts.join('。')}。` : '';
+}
+
+/** 社会だけが持つ、共通テストで必要な科目数 */
+function kyoteNote(u) {
+  const b = u.kyote_bun, r = u.kyote_ri;
+  if (!b && !r) return '';
+  const parts = [];
+  if (b) parts.push(`文系は${b}科目`);
+  if (r) parts.push(`理系は${r}科目`);
+  return `共通テストで必要なのは${parts.join('、')}です。`;
+}
+
+/* ============================================================
    1 校ぶんのページ
    ============================================================ */
 
@@ -253,42 +370,80 @@ function renderUniversity(uni, all, config) {
     subjects: perSubject.map(p => ({ dir: p.sub.dir, t: p.u.t, h: p.u.h, no: p.u.no, fx: p.u.fx })),
   });
 
+  const med = medicalInfo(perSubject);
+
   const sections = perSubject.map(p => {
     const d = data[p.sub.dir];
-    const { books, tracks } = mainBooks(d, p.u.t);
+    const { books, tracks, limited, features } = pickBooks(d, p.sub, p.u, p.u.t, !!med);
     const total = tierBookCount(d, p.u.t);
     const routeUrl = `/${p.sub.dir}/routes/${p.u.t}/`;
     const fx = Array.isArray(p.u.fx) ? p.u.fx : [];
+    const stages = d.stages || {};
+
+    /* 出題の事実。**データに入っている行だけ**を出す。
+       空のフィールドを「—」で埋めると、調べていないのか無いのかが読者に伝わらない */
+    const facts = [];
+    if (p.u.time) facts.push({ dt: '試験の構成', dd: p.u.time });
+    facts.push({ dt: '出題の特徴', dd: p.u.no
+      || '公表されている情報から特定できていません。募集要項と過去問で確認してください。' });
+    const avail = availNote(p.sub.dir, p.u);
+    if (avail) facts.push({ dt: '出題される分野', dd: avail });
+    if (p.u.fix) facts.push({ dt: '学部ごとの科目指定', dd: p.u.fix });
+    if (p.u.med) facts.push({ dt: '医学部医学科の場合', dd: p.u.med });
+    if (p.u.bun) facts.push({ dt: '文系学部の場合', dd: p.u.bun });
+    const kyote = p.sub.dir === 'social' ? kyoteNote(p.u) : '';
+    if (kyote) facts.push({ dt: '共通テスト', dd: kyote });
+    facts.push({ dt: '目標の目安', dd: `偏差値 ${p.u.h} 前後${fx.length ? `／${fx.join('・')}` : ''}` });
 
     return `    <section class="block usec" id="sub-${p.sub.dir}" style="--sc:${p.sub.color}">
       <div class="eyebrow">${esc(p.sub.en)}</div>
       <h2 class="sec">${esc(name)}の${esc(p.sub.ja)}</h2>
       <dl class="ufacts">
-        <div><dt>出題の形式</dt><dd>${esc(p.u.no || '公表されている情報から特定できていません。募集要項で確認してください。')}</dd></div>
-        <div><dt>目標の目安</dt><dd>偏差値 ${esc(String(p.u.h))} 前後${fx.length ? `／${fx.map(esc).join('・')}` : ''}</dd></div>
+${facts.map(f => `        <div><dt>${esc(f.dt)}</dt><dd>${esc(f.dd)}</dd></div>`).join('\n')}
       </dl>
-      ${books.length ? `<h3 class="usec__h3">この志望レベルのルートで最初に使う本</h3>
+${features.length ? `      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+      <p class="usec__note">${esc(name)}の${esc(p.sub.ja)}の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <ul class="upoints">
+${features.map(f => `        <li><b>${esc(f.key)}</b><span>${esc(f.tip)}</span></li>`).join('\n')}
+      </ul>
+` : ''}${books.length ? `      <h3 class="usec__h3">${esc(name)}におすすめの参考書</h3>
+      <p class="usec__note">${esc(p.tier.name)}の${esc(p.sub.ja)}ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを${books.length}冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は${esc(p.sub.ja)}のルートを見てください。</p>
       <ul class="ubooks">
 ${books.map(b => {
-    const tl = tracks.length > 1 ? (TRACK_LABELS[b.track] || b.track) : '';
-    return `        <li><a href="/${p.sub.dir}/books/${b.book.id}/"><b>${esc(b.book.name)}</b><span>${tl ? `${esc(tl)}／` : ''}${esc(b.role)}${b.role ? '／' : ''}難易度 ${b.book.diff}</span></a></li>`;
+    const st = stages[b.book.stage] || {};
+    /* トラック名は、その本が「一部のトラックにしか載っていない」ときだけ出す。
+       全トラックに載っている本に「文系」と書くと、理系の読者が読み飛ばす */
+    const tl = (tracks.length > 1 && b.tracks.length && b.tracks.length < tracks.length)
+      ? b.tracks.map(t => TRACK_LABELS[t] || t).join('・') : '';
+    const why = [b.role, ...b.reasons.slice(0, 3)].filter(Boolean).join('／');
+    return `        <li class="ubook">
+          <a class="ubook__cov" href="/${p.sub.dir}/books/${b.book.id}/" tabindex="-1" aria-hidden="true">${coverBox(b.book, { color: st.color || p.sub.color })}</a>
+          <div class="ubook__body">
+            <span class="ubook__tag">${[tl, st.label || ''].filter(Boolean).map(esc).join('／')}</span>
+            <a class="ubook__name" href="/${p.sub.dir}/books/${b.book.id}/">${esc(b.book.name)}</a>
+            <span class="ubook__meta">${esc(b.book.pub || '')}／難易度 ${b.book.diff}${b.book.hensachi ? `／${esc(b.book.hensachi)}` : ''}</span>
+${why ? `            <span class="ubook__why">${esc(why)}</span>` : ''}
+${b.note ? `            <span class="ubook__note">${esc(b.note)}</span>` : ''}
+          </div>
+        </li>`;
   }).join('\n')}
-      </ul>` : ''}
-      <p class="usec__more"><a href="${routeUrl}">${esc(tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${tracks.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(TRACK_LABELS[t] || t)).join('・')}別に用意しています</span>` : ''}</p>
+      </ul>
+` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${tracks.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(TRACK_LABELS[t] || t)).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(TRACK_LABELS[t] || t)).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
     </section>`;
   }).join('\n\n');
 
   // 同じ志望レベルの他大学（内部リンク。多すぎると読めないので 24 校で切る）
   const siblings = all.filter(x => x.tier === uni.tier && x.slug !== slug).slice(0, 24);
 
+  const stageRows = secondStageRows(perSubject);
   const { azUrl, rkUrl } = kakomonLinks(name, config);
 
   const hs = perSubject.map(p => p.u.h).filter(h => typeof h === 'number');
   const hardest = perSubject.slice().sort((a, b) => (b.u.h || 0) - (a.u.h || 0))[0];
 
   const title = clip(`${name}の参考書ルート｜全科目の出題傾向と対策 - ルート大全`, 60);
-  const desc = clip(`${name}（${tier.sub}）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式と、`
-    + `目標偏差値、そこへ届くまでに使う参考書の順番をまとめています。`, 120);
+  const desc = clip(`${name}（${tier.sub}）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、`
+    + `その出題に合わせて選んだおすすめの参考書をまとめています。${med ? '医学部医学科の条件も別に載せています。' : ''}`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -335,19 +490,39 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
 .unav{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
 .unav a{background:var(--surface);border:1px solid var(--line);padding:10px 14px;font-size:12.5px;font-weight:700;color:var(--ink-2);transition:.15s;box-shadow:var(--sh-s)}
 .unav a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--line-d)}
-.usec{border-left:3px solid var(--sc)}
+/* 科目の色の縦線と本文の間。ここを 0 にすると、線のすぐ横から文字が始まって窮屈に見える。
+   左の余白は縦線の太さ（3px）とは別に取る */
+.usec{border-left:3px solid var(--sc);padding:2px 0 4px 16px}
+@media(min-width:700px){.usec{padding-left:22px}}
 .ufacts{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:16px}
 .ufacts div{background:var(--surface);padding:14px 17px}
 .ufacts dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
-.usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:20px}
-.ubooks{list-style:none;margin-top:11px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
+.usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
+.upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
+.upoints li{background:var(--surface);padding:13px 16px}
+.upoints b{display:block;font-size:12.5px;font-weight:800;color:var(--sc);letter-spacing:.02em}
+.upoints span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.9;margin-top:5px}
+.ubooks{list-style:none;margin-top:12px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
 @media(min-width:720px){.ubooks{grid-template-columns:repeat(2,1fr)}}
-.ubooks a{display:block;background:var(--surface);padding:12px 15px;transition:.15s}
-.ubooks a:hover{background:var(--surface-2)}
-.ubooks b{display:block;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.5;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px}
-.ubooks span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:4px;letter-spacing:.03em}
-.usec__more{margin-top:16px;font-size:13px;line-height:1.8}
+.ubook{display:flex;gap:13px;background:var(--surface);padding:13px 15px}
+.ubook__cov{flex:none;--cw:52px;display:block}
+.ubook__body{min-width:0}
+.ubook__tag{display:block;font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.04em}
+.ubook__name{display:block;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.5;margin-top:3px;text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px}
+.ubook__name:hover{color:var(--accent-deep)}
+.ubook__meta{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-top:4px;letter-spacing:.03em}
+.ubook__why{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.7;margin-top:6px}
+.ubook__note{display:block;font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:4px}
+.unote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--indigo);padding:17px 20px;margin-top:16px}
+.unote p{font-size:13px;color:var(--ink-2);line-height:1.95}
+.unote dl{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:14px}
+.unote dl>div{background:var(--surface);padding:12px 15px}
+.unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+.unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
+.unote__sub{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.8}
+.usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
 .uhensa{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-s)}
@@ -378,7 +553,7 @@ ${portalHeader()}
   <div class="block" style="margin-top:26px">
     <div class="eyebrow">University</div>
     <h1 class="sec" style="font-size:29px">${esc(name)}の参考書ルート</h1>
-    <p class="sec-lead">${esc(name)}（${esc(kind)}／${esc(tier.sub)}）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何が問われ、どの参考書をどの順で進めるかをまとめたページです。学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
+    <p class="sec-lead">${esc(name)}（${esc(kind)}／${esc(tier.sub)}）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何がどう問われるかと、その出題に噛み合う参考書をまとめたページです。${med ? '医学部医学科は他学部と条件が変わるので、別に節を設けています。' : ''}学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
     <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
     <dl class="uhead">
       <div><dt>志望レベル</dt><dd>${esc(tier.name)}</dd></div>
@@ -387,7 +562,8 @@ ${portalHeader()}
       <div><dt>最も高い到達度が要る科目</dt><dd>${esc(hardest.sub.ja)}</dd></div>
     </dl>
     <div class="unav">
-${perSubject.map(p => `      <a href="#sub-${p.sub.dir}">${esc(p.sub.ja)}</a>`).join('\n')}
+      <a href="#exam">入試の組み立て</a>
+${med ? '      <a href="#med">医学部医学科</a>\n' : ''}${perSubject.map(p => `      <a href="#sub-${p.sub.dir}">${esc(p.sub.ja)}</a>`).join('\n')}
     </div>
     ${shareBar({
       url,
@@ -396,7 +572,35 @@ ${perSubject.map(p => `      <a href="#sub-${p.sub.dir}">${esc(p.sub.ja)}</a>`).
     })}
   </div>
 
-  <section class="block">
+  <section class="block" id="exam">
+    <div class="eyebrow">Exam format</div>
+    <h2 class="sec">${esc(name)}の入試はどう組み立てられているか</h2>
+    <p class="sec-lead">科目別の対策に入る前に、${esc(name)}の入試がどういう形で行われるかを押さえておきます。ここが分かっていないと、同じ大学の別方式の過去問を解いて手応えを取り違えます。</p>
+    <div class="unote">
+      <p>${esc(KIND_NOTES[kind] || '入試の組み立ては募集要項で確認してください。')}</p>
+${stageRows.length ? `      <dl>
+${stageRows.map(r => `        <div><dt>個別試験（二次）の${esc(r.name)}</dt><dd>${r.has ? '課されます。' : '課されません。'}${r.time ? `<span class="unote__sub">${esc(r.time)}</span>` : ''}</dd></div>`).join('\n')}
+      </dl>
+      <p style="margin-top:12px">英語と数学は、学部・学科によって課されるかどうかも配点も大きく変わるため、ここでは可否を出していません。科目別の説明と募集要項で確認してください。</p>` : ''}
+    </div>
+  </section>
+
+${med ? `  <section class="block" id="med">
+    <div class="eyebrow">Medical</div>
+    <h2 class="sec">${esc(name)}の医学部医学科について</h2>
+    <p class="sec-lead">医学部医学科は、同じ大学の他学部と同じ問題を使う場合でも、合格に必要な得点率が大きく上がります。理科の科目指定が別に決められていたり、面接・小論文が課されたりするのも医学科の特徴です。私立の医科大学では、医学部だけの独自問題を作っている大学もあります。</p>
+    <div class="unote">
+      <p>このページの参考書は、科目ごとに${esc(perSubject.map(p => `${p.sub.ja}は${p.tier.name}`).join('、'))}のルートから選んでいます。${med.tierMed
+        ? '医学科は科目によって求められる到達点が違うため、志望レベルも科目ごとに変えてあります。'
+        : `${esc(name)}全体の志望レベルで選んでいるので、医学科を受けるなら、下に出している条件のぶんだけ到達点を上げて考えてください。`}</p>
+${med.notes.length ? `      <dl>
+${med.notes.map(n => `        <div><dt>${esc(n.dt)}</dt><dd>${esc(n.dd)}</dd></div>`).join('\n')}
+      </dl>` : ''}
+      <p style="margin-top:12px">面接・小論文の有無と配点、共通テストの必要科目は年度によって変わります。出願前に必ず募集要項で確認してください。小論文の対策は<a href="/shoron/">小論文ルート大全</a>にまとめています。</p>
+    </div>
+  </section>
+
+` : ''}  <section class="block">
     <div class="eyebrow">Target level</div>
     <h2 class="sec">科目ごとの目標</h2>
     <p class="sec-lead">${esc(name)}で科目ごとに必要になる到達度の目安です。同じ大学でも学部・方式で配点が変わるため、数字は「どの科目に時間を厚く配るか」を決めるための相対的な目安として使ってください。算出のしかたは<a href="/methodology/">データの作り方</a>に書いています。</p>
