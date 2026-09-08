@@ -1251,7 +1251,8 @@ https://route-taizen.com/test/…         404
       （`http://` と `www.` はホスト正規化。**正しい状態なので消さない**）
 - [ ] 主要クエリの表示回数・CTR・平均掲載順位をページ単位で確認
 - [ ] リッチリザルト検査で、書籍ページのパンくずと `Book` を確認
-- [ ] 数値を `docs/kpi-plan.md` の基準値欄へ記入（**推測で埋めない**）
+- [ ] 数値を `docs/kpi-snapshots.md` へ**期間つきで**記録（**推測で埋めない**。
+      28 日集計 CSV から取り込む場合だけ `npm run import:kpi`）
 - [ ] 実測した件数を `docs/search-console-indexing.md` の「4. 実測の記録」へ 1 行足す
 
 ### Google アナリティクス 4

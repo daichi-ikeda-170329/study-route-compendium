@@ -1,6 +1,8 @@
 # KPI の取り込み手順
 
-`docs/kpi-plan.md` の基準値欄を埋めるための手順。
+28 日集計 CSV から `docs/kpi-baseline.json` / `kpi-baseline.md` を作るための手順。
+**管理画面を目視して数値を控えるだけなら、この手順は要らない。**その場合は
+`docs/kpi-snapshots.md` へ期間つきで書く（`docs/kpi-plan.md` の「見る指標」を参照）。
 **この作業は運営者にしかできない。** Search Console・GA4・AdSense の管理画面へ
 入る権限が要るためで、コード側からは取りに行けない。
 
@@ -85,7 +87,8 @@ cat docs/kpi-baseline.md
 
 ## 6. 値が入ったあと
 
-`docs/kpi-plan.md` の基準値欄へ、`docs/kpi-baseline.md` の数字を写す。
+`docs/kpi-baseline.md` に数字が入る。**`docs/kpi-plan.md` へ写さない**（同じ数値を
+二箇所に置くとドリフトする。kpi-plan.md は指標の定義と判断だけを持つ）。
 **写すときも推測で埋めない。** `—` のままの指標は `—` のままにする。
 
 ## 7. いまの状態
