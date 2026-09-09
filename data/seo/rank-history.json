@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "notes": [
+    "順位履歴。追記専用。過去の entries は書き換えない。",
+    "source: gsc = Search Console の平均掲載順位（正）。websearch = WebSearch で目視した概算順位。",
+    "rank が null は「その測定では順位を確認できなかった」であり、未インデックスの証拠ではない。"
+  ],
+  "entries": [
+    {
+      "date": "2026-09-09",
+      "source": "websearch",
+      "measurements": [
+        {
+          "keyword": "青チャート Focus Gold どっち",
+          "rank": null
+        },
+        {
+          "keyword": "ネクステージ ヴィンテージ 違い",
+          "rank": null
+        }
+      ],
+      "note": "WebSearch（米国インデックス）で検索したが route-taizen.com は結果に出ず、順位を確認できなかった。docs/search-console-indexing.md の実測（2026-09-07 時点で 1130 ページが登録済み）から、これは圏外の証拠ではなく計測手段の限界。GSC を有効にするまで順位の実測値は無い。"
+    }
+  ]
+}

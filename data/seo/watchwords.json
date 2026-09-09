@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "site": "https://route-taizen.com",
+  "gscProperty": "sc-domain:route-taizen.com",
+  "notes": [
+    "監視するキーワードの台帳。SEO Rank Watch スキルが読む。",
+    "ここに載っているキーワードだけが rank-history.json に記録される。",
+    "GSC で見つけた未登録クエリを追加するときは、運営者が中身を見て判断してから足す（生の検索クエリを機械的に流し込まない）。"
+  ],
+  "keywords": [
+    {
+      "keyword": "青チャート Focus Gold どっち",
+      "targetPath": "/math/guides/ao-vs-fg/",
+      "priority": "high"
+    },
+    {
+      "keyword": "ネクステージ ヴィンテージ 違い",
+      "targetPath": "/english/guides/nextstage-vs-vintage/",
+      "priority": "high"
+    },
+    {
+      "keyword": "ポレポレ 技術100",
+      "targetPath": "/english/guides/porepore-vs-gijutsu100/",
+      "priority": "high"
+    },
+    {
+      "keyword": "ターゲット1900 シス単 どっち",
+      "targetPath": "/english/guides/target-vs-sistan/",
+      "priority": "high"
+    },
+    {
+      "keyword": "1対1対応 標準問題精講",
+      "targetPath": "/math/guides/taio11-vs-hyomon/",
+      "priority": "high"
+    },
+    {
+      "keyword": "化学重要問題集 新演習 違い",
+      "targetPath": "/science/guides/juyo-vs-shinenshu/",
+      "priority": "high"
+    },
+    {
+      "keyword": "物理のエッセンス 宇宙一",
+      "targetPath": "/science/guides/essence-vs-uchuichi/",
+      "priority": "high"
+    },
+    {
+      "keyword": "山川 東進 一問一答",
+      "targetPath": "/social/guides/yamakawa-vs-toshin/",
+      "priority": "high"
+    },
+    {
+      "keyword": "アクセス ポラリス 現代文",
+      "targetPath": "/japanese/guides/access-vs-rules/",
+      "priority": "high"
+    },
+    {
+      "keyword": "大森徹 田部 生物",
+      "targetPath": "/science/guides/omori-vs-tabe/",
+      "priority": "high"
+    },
+    {
+      "keyword": "参考書 何冊",
+      "targetPath": "/guides/how-many-books/",
+      "priority": "medium"
+    },
+    {
+      "keyword": "過去問 いつから",
+      "targetPath": "/guides/kakomon-timing/",
+      "priority": "medium"
+    },
+    {
+      "keyword": "参考書 2周目",
+      "targetPath": "/guides/shuukai-sekkei/",
+      "priority": "medium"
+    },
+    {
+      "keyword": "英単語帳 ランキング",
+      "targetPath": "/english/guides/tango-ranking/",
+      "priority": "medium"
+    },
+    {
+      "keyword": "古文単語帳 おすすめ",
+      "targetPath": "/japanese/guides/kobun-tango-ranking/",
+      "priority": "medium"
+    },
+    {
+      "keyword": "参考書ルート",
+      "targetPath": "/",
+      "priority": "low"
+    },
+    {
+      "keyword": "英語 参考書 ルート",
+      "targetPath": "/english/",
+      "priority": "low"
+    }
+  ]
+}

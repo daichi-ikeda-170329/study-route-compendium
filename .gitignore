@@ -3,8 +3,9 @@
 Thumbs.db
 node_modules/
 
-# ローカル開発用（プレビューサーバー設定）
-.claude/
+# ローカル開発用（プレビューサーバー設定）。skills/ だけは運用手順なので追跡する
+.claude/*
+!.claude/skills/
 .codex/
 build/.cache/
 

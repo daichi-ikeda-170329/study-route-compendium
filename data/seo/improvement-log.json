@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "notes": [
+    "改善履歴。status は active / observing / achieved の 3 つ。",
+    "observing のキーワードは nextReviewDate まで再改善しない。"
+  ],
+  "keywords": [
+    {
+      "keyword": "青チャート Focus Gold どっち",
+      "targetPath": "/math/guides/ao-vs-fg/",
+      "status": "observing",
+      "nextReviewDate": "2026-09-16",
+      "actions": [
+        {
+          "date": "2026-09-09",
+          "rankAtAction": null,
+          "rankSource": "websearch",
+          "rankNote": "WebSearch（米国インデックス）では route-taizen.com が結果に出ず、着手時点の順位は実測できていない。GSC 未設定のため 7 日後の判定も同じ制約を受ける。",
+          "needs": "数学の網羅系を1冊に決めたい高校生・保護者が、青チャートとFocus Goldのどちらを買う／使うかを、自分の状況（学年・学校の配布・入手可否）に照らして判断したい。",
+          "gap": [
+            "カタカナ表記「フォーカスゴールド」がサイト全体で 0 件だった。上位ページはタイトル・本文にカタカナを含んでおり、実際の検索語と表記が一致していなかった。",
+            "「Focus Gold は学校でしか手に入らないのか」という購入可否の疑問に答えていなかった（旧文は『書店での扱いが青チャートほど広くない場合があります』という曖昧な記述のみ）。"
+          ],
+          "done": "build/content/articles.mjs の ao-vs-fg を編集。(1) title・desc・lead にカタカナ表記「フォーカスゴールド」を入れた。(2) 見出しを『違い3 — 手に入れやすさと情報量』から『違い3 — どこで買えるか・情報の多さ』に変え、啓林館の WEB ショップで個人購入でき解答が全問付属すること、大型書店には店頭在庫があることを事実として追記した（出典: 啓林館 WEB ショップの案内ページ）。文章量を増やす目的の加筆はしていない。",
+          "sources": [
+            "https://www.shinko-keirinbunkenweb.shop/new/2024-03-29-170621.html"
+          ]
+        }
+      ]
+    }
+  ]
+}
