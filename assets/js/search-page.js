@@ -13,7 +13,7 @@
 
   var INDEX_URL = '/assets/generated/search-facets.json';
   var PAGE = 40;               // 一度に出す件数
-  var SCHEMA = 2;
+  var SCHEMA = 3;             // v3 で「情報の確認状態」の絞り込みと項目を落とした
 
   var index = null;
   var query = C.emptyQuery();
@@ -96,11 +96,6 @@
       index.diffBands.map(function (b) { return { value: b.id, label: b.label }; }),
       '難易度が不明・確認中'));
 
-    box.appendChild(facet('statuses', '情報の確認状態',
-      Object.keys(index.statusLabel).map(function (k) {
-        return { value: k, label: index.statusLabel[k] };
-      }), null));
-
     box.appendChild(facet('yearBands', '刊行年',
       index.yearBands.map(function (b) { return { value: b.id, label: b.label }; }),
       '刊行年が不明'));
@@ -161,14 +156,16 @@
     if (b.ser) add('シリーズ', b.ser);
     box.appendChild(meta);
 
-    var badge = make('span', 'sf-badge', index.statusLabel[b.vs] || b.vs);
-    badge.setAttribute('data-v', b.vs);
-    var row = make('div', 'sf-meta');
-    row.appendChild(badge);
+    /* 確認状態のバッジは 2026-09-09 に外した。収録のほとんどに同じ
+       「一部情報を確認中」が並び、1 冊ごとの違いを伝えないまま面積を取っていた
+       （参考書カードの .bcard__ver と同じ理由。内訳は docs/data-quality.md、
+       経緯は docs/data-verification.md）。
+       ルート上の枠であることは、商品かどうかの違いなので残す */
     if (b.rt === 'routePlaceholder') {
+      var row = make('div', 'sf-meta');
       row.appendChild(make('span', 'sf-unknown', 'ルート上の枠（特定の商品ではありません）'));
+      box.appendChild(row);
     }
-    box.appendChild(row);
 
     return box;
   }

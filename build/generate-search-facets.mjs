@@ -7,7 +7,7 @@
  * ## なぜ既存の索引と分けるか
  *
  * `assets/js/book-index.js` は 235,925 バイトあり、**全ページのヘッダー検索**が
- * 検索欄に最初に触れたときに読む。ここへ出版社・著者・難易度帯・出版年・確認状態を
+ * 検索欄に最初に触れたときに読む。ここへ出版社・著者・難易度帯・出版年を
  * 足すと 400KB を超え、ヘッダー検索の初回応答が悪くなる。
  * だから**用途で分ける**。
  *
@@ -23,10 +23,15 @@
  * 画面側は「不明・確認中」として区別して出し、絞り込みを指定していないときは
  * 検索対象から外さない。
  *
- * ## 確認状態は複製しない
+ * ## 確認状態は載せない（v3・2026-09-09）
  *
- * 正本は `build/data/verification.json`。ここでは**その状態を参照するだけ**で、
- * 科目データ側へ書き戻さない。
+ * 以前は 1 冊ごとに `vs`（verified / partial / unverified）を載せ、`/search/` に
+ * 「情報の確認状態」の絞り込みと結果カードのバッジを出していた。収録のほとんどが
+ * 同じ「一部情報を確認中」で、1 冊ごとの違いを伝えないまま画面と転送量を
+ * 取っていたので、絞り込みごと外した（参考書カードの `.bcard__ver` と同じ理由。
+ * 内訳は `docs/data-quality.md`、経緯は `docs/data-verification.md`）。
+ * 台帳 `build/data/verification.json` は正本として残り、確かめた値だけを
+ * 構造化データに出す出し分けも変えていない。
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -36,7 +41,6 @@ import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { authorsOf, searchName } from './lib/booktitle.mjs';
 import { seriesOf } from './lib/series.mjs';
 import { hensachiRange } from './lib/rank.mjs';
-import { verificationOf, STATUS_LABEL } from './lib/verification.mjs';
 import { recordType } from './lib/record-type.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -88,7 +92,6 @@ function build() {
   for (const s of SUBJECTS) {
     const d = loadSubjectData(ROOT, s.dir);
     for (const b of d.books) {
-      const v = verificationOf(s.dir, b);
       const authors = authorsOf(s.dir, b.id);
       const series = seriesOf(b);
       const [lo, hi] = hensachiRange(b);
@@ -112,8 +115,6 @@ function build() {
         hen: lo === 999 ? null : [lo, hi],
         year: typeof b.year === 'number' ? b.year : null,
         yb: yearBand(b.year),
-        // 確認状態の正本は build/data/verification.json。ここは参照するだけ
-        vs: v.status,
         /* 同名シリーズ・巻違いの取り違えを防ぐための手がかり。
            seriesOf() は「レベル別 3 巻」「4 冊構成」「全レベル（調べ先）」を返す。
            該当しなければ null（無理に埋めない） */
@@ -126,11 +127,10 @@ function build() {
   }
 
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     subjects,
     diffBands: DIFF_BANDS,
     yearBands: YEAR_BANDS,
-    statusLabel: STATUS_LABEL,
     publishers: [...publishers].sort((a, b) => a.localeCompare(b, 'ja')),
     authors: [...authorSet].sort((a, b) => a.localeCompare(b, 'ja')),
     books,

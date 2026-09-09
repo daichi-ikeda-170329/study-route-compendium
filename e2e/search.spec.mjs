@@ -27,7 +27,7 @@ test('欠損している件数を隠さずに出す', async ({ page }) => {
   await expect(page.locator('.sf-card').first()).toContainText('著者');
 });
 
-test('科目・難易度帯・確認状態を組み合わせて絞り込める', async ({ page }) => {
+test('科目・難易度帯・刊行年を組み合わせて絞り込める', async ({ page }) => {
   await open(page);
   const head = page.locator('#sfResultsHead');
 
@@ -38,9 +38,18 @@ test('科目・難易度帯・確認状態を組み合わせて絞り込める',
   const after = await head.textContent();
   expect(Number(after.match(/(\d+) 冊/)[1]), '難易度で絞っても件数が減っていない').toBeLessThan(162);
 
-  await page.locator('#sf-statuses-verified').check();
+  await page.locator('#sf-yearBands-y2024').check();
   const last = await head.textContent();
   expect(Number(last.match(/(\d+) 冊/)[1])).toBeLessThanOrEqual(Number(after.match(/(\d+) 冊/)[1]));
+});
+
+/* 2026-09-09 に外した「情報の確認状態」の絞り込みが、画面に戻っていないこと。
+   バッジだけ消して絞り込みが残ると、選べるのに理由が読めない状態になる */
+test('情報の確認状態の絞り込みとバッジが出ていない', async ({ page }) => {
+  await open(page);
+  await expect(page.locator('#sfFacets')).not.toContainText('情報の確認状態');
+  await expect(page.locator('#sfFacets input[id^="sf-statuses-"]')).toHaveCount(0);
+  await expect(page.locator('.sf-badge')).toHaveCount(0);
 });
 
 test('「著者が分かっていない」だけを選べる', async ({ page }) => {

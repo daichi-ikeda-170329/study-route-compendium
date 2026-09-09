@@ -22,7 +22,6 @@ import { createRequire } from 'node:module';
 import { ROOT } from './helpers.mjs';
 import { SUBJECTS } from '../build/lib/extract.mjs';
 import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
-import { loadVerification, recordKey } from '../build/lib/verification.mjs';
 
 const require = createRequire(import.meta.url);
 const C = require(path.join(ROOT, 'assets/js/search-core.js'));
@@ -57,20 +56,25 @@ test('索引に全 1,390 冊が 1 回ずつ入っている', skip, () => {
   assert.deepEqual([...seen].sort(), [...ids].sort(), '索引と実データの顔ぶれが違う');
 });
 
-test('schemaVersion は 2（v1 の索引と別物であることを明示する）', skip, () => {
-  assert.equal(index.schemaVersion, 2);
+test('schemaVersion は 3（v1 の索引と別物であることを明示する）', skip, () => {
+  assert.equal(index.schemaVersion, 3);
 });
 
-test('確認状態が build/data/verification.json と一致する（複製ではなく参照）', skip, () => {
-  const v = loadVerification();
-  const bad = [];
-  for (const b of index.books) {
-    const dir = index.subjects[b.s].id;
-    const rec = v.records[recordKey(dir, b.id)];
-    const want = rec ? rec.status : 'unverified';
-    if (b.vs !== want) bad.push(`${dir}:${b.id} → 索引 ${b.vs} / 正本 ${want}`);
-  }
-  assert.deepEqual(bad.slice(0, 10), [], `${bad.length} 件で確認状態が食い違う`);
+/**
+ * 2026-09-09 に「情報の確認状態」の絞り込みと結果カードのバッジを /search/ から
+ * 外し、索引からも `vs` と `statusLabel` を落とした（v3）。収録のほとんどが同じ
+ * 「一部情報を確認中」で、1 冊ごとの違いを伝えないまま画面と転送量を取っていた
+ * （内訳は docs/data-quality.md）。
+ *
+ * 台帳（build/data/verification.json）は正本として残り、確かめた値だけを
+ * 構造化データに出す出し分けも変えていない（test/verification.test.mjs が見る）。
+ * ここで見るのは「画面向けの索引に持ち出していないこと」だけ。
+ */
+test('索引に確認状態を持ち出していない', skip, () => {
+  assert.equal(index.statusLabel, undefined, '索引に statusLabel が残っている');
+  const withVs = index.books.filter(b => 'vs' in b);
+  assert.deepEqual(withVs.slice(0, 5).map(b => b.id), [],
+    `${withVs.length} 冊に vs（確認状態）が残っている`);
 });
 
 test('分からない項目を 0 や空文字で埋めていない', skip, () => {
@@ -95,8 +99,8 @@ test('著者が分かっていない本が、素直に空配列で入ってい�
 test('ヘッダー検索の索引（v1）に絞り込み用の項目が入っていない', () => {
   const v1 = fs.readFileSync(path.join(ROOT, 'assets/js/book-index.js'), 'utf8');
   assert.match(v1, /"v":1/, 'v1 の版が変わっている');
-  for (const key of ['"diffBands"', '"statusLabel"', '"authors"', 'verified']) {
-    assert.ok(!v1.includes(key), `v1 に ${key} が入っている。絞り込み用の項目は v2 へ入れる`);
+  for (const key of ['"diffBands"', '"yearBands"', '"authors"', '"publishers"']) {
+    assert.ok(!v1.includes(key), `v1 に ${key} が入っている。絞り込み用の項目は詳細検索の索引へ入れる`);
   }
 });
 
@@ -107,17 +111,16 @@ test('ヘッダー検索の索引（v1）に絞り込み用の項目が入って
 /** 小さな索引を組み立てる。実データに依存せず規則だけを見る */
 function tinyIndex() {
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     subjects: [{ id: 'math', label: '数学' }, { id: 'english', label: '英語' }],
     diffBands: [{ id: 'basic', label: '基礎' }, { id: 'adv', label: '応用' }],
     yearBands: [{ id: 'y2024', label: '2024年以降' }],
-    statusLabel: { verified: '確認済み', unverified: '確認中' },
     publishers: ['旺文社'],
     authors: ['関正生'],
     books: [
-      { s: 0, id: 'full', n: '全部そろっている本', pub: '旺文社', au: ['関正生'], stage: 'core', diff: 3, db: 'basic', year: 2024, yb: 'y2024', vs: 'verified', hen: [40, 55], ser: null, rt: 'book' },
-      { s: 0, id: 'noauthor', n: '著者が分からない本', pub: '旺文社', au: [], stage: 'core', diff: 7, db: 'adv', year: 2024, yb: 'y2024', vs: 'unverified', hen: null, ser: null, rt: 'book' },
-      { s: 1, id: 'nodiff', n: '難易度が無い本', pub: null, au: [], stage: null, diff: null, db: null, year: null, yb: null, vs: 'unverified', hen: null, ser: null, rt: 'book' },
+      { s: 0, id: 'full', n: '全部そろっている本', pub: '旺文社', au: ['関正生'], stage: 'core', diff: 3, db: 'basic', year: 2024, yb: 'y2024', hen: [40, 55], ser: null, rt: 'book' },
+      { s: 0, id: 'noauthor', n: '著者が分からない本', pub: '旺文社', au: [], stage: 'core', diff: 7, db: 'adv', year: 2024, yb: 'y2024', hen: null, ser: null, rt: 'book' },
+      { s: 1, id: 'nodiff', n: '難易度が無い本', pub: null, au: [], stage: null, diff: null, db: null, year: null, yb: null, hen: null, ser: null, rt: 'book' },
     ],
   };
 }
@@ -161,20 +164,29 @@ test('難易度が無い本を「不明・確認中」で選べる', () => {
   assert.deepEqual(adv.books.map(b => b.id), ['noauthor']);
 });
 
-test('科目・出版社・難易度・確認状態を組み合わせられる', () => {
+test('科目・出版社・難易度・刊行年を組み合わせられる', () => {
   const idx = tinyIndex();
   assert.deepEqual(
     C.filterBooks(idx, { subjects: ['math'], diffBands: ['basic'] }).books.map(b => b.id),
     ['full']);
   assert.deepEqual(
-    C.filterBooks(idx, { subjects: ['math'], statuses: ['unverified'] }).books.map(b => b.id),
+    C.filterBooks(idx, { subjects: ['math'], diffBands: ['adv'], yearBands: ['y2024'] }).books.map(b => b.id),
     ['noauthor']);
   assert.deepEqual(
-    C.filterBooks(idx, { subjects: ['math'], publishers: ['旺文社'], statuses: ['verified'] }).books.map(b => b.id),
+    C.filterBooks(idx, { subjects: ['math'], publishers: ['旺文社'], authors: ['関正生'] }).books.map(b => b.id),
     ['full']);
   assert.deepEqual(
     C.filterBooks(idx, { subjects: ['english'], publishers: ['旺文社'] }).books.map(b => b.id),
     [], '両方に合う本が無いのに結果が出た');
+});
+
+/* 知らないキーを渡しても結果が変わらないこと。statuses は v3 で消したので、
+   古いブックマークや外部からの呼び出しで残っていても素通りする */
+test('知らない絞り込みキーは無視する', () => {
+  const idx = tinyIndex();
+  assert.deepEqual(
+    C.filterBooks(idx, { statuses: ['verified'] }).books.map(b => b.id),
+    ['full', 'noauthor', 'nodiff'], '消したはずの statuses が効いている');
 });
 
 test('検索語は書名・出版社・著者に当たり、全角と大小の違いを吸収する', () => {
@@ -216,19 +228,6 @@ test('並べ替えは決定的で、欠損は末尾へ行く', () => {
 test('実データでも、絞らなければ全冊が出る', skip, () => {
   const r = C.filterBooks(index, C.emptyQuery());
   assert.equal(r.books.length, index.books.length);
-});
-
-test('実データで、確認状態の絞り込みが正本の件数と合う', skip, () => {
-  const v = loadVerification();
-  const want = {};
-  for (const k of Object.keys(v.records)) {
-    const st = v.records[k].status;
-    want[st] = (want[st] || 0) + 1;
-  }
-  for (const st of Object.keys(want)) {
-    const got = C.filterBooks(index, { statuses: [st] }).books.length;
-    assert.equal(got, want[st], `${st}: 索引 ${got} 件 / 正本 ${want[st]} 件`);
-  }
 });
 
 test('実データで、科目の絞り込みが冊数と合う', skip, () => {

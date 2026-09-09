@@ -26,7 +26,7 @@
     return {
       q: '',
       subjects: [], publishers: [], authors: [],
-      stages: [], diffBands: [], yearBands: [], statuses: [],
+      stages: [], diffBands: [], yearBands: [],
     };
   }
 
@@ -80,7 +80,6 @@
       if (!matchOne(q.stages, b.stage)) continue;
       if (!matchOne(q.diffBands, b.db)) continue;
       if (!matchOne(q.yearBands, b.yb)) continue;
-      if (!matchOne(q.statuses, b.vs)) continue;
 
       out.push(b);
     }

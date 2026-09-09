@@ -37,7 +37,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 function render(counts, total) {
   const url = `${ORIGIN}/search/`;
   const title = `参考書の詳細検索｜出版社・著者・難易度から探す - ルート大全`;
-  const desc = '収録している参考書を、科目・出版社・著者・役割・難易度帯・刊行年・確認状態で絞り込んで探せます。'
+  const desc = '収録している参考書を、科目・出版社・著者・役割・難易度帯・刊行年で絞り込んで探せます。'
     + '情報が分かっていないものも「不明・確認中」として結果に出します。';
 
   const crumbItems = [
@@ -94,11 +94,6 @@ ${head({ title, desc, url, noindex: true, ogImage: `${ORIGIN}/assets/ogp.png` })
 .sf-meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font-size:12.5px;color:var(--ink-2)}
 .sf-meta b{font-weight:700}
 .sf-unknown{color:var(--muted-2)}
-.sf-badge{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;border:1px solid var(--line)}
-.sf-badge[data-v="verified"]{background:#E9F4EE;border-color:#9CCDB1;color:#1D5236}
-.sf-badge[data-v="partial"]{background:#F6F1E6;border-color:#D8C79E;color:#5C4A1E}
-.sf-badge[data-v="unverified"]{background:var(--surface-3);color:var(--ink-2)}
-.sf-badge[data-v="notApplicable"]{background:var(--surface-3);color:var(--muted-2)}
 .sf-empty{padding:24px 16px;text-align:center;color:var(--muted)}
 .sf-more{margin-top:14px;text-align:center}
 .sf-live{min-height:1.6em}
@@ -116,7 +111,7 @@ ${portalHeader()}
   <div class="art-head">
     <div class="eyebrow">Search</div>
     <h1 class="art-h1">参考書の詳細検索</h1>
-    <p class="art-lead">収録している${booksLabel(total)}を、科目・出版社・著者・役割・難易度帯・刊行年・確認状態で絞り込めます。<b>情報が分かっていないものも結果に出します。</b>「著者で絞っていない」ことと「著者が分かっている本だけ見たい」ことは違うので、絞り込みを指定していない項目では、分かっていない本も外しません。</p>
+    <p class="art-lead">収録している${booksLabel(total)}を、科目・出版社・著者・役割・難易度帯・刊行年で絞り込めます。<b>情報が分かっていないものも結果に出します。</b>「著者で絞っていない」ことと「著者が分かっている本だけ見たい」ことは違うので、絞り込みを指定していない項目では、分かっていない本も外しません。</p>
   </div>
 
   <div id="sfStatus" class="sf-live" role="status" aria-live="polite"></div>
