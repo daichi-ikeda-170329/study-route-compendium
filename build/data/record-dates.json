@@ -1,6 +1,218 @@
 {
  "_note": "レコードの中身が変わった日を控える台帳。build/lib/updated.mjs が読み書きする。手で編集しない。",
  "records": {
+  "article/_/dokugaku-set": {
+   "h": "e34b30e33e7c",
+   "d": "2026-09-09"
+  },
+  "article/_/hajime-no-issatsu": {
+   "h": "75a9c53adfcc",
+   "d": "2026-09-09"
+  },
+  "article/_/how-many-books": {
+   "h": "87e0ab48f16f",
+   "d": "2026-09-09"
+  },
+  "article/_/juryokyu-ranking": {
+   "h": "cb6d0051f533",
+   "d": "2026-09-09"
+  },
+  "article/_/kaburi-check": {
+   "h": "b55f1e1d66c6",
+   "d": "2026-09-09"
+  },
+  "article/_/kakomon-timing": {
+   "h": "1c51de903549",
+   "d": "2026-09-09"
+  },
+  "article/_/nagaku-yomareru": {
+   "h": "7e5397092238",
+   "d": "2026-09-09"
+  },
+  "article/_/nanido-bunpu": {
+   "h": "b4f590a4e654",
+   "d": "2026-09-09"
+  },
+  "article/_/nokori-jikan-select": {
+   "h": "3be896c8ccff",
+   "d": "2026-09-09"
+  },
+  "article/_/route-hours": {
+   "h": "d869459174a0",
+   "d": "2026-09-09"
+  },
+  "article/_/shuppansha-map": {
+   "h": "8c65d1dbf3c9",
+   "d": "2026-09-09"
+  },
+  "article/_/shuukai-sekkei": {
+   "h": "2c11ce35798c",
+   "d": "2026-09-09"
+  },
+  "article/_/tanjikan-ranking": {
+   "h": "5df3f7668b69",
+   "d": "2026-09-09"
+  },
+  "article/_/tsumazuki-awards": {
+   "h": "5889060fb599",
+   "d": "2026-09-09"
+  },
+  "article/english/bunpo-comparison": {
+   "h": "8bb4d2409614",
+   "d": "2026-09-09"
+  },
+  "article/english/chobun-comparison": {
+   "h": "8bd3fec8033b",
+   "d": "2026-09-09"
+  },
+  "article/english/eigo-jikan-haibun": {
+   "h": "dc6607f5a1bd",
+   "d": "2026-09-09"
+  },
+  "article/english/eisaku-comparison": {
+   "h": "ab74df4b4f1d",
+   "d": "2026-09-09"
+  },
+  "article/english/kaishaku-comparison": {
+   "h": "d5237179a024",
+   "d": "2026-09-09"
+  },
+  "article/english/kyotest-eigo-jikan": {
+   "h": "1825cce2aa22",
+   "d": "2026-09-09"
+  },
+  "article/english/listening-start": {
+   "h": "2861d972b5fd",
+   "d": "2026-09-09"
+  },
+  "article/english/nextstage-vs-vintage": {
+   "h": "854fd29e8c2d",
+   "d": "2026-09-09"
+  },
+  "article/english/porepore-vs-gijutsu100": {
+   "h": "7818ce85a9d3",
+   "d": "2026-09-09"
+  },
+  "article/english/tango-comparison": {
+   "h": "105d9557ecb4",
+   "d": "2026-09-09"
+  },
+  "article/english/tango-ranking": {
+   "h": "c4f68d6fd493",
+   "d": "2026-09-09"
+  },
+  "article/english/target-vs-sistan": {
+   "h": "3c66c0813cb2",
+   "d": "2026-09-09"
+  },
+  "article/japanese/access-vs-rules": {
+   "h": "0feee0396f98",
+   "d": "2026-09-09"
+  },
+  "article/japanese/gendaibun-goi": {
+   "h": "6e9b35e370bb",
+   "d": "2026-09-09"
+  },
+  "article/japanese/gendaibun-start": {
+   "h": "88fbf2f4c359",
+   "d": "2026-09-09"
+  },
+  "article/japanese/kanbun-start": {
+   "h": "9470539b8cd5",
+   "d": "2026-09-09"
+  },
+  "article/japanese/kobun-start": {
+   "h": "17e5e851a347",
+   "d": "2026-09-09"
+  },
+  "article/japanese/kobun-tango-ranking": {
+   "h": "3ad1c4e65e71",
+   "d": "2026-09-09"
+  },
+  "article/math/ao-vs-fg": {
+   "h": "da6c218343bb",
+   "d": "2026-09-09"
+  },
+  "article/math/bunkei-sugaku": {
+   "h": "e6b5cb406e45",
+   "d": "2026-09-09"
+  },
+  "article/math/bunyabetsu-kyoka": {
+   "h": "1a5b47a990a5",
+   "d": "2026-09-09"
+  },
+  "article/math/enshu-comparison": {
+   "h": "0ba61b9e151f",
+   "d": "2026-09-09"
+  },
+  "article/math/moura-comparison": {
+   "h": "dcb0c0b89f7a",
+   "d": "2026-09-09"
+  },
+  "article/math/moura-ranking": {
+   "h": "b94a104206fb",
+   "d": "2026-09-09"
+  },
+  "article/math/taio11-vs-hyomon": {
+   "h": "dc36523daffe",
+   "d": "2026-09-09"
+  },
+  "article/science/butsuri-route": {
+   "h": "36e497386c21",
+   "d": "2026-09-09"
+  },
+  "article/science/essence-vs-uchuichi": {
+   "h": "7223de7b87be",
+   "d": "2026-09-09"
+  },
+  "article/science/juyo-vs-shinenshu": {
+   "h": "1da10b8518d3",
+   "d": "2026-09-09"
+  },
+  "article/science/kagaku-mondaishu-ranking": {
+   "h": "86c8564246e5",
+   "d": "2026-09-09"
+  },
+  "article/science/kagaku-route": {
+   "h": "53ecde309fcc",
+   "d": "2026-09-09"
+  },
+  "article/science/omori-vs-tabe": {
+   "h": "ab083c074c9c",
+   "d": "2026-09-09"
+  },
+  "article/science/rika-select": {
+   "h": "b6a7265cf8cd",
+   "d": "2026-09-09"
+  },
+  "article/science/seibutsu-route": {
+   "h": "7c80335a90aa",
+   "d": "2026-09-09"
+  },
+  "article/social/chiri-route": {
+   "h": "c59b1396fd95",
+   "d": "2026-09-09"
+  },
+  "article/social/ichimonitto-ranking": {
+   "h": "232afbb7ab07",
+   "d": "2026-09-09"
+  },
+  "article/social/nihonshi-route": {
+   "h": "930ab7cc2a1f",
+   "d": "2026-09-09"
+  },
+  "article/social/sekaishi-route": {
+   "h": "57616b6524e6",
+   "d": "2026-09-09"
+  },
+  "article/social/shakai-select": {
+   "h": "14b4888850b5",
+   "d": "2026-09-09"
+  },
+  "article/social/yamakawa-vs-toshin": {
+   "h": "8fb453cecde4",
+   "d": "2026-09-09"
+  },
   "english/akahon": {
    "h": "dedc4387c50d",
    "d": "2026-09-05"

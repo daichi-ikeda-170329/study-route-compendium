@@ -25,7 +25,7 @@ import { coverBox } from './lib/cover.mjs';
 import { ARTICLES } from './content/articles.mjs';
 import { CATEGORIES, categoryOf } from './content/article-categories.mjs';
 import { adUnit } from './lib/ads.mjs';
-import { fileDate, saveDates } from './lib/updated.mjs';
+import { articleContentDate, saveDates } from './lib/updated.mjs';
 import { COMBOS, POLICIES, comboTotal, routeTotal, tracksOf, monthsAt } from './lib/route-hours.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -498,8 +498,10 @@ ${rows.map(r => `            <tr><th scope="row">${esc(r.name)}</th><td>${r.n}</
 }
 
 function render(a) {
-  // 記事本文は build/content/articles.mjs にまとめてある。手で日付を書かず、中身が変わった日を使う
-  const updated = fileDate('build/content/articles.mjs');
+  /* 手で日付を書かず、中身が変わった日を使う。**記事 1 本ごとに求める。**
+     articles.mjs には 53 本が同居しているので、ファイル単位で求めると
+     1 本直すだけで全記事の更新日が動く（build/lib/updated.mjs の冒頭を参照） */
+  const updated = articleContentDate(a);
   const sub = a.subject ? SUBJECTS.find(s => s.dir === a.subject) : null;
   const cat = categoryOf(a.category);
   const base = sub ? `/${sub.dir}/guides/${a.slug}/` : `/guides/${a.slug}/`;

@@ -3,11 +3,11 @@
  *
  * 更新日を手で書く運用にすると必ず古くなる。ここでは 2 通りの求め方を使い分ける。
  *
- *   1. 1 ページ = 1 ファイル（解説記事の本文・手書き HTML）… ファイルの中身のハッシュ
- *   2. 1 ファイルに多数のレコード（BOOKS の 1 冊・ROUTES の 1 本）… レコードの
- *      ハッシュを build/data/record-dates.json に控えておき、**中身が変わった日**を
- *      更新日にする。科目 HTML を 1 文字直しただけで 252 冊ぜんぶの更新日が
- *      動くのを避けるためで、git の日付をそのまま使うとそうなる。
+ *   1. 1 ページ = 1 ファイル（手書き HTML）… ファイルの中身のハッシュ
+ *   2. 1 ファイルに多数のレコード（BOOKS の 1 冊・ROUTES の 1 本・解説記事の 1 本）…
+ *      レコードのハッシュを build/data/record-dates.json に控えておき、**中身が
+ *      変わった日**を更新日にする。科目 HTML を 1 文字直しただけで 252 冊ぜんぶの
+ *      更新日が動くのを避けるためで、git の日付をそのまま使うとそうなる。
  *
  * 台帳は増えるだけで、消さない。生成を科目単位・1 冊単位で流しても、実行しな
  * かった本の日付が消えないようにするためである。
@@ -145,6 +145,52 @@ export function subjectContentDate(dir, data) {
   const key = `subject/${dir}`;
   if (!ledger.records[key]) {
     const prev = ledger.records[`file:${rel}`];
+    if (prev) {
+      // 求め方を変えただけ。**いまの中身のハッシュに前の日付を結び付ける**ので、
+      // 切り替えの瞬間に日付が動かない。次に中身が変われば普通に進む
+      ledger.records[key] = { h: hashOf(value), d: prev.d };
+      dirty = true;
+    }
+  }
+  return recordDate(key, value);
+}
+
+/**
+ * 解説記事 1 本の「中身が変わった日」。
+ *
+ * `fileDate('build/content/articles.mjs')` を使ってはいけない。53 本の記事が
+ * 1 つのファイルに同居しているので、**1 本直すだけで残り 52 本の更新日まで動く。**
+ * このファイルの先頭に書いたとおり、それは検索向けの偽更新にあたる。
+ * 2026-09-09 のコミット d67da7674 では、記事 1 本の編集で 30 本以上の
+ * dateModified が実際に繰り上がった。
+ *
+ * 日付の根拠は「読者に見える中身」だけに揃える。`published` は入れない。
+ * 公開日は「公開 …」として別枠で出すものだし、ここに入れると published を
+ * 直すたびに更新日まで動く。
+ *
+ * 台帳のキーは `article/<科目 or _>/<slug>`。slug だけにしないのは、
+ * generate-articles.mjs の重複検査が `<科目>/<slug>` の単位でしか一意性を
+ * 保証しておらず、科目をまたいで同じ slug が並びうるため。キーがぶつかると
+ * その 2 本がまた同じ日付を共有する（いま直している不具合そのものになる）。
+ *
+ * 台帳のキーを `file:build/content/articles.mjs` から移すとき、**前のキーの
+ * 日付を引き継ぐ**（引き継がないと 53 本すべてが「今日」になり、無くしたい
+ * 偽更新を切り替えの瞬間に一度だけ起こす）。
+ *
+ * `fileDate` が持っている「日付らしき並びを落とす」処理は、ここには入れない。
+ * あれは生成物の中に更新日そのものが混ざってハッシュが毎回変わるのを防ぐもので、
+ * ここで受け取るのは生成前の原稿なので、その混入は起きない。本文に書かれた
+ * 日付は読者に見える中身であり、直したなら更新日が動くのが正しい。
+ */
+export function articleContentDate(a) {
+  const value = {
+    title: a.title, h1: a.h1, desc: a.desc, lead: a.lead,
+    sections: a.sections, ctaTitle: a.ctaTitle, ctaText: a.ctaText,
+  };
+
+  const key = `article/${a.subject || '_'}/${a.slug}`;
+  if (!ledger.records[key]) {
+    const prev = ledger.records['file:build/content/articles.mjs'];
     if (prev) {
       // 求め方を変えただけ。**いまの中身のハッシュに前の日付を結び付ける**ので、
       // 切り替えの瞬間に日付が動かない。次に中身が変われば普通に進む
