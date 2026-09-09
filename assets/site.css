@@ -89,7 +89,10 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:21px;letter-spacing:.0
 .prose p{font-size:14.5px;line-height:1.95;color:var(--ink-2);margin-top:14px;max-width:44em}
 .prose p:first-child{margin-top:0}
 .prose b,.prose strong{color:var(--ink);font-weight:700}
-.prose a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px;font-weight:700;padding:3px 0}
+/* カード（.bcard）と書影リンク（.bref__cov）は本文リンクではなく 1 件そのものなので、
+   下線・太字・色を渡さない。:not() を外すと、カードの中の書名から難易度まで
+   全部に下線が乗る（実際に乗っていた） */
+.prose a:not(.bcard):not(.bref__cov){color:var(--indigo);text-decoration:underline;text-underline-offset:2px;font-weight:700;padding:3px 0}
 .prose h3{font-family:var(--serif);font-weight:800;font-size:17.5px;letter-spacing:.03em;margin:32px 0 10px;line-height:1.45}
 .prose ul,.prose ol{margin:14px 0 0 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:11px;max-width:44em}
 /* 行頭の点は絶対配置にする。flex にすると項目内の <b> が
@@ -108,7 +111,9 @@ h2.sec{font-family:var(--serif);font-weight:800;font-size:21px;letter-spacing:.0
 /* 幅は --cw で呼び出し側が決める。高さは 5:7 で自動。
    書籍ヒーローの .bk-cover と同じ考え方で、画像が読めなければ
    下に敷いた代替表示（書名と出版社）がそのまま見える。 */
-.rt-cov{position:relative;display:block;flex:none;width:var(--cw,54px);aspect-ratio:5/7;border-radius:3px;overflow:hidden;background:var(--surface-3);box-shadow:var(--sh-s)}
+/* 影で浮かせず、細い縁と内側の陰りだけで「紙の本」に見せる。
+   白い表紙の本が白い面の上に置かれても輪郭が消えないようにするための縁。 */
+.rt-cov{position:relative;display:block;flex:none;width:var(--cw,54px);aspect-ratio:5/7;border-radius:2px;overflow:hidden;background:var(--surface-3);box-shadow:inset 0 0 0 1px rgba(27,34,51,.13)}
 .rt-cov img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;background:var(--surface-3)}
 .rt-cov__ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:6px 5px;color:#fff;/* 科目色が明るいと白文字のコントラストが落ちる。色の上に暗いレイヤーを必ず重ねて、どの科目でも 4.5:1 を割らないようにする */background-image:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,.52));background-color:var(--cc,var(--sc))}
 .rt-cov__ph b{font-family:var(--serif);font-size:8.5px;font-weight:800;line-height:1.32;letter-spacing:.02em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical}
@@ -186,21 +191,28 @@ h1.bk-name{font-family:var(--serif);font-weight:800;font-size:29px;line-height:1
 .note p{font-size:13.2px;line-height:1.9;color:var(--ink-2)}
 
 /* ---------- 書籍カードのグリッド ---------- */
-.bcards{display:grid;grid-template-columns:1fr;gap:10px;margin-top:18px}
+.bcards{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px}
 @media(min-width:620px){.bcards{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:900px){.bcards{grid-template-columns:repeat(3,1fr)}}
-.bcard{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--bc,var(--sc));padding:14px 15px 13px;transition:.16s;box-shadow:var(--sh-s);display:flex;flex-direction:column}
-.bcard:hover{transform:translateY(-3px);box-shadow:var(--sh-m);border-color:var(--line-d)}
-.bcard__head{display:flex;align-items:flex-start;gap:11px}
-.bcard__head .rt-cov{--cw:56px}
+/* 影と上端の色帯をやめた（2026-09-09）。地の紙（--paper）の上に白い板が
+   浮いて見え、1 枚ずつが強く主張しすぎていたため。区切りは細い罫線と余白に任せ、
+   科目色は役割ラベルの点だけに残す。ホバーでも位置を動かさない
+   （3 列のグリッドで 1 枚だけ跳ねると、隣のカードとの間隔が読めなくなる）。 */
+.bcard{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:15px 16px 14px;display:flex;flex-direction:column;transition:border-color .16s,background-color .16s}
+.bcard:hover{border-color:var(--line-d);background:var(--surface-2)}
+.bcard__head{display:flex;align-items:flex-start;gap:13px}
+.bcard__head .rt-cov{--cw:58px}
 .bcard__meta{min-width:0;flex:1}
-.bcard__top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--muted-2);letter-spacing:.08em;margin-bottom:6px}
-.bcard__stage{color:var(--bc,var(--sc));font-weight:600}
-.bcard b{font-size:14px;font-weight:700;letter-spacing:.02em;line-height:1.45;color:var(--ink)}
-.bcard p{font-size:11.8px;color:var(--muted);margin-top:10px;line-height:1.7;flex:1}
-.bcard__foot{display:flex;align-items:center;gap:8px;margin-top:11px;padding-top:9px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:10px;color:var(--muted)}
-.bcard__diff{display:flex;gap:2px}
-.bcard__diff i{width:9px;height:4px;border-radius:1px;background:var(--line)}
+.bcard__top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--muted-2);letter-spacing:.08em;margin-bottom:7px}
+/* 役割は科目色の点で示す。文字まで色を付けると、カードの中で書名より先に目に入る */
+.bcard__stage{display:inline-flex;align-items:center;gap:5px;color:var(--ink-2);font-weight:700;white-space:nowrap}
+.bcard__stage::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bc,var(--sc));flex:none}
+.bcard__pub{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.bcard b{font-family:var(--serif);font-size:15px;font-weight:800;letter-spacing:.02em;line-height:1.5;color:var(--ink)}
+.bcard p{font-size:11.8px;color:var(--muted);margin-top:11px;line-height:1.8;flex:1}
+.bcard__foot{display:flex;align-items:center;gap:9px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line-2);font-family:var(--mono);font-size:10px;color:var(--muted)}
+.bcard__diff{display:flex;gap:2px;flex:none}
+.bcard__diff i{width:8px;height:4px;border-radius:1px;background:var(--line)}
 .bcard__diff i.on{background:var(--bc,var(--sc))}
 
 /* ---------- 購入リンク ---------- */
@@ -331,11 +343,6 @@ table.scale__t tbody tr.on th,table.scale__t tbody tr.on td{color:var(--accent-d
 
 /* カードのシリーズ表示。難易度の数字がシリーズ全体の代表値であることを示す */
 .bcard__series{margin-left:6px;padding:1px 6px;border:1px solid var(--line-d);border-radius:2px;font-size:9.5px;color:var(--muted);white-space:nowrap}
-
-/* カード上の確認状態。内訳を出す「この情報の確かめ方」は 2026-09-05 に
-   書籍ページから外したので、状態はこのバッジだけで伝える */
-.bcard__ver{display:inline-block;margin-top:6px;padding:1px 7px;border:1px solid var(--line-d);border-radius:999px;
-  font-size:10.5px;font-weight:700;color:var(--muted-2);background:var(--bg);letter-spacing:.02em}
 
 /* ============================================================
    アクセシビリティの下敷き

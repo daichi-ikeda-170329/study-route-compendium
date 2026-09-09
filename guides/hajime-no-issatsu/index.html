@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -211,87 +229,157 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <p>科目と分野で 14 部門に分けました。同じ科目でも、分野が変われば入り口の本は変わります。</p>
       <div class="awards">
         <div class="award" style="--ac:#24427C">
-          <div class="award__title">数学・とにかく手を動かす部門</div>
-          <b class="award__book"><a href="/math/books/hitotsu/">高校数学をひとつひとつわかりやすく。</a></b>
-          <div class="award__meta">数学・学研／難易度 1 / 10／各巻30〜45h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/math/books/hitotsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>高校数学をひとつひとつわかりやすく。</b><em>学研</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053054370.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053054370.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053054370.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053054370.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053054370.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053054370.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053054371.jpg|https://books.google.com/books/content?vid=ISBN9784053054371&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053054371.jpg|https://www.gakusan.com/bookimage_s/9784053054371.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">数学・とにかく手を動かす部門</div>
+              <b class="award__book"><a href="/math/books/hitotsu/">高校数学をひとつひとつわかりやすく。</a></b>
+              <div class="award__meta">数学・学研／難易度 1 / 10／各巻30〜45h</div>
+            </div>
+          </div>
           <p class="award__why">1 テーマが見開き 1 つで完結する構成です。数学から離れていた期間が長い人でも、1 日に進む量を決めやすくなっています。</p>
         </div>
         <div class="award" style="--ac:#24427C">
-          <div class="award__title">数学・読み物として入る部門</div>
-          <b class="award__book"><a href="/math/books/yasashiko/">やさしい高校数学</a></b>
-          <div class="award__meta">数学・学研／難易度 1 / 10／各巻60〜80h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/math/books/yasashiko/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>やさしい高校数学</b><em>学研</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053054699.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053054699.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053054699.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053054692.jpg|https://books.google.com/books/content?vid=ISBN9784053054692&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053054692.jpg|https://www.gakusan.com/bookimage_s/9784053054692.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">数学・読み物として入る部門</div>
+              <b class="award__book"><a href="/math/books/yasashiko/">やさしい高校数学</a></b>
+              <div class="award__meta">数学・学研／難易度 1 / 10／各巻60〜80h</div>
+            </div>
+          </div>
           <p class="award__why">会話形式で式の意味を説明する本です。手を動かす前に「何をしているのか」を言葉で押さえたい人はこちらから入れます。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">英文法・ゼロから部門</div>
-          <b class="award__book"><a href="/english/books/oiwa/">大岩のいちばんはじめの英文法</a></b>
-          <div class="award__meta">英語・ナガセ(東進)／難易度 1 / 10／20〜30h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/oiwa/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>大岩のいちばんはじめの英文法</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890855890.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855890.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890855896.jpg|https://books.google.com/books/content?vid=ISBN9784890855896&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890855896.jpg|https://www.gakusan.com/bookimage_s/9784890855896.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">英文法・ゼロから部門</div>
+              <b class="award__book"><a href="/english/books/oiwa/">大岩のいちばんはじめの英文法</a></b>
+              <div class="award__meta">英語・ナガセ(東進)／難易度 1 / 10／20〜30h</div>
+            </div>
+          </div>
           <p class="award__why">品詞と文型から始める講義本です。ここに挙げた入門書のなかでも想定時間が短く、1 週間台で 1 周できる分量に収まっています。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">英単語・中学から拾い直す部門</div>
-          <b class="award__book"><a href="/english/books/hijii-tango/">肘井学のゼロから英単語</a></b>
-          <div class="award__meta">英語・KADOKAWA／難易度 2 / 10／毎日20分×2か月</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/hijii-tango/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>肘井学のゼロから英単語</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046052570.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046052575.jpg|https://books.google.com/books/content?vid=ISBN9784046052575&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046052575.jpg|https://www.gakusan.com/bookimage_s/9784046052575.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">英単語・中学から拾い直す部門</div>
+              <b class="award__book"><a href="/english/books/hijii-tango/">肘井学のゼロから英単語</a></b>
+              <div class="award__meta">英語・KADOKAWA／難易度 2 / 10／毎日20分×2か月</div>
+            </div>
+          </div>
           <p class="award__why">高校の単語帳に入る前の橋渡しです。受験用の 1,900 語級を開いて手が止まった人が、そこへ戻るための 1 冊になります。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">現代文・解き方を知る部門</div>
-          <b class="award__book"><a href="/japanese/books/zero-kakusei/">ゼロから覚醒 はじめよう現代文</a></b>
-          <div class="award__meta">国語・かんき出版／難易度 1 / 10／10〜15h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/zero-kakusei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ゼロから覚醒 はじめよう現代文</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761274867.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761274867.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761274867.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761274867.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761274867.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761274867.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761274863.jpg|https://books.google.com/books/content?vid=ISBN9784761274863&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761274863.jpg|https://www.gakusan.com/bookimage_s/9784761274863.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">現代文・解き方を知る部門</div>
+              <b class="award__book"><a href="/japanese/books/zero-kakusei/">ゼロから覚醒 はじめよう現代文</a></b>
+              <div class="award__meta">国語・かんき出版／難易度 1 / 10／10〜15h</div>
+            </div>
+          </div>
           <p class="award__why">現代文を感覚で解いてきた人が、設問の型から入り直すための本です。分量が少なく、他科目と並行しても崩れません。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">古典文法・短期で通す部門</div>
-          <b class="award__book"><a href="/japanese/books/yasawa6h/">八澤のたった6時間で古典文法</a></b>
-          <div class="award__meta">国語・Gakken／難易度 1 / 10／6〜10h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/yasawa6h/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>八澤のたった6時間で古典文法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053055709.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053055709.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053055705.jpg|https://books.google.com/books/content?vid=ISBN9784053055705&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053055705.jpg|https://www.gakusan.com/bookimage_s/9784053055705.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">古典文法・短期で通す部門</div>
+              <b class="award__book"><a href="/japanese/books/yasawa6h/">八澤のたった6時間で古典文法</a></b>
+              <div class="award__meta">国語・Gakken／難易度 1 / 10／6〜10h</div>
+            </div>
+          </div>
           <p class="award__why">古典文法のうち読解に要る部分だけを通します。文法書を最初から読んで挫折した人が、全体像だけ先に取るのに向きます。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">漢文・最短で形にする部門</div>
-          <b class="award__book"><a href="/japanese/books/okamoto-3h-kanbun/">岡本のたった3時間で漢文句法</a></b>
-          <div class="award__meta">国語・Gakken／難易度 1 / 10／3〜6h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/okamoto-3h-kanbun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>岡本のたった3時間で漢文句法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057108.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057108.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057105.jpg|https://books.google.com/books/content?vid=ISBN9784053057105&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057105.jpg|https://www.gakusan.com/bookimage_s/9784053057105.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">漢文・最短で形にする部門</div>
+              <b class="award__book"><a href="/japanese/books/okamoto-3h-kanbun/">岡本のたった3時間で漢文句法</a></b>
+              <div class="award__meta">国語・Gakken／難易度 1 / 10／3〜6h</div>
+            </div>
+          </div>
           <p class="award__why">句法を短時間で通す本です。漢文は範囲が狭く、ここを抜けるだけで共通テストの得点が動きます。</p>
         </div>
         <div class="award" style="--ac:#2F6E4F">
-          <div class="award__title">物理・イメージから入る部門</div>
-          <b class="award__book"><a href="/science/books/uchu-rikigaku/">宇宙一わかりやすい高校物理 力学・波動</a></b>
-          <div class="award__meta">理科・Gakken／難易度 1 / 10／20〜30h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/science/books/uchu-rikigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>宇宙一わかりやすい高校物理 力学・波動</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053056462.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056462.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053056467.jpg|https://books.google.com/books/content?vid=ISBN9784053056467&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053056467.jpg|https://www.gakusan.com/bookimage_s/9784053056467.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">物理・イメージから入る部門</div>
+              <b class="award__book"><a href="/science/books/uchu-rikigaku/">宇宙一わかりやすい高校物理 力学・波動</a></b>
+              <div class="award__meta">理科・Gakken／難易度 1 / 10／20〜30h</div>
+            </div>
+          </div>
           <p class="award__why">図と例えで現象の絵を作ってから式に入る構成です。公式を覚えたのに問題が解けない、という状態の入り口になります。</p>
         </div>
         <div class="award" style="--ac:#2F6E4F">
-          <div class="award__title">化学・用語から入る部門</div>
-          <b class="award__book"><a href="/science/books/tottemo-yasashii-kagaku/">高校 とってもやさしい化学</a></b>
-          <div class="award__meta">理科・旺文社／難易度 1 / 10／10〜20h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/science/books/tottemo-yasashii-kagaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>高校 とってもやさしい化学</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010343613.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010343613.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010343613.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010343613.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010343613.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010343613.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010343616.jpg|https://books.google.com/books/content?vid=ISBN9784010343616&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010343616.jpg|https://www.gakusan.com/bookimage_s/9784010343616.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">化学・用語から入る部門</div>
+              <b class="award__book"><a href="/science/books/tottemo-yasashii-kagaku/">高校 とってもやさしい化学</a></b>
+              <div class="award__meta">理科・旺文社／難易度 1 / 10／10〜20h</div>
+            </div>
+          </div>
           <p class="award__why">化学の用語と計算の型を、書き込み形式で 1 つずつ確認します。理論化学の最初の壁を越えるための本です。</p>
         </div>
         <div class="award" style="--ac:#2F6E4F">
-          <div class="award__title">生物・図で押さえる部門</div>
-          <b class="award__book"><a href="/science/books/uchu-ichi-kiso/">宇宙一わかりやすい高校生物(生物基礎)</a></b>
-          <div class="award__meta">理科・Gakken／難易度 1 / 10／15〜25h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/science/books/uchu-ichi-kiso/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>宇宙一わかりやすい高校生物(生物基礎)</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053056632.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053056632.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056632.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053056634.jpg|https://books.google.com/books/content?vid=ISBN9784053056634&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053056634.jpg|https://www.gakusan.com/bookimage_s/9784053056634.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">生物・図で押さえる部門</div>
+              <b class="award__book"><a href="/science/books/uchu-ichi-kiso/">宇宙一わかりやすい高校生物(生物基礎)</a></b>
+              <div class="award__meta">理科・Gakken／難易度 1 / 10／15〜25h</div>
+            </div>
+          </div>
           <p class="award__why">生物基礎の範囲を図中心に説明します。暗記に入る前に、何と何がつながっているのかを先に見ておくための 1 冊です。</p>
         </div>
         <div class="award" style="--ac:#5B4E9E">
-          <div class="award__title">日本史・流れを先に取る部門</div>
-          <b class="award__book"><a href="/social/books/chosoku-nihonshi/">超速!日本史</a></b>
-          <div class="award__meta">社会・ブックマン社／難易度 2 / 10／4〜8h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/social/books/chosoku-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>超速!日本史</b><em>ブックマン社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4893086065.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4893086065.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4893086065.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4893086065.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4893086065.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4893086065.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784893086068.jpg|https://books.google.com/books/content?vid=ISBN9784893086068&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784893086068.jpg|https://www.gakusan.com/bookimage_s/9784893086068.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">日本史・流れを先に取る部門</div>
+              <b class="award__book"><a href="/social/books/chosoku-nihonshi/">超速!日本史</a></b>
+              <div class="award__meta">社会・ブックマン社／難易度 2 / 10／4〜8h</div>
+            </div>
+          </div>
           <p class="award__why">通史を短時間で 1 周する本です。用語集や一問一答に入る前に、時代の並びだけを頭に入れておくと定着が変わります。</p>
         </div>
         <div class="award" style="--ac:#5B4E9E">
-          <div class="award__title">世界史・教科書が読めない人部門</div>
-          <b class="award__book"><a href="/social/books/kyokasho-yasashii-sekaishi/">教科書よりやさしい世界史</a></b>
-          <div class="award__meta">社会・旺文社／難易度 2 / 10／8〜12h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/social/books/kyokasho-yasashii-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>教科書よりやさしい世界史</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/401033830X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401033830X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010338308.jpg|https://books.google.com/books/content?vid=ISBN9784010338308&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010338308.jpg|https://www.gakusan.com/bookimage_s/9784010338308.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">世界史・教科書が読めない人部門</div>
+              <b class="award__book"><a href="/social/books/kyokasho-yasashii-sekaishi/">教科書よりやさしい世界史</a></b>
+              <div class="award__meta">社会・旺文社／難易度 2 / 10／8〜12h</div>
+            </div>
+          </div>
           <p class="award__why">教科書の記述をかみ砕いた本です。世界史は固有名詞の密度が高く、いきなり教科書に入ると読み進められないことがあります。</p>
         </div>
         <div class="award" style="--ac:#5B4E9E">
-          <div class="award__title">地理・仕組みから入る部門</div>
-          <b class="award__book"><a href="/social/books/chiri-yamaoka-kyoshitsu1/">山岡の地理教室1</a></b>
-          <div class="award__meta">社会・東進ブックス(ナガセ)／難易度 2 / 10／15〜25h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/social/books/chiri-yamaoka-kyoshitsu1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>山岡の地理教室1</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4868270052.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4868270052.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4868270052.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4868270052.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4868270052.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4868270052.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784868270058.jpg|https://books.google.com/books/content?vid=ISBN9784868270058&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784868270058.jpg|https://www.gakusan.com/bookimage_s/9784868270058.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">地理・仕組みから入る部門</div>
+              <b class="award__book"><a href="/social/books/chiri-yamaoka-kyoshitsu1/">山岡の地理教室1</a></b>
+              <div class="award__meta">社会・東進ブックス(ナガセ)／難易度 2 / 10／15〜25h</div>
+            </div>
+          </div>
           <p class="award__why">地理は暗記量が少ないぶん、なぜそうなるかの説明が要ります。系統地理の考え方を講義形式で通す本です。</p>
         </div>
         <div class="award" style="--ac:#1F6E7A">
-          <div class="award__title">情報I・全体像をつかむ部門</div>
-          <b class="award__book"><a href="/joho/books/info-hitotsuzutsu/">高校 情報Iをひとつひとつわかりやすく。</a></b>
-          <div class="award__meta">情報・Gakken／難易度 2 / 10／15〜25h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/joho/books/info-hitotsuzutsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>高校 情報Iをひとつひとつわかりやすく。</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057434.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057434.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057434.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057434.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057434.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057434.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057433.jpg|https://books.google.com/books/content?vid=ISBN9784053057433&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057433.jpg|https://www.gakusan.com/bookimage_s/9784053057433.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">情報I・全体像をつかむ部門</div>
+              <b class="award__book"><a href="/joho/books/info-hitotsuzutsu/">高校 情報Iをひとつひとつわかりやすく。</a></b>
+              <div class="award__meta">情報・Gakken／難易度 2 / 10／15〜25h</div>
+            </div>
+          </div>
           <p class="award__why">情報Iは範囲が新しく、参考書の数自体が限られます。まず全体を 1 周して、どこが問われるのかを把握するための本です。</p>
         </div>
       </div>
@@ -307,21 +395,21 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
           <caption>入門・講義の役割を持つ本のうち、想定学習時間が短い順に 15 冊。</caption>
           <thead><tr><th>順位</th><th>科目</th><th>参考書</th><th>出版社</th><th>想定学習時間</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><span class="rk">1</span></th><td>国語</td><td class="rk__name"><a href="/japanese/books/okamoto-3h-kanbun/">岡本のたった3時間で漢文句法</a></td><td>Gakken</td><td>5時間</td></tr>
-            <tr><th scope="row"><span class="rk">2</span></th><td>社会</td><td class="rk__name"><a href="/social/books/chosoku-nihonshi/">超速!日本史</a></td><td>ブックマン社</td><td>6時間</td></tr>
-            <tr><th scope="row"><span class="rk">3</span></th><td>国語</td><td class="rk__name"><a href="/japanese/books/yasawa3h-dokkai/">八澤のたった3時間で古文読解</a></td><td>Gakken</td><td>6時間</td></tr>
-            <tr><th scope="row"><span class="rk">4</span></th><td>国語</td><td class="rk__name"><a href="/japanese/books/yasawa6h/">八澤のたった6時間で古典文法</a></td><td>Gakken</td><td>8時間</td></tr>
-            <tr><th scope="row"><span class="rk">5</span></th><td>社会</td><td class="rk__name"><a href="/social/books/kyokasho-yasashii-sekaishi/">教科書よりやさしい世界史</a></td><td>旺文社</td><td>10時間</td></tr>
-            <tr><th scope="row"><span class="rk">6</span></th><td>社会</td><td class="rk__name"><a href="/social/books/rinri-manga/">マンガで倫理</a></td><td>KADOKAWA</td><td>10時間</td></tr>
-            <tr><th scope="row"><span class="rk">7</span></th><td>国語</td><td class="rk__name"><a href="/japanese/books/hayaoboe/">漢文早覚え速答法</a></td><td>Gakken</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">8</span></th><td>理科</td><td class="rk__name"><a href="/science/books/hitotsu-kiso/">高校物理基礎をひとつひとつわかりやすく。</a></td><td>Gakken</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">9</span></th><td>社会</td><td class="rk__name"><a href="/social/books/ichidoyondara-sekaishi/">一度読んだら忘れない</a></td><td>SBクリエイティブ</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">10</span></th><td>国語</td><td class="rk__name"><a href="/japanese/books/kanki-kanbun-dokkai/">高校の漢文読解が1冊でしっかりわかる本</a></td><td>かんき出版</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">11</span></th><td>社会</td><td class="rk__name"><a href="/social/books/kyokasho-yasashii-nihonshi/">教科書よりやさしい</a></td><td>旺文社</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">12</span></th><td>国語</td><td class="rk__name"><a href="/japanese/books/sou-4jikan-gendaibun/">ムビスタ 宗のたった4時間で現代文</a></td><td>Gakken</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">13</span></th><td>国語</td><td class="rk__name"><a href="/japanese/books/tamura-yasashiku/">田村のやさしく語る現代文</a></td><td>代々木ライブラリー</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">14</span></th><td>理科</td><td class="rk__name"><a href="/science/books/tottemo-yasashii-kagakukiso/">高校 とってもやさしい化学基礎</a></td><td>旺文社</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">15</span></th><td>理科</td><td class="rk__name"><a href="/science/books/wasureta-seibutsu/">忘れてしまった高校の生物を復習する本</a></td><td>KADOKAWA</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">1</span></th><td>国語</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/okamoto-3h-kanbun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>岡本のたった3時間で漢文句法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057108.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057108.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057105.jpg|https://books.google.com/books/content?vid=ISBN9784053057105&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057105.jpg|https://www.gakusan.com/bookimage_s/9784053057105.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/okamoto-3h-kanbun/">岡本のたった3時間で漢文句法</a></span></span></td><td>Gakken</td><td>5時間</td></tr>
+            <tr><th scope="row"><span class="rk">2</span></th><td>社会</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/social/books/chosoku-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>超速!日本史</b><em>ブックマン社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4893086065.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4893086065.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4893086065.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4893086065.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4893086065.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4893086065.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784893086068.jpg|https://books.google.com/books/content?vid=ISBN9784893086068&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784893086068.jpg|https://www.gakusan.com/bookimage_s/9784893086068.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/chosoku-nihonshi/">超速!日本史</a></span></span></td><td>ブックマン社</td><td>6時間</td></tr>
+            <tr><th scope="row"><span class="rk">3</span></th><td>国語</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/yasawa3h-dokkai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>八澤のたった3時間で古文読解</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053058929.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053058929.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053058929.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053058929.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053058929.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053058929.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053058928.jpg|https://books.google.com/books/content?vid=ISBN9784053058928&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053058928.jpg|https://www.gakusan.com/bookimage_s/9784053058928.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/yasawa3h-dokkai/">八澤のたった3時間で古文読解</a></span></span></td><td>Gakken</td><td>6時間</td></tr>
+            <tr><th scope="row"><span class="rk">4</span></th><td>国語</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/yasawa6h/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>八澤のたった6時間で古典文法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053055709.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053055709.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053055705.jpg|https://books.google.com/books/content?vid=ISBN9784053055705&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053055705.jpg|https://www.gakusan.com/bookimage_s/9784053055705.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/yasawa6h/">八澤のたった6時間で古典文法</a></span></span></td><td>Gakken</td><td>8時間</td></tr>
+            <tr><th scope="row"><span class="rk">5</span></th><td>社会</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/social/books/kyokasho-yasashii-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>教科書よりやさしい世界史</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/401033830X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/401033830X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401033830X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010338308.jpg|https://books.google.com/books/content?vid=ISBN9784010338308&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010338308.jpg|https://www.gakusan.com/bookimage_s/9784010338308.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/kyokasho-yasashii-sekaishi/">教科書よりやさしい世界史</a></span></span></td><td>旺文社</td><td>10時間</td></tr>
+            <tr><th scope="row"><span class="rk">6</span></th><td>社会</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/social/books/rinri-manga/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>マンガで倫理</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046075643.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046075643.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046075643.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046075643.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046075643.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046075643.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046075642.jpg|https://books.google.com/books/content?vid=ISBN9784046075642&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046075642.jpg|https://www.gakusan.com/bookimage_s/9784046075642.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/rinri-manga/">マンガで倫理</a></span></span></td><td>KADOKAWA</td><td>10時間</td></tr>
+            <tr><th scope="row"><span class="rk">7</span></th><td>国語</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/hayaoboe/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>漢文早覚え速答法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053060842.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060842.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053060846.jpg|https://books.google.com/books/content?vid=ISBN9784053060846&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053060846.jpg|https://www.gakusan.com/bookimage_s/9784053060846.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/hayaoboe/">漢文早覚え速答法</a></span></span></td><td>Gakken</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">8</span></th><td>理科</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/science/books/hitotsu-kiso/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>高校物理基礎をひとつひとつわかりやすく。</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/405305477X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/405305477X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405305477X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/405305477X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/405305477X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405305477X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053054777.jpg|https://books.google.com/books/content?vid=ISBN9784053054777&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053054777.jpg|https://www.gakusan.com/bookimage_s/9784053054777.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/science/books/hitotsu-kiso/">高校物理基礎をひとつひとつわかりやすく。</a></span></span></td><td>Gakken</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">9</span></th><td>社会</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/social/books/ichidoyondara-sekaishi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>一度読んだら忘れない</b><em>SBクリエイティブ</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4797397128.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4797397128.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4797397128.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784797397123.jpg|https://books.google.com/books/content?vid=ISBN9784797397123&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784797397123.jpg|https://www.gakusan.com/bookimage_s/9784797397123.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/ichidoyondara-sekaishi/">一度読んだら忘れない</a></span></span></td><td>SBクリエイティブ</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">10</span></th><td>国語</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/kanki-kanbun-dokkai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>高校の漢文読解が1冊でしっかりわかる本</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230584.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230584.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230584.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230584.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230584.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230584.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230586.jpg|https://books.google.com/books/content?vid=ISBN9784761230586&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230586.jpg|https://www.gakusan.com/bookimage_s/9784761230586.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/kanki-kanbun-dokkai/">高校の漢文読解が1冊でしっかりわかる本</a></span></span></td><td>かんき出版</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">11</span></th><td>社会</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/social/books/kyokasho-yasashii-nihonshi/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>教科書よりやさしい</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010338237.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010338237.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010338237.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010338237.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010338237.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010338237.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010338230.jpg|https://books.google.com/books/content?vid=ISBN9784010338230&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010338230.jpg|https://www.gakusan.com/bookimage_s/9784010338230.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/kyokasho-yasashii-nihonshi/">教科書よりやさしい</a></span></span></td><td>旺文社</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">12</span></th><td>国語</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/sou-4jikan-gendaibun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ムビスタ 宗のたった4時間で現代文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053058457.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053058457.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053058457.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053058457.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053058457.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053058457.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053058454.jpg|https://books.google.com/books/content?vid=ISBN9784053058454&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053058454.jpg|https://www.gakusan.com/bookimage_s/9784053058454.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/sou-4jikan-gendaibun/">ムビスタ 宗のたった4時間で現代文</a></span></span></td><td>Gakken</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">13</span></th><td>国語</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/tamura-yasashiku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>田村のやさしく語る現代文</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4863467524.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4863467524.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863467524.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4863467524.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4863467524.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4863467524.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784863467521.jpg|https://books.google.com/books/content?vid=ISBN9784863467521&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784863467521.jpg|https://www.gakusan.com/bookimage_s/9784863467521.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/tamura-yasashiku/">田村のやさしく語る現代文</a></span></span></td><td>代々木ライブラリー</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">14</span></th><td>理科</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/science/books/tottemo-yasashii-kagakukiso/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>高校 とってもやさしい化学基礎</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010349379.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010349379.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349379.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010349379.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349379.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349379.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010349373.jpg|https://books.google.com/books/content?vid=ISBN9784010349373&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010349373.jpg|https://www.gakusan.com/bookimage_s/9784010349373.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/science/books/tottemo-yasashii-kagakukiso/">高校 とってもやさしい化学基礎</a></span></span></td><td>旺文社</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">15</span></th><td>理科</td><td class="rk__name"><span class="bref"><a class="bref__cov" href="/science/books/wasureta-seibutsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>忘れてしまった高校の生物を復習する本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046028793.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046028793.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046028793.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046028792.jpg|https://books.google.com/books/content?vid=ISBN9784046028792&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046028792.jpg|https://www.gakusan.com/bookimage_s/9784046028792.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/science/books/wasureta-seibutsu/">忘れてしまった高校の生物を復習する本</a></span></span></td><td>KADOKAWA</td><td>12時間</td></tr>
           </tbody>
         </table>
         </div>

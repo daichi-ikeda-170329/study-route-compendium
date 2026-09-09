@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -207,8 +225,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">3冊を並べる</h2>
       <div class="vs vs--3">
         <div class="vs__col">
-          <div class="vs__pub">桐原書店</div>
-          <b class="vs__name"><a href="/english/books/nextstage/">Next Stage 英文法・語法問題</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/english/books/nextstage/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>Next Stage 英文法・語法問題</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342431181.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342431181.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342431181.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342431180.jpg|https://books.google.com/books/content?vid=ISBN9784342431180&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342431180.jpg|https://www.gakusan.com/bookimage_s/9784342431180.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">桐原書店</div>
+              <b class="vs__name"><a href="/english/books/nextstage/">Next Stage 英文法・語法問題</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>5 / 10</dd></div>
             <div><dt>到達目安</dt><dd>50〜62</dd></div>
@@ -220,8 +243,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">いいずな書店</div>
-          <b class="vs__name"><a href="/english/books/vintage/">Vintage 英文法・語法</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/english/books/vintage/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>Vintage 英文法・語法</b><em>いいずな書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4864603758.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4864603758.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4864603758.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4864603758.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4864603758.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4864603758.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784864603751.jpg|https://books.google.com/books/content?vid=ISBN9784864603751&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784864603751.jpg|https://www.gakusan.com/bookimage_s/9784864603751.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">いいずな書店</div>
+              <b class="vs__name"><a href="/english/books/vintage/">Vintage 英文法・語法</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>5 / 10</dd></div>
             <div><dt>到達目安</dt><dd>50〜63</dd></div>
@@ -233,8 +261,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">旺文社</div>
-          <b class="vs__name"><a href="/english/books/scramble/">スクランブル英文法・語法</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/english/books/scramble/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>スクランブル英文法・語法</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401034427X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401034427X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401034427X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/401034427X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/401034427X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401034427X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010344279.jpg|https://books.google.com/books/content?vid=ISBN9784010344279&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010344279.jpg|https://www.gakusan.com/bookimage_s/9784010344279.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">旺文社</div>
+              <b class="vs__name"><a href="/english/books/scramble/">スクランブル英文法・語法</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>5 / 10</dd></div>
             <div><dt>到達目安</dt><dd>50〜63</dd></div>
@@ -274,37 +307,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>大岩のいちばんはじめの英文法</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890855890.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890855890.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890855890.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890855896.jpg|https://books.google.com/books/content?vid=ISBN9784890855896&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890855896.jpg|https://www.gakusan.com/bookimage_s/9784890855896.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">文法</span><span>ナガセ(東進)</span></div>
+            <div class="bcard__top"><span class="bcard__stage">文法</span><span class="bcard__pub">ナガセ(東進)</span></div>
             <b>大岩のいちばんはじめの英文法</b>
           </div>
         </div>
         <p>大岩秀樹による、中学英語からやり直す講義系文法書（東進）。品詞・文型といった土台から会話調で解説する。同じ入門帯の肘井学のゼロから英文法より手…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 1／〜50</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/english/books/hijii-zero/" style="--bc:#24427C">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>肘井学のゼロから英文法</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046061510.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046061510.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046061510.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046061515.jpg|https://books.google.com/books/content?vid=ISBN9784046061515&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046061515.jpg|https://www.gakusan.com/bookimage_s/9784046061515.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">文法</span><span>KADOKAWA</span></div>
+            <div class="bcard__top"><span class="bcard__stage">文法</span><span class="bcard__pub">KADOKAWA</span></div>
             <b>肘井学のゼロから英文法</b>
           </div>
         </div>
         <p>肘井学による、読解につながる文法を意識した入門講義（KADOKAWA・2023年改訂、音声付き）。同じ入門帯の世界一わかりやすい英文法の授業が…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 2／40〜55</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/english/books/evergreen/" style="--bc:#24427C">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>総合英語Evergreen</b><em>いいずな書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4868100440.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4868100440.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4868100440.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4868100440.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4868100440.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4868100440.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784868100447.jpg|https://books.google.com/books/content?vid=ISBN9784868100447&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784868100447.jpg|https://www.gakusan.com/bookimage_s/9784868100447.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">文法</span><span>いいずな書店</span></div>
+            <div class="bcard__top"><span class="bcard__stage">文法</span><span class="bcard__pub">いいずな書店</span></div>
             <b>総合英語Evergreen</b>
           </div>
         </div>
         <p>文法を網羅的に解説する総合英語（いいずな書店、2025年新版）。全レベル向けの参照用で、講義型の真・英文法大全より項目引きに向き、ブレイクスル…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜65<span class="bcard__series">全レベル（調べ先）</span></span></div>
-        <span class="bcard__ver">書誌情報を確認中</span>
       </a>
       </div>
       <p>帯ごとの整理は<a href="/english/guides/bunpo-comparison/">英文法はどれをやるか</a>にまとめました。</p>
@@ -320,37 +350,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>英文法ファイナル演習ポラリス</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046043725.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046043725.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046043725.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046043725.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046043725.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046043725.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046043726.jpg|https://books.google.com/books/content?vid=ISBN9784046043726&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046043726.jpg|https://www.gakusan.com/bookimage_s/9784046043726.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">文法</span><span>KADOKAWA</span></div>
+            <div class="bcard__top"><span class="bcard__stage">文法</span><span class="bcard__pub">KADOKAWA</span></div>
             <b>英文法ファイナル演習ポラリス</b>
           </div>
         </div>
         <p>単元をシャッフルしたランダム形式で文法を総仕上げするポラリスの演習編。標準・応用・発展の3段階。同じランダム演習のセレクト600が1冊完結なの…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 6／50〜73<span class="bcard__series">レベル別 3 巻</span></span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/english/books/hinshutsu1000/" style="--bc:#24427C">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>頻出英文法・語法問題1000</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342726718.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342726718.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342726718.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342726718.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342726718.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342726718.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342726712.jpg|https://books.google.com/books/content?vid=ISBN9784342726712&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342726712.jpg|https://www.gakusan.com/bookimage_s/9784342726712.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">文法</span><span>桐原書店</span></div>
+            <div class="bcard__top"><span class="bcard__stage">文法</span><span class="bcard__pub">桐原書店</span></div>
             <b>頻出英文法・語法問題1000</b>
           </div>
         </div>
         <p>1000題に復習200題を加え、全問全選択肢を解説する大量演習型の文法・語法問題集（桐原書店・増補改訂版）。同じ帯のULTIMATEが600題…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／58〜70</span></div>
-        
       </a>
       <a class="bcard" href="/english/books/eibunpo-gohou-random-select-600/" style="--bc:#24427C">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>英文法・語法ランダム演習 セレクト600</b><em>Gakken（学研）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/405303440X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/405303440X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405303440X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/405303440X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/405303440X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/405303440X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053034403.jpg|https://books.google.com/books/content?vid=ISBN9784053034403&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053034403.jpg|https://www.gakusan.com/bookimage_s/9784053034403.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">文法</span><span>Gakken（学研）</span></div>
+            <div class="bcard__top"><span class="bcard__stage">文法</span><span class="bcard__pub">Gakken（学研）</span></div>
             <b>英文法・語法ランダム演習 セレクト600</b>
           </div>
         </div>
         <p>単元別でなくランダム配列で出題する600題の文法・語法問題集（Gakken・2011年）。同じランダム演習のファイナル演習ポラリスがレベル別3…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／50〜60</span></div>
-        <span class="bcard__ver">書誌情報を確認中</span>
       </a>
       </div>
     </section>

@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -227,11 +245,11 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/english/books/haitore-wabun/">英作文ハイパートレーニング 和文英訳編</a></th><td>5 / 10</td><td>50〜65</td><td>256頁</td><td>35〜50h</td><td>国公立二次の和文英訳を主軸にしたい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/haitore-jiyu/">英作文ハイパートレーニング 自由英作文編 Plus</a></th><td>5 / 10</td><td>50〜65</td><td>224頁</td><td>30〜45h</td><td>自由英作文の型を身につけたい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/eisaku-polaris1/">英作文ポラリス1(和文英訳編)</a></th><td>6 / 10</td><td>55〜65</td><td>304頁</td><td>35〜50h</td><td>関正生の本で和文英訳を固めたい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/eisaku-polaris2/">英作文ポラリス2(自由英作文編)</a></th><td>7 / 10</td><td>58〜68</td><td>テーマ別26題・264頁</td><td>35〜50h</td><td>自由英作文が出る難関大の志望者</td></tr>
-            <tr><th scope="row"><a href="/english/books/kiso-eisaku/">基礎英作文問題精講</a></th><td>6 / 10</td><td>55〜68</td><td>272頁+別冊</td><td>40〜55h</td><td>英作文全体を1冊で仕上げたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/haitore-wabun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>英作文ハイパートレーニング 和文英訳編</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342207788.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342207788.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342207785.jpg|https://books.google.com/books/content?vid=ISBN9784342207785&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342207785.jpg|https://www.gakusan.com/bookimage_s/9784342207785.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/haitore-wabun/">英作文ハイパートレーニング 和文英訳編</a></span></span></th><td>5 / 10</td><td>50〜65</td><td>256頁</td><td>35〜50h</td><td>国公立二次の和文英訳を主軸にしたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/haitore-jiyu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>英作文ハイパートレーニング 自由英作文編 Plus</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342209691.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342209691.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342209691.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342209691.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342209691.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342209691.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342209697.jpg|https://books.google.com/books/content?vid=ISBN9784342209697&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342209697.jpg|https://www.gakusan.com/bookimage_s/9784342209697.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/haitore-jiyu/">英作文ハイパートレーニング 自由英作文編 Plus</a></span></span></th><td>5 / 10</td><td>50〜65</td><td>224頁</td><td>30〜45h</td><td>自由英作文の型を身につけたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/eisaku-polaris1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>英作文ポラリス1(和文英訳編)</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046047941.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046047941.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046047941.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046047941.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046047941.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046047941.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046047946.jpg|https://books.google.com/books/content?vid=ISBN9784046047946&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046047946.jpg|https://www.gakusan.com/bookimage_s/9784046047946.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/eisaku-polaris1/">英作文ポラリス1(和文英訳編)</a></span></span></th><td>6 / 10</td><td>55〜65</td><td>304頁</td><td>35〜50h</td><td>関正生の本で和文英訳を固めたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/eisaku-polaris2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>英作文ポラリス2(自由英作文編)</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404604795X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404604795X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404604795X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/404604795X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/404604795X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404604795X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046047953.jpg|https://books.google.com/books/content?vid=ISBN9784046047953&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046047953.jpg|https://www.gakusan.com/bookimage_s/9784046047953.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/eisaku-polaris2/">英作文ポラリス2(自由英作文編)</a></span></span></th><td>7 / 10</td><td>58〜68</td><td>テーマ別26題・264頁</td><td>35〜50h</td><td>自由英作文が出る難関大の志望者</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/kiso-eisaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>基礎英作文問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010349654.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010349654.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349654.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010349654.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349654.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349654.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010349656.jpg|https://books.google.com/books/content?vid=ISBN9784010349656&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010349656.jpg|https://www.gakusan.com/bookimage_s/9784010349656.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/kiso-eisaku/">基礎英作文問題精講</a></span></span></th><td>6 / 10</td><td>55〜68</td><td>272頁+別冊</td><td>40〜55h</td><td>英作文全体を1冊で仕上げたい人</td></tr>
           </tbody>
         </table>
         </div>
@@ -250,9 +268,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/english/books/dragon100/">ドラゴン・イングリッシュ基本英文100</a></th><td>6 / 10</td><td>55〜70</td><td>基本英文100</td><td>30〜45h</td><td>最小の暗唱量で英作文の核を作りたい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/kihon300sen/">英作文基本300選</a></th><td>6 / 10</td><td>55〜68</td><td>基本英文300</td><td>40〜60h</td><td>例文暗唱で英作文の土台を作りたい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/shin-kihon-eibun-700sen-shinso/">新・基本英文700選〈新装版〉</a></th><td>6 / 10</td><td>50〜65</td><td>例文700</td><td>40〜60h</td><td>例文暗記で英作文・英文解釈の基礎を固めたい受験生</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/dragon100/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>ドラゴン・イングリッシュ基本英文100</b><em>講談社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4065246946.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4065246946.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4065246946.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4065246946.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4065246946.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4065246946.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784065246948.jpg|https://books.google.com/books/content?vid=ISBN9784065246948&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784065246948.jpg|https://www.gakusan.com/bookimage_s/9784065246948.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/dragon100/">ドラゴン・イングリッシュ基本英文100</a></span></span></th><td>6 / 10</td><td>55〜70</td><td>基本英文100</td><td>30〜45h</td><td>最小の暗唱量で英作文の核を作りたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/kihon300sen/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>英作文基本300選</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111573.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111573.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111573.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111573.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111573.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111573.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111577.jpg|https://books.google.com/books/content?vid=ISBN9784796111577&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111577.jpg|https://www.gakusan.com/bookimage_s/9784796111577.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/kihon300sen/">英作文基本300選</a></span></span></th><td>6 / 10</td><td>55〜68</td><td>基本英文300</td><td>40〜60h</td><td>例文暗唱で英作文の土台を作りたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/shin-kihon-eibun-700sen-shinso/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>新・基本英文700選〈新装版〉</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/479611162X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/479611162X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/479611162X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/479611162X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/479611162X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/479611162X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111621.jpg|https://books.google.com/books/content?vid=ISBN9784796111621&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111621.jpg|https://www.gakusan.com/bookimage_s/9784796111621.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/shin-kihon-eibun-700sen-shinso/">新・基本英文700選〈新装版〉</a></span></span></th><td>6 / 10</td><td>50〜65</td><td>例文700</td><td>40〜60h</td><td>例文暗記で英作文・英文解釈の基礎を固めたい受験生</td></tr>
           </tbody>
         </table>
         </div>
@@ -275,37 +293,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>減点されない英作文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053044251.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053044251.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053044251.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053044251.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053044251.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053044251.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053044259.jpg|https://books.google.com/books/content?vid=ISBN9784053044259&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053044259.jpg|https://www.gakusan.com/bookimage_s/9784053044259.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">英作</span><span>Gakken</span></div>
+            <div class="bcard__top"><span class="bcard__stage">英作</span><span class="bcard__pub">Gakken</span></div>
             <b>減点されない英作文</b>
           </div>
         </div>
         <p>「うまく書く」より「減点されない」に振り切った答案術の本（Gakken、改訂版）。同帯の英作文プラチナルールが採点基準からのルール集なのに対し…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／50〜62</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/english/books/hijii-tadashiku/" style="--bc:#2F6E4F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>正しく書ける英作文</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325260226.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325260226.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325260226.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325260226.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325260226.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325260226.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325260226.jpg|https://books.google.com/books/content?vid=ISBN9784325260226&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325260226.jpg|https://www.gakusan.com/bookimage_s/9784325260226.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">英作</span><span>教学社</span></div>
+            <div class="bcard__top"><span class="bcard__stage">英作</span><span class="bcard__pub">教学社</span></div>
             <b>正しく書ける英作文</b>
           </div>
         </div>
         <p>ミスの型を分類して潰していく和文英訳の体系書（教学社、赤本プラス）。同帯のハイパートレーニング和文英訳編が訳す手順を訓練するのに対し、ミスの分…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／52〜65</span></div>
-        
       </a>
       <a class="bcard" href="/english/books/reikai-wabun-eiyaku-kyohon-bunpo/" style="--bc:#2F6E4F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>例解 和文英訳教本 文法矯正編</b><em>プレイス</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/490373823X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/490373823X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/490373823X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/490373823X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/490373823X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/490373823X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784903738239.jpg|https://books.google.com/books/content?vid=ISBN9784903738239&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784903738239.jpg|https://www.gakusan.com/bookimage_s/9784903738239.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">英作</span><span>プレイス</span></div>
+            <div class="bcard__top"><span class="bcard__stage">英作</span><span class="bcard__pub">プレイス</span></div>
             <b>例解 和文英訳教本 文法矯正編</b>
           </div>
         </div>
         <p>小倉弘による、日本人が誤りやすい文法事項別に和文英訳を矯正する演習書（プレイス）。同帯のハイパートレーニング和文英訳編が訳す手順を扱うのに対し…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 6／52〜65</span></div>
-        
       </a>
       </div>
       <p>順番としては、<b>例文暗唱 → 減点対策 → 演習書</b>の並行運用が無理のない形です。減点対策を最初に読んでも、書いた経験がないので実感が湧きません。何本か書いて減点されてから読むと、書いてあることが自分の失敗と一致します。</p>
@@ -319,37 +334,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>竹岡広信の英作文が面白いほど書ける本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046051264.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046051264.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046051264.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046051264.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046051264.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046051264.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046051264.jpg|https://books.google.com/books/content?vid=ISBN9784046051264&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046051264.jpg|https://www.gakusan.com/bookimage_s/9784046051264.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">英作</span><span>KADOKAWA</span></div>
+            <div class="bcard__top"><span class="bcard__stage">英作</span><span class="bcard__pub">KADOKAWA</span></div>
             <b>竹岡広信の英作文が面白いほど書ける本</b>
           </div>
         </div>
         <p>竹岡広信による「原則70」で英作文を解説する568頁の総合演習書（KADOKAWA、2024年改訂）。同帯の英作文バイブルが解いて覚える2冊構…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／58〜72</span></div>
-        
       </a>
       <a class="bcard" href="/english/books/sainankan-eisaku/" style="--bc:#2F6E4F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>最難関大への英作文ハイトレ</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342207796.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342207796.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342207796.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342207796.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342207796.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342207796.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342207792.jpg|https://books.google.com/books/content?vid=ISBN9784342207792&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342207792.jpg|https://www.gakusan.com/bookimage_s/9784342207792.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">英作</span><span>桐原書店</span></div>
+            <div class="bcard__top"><span class="bcard__stage">英作</span><span class="bcard__pub">桐原書店</span></div>
             <b>最難関大への英作文ハイトレ</b>
           </div>
         </div>
         <p>東大・京大・阪大レベルの和文英訳演習書（桐原書店、新装版、288頁）。同シリーズの和文英訳編の上位にあたり、こなれた日本語を英語に落とす「和文…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span>難易度 8／63〜75</span></div>
-        
       </a>
       <a class="bcard" href="/english/books/yokubari/" style="--bc:#2F6E4F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>よくばり英作文</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111603.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111603.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111603.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111603.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111603.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111603.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111607.jpg|https://books.google.com/books/content?vid=ISBN9784796111607&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111607.jpg|https://www.gakusan.com/bookimage_s/9784796111607.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">英作</span><span>駿台文庫</span></div>
+            <div class="bcard__top"><span class="bcard__stage">英作</span><span class="bcard__pub">駿台文庫</span></div>
             <b>よくばり英作文</b>
           </div>
         </div>
         <p>文例418を収めた暗唱例文集の新装版（駿台文庫）。同じ暗唱帯のドラゴン・イングリッシュ100文の上位にあたり、表現の幅を広げる位置づけ。東大・…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／58〜70</span></div>
-        
       </a>
       </div>
       <p>ただし、<b>この段階に進む前に確認すべきは、標準レベルの答案で減点が止まっているか</b>です。上位の本は「より難しい日本語をほどく」練習であって、基本的な文法ミスを直す本ではありません。土台が緩いまま上に積むと、難しい問題で書けないという結果だけが残ります。</p>

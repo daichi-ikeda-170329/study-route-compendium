@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -207,57 +225,102 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <p>目的ごとに 9 部門に分けました。選定の基準は「その目的に対して他の本より作りが合っていること」です。語数の多さでは順位を付けていません。</p>
       <div class="awards">
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">中学からやり直す部門</div>
-          <b class="award__book"><a href="/english/books/hijii-tango/">肘井学のゼロから英単語</a></b>
-          <div class="award__meta">英語・KADOKAWA／難易度 2 / 10／毎日20分×2か月</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/hijii-tango/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>肘井学のゼロから英単語</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046052570.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046052575.jpg|https://books.google.com/books/content?vid=ISBN9784046052575&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046052575.jpg|https://www.gakusan.com/bookimage_s/9784046052575.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">中学からやり直す部門</div>
+              <b class="award__book"><a href="/english/books/hijii-tango/">肘井学のゼロから英単語</a></b>
+              <div class="award__meta">英語・KADOKAWA／難易度 2 / 10／毎日20分×2か月</div>
+            </div>
+          </div>
           <p class="award__why">受験用の 1,900 語級に入る前の橋渡しです。単語帳を開いて未知語ばかりだった人が、まずここまで戻ります。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">高校基礎を固める部門</div>
-          <b class="award__book"><a href="/english/books/target1200/">英単語ターゲット1200</a></b>
-          <div class="award__meta">英語・旺文社／難易度 2 / 10／毎日20分×2〜3か月</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/target1200/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1200</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346485.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346485.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346488.jpg|https://books.google.com/books/content?vid=ISBN9784010346488&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346488.jpg|https://www.gakusan.com/bookimage_s/9784010346488.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">高校基礎を固める部門</div>
+              <b class="award__book"><a href="/english/books/target1200/">英単語ターゲット1200</a></b>
+              <div class="award__meta">英語・旺文社／難易度 2 / 10／毎日20分×2〜3か月</div>
+            </div>
+          </div>
           <p class="award__why">高校必修の語に熟語を加えた構成です。上位版へそのまま接続できるので、シリーズで通したい人に向きます。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">共通テストまで部門</div>
-          <b class="award__book"><a href="/english/books/target1400/">英単語ターゲット1400</a></b>
-          <div class="award__meta">英語・旺文社／難易度 4 / 10／毎日30分×3〜4か月</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/target1400/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1400</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346471.jpg|https://books.google.com/books/content?vid=ISBN9784010346471&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346471.jpg|https://www.gakusan.com/bookimage_s/9784010346471.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">共通テストまで部門</div>
+              <b class="award__book"><a href="/english/books/target1400/">英単語ターゲット1400</a></b>
+              <div class="award__meta">英語・旺文社／難易度 4 / 10／毎日30分×3〜4か月</div>
+            </div>
+          </div>
           <p class="award__why">共通テストの水準までを射程に置いた 1 冊です。難関大を受けないなら、ここで止めても組み立てが成立します。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">受験の主力・リスト型部門</div>
-          <b class="award__book"><a href="/english/books/target1900/">英単語ターゲット1900</a></b>
-          <div class="award__meta">英語・旺文社／難易度 6 / 10／毎日30分×4〜6か月</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/target1900/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1900</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346469.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346469.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346469.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346469.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346469.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346469.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346464.jpg|https://books.google.com/books/content?vid=ISBN9784010346464&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346464.jpg|https://www.gakusan.com/bookimage_s/9784010346464.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">受験の主力・リスト型部門</div>
+              <b class="award__book"><a href="/english/books/target1900/">英単語ターゲット1900</a></b>
+              <div class="award__meta">英語・旺文社／難易度 6 / 10／毎日30分×4〜6か月</div>
+            </div>
+          </div>
           <p class="award__why">1 語 1 義から入るので、進捗が測りやすく周回の設計が立てやすい構成です。区切って回したい人向けです。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">受験の主力・フレーズ型部門</div>
-          <b class="award__book"><a href="/english/books/sistan/">システム英単語</a></b>
-          <div class="award__meta">英語・駿台文庫／難易度 6 / 10／毎日30分×4〜6か月</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/sistan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111379.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111379.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111379.jpg|https://books.google.com/books/content?vid=ISBN9784796111379&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111379.jpg|https://www.gakusan.com/bookimage_s/9784796111379.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">受験の主力・フレーズ型部門</div>
+              <b class="award__book"><a href="/english/books/sistan/">システム英単語</a></b>
+              <div class="award__meta">英語・駿台文庫／難易度 6 / 10／毎日30分×4〜6か月</div>
+            </div>
+          </div>
           <p class="award__why">短いフレーズごと覚える設計です。長文で単語に反応できない状態には、この方向が効きます。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">文章で覚える部門</div>
-          <b class="award__book"><a href="/english/books/sokutan-hisshu/">速読英単語 必修編</a></b>
-          <div class="award__meta">英語・Z会／難易度 6 / 10／毎日40分×5〜6か月</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/sokutan-hisshu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>速読英単語 必修編</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865316426.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865316426.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865316426.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4865316426.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4865316426.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865316426.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784865316421.jpg|https://books.google.com/books/content?vid=ISBN9784865316421&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784865316421.jpg|https://www.gakusan.com/bookimage_s/9784865316421.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">文章で覚える部門</div>
+              <b class="award__book"><a href="/english/books/sokutan-hisshu/">速読英単語 必修編</a></b>
+              <div class="award__meta">英語・Z会／難易度 6 / 10／毎日40分×5〜6か月</div>
+            </div>
+          </div>
           <p class="award__why">長文のなかで単語に出会う構成です。単語帳と読解を 1 冊で兼ねたい場合に選びます。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">音で回す部門</div>
-          <b class="award__book"><a href="/english/books/yumetan/">ユメタン(1・2)</a></b>
-          <div class="award__meta">英語・アルク／難易度 5 / 10／1週間100語×10週/巻</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/yumetan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>ユメタン(1・2)</b><em>アルク</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/475744236X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/475744236X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/475744236X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/475744236X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/475744236X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/475744236X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784757442368.jpg|https://books.google.com/books/content?vid=ISBN9784757442368&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784757442368.jpg|https://www.gakusan.com/bookimage_s/9784757442368.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">音で回す部門</div>
+              <b class="award__book"><a href="/english/books/yumetan/">ユメタン(1・2)</a></b>
+              <div class="award__meta">英語・アルク／難易度 5 / 10／1週間100語×10週/巻</div>
+            </div>
+          </div>
           <p class="award__why">音声を軸に回す設計です。通学時間を単語に充てたい人は、この作りの本を選ぶと定着が変わります。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">最難関部門</div>
-          <b class="award__book"><a href="/english/books/teppeki/">鉄緑会東大英単語熟語 鉄壁</a></b>
-          <div class="award__meta">英語・KADOKAWA／難易度 9 / 10／毎日40分×6か月〜</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/teppeki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>鉄緑会東大英単語熟語 鉄壁</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404604411X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404604411X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404604411X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/404604411X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/404604411X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404604411X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046044112.jpg|https://books.google.com/books/content?vid=ISBN9784046044112&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046044112.jpg|https://www.gakusan.com/bookimage_s/9784046044112.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">最難関部門</div>
+              <b class="award__book"><a href="/english/books/teppeki/">鉄緑会東大英単語熟語 鉄壁</a></b>
+              <div class="award__meta">英語・KADOKAWA／難易度 9 / 10／毎日40分×6か月〜</div>
+            </div>
+          </div>
           <p class="award__why">語源と派生をまとめて扱うぶん分量が大きく、時間の確保が前提になります。主力の 1 冊を終えたあとに置きます。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">テーマ別に読む部門</div>
-          <b class="award__book"><a href="/english/books/linga/">話題別英単語リンガメタリカ</a></b>
-          <div class="award__meta">英語・Z会／難易度 9 / 10／毎日30分×3〜4か月</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/linga/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>話題別英単語リンガメタリカ</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865316515.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865316515.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865316515.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4865316515.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4865316515.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865316515.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784865316513.jpg|https://books.google.com/books/content?vid=ISBN9784865316513&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784865316513.jpg|https://www.gakusan.com/bookimage_s/9784865316513.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">テーマ別に読む部門</div>
+              <b class="award__book"><a href="/english/books/linga/">話題別英単語リンガメタリカ</a></b>
+              <div class="award__meta">英語・Z会／難易度 9 / 10／毎日30分×3〜4か月</div>
+            </div>
+          </div>
           <p class="award__why">分野ごとの背景知識と語彙を同時に入れます。難関大の長文でテーマ知識が要る段で使います。</p>
         </div>
       </div>
@@ -273,18 +336,18 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
           <caption>英単語帳を想定学習時間の短い順に 12 冊。</caption>
           <thead><tr><th>順位</th><th>参考書</th><th>出版社</th><th>想定学習時間</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><span class="rk">1</span></th><td class="rk__name"><a href="/english/books/kikutan-basic-4000/">キクタン Basic 4000</a></td><td>アルク</td><td>25時間</td></tr>
-            <tr><th scope="row"><span class="rk">2</span></th><td class="rk__name"><a href="/english/books/sparta-2-advanced/">英単語SPARTA2 advanced level 1000語</a></td><td>かんき出版</td><td>30時間</td></tr>
-            <tr><th scope="row"><span class="rk">3</span></th><td class="rk__name"><a href="/english/books/sparta-3-mastery/">英単語SPARTA3 mastery level 1000語</a></td><td>かんき出版</td><td>30時間</td></tr>
-            <tr><th scope="row"><span class="rk">4</span></th><td class="rk__name"><a href="/english/books/eiken-2kyu-derujun-pastan-shinso-5th/">英検2級 でる順パス単</a></td><td>旺文社</td><td>35時間</td></tr>
-            <tr><th scope="row"><span class="rk">5</span></th><td class="rk__name"><a href="/english/books/hijii-tango/">肘井学のゼロから英単語</a></td><td>KADOKAWA</td><td>40時間</td></tr>
-            <tr><th scope="row"><span class="rk">6</span></th><td class="rk__name"><a href="/english/books/distinction-2000/">Distinction 2000</a></td><td>KADOKAWA</td><td>50時間</td></tr>
-            <tr><th scope="row"><span class="rk">7</span></th><td class="rk__name"><a href="/english/books/kikutan-advanced-6000/">キクタン Advanced 6000</a></td><td>アルク</td><td>50時間</td></tr>
-            <tr><th scope="row"><span class="rk">8</span></th><td class="rk__name"><a href="/english/books/sokudoku-sokucho-core-1900-ver6/">速読速聴・英単語 Core 1900 ver.6</a></td><td>Z会</td><td>50時間</td></tr>
-            <tr><th scope="row"><span class="rk">9</span></th><td class="rk__name"><a href="/english/books/target1200/">英単語ターゲット1200</a></td><td>旺文社</td><td>50時間</td></tr>
-            <tr><th scope="row"><span class="rk">10</span></th><td class="rk__name"><a href="/english/books/kikutan-super-12000/">キクタン Super 12000</a></td><td>アルク</td><td>70時間</td></tr>
-            <tr><th scope="row"><span class="rk">11</span></th><td class="rk__name"><a href="/english/books/leap-basic/">必携英単語LEAP Basic</a></td><td>数研出版</td><td>70時間</td></tr>
-            <tr><th scope="row"><span class="rk">12</span></th><td class="rk__name"><a href="/english/books/sistan-basic/">システム英単語Basic</a></td><td>駿台文庫</td><td>70時間</td></tr>
+            <tr><th scope="row"><span class="rk">1</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/kikutan-basic-4000/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>キクタン Basic 4000</b><em>アルク</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4757433476.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4757433476.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433476.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784757433472.jpg|https://books.google.com/books/content?vid=ISBN9784757433472&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784757433472.jpg|https://www.gakusan.com/bookimage_s/9784757433472.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/kikutan-basic-4000/">キクタン Basic 4000</a></span></span></td><td>アルク</td><td>25時間</td></tr>
+            <tr><th scope="row"><span class="rk">2</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/sparta-2-advanced/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語SPARTA2 advanced level 1000語</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230835.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230835.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230835.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230835.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230835.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230835.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230838.jpg|https://books.google.com/books/content?vid=ISBN9784761230838&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230838.jpg|https://www.gakusan.com/bookimage_s/9784761230838.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/sparta-2-advanced/">英単語SPARTA2 advanced level 1000語</a></span></span></td><td>かんき出版</td><td>30時間</td></tr>
+            <tr><th scope="row"><span class="rk">3</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/sparta-3-mastery/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語SPARTA3 mastery level 1000語</b><em>かんき出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4761230843.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4761230843.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230843.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4761230843.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4761230843.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4761230843.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784761230845.jpg|https://books.google.com/books/content?vid=ISBN9784761230845&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784761230845.jpg|https://www.gakusan.com/bookimage_s/9784761230845.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/sparta-3-mastery/">英単語SPARTA3 mastery level 1000語</a></span></span></td><td>かんき出版</td><td>30時間</td></tr>
+            <tr><th scope="row"><span class="rk">4</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/eiken-2kyu-derujun-pastan-shinso-5th/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英検2級 でる順パス単</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010951192.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010951192.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010951192.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010951194.jpg|https://books.google.com/books/content?vid=ISBN9784010951194&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010951194.jpg|https://www.gakusan.com/bookimage_s/9784010951194.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/eiken-2kyu-derujun-pastan-shinso-5th/">英検2級 でる順パス単</a></span></span></td><td>旺文社</td><td>35時間</td></tr>
+            <tr><th scope="row"><span class="rk">5</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/hijii-tango/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>肘井学のゼロから英単語</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046052570.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046052570.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046052570.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046052575.jpg|https://books.google.com/books/content?vid=ISBN9784046052575&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046052575.jpg|https://www.gakusan.com/bookimage_s/9784046052575.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/hijii-tango/">肘井学のゼロから英単語</a></span></span></td><td>KADOKAWA</td><td>40時間</td></tr>
+            <tr><th scope="row"><span class="rk">6</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/distinction-2000/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>Distinction 2000</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046045337.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046045337.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046045337.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046045337.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046045337.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046045337.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046045331.jpg|https://books.google.com/books/content?vid=ISBN9784046045331&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046045331.jpg|https://www.gakusan.com/bookimage_s/9784046045331.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/distinction-2000/">Distinction 2000</a></span></span></td><td>KADOKAWA</td><td>50時間</td></tr>
+            <tr><th scope="row"><span class="rk">7</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/kikutan-advanced-6000/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>キクタン Advanced 6000</b><em>アルク</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4757433484.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757433484.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433484.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4757433484.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4757433484.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433484.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784757433489.jpg|https://books.google.com/books/content?vid=ISBN9784757433489&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784757433489.jpg|https://www.gakusan.com/bookimage_s/9784757433489.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/kikutan-advanced-6000/">キクタン Advanced 6000</a></span></span></td><td>アルク</td><td>50時間</td></tr>
+            <tr><th scope="row"><span class="rk">8</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/sokudoku-sokucho-core-1900-ver6/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>速読速聴・英単語 Core 1900 ver.6</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4862904742.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4862904742.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4862904742.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4862904742.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4862904742.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4862904742.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784862904744.jpg|https://books.google.com/books/content?vid=ISBN9784862904744&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784862904744.jpg|https://www.gakusan.com/bookimage_s/9784862904744.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/sokudoku-sokucho-core-1900-ver6/">速読速聴・英単語 Core 1900 ver.6</a></span></span></td><td>Z会</td><td>50時間</td></tr>
+            <tr><th scope="row"><span class="rk">9</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/target1200/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1200</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346485.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346485.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346485.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346488.jpg|https://books.google.com/books/content?vid=ISBN9784010346488&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346488.jpg|https://www.gakusan.com/bookimage_s/9784010346488.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/target1200/">英単語ターゲット1200</a></span></span></td><td>旺文社</td><td>50時間</td></tr>
+            <tr><th scope="row"><span class="rk">10</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/kikutan-super-12000/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>キクタン Super 12000</b><em>アルク</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4757433492.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757433492.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433492.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4757433492.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4757433492.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757433492.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784757433496.jpg|https://books.google.com/books/content?vid=ISBN9784757433496&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784757433496.jpg|https://www.gakusan.com/bookimage_s/9784757433496.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/kikutan-super-12000/">キクタン Super 12000</a></span></span></td><td>アルク</td><td>70時間</td></tr>
+            <tr><th scope="row"><span class="rk">11</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/leap-basic/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>必携英単語LEAP Basic</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410144332.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410144332.jpg|https://books.google.com/books/content?vid=ISBN9784410144332&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410144332.jpg|https://www.gakusan.com/bookimage_s/9784410144332.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/leap-basic/">必携英単語LEAP Basic</a></span></span></td><td>数研出版</td><td>70時間</td></tr>
+            <tr><th scope="row"><span class="rk">12</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/english/books/sistan-basic/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語Basic</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111417.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111416.jpg|https://books.google.com/books/content?vid=ISBN9784796111416&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111416.jpg|https://www.gakusan.com/bookimage_s/9784796111416.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/sistan-basic/">システム英単語Basic</a></span></span></td><td>駿台文庫</td><td>70時間</td></tr>
           </tbody>
         </table>
         </div>

@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -209,8 +227,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <p>収録しているデータをそのまま並べます。強みと注意点も、書籍ページに置いている内容と同じものです。</p>
       <div class="vs vs--2">
         <div class="vs__col">
-          <div class="vs__pub">数研出版</div>
-          <b class="vs__name"><a href="/math/books/ao/">青チャート</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/math/books/ao/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>青チャート</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410105787.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410105784.jpg|https://books.google.com/books/content?vid=ISBN9784410105784&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410105784.jpg|https://www.gakusan.com/bookimage_s/9784410105784.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">数研出版</div>
+              <b class="vs__name"><a href="/math/books/ao/">青チャート</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>6 / 10</dd></div>
             <div><dt>到達目安</dt><dd>50〜67</dd></div>
@@ -222,8 +245,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">啓林館</div>
-          <b class="vs__name"><a href="/math/books/fg/">Focus Gold</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/math/books/fg/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>Focus Gold</b><em>啓林館</em></span><img src="https://m.media-amazon.com/images/I/31Mc5B0eW2L._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/31Mc5B0eW2L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4402252539.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402252539.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4402252539.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4402252539.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402252539.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784402252533.jpg|https://books.google.com/books/content?vid=ISBN9784402252533&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784402252533.jpg|https://www.gakusan.com/bookimage_s/9784402252533.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">啓林館</div>
+              <b class="vs__name"><a href="/math/books/fg/">Focus Gold</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>6 / 10</dd></div>
             <div><dt>到達目安</dt><dd>50〜70</dd></div>
@@ -276,37 +304,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>青チャート</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410105787.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410105784.jpg|https://books.google.com/books/content?vid=ISBN9784410105784&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410105784.jpg|https://www.gakusan.com/bookimage_s/9784410105784.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">網羅</span><span>数研出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">網羅</span><span class="bcard__pub">数研出版</span></div>
             <b>青チャート</b>
           </div>
         </div>
         <p>教科書レベルから難関大入試の典型までを段階的に扱う網羅系（数研出版、各巻約1,100題）。Focus Goldがチャレンジ編で最難関まで扱うの…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 6／50〜67</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/math/books/fg/" style="--bc:#24427C">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>Focus Gold</b><em>啓林館</em></span><img src="https://m.media-amazon.com/images/I/31Mc5B0eW2L._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/31Mc5B0eW2L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4402252539.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402252539.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4402252539.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4402252539.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4402252539.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784402252533.jpg|https://books.google.com/books/content?vid=ISBN9784402252533&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784402252533.jpg|https://www.gakusan.com/bookimage_s/9784402252533.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">網羅</span><span>啓林館</span></div>
+            <div class="bcard__top"><span class="bcard__stage">網羅</span><span class="bcard__pub">啓林館</span></div>
             <b>Focus Gold</b>
           </div>
         </div>
         <p>例題の指針「Focus」と段階式の構成を持つ大型網羅書（啓林館、各巻1,000題超）。青チャートと同帯だが、マスター編〜チャレンジ編まで仕上げ…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 6／50〜70</span></div>
-        <span class="bcard__ver">書誌情報を確認中</span>
       </a>
       <a class="bcard" href="/math/books/kisomon/" style="--bc:#24427C">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>基礎問題精講</b><em>旺文社</em></span><img src="https://m.media-amazon.com/images/I/41pe36vQ+7L._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/41pe36vQ+7L._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349182.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349182.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010349182.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349182.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349182.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010349182.jpg|https://books.google.com/books/content?vid=ISBN9784010349182&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010349182.jpg|https://www.gakusan.com/bookimage_s/9784010349182.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">網羅</span><span>旺文社</span></div>
+            <div class="bcard__top"><span class="bcard__stage">網羅</span><span class="bcard__pub">旺文社</span></div>
             <b>基礎問題精講</b>
           </div>
         </div>
         <p>入試頻出パターンをチャートの1/3の分量で押さえる薄型網羅書（旺文社、全3巻）。黄チャートと同帯だが、問題数を絞って3か月前後で1周できる。時…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／45〜58</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       </div>
     </section>

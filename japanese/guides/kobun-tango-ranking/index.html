@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -206,39 +224,69 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">部門別・古文単語帳</h2>
       <div class="awards">
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">語呂で入れる部門</div>
-          <b class="award__book"><a href="/japanese/books/kobun-gorogo/">古文単語ゴロゴ プレミアム+</a></b>
-          <div class="award__meta">国語・スタディカンパニー／難易度 2 / 10／20〜30h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/kobun-gorogo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古文単語ゴロゴ プレミアム+</b><em>スタディカンパニー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4907422326.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4907422326.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4907422326.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4907422326.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4907422326.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4907422326.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784907422325.jpg|https://books.google.com/books/content?vid=ISBN9784907422325&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784907422325.jpg|https://www.gakusan.com/bookimage_s/9784907422325.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">語呂で入れる部門</div>
+              <b class="award__book"><a href="/japanese/books/kobun-gorogo/">古文単語ゴロゴ プレミアム+</a></b>
+              <div class="award__meta">国語・スタディカンパニー／難易度 2 / 10／20〜30h</div>
+            </div>
+          </div>
           <p class="award__why">語呂で覚える形です。古文単語は現代語と意味がずれる語が多く、理屈で覚えにくいものを最初に入れるのに向きます。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">標準の1冊部門</div>
-          <b class="award__book"><a href="/japanese/books/tango315/">重要古文単語315</a></b>
-          <div class="award__meta">国語・桐原書店／難易度 3 / 10／20〜30h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/tango315/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>重要古文単語315</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342353091.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342353091.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342353091.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342353091.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342353091.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342353091.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342353093.jpg|https://books.google.com/books/content?vid=ISBN9784342353093&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342353093.jpg|https://www.gakusan.com/bookimage_s/9784342353093.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">標準の1冊部門</div>
+              <b class="award__book"><a href="/japanese/books/tango315/">重要古文単語315</a></b>
+              <div class="award__meta">国語・桐原書店／難易度 3 / 10／20〜30h</div>
+            </div>
+          </div>
           <p class="award__why">語数と解説の分量が受験の標準に合っています。どれにするか決まらない場合は、この帯から選ぶと外れません。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">イラストで意味を掴む部門</div>
-          <b class="award__book"><a href="/japanese/books/madonna-tango/">マドンナ古文単語230</a></b>
-          <div class="award__meta">国語・Gakken／難易度 2 / 10／15〜22h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/madonna-tango/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>マドンナ古文単語230</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057590.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057590.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057590.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057590.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057590.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057590.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057594.jpg|https://books.google.com/books/content?vid=ISBN9784053057594&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057594.jpg|https://www.gakusan.com/bookimage_s/9784053057594.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">イラストで意味を掴む部門</div>
+              <b class="award__book"><a href="/japanese/books/madonna-tango/">マドンナ古文単語230</a></b>
+              <div class="award__meta">国語・Gakken／難易度 2 / 10／15〜22h</div>
+            </div>
+          </div>
           <p class="award__why">語のイメージを絵で示します。語数は絞られていますが、意味のずれが大きい語から入れられます。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">文章のなかで覚える部門</div>
-          <b class="award__book"><a href="/japanese/books/yomitoki-tango/">読み解き古文単語</a></b>
-          <div class="award__meta">国語・Z会／難易度 5 / 10／25〜35h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/yomitoki-tango/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>読み解き古文単語</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4879156051.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4879156051.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4879156051.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784879156051.jpg|https://books.google.com/books/content?vid=ISBN9784879156051&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784879156051.jpg|https://www.gakusan.com/bookimage_s/9784879156051.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">文章のなかで覚える部門</div>
+              <b class="award__book"><a href="/japanese/books/yomitoki-tango/">読み解き古文単語</a></b>
+              <div class="award__meta">国語・Z会／難易度 5 / 10／25〜35h</div>
+            </div>
+          </div>
           <p class="award__why">例文と読解を兼ねる構成です。単語帳と読解演習を 1 冊にまとめたい場合に選びます。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">語数を確保する部門</div>
-          <b class="award__book"><a href="/japanese/books/formula600/">古文単語FORMULA600</a></b>
-          <div class="award__meta">国語・東進ブックス(ナガセ)／難易度 4 / 10／25〜35h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/formula600/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古文単語FORMULA600</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890856390.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890856390.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890856390.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890856398.jpg|https://books.google.com/books/content?vid=ISBN9784890856398&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890856398.jpg|https://www.gakusan.com/bookimage_s/9784890856398.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">語数を確保する部門</div>
+              <b class="award__book"><a href="/japanese/books/formula600/">古文単語FORMULA600</a></b>
+              <div class="award__meta">国語・東進ブックス(ナガセ)／難易度 4 / 10／25〜35h</div>
+            </div>
+          </div>
           <p class="award__why">掲載語数が多い帯です。難関大で細かい語の意味が問われる場合に、上積みとして使います。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">グループで整理する部門</div>
-          <b class="award__book"><a href="/japanese/books/group30/">GROUP30で覚える古文単語600</a></b>
-          <div class="award__meta">国語・語学春秋社／難易度 4 / 10／25〜35h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/group30/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>GROUP30で覚える古文単語600</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4875687915.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4875687915.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875687915.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784875687917.jpg|https://books.google.com/books/content?vid=ISBN9784875687917&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784875687917.jpg|https://www.gakusan.com/bookimage_s/9784875687917.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">グループで整理する部門</div>
+              <b class="award__book"><a href="/japanese/books/group30/">GROUP30で覚える古文単語600</a></b>
+              <div class="award__meta">国語・語学春秋社／難易度 4 / 10／25〜35h</div>
+            </div>
+          </div>
           <p class="award__why">意味の近い語をまとめて扱います。似た語の区別がつかない状態を解消するのに向きます。</p>
         </div>
       </div>
@@ -254,16 +302,16 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
           <caption>古文の知識分野（単語・文法・常識）を想定学習時間の短い順に 10 冊。</caption>
           <thead><tr><th>順位</th><th>参考書</th><th>出版社</th><th>想定学習時間</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><span class="rk">1</span></th><td class="rk__name"><a href="/japanese/books/genji-joshiki/">源氏でわかる古典常識</a></td><td>Gakken</td><td>10時間</td></tr>
-            <tr><th scope="row"><span class="rk">2</span></th><td class="rk__name"><a href="/japanese/books/jump-up-note-kotenbunpo-enshu/">基礎からのジャンプアップノート 古典文法 演習ドリル 新装</a></td><td>旺文社</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">3</span></th><td class="rk__name"><a href="/japanese/books/madonna-joshiki/">マドンナ古文常識217</a></td><td>Gakken</td><td>12時間</td></tr>
-            <tr><th scope="row"><span class="rk">4</span></th><td class="rk__name"><a href="/japanese/books/bunpo-10drill/">古典文法10題ドリル 古文基礎編</a></td><td>駿台文庫</td><td>15時間</td></tr>
-            <tr><th scope="row"><span class="rk">5</span></th><td class="rk__name"><a href="/japanese/books/bunpo-30theme/">古文文法問題演習 基本テーマ30</a></td><td>河合出版</td><td>15時間</td></tr>
-            <tr><th scope="row"><span class="rk">6</span></th><td class="rk__name"><a href="/japanese/books/stepup-trial/">ステップアップノート30 古典文法トレーニング</a></td><td>河合出版</td><td>15時間</td></tr>
-            <tr><th scope="row"><span class="rk">7</span></th><td class="rk__name"><a href="/japanese/books/stepup30/">ステップアップノート30 古典文法基礎ドリル</a></td><td>河合出版</td><td>15時間</td></tr>
-            <tr><th scope="row"><span class="rk">8</span></th><td class="rk__name"><a href="/japanese/books/shin-gorogo-kobun-tango/">新・ゴロゴ古文単語</a></td><td>アントロット出版</td><td>17時間</td></tr>
-            <tr><th scope="row"><span class="rk">9</span></th><td class="rk__name"><a href="/japanese/books/sokudoku-kobun-tango/">速読古文単語</a></td><td>Z会</td><td>17時間</td></tr>
-            <tr><th scope="row"><span class="rk">10</span></th><td class="rk__name"><a href="/japanese/books/tsuchiya-kobun-tango-222/">土屋の古文単語222 新装</a></td><td>タイレル出版（発売：星雲社）</td><td>17時間</td></tr>
+            <tr><th scope="row"><span class="rk">1</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/genji-joshiki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>源氏でわかる古典常識</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057299.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057299.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057299.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057299.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057299.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057299.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057297.jpg|https://books.google.com/books/content?vid=ISBN9784053057297&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057297.jpg|https://www.gakusan.com/bookimage_s/9784053057297.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/genji-joshiki/">源氏でわかる古典常識</a></span></span></td><td>Gakken</td><td>10時間</td></tr>
+            <tr><th scope="row"><span class="rk">2</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/jump-up-note-kotenbunpo-enshu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>基礎からのジャンプアップノート 古典文法 演習ドリル 新装</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354100.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354100.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354100.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010354100.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010354100.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354100.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010354100.jpg|https://books.google.com/books/content?vid=ISBN9784010354100&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010354100.jpg|https://www.gakusan.com/bookimage_s/9784010354100.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/jump-up-note-kotenbunpo-enshu/">基礎からのジャンプアップノート 古典文法 演習ドリル 新装</a></span></span></td><td>旺文社</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">3</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/madonna-joshiki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>マドンナ古文常識217</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056667.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056667.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056667.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053056667.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053056667.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056667.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053056665.jpg|https://books.google.com/books/content?vid=ISBN9784053056665&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053056665.jpg|https://www.gakusan.com/bookimage_s/9784053056665.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/madonna-joshiki/">マドンナ古文常識217</a></span></span></td><td>Gakken</td><td>12時間</td></tr>
+            <tr><th scope="row"><span class="rk">4</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/bunpo-10drill/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古典文法10題ドリル 古文基礎編</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796115234.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796115234.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796115234.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796115230.jpg|https://books.google.com/books/content?vid=ISBN9784796115230&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796115230.jpg|https://www.gakusan.com/bookimage_s/9784796115230.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/bunpo-10drill/">古典文法10題ドリル 古文基礎編</a></span></span></td><td>駿台文庫</td><td>15時間</td></tr>
+            <tr><th scope="row"><span class="rk">5</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/bunpo-30theme/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古文文法問題演習 基本テーマ30</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4877258434.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4877258434.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4877258434.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784877258436.jpg|https://books.google.com/books/content?vid=ISBN9784877258436&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784877258436.jpg|https://www.gakusan.com/bookimage_s/9784877258436.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/bunpo-30theme/">古文文法問題演習 基本テーマ30</a></span></span></td><td>河合出版</td><td>15時間</td></tr>
+            <tr><th scope="row"><span class="rk">6</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/stepup-trial/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート30 古典文法トレーニング</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777228738.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777228738.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777228738.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228737.jpg|https://books.google.com/books/content?vid=ISBN9784777228737&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228737.jpg|https://www.gakusan.com/bookimage_s/9784777228737.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/stepup-trial/">ステップアップノート30 古典文法トレーニング</a></span></span></td><td>河合出版</td><td>15時間</td></tr>
+            <tr><th scope="row"><span class="rk">7</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/stepup30/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート30 古典文法基礎ドリル</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/477722872X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722872X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228720.jpg|https://books.google.com/books/content?vid=ISBN9784777228720&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228720.jpg|https://www.gakusan.com/bookimage_s/9784777228720.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/stepup30/">ステップアップノート30 古典文法基礎ドリル</a></span></span></td><td>河合出版</td><td>15時間</td></tr>
+            <tr><th scope="row"><span class="rk">8</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/shin-gorogo-kobun-tango/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>新・ゴロゴ古文単語</b><em>アントロット出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4911467002.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4911467002.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4911467002.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4911467002.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4911467002.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4911467002.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784911467008.jpg|https://books.google.com/books/content?vid=ISBN9784911467008&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784911467008.jpg|https://www.gakusan.com/bookimage_s/9784911467008.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/shin-gorogo-kobun-tango/">新・ゴロゴ古文単語</a></span></span></td><td>アントロット出版</td><td>17時間</td></tr>
+            <tr><th scope="row"><span class="rk">9</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/sokudoku-kobun-tango/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>速読古文単語</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4860668375.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4860668375.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860668375.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4860668375.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4860668375.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4860668375.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784860668372.jpg|https://books.google.com/books/content?vid=ISBN9784860668372&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784860668372.jpg|https://www.gakusan.com/bookimage_s/9784860668372.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/sokudoku-kobun-tango/">速読古文単語</a></span></span></td><td>Z会</td><td>17時間</td></tr>
+            <tr><th scope="row"><span class="rk">10</span></th><td class="rk__name"><span class="bref"><a class="bref__cov" href="/japanese/books/tsuchiya-kobun-tango-222/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>土屋の古文単語222 新装</b><em>タイレル出版（発売：星雲社）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4434207962.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4434207962.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4434207962.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784434207969.jpg|https://books.google.com/books/content?vid=ISBN9784434207969&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784434207969.jpg|https://www.gakusan.com/bookimage_s/9784434207969.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/tsuchiya-kobun-tango-222/">土屋の古文単語222 新装</a></span></span></td><td>タイレル出版（発売：星雲社）</td><td>17時間</td></tr>
           </tbody>
         </table>
         </div>
@@ -284,37 +332,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>八澤のたった6時間で古典文法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053055709.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053055709.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053055709.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053055705.jpg|https://books.google.com/books/content?vid=ISBN9784053055705&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053055705.jpg|https://www.gakusan.com/bookimage_s/9784053055705.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">導入</span><span>Gakken</span></div>
+            <div class="bcard__top"><span class="bcard__stage">導入</span><span class="bcard__pub">Gakken</span></div>
             <b>八澤のたった6時間で古典文法</b>
           </div>
         </div>
         <p>動画講義と連動し、古典文法の全体像を6時間で掴む超入門書（Gakken、2022年）。同帯のやさしくわかりやすい古典文法が書き込み式なのに対し…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 1／〜52</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/japanese/books/stepup30/" style="--bc:#8A6D2F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート30 古典文法基礎ドリル</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/477722872X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/477722872X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722872X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777228720.jpg|https://books.google.com/books/content?vid=ISBN9784777228720&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777228720.jpg|https://www.gakusan.com/bookimage_s/9784777228720.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">知識</span><span>河合出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">知識</span><span class="bcard__pub">河合出版</span></div>
             <b>ステップアップノート30 古典文法基礎ドリル</b>
           </div>
         </div>
         <p>30項目を見開きの要点整理+ドリルで進める古典文法の演習帳、2024年四訂版（河合出版）。同帯の古典文法10題ドリルが1項目10題の小刻み型な…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 2／40〜58</span></div>
-        
       </a>
       <a class="bcard" href="/japanese/books/motoi-kobun-dokkai/" style="--bc:#2E7D9A">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>元井太郎の 古文読解が面白いほどできる本</b><em>KADOKAWA（中経出版）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404600178X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404600178X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404600178X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/404600178X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/404600178X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404600178X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046001788.jpg|https://books.google.com/books/content?vid=ISBN9784046001788&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046001788.jpg|https://www.gakusan.com/bookimage_s/9784046001788.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">導入</span><span>KADOKAWA（中経出版）</span></div>
+            <div class="bcard__top"><span class="bcard__stage">導入</span><span class="bcard__pub">KADOKAWA（中経出版）</span></div>
             <b>元井太郎の 古文読解が面白いほどできる本</b>
           </div>
         </div>
         <p>単語・文法を覚えた後の「読み方」に特化した会話形式の読解入門書（KADOKAWA、2014年改訂版）。同帯の富井の古文読解をはじめからていねい…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／40〜52</span></div>
-        
       </a>
       </div>
       <p>順序の話は<a href="/japanese/guides/kobun-start/">古文はどこから手をつけるか</a>に書きました。<b>単語帳を 3 冊比べる時間があるなら、文法を 1 周するほうが点が動きます。</b></p>

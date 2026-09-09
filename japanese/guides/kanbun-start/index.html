@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -221,11 +239,11 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/japanese/books/okamoto-3h-kanbun/">岡本のたった3時間で漢文句法</a></th><td>1 / 10</td><td>〜55(超入門)</td><td>動画授業付き</td><td>3〜6h</td><td>漢文に初めて触れ句法の全体像を先に知りたい人</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/hayaoboe/">漢文早覚え速答法</a></th><td>2 / 10</td><td>40〜62</td><td>310頁/句法10公式</td><td>10〜15h</td><td>短時間で共テ・私大の漢文を読めるようにしたい人</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/yama/">漢文ヤマのヤマ</a></th><td>2 / 10</td><td>40〜65</td><td>194頁/重要句法66</td><td>12〜18h</td><td>最初の1冊で句法を体系的に固めたい人</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/okamoto-kanbun/">岡本梨奈の漢文 読み方&amp;解き方</a></th><td>2 / 10</td><td>〜60(導入)</td><td>336頁/句法+演習</td><td>15〜20h</td><td>知識ゼロから1冊で共テ・入試基礎まで進めたい人</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/miwa-kyoshitsu/">三羽邦美の漢文教室</a></th><td>3 / 10</td><td>45〜65</td><td>256頁</td><td>18〜25h</td><td>漢文を体系的に深く学びたい国公立志望者</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/okamoto-3h-kanbun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>岡本のたった3時間で漢文句法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057108.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057108.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057108.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057105.jpg|https://books.google.com/books/content?vid=ISBN9784053057105&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057105.jpg|https://www.gakusan.com/bookimage_s/9784053057105.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/okamoto-3h-kanbun/">岡本のたった3時間で漢文句法</a></span></span></th><td>1 / 10</td><td>〜55(超入門)</td><td>動画授業付き</td><td>3〜6h</td><td>漢文に初めて触れ句法の全体像を先に知りたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/hayaoboe/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>漢文早覚え速答法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053060842.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060842.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053060846.jpg|https://books.google.com/books/content?vid=ISBN9784053060846&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053060846.jpg|https://www.gakusan.com/bookimage_s/9784053060846.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/hayaoboe/">漢文早覚え速答法</a></span></span></th><td>2 / 10</td><td>40〜62</td><td>310頁/句法10公式</td><td>10〜15h</td><td>短時間で共テ・私大の漢文を読めるようにしたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/yama/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>漢文ヤマのヤマ</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053040299.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053040299.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053040299.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053040299.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053040299.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053040299.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053040299.jpg|https://books.google.com/books/content?vid=ISBN9784053040299&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053040299.jpg|https://www.gakusan.com/bookimage_s/9784053040299.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/yama/">漢文ヤマのヤマ</a></span></span></th><td>2 / 10</td><td>40〜65</td><td>194頁/重要句法66</td><td>12〜18h</td><td>最初の1冊で句法を体系的に固めたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/okamoto-kanbun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>岡本梨奈の漢文 読み方&amp;解き方</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404606403X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404606403X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404606403X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/404606403X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/404606403X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404606403X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046064035.jpg|https://books.google.com/books/content?vid=ISBN9784046064035&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046064035.jpg|https://www.gakusan.com/bookimage_s/9784046064035.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/okamoto-kanbun/">岡本梨奈の漢文 読み方&amp;解き方</a></span></span></th><td>2 / 10</td><td>〜60(導入)</td><td>336頁/句法+演習</td><td>15〜20h</td><td>知識ゼロから1冊で共テ・入試基礎まで進めたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/miwa-kyoshitsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>三羽邦美の漢文教室</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354917.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354917.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354917.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010354917.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010354917.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354917.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010354919.jpg|https://books.google.com/books/content?vid=ISBN9784010354919&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010354919.jpg|https://www.gakusan.com/bookimage_s/9784010354919.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/miwa-kyoshitsu/">三羽邦美の漢文教室</a></span></span></th><td>3 / 10</td><td>45〜65</td><td>256頁</td><td>18〜25h</td><td>漢文を体系的に深く学びたい国公立志望者</td></tr>
           </tbody>
         </table>
         </div>
@@ -248,37 +266,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ステップアップノート10 漢文句形ドリル</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/487725577X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/487725577X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/487725577X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/487725577X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/487725577X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/487725577X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784877255770.jpg|https://books.google.com/books/content?vid=ISBN9784877255770&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784877255770.jpg|https://www.gakusan.com/bookimage_s/9784877255770.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">知識</span><span>河合出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">知識</span><span class="bcard__pub">河合出版</span></div>
             <b>ステップアップノート10 漢文句形ドリル</b>
           </div>
         </div>
         <p>句形を10項目の書き込みドリルで定着させる問題集（河合出版）。33項目のジャンプアップノートより項目が粗く、後半の演習問題で入試形式に慣れる。…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
-        
       </a>
       <a class="bcard" href="/japanese/books/jumpup-kanbun/" style="--bc:#8A6D2F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ジャンプアップノート 漢文句法</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010354135.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010354135.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354135.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010354135.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010354135.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010354135.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010354131.jpg|https://books.google.com/books/content?vid=ISBN9784010354131&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010354131.jpg|https://www.gakusan.com/bookimage_s/9784010354131.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">知識</span><span>旺文社</span></div>
+            <div class="bcard__top"><span class="bcard__stage">知識</span><span class="bcard__pub">旺文社</span></div>
             <b>ジャンプアップノート 漢文句法</b>
           </div>
         </div>
         <p>33項目の書き込み式で句法を定着させるドリルの2024年三訂版（旺文社）。10項目のステップアップノート10より項目が細かく、新課程の共テ形式…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
-        
       </a>
       <a class="bcard" href="/japanese/books/kanbun-10drill/" style="--bc:#8A6D2F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>古典文法10題ドリル 漢文編</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/479611548X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/479611548X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/479611548X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/479611548X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/479611548X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/479611548X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796115483.jpg|https://books.google.com/books/content?vid=ISBN9784796115483&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796115483.jpg|https://www.gakusan.com/bookimage_s/9784796115483.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">知識</span><span>駿台文庫</span></div>
+            <div class="bcard__top"><span class="bcard__stage">知識</span><span class="bcard__pub">駿台文庫</span></div>
             <b>古典文法10題ドリル 漢文編</b>
           </div>
         </div>
         <p>1項目10題ずつで句法を小刻みに定着させる駿台のドリル（駿台文庫）。同じ句法ドリルのステップアップノート10と役割は同じで、チャレンジ問題で入…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
-        
       </a>
       </div>
       <p>このタイプの本は薄く、短期間で終わります。<b>講義系と並行して進めるのが最も効率的です。</b>1 章読んだらその範囲のドリルを解く、という運用にすると、読んだだけで終わる状態を防げます。</p>
@@ -295,37 +310,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>マーク式基礎問題集 漢文</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477722337X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477722337X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722337X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/477722337X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/477722337X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722337X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777223374.jpg|https://books.google.com/books/content?vid=ISBN9784777223374&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777223374.jpg|https://www.gakusan.com/bookimage_s/9784777223374.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>河合出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span class="bcard__pub">河合出版</span></div>
             <b>マーク式基礎問題集 漢文</b>
           </div>
         </div>
         <p>共テ形式の漢文演習書（河合出版）。句形ドリル・演習・予想問題の3部で、本番より少し易しいレベルから形式に慣れる。本番に近い難度の短期攻略と違い…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／45〜60</span></div>
-        
       </a>
       <a class="bcard" href="/japanese/books/kyote-kanbun-sugowaza/" style="--bc:#2F6E4F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>共通テスト漢文のスゴ技</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046066679.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046066679.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046066679.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046066679.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046066679.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046066679.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046066671.jpg|https://books.google.com/books/content?vid=ISBN9784046066671&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046066671.jpg|https://www.gakusan.com/bookimage_s/9784046066671.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>KADOKAWA</span></div>
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span class="bcard__pub">KADOKAWA</span></div>
             <b>共通テスト漢文のスゴ技</b>
           </div>
         </div>
         <p>「7つの急所」に絞って10時間で共テ漢文を仕上げる速習書の2024年改訂版（KADOKAWA）。設問別のコツを整理する満点のコツより範囲を絞り…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／45〜65</span></div>
-        
       </a>
       <a class="bcard" href="/japanese/books/tanki-kyote-kanbun/" style="--bc:#2F6E4F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>短期攻略 共通テスト漢文</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796123962.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796123962.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796123962.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796123962.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796123962.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796123962.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796123969.jpg|https://books.google.com/books/content?vid=ISBN9784796123969&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796123969.jpg|https://www.gakusan.com/bookimage_s/9784796123969.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>駿台文庫</span></div>
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span class="bcard__pub">駿台文庫</span></div>
             <b>短期攻略 共通テスト漢文</b>
           </div>
         </div>
         <p>厳選8題で共テ漢文を本番レベルに仕上げる駿台の共テ演習書の2024年改訂版。本番より易しいマーク式基礎問題集と違い、本番に近い難度で高得点層の…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／50〜65</span></div>
-        
       </a>
       </div>
       <p><b>ここで止めて構いません。</b>共通テストでしか使わないのに二次向けの記述演習に進むのは、配点に見合わない投資です。</p>
@@ -337,11 +349,11 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/japanese/books/dojo-kiso/">漢文道場 基礎編</a></th><td>3 / 10</td><td>45〜60</td><td>本体168頁+別冊128頁</td><td>15〜20h</td><td>句法を覚えて最初の演習書を探す人</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/dojo/">漢文道場 入門から実戦まで</a></th><td>5 / 10</td><td>50〜68</td><td>本体224頁+別冊80頁</td><td>20〜30h</td><td>漢文を1冊で入試レベルまで仕上げたい人</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/jissen-hyojun-kanbun/">実戦演習 標準漢文</a></th><td>5 / 10</td><td>50〜65</td><td>29題/128頁</td><td>12〜18h</td><td>標準レベルの漢文演習を短期で追加したい人</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/tokuten-kan/">得点奪取 漢文</a></th><td>6 / 10</td><td>55〜68</td><td>200頁/典型4+演習</td><td>18〜25h</td><td>国公立二次の漢文記述を対策する人</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/seisen-kan/">入試精選問題集 漢文</a></th><td>6 / 10</td><td>55〜68</td><td>30題/196頁</td><td>20〜28h</td><td>難関大の漢文の演習量を確保したい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/dojo-kiso/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>漢文道場 基礎編</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4865314520.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4865314520.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865314520.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4865314520.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4865314520.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4865314520.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784865314526.jpg|https://books.google.com/books/content?vid=ISBN9784865314526&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784865314526.jpg|https://www.gakusan.com/bookimage_s/9784865314526.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/dojo-kiso/">漢文道場 基礎編</a></span></span></th><td>3 / 10</td><td>45〜60</td><td>本体168頁+別冊128頁</td><td>15〜20h</td><td>句法を覚えて最初の演習書を探す人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/dojo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>漢文道場 入門から実戦まで</b><em>Z会</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4879150363.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4879150363.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4879150363.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4879150363.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4879150363.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4879150363.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784879150363.jpg|https://books.google.com/books/content?vid=ISBN9784879150363&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784879150363.jpg|https://www.gakusan.com/bookimage_s/9784879150363.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/dojo/">漢文道場 入門から実戦まで</a></span></span></th><td>5 / 10</td><td>50〜68</td><td>本体224頁+別冊80頁</td><td>20〜30h</td><td>漢文を1冊で入試レベルまで仕上げたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/jissen-hyojun-kanbun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>実戦演習 標準漢文</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342736306.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342736306.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342736306.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342736306.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342736306.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342736306.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342736308.jpg|https://books.google.com/books/content?vid=ISBN9784342736308&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342736308.jpg|https://www.gakusan.com/bookimage_s/9784342736308.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/jissen-hyojun-kanbun/">実戦演習 標準漢文</a></span></span></th><td>5 / 10</td><td>50〜65</td><td>29題/128頁</td><td>12〜18h</td><td>標準レベルの漢文演習を短期で追加したい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/tokuten-kan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>得点奪取 漢文</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477723021X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477723021X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477723021X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/477723021X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/477723021X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477723021X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777230211.jpg|https://books.google.com/books/content?vid=ISBN9784777230211&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777230211.jpg|https://www.gakusan.com/bookimage_s/9784777230211.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/tokuten-kan/">得点奪取 漢文</a></span></span></th><td>6 / 10</td><td>55〜68</td><td>200頁/典型4+演習</td><td>18〜25h</td><td>国公立二次の漢文記述を対策する人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/seisen-kan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>入試精選問題集 漢文</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777225852.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777225852.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777225852.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777225852.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777225852.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777225852.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777225859.jpg|https://books.google.com/books/content?vid=ISBN9784777225859&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777225859.jpg|https://www.gakusan.com/bookimage_s/9784777225859.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/seisen-kan/">入試精選問題集 漢文</a></span></span></th><td>6 / 10</td><td>55〜68</td><td>30題/196頁</td><td>20〜28h</td><td>難関大の漢文の演習量を確保したい人</td></tr>
           </tbody>
         </table>
         </div>

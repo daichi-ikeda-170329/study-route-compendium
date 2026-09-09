@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -220,11 +238,11 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/social/books/kanaya-nagare-1/">金谷①古代</a></th><td>3 / 10</td><td>〜55(導入)</td><td>15〜20h</td><td>通史を初めて一周する受験生・高2</td></tr>
-            <tr><th scope="row"><a href="/social/books/jikkyo-sekaishi-1/">実況中継①</a></th><td>5 / 10</td><td>45〜65</td><td>20〜25h</td><td>ゼロから難関私大まで一気に走りたい人</td></tr>
-            <tr><th scope="row"><a href="/social/books/chiri-murase-keito/">村瀬 系統地理</a></th><td>3 / 10</td><td>〜55(導入)</td><td>25〜35h</td><td>地理をゼロから始める人の1冊目</td></tr>
-            <tr><th scope="row"><a href="/social/books/kageyama-kt-seikei/">蔭山の共テ政経</a></th><td>4 / 10</td><td>〜共テ8割</td><td>25〜35h</td><td>共テのみで政経を使う理系・国公立志望者</td></tr>
-            <tr><th scope="row"><a href="/social/books/rinri-kageyama/">蔭山の共テ倫理</a></th><td>4 / 10</td><td>〜共テ8割</td><td>25〜35h</td><td>倫理をゼロから理解ベースで始めたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/social/books/kanaya-nagare-1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>金谷①古代</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859748.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859748.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859748.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890859748.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890859748.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859748.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859740.jpg|https://books.google.com/books/content?vid=ISBN9784890859740&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859740.jpg|https://www.gakusan.com/bookimage_s/9784890859740.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/kanaya-nagare-1/">金谷①古代</a></span></span></th><td>3 / 10</td><td>〜55(導入)</td><td>15〜20h</td><td>通史を初めて一周する受験生・高2</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/social/books/jikkyo-sekaishi-1/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>実況中継①</b><em>語学春秋社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4875688369.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4875688369.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4875688369.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784875688365.jpg|https://books.google.com/books/content?vid=ISBN9784875688365&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784875688365.jpg|https://www.gakusan.com/bookimage_s/9784875688365.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/jikkyo-sekaishi-1/">実況中継①</a></span></span></th><td>5 / 10</td><td>45〜65</td><td>20〜25h</td><td>ゼロから難関私大まで一気に走りたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/social/books/chiri-murase-keito/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>村瀬 系統地理</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053047560.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053047560.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053047560.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053047560.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053047560.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053047560.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053047564.jpg|https://books.google.com/books/content?vid=ISBN9784053047564&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053047564.jpg|https://www.gakusan.com/bookimage_s/9784053047564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/chiri-murase-keito/">村瀬 系統地理</a></span></span></th><td>3 / 10</td><td>〜55(導入)</td><td>25〜35h</td><td>地理をゼロから始める人の1冊目</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/social/books/kageyama-kt-seikei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山の共テ政経</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053059771.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053059771.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059771.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053059772.jpg|https://books.google.com/books/content?vid=ISBN9784053059772&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053059772.jpg|https://www.gakusan.com/bookimage_s/9784053059772.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/kageyama-kt-seikei/">蔭山の共テ政経</a></span></span></th><td>4 / 10</td><td>〜共テ8割</td><td>25〜35h</td><td>共テのみで政経を使う理系・国公立志望者</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/social/books/rinri-kageyama/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>蔭山の共テ倫理</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053059798.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053059798.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059798.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053059798.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053059798.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053059798.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053059796.jpg|https://books.google.com/books/content?vid=ISBN9784053059796&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053059796.jpg|https://www.gakusan.com/bookimage_s/9784053059796.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/social/books/rinri-kageyama/">蔭山の共テ倫理</a></span></span></th><td>4 / 10</td><td>〜共テ8割</td><td>25〜35h</td><td>倫理をゼロから理解ベースで始めたい人</td></tr>
           </tbody>
         </table>
         </div>

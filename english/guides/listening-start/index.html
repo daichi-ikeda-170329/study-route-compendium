@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -233,11 +251,11 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/english/books/hijii-zero-lis/">ゼロから英語リスニング</a></th><td>3 / 10</td><td>40〜55</td><td>音変化25ポイント・248頁</td><td>25〜35h</td><td>リスニングを音の基礎から立て直したい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/lis-shuchu/">共通テスト英語〔リスニング〕集中講義</a></th><td>4 / 10</td><td>45〜60</td><td>要点+演習・240頁</td><td>20〜30h</td><td>共テリスニングを短期で仕上げたい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/kimeru-lis/">きめる!共通テスト英語リスニング</a></th><td>5 / 10</td><td>48〜63</td><td>400頁</td><td>30〜40h</td><td>講義でじっくり共テリスニングを対策したい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/takeoka-lis/">共テ英語[リスニング]面白いほど</a></th><td>5 / 10</td><td>45〜65</td><td>352頁</td><td>30〜45h</td><td>共テリスニングを本格的に仕上げたい人</td></tr>
-            <tr><th scope="row"><a href="/english/books/manten-kotsu/">共テ英語〔リスニング〕満点のコツ</a></th><td>5 / 10</td><td>50〜65</td><td>184頁</td><td>20〜30h</td><td>共テリスニングで9割〜満点を狙う人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/hijii-zero-lis/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>ゼロから英語リスニング</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046058188.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046058188.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046058188.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046058188.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046058188.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046058188.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046058188.jpg|https://books.google.com/books/content?vid=ISBN9784046058188&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046058188.jpg|https://www.gakusan.com/bookimage_s/9784046058188.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/hijii-zero-lis/">ゼロから英語リスニング</a></span></span></th><td>3 / 10</td><td>40〜55</td><td>音変化25ポイント・248頁</td><td>25〜35h</td><td>リスニングを音の基礎から立て直したい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/lis-shuchu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>共通テスト英語〔リスニング〕集中講義</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010353929.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010353929.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353929.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010353929.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010353929.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010353929.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010353929.jpg|https://books.google.com/books/content?vid=ISBN9784010353929&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010353929.jpg|https://www.gakusan.com/bookimage_s/9784010353929.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/lis-shuchu/">共通テスト英語〔リスニング〕集中講義</a></span></span></th><td>4 / 10</td><td>45〜60</td><td>要点+演習・240頁</td><td>20〜30h</td><td>共テリスニングを短期で仕上げたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/kimeru-lis/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>きめる!共通テスト英語リスニング</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053061792.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053061792.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061792.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053061792.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053061792.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053061792.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053061799.jpg|https://books.google.com/books/content?vid=ISBN9784053061799&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053061799.jpg|https://www.gakusan.com/bookimage_s/9784053061799.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/kimeru-lis/">きめる!共通テスト英語リスニング</a></span></span></th><td>5 / 10</td><td>48〜63</td><td>400頁</td><td>30〜40h</td><td>講義でじっくり共テリスニングを対策したい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/takeoka-lis/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>共テ英語[リスニング]面白いほど</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046062444.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046062444.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046062444.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046062444.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046062444.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046062444.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046062444.jpg|https://books.google.com/books/content?vid=ISBN9784046062444&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046062444.jpg|https://www.gakusan.com/bookimage_s/9784046062444.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/takeoka-lis/">共テ英語[リスニング]面白いほど</a></span></span></th><td>5 / 10</td><td>45〜65</td><td>352頁</td><td>30〜45h</td><td>共テリスニングを本格的に仕上げたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/english/books/manten-kotsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>共テ英語〔リスニング〕満点のコツ</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325260110.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325260110.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325260110.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325260110.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325260110.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325260110.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325260110.jpg|https://books.google.com/books/content?vid=ISBN9784325260110&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325260110.jpg|https://www.gakusan.com/bookimage_s/9784325260110.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/english/books/manten-kotsu/">共テ英語〔リスニング〕満点のコツ</a></span></span></th><td>5 / 10</td><td>50〜65</td><td>184頁</td><td>20〜30h</td><td>共テリスニングで9割〜満点を狙う人</td></tr>
           </tbody>
         </table>
         </div>
@@ -260,37 +278,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>キムタツの東大英語リスニング BASIC</b><em>アルク</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4757439091.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757439091.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757439091.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4757439091.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4757439091.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757439091.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784757439092.jpg|https://books.google.com/books/content?vid=ISBN9784757439092&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784757439092.jpg|https://www.gakusan.com/bookimage_s/9784757439092.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">リス</span><span>アルク</span></div>
+            <div class="bcard__top"><span class="bcard__stage">リス</span><span class="bcard__pub">アルク</span></div>
             <b>キムタツの東大英語リスニング BASIC</b>
           </div>
         </div>
         <p>80語の短文から500語の長文へ段階的に伸ばす木村達哉の東大形式リスニング入門編（アルク）。同帯の英語リスニング プラチナルールが解法技術を扱…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／55〜63</span></div>
-        
       </a>
       <a class="bcard" href="/english/books/kimutatsu-todai/" style="--bc:#946200">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>キムタツの東大英語リスニング</b><em>アルク</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4757439105.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4757439105.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757439105.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4757439105.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4757439105.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4757439105.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784757439108.jpg|https://books.google.com/books/content?vid=ISBN9784757439108&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784757439108.jpg|https://www.gakusan.com/bookimage_s/9784757439108.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">リス</span><span>アルク</span></div>
+            <div class="bcard__top"><span class="bcard__stage">リス</span><span class="bcard__pub">アルク</span></div>
             <b>キムタツの東大英語リスニング</b>
           </div>
         </div>
         <p>東大形式の模擬問題で構成した木村達哉の東大リスニング実戦演習書（アルク）。同帯の鉄緑会 東大英語リスニングが本番より重い負荷をかけるのに対し、…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span>難易度 8／63〜75</span></div>
-        
       </a>
       <a class="bcard" href="/english/books/tetsuryoku-lis/" style="--bc:#946200">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>鉄緑会 東大英語リスニング</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046053712.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046053712.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046053712.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046053712.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046053712.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046053712.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046053718.jpg|https://books.google.com/books/content?vid=ISBN9784046053718&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046053718.jpg|https://www.gakusan.com/bookimage_s/9784046053718.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">リス</span><span>KADOKAWA</span></div>
+            <div class="bcard__top"><span class="bcard__stage">リス</span><span class="bcard__pub">KADOKAWA</span></div>
             <b>鉄緑会 東大英語リスニング</b>
           </div>
         </div>
         <p>鉄緑会製のオリジナル問題で構成した東大リスニングの実戦演習書（KADOKAWA・改訂版）。同帯のキムタツの東大英語リスニングが演習量を軸にする…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span><span>難易度 9／67〜75</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       </div>
       <p>進め方は、共通テストレベルで安定してから移るのが原則です。共通テストで取りこぼしがある状態で長文リスニングに入っても、聞けない時間が長くなるだけで練習になりません。</p>

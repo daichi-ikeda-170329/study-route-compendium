@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -221,9 +239,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/science/books/essence-rikigaku/">物理のエッセンス 力学・波動</a></th><td>4 / 10</td><td>45〜60</td><td>例題+問題 約200題</td><td>30〜40h</td><td>教科書を終えて入試物理を始める受験生</td></tr>
-            <tr><th scope="row"><a href="/science/books/kiso-seiko/">化学 基礎問題精講</a></th><td>5 / 10</td><td>50〜62</td><td>必修問題+演習問題 約200題</td><td>40〜60h</td><td>独学で入試基礎を固めたい受験生</td></tr>
-            <tr><th scope="row"><a href="/science/books/kiso-mondai-seiko/">生物 基礎問題精講</a></th><td>5 / 10</td><td>48〜65</td><td>必修問題 約100題+演習</td><td>40〜60h</td><td>入試の典型問題を一通り身につけたい理系生</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/science/books/essence-rikigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>物理のエッセンス 力学・波動</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227235.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227235.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227235.jpg|https://books.google.com/books/content?vid=ISBN9784777227235&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227235.jpg|https://www.gakusan.com/bookimage_s/9784777227235.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/science/books/essence-rikigaku/">物理のエッセンス 力学・波動</a></span></span></th><td>4 / 10</td><td>45〜60</td><td>例題+問題 約200題</td><td>30〜40h</td><td>教科書を終えて入試物理を始める受験生</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/science/books/kiso-seiko/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>化学 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352566.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352566.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352566.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352564.jpg|https://books.google.com/books/content?vid=ISBN9784010352564&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352564.jpg|https://www.gakusan.com/bookimage_s/9784010352564.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/science/books/kiso-seiko/">化学 基礎問題精講</a></span></span></th><td>5 / 10</td><td>50〜62</td><td>必修問題+演習問題 約200題</td><td>40〜60h</td><td>独学で入試基礎を固めたい受験生</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/science/books/kiso-mondai-seiko/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>生物 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352574.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352574.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352574.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352571.jpg|https://books.google.com/books/content?vid=ISBN9784010352571&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352571.jpg|https://www.gakusan.com/bookimage_s/9784010352571.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/science/books/kiso-mondai-seiko/">生物 基礎問題精講</a></span></span></th><td>5 / 10</td><td>48〜65</td><td>必修問題 約100題+演習</td><td>40〜60h</td><td>入試の典型問題を一通り身につけたい理系生</td></tr>
           </tbody>
         </table>
         </div>
@@ -260,37 +278,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>青木の地学基礎をはじめからていねいに</b><em>東進ブックス(ナガセ)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/489085987X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/489085987X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085987X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859870.jpg|https://books.google.com/books/content?vid=ISBN9784890859870&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859870.jpg|https://www.gakusan.com/bookimage_s/9784890859870.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">導入</span><span>東進ブックス(ナガセ)</span></div>
+            <div class="bcard__top"><span class="bcard__stage">導入</span><span class="bcard__pub">東進ブックス(ナガセ)</span></div>
             <b>青木の地学基礎をはじめからていねいに</b>
           </div>
         </div>
         <p>地学基礎を語り口調で一周する入門講義書。全15講と確認問題で構成する。同じ入門帯の安藤雅彦 地学基礎 講義の実況中継より図と板書風のまとめが多…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 2／40〜58</span></div>
-        
       </a>
       <a class="bcard" href="/science/books/kimeru-chigaku-kiso/" style="--bc:#2F6E4F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>きめる!共通テスト地学基礎</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053058074.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053058074.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053058074.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053058074.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053058074.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053058074.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053058072.jpg|https://books.google.com/books/content?vid=ISBN9784053058072&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053058072.jpg|https://www.gakusan.com/bookimage_s/9784053058072.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>Gakken</span></div>
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span class="bcard__pub">Gakken</span></div>
             <b>きめる!共通テスト地学基礎</b>
           </div>
         </div>
         <p>共通テスト向けに講義と演習を一体にした一冊。各テーマの末尾に共テ形式の確認問題が付き、別冊のまとめで直前の総復習ができる。同帯の地学基礎の点数…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
-        
       </a>
       <a class="bcard" href="/science/books/omoshiroi-chigaku-kiso/" style="--bc:#2F6E4F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>地学基礎の点数が面白いほどとれる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046063645.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046063645.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046063645.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046063645.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046063645.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046063645.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046063649.jpg|https://books.google.com/books/content?vid=ISBN9784046063649&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046063649.jpg|https://www.gakusan.com/bookimage_s/9784046063649.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">共テ</span><span>KADOKAWA</span></div>
+            <div class="bcard__top"><span class="bcard__stage">共テ</span><span class="bcard__pub">KADOKAWA</span></div>
             <b>地学基礎の点数が面白いほどとれる本</b>
           </div>
         </div>
         <p>共通テストで問われる知識を過去問の分析にもとづいて整理した講義書。各節末に過去問ベースの確認問題が付く。きめる!共通テスト地学基礎より情報量が…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜62</span></div>
-        
       </a>
       </div>
       <p>ただし、専門科目としての地学には制約があります。<b>受験できる大学が限られ、参考書と問題集の選択肢も他科目に比べて少ない</b>という現実的な問題です。収録している冊数を見ても、他の 3 科目とは差があります。</p>

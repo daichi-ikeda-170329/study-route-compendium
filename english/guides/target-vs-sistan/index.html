@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -207,8 +225,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">3冊を並べる</h2>
       <div class="vs vs--3">
         <div class="vs__col">
-          <div class="vs__pub">旺文社</div>
-          <b class="vs__name"><a href="/english/books/target1900/">英単語ターゲット1900</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/english/books/target1900/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1900</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346469.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346469.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346469.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346469.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346469.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346469.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346464.jpg|https://books.google.com/books/content?vid=ISBN9784010346464&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346464.jpg|https://www.gakusan.com/bookimage_s/9784010346464.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">旺文社</div>
+              <b class="vs__name"><a href="/english/books/target1900/">英単語ターゲット1900</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>6 / 10</dd></div>
             <div><dt>到達目安</dt><dd>55〜70</dd></div>
@@ -220,8 +243,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">駿台文庫</div>
-          <b class="vs__name"><a href="/english/books/sistan/">システム英単語</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/english/books/sistan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111379.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111379.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111379.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111379.jpg|https://books.google.com/books/content?vid=ISBN9784796111379&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111379.jpg|https://www.gakusan.com/bookimage_s/9784796111379.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">駿台文庫</div>
+              <b class="vs__name"><a href="/english/books/sistan/">システム英単語</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>6 / 10</dd></div>
             <div><dt>到達目安</dt><dd>55〜70</dd></div>
@@ -233,8 +261,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">数研出版</div>
-          <b class="vs__name"><a href="/english/books/leap/">必携英単語LEAP</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/english/books/leap/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>必携英単語LEAP</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410144235.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410144235.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144235.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410144235.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410144235.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144235.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410144233.jpg|https://books.google.com/books/content?vid=ISBN9784410144233&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410144233.jpg|https://www.gakusan.com/bookimage_s/9784410144233.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">数研出版</div>
+              <b class="vs__name"><a href="/english/books/leap/">必携英単語LEAP</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>6 / 10</dd></div>
             <div><dt>到達目安</dt><dd>52〜68</dd></div>
@@ -274,37 +307,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>英単語ターゲット1400</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010346477.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010346477.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010346471.jpg|https://books.google.com/books/content?vid=ISBN9784010346471&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010346471.jpg|https://www.gakusan.com/bookimage_s/9784010346471.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">単語</span><span>旺文社</span></div>
+            <div class="bcard__top"><span class="bcard__stage">単語</span><span class="bcard__pub">旺文社</span></div>
             <b>英単語ターゲット1400</b>
           </div>
         </div>
         <p>共通テスト〜中堅私大レベルの頻出1,400語をでる順で収録した単語帳（5訂版）。同帯のシス単Basicがフレーズで覚えさせるのに対し、一語一義…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／45〜58</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/english/books/sistan-basic/" style="--bc:#2E7D9A">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>システム英単語Basic</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796111417.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796111417.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796111417.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796111416.jpg|https://books.google.com/books/content?vid=ISBN9784796111416&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796111416.jpg|https://www.gakusan.com/bookimage_s/9784796111416.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">単語</span><span>駿台文庫</span></div>
+            <div class="bcard__top"><span class="bcard__stage">単語</span><span class="bcard__pub">駿台文庫</span></div>
             <b>システム英単語Basic</b>
           </div>
         </div>
         <p>シス単の語彙を基礎側に寄せた入門版で、1,500語と多義語170を扱う（5訂版）。同帯のターゲット1400が一語一義のリスト型なのに対し、中学…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／42〜55</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/english/books/leap-basic/" style="--bc:#2E7D9A">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>必携英単語LEAP Basic</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410144332.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410144332.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410144332.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410144332.jpg|https://books.google.com/books/content?vid=ISBN9784410144332&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410144332.jpg|https://www.gakusan.com/bookimage_s/9784410144332.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">単語</span><span>数研出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">単語</span><span class="bcard__pub">数研出版</span></div>
             <b>必携英単語LEAP Basic</b>
           </div>
         </div>
         <p>LEAPの基礎版で、高校基礎〜共テレベルの1,600語+300語を扱う（2025年改訂）。同帯のターゲット1400がでる順なのに対し、「使える…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／42〜55</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       </div>
     </section>

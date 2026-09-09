@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -211,27 +229,47 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">数学のつまずき</h2>
       <div class="awards">
         <div class="award" style="--ac:#24427C">
-          <div class="award__title">方針は立つのに計算で時間を落とす</div>
-          <b class="award__book"><a href="/math/books/ukaru-keisan/">合格る計算 数学I・A・II・B・C</a></b>
-          <div class="award__meta">数学・文英堂／難易度 3 / 10／60〜80h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/math/books/ukaru-keisan/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>合格る計算 数学I・A・II・B・C</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578243435.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578243435.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243435.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578243434.jpg|https://books.google.com/books/content?vid=ISBN9784578243434&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578243434.jpg|https://www.gakusan.com/bookimage_s/9784578243434.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">方針は立つのに計算で時間を落とす</div>
+              <b class="award__book"><a href="/math/books/ukaru-keisan/">合格る計算 数学I・A・II・B・C</a></b>
+              <div class="award__meta">数学・文英堂／難易度 3 / 10／60〜80h</div>
+            </div>
+          </div>
           <p class="award__why">計算そのものを速く正確にするための本です。解法を増やす本ではないので、模試で「時間が足りない」「途中式でミスする」が続く人向けです。</p>
         </div>
         <div class="award" style="--ac:#24427C">
-          <div class="award__title">確率だけ毎回落とす</div>
-          <b class="award__book"><a href="/math/books/hatto-kakuritsu/">ハッとめざめる確率</a></b>
-          <div class="award__meta">数学・東京出版／難易度 7 / 10／40〜60h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/math/books/hatto-kakuritsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>ハッとめざめる確率</b><em>東京出版</em></span><img src="https://m.media-amazon.com/images/I/61CX2DG2AvL._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/61CX2DG2AvL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887420447.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420447.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4887420447.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887420447.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420447.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887420441.jpg|https://books.google.com/books/content?vid=ISBN9784887420441&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887420441.jpg|https://www.gakusan.com/bookimage_s/9784887420441.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">確率だけ毎回落とす</div>
+              <b class="award__book"><a href="/math/books/hatto-kakuritsu/">ハッとめざめる確率</a></b>
+              <div class="award__meta">数学・東京出版／難易度 7 / 10／40〜60h</div>
+            </div>
+          </div>
           <p class="award__why">確率を数え上げの考え方から組み直します。公式の当てはめで解いてきた人が、設定の読み替えを身につけるための本です。</p>
         </div>
         <div class="award" style="--ac:#24427C">
-          <div class="award__title">整数問題で手が止まる</div>
-          <b class="award__book"><a href="/math/books/master-seisu/">マスター・オブ・整数</a></b>
-          <div class="award__meta">数学・東京出版／難易度 8 / 10／50〜70h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/math/books/master-seisu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>マスター・オブ・整数</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/488742017X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/488742017X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887420175.jpg|https://books.google.com/books/content?vid=ISBN9784887420175&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887420175.jpg|https://www.gakusan.com/bookimage_s/9784887420175.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">整数問題で手が止まる</div>
+              <b class="award__book"><a href="/math/books/master-seisu/">マスター・オブ・整数</a></b>
+              <div class="award__meta">数学・東京出版／難易度 8 / 10／50〜70h</div>
+            </div>
+          </div>
           <p class="award__why">整数は解法の型が限られている一方、型を知らないと何も書けない分野です。頻出の道具を集中的に通します。</p>
         </div>
         <div class="award" style="--ac:#24427C">
-          <div class="award__title">数学IIIの計算が重い</div>
-          <b class="award__book"><a href="/math/books/ukaru-keisan3/">合格る計算 数学III・C</a></b>
-          <div class="award__meta">数学・文英堂／難易度 5 / 10／60〜80h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/math/books/ukaru-keisan3/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>合格る計算 数学III・C</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578243443.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243443.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578243441.jpg|https://books.google.com/books/content?vid=ISBN9784578243441&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578243441.jpg|https://www.gakusan.com/bookimage_s/9784578243441.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">数学IIIの計算が重い</div>
+              <b class="award__book"><a href="/math/books/ukaru-keisan3/">合格る計算 数学III・C</a></b>
+              <div class="award__meta">数学・文英堂／難易度 5 / 10／60〜80h</div>
+            </div>
+          </div>
           <p class="award__why">微積分の計算量に耐えるための練習です。理系で数学IIIの試験時間が足りない人は、解法より先にここを疑ってください。</p>
         </div>
       </div>
@@ -241,27 +279,47 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">英語のつまずき</h2>
       <div class="awards">
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">単語は分かるのに英文が読めない</div>
-          <b class="award__book"><a href="/english/books/kihon-kokoda/">英文読解入門 基本はここだ!</a></b>
-          <div class="award__meta">英語・代々木ライブラリー／難易度 3 / 10／20〜30h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/kihon-kokoda/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>英文読解入門 基本はここだ!</b><em>代々木ライブラリー</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4896808371.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4896808371.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4896808371.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4896808371.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4896808371.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4896808371.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784896808377.jpg|https://books.google.com/books/content?vid=ISBN9784896808377&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784896808377.jpg|https://www.gakusan.com/bookimage_s/9784896808377.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">単語は分かるのに英文が読めない</div>
+              <b class="award__book"><a href="/english/books/kihon-kokoda/">英文読解入門 基本はここだ!</a></b>
+              <div class="award__meta">英語・代々木ライブラリー／難易度 3 / 10／20〜30h</div>
+            </div>
+          </div>
           <p class="award__why">文の骨組みを取る作業を、短い例文で通します。長文を何題解いても読めるようにならない状態は、たいていこの段が抜けています。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">文法問題集を1周したのに正答率が上がらない</div>
-          <b class="award__book"><a href="/english/books/toshin-bunpo-lv/">英文法レベル別問題集(1〜6)</a></b>
-          <div class="award__meta">英語・ナガセ(東進)／難易度 3 / 10／各巻15〜25h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/toshin-bunpo-lv/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>英文法レベル別問題集(1〜6)</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/489085939X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/489085939X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/489085939X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859399.jpg|https://books.google.com/books/content?vid=ISBN9784890859399&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859399.jpg|https://www.gakusan.com/bookimage_s/9784890859399.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">文法問題集を1周したのに正答率が上がらない</div>
+              <b class="award__book"><a href="/english/books/toshin-bunpo-lv/">英文法レベル別問題集(1〜6)</a></b>
+              <div class="award__meta">英語・ナガセ(東進)／難易度 3 / 10／各巻15〜25h</div>
+            </div>
+          </div>
           <p class="award__why">レベル別に段階を分けた問題集です。分厚い網羅型を 1 周して手応えが無い人は、易しい段からやり直すほうが早く戻せます。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">英作文で減点が続く</div>
-          <b class="award__book"><a href="/english/books/genten/">減点されない英作文</a></b>
-          <div class="award__meta">英語・Gakken／難易度 5 / 10／25〜35h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/genten/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>減点されない英作文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053044251.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053044251.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053044251.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053044251.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053044251.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053044251.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053044259.jpg|https://books.google.com/books/content?vid=ISBN9784053044259&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053044259.jpg|https://www.gakusan.com/bookimage_s/9784053044259.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">英作文で減点が続く</div>
+              <b class="award__book"><a href="/english/books/genten/">減点されない英作文</a></b>
+              <div class="award__meta">英語・Gakken／難易度 5 / 10／25〜35h</div>
+            </div>
+          </div>
           <p class="award__why">書ける英文を増やすのではなく、減点される書き方を避けるための本です。自由英作文で内容は書けるのに点が伸びない人向けです。</p>
         </div>
         <div class="award" style="--ac:#B5432A">
-          <div class="award__title">長文の設問が最後まで解ききれない</div>
-          <b class="award__book"><a href="/english/books/sokudoku-tr/">英語長文プラス 速読トレーニング</a></b>
-          <div class="award__meta">英語・旺文社／難易度 5 / 10／20〜30h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/english/books/sokudoku-tr/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>英語長文プラス 速読トレーニング</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010349697.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010349697.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349697.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010349697.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010349697.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010349697.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010349694.jpg|https://books.google.com/books/content?vid=ISBN9784010349694&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010349694.jpg|https://www.gakusan.com/bookimage_s/9784010349694.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">長文の設問が最後まで解ききれない</div>
+              <b class="award__book"><a href="/english/books/sokudoku-tr/">英語長文プラス 速読トレーニング</a></b>
+              <div class="award__meta">英語・旺文社／難易度 5 / 10／20〜30h</div>
+            </div>
+          </div>
           <p class="award__why">読む速度そのものを対象にした演習です。ただし速く読めない原因が構文にある場合は先に解釈へ戻ります。判断は<a href="/english/guides/kyotest-eigo-jikan/">共通テスト英語で時間が足りない</a>に書きました。</p>
         </div>
       </div>
@@ -271,21 +329,36 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">国語のつまずき</h2>
       <div class="awards">
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">古文で主語が取れない</div>
-          <b class="award__book"><a href="/japanese/books/motoi-kobun-dokkai/">元井太郎の 古文読解が面白いほどできる本</a></b>
-          <div class="award__meta">国語・KADOKAWA（中経出版）／難易度 3 / 10／20〜25h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/motoi-kobun-dokkai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>元井太郎の 古文読解が面白いほどできる本</b><em>KADOKAWA（中経出版）</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/404600178X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/404600178X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404600178X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/404600178X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/404600178X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/404600178X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046001788.jpg|https://books.google.com/books/content?vid=ISBN9784046001788&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046001788.jpg|https://www.gakusan.com/bookimage_s/9784046001788.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">古文で主語が取れない</div>
+              <b class="award__book"><a href="/japanese/books/motoi-kobun-dokkai/">元井太郎の 古文読解が面白いほどできる本</a></b>
+              <div class="award__meta">国語・KADOKAWA（中経出版）／難易度 3 / 10／20〜25h</div>
+            </div>
+          </div>
           <p class="award__why">古文が読めない原因の多くは単語量ではなく、主語の省略を追えないことです。読解の手順そのものを扱います。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">漢文を後回しにしたまま直前期に来た</div>
-          <b class="award__book"><a href="/japanese/books/hayaoboe/">漢文早覚え速答法</a></b>
-          <div class="award__meta">国語・Gakken／難易度 2 / 10／10〜15h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/hayaoboe/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>漢文早覚え速答法</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053060842.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053060842.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060842.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053060846.jpg|https://books.google.com/books/content?vid=ISBN9784053060846&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053060846.jpg|https://www.gakusan.com/bookimage_s/9784053060846.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">漢文を後回しにしたまま直前期に来た</div>
+              <b class="award__book"><a href="/japanese/books/hayaoboe/">漢文早覚え速答法</a></b>
+              <div class="award__meta">国語・Gakken／難易度 2 / 10／10〜15h</div>
+            </div>
+          </div>
           <p class="award__why">句法を絞って短時間で通す本です。漢文は範囲が最も狭く、直前でも点が動く数少ない分野です。</p>
         </div>
         <div class="award" style="--ac:#8A6D2F">
-          <div class="award__title">現代文の記述で部分点しか来ない</div>
-          <b class="award__book"><a href="/japanese/books/funaguchi-kijutsu/">船口の最強の現代文 記述トレーニング</a></b>
-          <div class="award__meta">国語・Gakken／難易度 5 / 10／15〜22h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/japanese/books/funaguchi-kijutsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>船口の最強の現代文 記述トレーニング</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053037778.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053037778.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053037778.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053037778.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053037778.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053037778.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053037770.jpg|https://books.google.com/books/content?vid=ISBN9784053037770&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053037770.jpg|https://www.gakusan.com/bookimage_s/9784053037770.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">現代文の記述で部分点しか来ない</div>
+              <b class="award__book"><a href="/japanese/books/funaguchi-kijutsu/">船口の最強の現代文 記述トレーニング</a></b>
+              <div class="award__meta">国語・Gakken／難易度 5 / 10／15〜22h</div>
+            </div>
+          </div>
           <p class="award__why">記述の答案を作る手順を分解します。選択式では取れるのに記述で落ちる人は、読解ではなく答案化の練習が要ります。</p>
         </div>
       </div>
@@ -295,39 +368,69 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">理科・社会のつまずき</h2>
       <div class="awards">
         <div class="award" style="--ac:#2F6E4F">
-          <div class="award__title">化学の計算問題で詰まる</div>
-          <b class="award__book"><a href="/science/books/keisan-hisshu120/">化学計算問題の必修解法120</a></b>
-          <div class="award__meta">理科・文英堂／難易度 5 / 10／30〜45h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/science/books/keisan-hisshu120/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>化学計算問題の必修解法120</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243079.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243079.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243079.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578243079.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578243079.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243079.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578243076.jpg|https://books.google.com/books/content?vid=ISBN9784578243076&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578243076.jpg|https://www.gakusan.com/bookimage_s/9784578243076.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">化学の計算問題で詰まる</div>
+              <b class="award__book"><a href="/science/books/keisan-hisshu120/">化学計算問題の必修解法120</a></b>
+              <div class="award__meta">理科・文英堂／難易度 5 / 10／30〜45h</div>
+            </div>
+          </div>
           <p class="award__why">モル計算から平衡まで、計算問題の型を絞って通します。理論化学の講義は読めるのに問題になると止まる人向けです。</p>
         </div>
         <div class="award" style="--ac:#2F6E4F">
-          <div class="award__title">有機の構造決定が解けない</div>
-          <b class="award__book"><a href="/science/books/yuki-kozo-hisshu50/">化学 有機構造決定の必修解法50</a></b>
-          <div class="award__meta">理科・文英堂／難易度 6 / 10／20〜30h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/science/books/yuki-kozo-hisshu50/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>化学 有機構造決定の必修解法50</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243060.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243060.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243060.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578243060.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578243060.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243060.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578243069.jpg|https://books.google.com/books/content?vid=ISBN9784578243069&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578243069.jpg|https://www.gakusan.com/bookimage_s/9784578243069.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">有機の構造決定が解けない</div>
+              <b class="award__book"><a href="/science/books/yuki-kozo-hisshu50/">化学 有機構造決定の必修解法50</a></b>
+              <div class="award__meta">理科・文英堂／難易度 6 / 10／20〜30h</div>
+            </div>
+          </div>
           <p class="award__why">構造決定は手順が決まっている一方で、その手順を明示している本が限られます。有機だけ得点が安定しない人に効きます。</p>
         </div>
         <div class="award" style="--ac:#2F6E4F">
-          <div class="award__title">生物の考察問題で差がつく</div>
-          <b class="award__book"><a href="/science/books/omori-jikken-kosatsu/">大森徹の生物 実験・考察問題の解法</a></b>
-          <div class="award__meta">理科・旺文社／難易度 7 / 10／25〜40h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/science/books/omori-jikken-kosatsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>大森徹の生物 実験・考察問題の解法</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010355093.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010355093.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010355093.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010355093.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010355093.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010355093.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010355091.jpg|https://books.google.com/books/content?vid=ISBN9784010355091&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010355091.jpg|https://www.gakusan.com/bookimage_s/9784010355091.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">生物の考察問題で差がつく</div>
+              <b class="award__book"><a href="/science/books/omori-jikken-kosatsu/">大森徹の生物 実験・考察問題の解法</a></b>
+              <div class="award__meta">理科・旺文社／難易度 7 / 10／25〜40h</div>
+            </div>
+          </div>
           <p class="award__why">生物の上位帯は、知識ではなく初見の実験を読む力で差がつきます。暗記は足りているのに点が止まる段で使います。</p>
         </div>
         <div class="award" style="--ac:#5B4E9E">
-          <div class="award__title">日本史の年号が結び付かない</div>
-          <b class="award__book"><a href="/social/books/kanaya-nendai-anki/">日本史年代暗記</a></b>
-          <div class="award__meta">社会・ナガセ(東進ブックス)／難易度 4 / 10／10〜15h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/social/books/kanaya-nendai-anki/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>日本史年代暗記</b><em>ナガセ(東進ブックス)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859179.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859179.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859179.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890859179.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890859179.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859179.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859177.jpg|https://books.google.com/books/content?vid=ISBN9784890859177&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859177.jpg|https://www.gakusan.com/bookimage_s/9784890859177.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">日本史の年号が結び付かない</div>
+              <b class="award__book"><a href="/social/books/kanaya-nendai-anki/">日本史年代暗記</a></b>
+              <div class="award__meta">社会・ナガセ(東進ブックス)／難易度 4 / 10／10〜15h</div>
+            </div>
+          </div>
           <p class="award__why">出来事の前後関係を問う設問に対応するための本です。用語は覚えているのに並べ替えで落とす人向けです。</p>
         </div>
         <div class="award" style="--ac:#5B4E9E">
-          <div class="award__title">世界史の同時代がつながらない</div>
-          <b class="award__book"><a href="/social/books/yoko-sekaishi-tankyu/">ヨコから見る世界史</a></b>
-          <div class="award__meta">社会・Gakken／難易度 6 / 10／12〜18h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/social/books/yoko-sekaishi-tankyu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>ヨコから見る世界史</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053060478.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053060478.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060478.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053060478.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053060478.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053060478.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053060471.jpg|https://books.google.com/books/content?vid=ISBN9784053060471&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053060471.jpg|https://www.gakusan.com/bookimage_s/9784053060471.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">世界史の同時代がつながらない</div>
+              <b class="award__book"><a href="/social/books/yoko-sekaishi-tankyu/">ヨコから見る世界史</a></b>
+              <div class="award__meta">社会・Gakken／難易度 6 / 10／12〜18h</div>
+            </div>
+          </div>
           <p class="award__why">タテの流れは追えているのに、同じ時期の別地域とつながらない状態を埋めます。詳しくは<a href="/social/guides/sekaishi-route/">世界史はどう組むか</a>に書きました。</p>
         </div>
         <div class="award" style="--ac:#5B4E9E">
-          <div class="award__title">地理の統計判別で外す</div>
-          <b class="award__book"><a href="/social/books/chiri-toukei-yomikata/">統計データ読み方</a></b>
-          <div class="award__meta">社会・KADOKAWA／難易度 6 / 10／15〜25h</div>
+          <div class="award__head">
+            <a class="bref__cov" href="/social/books/chiri-toukei-yomikata/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>統計データ読み方</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046056495.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046056495.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046056495.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046056495.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046056495.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046056495.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046056498.jpg|https://books.google.com/books/content?vid=ISBN9784046056498&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046056498.jpg|https://www.gakusan.com/bookimage_s/9784046056498.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="award__headtxt">
+              <div class="award__title">地理の統計判別で外す</div>
+              <b class="award__book"><a href="/social/books/chiri-toukei-yomikata/">統計データ読み方</a></b>
+              <div class="award__meta">社会・KADOKAWA／難易度 6 / 10／15〜25h</div>
+            </div>
+          </div>
           <p class="award__why">地理で最後まで残るのが統計の読み取りです。用語を覚えても解けないので、判別の手順を別に練習します。</p>
         </div>
       </div>

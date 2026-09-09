@@ -21,6 +21,7 @@ import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { bookCards } from './lib/cards.mjs';
+import { coverBox } from './lib/cover.mjs';
 import { ARTICLES } from './content/articles.mjs';
 import { CATEGORIES, categoryOf } from './content/article-categories.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -46,6 +47,31 @@ function lookup(dir, id, ctxLabel) {
 function bookLink(dir, id, label) {
   const b = lookup(dir, id, 'bookLink');
   return `<a href="/${dir}/books/${b.id}/">${esc(label || b.name)}</a>`;
+}
+
+/**
+ * 記事の中で 1 冊を指すときの共通表示（書影 + 書名リンク）。
+ *
+ * 書名だけを置くと、読んだ人は文字列を頭の中で現物に変換しないと本屋で探せない。
+ * 比較表・順位表・一騎打ち・部門別で同じ形にするため、ここ 1 か所で組み立てる
+ * （参考書カードを build/lib/cards.mjs に 1 本化したのと同じ理由）。
+ *
+ * 書影は書名の言い換えでしかないので、読み上げには書名のリンクだけを渡す
+ * （aria-hidden と tabindex="-1"。build/generate-routes.mjs の書影と同じ扱い）。
+ */
+function bookCover(dir, book) {
+  const sub = SUBJECTS.find(s => s.dir === dir);
+  if (!sub) throw new Error(`bookCover: 知らない科目 ${dir}`);
+  const color = (data[dir].stages[book.stage] || {}).color || sub.color;
+  return `<a class="bref__cov" href="/${dir}/books/${book.id}/" tabindex="-1" aria-hidden="true">`
+    + `${coverBox(book, { color })}</a>`;
+}
+
+/** 表のセルに置く 1 冊。書影を左に、書名リンクを右に並べる */
+function bookRef(dir, id, label) {
+  const b = lookup(dir, id, 'bookRef');
+  return `<span class="bref">${bookCover(dir, b)}`
+    + `<span class="bref__t">${bookLink(dir, b.id, label)}</span></span>`;
 }
 
 /**
@@ -176,7 +202,7 @@ function renderBlock(bl, dir) {
         <table class="cmp">
           <thead><tr><th>参考書</th>${cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead>
           <tbody>
-${books.map(b => `            <tr><th scope="row">${bookLink(d, b.id)}</th>${cols.map(c => `<td>${esc(cell(b, c))}</td>`).join('')}</tr>`).join('\n')}
+${books.map(b => `            <tr><th scope="row">${bookRef(d, b.id)}</th>${cols.map(c => `<td>${esc(cell(b, c))}</td>`).join('')}</tr>`).join('\n')}
           </tbody>
         </table>
         </div>
@@ -282,8 +308,13 @@ ${rows.map(r => `            <tr><th scope="row"><a href="${r.href}">${esc(r.nam
     const list = bl.versus.map(id => lookup(d, id, 'versus'));
     if (list.length < 2 || list.length > 3) throw new Error('versus: 2〜3 冊で書く');
     const panels = list.map(b => `        <div class="vs__col">
-          <div class="vs__pub">${esc(b.pub || '')}</div>
-          <b class="vs__name">${bookLink(d, b.id)}</b>
+          <div class="vs__head">
+            ${bookCover(d, b)}
+            <div class="vs__headtxt">
+              <div class="vs__pub">${esc(b.pub || '')}</div>
+              <b class="vs__name">${bookLink(d, b.id)}</b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>${b.diff} / 10</dd></div>
             <div><dt>到達目安</dt><dd>${esc(b.hensachi || '—')}</dd></div>
@@ -317,7 +348,7 @@ ${panels}
       const rd = r.dir || d;
       const b = lookup(rd, r.id, 'rankTable');
       return `            <tr><th scope="row"><span class="rk">${i + 1}</span></th>`
-        + `<td class="rk__name">${bookLink(rd, b.id)}</td>`
+        + `<td class="rk__name">${bookRef(rd, b.id)}</td>`
         + cols.map(c => `<td>${esc(cell(b, c))}</td>`).join('')
         + `<td class="rk__why">${inline(r.note, rd)}</td></tr>`;
     }).join('\n');
@@ -335,9 +366,14 @@ ${rows}
       const b = lookup(ad, a.id, 'awards');
       const sub = SUBJECTS.find(s => s.dir === ad);
       return `        <div class="award" style="--ac:${sub.color}">
-          <div class="award__title">${esc(a.title)}</div>
-          <b class="award__book">${bookLink(ad, b.id)}</b>
-          <div class="award__meta">${esc(sub.ja)}・${esc(b.pub || '')}／難易度 ${b.diff} / 10／${esc(b.hours || '—')}</div>
+          <div class="award__head">
+            ${bookCover(ad, b)}
+            <div class="award__headtxt">
+              <div class="award__title">${esc(a.title)}</div>
+              <b class="award__book">${bookLink(ad, b.id)}</b>
+              <div class="award__meta">${esc(sub.ja)}・${esc(b.pub || '')}／難易度 ${b.diff} / 10／${esc(b.hours || '—')}</div>
+            </div>
+          </div>
           <p class="award__why">${inline(a.reason, ad)}</p>
         </div>`;
     }).join('\n');
@@ -364,7 +400,7 @@ ${rows}
           <tbody>
 ${rows.map((x, i) => `            <tr><th scope="row"><span class="rk">${i + 1}</span></th>`
       + (multi ? `<td>${esc(x.sub.ja)}</td>` : '')
-      + `<td class="rk__name">${bookLink(x.dir, x.b.id)}</td>`
+      + `<td class="rk__name">${bookRef(x.dir, x.b.id)}</td>`
       + `<td>${esc(x.b.pub || '—')}</td><td>${esc(valOf(x.b))}</td></tr>`).join('\n')}
           </tbody>`, c.caption);
   }
@@ -550,6 +586,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -559,6 +602,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -568,6 +615,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -575,6 +625,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}

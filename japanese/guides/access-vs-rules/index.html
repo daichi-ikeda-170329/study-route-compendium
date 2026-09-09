@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -207,8 +225,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">標準帯の3冊を並べる</h2>
       <div class="vs vs--3">
         <div class="vs__col">
-          <div class="vs__pub">河合出版</div>
-          <b class="vs__name"><a href="/japanese/books/access-hatten/">入試現代文へのアクセス 発展編</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/japanese/books/access-hatten/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>入試現代文へのアクセス 発展編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777213595.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213595.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777213597.jpg|https://books.google.com/books/content?vid=ISBN9784777213597&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777213597.jpg|https://www.gakusan.com/bookimage_s/9784777213597.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">河合出版</div>
+              <b class="vs__name"><a href="/japanese/books/access-hatten/">入試現代文へのアクセス 発展編</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>5 / 10</dd></div>
             <div><dt>到達目安</dt><dd>52〜62</dd></div>
@@ -220,8 +243,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">旺文社</div>
-          <b class="vs__name"><a href="/japanese/books/rules2/">The Rules 現代文問題集 2 入試標準</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/japanese/books/rules2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>The Rules 現代文問題集 2 入試標準</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010350873.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010350873.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010350873.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010350873.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010350873.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010350873.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010350874.jpg|https://books.google.com/books/content?vid=ISBN9784010350874&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010350874.jpg|https://www.gakusan.com/bookimage_s/9784010350874.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">旺文社</div>
+              <b class="vs__name"><a href="/japanese/books/rules2/">The Rules 現代文問題集 2 入試標準</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>5 / 10</dd></div>
             <div><dt>到達目安</dt><dd>52〜62</dd></div>
@@ -233,8 +261,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">KADOKAWA</div>
-          <b class="vs__name"><a href="/japanese/books/polaris-g2/">現代文ポラリス 2 標準レベル</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/japanese/books/polaris-g2/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>現代文ポラリス 2 標準レベル</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046022213.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046022213.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046022213.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046022213.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046022213.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046022213.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046022219.jpg|https://books.google.com/books/content?vid=ISBN9784046022219&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046022219.jpg|https://www.gakusan.com/bookimage_s/9784046022219.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">KADOKAWA</div>
+              <b class="vs__name"><a href="/japanese/books/polaris-g2/">現代文ポラリス 2 標準レベル</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>5 / 10</dd></div>
             <div><dt>到達目安</dt><dd>52〜62</dd></div>
@@ -267,9 +300,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/japanese/books/access-kihon/">入試現代文へのアクセス 基本編</a></th><td>3 / 10</td><td>45〜55</td><td>16題/260頁</td><td>20〜30h</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/access-hatten/">入試現代文へのアクセス 発展編</a></th><td>5 / 10</td><td>52〜62</td><td>16題/244頁</td><td>20〜30h</td></tr>
-            <tr><th scope="row"><a href="/japanese/books/access-kansei/">入試現代文へのアクセス 完成編</a></th><td>7 / 10</td><td>58〜68</td><td>16題/262頁</td><td>25〜35h</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/access-kihon/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>入試現代文へのアクセス 基本編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777213587.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777213587.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213587.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777213587.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777213587.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213587.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777213580.jpg|https://books.google.com/books/content?vid=ISBN9784777213580&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777213580.jpg|https://www.gakusan.com/bookimage_s/9784777213580.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/access-kihon/">入試現代文へのアクセス 基本編</a></span></span></th><td>3 / 10</td><td>45〜55</td><td>16題/260頁</td><td>20〜30h</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/access-hatten/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>入試現代文へのアクセス 発展編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777213595.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777213595.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213595.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777213597.jpg|https://books.google.com/books/content?vid=ISBN9784777213597&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777213597.jpg|https://www.gakusan.com/bookimage_s/9784777213597.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/access-hatten/">入試現代文へのアクセス 発展編</a></span></span></th><td>5 / 10</td><td>52〜62</td><td>16題/244頁</td><td>20〜30h</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/japanese/books/access-kansei/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>入試現代文へのアクセス 完成編</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777213609.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777213609.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213609.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777213609.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777213609.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777213609.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777213603.jpg|https://books.google.com/books/content?vid=ISBN9784777213603&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777213603.jpg|https://www.gakusan.com/bookimage_s/9784777213603.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/japanese/books/access-kansei/">入試現代文へのアクセス 完成編</a></span></span></th><td>7 / 10</td><td>58〜68</td><td>16題/262頁</td><td>25〜35h</td></tr>
           </tbody>
         </table>
         </div>
@@ -280,37 +313,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>The Rules 現代文問題集 1 入試基礎</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010350865.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010350865.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010350865.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010350865.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010350865.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010350865.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010350867.jpg|https://books.google.com/books/content?vid=ISBN9784010350867&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010350867.jpg|https://www.gakusan.com/bookimage_s/9784010350867.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">基礎</span><span>旺文社</span></div>
+            <div class="bcard__top"><span class="bcard__stage">基礎</span><span class="bcard__pub">旺文社</span></div>
             <b>The Rules 現代文問題集 1 入試基礎</b>
           </div>
         </div>
         <p>柳生好之によるレベル別演習シリーズの1冊目（旺文社、2023年）。各題で読解と解答のルールを明示し、共テ・中堅私大レベルの文章で身につける。同…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜55</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/japanese/books/rules3/" style="--bc:#B5432A">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>The Rules 現代文問題集 3 入試難関</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010350881.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010350881.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010350881.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010350881.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010350881.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010350881.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010350881.jpg|https://books.google.com/books/content?vid=ISBN9784010350881&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010350881.jpg|https://www.gakusan.com/bookimage_s/9784010350881.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">応用</span><span>旺文社</span></div>
+            <div class="bcard__top"><span class="bcard__stage">応用</span><span class="bcard__pub">旺文社</span></div>
             <b>The Rules 現代文問題集 3 入試難関</b>
           </div>
         </div>
         <p>柳生好之によるThe Rules現代文問題集の3巻（旺文社）。早慶・上位国公立の過去問12題で難解な評論や長い小説にルールを適用する。同帯のポ…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／58〜67</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/japanese/books/polaris-g1/" style="--bc:#24427C">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>現代文ポラリス 1 基礎レベル</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046022183.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046022183.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046022183.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046022183.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046022183.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046022183.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046022189.jpg|https://books.google.com/books/content?vid=ISBN9784046022189&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046022189.jpg|https://www.gakusan.com/bookimage_s/9784046022189.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">基礎</span><span>KADOKAWA</span></div>
+            <div class="bcard__top"><span class="bcard__stage">基礎</span><span class="bcard__pub">KADOKAWA</span></div>
             <b>現代文ポラリス 1 基礎レベル</b>
           </div>
         </div>
         <p>柳生好之によるレベル別演習書の1冊目（KADOKAWA）。日東駒専・中堅国公立の過去問13題に、本文の全文解説と解答へのプロセスを付す。同帯の…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 3／45〜55</span></div>
-        
       </a>
       </div>
     </section>

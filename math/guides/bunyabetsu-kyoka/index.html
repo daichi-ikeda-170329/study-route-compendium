@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -224,11 +242,11 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/math/books/sakata/">坂田アキラの面白いほどわかる本</a></th><td>3 / 10</td><td>40〜55</td><td>講義+例題 約380頁/巻</td><td>各巻25〜40h</td><td>特定分野で完全につまずいた人</td></tr>
-            <tr><th scope="row"><a href="/math/books/ukaru-kakuritsu/">合格る確率+場合の数</a></th><td>6 / 10</td><td>55〜68</td><td>頻出パターン網羅型</td><td>40〜55h</td><td>確率を体系的に固めたい中堅〜難関志望者</td></tr>
-            <tr><th scope="row"><a href="/math/books/hatto-kakuritsu/">ハッとめざめる確率</a></th><td>7 / 10</td><td>55〜70</td><td>講義+例題(288頁)</td><td>40〜60h</td><td>確率に苦手意識がある中堅〜難関志望者</td></tr>
-            <tr><th scope="row"><a href="/math/books/bunyabetsu-baai/">分野別標準問題精講 場合の数・確率</a></th><td>7 / 10</td><td>57〜65</td><td>86問(288頁)</td><td>40〜55h</td><td>確率を演習で入試レベルに引き上げたい人</td></tr>
-            <tr><th scope="row"><a href="/math/books/tankyu-kakuritsu/">解法の探求・確率</a></th><td>8 / 10</td><td>62〜72</td><td>基礎・演習・発展の3部</td><td>45〜65h</td><td>確率を最難関レベルまで仕上げたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/math/books/sakata/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>坂田アキラの面白いほどわかる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046007311.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046007311.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046007311.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046007311.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046007311.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046007311.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046007315.jpg|https://books.google.com/books/content?vid=ISBN9784046007315&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046007315.jpg|https://www.gakusan.com/bookimage_s/9784046007315.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/math/books/sakata/">坂田アキラの面白いほどわかる本</a></span></span></th><td>3 / 10</td><td>40〜55</td><td>講義+例題 約380頁/巻</td><td>各巻25〜40h</td><td>特定分野で完全につまずいた人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/math/books/ukaru-kakuritsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>合格る確率+場合の数</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243451.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243451.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243451.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578243451.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578243451.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243451.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578243458.jpg|https://books.google.com/books/content?vid=ISBN9784578243458&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578243458.jpg|https://www.gakusan.com/bookimage_s/9784578243458.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/math/books/ukaru-kakuritsu/">合格る確率+場合の数</a></span></span></th><td>6 / 10</td><td>55〜68</td><td>頻出パターン網羅型</td><td>40〜55h</td><td>確率を体系的に固めたい中堅〜難関志望者</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/math/books/hatto-kakuritsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>ハッとめざめる確率</b><em>東京出版</em></span><img src="https://m.media-amazon.com/images/I/61CX2DG2AvL._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/61CX2DG2AvL._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887420447.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420447.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4887420447.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887420447.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420447.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887420441.jpg|https://books.google.com/books/content?vid=ISBN9784887420441&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887420441.jpg|https://www.gakusan.com/bookimage_s/9784887420441.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/math/books/hatto-kakuritsu/">ハッとめざめる確率</a></span></span></th><td>7 / 10</td><td>55〜70</td><td>講義+例題(288頁)</td><td>40〜60h</td><td>確率に苦手意識がある中堅〜難関志望者</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/math/books/bunyabetsu-baai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>分野別標準問題精講 場合の数・確率</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352647.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352647.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352647.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352647.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352647.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352647.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352649.jpg|https://books.google.com/books/content?vid=ISBN9784010352649&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352649.jpg|https://www.gakusan.com/bookimage_s/9784010352649.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/math/books/bunyabetsu-baai/">分野別標準問題精講 場合の数・確率</a></span></span></th><td>7 / 10</td><td>57〜65</td><td>86問(288頁)</td><td>40〜55h</td><td>確率を演習で入試レベルに引き上げたい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/math/books/tankyu-kakuritsu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>解法の探求・確率</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4887420862.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4887420862.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420862.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4887420862.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887420862.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420862.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887420861.jpg|https://books.google.com/books/content?vid=ISBN9784887420861&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887420861.jpg|https://www.gakusan.com/bookimage_s/9784887420861.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/math/books/tankyu-kakuritsu/">解法の探求・確率</a></span></span></th><td>8 / 10</td><td>62〜72</td><td>基礎・演習・発展の3部</td><td>45〜65h</td><td>確率を最難関レベルまで仕上げたい人</td></tr>
           </tbody>
         </table>
         </div>
@@ -250,9 +268,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <table class="cmp">
           <thead><tr><th>参考書</th><th>難易度</th><th>到達目安</th><th>問題数</th><th>想定時間</th><th>向いている人</th></tr></thead>
           <tbody>
-            <tr><th scope="row"><a href="/math/books/sasaki-seisu/">佐々木隆宏の整数問題が面白いほどとける本</a></th><td>6 / 10</td><td>55〜68</td><td>体系別講義+チェック問題</td><td>35〜50h</td><td>整数問題の型を初めて学ぶ人</td></tr>
-            <tr><th scope="row"><a href="/math/books/bunyabetsu-seisu/">分野別標準問題精講 整数</a></th><td>7 / 10</td><td>57〜70</td><td>66テーマ+演習</td><td>40〜60h</td><td>志望校頻出の整数を集中強化したい人</td></tr>
-            <tr><th scope="row"><a href="/math/books/master-seisu/">マスター・オブ・整数</a></th><td>8 / 10</td><td>60〜70</td><td>約200題(4部構成)</td><td>50〜70h</td><td>整数が頻出の京大・一橋・東大志望者</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/math/books/sasaki-seisu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>佐々木隆宏の整数問題が面白いほどとける本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046019859.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046019859.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046019859.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046019859.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046019859.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046019859.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046019851.jpg|https://books.google.com/books/content?vid=ISBN9784046019851&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046019851.jpg|https://www.gakusan.com/bookimage_s/9784046019851.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/math/books/sasaki-seisu/">佐々木隆宏の整数問題が面白いほどとける本</a></span></span></th><td>6 / 10</td><td>55〜68</td><td>体系別講義+チェック問題</td><td>35〜50h</td><td>整数問題の型を初めて学ぶ人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/math/books/bunyabetsu-seisu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>分野別標準問題精講 整数</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352639.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352639.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352639.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352639.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352639.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352639.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352632.jpg|https://books.google.com/books/content?vid=ISBN9784010352632&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352632.jpg|https://www.gakusan.com/bookimage_s/9784010352632.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/math/books/bunyabetsu-seisu/">分野別標準問題精講 整数</a></span></span></th><td>7 / 10</td><td>57〜70</td><td>66テーマ+演習</td><td>40〜60h</td><td>志望校頻出の整数を集中強化したい人</td></tr>
+            <tr><th scope="row"><span class="bref"><a class="bref__cov" href="/math/books/master-seisu/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>マスター・オブ・整数</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/488742017X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/488742017X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/488742017X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887420175.jpg|https://books.google.com/books/content?vid=ISBN9784887420175&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887420175.jpg|https://www.gakusan.com/bookimage_s/9784887420175.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a><span class="bref__t"><a href="/math/books/master-seisu/">マスター・オブ・整数</a></span></span></th><td>8 / 10</td><td>60〜70</td><td>約200題(4部構成)</td><td>50〜70h</td><td>整数が頻出の京大・一橋・東大志望者</td></tr>
           </tbody>
         </table>
         </div>
@@ -273,37 +291,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>志田晶の面白いほどわかる本</b><em>KADOKAWA</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4046068833.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4046068833.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046068833.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4046068833.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4046068833.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4046068833.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784046068835.jpg|https://books.google.com/books/content?vid=ISBN9784046068835&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784046068835.jpg|https://www.gakusan.com/bookimage_s/9784046068835.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">分野別</span><span>KADOKAWA</span></div>
+            <div class="bcard__top"><span class="bcard__stage">分野別</span><span class="bcard__pub">KADOKAWA</span></div>
             <b>志田晶の面白いほどわかる本</b>
           </div>
         </div>
         <p>志田晶による数Cベクトルの講義書（KADOKAWA、2025年改訂第2版、336頁）。同帯の坂田アキラの面白いほどわかる本が途中式を省かない講…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／50〜60</span></div>
-        
       </a>
       <a class="bcard" href="/math/books/bunyabetsu-hyojun-mondai-seiko-vector/" style="--bc:#946200">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>数学 ベクトル 分野別標準問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/401035268X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/401035268X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035268X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/401035268X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/401035268X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/401035268X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352687.jpg|https://books.google.com/books/content?vid=ISBN9784010352687&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352687.jpg|https://www.gakusan.com/bookimage_s/9784010352687.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">分野別</span><span>旺文社</span></div>
+            <div class="bcard__top"><span class="bcard__stage">分野別</span><span class="bcard__pub">旺文社</span></div>
             <b>数学 ベクトル 分野別標準問題精講</b>
           </div>
         </div>
         <p>旺文社「分野別標準問題精講」のベクトル編で、入試標準〜応用の記述問題集。同じベクトルを扱う数学の真髄 -ベクトル-が講義中心なのに対し、こちら…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／55〜68</span></div>
-        
       </a>
       <a class="bcard" href="/math/books/shinzui-v/" style="--bc:#946200">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>数学の真髄 -ベクトル-</b><em>ナガセ(東進)</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4890859667.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4890859667.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859667.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4890859667.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4890859667.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4890859667.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784890859665.jpg|https://books.google.com/books/content?vid=ISBN9784890859665&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784890859665.jpg|https://www.gakusan.com/bookimage_s/9784890859665.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">分野別</span><span>ナガセ(東進)</span></div>
+            <div class="bcard__top"><span class="bcard__stage">分野別</span><span class="bcard__pub">ナガセ(東進)</span></div>
             <b>数学の真髄 -ベクトル-</b>
           </div>
         </div>
         <p>一次独立などの原理からベクトルを組み立て直す分野講義書（ナガセ、2024年、講義+精選例題）。数学の真髄 -論理・写像-の続巻で、同帯の志田晶…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／58〜70</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       </div>
       <p>理系の微分積分は、分野別対策の価値が特に高い領域です。<b>数IIIの微積は配点が大きく、出題される大学がほぼ確実に出す</b>ためです。計算量が多いので、速度と正確さを別に鍛える必要があります。</p>
@@ -312,37 +327,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#946200"><span class="rt-cov__ph"><b>微積分/基礎の極意</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4887420293.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887420293.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887420293.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887420298.jpg|https://books.google.com/books/content?vid=ISBN9784887420298&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887420298.jpg|https://www.gakusan.com/bookimage_s/9784887420298.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">分野別</span><span>東京出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">分野別</span><span class="bcard__pub">東京出版</span></div>
             <b>微積分/基礎の極意</b>
           </div>
         </div>
         <p>栗田哲也による数III微積分の計算力と本質理解を3部（計算演習+入試演習）で鍛える分野研究書（東京出版、2000年）。同じ東京出版の解法の探求…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span>難易度 8／58〜70</span></div>
-        <span class="bcard__ver">書誌情報を確認中</span>
       </a>
       <a class="bcard" href="/math/books/ukaru-keisan3/" style="--bc:#8A6D2F">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#8A6D2F"><span class="rt-cov__ph"><b>合格る計算 数学III・C</b><em>文英堂</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4578243443.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4578243443.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4578243443.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784578243441.jpg|https://books.google.com/books/content?vid=ISBN9784578243441&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784578243441.jpg|https://www.gakusan.com/bookimage_s/9784578243441.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">計算</span><span>文英堂</span></div>
+            <div class="bcard__top"><span class="bcard__stage">計算</span><span class="bcard__pub">文英堂</span></div>
             <b>合格る計算 数学III・C</b>
           </div>
         </div>
         <p>広瀬和之による数III・Cの計算処理に特化した約120テーマの練習書（文英堂、2024年）。合格る計算 数学I・A・II・B・Cの続巻で、同じ…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／50〜67</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/math/books/kaiho-no-tankyu-bisekibun/" style="--bc:#B5432A">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>解法の探求・微積分 微積分の原則から発展へ</b><em>東京出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4887421516.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4887421516.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887421516.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4887421516.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4887421516.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4887421516.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784887421516.jpg|https://books.google.com/books/content?vid=ISBN9784887421516&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784887421516.jpg|https://www.gakusan.com/bookimage_s/9784887421516.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">応用</span><span>東京出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">応用</span><span class="bcard__pub">東京出版</span></div>
             <b>解法の探求・微積分 微積分の原則から発展へ</b>
           </div>
         </div>
         <p>微積分の原則から発展的な処理までテーマ別に扱う東京出版の応用問題集（2009年）。同じ東京出版の微積分/基礎の極意が計算演習から入るのに対し、…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span><span>難易度 8／60〜75</span></div>
-        <span class="bcard__ver">書誌情報を確認中</span>
       </a>
       </div>
       <p>ここで注意すべきは、<b>計算力の問題を解法の問題と混同しない</b>ことです。方針は立つのに答えが合わない場合、必要なのは分野別問題集ではなく計算練習です。<a href="/math/books/ukaru-keisan3/">合格る計算 数学III・C</a>のような本を挟むほうが早く直ります。</p>

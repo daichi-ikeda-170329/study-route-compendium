@@ -97,6 +97,13 @@ table.cmp td{color:var(--ink-2)}
 table.cmp td.rk__name{font-weight:700;color:var(--ink);white-space:nowrap}
 table.cmp td.rk__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:2px}
 table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
+/* 記事の中で 1 冊を指す共通表示（書影 + 書名）。書名だけでは、読んだ人が
+   書店や通販で現物と結び付けられない。書影は書名の言い換えなので、
+   リンクの下線や色は書名の側にだけ出す（.bref__cov には渡さない） */
+.bref{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.bref .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.bref .rt-cov{--cw:34px}
+.bref__t{min-width:0;padding-top:1px}
 /* 一騎打ち。狭い画面では縦に積み、VS の印は区切りとして残す */
 .vs{display:grid;grid-template-columns:1fr;gap:0;margin:24px 0;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
 .vs__col{padding:18px 19px;border-top:3px solid var(--sc)}
@@ -106,6 +113,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
   .vs--3{grid-template-columns:1fr auto 1fr auto 1fr}
   .vs__mark{padding:0 10px;border:none;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
 }
+.vs__head{display:flex;align-items:flex-start;gap:13px}
+.vs__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.vs__head .rt-cov{--cw:56px}
+.vs__headtxt{min-width:0;flex:1}
 .vs__pub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted-2)}
 .vs__name{display:block;font-family:var(--serif);font-size:16px;line-height:1.45;margin-top:6px}
 .vs__name a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -115,6 +126,9 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .vs__spec dd{color:var(--ink-2);flex:1}
 .vs__pros,.vs__cons{margin-top:12px;display:flex;flex-direction:column;gap:4px;list-style:none}
 .vs__pros li,.vs__cons li{font-size:12.5px;line-height:1.7;color:var(--ink-2);padding-left:17px;position:relative}
+/* 行頭の +/- は .prose li::before（5px の丸）と同じ疑似要素を使う。丸の指定が
+   残ると、+ の左上に点が重なって出る。ここで丸の分を打ち消しておく */
+.vs__pros li::before,.vs__cons li::before{top:0;width:auto;height:auto;background:none;border-radius:0}
 .vs__pros li::before{content:"+";position:absolute;left:0;color:var(--sc);font-weight:700}
 .vs__cons li::before{content:"-";position:absolute;left:2px;color:var(--muted-2);font-weight:700}
 .vs__verdict{margin-top:14px;padding-left:13px;border-left:3px solid var(--sc);font-size:14px;line-height:1.95;color:var(--ink-2)}
@@ -122,6 +136,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .awards{display:grid;grid-template-columns:1fr;gap:11px;margin:24px 0}
 @media(min-width:700px){.awards{grid-template-columns:repeat(2,1fr)}}
 .award{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ac);padding:16px 18px;box-shadow:var(--sh-s)}
+.award__head{display:flex;align-items:flex-start;gap:13px}
+.award__head .bref__cov{flex:none;display:block;padding:0;text-decoration:none}
+.award__head .rt-cov{--cw:48px}
+.award__headtxt{min-width:0;flex:1}
 .award__title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ac);font-weight:700}
 .award__book{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.45;margin-top:8px}
 .award__book a{color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
@@ -207,8 +225,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
       <h2 class="sec">3冊を並べる</h2>
       <div class="vs vs--3">
         <div class="vs__col">
-          <div class="vs__pub">Gakken</div>
-          <b class="vs__name"><a href="/science/books/uchu-rikigaku/">宇宙一わかりやすい高校物理 力学・波動</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/science/books/uchu-rikigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>宇宙一わかりやすい高校物理 力学・波動</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053056462.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053056462.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053056462.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053056467.jpg|https://books.google.com/books/content?vid=ISBN9784053056467&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053056467.jpg|https://www.gakusan.com/bookimage_s/9784053056467.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">Gakken</div>
+              <b class="vs__name"><a href="/science/books/uchu-rikigaku/">宇宙一わかりやすい高校物理 力学・波動</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>1 / 10</dd></div>
             <div><dt>到達目安</dt><dd>〜50</dd></div>
@@ -220,8 +243,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">Gakken</div>
-          <b class="vs__name"><a href="/science/books/hiden-rikigaku/">秘伝の物理講義 力学・波動</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/science/books/hiden-rikigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2E7D9A"><span class="rt-cov__ph"><b>秘伝の物理講義 力学・波動</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057876.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057876.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057876.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057876.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057876.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057876.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057877.jpg|https://books.google.com/books/content?vid=ISBN9784053057877&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057877.jpg|https://www.gakusan.com/bookimage_s/9784053057877.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">Gakken</div>
+              <b class="vs__name"><a href="/science/books/hiden-rikigaku/">秘伝の物理講義 力学・波動</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>3 / 10</dd></div>
             <div><dt>到達目安</dt><dd>45〜60</dd></div>
@@ -233,8 +261,13 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         </div>
         <div class="vs__mark" aria-hidden="true">VS</div>
         <div class="vs__col">
-          <div class="vs__pub">河合出版</div>
-          <b class="vs__name"><a href="/science/books/essence-rikigaku/">物理のエッセンス 力学・波動</a></b>
+          <div class="vs__head">
+            <a class="bref__cov" href="/science/books/essence-rikigaku/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>物理のエッセンス 力学・波動</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227235.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227235.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227235.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227235.jpg|https://books.google.com/books/content?vid=ISBN9784777227235&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227235.jpg|https://www.gakusan.com/bookimage_s/9784777227235.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
+            <div class="vs__headtxt">
+              <div class="vs__pub">河合出版</div>
+              <b class="vs__name"><a href="/science/books/essence-rikigaku/">物理のエッセンス 力学・波動</a></b>
+            </div>
+          </div>
           <dl class="vs__spec">
             <div><dt>難易度</dt><dd>4 / 10</dd></div>
             <div><dt>到達目安</dt><dd>45〜60</dd></div>
@@ -273,37 +306,34 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>良問の風</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4777227251.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4777227251.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4777227251.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227259.jpg|https://books.google.com/books/content?vid=ISBN9784777227259&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227259.jpg|https://www.gakusan.com/bookimage_s/9784777227259.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">標準</span><span>河合出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">標準</span><span class="bcard__pub">河合出版</span></div>
             <b>良問の風</b>
           </div>
         </div>
         <p>浜島清利による入試標準の問題集（河合出版・2023年三訂版）。標準問題約150題を分野別に収録し、エッセンスの考え方をそのまま当てはめて解ける…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 5／52〜62</span></div>
-        
       </a>
       <a class="bcard" href="/science/books/meimon-mori-1/" style="--bc:#B5432A">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>名問の森 力学・熱・波動I</b><em>河合出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/477722726X.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/477722726X.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722726X.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/477722726X.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/477722726X.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/477722726X.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784777227266.jpg|https://books.google.com/books/content?vid=ISBN9784777227266&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784777227266.jpg|https://www.gakusan.com/bookimage_s/9784777227266.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">応用</span><span>河合出版</span></div>
+            <div class="bcard__top"><span class="bcard__stage">応用</span><span class="bcard__pub">河合出版</span></div>
             <b>名問の森 力学・熱・波動I</b>
           </div>
         </div>
         <p>浜島清利による難関大向け問題集の前半巻（河合出版・2024年四訂版）。力学・熱・波動Iの約70題を、設問ごとに考え方を示す解説で扱う。良問の風…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 7／60〜70</span></div>
-        <span class="bcard__ver">一部情報を確認中</span>
       </a>
       <a class="bcard" href="/science/books/kosei-kiso/" style="--bc:#24427C">
         <div class="bcard__head">
           <span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>物理 基礎問題精講</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010352558.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010352558.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352558.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010352558.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010352558.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010352558.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010352557.jpg|https://books.google.com/books/content?vid=ISBN9784010352557&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010352557.jpg|https://www.gakusan.com/bookimage_s/9784010352557.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span>
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">基礎</span><span>旺文社</span></div>
+            <div class="bcard__top"><span class="bcard__stage">基礎</span><span class="bcard__pub">旺文社</span></div>
             <b>物理 基礎問題精講</b>
           </div>
         </div>
         <p>問題精講シリーズの基礎編、2023年の五訂版。入試基礎〜標準の典型を約110題に絞り、「精講」で要点を示してから解答を置く。同帯の物理のエッセ…</p>
         <div class="bcard__foot"><span class="bcard__diff"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span>難易度 4／48〜60</span></div>
-        
       </a>
       </div>
     </section>

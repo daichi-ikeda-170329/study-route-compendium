@@ -10,7 +10,6 @@ import { esc, clip } from './extract.mjs';
 import { coverBox } from './cover.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './newbooks.mjs';
 import { seriesOf, hensachiPlain } from './series.mjs';
-import { verificationOf } from './verification.mjs';
 
 /**
  * @param {object} b      BOOKS の 1 冊
@@ -33,25 +32,22 @@ export function bookCard(b, sub, stages) {
     : `<span class="bcard__diff">${bars}</span><span>難易度 ${b.diff}／${esc(hensachiPlain(b) || '—')}`
       + `${series ? `<span class="bcard__series">${esc(series.label)}</span>` : ''}</span>`;
 
-  // 書誌情報を確かめきれていない本は、カードの時点でそう分かるようにする。
-  // 詳細（どの項目を確かめたか）は書籍ページの「この情報の確かめ方」に出る。
-  // 色だけで伝えないよう、必ず文字のラベルにする
-  const ver = verificationOf(sub.dir, b);
-  const verBadge = ver.status === 'unverified'
-    ? '<span class="bcard__ver">書誌情報を確認中</span>'
-    : ver.status === 'partial' ? '<span class="bcard__ver">一部情報を確認中</span>' : '';
+  /* 確認状態のバッジ（.bcard__ver）は 2026-09-09 に外した。1,390 冊のほぼ全部に
+     同じ「一部情報を確認中」が並び、1 件ごとの違いを伝えないまま面積だけを取っていた。
+     2026-09-05 に書籍ページの「この情報の確かめ方」を外したのと同じ理由。
+     台帳（build/data/verification.json）と、確かめた値だけを構造化データに出す
+     出し分けは残っている（docs/data-verification.md）。 */
 
   return `      <a class="bcard" href="/${sub.dir}/books/${b.id}/" style="--bc:${color}">
         <div class="bcard__head">
           ${coverBox(b, { color })}
           <div class="bcard__meta">
-            <div class="bcard__top"><span class="bcard__stage">${esc(st.short || '')}</span><span>${esc(b.pub || '')}</span></div>
+            <div class="bcard__top"><span class="bcard__stage">${esc(st.short || '')}</span><span class="bcard__pub">${esc(b.pub || '')}</span></div>
             <b>${esc(b.name)}</b>
           </div>
         </div>
         <p>${esc(clip(b.desc || `${b.pub} から刊行された新刊。評価は準備中です。`, 72))}</p>
         <div class="bcard__foot">${foot}</div>
-        ${verBadge}
       </a>`;
 }
 
