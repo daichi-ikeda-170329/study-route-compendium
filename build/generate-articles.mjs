@@ -135,6 +135,21 @@ function inline(text, dir) {
 }
 
 /**
+ * 同じ記法を「素の文」に落とす。カードの抜粋・meta description のように
+ * タグを置けない場所で使う。
+ *
+ * `inline()` を通せない場所で `esc()` だけ掛けると、`**強調**` の `*` や
+ * `[[id|表示名]]` の括弧がそのまま画面に出る。記法を足すときは
+ * **`inline()` とこの関数の両方を直す**（片方だけだと一覧カードにだけ生の記法が残る）。
+ */
+function plain(text) {
+  return String(text ?? '')
+    .replace(/\{\{(\/[^|{}]*)\|([^{}]+)\}\}/g, (_, href, label) => label)
+    .replace(/\[\[(?:[a-z]+:)?([a-z0-9_-]+)(?:\|([^\]]+))?\]\]/gi, (_, id, label) => label || '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1');
+}
+
+/**
  * 表の外枠。比較表・順位表で同じ見た目を使う。
  * 横スクロールできることを画面幅で出し分ける仕掛けは 1 か所にまとめる
  * （表の種類ごとに書き写すと、片方だけ直し忘れる）。
@@ -710,8 +725,8 @@ function guideCard(a, { showSubject = false } = {}) {
   const sub = a.subject ? SUBJECTS.find(s => s.dir === a.subject) : null;
   const href = `${sub ? `/${sub.dir}` : ''}/guides/${a.slug}/`;
   const cat = categoryOf(a.category);
-  // リード文の [[…]] は書名だけに戻す。表示名が無ければ id をそのまま出さず落とす
-  const lead = clip(a.lead.replace(/\[\[(?:[a-z]+:)?([a-z0-9_-]+)(?:\|([^\]]+))?\]\]/gi, (_, id, l) => l || ''), 96);
+  // リード文は記法を落として素の文にする（表示名が無い [[…]] は id を出さず落とす）
+  const lead = clip(plain(a.lead), 96);
   return `      <a class="gcard" href="${href}"${sub ? ` style="--gs:${sub.color}"` : ''}>
         <div class="gcard__no">${esc(cat.en)}${showSubject ? `<span class="gcard__sub">${esc(sub ? sub.ja : '全科目')}</span>` : ''}</div>
         <b>${esc(a.h1 || a.title)}</b>
