@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参考書を 2 冊並べて比べる - ルート大全</title>
+<meta name="description" content="収録している参考書から 2 冊を選び、難易度・到達目安・問題数・想定学習時間・向いている人・強みと注意点を横に並べて比べられます。">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#F6F4EF">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://route-taizen.com/compare/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ルート大全">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="参考書を 2 冊並べて比べる - ルート大全">
+<meta property="og:description" content="収録している参考書から 2 冊を選び、難易度・到達目安・問題数・想定学習時間・向いている人・強みと注意点を横に並べて比べられます。">
+<meta property="og:url" content="https://route-taizen.com/compare/">
+<meta property="og:image" content="https://route-taizen.com/assets/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@route_taizen">
+<meta name="twitter:title" content="参考書を 2 冊並べて比べる - ルート大全">
+<meta name="twitter:description" content="収録している参考書から 2 冊を選び、難易度・到達目安・問題数・想定学習時間・向いている人・強みと注意点を横に並べて比べられます。">
+<meta name="twitter:image" content="https://route-taizen.com/assets/ogp.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images-fe.ssl-images-amazon.com">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- 解析イベントの送信口。**search.js より先に読む**（allowlist を通らない
+     送信が先に走らないようにするため）。defer どうしは文書の順に実行される。
+
+     以前は defer を付けていなかった。科目トップのデータと描画コードが本文中の
+     同期スクリプトで、読み込み直後に共有 URL の復元を記録していたためである。
+     2026-09-05 に科目データを外へ出し、描画コードは
+     assets/js/subject-<科目>.js（defer）＋ assets/js/subject-loader.js（fetch のあとに起動）
+     になった。復元の記録は起動時に走るので、defer な analytics.js より必ずあとになる。
+     RTAnalytics を使う箇所はすべて if (window.RTAnalytics) で守られており、
+     クリックなどの操作時にしか呼ばれない。
+     defer にすると、この 1 本だけで描画のブロックが約 300ms 減る（Lighthouse 実測）。 -->
+<script src="/assets/js/analytics.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+<!-- Google アナリティクス 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DQ5WFXEFMX', {
+  /* **共有 URL の query と hash を GA4 へ渡さない。**
+     共有リンクは診断の回答（志望レベル・型・現在地）と、場合によっては志望校名を
+     query に持つ。GA4 は既定でページ URL をそのまま送るので、ここで
+     origin + pathname に差し替える。ページ単位の集計はこれで足りる。
+     契約は docs/analytics-events.md */
+  page_location: location.origin + location.pathname
+});
+</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
+<style>
+:root{--sc:#24427C}
+.cmp-lead{font-size:13.5px;color:var(--ink-2);line-height:1.9;margin-top:10px;max-width:46em}
+.cmp-wrap{overflow-x:auto;margin-top:20px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--sh-s)}
+table.cmpx{border-collapse:collapse;width:100%;min-width:620px;font-size:13px}
+table.cmpx th,table.cmpx td{padding:12px 14px;border-bottom:1px solid var(--line-2);text-align:left;vertical-align:top;line-height:1.75}
+table.cmpx thead th{background:var(--surface-2);font-size:13.5px}
+table.cmpx tbody th{width:8.5em;font-size:11.5px;color:var(--muted);font-weight:700;white-space:nowrap}
+table.cmpx td{width:calc(50% - 4.25em);color:var(--ink-2)}
+table.cmpx tr:last-child th,table.cmpx tr:last-child td{border-bottom:none}
+.cmpx__name a{font-family:var(--serif);font-weight:800;font-size:15.5px;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px}
+.cmpx__sub{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.cmpx__cov{width:84px;aspect-ratio:.71;background:var(--surface-2);border:1px solid var(--line);display:block;overflow:hidden}
+.cmpx__cov img{width:100%;height:100%;object-fit:cover;display:block}
+.cmpx__bar{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
+.cmpx__bar i{width:9px;height:12px;background:var(--line);display:block}
+.cmpx__bar i.on{background:var(--sc)}
+table.cmpx ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+table.cmpx li{padding-left:13px;position:relative}
+table.cmpx li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--muted-2)}
+.cmpx__buy{display:flex;flex-wrap:wrap;gap:8px}
+.cmpx__buy a{font-size:12px;font-weight:700;padding:8px 12px;border:1px solid var(--line-d);background:var(--surface);color:var(--ink)}
+.cmp-pick{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px}
+@media(min-width:760px){.cmp-pick{grid-template-columns:1fr 1fr}}
+.cmp-slot{background:var(--surface);border:1px solid var(--line);padding:16px 18px;box-shadow:var(--sh-s)}
+.cmp-slot h2{font-size:14px;font-weight:800}
+.cmp-slot input{width:100%;min-height:44px;margin-top:10px;padding:10px 12px;border:1px solid var(--line-d);border-radius:6px;font:inherit;background:var(--surface);color:inherit}
+.cmp-slot__cur{font-size:13px;margin-top:8px;color:var(--ink-2);min-height:1.7em}
+.cmp-slot__hits{display:flex;flex-direction:column;gap:2px;margin-top:8px}
+.cmp-slot__hits button{min-height:44px;text-align:left;padding:8px 10px;border:1px solid var(--line-2);background:var(--surface-2);font:inherit;font-size:13px;cursor:pointer;color:inherit}
+.cmp-slot__hits button:hover{border-color:var(--line-d)}
+.cmp-go{margin-top:16px;min-height:44px;padding:10px 18px;border:1px solid var(--ink);background:var(--ink);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.cmp-go[disabled]{opacity:.4;cursor:not-allowed}
+.cmp-msg{margin-top:14px;font-size:13px;color:var(--accent-deep)}
+</style>
+</head>
+<body>
+
+<aside class="pr-bar" aria-label="広告についてのお知らせ">当サイトは<b>アフィリエイト広告</b>を利用しています。参考書の紹介リンクから購入された場合、当サイトに紹介料が発生することがあります。また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。</aside>
+
+<nav class="xbar" aria-label="科目切り替え">
+  <div class="xbar__in">
+    <a class="xbar__brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ルート大全
+    </a>
+      <a class="xl" href="/english/">英語</a>
+      <a class="xl" href="/japanese/">国語</a>
+      <a class="xl" href="/math/">数学</a>
+      <a class="xl" href="/science/">理科</a>
+      <a class="xl" href="/social/">社会</a>
+      <a class="xl" href="/joho/">情報</a>
+      <a class="xl" href="/shoron/">小論文</a>
+  </div>
+</nav>
+
+<header class="app-header">
+  <div class="app-header__in">
+    <a class="logo" href="/">
+      <div class="logo__mark" aria-hidden="true">全</div>
+      <div class="logo__txt"><b>ルート大全</b><span>ROUTE COMPENDIUM</span></div>
+    </a>
+    <div class="rt-search" id="rtSearch" style="min-height:38px">
+      <div class="rt-search__in">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="search" id="rtSearchInput" placeholder="参考書名で検索（全7科目）" autocomplete="off" spellcheck="false" role="combobox" aria-label="参考書を検索" aria-controls="rtSearchPop" aria-expanded="false" aria-autocomplete="list">
+      </div>
+      <div class="rt-search__pop" id="rtSearchPop" role="listbox" aria-label="検索候補"></div>
+    </div>
+    <div class="hdr-cta"><a href="/#subjects">科目から選ぶ</a><a class="primary" href="/">トップへ</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="パンくずリスト">
+    <a href="/">ルート大全</a>
+    <span class="sep">/</span><b>2 冊を比べる</b>
+  </nav>
+
+  <div class="block" style="margin-top:26px">
+    <div class="eyebrow">Compare</div>
+    <h1 class="sec" style="font-size:29px">参考書を 2 冊並べて比べる</h1>
+    <p class="cmp-lead">難易度・到達目安・想定学習時間は編集部の推定値です（<a href="/methodology/">算出方法</a>）。書名・出版社・刊行年・問題数は公開されている書誌情報です。</p>
+    <div id="cmpRoot" aria-live="polite">
+      <noscript><p class="cmp-msg">比べる表の表示には JavaScript が要ります。各参考書の詳細ページは<a href="/search/">詳細検索</a>から開けます。</p></noscript>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="site-foot__in">
+    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__list">
+      <a href="/english/" style="--fsc:#B5432A">
+        <span class="fs-mark" aria-hidden="true">英</span>
+        <span class="fs-txt"><b>英語ルート大全</b><span>252 BOOKS</span></span>
+      </a>
+      <a href="/japanese/" style="--fsc:#8A6D2F">
+        <span class="fs-mark" aria-hidden="true">国</span>
+        <span class="fs-txt"><b>国語ルート大全</b><span>192 BOOKS</span></span>
+      </a>
+      <a href="/math/" style="--fsc:#24427C">
+        <span class="fs-mark" aria-hidden="true">数</span>
+        <span class="fs-txt"><b>数学ルート大全</b><span>162 BOOKS</span></span>
+      </a>
+      <a href="/science/" style="--fsc:#2F6E4F">
+        <span class="fs-mark" aria-hidden="true">理</span>
+        <span class="fs-txt"><b>理科ルート大全</b><span>373 BOOKS</span></span>
+      </a>
+      <a href="/social/" style="--fsc:#5B4E9E">
+        <span class="fs-mark" aria-hidden="true">社</span>
+        <span class="fs-txt"><b>社会ルート大全</b><span>293 BOOKS</span></span>
+      </a>
+      <a href="/joho/" style="--fsc:#1F6E7A">
+        <span class="fs-mark" aria-hidden="true">情</span>
+        <span class="fs-txt"><b>情報ルート大全</b><span>29 BOOKS</span></span>
+      </a>
+      <a href="/shoron/" style="--fsc:#8E3B5E">
+        <span class="fs-mark" aria-hidden="true">論</span>
+        <span class="fs-txt"><b>小論文ルート大全</b><span>89 BOOKS</span></span>
+      </a>
+    </div>
+    <div class="foot-links">
+      <a href="/">ルート大全 トップ</a>
+      <a href="/#subjects">科目から選ぶ</a>
+      <a href="/#catalog">参考書から探す</a>
+      <a href="/guides/">参考書の選び方</a>
+      <a href="/univ/">志望校から探す</a>
+      <a href="/search/">詳細検索</a>
+      <a href="/progress/">学習の記録</a>
+      <a href="/#faq">よくある質問</a>
+      <a href="https://x.com/route_taizen" target="_blank" rel="noopener noreferrer me">X @route_taizen</a>
+    </div>
+    <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
+      <a href="/about/">運営者情報</a>
+      <a href="/methodology/">データの作り方</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/ads/">広告について</a>
+      <a href="/changelog/">更新履歴</a>
+    </nav>
+    <div class="foot-legal">
+      <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
+      掲載している難易度・到達偏差値・想定学習時間は<a href="/methodology/">編集部の推定値</a>であり、学習成果を保証するものではありません。講師名を冠したルートは当サイトが独自に構成したもので、講師本人・所属予備校・出版社の推奨や監修ではありません。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。<br>
+      当サイトはアフィリエイト広告を利用しています。Amazon のアソシエイトとして、ルート大全は適格販売により収入を得ています。<br>
+      &copy; 2026 ルート大全
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "@id": "https://route-taizen.com/compare/#breadcrumb",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "ルート大全",
+     "item": "https://route-taizen.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "2 冊を比べる",
+     "item": "https://route-taizen.com/compare/"
+    }
+   ]
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://route-taizen.com/compare/#webpage",
+   "url": "https://route-taizen.com/compare/",
+   "name": "参考書を 2 冊並べて比べる - ルート大全",
+   "description": "収録している参考書から 2 冊を選び、難易度・到達目安・問題数・想定学習時間・向いている人・強みと注意点を横に並べて比べられます。",
+   "inLanguage": "ja",
+   "isPartOf": {
+    "@id": "https://route-taizen.com/#website"
+   },
+   "breadcrumb": {
+    "@id": "https://route-taizen.com/compare/#breadcrumb"
+   }
+  }
+ ]
+}
+</script>
+
+<script>/* 取得先。build/generate-compare.mjs が書く。手で編集しない */window.RT_COMPARE_ASSETS={"v":1,"subjects":{"english":{"ja":"英語","full":"英語ルート大全","color":"#B5432A","core":"/assets/generated/subjects/english.core.json?v=03f24fc092","books":"/assets/generated/subjects/english.books.json?v=7b3255edc6"},"japanese":{"ja":"国語","full":"国語ルート大全","color":"#8A6D2F","core":"/assets/generated/subjects/japanese.core.json?v=017f5bd80b","books":"/assets/generated/subjects/japanese.books.json?v=47d4d7a7ff"},"math":{"ja":"数学","full":"数学ルート大全","color":"#24427C","core":"/assets/generated/subjects/math.core.json?v=0017800b5f","books":"/assets/generated/subjects/math.books.json?v=953159bbed"},"science":{"ja":"理科","full":"理科ルート大全","color":"#2F6E4F","core":"/assets/generated/subjects/science.core.json?v=551394be96","books":"/assets/generated/subjects/science.books.json?v=f65c37f7df"},"social":{"ja":"社会","full":"社会ルート大全","color":"#5B4E9E","core":"/assets/generated/subjects/social.core.json?v=830b7ce4a5","books":"/assets/generated/subjects/social.books.json?v=16b155396f"},"joho":{"ja":"情報","full":"情報ルート大全","color":"#1F6E7A","core":"/assets/generated/subjects/joho.core.json?v=a70ad40ed1","books":"/assets/generated/subjects/joho.books.json?v=f1ce6e25be"},"shoron":{"ja":"小論文","full":"小論文ルート大全","color":"#8E3B5E","core":"/assets/generated/subjects/shoron.core.json?v=a2f7f8b0b0","books":"/assets/generated/subjects/shoron.books.json?v=16eeae68bf"}}};</script>
+<script src="/assets/js/cover-policies.js" defer></script>
+<script src="/assets/js/cover-resolver.js" defer></script>
+<script src="/assets/js/compare.js" defer></script>
+
+</body>
+</html>

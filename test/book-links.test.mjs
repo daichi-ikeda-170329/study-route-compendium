@@ -85,3 +85,12 @@ test('書籍ページの見出しは 基本情報 → 状態を記録する → 
     assert.deepEqual(h2.slice(0, 3), ['基本情報', 'この参考書の状態を記録する', 'どんな人に向いているか'], `${rel}: ${h2.join(' / ')}`);
   }
 });
+
+test('2 冊比較ページは noindex で sitemap に載らず、書籍ページの横の選択肢から比較へ辿れる（仕様書 4.2）', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'compare/index.html'), 'utf8');
+  assert.match(html, /<meta name="robots" content="noindex,follow">/);
+  assert.match(html, /window\.RT_COMPARE_ASSETS=/);
+  assert.doesNotMatch(fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8'), /\/compare\//);
+  const book = fs.readFileSync(path.join(ROOT, 'english/books/rules4/index.html'), 'utf8');
+  assert.match(book, /<a class="bcmp__go" href="\/compare\/\?a=english:rules4&amp;b=english:[a-z0-9-]+">この本と比較<\/a>/);
+});

@@ -15,7 +15,7 @@ import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { authorsOf, searchName, withAuthor, displayName } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
-import { bookCards } from './lib/cards.mjs';
+import { bookCards, bookCard } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { pickAlternatives, pickNext, pickPrev } from './lib/book-links.mjs';
@@ -425,7 +425,12 @@ ${(book.cons || []).map(c => `          <li>${esc(c)}</li>`).join('\n')}
       <div class="eyebrow">Alternatives</div>
       <h2 class="sec">同じ役割・同じレベルの参考書</h2>
       <p class="sec-lead">${esc(bn)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。相性で選んで構いません。ここから 1 冊を選び切ることが大切で、複数を並行させる必要はありません。</p>
-${bookCards(alts, sub, stages)}
+      <div class="bcards">
+${alts.map(a => `      <div class="bcmp">
+${bookCard(a, sub, stages)}
+        <a class="bcmp__go" href="/compare/?a=${sub.dir}:${book.id}&amp;b=${sub.dir}:${a.id}">この本と比較</a>
+      </div>`).join('\n')}
+      </div>
     </section>` : ''}
 
     ${next.list.length ? `<section class="block">

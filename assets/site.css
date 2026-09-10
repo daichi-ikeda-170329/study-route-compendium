@@ -470,6 +470,11 @@ img, svg, video, iframe { max-width: 100%; }
 .bk-prev span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .bk-ed b{font-family:var(--mono);font-size:12px;color:var(--ink);margin-right:10px}
 
+/* 書籍ページの「同じ役割・同じレベル」のカードに添える比較リンク（/compare/。仕様書 4.2） */
+.bcmp{display:flex;flex-direction:column;min-width:0}
+.bcmp>.bcard{flex:1}
+.bcmp__go{align-self:flex-start;margin-top:6px;font-size:12px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:4px 0}
+
 /* rt-search:start — build/apply-search-style.mjs が assets/js/search.js の STYLE から書き込む。手で編集しない */
 :root{--rt-search-css:1}
 .app-header__in{flex-wrap:wrap}

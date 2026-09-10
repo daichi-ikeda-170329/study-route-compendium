@@ -310,3 +310,30 @@ test('講師ルートを表示すると、ルートの冒頭に非公式の注�
   await expect(first).toContainText('このルートは当サイトが市販の著作をもとに独自に構成したもので、関正生本人・所属予備校・出版社の推奨や監修ではありません。');
   expect(errors).toEqual([]);
 });
+
+/* ---------- 2 冊比較（仕様書 4.2） ---------- */
+
+test('2 冊比較: 有効な 2 冊なら表が出る', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/compare/?a=english:rules4&b=english:supremacy', { waitUntil: 'domcontentloaded' });
+  const table = page.locator('table.cmpx');
+  await expect(table).toBeVisible();
+  await expect(table.locator('thead')).toContainText('The Rules');
+  await expect(table.locator('thead')).toContainText('SUPREMACY');
+  await expect(table.locator('tbody tr')).toHaveCount(12);
+  expect(errors).toEqual([]);
+});
+
+test('2 冊比較: 無効な指定なら空の状態になり、選ぶと表に進める', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/compare/?a=english:zzz', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('.cmp-msg')).toContainText('見つかりませんでした');
+  await expect(page.locator('table.cmpx')).toHaveCount(0);
+  for (const [i, q] of [[0, 'ポレポレ'], [1, 'SUPREMACY']]) {
+    await page.locator(`#cmpQ${i}`).fill(q);
+    await page.locator(`#cmpHits${i} button`).first().click();
+  }
+  await page.locator('#cmpGo').click();
+  await expect(page.locator('table.cmpx')).toBeVisible();
+  expect(errors).toEqual([]);
+});

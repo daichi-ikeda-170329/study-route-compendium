@@ -33,6 +33,7 @@ export const KEY_PAGES = [
   { url: '/guides/', name: '記事ジャンルの入口' },
   { url: '/guides/hajime-no-issatsu/', name: '部門別ランキング記事' },
   { url: '/search/', name: '詳細検索' },
+  { url: '/compare/?a=english:rules4&b=english:supremacy', name: '2 冊比較' },
   { url: '/progress/', name: '学習の記録' },
   { url: '/privacy/', name: 'プライバシー' },
   { url: '/methodology/', name: '算出方法' },
