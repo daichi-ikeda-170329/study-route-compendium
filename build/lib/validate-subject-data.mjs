@@ -34,7 +34,46 @@ const TYPES = {
   basic: 'boolean', nocover: 'boolean', cover: 'string', coverExample: 'string',
   pros: 'array', cons: 'array', unis: 'array', alts: 'array',
   fb: 'object',
+  // 書籍ページの本文を厚くするための任意項目（仕様書 3.1）。無い本は従来どおりの表示
+  pages: 'number', media: 'array', toc: 'array', howto: 'array', finish: 'string', editions: 'array',
 };
+
+/** media に書いてよい値（書籍ページの基本情報「付属」） */
+export const MEDIA_VALUES = ['音声', 'アプリ', '電子版', '動画', '別冊解答'];
+/** howto の phase に書いてよい値（書籍ページの「使い方の手順」） */
+export const HOWTO_PHASES = ['1周目', '2周目', '3周目以降', '仕上げ'];
+/** 構成（toc）に出す項目の上限 */
+export const TOC_MAX = 12;
+
+/** 任意項目の中身の検査。型（TYPES）が合っている前提で呼ぶ */
+function checkBookExtras(b, bad) {
+  const key = b.id;
+  if (typeof b.pages === 'number' && (!Number.isInteger(b.pages) || b.pages < 1)) bad(`${key}.pages: 1 以上の整数のはずが ${b.pages}`);
+  if (Array.isArray(b.media)) {
+    for (const m of b.media) if (!MEDIA_VALUES.includes(m)) bad(`${key}.media: 「${m}」は ${MEDIA_VALUES.join('・')} のどれでもない`);
+    if (new Set(b.media).size !== b.media.length) bad(`${key}.media: 同じ値が 2 回ある`);
+  }
+  if (Array.isArray(b.toc)) {
+    if (!b.toc.length) bad(`${key}.toc: 空の配列。無いなら項目ごと持たない`);
+    if (b.toc.length > TOC_MAX) bad(`${key}.toc: ${b.toc.length} 項目（${TOC_MAX} 項目まで）`);
+    for (const t of b.toc) if (typeof t !== 'string' || !t) bad(`${key}.toc: 文字列でない項目がある`);
+  }
+  if (Array.isArray(b.howto)) {
+    if (!b.howto.length) bad(`${key}.howto: 空の配列。無いなら項目ごと持たない`);
+    for (const h of b.howto) {
+      if (!h || typeof h !== 'object' || Array.isArray(h)) { bad(`${key}.howto: オブジェクトでない項目がある`); continue; }
+      if (!HOWTO_PHASES.includes(h.phase)) bad(`${key}.howto: phase「${h.phase}」は ${HOWTO_PHASES.join('・')} のどれでもない`);
+      if (typeof h.do !== 'string' || !h.do) bad(`${key}.howto: do が空か文字列でない`);
+    }
+  }
+  if (b.finish === '') bad(`${key}.finish: 空文字。無いなら項目ごと持たない`);
+  if (Array.isArray(b.editions)) {
+    for (const e of b.editions) {
+      if (!e || !Number.isInteger(e.year) || e.year < 1900 || e.year > 2100) bad(`${key}.editions: year が西暦の整数でない項目がある`);
+      if (!e || typeof e.note !== 'string' || !e.note) bad(`${key}.editions: note が空か文字列でない`);
+    }
+  }
+}
 
 const typeOf = (v) => (Array.isArray(v) ? 'array' : typeof v);
 
@@ -62,11 +101,13 @@ export function validateSubjectData(dir, data) {
     if (ids.has(b.id)) bad(`${key}: id が重複している`);
     ids.add(b.id);
 
+    let typed = true;
     for (const [f, want] of Object.entries(TYPES)) {
       if (b[f] === undefined || b[f] === null) continue;
       const got = typeOf(b[f]);
-      if (got !== want) bad(`${key}.${f}: ${want} のはずが ${got}`);
+      if (got !== want) { bad(`${key}.${f}: ${want} のはずが ${got}`); typed = false; }
     }
+    if (typed) checkBookExtras(b, bad);
 
     // 不明を空文字や 0 で表していないか。**空文字は「無い」ではなく「書き忘れ」の合図**
     for (const f of ['official', 'pub', 'isbn13', 'hensachi', 'problems', 'hours', 'style']) {

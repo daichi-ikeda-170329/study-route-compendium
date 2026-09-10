@@ -18,7 +18,7 @@ import { coverSrcs } from './lib/cover.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
-import { pickAlternatives, pickNext } from './lib/book-links.mjs';
+import { pickAlternatives, pickNext, pickPrev } from './lib/book-links.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { degreeLine, bandOf } from './lib/scale.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
@@ -145,7 +145,8 @@ function renderBook(book, ctx) {
   const fieldName = subLabel ? `${sub.ja}（${subLabel}）` : sub.ja;
   // 読者に見せる書名（内部略称なら正式名称。build/lib/booktitle.mjs の displayName）
   const bn = displayName(book, sub.dir);
-  const position = prov ? '' : positionSentence(book, books, st, fieldName, bn);
+  // 本ごとに数字が変わるだけの定型文。構成と使い方の手順を書いた本では、そちらで足りるので出さない
+  const position = prov || (book.toc && book.howto) ? '' : positionSentence(book, books, st, fieldName, bn);
 
   // 検索されるときの書名。内部略称の本は正式名称由来に、著者名が
   // 書名の一部として通っている本（「関正生の英文法ポラリス」など）は著者名込みにする。
@@ -259,9 +260,64 @@ function renderBook(book, ctx) {
     ['問題数・構成', esc(book.problems || '—')],
     ['想定学習時間', esc(book.hours || '—')],
     ['形式', esc(book.style || '—')],
+    // 書誌情報で確かめられた本だけが持つ（仕様書 3.1）。無い本は行ごと出さない
+    ...(typeof book.pages === 'number' ? [['ページ数', `${book.pages} ページ`]] : []),
+    ...(Array.isArray(book.media) && book.media.length ? [['付属', esc(book.media.join('・'))]] : []),
     ['ISBN', placeholder ? '—（特定の商品ではありません）'
       : book.isbn13 ? `<span class="mono">${esc(book.isbn13)}</span>` : '—'],
   ].map(([k, v]) => `      <div><dt>${k}</dt><dd>${v}</dd></div>`).join('\n');
+
+  /* 本文を厚くする任意項目（books.json の toc / howto / finish / editions）と、
+     ルートから逆に引く「この本の前に置く本」。どれも無い本は節ごと出さない（従来と同じ HTML） */
+  const toc = Array.isArray(book.toc) && book.toc.length ? book.toc : null;
+  const howto = Array.isArray(book.howto) && book.howto.length ? book.howto : null;
+  const editions = Array.isArray(book.editions) && book.editions.length
+    ? [...book.editions].sort((a, b) => b.year - a.year) : null;
+  const prevs = prov ? [] : pickPrev(book, books, ctx.routes, ctx.tiers);
+  const extraBody = [
+    toc ? `<section class="block prose">
+      <div class="eyebrow">Contents</div>
+      <h2 class="sec">構成</h2>
+      <ol class="bk-toc">
+${toc.map(t => `        <li>${esc(t)}</li>`).join('\n')}
+      </ol>
+      <p class="spec__note">目次の大きな単位です（出版社の公表している書誌情報による）。</p>
+    </section>` : '',
+    howto ? `<section class="block prose">
+      <div class="eyebrow">How to use</div>
+      <h2 class="sec">使い方の手順</h2>
+      <ol class="bk-howto">
+${howto.map(h => `        <li><b>${esc(h.phase)}</b>${esc(h.do)}</li>`).join('\n')}
+      </ol>
+      <p class="spec__note">編集部がすすめる進め方です。1 周目で完璧を求めず、周回で仕上げる前提で書いています。</p>
+    </section>` : '',
+    book.finish ? `<section class="block prose">
+      <div class="eyebrow">Finish line</div>
+      <h2 class="sec">終わりの基準</h2>
+      <p>${esc(book.finish)}</p>
+    </section>` : '',
+  ].filter(Boolean).join('\n\n    ');
+
+  const prevSection = prevs.length ? `<section class="block">
+      <div class="eyebrow">Before this book</div>
+      <h2 class="sec">この本の前に置く本</h2>
+      <p class="sec-lead">${esc(sub.full)}の志望校別ルートで、${esc(bn)}の直前に置いている本です。ここに挙げた本を終えてから取りかかると、段差なく進めます。</p>
+      <ul class="bk-prev">
+${prevs.map(p => {
+    const pn = displayName(p.book, sub.dir);
+    return `        <li><a href="/${sub.dir}/books/${p.book.id}/">${esc(pn)}</a><span>${esc(p.tier.name)}のルートでは${esc(pn)}の次${p.count > 1 ? `（${p.count} つのルートで直前）` : ''}</span></li>`;
+  }).join('\n')}
+      </ul>
+    </section>` : '';
+
+  const editionSection = editions ? `<section class="block">
+      <div class="eyebrow">Editions</div>
+      <h2 class="sec">改訂の履歴</h2>
+      <ul class="bk-ed">
+${editions.map(e => `        <li><b>${e.year} 年</b>${esc(e.note)}</li>`).join('\n')}
+      </ul>
+      <p class="spec__note">国立国会図書館・CiNii Books・出版社などの書誌で確かめられた版だけを載せています。版によって収録内容が変わるので、購入するときは版を確認してください。</p>
+    </section>` : '';
 
   const nextLead = next.kind === 'same'
     ? `${bn}を終えたあと、同じ「${st.label}」の枠内でもう一段レベルを上げるなら、次の参考書が候補になります。`
@@ -344,7 +400,7 @@ ${/* 学習の記録は基本情報の直後に置く（購入ボタンの後ろ
       ${degreeLine(book.diff)}
     </section>${adUnit('inArticle')}
 
-    <div class="pc-grid">
+    ${extraBody}${extraBody ? '\n\n    ' : ''}<div class="pc-grid">
       <div class="pc good">
         <h3><i><svg viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>強み</h3>
         <ul>
@@ -365,7 +421,7 @@ ${(book.cons || []).map(c => `          <li>${esc(c)}</li>`).join('\n')}
       あくまで「このレベルの本を使う人が多い層」の目安です。同じ大学でも学部・方式で必要な到達点は変わります。${sub.full}の<a href="/${sub.dir}/" style="color:var(--indigo);font-weight:700">ルート画面</a>で志望校名を直接入れると、出題形式に合わせた並びが出ます。</p>
     </div>` : ''}
 
-    ${alts.length ? `<section class="block">
+    ${prevSection}${prevSection ? '\n\n    ' : ''}${alts.length ? `<section class="block">
       <div class="eyebrow">Alternatives</div>
       <h2 class="sec">同じ役割・同じレベルの参考書</h2>
       <p class="sec-lead">${esc(bn)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。相性で選んで構いません。ここから 1 冊を選び切ることが大切で、複数を並行させる必要はありません。</p>
@@ -379,7 +435,7 @@ ${bookCards(alts, sub, stages)}
 ${bookCards(next.list, sub, stages)}
     </section>` : ''}
 
-    <section class="block">
+    ${editionSection}${editionSection ? '\n\n' : ''}    <section class="block">
       <div class="eyebrow">Where to buy</div>
       <h2 class="sec">購入する</h2>
       <div class="buy">
@@ -465,7 +521,7 @@ for (const sub of targets) {
     const outDir = path.join(ROOT, sub.dir, 'books', book.id);
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.join(outDir, 'index.html'),
-      renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, counts, config }));
+      renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, tiers: d.tiers, counts, config }));
     written++;
   }
   console.log(`  ✓ ${sub.dir}: ${list.length} ページ`);

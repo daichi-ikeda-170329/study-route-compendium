@@ -110,3 +110,42 @@ export function pickNext(book, books, exclude, dir, routes, max = 6) {
   const kind = sameRole.length && later2.length ? 'mixed' : later2.length ? 'later' : 'same';
   return { list: [...sameRole, ...later2].slice(0, max), kind };
 }
+
+/**
+ * この本の前に置く本（縦の接続の逆向き）。
+ *
+ * 志望校別ルートの全志望レベル・全トラック・全方針（omni / quick）の本編を見て、
+ * この本が i 番目にあるときの i-1 番目の本を数える。多く出た順に最大 3 冊。
+ * 並行して進める本・ルートに載っていない本は、前に置く本が決まらないので空になる。
+ *
+ * @param {object} book
+ * @param {object[]} books  同じ科目の BOOKS
+ * @param {object} routes   同じ科目の ROUTES
+ * @param {object[]} tiers  同じ科目の TIERS（並び順と表示名に使う）
+ * @returns {{book: object, count: number, tier: object}[]}  tier はその組み合わせが最初に出る志望レベル
+ */
+export function pickPrev(book, books, routes, tiers, max = 3) {
+  const byId = new Map(books.map(b => [b.id, b]));
+  const found = new Map();   // 前の本の id → {count, tier, order}
+  (tiers || []).forEach((tier, order) => {
+    const node = (routes || {})[tier.id] || {};
+    for (const [k, v] of Object.entries(node)) {
+      if (!v || Array.isArray(v) || k === 'para' || k === 'final' || k === 'basic') continue;
+      for (const pol of ['omni', 'quick']) {
+        const list = v[pol] || [];
+        const i = list.findIndex(s => s.id === book.id);
+        if (i <= 0) continue;
+        const prevId = list[i - 1].id;
+        const cur = found.get(prevId);
+        if (cur) cur.count++;
+        else found.set(prevId, { count: 1, tier, order });
+      }
+    }
+  });
+  return [...found.entries()]
+    .map(([id, x]) => ({ book: byId.get(id), count: x.count, tier: x.tier, order: x.order }))
+    .filter(x => x.book && x.book.recordType !== 'routePlaceholder' && x.book.id !== book.id)
+    .sort((a, b) => b.count - a.count || a.order - b.order || a.book.id.localeCompare(b.book.id))
+    .slice(0, max)
+    .map(({ book: b, count, tier }) => ({ book: b, count, tier }));
+}

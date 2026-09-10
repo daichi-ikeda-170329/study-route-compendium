@@ -46,11 +46,18 @@ function main() {
   const isbnSeen = new Map();
   const mismatches = { official: [], pub: [], year: [] };
   const staleChecks = [];
+  /* 書籍ページの本文を厚くする任意項目の充足（仕様書 3.1）。科目ごとに「持っている本の数」 */
+  const EXTRA_FIELDS = ['toc', 'howto', 'finish', 'editions', 'pages', 'media'];
+  const extras = {};
 
   for (const s of SUBJECTS) {
     const d = loadSubjectData(ROOT, s.dir);
     const inRoute = s.catalogOnly ? new Map() : tally(d.routes, d.tiers).main;
     bySubject[s.dir] = { total: d.books.length, verified: 0, partial: 0, unverified: 0, notApplicable: 0 };
+    extras[s.dir] = Object.fromEntries(EXTRA_FIELDS.map(f => [f, d.books.filter(b => {
+      const v = b[f];
+      return Array.isArray(v) ? v.length > 0 : v !== undefined && v !== null && v !== '';
+    }).length]));
 
     for (const b of d.books) {
       const v = verificationOf(s.dir, b);
@@ -112,6 +119,7 @@ function main() {
     mismatchCounts: Object.fromEntries(Object.entries(mismatches).map(([k, v]) => [k, v.length])),
     staleChecks: staleChecks.length,
     textMarkRemaining: rows.filter(r => r.textMark).length,
+    extras,
   };
 
   // 生成日は**中身が変わった日**。実行日を書くと、データを一切変えていない日に
@@ -166,6 +174,19 @@ function main() {
     ...PRIORITY.map((p, i) => {
       const x = byPriority[p.key];
       return `| ${i + 1} | ${x.label} | ${x.total} | ${x.unverified} | ${x.partial} |`;
+    }),
+    '',
+    '## 書籍ページの任意項目の充足',
+    '',
+    '書籍ページの本文を厚くするための任意項目（`books.json` の `toc` / `howto` / `finish` / `editions` / `pages` / `media`）を',
+    '持っている本の数。書誌で確かめられる `toc` / `pages` / `media` / `editions` は推測で埋めない。',
+    '',
+    `| 科目 | 収録 | ${EXTRA_FIELDS.join(' | ')} |`,
+    `|---|---:|${EXTRA_FIELDS.map(() => '---:').join('|')}|`,
+    ...SUBJECTS.map(s => {
+      const x = extras[s.dir];
+      const tot = bySubject[s.dir].total;
+      return `| ${s.ja} | ${tot} | ${EXTRA_FIELDS.map(f => `${x[f]}（${Math.round((x[f] / tot) * 1000) / 10}%）`).join(' | ')} |`;
     }),
     '',
     '## 書誌データベースとの食い違い',

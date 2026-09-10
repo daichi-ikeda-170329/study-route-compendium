@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-06",
+ "generatedAt": "2026-09-10",
  "total": 1390,
  "byStatus": {
   "verified": 402,
@@ -103,5 +103,63 @@
   "year": 139
  },
  "staleChecks": 0,
- "textMarkRemaining": 159
+ "textMarkRemaining": 159,
+ "extras": {
+  "english": {
+   "toc": 2,
+   "howto": 3,
+   "finish": 3,
+   "editions": 3,
+   "pages": 3,
+   "media": 2
+  },
+  "japanese": {
+   "toc": 0,
+   "howto": 0,
+   "finish": 0,
+   "editions": 0,
+   "pages": 0,
+   "media": 0
+  },
+  "math": {
+   "toc": 0,
+   "howto": 1,
+   "finish": 1,
+   "editions": 1,
+   "pages": 1,
+   "media": 1
+  },
+  "science": {
+   "toc": 0,
+   "howto": 0,
+   "finish": 0,
+   "editions": 0,
+   "pages": 0,
+   "media": 0
+  },
+  "social": {
+   "toc": 0,
+   "howto": 0,
+   "finish": 0,
+   "editions": 0,
+   "pages": 0,
+   "media": 0
+  },
+  "joho": {
+   "toc": 0,
+   "howto": 0,
+   "finish": 0,
+   "editions": 0,
+   "pages": 0,
+   "media": 0
+  },
+  "shoron": {
+   "toc": 0,
+   "howto": 0,
+   "finish": 0,
+   "editions": 0,
+   "pages": 0,
+   "media": 0
+  }
+ }
 }
