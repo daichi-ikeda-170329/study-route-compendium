@@ -29,6 +29,10 @@ import { displayName } from './lib/booktitle.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WARN_OK = process.argv.includes('--warn-ok');
+/** OGP を画像ファイルではなく台帳で確かめる（画像を作らない CI 用。.github/workflows/test.yml） */
+const OGP_LEDGER = process.env.RT_OGP_FROM_LEDGER === '1'
+  ? new Set(Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'ogp-hashes.json'), 'utf8')).files))
+  : null;
 
 const errors = [];
 const warns = [];
@@ -428,8 +432,12 @@ function checkHtml(files) {
     for (const m of src.matchAll(/<meta (?:property="og:image"|name="twitter:image") content="([^"]+)"/g)) {
       const u = m[1];
       if (!u.startsWith(`${ORIGIN}/`)) { err(at, `og:image が絶対 URL でない（${u}）`); continue; }
-      const f = path.join(ROOT, u.slice(ORIGIN.length + 1));
-      if (!fs.existsSync(f)) err(at, `og:image のファイルが無い（${u}）`);
+      const rel_ = u.slice(ORIGIN.length + 1);
+      /* OGP 画像はコミットしない（CI で作る）。画像の無い環境（test.yml）では
+         RT_OGP_FROM_LEDGER=1 で、ハッシュ台帳に載っていることで代替する */
+      if (OGP_LEDGER ? !OGP_LEDGER.has(rel_) : !fs.existsSync(path.join(ROOT, rel_))) {
+        err(at, `og:image の${OGP_LEDGER ? '台帳（build/data/ogp-hashes.json）に無い' : 'ファイルが無い'}（${u}）`);
+      }
     }
 
     // 書籍ページはその本の OGP を指す（科目共通の画像では、貼っても何の本か分からない）

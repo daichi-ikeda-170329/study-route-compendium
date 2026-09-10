@@ -29,6 +29,17 @@ jobs:
       - name: 依存パッケージを入れる
         run: npm ci
 
+      # OGP のフォント（Google Fonts から取る）を使い回す。build/ogp/ を変えたら取り直す
+      - name: OGP のフォントを使い回す
+        uses: actions/cache@v4
+        with:
+          path: build/.cache/fonts
+          key: fonts-${{ hashFiles('build/ogp/**') }}
+
+      # OGP 画像はコミットしていない。画像が無いうちの検査は台帳で代替する
+      - name: OGP の台帳がデータとずれていないか
+        run: node build/gen-ogp.mjs --check --no-files
+
       # データが壊れた状態から 1,390 ページを作らないための関門
       - name: データを検証する
         run: npm run check:data
@@ -39,6 +50,8 @@ jobs:
       # 文章の検査（非日本語文字の混入・孤立ページ・リンク切れ・定型段落の重複・誇張語）
       - name: サイト全体を検査する
         run: npm run check:site
+        env:
+          RT_OGP_FROM_LEDGER: '1'
 
       # ここが本体。生成し直して差分が出たら落とす
       - name: 生成物が最新か確かめる

@@ -193,7 +193,10 @@ async function main() {
 
   // 6. 代表的な配信アセットが生きている
   for (const p of ['/assets/site.css', '/assets/js/book-index.js', '/assets/js/search.js',
-                   '/sitemap.xml', '/robots.txt', '/ads.txt']) {
+                   '/sitemap.xml', '/robots.txt', '/ads.txt',
+                   // OGP 画像はリポジトリにコミットせず、pages.yml が CI で作って dist/ に入れる（仕様書 5.2）。
+                   // 作り忘れ・配り忘れを本番で見る
+                   '/assets/ogp/english/rules4.png']) {
     await expectOk(p);
   }
 

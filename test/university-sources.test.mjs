@@ -47,9 +47,10 @@ test('大学別ページの og:image は大学ごとの画像を指し、ファ�
   for (const slug of ['waseda', 'fun', 'todai']) {
     const html = fs.readFileSync(path.join(ROOT, 'univ', slug, 'index.html'), 'utf8');
     assert.ok(html.includes(`<meta property="og:image" content="https://route-taizen.com/assets/ogp/univ/${slug}.png">`), `${slug}: og:image が大学の画像でない`);
-    assert.ok(fs.existsSync(path.join(ROOT, 'assets/ogp/univ', `${slug}.png`)), `${slug}: 画像が無い`);
   }
+  // 画像はコミットしない（CI で作る。仕様書 5.2）ので、実在はハッシュ台帳で確かめる
   const hashes = JSON.parse(fs.readFileSync(path.join(ROOT, 'build/data/ogp-hashes.json'), 'utf8')).files;
+  for (const slug of ['waseda', 'fun', 'todai']) assert.ok(hashes[`assets/ogp/univ/${slug}.png`], `${slug}: 台帳に無い`);
   assert.equal(Object.keys(hashes).filter(k => k.startsWith('assets/ogp/univ/')).length, slugs.size, '台帳の大学数と画像の数が合わない');
 });
 

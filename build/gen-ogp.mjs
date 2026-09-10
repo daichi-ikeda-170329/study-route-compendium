@@ -6,6 +6,13 @@
  *   node build/gen-ogp.mjs --books        書籍別だけ
  *   node build/gen-ogp.mjs --univ         大学別（/univ/<slug>/）だけ
  *   node build/gen-ogp.mjs --check        データとずれていれば終了コード 1 で落ちる
+ *   node build/gen-ogp.mjs --check --no-files
+ *                                        画像ファイルの有無は見ず、ハッシュ台帳とのずれだけを見る
+ *
+ * **画像はリポジトリにコミットしない**（2026-09-11。1,700 枚を超えて履歴が膨らむため。仕様書 5.2）。
+ * .gitignore に入れてあり、公開物は .github/workflows/pages.yml が CI で作る。
+ * 台帳（build/data/ogp-hashes.json）はコミットしたままにし、CI の test.yml は
+ * `--check --no-files` で「データを変えたのに台帳を更新していない」だけを見る
  *
  * **なぜ要るか。** 2026-08 に置かれた assets/ogp*.png は、元の SVG も生成手順も
  * リポジトリに無く、画像の中に冊数が焼き込まれていた。冊数が増えても直せず、
@@ -38,6 +45,7 @@ import { tierGroup } from './lib/tiers.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const CHECK = args.includes('--check');
+const NO_FILES = args.includes('--no-files');
 const ONLY_SUBJECTS = args.includes('--subjects');
 const ONLY_BOOKS = args.includes('--books');
 const ONLY_UNIV = args.includes('--univ');
@@ -88,7 +96,7 @@ const stale = [];
 async function emit(rel, svg, hashes) {
   const file = path.join(ROOT, rel);
   const h = sha(svg);
-  if (hashes[rel] === h && fs.existsSync(file)) return;
+  if (hashes[rel] === h && (NO_FILES || fs.existsSync(file))) return;
   if (CHECK) { stale.push(rel); return; }
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, await rasterize(svg));

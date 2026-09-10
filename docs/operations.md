@@ -353,6 +353,12 @@ node build/gen-x-posts.mjs 2026-09    # 月を指定
 
 ## OGP 画像
 
+> **2026-09-11 から OGP 画像はリポジトリにコミットしない**（`.gitignore` の `assets/ogp/` `assets/ogp.png` `assets/ogp-*.png`）。
+> 公開物は `.github/workflows/pages.yml` が CI で作り、`dist/` に入れる。**ローカルで見るときだけ `npm run ogp` を流す。コミットしない。**
+> ハッシュ台帳 `build/data/ogp-hashes.json` はコミットする（`test.yml` は `gen-ogp.mjs --check --no-files` で台帳だけを見る。
+> 画像の無い環境の `check-site.mjs` は `RT_OGP_FROM_LEDGER=1` で台帳を実在の代わりにする）。本番に画像が出ているかは
+> `npm run check:production` が `/assets/ogp/english/rules4.png` で確かめる。
+
 SNS やチャットにリンクを貼ったときに出る 1200×630 の画像。**全部がビルドの生成物**で、
 `node build/gen-ogp.mjs` で作り直せる。
 

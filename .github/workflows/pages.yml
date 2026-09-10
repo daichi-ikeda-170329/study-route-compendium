@@ -39,6 +39,15 @@ jobs:
       - name: 依存パッケージを入れる
         run: npm ci
 
+      # OGP のフォント（Google Fonts から取る）を使い回す。build/ogp/ を変えたら取り直す
+      - name: OGP のフォントを使い回す
+        uses: actions/cache@v4
+        with:
+          path: build/.cache/fonts
+          key: fonts-${{ hashFiles('build/ogp/**') }}
+
+      # OGP 画像はリポジトリに無い（.gitignore）。all.mjs の中の gen-ogp.mjs がここで作り、
+      # build-public.mjs が dist/assets/ogp/ に入れる。台帳が同じなら git diff は出ない
       - name: 生成物が最新か確かめる
         run: |
           node build/all.mjs

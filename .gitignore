@@ -16,3 +16,9 @@ dist/
 
 # KPI の入力（管理画面から出した集計 CSV）。**リポジトリにも公開物にも入れない**
 private/
+
+# OGP 画像（生成物）。**コミットしない**（1,700 枚を超えて履歴が膨らむため。2026-09-11）。
+# 公開物は .github/workflows/pages.yml が CI で作る。台帳 build/data/ogp-hashes.json はコミットする
+assets/ogp/
+assets/ogp-*.png
+assets/ogp.png
