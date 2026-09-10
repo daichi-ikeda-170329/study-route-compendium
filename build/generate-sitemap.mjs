@@ -84,7 +84,14 @@ if (fs.existsSync(univRoot)) {
     .filter(d => d.isDirectory() && fs.existsSync(path.join(univRoot, d.name, 'index.html')))
     .map(d => d.name)
     .sort();
-  for (const slug of slugs) add(urls, `univ/${slug}`, '0.8', 'weekly');
+  for (const slug of slugs) {
+    add(urls, `univ/${slug}`, '0.8', 'weekly');
+    // 学部別ページ（/univ/<slug>/<学部>/。仕様書 4.5）
+    const sub = path.join(univRoot, slug);
+    for (const f of fs.readdirSync(sub, { withFileTypes: true }).filter(x => x.isDirectory()).map(x => x.name).sort()) {
+      if (fs.existsSync(path.join(sub, f, 'index.html'))) add(urls, `univ/${slug}/${f}`, '0.7', 'monthly');
+    }
+  }
 }
 
 // 科目に属さない記事（/guides/…）

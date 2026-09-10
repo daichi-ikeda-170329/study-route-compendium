@@ -59,6 +59,7 @@ import { NON_TRACK, trackKeys, trackLabel, groupTracks } from './lib/tracks.mjs'
 import { beforeRoute, beforeSentence } from './lib/route-start.mjs';
 import { tierGroup } from './lib/tiers.mjs';
 import { loadUniversitySources } from './lib/university-sources.mjs';
+import { facultyGroups, facultyVerdict, facultyPath, renderFacultyPage } from './lib/faculty-pages.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -105,6 +106,19 @@ const MAX_BOOKS_PER_TRACK = 4;
 const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8'));
 /** 出典（年度・確認日・公式 URL・学部×方式）。登録の無い大学は undefined */
 const SOURCES = loadUniversitySources();
+
+/**
+ * 学部別ページを作る学部（仕様書 4.5）。slug を持ち、固有テキストが 300 字以上の学部だけ。
+ * 足りない学部は理由をログに出して作らない（build/lib/faculty-pages.mjs）
+ */
+const FACULTY_PAGES = new Map();   // 大学の slug → 作る学部のグループ
+for (const [slug, src] of Object.entries(SOURCES)) {
+  for (const g of facultyGroups(src)) {
+    const v = facultyVerdict(g);
+    if (v.ok) FACULTY_PAGES.set(slug, [...(FACULTY_PAGES.get(slug) || []), g]);
+    else console.log(`  – ${facultyPath(slug, g.slug)} を作らない: ${v.reason}`);
+  }
+}
 
 const data = {};
 const counts = {};
@@ -632,6 +646,8 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp/univ/${slug}.png` })}
 .ufac thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;white-space:nowrap}
 .ufac tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
 .ufac tr:last-child th,.ufac tr:last-child td{border-bottom:none}
+.ufac-go{margin-top:10px;font-size:13px;line-height:1.9}
+.ufac-go a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
@@ -690,7 +706,8 @@ ${med ? '      <a href="#med">医学部医学科</a>\n' : ''}${perSubject.map(p 
     <h2 class="sec">${esc(name)}の入試はどう組み立てられているか</h2>
     <p class="sec-lead">科目別の対策に入る前に、${esc(name)}の入試がどういう形で行われるかを押さえておきます。ここが分かっていないと、同じ大学の別方式の過去問を解いて手応えを取り違えます。</p>
 ${facultyTable}
-    <div class="unote">
+${(FACULTY_PAGES.get(slug) || []).length ? `      <p class="ufac-go">学部別に見る: ${FACULTY_PAGES.get(slug).map(g => `<a href="${facultyPath(slug, g.slug)}">${esc(g.name)}</a>`).join('、')}</p>
+` : ''}    <div class="unote">
       <p>${esc(KIND_NOTES[kind] || '入試の組み立ては募集要項で確認してください。')}</p>
 ${stageRows.length ? `      <dl>
 ${stageRows.map(r => `        <div><dt>個別試験（二次）の${esc(r.name)}</dt><dd>${r.has ? '課されます。' : '課されません。'}<a class="unote__go" href="#sub-${r.dir}">詳しくは${esc(r.name)}の節へ</a></dd></div>`).join('\n')}
@@ -890,6 +907,21 @@ for (const uni of all) {
   const dir = path.join(outRoot, uni.slug);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), renderUniversity(uni, all, config));
+
+  /* 学部別ページ。作らなくなった学部のディレクトリは消す（sitemap に載らないページを残さない） */
+  const groups = FACULTY_PAGES.get(uni.slug) || [];
+  const keepFac = new Set(groups.map(g => g.slug));
+  for (const g of groups) {
+    const fdir = path.join(dir, g.slug);
+    fs.mkdirSync(fdir, { recursive: true });
+    fs.writeFileSync(path.join(fdir, 'index.html'), renderFacultyPage({
+      uni, group: g, src: SOURCES[uni.slug], subjects: data, counts, amazonTag: config.amazonTag,
+    }));
+    console.log(`  ✓ ${facultyPath(uni.slug, g.slug)}`);
+  }
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.isDirectory() && !keepFac.has(e.name)) fs.rmSync(path.join(dir, e.name), { recursive: true, force: true });
+  }
 }
 fs.writeFileSync(path.join(outRoot, 'index.html'), renderIndex(all));
 

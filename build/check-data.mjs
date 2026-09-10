@@ -107,6 +107,18 @@ for (const [isbn, keys] of isbnSeen) {
     let raw = null;
     try { raw = JSON.parse(fs.readFileSync(SOURCES_FILE, 'utf8')); } catch (e) { bad(`university-sources.json を読めない: ${e.message}`); }
     if (raw) for (const p of validateUniversitySources(raw, slugs)) bad(p);
+    // 学部の重点対策（faculties[].focus）は、その科目の focus.json にあるキーだけ
+    for (const [slug, u] of Object.entries((raw && raw.universities) || {})) {
+      for (const f of u.faculties || []) {
+        for (const [dir, keys] of Object.entries(f.focus || {})) {
+          if (!SUBJECTS.some(s => s.dir === dir)) { bad(`university-sources.json: ${slug}/${f.name} の focus に未知の科目「${dir}」`); continue; }
+          const focus = loadSubjectData(ROOT, dir).focus || {};
+          for (const k of Array.isArray(keys) ? keys : []) {
+            if (!focus[k]) bad(`university-sources.json: ${slug}/${f.name} の focus「${k}」が ${dir} の focus.json に無い`);
+          }
+        }
+      }
+    }
   }
 }
 

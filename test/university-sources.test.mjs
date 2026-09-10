@@ -52,3 +52,40 @@ test('大学別ページの og:image は大学ごとの画像を指し、ファ�
   const hashes = JSON.parse(fs.readFileSync(path.join(ROOT, 'build/data/ogp-hashes.json'), 'utf8')).files;
   assert.equal(Object.keys(hashes).filter(k => k.startsWith('assets/ogp/univ/')).length, slugs.size, '台帳の大学数と画像の数が合わない');
 });
+
+/* ---------- 学部別ページ（仕様書 4.5） ---------- */
+
+const { facultyGroups, facultyVerdict, renderFacultyPage, FACULTY_MIN_UNIQUE } = await import('../build/lib/faculty-pages.mjs');
+const { loadSubjectData } = await import('../build/lib/load-subject-data.mjs');
+
+test('学部別ページは固有テキストが 300 字以上の学部だけ作り、足りない学部はページを持たない', () => {
+  const src = loadUniversitySources();
+  for (const u of ['waseda', 'keio', 'sophia']) {
+    for (const g of facultyGroups(src[u])) {
+      const exists = fs.existsSync(path.join(ROOT, 'univ', u, g.slug, 'index.html'));
+      assert.equal(exists, facultyVerdict(g).ok, `${u}/${g.slug}: 判定とページの有無が合わない`);
+    }
+  }
+});
+
+test('同じ学部の別方式は 1 つにまとめ、固有テキストが足りれば学部別ページを描ける', () => {
+  const g = {
+    slug: 'test', name: 'テスト学部', focus: { english: ['超長文'] },
+    rows: [{ name: 'テスト学部', method: '一般選抜', subjects: '外国語・国語', note: 'あ'.repeat(FACULTY_MIN_UNIQUE) }],
+  };
+  assert.equal(facultyVerdict(g).ok, true);
+  assert.equal(facultyVerdict({ ...g, rows: [{ ...g.rows[0], note: '短い' }] }).ok, false);
+  const html = renderFacultyPage({
+    uni: { slug: 'waseda', name: '早稲田大学' }, group: g, src: loadUniversitySources().waseda,
+    subjects: { english: loadSubjectData(ROOT, 'english') }, counts: {},
+  });
+  assert.match(html, /<h1 class="sec"[^>]*>早稲田大学 テスト学部<\/h1>/);
+  assert.match(html, /href="\/univ\/waseda\/"/, '親ページへのリンクが無い');
+  assert.match(html, /テスト学部の出題形式に合わせた重点対策/);
+  assert.match(html, /早稲田大学%20テスト学部|早稲田大学\+テスト学部|早稲田大学 テスト学部 赤本/, '過去問検索に学部名が入っていない');
+  const merged = facultyGroups({ faculties: [
+    { name: 'A学部', method: 'x', subjects: 'y', slug: 'a' }, { name: 'A学部', method: 'z', subjects: 'w', slug: 'a' },
+  ] });
+  assert.equal(merged.length, 1);
+  assert.equal(merged[0].rows.length, 2);
+});

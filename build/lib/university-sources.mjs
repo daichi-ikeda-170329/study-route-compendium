@@ -72,8 +72,13 @@ export function validateUniversitySources(raw, slugs) {
         if (f.slug !== undefined && !/^[a-z0-9-]+$/.test(f.slug)) bad(`${at}.slug: 英数小文字とハイフンだけ`);
         if (f.focus !== undefined && (typeof f.focus !== 'object' || Array.isArray(f.focus))) bad(`${at}.focus: 科目→重点キーの配列のオブジェクトが要る`);
       });
-      const fslugs = u.faculties.map(f => f.slug).filter(Boolean);
-      if (new Set(fslugs).size !== fslugs.length) bad(`${slug}.faculties: slug が重複している`);
+      // 同じ学部の別方式の行は同じ slug を共有する（1 ページにまとめる）。別の学部で同じ slug は不可
+      const bySlug = new Map();
+      for (const f of u.faculties) {
+        if (!f.slug) continue;
+        if (bySlug.has(f.slug) && bySlug.get(f.slug) !== f.name) bad(`${slug}.faculties: slug「${f.slug}」が別の学部（${bySlug.get(f.slug)} と ${f.name}）で重複している`);
+        bySlug.set(f.slug, f.name);
+      }
     }
   }
   return problems;
