@@ -136,3 +136,68 @@ test('本編が違う段階はトラックごとの節のまま', () => {
   assert.equal(countSections('english/routes/march/index.html'), 2);
   assert.equal(countSections('math/routes/march/index.html'), 2);
 });
+
+/* ---------- ルートの始まり（タスク 1.3） ---------- */
+
+const { firstStageLabel, beforeRoute } = await import('../build/lib/route-start.mjs');
+
+test('firstStageLabel: 易しい本・導入の役割で始まるなら「導入」、それ以外は段の名前', () => {
+  const d = {
+    books: [
+      { id: 'easy', stage: 'bunpo', diff: 2 },
+      { id: 'hard', stage: 'bunpo', diff: 5 },
+      { id: 'intro-hard', stage: 'intro', diff: 5 },
+    ],
+    stages: { bunpo: { label: '文法' }, intro: { label: '導入・講義' } },
+  };
+  assert.equal(firstStageLabel({ omni: [{ id: 'easy', role: '文法' }] }, d), '導入');
+  assert.equal(firstStageLabel({ omni: [{ id: 'hard', role: '導入' }] }, d), '導入', 'role に導入');
+  assert.equal(firstStageLabel({ omni: [{ id: 'hard', role: '文法講義' }] }, d), '文法');
+  assert.equal(firstStageLabel({ omni: [{ id: 'intro-hard', role: '理論講義' }] }, d), '導入', '段の名前に導入');
+  assert.equal(firstStageLabel({ omni: [] }, d), '導入', '本編が空なら既定値');
+});
+
+test('firstStageLabel: 実データでも早慶の英語は文法、共テの数学は導入', () => {
+  const en = loadSubjectData(ROOT, 'english');
+  const ma = loadSubjectData(ROOT, 'math');
+  assert.equal(firstStageLabel(groupTracks(en.routes.sokei)[0].seq, en), '文法');
+  assert.equal(firstStageLabel(groupTracks(ma.routes.kyote)[0].seq, ma), '導入');
+});
+
+test('beforeRoute: 手前のルートから、このルートに無く先頭より易しい本だけを挙げる', () => {
+  const so = loadSubjectData(ROOT, 'social');
+  for (const t of so.tiers) {
+    for (const g of groupTracks(so.routes[t.id])) {
+      const b = beforeRoute(so, t.id, g);
+      if (!b) continue;
+      const here = new Set([...(g.seq.omni || []), ...(g.seq.quick || [])].map(s => s.id));
+      for (const p of b.prevBooks) {
+        assert.ok(!here.has(p.id), `${t.id}: ${p.id} はこのルート自身に載っている`);
+        assert.ok(p.diff < b.book.diff, `${t.id}: ${p.id}（${p.diff}）が先頭 ${b.book.id}（${b.book.diff}）より易しくない`);
+      }
+    }
+  }
+  const ma = loadSubjectData(ROOT, 'math');
+  assert.equal(beforeRoute(ma, 'kyote', groupTracks(ma.routes.kyote)[0]), null, '共テは手前が無い');
+});
+
+test('prevTierOf: 並びの 1 つ手前。医学部系は地方旧帝へ戻す', async () => {
+  const { prevTierOf } = await import('../build/lib/tiers.mjs');
+  assert.equal(prevTierOf('english', 'kyote'), null);
+  assert.equal(prevTierOf('english', 'sokei').id, 'chikoku');
+  assert.equal(prevTierOf('math', 'med').id, 'kyutei');
+  assert.equal(prevTierOf('math', 'shiritsui').id, 'kyutei');
+});
+
+test('早慶の英語ルートは「文法から過去問まで」と「ここより前の段階」を出す', () => {
+  const html = read('english/routes/sokei/index.html');
+  assert.match(html, /文法から過去問まで/);
+  assert.match(html, /<h3>ここより前の段階<\/h3>/);
+  assert.match(html, /href="\/english\/routes\/chikoku\/"/);
+});
+
+test('共テの数学ルートは「導入から過去問まで」のまま、ボックス無し', () => {
+  const html = read('math/routes/kyote/index.html');
+  assert.match(html, /導入から過去問まで/);
+  assert.doesNotMatch(html, /ここより前の段階/);
+});

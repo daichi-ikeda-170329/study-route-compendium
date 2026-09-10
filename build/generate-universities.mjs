@@ -56,6 +56,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { NON_TRACK, trackKeys, trackLabel, groupTracks } from './lib/tracks.mjs';
+import { beforeRoute, beforeSentence } from './lib/route-start.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -360,6 +361,13 @@ function renderUniversity(uni, all, config) {
     const routeUrl = `/${p.sub.dir}/routes/${p.u.t}/`;
     const fx = Array.isArray(p.u.fx) ? p.u.fx : [];
     const stages = d.stages || {};
+    const groups = groupTracks(d.routes[p.u.t], tracks);
+
+    /* ルートの先頭の本が難しいときは、その前にやる段階を 1 行添える（ルートページと同じ文）。
+       本編が違うトラックで同じ本から始まるなら 1 回だけ */
+    const seenStart = new Set();
+    const befores = groups.map(g => ({ g, b: beforeRoute(d, p.u.t, g) }))
+      .filter(x => x.b && !seenStart.has(x.b.book.id) && seenStart.add(x.b.book.id));
 
     /* 出題の事実。**データに入っている行だけ**を出す。
        空のフィールドを「—」で埋めると、調べていないのか無いのかが読者に伝わらない */
@@ -409,7 +417,8 @@ ${b.note ? `            <span class="ubook__note">${esc(b.note)}</span>` : ''}
         </li>`;
   }).join('\n')}
       </ul>
-` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${groupTracks(d.routes[p.u.t], tracks).length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(trackLabel(d, t, 'short'))).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(trackLabel(d, t, 'short'))).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
+` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${groups.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(trackLabel(d, t, 'short'))).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(trackLabel(d, t, 'short'))).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
+${befores.map(x => `      <p class="usec__before">${beforeSentence(d, x.g, x.b)}</p>`).join('\n')}
     </section>`;
   }).join('\n\n');
 
@@ -506,6 +515,8 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
 .usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
+.usec__before{font-size:12px;color:var(--ink-2);line-height:1.85;margin-top:8px;max-width:44em}
+.usec__before a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .uhensa{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-s)}
 .uhensa th,.uhensa td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left}
 .uhensa th{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em;background:var(--surface-2)}

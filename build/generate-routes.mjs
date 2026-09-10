@@ -14,6 +14,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { NON_TRACK, trackRank, trackLabel, groupTracks } from './lib/tracks.mjs';
+import { firstStageLabel, beforeRoute, beforeSentence } from './lib/route-start.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
@@ -117,6 +118,11 @@ function render(sub, d, tier, norm, counts) {
   const merged = trackKeys.length > 1 && groups.length === 1;
   const sideSplit = groups.some(g => ['para', 'final'].some(kind => g[kind].length > 1));
 
+  /* 「〜から過去問まで」の〜。上位の段階は導入の段を持たないので一律に「導入」と書かない。
+     分野ごとに始まりが違うときは、どれか 1 つの名前で代表させない */
+  const starts = [...new Set(groups.map(g => firstStageLabel(g.seq, d)))];
+  const startLabel = starts.length === 1 ? starts[0] : 'それぞれの最初の段階';
+
   /* リード文とメタ説明のトラックの書き方。
      分かれている → 「A・B別にまとめています」
      本編が同じ   → 「本編の並びは A・B で違いはありません」（並行枠だけ違うならそう書く） */
@@ -128,7 +134,7 @@ function render(sub, d, tier, norm, counts) {
 
   const title = `${tier.name}の${sub.ja}参考書ルート｜${tier.sub} - ${sub.full}`;
   const desc = clip(`${tier.name}（${tier.sub}）を目指す人向けの${sub.ja}参考書ルート。`
-    + `目標は${tier.goal}。導入から過去問まで何をどの順で進めるかを、${used.size}冊の中から並べています。${trackDesc}`, 120);
+    + `目標は${tier.goal}。${startLabel}から過去問まで何をどの順で進めるかを、${used.size}冊の中から並べています。${trackDesc}`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -167,9 +173,18 @@ ${stepList(seq[p.key], bookById, sub, d.stages)}
     const final = sideBlock(g, 'final', '最後の仕上げ',
       '直前期に取り組む総仕上げです。上のルートを終えてから着手します。');
 
+    /* 先頭の本が難しいルートは、その前にやる段階を王道網羅型の直前で案内する */
+    const before = beforeRoute(d, tier.id, g);
+    const beforeBox = before ? `<div class="rbefore">
+        <h3>ここより前の段階</h3>
+        <p>${beforeSentence(d, g, before)}</p>
+        <p class="rbefore__go"><a href="/${sub.dir}/routes/${before.prevTier.id}/">${esc(before.prevTier.name)}の${esc(sub.ja)}参考書ルートを見る</a></p>
+      </div>` : '';
+
     return `    <section class="block" id="${id}">
       <div class="eyebrow">${esc(common ? '共通' : label)}</div>
       <h2 class="sec">${esc(label)}のルート</h2>
+      ${beforeBox}
       <div class="rpols">
 ${bodies}
       </div>
@@ -239,6 +254,12 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/${sub.ogp || `ogp-${sub.di
 .rstep__note{font-size:12.5px;color:var(--ink-2);margin-top:7px;line-height:1.75}
 .rstep__alts{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.7}
 .rstep__alts a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px;padding:4px 0;display:inline-block}
+.rbefore{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--indigo);padding:16px 20px;margin-top:16px}
+.rbefore h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-bottom:7px}
+.rbefore p{font-size:12.5px;color:var(--ink-2);line-height:1.85}
+.rbefore a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.rbefore__go{margin-top:8px}
+.rbefore__go a{padding:4px 0;display:inline-block}
 .rside{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:18px 20px;margin-top:14px}
 .rside h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-bottom:7px}
 .rside p{font-size:12.5px;color:var(--muted);line-height:1.8}
@@ -266,7 +287,7 @@ ${header(sub)}
   <div class="block" style="margin-top:26px">
     <div class="eyebrow">Route by target</div>
     <h1 class="sec" style="font-size:29px">${esc(tier.name)}の${esc(sub.ja)}参考書ルート</h1>
-    <p class="sec-lead">${esc(tier.sub)}を目指す人に向けた${esc(sub.ja)}の並びです。導入から過去問まで、${used.size}冊の中から「何を・どの順で」やるかを${trackLead}すでに終えた段階は飛ばして構いません。</p>
+    <p class="sec-lead">${esc(tier.sub)}を目指す人に向けた${esc(sub.ja)}の並びです。${esc(startLabel)}から過去問まで、${used.size}冊の中から「何を・どの順で」やるかを${trackLead}すでに終えた段階は飛ばして構いません。</p>
     <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
     <dl class="tier-head">
       <div><dt>目標</dt><dd>${esc(tier.goal)}</dd></div>
