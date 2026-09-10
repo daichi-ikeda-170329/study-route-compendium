@@ -39,7 +39,7 @@ const urls = [];
 add(urls, '', '1.0', 'weekly');
 
 // 信頼性ページ（/about/ /methodology/ /privacy/ /disclaimer/ /ads/ /changelog/）
-for (const slug of ['about', 'methodology', 'privacy', 'disclaimer', 'ads', 'changelog']) {
+for (const slug of ['about', 'methodology', 'privacy', 'disclaimer', 'ads', 'changelog', 'new']) {
   if (fs.existsSync(path.join(ROOT, slug, 'index.html'))) add(urls, slug, '0.5', 'monthly');
 }
 

@@ -46,6 +46,8 @@ const ALLOW_DIRS = [
   'univ',
   /* 2 冊比較（/compare/。noindex,follow）。ここへ足し忘れると本番で 404 になる */
   'compare',
+  /* 新刊・評価準備中の一覧（/new/）。ここへ足し忘れると本番で 404 になる */
+  'new',
   ...SUBJECTS.map(s => s.dir),
 ];
 

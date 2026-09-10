@@ -176,7 +176,8 @@ export function postF(b, sub, stages) {
     b.subjects ? `収録：${b.subjects}` : null,
     '難易度の評価はまだしていません。現物を確認してから書きます。',
   ].filter(Boolean);
-  const tail = `\n▼ 図鑑に追加しました\n${url}`;
+  // 評価待ちの新刊の一覧（/new/。仕様書 4.4）。追跡の引数は付けない（一覧は投稿ごとに変わらない）
+  const tail = `\n▼ 図鑑に追加しました\n${url}\n▼ 評価待ちの新刊の一覧\n${ORIGIN}/new/`;
 
   const text = fitLines(head, optional, tail);
   return text ? { type: 'F', text, note: `${sub.ja} / ${b.id}` } : null;

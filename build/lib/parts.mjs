@@ -263,6 +263,7 @@ export const FOOTER_LINKS = {
     { href: '/univ/', label: '志望校から探す' },
     { href: '/search/', label: '詳細検索' },
     { href: '/progress/', label: '学習の記録' },
+    { href: '/new/', label: '新刊・評価準備中' },
     { href: '/#faq', label: 'よくある質問' },
     { href: `https://x.com/${X_HANDLE}`, label: `X @${X_HANDLE}`, external: true },
   ],

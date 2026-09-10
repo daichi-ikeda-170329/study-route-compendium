@@ -53,6 +53,7 @@ const STEPS = [
   { name: '検索の絞り込み索引',    script: 'generate-search-facets.mjs',   checkArgs: ['--check'] },
   { name: '詳細検索ページ',        script: 'generate-search-page.mjs',     checkArgs: null },
   { name: '2 冊比較ページ',        script: 'generate-compare.mjs',         checkArgs: null },
+  { name: '新刊・評価準備中の一覧', script: 'generate-new.mjs',             checkArgs: null },
   { name: '検索インデックス',      script: 'generate-search.mjs',   checkArgs: null },
   { name: '科目トップの事前描画',  script: 'prerender-tops.mjs',    checkArgs: ['--check'] },
   { name: '収録冊数',              script: 'apply-count.mjs',       checkArgs: ['--check'] },
