@@ -57,6 +57,7 @@ import { fileURLToPath } from 'node:url';
 import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { NON_TRACK, trackKeys, trackLabel, groupTracks } from './lib/tracks.mjs';
 import { beforeRoute, beforeSentence } from './lib/route-start.mjs';
+import { tierGroup } from './lib/tiers.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -79,6 +80,16 @@ const ROUTE_SUBJECTS = SUBJECTS.filter(s => !s.catalogOnly);
 function tierRank(t) {
   const n = Number(t && t.no);
   return Number.isFinite(n) ? n : 99;
+}
+
+/**
+ * 志望レベルの表示。科目をまたいで共通の帯の名前を主に出し、科目固有の名前を小さく添える
+ * （「早慶上智 <small>早慶理工・上智・理科大</small>」。build/lib/tiers.mjs の TIER_GROUP）
+ */
+function tierLabel(tier) {
+  const g = tierGroup(tier.id);
+  if (!g) return esc(tier.name);
+  return g === tier.name ? esc(g) : `${esc(g)}<small>${esc(tier.name)}</small>`;
 }
 
 /** 1 科目あたりに出すおすすめ参考書の上限（トラックを分けないとき） */
@@ -600,6 +611,7 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
 .uhensa td{font-weight:700;color:var(--ink)}
 .uhensa td.mono{font-family:var(--mono);font-weight:600;color:var(--ink-2)}
 .uhensa tr:last-child th,.uhensa tr:last-child td{border-bottom:none}
+.uhensa td.utier small,.uhead dd small{display:block;font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;letter-spacing:.02em}
 .ubuy{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:19px 21px;margin-top:18px}
 .ubuy p{font-size:12.5px;color:var(--ink-2);line-height:1.85;margin-top:8px}
 .ubuy__btns{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
@@ -625,7 +637,7 @@ ${portalHeader()}
     <p class="sec-lead">${esc(name)}（${esc(kind)}／${esc(tier.sub)}）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何がどう問われるかと、その出題に噛み合う参考書をまとめたページです。${med ? '医学部医学科は他学部と条件が変わるので、別に節を設けています。' : ''}学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
     <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
     <dl class="uhead">
-      <div><dt>志望レベル</dt><dd>${esc(tier.name)}</dd></div>
+      <div><dt>志望レベル</dt><dd>${tierLabel(tier)}</dd></div>
       <div><dt>区分</dt><dd>${esc(kind || '—')}</dd></div>
       <div><dt>目標の目安</dt><dd>${hs.length ? `偏差値 ${Math.min(...hs)}〜${Math.max(...hs)}` : '—'}</dd></div>
     </dl>
@@ -674,7 +686,7 @@ ${med.notes.map(n => `        <div><dt>${esc(n.dt)}</dt><dd>${esc(n.dd)}</dd></d
     <p class="sec-lead">${esc(name)}で科目ごとに必要になる到達度の目安です。同じ大学でも学部・方式で配点が変わるため、数字は「どの科目に時間を厚く配るか」を決めるための相対的な目安として使ってください。算出のしかたは<a href="/methodology/">データの作り方</a>に書いています。</p>
     <table class="uhensa">
       <tr><th scope="col">科目</th><th scope="col">目標偏差値</th><th scope="col">志望レベル</th></tr>
-${perSubject.map(p => `      <tr><th scope="row">${esc(p.sub.ja)}</th><td class="mono">${esc(String(p.u.h))}</td><td class="mono">${esc(p.tier.name)}</td></tr>`).join('\n')}
+${perSubject.map(p => `      <tr><th scope="row">${esc(p.sub.ja)}</th><td class="mono">${esc(String(p.u.h))}</td><td class="utier">${tierLabel(p.tier)}</td></tr>`).join('\n')}
     </table>
   </section>
 

@@ -201,3 +201,20 @@ test('共テの数学ルートは「導入から過去問まで」のまま、�
   assert.match(html, /導入から過去問まで/);
   assert.doesNotMatch(html, /ここより前の段階/);
 });
+
+/* ---------- 志望レベルの帯（タスク 2.7） ---------- */
+
+test('全科目の志望レベルが TIER_GROUP に載っている', async () => {
+  const { TIER_GROUP, tierGroup } = await import('../build/lib/tiers.mjs');
+  for (const dir of ['english', 'japanese', 'math', 'science', 'social']) {
+    for (const t of loadSubjectData(ROOT, dir).tiers) assert.ok(TIER_GROUP[t.id], `${dir}: ${t.id} が TIER_GROUP に無い`);
+  }
+  assert.equal(tierGroup('zzz'), '');
+});
+
+test('大学ページの「科目ごとの目標」の志望レベルは、主表示が帯の名前でそろう', () => {
+  const html = read('univ/waseda/index.html');
+  const main = [...html.matchAll(/<td class="utier">([^<]*)/g)].map(m => m[1]);
+  assert.deepEqual(main, ['早慶上智', '早慶上智', '早慶上智', '早慶上智', '早慶上智']);
+  assert.match(html, /<td class="utier">早慶上智<small>早慶理工・上智・理科大<\/small><\/td>/);
+});

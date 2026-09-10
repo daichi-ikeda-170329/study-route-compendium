@@ -14,6 +14,8 @@
  */
 import { recordType, isPlaceholder } from './record-type.mjs';
 import { allTrackKeys } from './tracks.mjs';
+// 循環 import になるが、関数の中でしか使わないので読み込み順に依存しない
+import { TIER_GROUP } from './tiers.mjs';
 
 /** BOOKS の 1 レコードに必ずある項目 */
 export const REQUIRED_BOOK = ['id', 'name', 'stage'];
@@ -94,6 +96,8 @@ export function validateSubjectData(dir, data) {
   for (const t of data.tiers) {
     if (!t.id || !t.name) bad(`TIERS に id か name が無い項目がある`);
     if (!data.routes[t.id]) bad(`TIERS の「${t.id}」にルートが無い`);
+    // 大学別ページは科目をまたいで帯の名前にそろえて出す（build/lib/tiers.mjs の TIER_GROUP）
+    if (t.id && !TIER_GROUP[t.id]) bad(`TIERS の「${t.id}」が build/lib/tiers.mjs の TIER_GROUP に無い`);
   }
   const known = new Set(data.books.map(b => b.id));
   const walk = (node, where) => {
