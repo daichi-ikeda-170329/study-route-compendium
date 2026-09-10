@@ -23,6 +23,8 @@ var BOOKS  = DATA.books;
 /* 読者に見せる書名。内部略称の本はビルド時に正式名称を dn として配信している
    （build/lib/booktitle.mjs の displayName。静的ページと同じ規則）。並べ替え・検索には name を使う */
 const bookName = b => (b && (b.dn || b.name)) || "";
+/* 起動（ハッシュ・共有 URL の復元）が終わるまでは画面遷移を履歴に積まない（go を参照） */
+let NAV_BOOTED = false;
 /* この科目のディレクトリ名（URL の組み立てに使う） */
 const SUBJ_DIR = "japanese";
 
@@ -425,7 +427,10 @@ function renderVerdict(){
    履歴には積まない（replaceState）。この SPA は「戻る」を画面遷移として扱っていないため、
    pushState にすると戻るたびに 1 画面ずつ遡ることになり、サイトを離れられなくなる。 */
 const VIEWS = ["home","catalog","route","quiz","guide"];
-function go(view){
+function go(view, opts){
+  /* 画面（VIEWS）が変わるときだけ履歴に積む。起動中（ハッシュ・共有 URL の復元）と、
+     同じ画面の中での状態変更、戻る/進む（popstate）からの呼び出しは積まない */
+  const push = NAV_BOOTED && view !== S.view && !(opts && opts.push === false);
   S.view = view;
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v.id==="view-"+view));
   document.querySelectorAll("#navDesktop button, #tabbar button").forEach(b=>{
@@ -436,21 +441,36 @@ function go(view){
   });
   window.scrollTo({top:0});
   if(view==="quiz" && !quizState.started) startQuiz();
-  syncHash(view);
+  syncHash(view, push);
 }
-function syncHash(view){
+function syncHash(view, push){
   try{
     const want = view==="home" ? "" : "#"+view;
-    if(location.hash === want) return;
-    history.replaceState(null, "", location.pathname + location.search + want);
+    const url = location.pathname + location.search + want;
+    /* 2026-09-10 まで常に replaceState だった。図鑑→ルート→診断と動いたあとに
+       ブラウザの「戻る」を押すと、一気にサイトの外へ出ていた（仕様書 2.3） */
+    if(push){ history.pushState({view: view}, "", url); return; }
+    if(location.hash === want && history.state && history.state.view === view) return;
+    history.replaceState({view: view}, "", url);
   }catch(e){ /* history に触れない環境では URL が追従しないだけ */ }
 }
-/** ハッシュが指す画面へ移る。未知のハッシュは無視して現在の画面のままにする */
-function applyHash(){
+/** いまのハッシュが指す画面。未知のハッシュなら空文字 */
+function hashView(){
   const v = (location.hash || "").slice(1);
-  if(VIEWS.indexOf(v) >= 0 && v !== S.view) go(v);
+  return VIEWS.indexOf(v) >= 0 ? v : "";
+}
+/** ハッシュが指す画面へ移る。未知のハッシュは無視して現在の画面のままにする。
+    ハッシュの変化はブラウザがすでに履歴に積んでいるので、ここでは積まない */
+function applyHash(){
+  const v = hashView();
+  if(v && v !== S.view) go(v, {push:false});
 }
 window.addEventListener("hashchange", applyHash);
+/* ブラウザの戻る/進む。積んだときの画面へ戻す（ハッシュが無い最初の項目はホーム） */
+window.addEventListener("popstate", function(e){
+  const v = (e.state && e.state.view) || hashView() || "home";
+  if(VIEWS.indexOf(v) >= 0 && v !== S.view) go(v, {push:false});
+});
 
 /* ============================================================
    COVERS — 実表紙画像(Amazon→国立国会図書館→Google Books→openBD)+自動フォールバック
@@ -1406,6 +1426,9 @@ RTShare.setup({
     show: ()=>{ go("route"); focusResult("#routeOutput"); }
   }
 });
+
+/* ここまでで起動が終わる。以降の画面遷移は履歴に積む */
+NAV_BOOTED = true;
 
 /* 状態を持つ束縛は本体のあとで載せる（const / let は巻き上げの対象外のため）。自動生成 */
   try { window.S = S; } catch (e) { /* まだ宣言に達していない名前は飛ばす */ }

@@ -55,6 +55,7 @@
 | 2026-09-10 | 1.7 書籍ページのあとに進む本 | (このコミット) | `pickNext` / `pickAlternatives` を `build/lib/book-links.mjs` へ移し、タグ一致 +3・同ルートの後ろ +2・文理一致 +1・枠 -2 で並べる。`tagParts` は `build/lib/unitags.mjs` に切り出して大学ページと共用。仕様書の `todai-eigo` は実在せず、東大は `todai25` |
 | 2026-09-10 | 2.1 数字・年度・根拠説明の統一 | (このコミット) | フッター文を `site-meta.json` の `footerBlurb` から書き込む（冊数は count-state の前回値）。志望校節に 160 / 21 / 181 の内訳を書き `apply-count` のアンカーに登録。「ご利用にあたって」は `legal.mjs` の `USAGE_NOTE` を事前描画でページに 1 回だけ出す（2.2 の一部を前倒し） |
 | 2026-09-10 | 2.2 科目トップの軽量化 | (このコミット) | **ガイド本文を外すだけでは 146KB→127KB で 100KB を切れなかった**（最大の内訳はインライン CSS の 57KB）。各科目の CSS を中身を変えずに `assets/css/subject-<科目>.css` へ出し、描画ブロックの `<link>` で読む（`?v=` は `generate-subject-assets` が付け替え、検索 CSS も同ファイルへ書き込む）。英語トップは 69,928 バイト。ガイドは `/<科目>/guides/basics/<nn>/` に 61 本（`generate-guides-static.mjs`、記事と同じ `articlePage`） |
+| 2026-09-10 | 2.3 画面遷移を履歴に積む | (このコミット) | 7 科目の `go` に「起動中（ハッシュ・共有 URL の復元）は積まない」フラグを置き、画面が変わるときだけ `pushState`。`popstate` で戻る/進むに追従。5.5 の統合前に各科目へ同じ変更を入れた |
 
 ## 次にやること
 

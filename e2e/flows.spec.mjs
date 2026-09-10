@@ -226,3 +226,76 @@ test('JS が無くても学習ガイドの見出しと記事一覧への案内�
   expect(await page.locator('#guideList .g-card h3').count()).toBeGreaterThan(5);
   await ctx.close();
 });
+
+/* ---------- 画面遷移の履歴（仕様書 2.3） ---------- */
+
+/** 診断を結果まで進める（選択肢の先頭を選び続ける） */
+async function finishQuiz(page) {
+  for (let step = 0; step < 10; step++) {
+    if (await page.locator('#quizShell .result-hero').count()) break;
+    const opt = page.locator('#quizShell .opt').first();
+    if (!(await opt.count())) break;
+    await opt.click();
+    const next = page.locator('#quizNext');
+    if (!(await next.count())) break;
+    await next.click();
+    await page.waitForTimeout(80);
+  }
+}
+
+test('図鑑→ルート→診断と動いたあと、戻るで 1 画面ずつ戻る', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/english/', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  for (const v of ['catalog', 'route', 'quiz']) {
+    await nav(page, v).click();
+    await expect(page.locator(`#view-${v}`)).toBeVisible();
+  }
+  await page.goBack();
+  await expect(page.locator('#view-route')).toBeVisible();
+  await page.goBack();
+  await expect(page.locator('#view-catalog')).toBeVisible();
+  await page.goBack();
+  await expect(page.locator('#view-home')).toBeVisible();
+  // 進むでも同じ順にたどれる
+  await page.goForward();
+  await expect(page.locator('#view-catalog')).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('診断の設問を進めても履歴は積まず、戻る 1 回で診断から出る', async ({ page }) => {
+  await page.goto('/english/', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  await nav(page, 'quiz').click();
+  await expect(page.locator('#view-quiz')).toBeVisible();
+  for (let i = 0; i < 3; i++) {
+    await page.locator('#quizShell .opt').first().click();
+    await page.locator('#quizNext').click();
+    await page.waitForTimeout(80);
+  }
+  await page.goBack();
+  await expect(page.locator('#view-quiz')).toBeHidden();
+  await expect(page.locator('#view-home')).toBeVisible();
+});
+
+test('共有 URL を開いて結果が出るまでに履歴を増やさない', async ({ page, context }) => {
+  await page.goto('/english/#quiz', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  await finishQuiz(page);
+  await expect(page.locator('#quizShell .result-hero')).toBeVisible();
+  const url = await page.locator('.rt-share[data-rt-url]').first().getAttribute('data-rt-url');
+  expect(url).toMatch(/\?v=1&a=/);
+  const shared = new URL(url);
+
+  const fresh = await context.newPage();
+  await fresh.goto('/english/', { waitUntil: 'domcontentloaded' });
+  const baseline = await fresh.evaluate(() => history.length);
+  await fresh.close();
+
+  const p2 = await context.newPage();
+  await p2.goto(shared.pathname + shared.search, { waitUntil: 'domcontentloaded' });
+  await waitForApp(p2);
+  await expect(p2.locator('#quizShell .result-hero')).toBeVisible();
+  expect(await p2.evaluate(() => history.length)).toBe(baseline);
+  await p2.close();
+});
