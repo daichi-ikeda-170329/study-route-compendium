@@ -38,6 +38,7 @@ const STEPS = [
   { name: '科目データの形',        script: 'snapshot-subject-data.mjs', checkArgs: ['--check'] },
   { name: '年度表記',              script: 'apply-site-meta.mjs',   checkArgs: ['--check'] },
   { name: '検索ボックスの CSS',    script: 'apply-search-style.mjs', checkArgs: ['--check'] },
+  { name: '手書き HTML のフッター', script: 'apply-footer.mjs',      checkArgs: ['--check'] },
   { name: '書籍ページ',            script: 'generate-books.mjs',    checkArgs: null },
   { name: '索引・おすすめ',        script: 'generate-index.mjs',    checkArgs: null },
   { name: 'おすすめ',              script: 'generate-picks.mjs',    checkArgs: null },

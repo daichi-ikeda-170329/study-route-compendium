@@ -402,6 +402,10 @@ function checkHtml(files) {
     for (const slug of legalSlugs) {
       if (!src.includes(`href="/${slug}/"`)) err(at, `フッターに /${slug}/ へのリンクが無い`);
     }
+    // 詳細検索と学習の記録はどのページからも辿れること（手書き HTML は build/apply-footer.mjs が入れる）
+    for (const href of ['/search/', '/progress/']) {
+      if (!src.includes(`href="${href}"`)) err(at, `フッターに ${href} へのリンクが無い`);
+    }
     if (amazon && !src.includes(amazon)) err(at, 'Amazon アソシエイトの必須表記が無い');
 
     // title / description

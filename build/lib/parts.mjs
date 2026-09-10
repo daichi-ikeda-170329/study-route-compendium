@@ -248,6 +248,31 @@ export const LEGAL_PAGES = [
 ];
 
 /**
+ * フッターのサイト内リンク。**生成ページ（footer()）と手書き HTML（build/apply-footer.mjs）の
+ * 両方がここから組む。** 2026-09-10 まで手書きのポータル・科目トップ・404 には「詳細検索」
+ * 「学習の記録」が無く、/progress/ にはトップから辿れなかった（仕様書 2.4）。
+ *
+ *   site  … サイトの機能・導線（どのページからも出す）
+ *   legal … 信頼性ページ（LEGAL_PAGES と同じ並び）
+ */
+export const FOOTER_LINKS = {
+  site: [
+    { href: '/univ/', label: '志望校から探す' },
+    { href: '/search/', label: '詳細検索' },
+    { href: '/progress/', label: '学習の記録' },
+    { href: '/#faq', label: 'よくある質問' },
+    { href: `https://x.com/${X_HANDLE}`, label: `X @${X_HANDLE}`, external: true },
+  ],
+  legal: LEGAL_PAGES.map(p => ({ href: `/${p.slug}/`, label: p.label })),
+};
+
+/** フッターのリンク 1 本。外部リンクは別タブで開き、X には rel="me" を付ける */
+export function footerLink(l) {
+  const rel = l.external ? ` target="_blank" rel="noopener noreferrer${/x\.com/.test(l.href) ? ' me' : ''}"` : '';
+  return `<a href="${l.href}"${rel}>${l.label}</a>`;
+}
+
+/**
  * Amazon アソシエイトの運営規約が求める表記。
  * amazonTag が入っているときだけ出す（未参加の状態で参加者の表記を出さない）。
  * 表示名はアソシエイトの登録名。リポジトリからは分からないのでサイト名を使う。
@@ -281,14 +306,10 @@ ${curDir ? `      <a href="/${curDir}/">参考書図鑑</a>
       <a href="/${curDir}/guides/">参考書の選び方</a>`}` : `      <a href="/#subjects">科目から選ぶ</a>
       <a href="/#catalog">参考書から探す</a>
       <a href="/guides/">参考書の選び方</a>`}
-      <a href="/univ/">志望校から探す</a>
-      <a href="/search/">詳細検索</a>
-      <a href="/progress/">学習の記録</a>
-      <a href="/#faq">よくある質問</a>
-      <a href="https://x.com/${X_HANDLE}" target="_blank" rel="noopener noreferrer me">X @${X_HANDLE}</a>
+${FOOTER_LINKS.site.map(l => `      ${footerLink(l)}`).join('\n')}
     </div>
     <nav class="foot-links foot-links--legal" aria-label="サイトの表記">
-${LEGAL_PAGES.map(p => `      <a href="/${p.slug}/">${p.label}</a>`).join('\n')}
+${FOOTER_LINKS.legal.map(l => `      ${footerLink(l)}`).join('\n')}
     </nav>
     <div class="foot-legal">
       <b>ルート大全</b> — 大学受験 参考書ルート&amp;図鑑<br>
