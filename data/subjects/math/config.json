@@ -6,6 +6,7 @@
     "contact": "",
     "amazonTag": "routetaizen-22",
     "rakutenId": "56ba2770.50b55cf7.56ba2771.68ff96bc",
-    "adsenseId": "ca-pub-4704595822429716"
+    "adsenseId": "ca-pub-4704595822429716",
+    "trackLabels": {"bun":{"label":"文系","short":"文系","lead":"数学I・A・II・B・Cの範囲"},"ri":{"label":"理系","short":"理系","lead":"数学IIIまで含む"}}
   }
 }

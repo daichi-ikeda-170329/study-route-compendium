@@ -54,7 +54,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { NON_TRACK, trackKeys, trackLabel } from './lib/tracks.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -67,23 +68,6 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 /** ルートを持つ 5 科目だけを扱う（情報・小論文は志望レベルの定義を持たない） */
 const ROUTE_SUBJECTS = SUBJECTS.filter(s => !s.catalogOnly);
-
-/** トラックの表示名。generate-routes.mjs と同じ対応を使う */
-const TRACK_LABELS = { bun: '文系', ri: '理系', ...SUB_LABELS };
-/** ルートの並びそのものではないキー。generate-routes.mjs と同じ */
-const NON_TRACK = new Set(['para', 'final', 'basic']);
-/** トラックの表示順。generate-routes.mjs と同じ */
-const TRACK_ORDER = [
-  'bun', 'ri',
-  'gendai', 'kobun', 'koten', 'kanbun',
-  'butsuri', 'kagaku', 'seibutsu', 'chigaku',
-  'nihonshi', 'sekaishi', 'chiri', 'kokyo', 'seikei', 'rinri',
-  'sogo',
-];
-const trackRank = (k) => {
-  const i = TRACK_ORDER.indexOf(k);
-  return i < 0 ? TRACK_ORDER.length : i;
-};
 
 /**
  * 志望レベルの並び順は tier の `no`（"01"〜"09"）に従う。
@@ -184,10 +168,7 @@ function resolveUniversities() {
  * このページには大学名の入った過去問の節を別に置いてある。
  */
 function pickBooks(d, sub, u, tierId, isMed) {
-  const node = d.routes[tierId] || {};
-  const allTracks = Object.keys(node)
-    .filter(k => !NON_TRACK.has(k) && node[k])
-    .sort((a, b) => trackRank(a) - trackRank(b));
+  const allTracks = trackKeys(d.routes[tierId]);
 
   const { keep, limited } = availableTracks(sub.dir, u, allTracks);
   const features = matchFeatures(sub.dir, uniText(u));
@@ -325,13 +306,13 @@ const AVAIL_MAP = {
 };
 
 /** 「日本史・世界史・地理が出題されます。公民は出題されません。」を作る */
-function availNote(dir, u) {
+function availNote(d, dir, u) {
   const rows = AVAIL_MAP[dir];
   if (!rows) return '';
   const ok = [], some = [], no = [];
   for (const [k, f] of rows) {
     const v = f(u);
-    const label = TRACK_LABELS[k] || k;
+    const label = trackLabel(d, k);
     if (v === 2) some.push(label);
     else if (v) ok.push(label);
     else no.push(label);
@@ -386,7 +367,7 @@ function renderUniversity(uni, all, config) {
     if (p.u.time) facts.push({ dt: '試験の構成', dd: p.u.time });
     facts.push({ dt: '出題の特徴', dd: p.u.no
       || '公表されている情報から特定できていません。募集要項と過去問で確認してください。' });
-    const avail = availNote(p.sub.dir, p.u);
+    const avail = availNote(d, p.sub.dir, p.u);
     if (avail) facts.push({ dt: '出題される分野', dd: avail });
     if (p.u.fix) facts.push({ dt: '学部ごとの科目指定', dd: p.u.fix });
     if (p.u.med) facts.push({ dt: '医学部医学科の場合', dd: p.u.med });
@@ -414,7 +395,7 @@ ${books.map(b => {
     /* トラック名は、その本が「一部のトラックにしか載っていない」ときだけ出す。
        全トラックに載っている本に「文系」と書くと、理系の読者が読み飛ばす */
     const tl = (tracks.length > 1 && b.tracks.length && b.tracks.length < tracks.length)
-      ? b.tracks.map(t => TRACK_LABELS[t] || t).join('・') : '';
+      ? b.tracks.map(t => trackLabel(d, t, 'short')).join('・') : '';
     const why = [b.role, ...b.reasons.slice(0, 3)].filter(Boolean).join('／');
     return `        <li class="ubook">
           <a class="ubook__cov" href="/${p.sub.dir}/books/${b.book.id}/" tabindex="-1" aria-hidden="true">${coverBox(b.book, { color: st.color || p.sub.color })}</a>
@@ -428,7 +409,7 @@ ${b.note ? `            <span class="ubook__note">${esc(b.note)}</span>` : ''}
         </li>`;
   }).join('\n')}
       </ul>
-` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${tracks.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(TRACK_LABELS[t] || t)).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(TRACK_LABELS[t] || t)).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
+` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${tracks.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(trackLabel(d, t, 'short'))).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(trackLabel(d, t, 'short'))).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
     </section>`;
   }).join('\n\n');
 

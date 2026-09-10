@@ -39,6 +39,15 @@
 | 7 | Best Practices 77 の原因分離 | S10 | DONE（自サイト由来 0 と実証） |
 | 8 | KPI 基準値 | S10 | DONE（機構）+ BLOCKED_EXTERNAL（実数の投入） |
 
+## 2026-09-10 改修仕様書の対応
+
+仕様書: `/Users/ikedadaichi/Downloads/route-taizen-改修仕様書.md`（29 タスク、P0→P4 の順に実施）。
+1 タスク 1 コミット。コミット欄の「(このコミット)」は、全タスク完了時に実ハッシュへ置き換える。
+
+| 日付 | タスク | コミット | 備考 |
+|---|---|---|---|
+| 2026-09-10 | 1.1 トラック表示名 | (このコミット) | 正本を `config.json` の `trackLabels` に移し `build/lib/tracks.mjs` から引く。数学 JS の共有ラベルが「国公立二次型」になっていた誤りも同時に解消 |
+
 ## 次にやること
 
 **S0〜S11 は終わった。** 最終報告は `docs/remediation-final-report-2026-09-05.md`。

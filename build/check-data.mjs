@@ -9,6 +9,7 @@
 import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { isPlaceholder, recordType } from './lib/record-type.mjs';
+import { validateSubjectData } from './lib/validate-subject-data.mjs';
 import { verificationOf, verifiedFieldIsWellFormed, loadVerification, STATUSES } from './lib/verification.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -45,6 +46,9 @@ for (const s of SUBJECTS) {
   const d = loadSubjectData(ROOT, s.dir);
   total += d.books.length;
   const ids = new Set();
+
+  /* 形の検証（型・trackLabels・focus など）。snapshot-subject-data.mjs と同じ関数を通す */
+  for (const p of validateSubjectData(s.dir, d)) bad(p);
 
   for (const b of d.books) {
     const key = `${s.dir}:${b.id}`;

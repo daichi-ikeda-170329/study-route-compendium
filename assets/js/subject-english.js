@@ -56,6 +56,13 @@ const AFF    = AFF_AZ || AFF_RK;
 /* Google AdSense。ID が入るまで広告も広告の表記も出さない */
 const ADSENSE = Boolean(CONFIG.adsenseId);
 
+/* トラック（bun / ri）の表示名。正本は data/subjects/english/config.json の trackLabels。
+   form: "label"（見出し用）/ "short"（文中用）/ "lead"（説明）。静的ページ（build/lib/tracks.mjs）と同じ規則 */
+const trackName = (k, form) => {
+  const t = CONFIG.trackLabels && CONFIG.trackLabels[k];
+  return (t && t[form || "label"]) || k;
+};
+
 const AFF_PROGRAMS = [
   AFF_AZ ? "Amazonアソシエイト・プログラム" : null,
   AFF_RK ? "楽天アフィリエイト" : null
@@ -891,7 +898,7 @@ function applyUni(){
       <div class="uni-card__top"><h4>${r.label}</h4><span>${S.uni.ty} ・ 英語の到達目安 偏差値 ${r.hen}</span></div>
       <div class="uni-card__map">
         <span class="tag">${t.name} ルート</span><span class="arw">/</span>
-        <span>${r.bunri==="bun"?"国公立二次型(記述)":"私立個別型(マーク)"}</span><span class="arw">/</span>
+        <span>${trackName(r.bunri)}</span><span class="arw">/</span>
         <span>${S.policy==="omni"?"王道網羅型":"時短・精選型"}</span>
       </div>
       <div class="uni-card__note"><b>英語の出題傾向:</b> ${S.uni.no}。${r.extra||""}
@@ -1079,10 +1086,10 @@ function renderRouteBody(){
     : sensei ? sensei.name+" 完走" : tier.goal;
   const reachLabel = (S.mode==="uni"&&S.uni) ? "偏差値 "+resolveUni(S.uni,S.fac).hen
     : sensei ? "最難関まで対応" : tier.hensachi;
-  const subLabel = sensei ? sensei.tag+" — 一気通貫" : `${S.bunri==="bun"?"国公立二次型":"私立個別型"} / ${S.policy==="omni"?"王道網羅型":"時短・精選型"}`;
+  const subLabel = sensei ? sensei.tag+" — 一気通貫" : `${trackName(S.bunri,"short")} / ${S.policy==="omni"?"王道網羅型":"時短・精選型"}`;
   const goalCard = sensei
     ? `<h4>${sensei.name} 完走</h4><p>${sensei.sub}。過去問で志望校の形式に合わせて仕上げれば完成です。</p>`
-    : `<h4>${tier.goal}</h4><p>${tier.name}(${S.bunri==="bun"?"国公立二次型":"私立個別型"})ルート完走。過去問で合格点を安定させたら完成です。</p>`;
+    : `<h4>${tier.goal}</h4><p>${tier.name}(${trackName(S.bunri,"short")})ルート完走。過去問で合格点を安定させたら完成です。</p>`;
   out.innerHTML = `
     <div class="route-summary">
       <dl style="display:contents">
@@ -1214,7 +1221,7 @@ function renderQuizResult(){
     <div class="quiz-step">
       <div class="result-hero">
         <div class="rh-label">DIAGNOSIS COMPLETE — あなたにおすすめのルート</div>
-        <h3>${t.name}<br><span style="font-size:16px;opacity:.85">${bunri==="bun"?"国公立二次型":"私立個別型"} × ${polLabel}</span></h3>
+        <h3>${t.name}<br><span style="font-size:16px;opacity:.85">${trackName(bunri,"short")} × ${polLabel}</span></h3>
         <p>メイン教材 ${books.length} 冊+単語・熟語の並行枠。${policy==="omni"?"網羅系を軸に、盤石な土台から積み上げる王道の道筋です。":"精選された教材で最短距離を取る、巻き返しに強い道筋です。"}現在の学力に合わせて${level>0?"習得済みの段階はスキップ表示になります。":"導入から丁寧に始めます。"}</p>
       </div>
       <div class="opt-list" style="margin-top:14px">
@@ -1233,7 +1240,7 @@ function renderQuizResult(){
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-      ${RTShare.afterResult({tier:t.name, variant:bunri==="bun"?"国公立二次型":"私立個別型", policy:polLabel})}
+      ${RTShare.afterResult({tier:t.name, variant:trackName(bunri,"short"), policy:polLabel})}
     </div>`;
   focusResult("#quizShell .result-hero");
 }
@@ -1450,7 +1457,7 @@ RTShare.setup({
         tokens:["t", t.id, S.bunri, S.policy, String(S.level)],
         uni: uni,
         label: [uni || t.name,
-                S.bunri==="bun" ? "国公立二次型" : "私立個別型",
+                trackName(S.bunri,"short"),
                 S.policy==="omni" ? "王道網羅型" : "時短・精選型"].join(" / ")
       };
     },

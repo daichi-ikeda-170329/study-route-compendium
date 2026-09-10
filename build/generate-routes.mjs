@@ -7,12 +7,13 @@
  *   science        : butsuri / kagaku / seibutsu / chigaku
  *   social         : nihonshi / sekaishi / …
  * さらに para（並行して進める本）と final（最終仕上げ）が tier 直下にぶら下がる。
- * トラックとして扱わないキーは NON_TRACK に並べてある。
+ * トラックとして扱わないキー・表示順・表示名は build/lib/tracks.mjs にある。
  */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
+import { NON_TRACK, trackRank, trackLabel } from './lib/tracks.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
@@ -30,27 +31,10 @@ const UNIV_SLUG = new Map(
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-/** トラックキーの表示名。分野コードは SUB_LABELS と共通 */
-const TRACK_LABELS = { bun: '文系', ri: '理系', ...SUB_LABELS };
 const POLICIES = [
   { key: 'omni',  label: '王道網羅型',   note: '時間に余裕があり、抜けを作らずに積み上げたい場合の並び。網羅系を軸に据えます。' },
   { key: 'quick', label: '時短・精選型', note: '残り時間が少ない、または他科目に時間を回したい場合の並び。冊数を絞って要点だけ通します。' },
 ];
-/* トラックの名前として現れるが、ルートの並びそのものではないキー。
-   basic は理科基礎（文系・共テのみ）のルートで、科目トップだけで使う */
-const NON_TRACK = new Set(['para', 'final', 'basic']);
-/** トラックの表示順。ROUTES のキー順は科目によってばらつくのでここで固定する */
-const TRACK_ORDER = [
-  'bun', 'ri',
-  'gendai', 'kobun', 'koten', 'kanbun',
-  'butsuri', 'kagaku', 'seibutsu', 'chigaku',
-  'nihonshi', 'sekaishi', 'chiri', 'kokyo', 'seikei', 'rinri',
-  'sogo',
-];
-const trackRank = (k) => {
-  const i = TRACK_ORDER.indexOf(k);
-  return i < 0 ? TRACK_ORDER.length : i;
-};
 
 /**
  * ROUTES を { [tier]: { tracks: {track: {omni, quick}}, para: {track: []}, final: {track: []} } } に揃える。
@@ -79,8 +63,6 @@ function normalize(routes, tiers) {
   }
   return out;
 }
-
-const trackLabel = (k) => TRACK_LABELS[k] || k;
 
 function stepList(steps, bookById, sub, stages) {
   return steps.map((s, i) => {
@@ -140,7 +122,7 @@ function render(sub, d, tier, norm, counts) {
   ];
 
   const sections = trackKeys.map(tk => {
-    const label = trackLabel(tk);
+    const label = trackLabel(d, tk);
     const seq = node.tracks[tk];
     const bodies = POLICIES.filter(p => (seq[p.key] || []).length).map(p => `      <div class="rpol">
         <h3 class="rpol__t"><b>${p.label}</b><span>${(seq[p.key] || []).length}冊</span></h3>
@@ -264,7 +246,7 @@ ${header(sub)}
   <div class="block" style="margin-top:26px">
     <div class="eyebrow">Route by target</div>
     <h1 class="sec" style="font-size:29px">${esc(tier.name)}の${esc(sub.ja)}参考書ルート</h1>
-    <p class="sec-lead">${esc(tier.sub)}を目指す人に向けた${esc(sub.ja)}の並びです。導入から過去問まで、${used.size}冊の中から「何を・どの順で」やるかを${trackKeys.map(trackLabel).map(esc).join('・')}別にまとめています。すでに終えた段階は飛ばして構いません。</p>
+    <p class="sec-lead">${esc(tier.sub)}を目指す人に向けた${esc(sub.ja)}の並びです。導入から過去問まで、${used.size}冊の中から「何を・どの順で」やるかを${trackKeys.map(k => esc(trackLabel(d, k, 'short'))).join('・')}別にまとめています。すでに終えた段階は飛ばして構いません。</p>
     <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
     <dl class="tier-head">
       <div><dt>目標</dt><dd>${esc(tier.goal)}</dd></div>
@@ -272,7 +254,7 @@ ${header(sub)}
       <div><dt>収録冊数</dt><dd>${used.size} 冊</dd></div>
     </dl>
     ${trackKeys.length > 1 ? `<div class="tnav">
-${trackKeys.map(tk => `      <a href="#track-${tk}">${esc(trackLabel(tk))}のルート</a>`).join('\n')}
+${trackKeys.map(tk => `      <a href="#track-${tk}">${esc(trackLabel(d, tk))}のルート</a>`).join('\n')}
     </div>` : ''}
     ${shareBar({
       url,

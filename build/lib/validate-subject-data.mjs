@@ -13,6 +13,7 @@
  * 持ち、検証もそれを通す。0 を「未設定」の意味で使うと、本当の 0 と区別できなくなる。
  */
 import { recordType, isPlaceholder } from './record-type.mjs';
+import { allTrackKeys } from './tracks.mjs';
 
 /** BOOKS の 1 レコードに必ずある項目 */
 export const REQUIRED_BOOK = ['id', 'name', 'stage'];
@@ -103,6 +104,25 @@ export function validateSubjectData(dir, data) {
     for (const v of Object.values(node)) if (v && typeof v === 'object') walk(v, where);
   };
   walk(data.routes, 'ROUTES');
+
+  /* トラックの表示名。書くなら routes.json のトラックと過不足なくそろえる。
+     足りないと静的ページだけ SUB_LABELS に落ちて「bun」がそのまま見出しに出る */
+  const labels = data.config && data.config.trackLabels;
+  if (labels !== undefined) {
+    if (!labels || typeof labels !== 'object' || Array.isArray(labels)) {
+      bad('config.trackLabels がオブジェクトでない');
+    } else {
+      const want = allTrackKeys(data.routes);
+      for (const k of want) if (!labels[k]) bad(`config.trackLabels に「${k}」が無い（routes.json にあるトラック）`);
+      for (const k of Object.keys(labels)) {
+        if (!want.has(k)) bad(`config.trackLabels の「${k}」は routes.json に無いトラック`);
+        const v = labels[k] || {};
+        for (const f of ['label', 'short', 'lead']) {
+          if (typeof v[f] !== 'string' || !v[f]) bad(`config.trackLabels.${k}.${f} が空か文字列でない`);
+        }
+      }
+    }
+  }
 
   /* 大学 */
   for (const u of data.unis) {

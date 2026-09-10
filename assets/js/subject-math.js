@@ -56,6 +56,13 @@ const AFF    = AFF_AZ || AFF_RK;
 /* Google AdSense。ID が入るまで広告も広告の表記も出さない */
 const ADSENSE = Boolean(CONFIG.adsenseId);
 
+/* トラック（bun / ri）の表示名。正本は data/subjects/math/config.json の trackLabels。
+   form: "label"（見出し用）/ "short"（文中用）/ "lead"（説明）。静的ページ（build/lib/tracks.mjs）と同じ規則 */
+const trackName = (k, form) => {
+  const t = CONFIG.trackLabels && CONFIG.trackLabels[k];
+  return (t && t[form || "label"]) || k;
+};
+
 const AFF_PROGRAMS = [
   AFF_AZ ? "Amazonアソシエイト・プログラム" : null,
   AFF_RK ? "楽天アフィリエイト" : null
@@ -792,7 +799,7 @@ function applyUni(){
       <div class="uni-card__top"><h4>${r.label}</h4><span>${S.uni.ty} ・ 数学の到達目安 偏差値 ${r.hen}</span></div>
       <div class="uni-card__map">
         <span class="tag">${t.name} ルート</span><span class="arw">/</span>
-        <span>${r.bunri==="bun"?"文系":"理系(数III・C)"}</span><span class="arw">/</span>
+        <span>${r.bunri==="bun"?trackName("bun"):trackName("ri")+"(数III・C)"}</span><span class="arw">/</span>
         <span>${S.policy==="omni"?"王道網羅型":"時短・精選型"}</span>
       </div>
       <div class="uni-card__note"><b>数学の出題傾向:</b> ${S.uni.no}。${r.extra||""}</div>
@@ -959,7 +966,7 @@ function renderRouteBody(){
         <div class="rs-item"><dt>目安期間</dt><dd>${months}<small> か月〜</small></dd></div>
         <div class="rs-item"><dt>到達目安</dt><dd style="font-size:13px;line-height:1.4;padding-top:3px">${(S.mode==="uni"&&S.uni)?"偏差値 "+resolveUni(S.uni,S.fac).hen:tier.hensachi}</dd></div>
       </dl>
-      <div class="rs-goal"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6 21V4m0 0h11l-2.5 4L17 12H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>目標:<b>${(S.mode==="uni"&&S.uni)?S.uni.n+(S.fac?" "+S.fac.trim():"")+" 合格":tier.goal}</b> — ${S.bunri==="bun"?"文系":"理系"} / ${S.policy==="omni"?"王道網羅型":"時短・精選型"}</div>
+      <div class="rs-goal"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6 21V4m0 0h11l-2.5 4L17 12H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>目標:<b>${(S.mode==="uni"&&S.uni)?S.uni.n+(S.fac?" "+S.fac.trim():"")+" 合格":tier.goal}</b> — ${trackName(S.bunri,"short")} / ${S.policy==="omni"?"王道網羅型":"時短・精選型"}</div>
     </div>
     ${uniNote}
     <div class="climb">
@@ -969,7 +976,7 @@ function renderRouteBody(){
       ${paraHtml}
       <div class="climb-goal">
         <div class="cg-marker"><div class="cg-flag"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M6 21V4m0 0h11l-2.5 4L17 12H6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-        <div class="cg-card"><h4>${tier.goal}</h4><p>${tier.name}(${S.bunri==="bun"?"文系":"理系"})ルート完走。過去問で合格点を安定させたら完成です。</p></div>
+        <div class="cg-card"><h4>${tier.goal}</h4><p>${tier.name}(${trackName(S.bunri,"short")})ルート完走。過去問で合格点を安定させたら完成です。</p></div>
       </div>
     </div>
     <div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><p>${polNote}</p></div>
@@ -1070,7 +1077,7 @@ function renderQuizResult(){
     <div class="quiz-step">
       <div class="result-hero">
         <div class="rh-label">DIAGNOSIS COMPLETE — あなたにおすすめのルート</div>
-        <h3>${t.name}<br><span style="font-size:16px;opacity:.85">${bunri==="bun"?"文系":"理系"} × ${polLabel}</span></h3>
+        <h3>${t.name}<br><span style="font-size:16px;opacity:.85">${trackName(bunri,"short")} × ${polLabel}</span></h3>
         <p>メイン教材 ${books.length} 冊。${policy==="omni"?"網羅系を軸に、盤石な土台から積み上げる王道の道筋です。":"精選された教材で最短距離を取る、巻き返しに強い道筋です。"}現在の学力に合わせて${level>0?"習得済みの段階はスキップ表示になります。":"導入から丁寧に始めます。"}</p>
       </div>
       <div class="opt-list" style="margin-top:14px">
@@ -1090,7 +1097,7 @@ function renderQuizResult(){
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-      ${RTShare.afterResult({tier:t.name, variant:bunri==="bun"?"文系":"理系", policy:polLabel})}
+      ${RTShare.afterResult({tier:t.name, variant:trackName(bunri,"short"), policy:polLabel})}
     </div>`;
   focusResult("#quizShell .result-hero");
 }
@@ -1301,7 +1308,7 @@ RTShare.setup({
         tokens:["t", t.id, S.bunri, S.policy, String(S.level)],
         uni: uni,
         label: [uni || t.name,
-                S.bunri==="bun" ? "国公立二次型" : "私立個別型",
+                trackName(S.bunri,"short"),
                 S.policy==="omni" ? "王道網羅型" : "時短・精選型"].join(" / ")
       };
     },
