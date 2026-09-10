@@ -67,13 +67,18 @@ function normalize(routes, tiers) {
   return out;
 }
 
-function stepList(steps, bookById, sub, stages) {
+/* mark を渡すと、画像の書き出し（assets/js/route-image.js）が読む data-ri-* 属性を付ける。
+   ページに並ぶルートのうち、最初のトラックの王道網羅型だけに付ける（画像に描くのは 1 本） */
+const riAttrs = (o) => Object.entries(o).map(([k, v]) => ` data-ri-${k}="${esc(String(v ?? ''))}"`).join('');
+
+function stepList(steps, bookById, sub, stages, mark = false) {
   return steps.map((s, i) => {
     const b = bookById.get(s.id);
     if (!b) return '';
     const st = stages[b.stage] || {};
     const alts = (s.alts || []).map(id => bookById.get(id)).filter(Boolean);
-    return `        <li class="rstep">
+    const ri = mark ? ` data-ri-item${riAttrs({ no: i + 1, name: displayName(b, sub.dir), role: s.role || st.label || '', diff: b.diff ?? '' })}` : '';
+    return `        <li class="rstep"${ri}>
           <span class="rstep__no">${String(i + 1).padStart(2, '0')}</span>
           <a class="rstep__cov" href="/${sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || sub.color, dir: sub.dir })}</a>
           <div class="rstep__body">
@@ -87,12 +92,13 @@ function stepList(steps, bookById, sub, stages) {
   }).filter(Boolean).join('\n');
 }
 
-function sideList(steps, bookById, sub, stages) {
+function sideList(steps, bookById, sub, stages, mark = false) {
   return steps.map(s => {
     const b = bookById.get(s.id);
     if (!b) return '';
     const st = stages[b.stage] || {};
-    return `          <li>
+    const ri = mark ? ` data-ri-item${riAttrs({ kind: 'para', name: displayName(b, sub.dir) })}` : '';
+    return `          <li${ri}>
             <a class="rside__cov" href="/${sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || sub.color, dir: sub.dir })}</a>
             <div><a class="rside__name" href="/${sub.dir}/books/${b.id}/">${esc(displayName(b, sub.dir))}</a>${s.note ? `<span>${esc(s.note)}</span>` : ''}</div>
           </li>`;
@@ -145,14 +151,15 @@ function render(sub, d, tier, norm, counts) {
     { name: tier.name, url, absUrl: url },
   ];
 
-  const sideBlock = (g, kind, title, note) => g[kind].map(part => {
+  const firstGroup = groups[0];
+  const sideBlock = (g, kind, title, note) => g[kind].map((part, pi) => {
     // グループ内でトラックごとに中身が違うときだけ、どのトラック向けかを見出しに添える
     const whose = g.keys.length > 1 && part.keys.length < g.keys.length ? `（${esc(shorts(part.keys))}）` : '';
     return `<div class="rside">
         <h3>${title}${whose}</h3>
         <p>${note}</p>
         <ul>
-${sideList(part.list, bookById, sub, d.stages)}
+${sideList(part.list, bookById, sub, d.stages, g === firstGroup && kind === 'para' && pi === 0)}
         </ul>
       </div>`;
   }).join('\n      ');
@@ -185,7 +192,7 @@ ${sideList(part.list, bookById, sub, d.stages)}
         <h3 class="rpol__t"><b>${p.label}</b><span>${(seq[p.key] || []).length}冊</span></h3>
 ${policyHours(g, p.key)}        <p class="rpol__n">${p.note}</p>
         <ol class="rsteps">
-${stepList(seq[p.key], bookById, sub, d.stages)}
+${stepList(seq[p.key], bookById, sub, d.stages, g === firstGroup && p.key === 'omni')}
         </ol>
       </div>`).join('\n');
 
@@ -333,7 +340,10 @@ ${topBars(sub.dir)}
 
 ${header(sub)}
 
-<main class="wrap">
+<main class="wrap" data-route-image${riAttrs({
+    title: `${tier.name}（${firstGroup.keys.map(k => trackLabel(d, k, 'short')).join('・')}）王道網羅型`,
+    sub: sub.full, url, file: `route-taizen-${sub.dir}-${tier.id}.png`,
+  })}>
   ${crumbs(crumbItems)}
 
   <div class="block" style="margin-top:26px">
@@ -354,6 +364,7 @@ ${groups.map(g => g.keys.length > 1
     </div>` : ''}
     ${shareBar({
       url,
+      image: true,
       head: 'SHARE — このルートを共有する',
       text: `【ルート大全】${tier.name}の${sub.ja}参考書ルート（${used.size}冊）`,
     })}
@@ -395,6 +406,7 @@ ${others.map(t => `      <a href="/${sub.dir}/routes/${t.id}/">${esc(t.name)}</a
 ${footer(sub.dir, counts)}
 
 ${jsonLd(ld)}
+<script src="/assets/js/route-image.js" defer></` + `script>
 
 </body>
 </html>

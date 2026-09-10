@@ -439,6 +439,7 @@
       label: label,
       tweet: "【ルート大全で診断】\n" + label + "のルートが出ました",
       save: true,
+      image: true,
       /* **何が共有され、何が共有されないかを明示する。**
          診断のあとの追加質問（assets/js/refine.js）と学習の記録
          （assets/js/progress.js）はこの端末の中だけに残る。
@@ -478,6 +479,13 @@
       btns += '<button type="button" class="btn btn-ghost" onclick="RTShare.shareNative(this)">'
         + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v13M8 7l4-4 4 4M5 14v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
         + '共有</button>';
+    }
+    /* ルート・診断結果の画像書き出し（assets/js/route-image.js。仕様書 4.3）。
+       スクリプトが読めていないページでは出さない */
+    if (opts.image && global.RTRouteImage) {
+      btns += '<button type="button" class="btn btn-ghost" onclick="RTRouteImage.save(this)">'
+        + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        + '画像で保存</button>';
     }
     if (opts.save && storageOK()) {
       btns += '<button type="button" class="btn btn-ghost" onclick="RTShare.saveRoute(this)">'
@@ -533,6 +541,7 @@
       label: label,
       tweet: "【ルート大全】\n" + label + "のルートで進めます",
       save: false,
+      image: true,
       note: "共有リンクに含まれるのは志望レベル・型・方針・現在地だけです。学部名・模試の偏差値・既習の参考書は含まれません。"
     });
   }

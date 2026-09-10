@@ -142,7 +142,8 @@ test('保存・復元・削除がこの端末の中だけで動く', async ({ pa
   await page.locator('#routePicker .rpick').first().click();
   await expect(page.locator('#routeOutput .climb')).toBeVisible();
 
-  const saveBtn = page.locator('button', { hasText: '保存' }).first();
+  // 「画像で保存」（ルートの画像書き出し。仕様書 4.3）は localStorage の保存ではないので除く
+  const saveBtn = page.locator('button', { hasText: '保存' }).filter({ hasNotText: '画像' }).first();
   if (await saveBtn.count()) {
     await saveBtn.click();
     const keys = await page.evaluate(() => Object.keys(window.localStorage));
@@ -336,4 +337,54 @@ test('2 冊比較: 無効な指定なら空の状態になり、選ぶと表に�
   await page.locator('#cmpGo').click();
   await expect(page.locator('table.cmpx')).toBeVisible();
   expect(errors).toEqual([]);
+});
+
+/* ---------- ルート・診断結果の画像書き出し（仕様書 4.3） ---------- */
+
+/** ダウンロードした PNG の幅と高さ（IHDR を読む） */
+async function pngSize(download) {
+  const fs = await import('node:fs');
+  const buf = fs.readFileSync(await download.path());
+  expect(buf.subarray(1, 4).toString()).toBe('PNG');
+  return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
+}
+
+test('静的ルートページの「画像で保存」で 1080×1350 の PNG が保存される', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/english/routes/sokei/', { waitUntil: 'domcontentloaded' });
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.locator('.sharebar button', { hasText: '画像で保存' }).click(),
+  ]);
+  expect(download.suggestedFilename()).toBe('route-taizen-english-sokei.png');
+  expect(await pngSize(download)).toEqual({ w: 1080, h: 1350 });
+  expect(errors).toEqual([]);
+});
+
+test('科目トップのルート画面でも「画像で保存」で PNG が保存される', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/math/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  await page.locator('#routePicker .rpick').first().click();
+  await expect(page.locator('#routeOutput .climb')).toBeVisible();
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    // ルート画面の共有ブロックは #routeOutput の外（同じ画面の中）に描かれる
+    page.locator('#view-route .rt-share button', { hasText: '画像で保存' }).click(),
+  ]);
+  expect(download.suggestedFilename()).toMatch(/^route-taizen-math-[a-z]+\.png$/);
+  expect(await pngSize(download)).toEqual({ w: 1080, h: 1350 });
+  expect(errors).toEqual([]);
+});
+
+test('診断結果の「画像で保存」でも PNG が保存される', async ({ page }) => {
+  await page.goto('/english/#quiz', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  await finishQuiz(page);
+  await expect(page.locator('#quizShell .result-hero')).toBeVisible();
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.locator('#quizShell .rt-share button', { hasText: '画像で保存' }).click(),
+  ]);
+  expect(await pngSize(download)).toEqual({ w: 1080, h: 1350 });
 });

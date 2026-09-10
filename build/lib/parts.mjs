@@ -201,7 +201,10 @@ export function shareBar(o) {
       Xで共有</a>
     <button class="sharebar__b" type="button" data-rt-copy="${esc(o.url)}">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9h10v10H9zM5 15H4V4h11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      リンクをコピー</button>
+      リンクをコピー</button>${o.image ? `
+    <button class="sharebar__b" type="button" onclick="window.RTRouteImage &amp;&amp; RTRouteImage.save(this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      画像で保存</button>` : ''}
     <span class="sharebar__msg" role="status"></span>
   </div>
   <script>

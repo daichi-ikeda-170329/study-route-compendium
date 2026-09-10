@@ -396,7 +396,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 
   <!-- ============ QUIZ ============ -->
   <section class="view" id="view-quiz">
-    <div class="quiz-shell" id="quizShell" role="region" aria-label="3 分診断" aria-live="polite" tabindex="-1"></div>
+    <div class="quiz-shell" id="quizShell" data-route-image role="region" aria-label="3 分診断" aria-live="polite" tabindex="-1"></div>
   </section>
 
   <!-- ============ ROUTE ============ -->
@@ -512,7 +512,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         </div>
       </div>
 
-      <div id="routeOutput" role="region" aria-label="参考書ルート" aria-live="polite" aria-busy="false" tabindex="-1"></div>
+      <div id="routeOutput" data-route-image role="region" aria-label="参考書ルート" aria-live="polite" aria-busy="false" tabindex="-1"></div>
       <div id="routeShare"></div>
     </div>
   </section>
@@ -736,6 +736,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 <script>/* RT_SUBJECT_ASSETS — build/generate-subject-assets.mjs が書き換える。手で編集しない */window.RT_SUBJECT_ASSETS={"v":1,"subject":"japanese","files":{"core":"/assets/generated/subjects/japanese.core.json?v=017f5bd80b","books":"/assets/generated/subjects/japanese.books.json?v=47d4d7a7ff","routes":"/assets/generated/subjects/japanese.routes.json?v=82cbf4b4a3","unis":"/assets/generated/subjects/japanese.unis.json?v=df4842cea9","guides":"/assets/generated/subjects/japanese.guides.json?v=6526e6234b"},"bytes":{"core":2427,"books":222546,"routes":35204,"unis":76439,"guides":20106}};window.RT_SUBJECT_QUEUE=[];(["catGroups","isProv","provLast","hRange","byDiffAsc","byDiffDesc","diffColor","normQ","searchUnis","facBunri","isMed","resolveUni","pickBunri","levelFromHen","levelFromDone","moshiComparable","recalcStatus","targetHen","renderVerdict","go","syncHash","hashView","applyHash","coverSrcs","amazonURL","rakutenURL","coverHTML","buildFilters","setFilter","bookCardHTML","renderCatalog","findConnections","openModal","closeModal","buildRoutePicker","selectTier","setSubj","syncMode","setMode","sugSync","sugClose","renderUniSug","pickUni","subjBadge","applyUni","renderDoneSug","addDone","removeDone","renderDoneChips","segAria","wireSeg","subjectPlan","nodeHTML","renderRoute","renderRouteBody","renderHome","startQuiz","activeQuizSteps","renderQuiz","pickOpt","nextQuiz","focusResult","renderQuizResult","applyQuiz","guidePagePath","renderGuide","toggleGuide","trapFocusables","modalOpened","modalClosed","openBox","syncRouteSegs","applySharedUni","sharedUniName"]).forEach(function(n){if(window[n])return;window[n]=function(){window.RT_SUBJECT_QUEUE.push([n,[].slice.call(arguments)])};window[n].__rtStub=1});window.RT_SUBJECT_FLUSH=function(){var q=window.RT_SUBJECT_QUEUE;window.RT_SUBJECT_QUEUE=[];q.forEach(function(c){var f=window[c[0]];if(typeof f==="function"&&!f.__rtStub)f.apply(null,c[1])})};</script>
 <script src="/assets/js/cover-policies.js" defer></script>
 <script src="/assets/js/cover-resolver.js" defer></script>
+<script src="/assets/js/route-image.js" defer></script>
 <script src="/assets/js/progress.js" defer></script>
 <script src="/assets/js/progress-control.js" defer></script>
 <script src="/assets/js/refine.js" defer></script>

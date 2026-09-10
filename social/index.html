@@ -396,7 +396,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 
   <!-- ============ QUIZ ============ -->
   <section class="view" id="view-quiz">
-    <div class="quiz-shell" id="quizShell" role="region" aria-label="3 分診断" aria-live="polite" tabindex="-1"></div>
+    <div class="quiz-shell" id="quizShell" data-route-image role="region" aria-label="3 分診断" aria-live="polite" tabindex="-1"></div>
   </section>
 
   <!-- ============ ROUTE ============ -->
@@ -519,7 +519,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div class="subj-bar__hint" id="subjHint"></div>
       </div>
 
-      <div id="routeOutput" role="region" aria-label="参考書ルート" aria-live="polite" aria-busy="false" tabindex="-1"></div>
+      <div id="routeOutput" data-route-image role="region" aria-label="参考書ルート" aria-live="polite" aria-busy="false" tabindex="-1"></div>
       <div id="routeShare"></div>
     </div>
   </section>
@@ -761,6 +761,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 <script>/* RT_SUBJECT_ASSETS — build/generate-subject-assets.mjs が書き換える。手で編集しない */window.RT_SUBJECT_ASSETS={"v":1,"subject":"social","files":{"core":"/assets/generated/subjects/social.core.json?v=830b7ce4a5","books":"/assets/generated/subjects/social.books.json?v=16b155396f","routes":"/assets/generated/subjects/social.routes.json?v=ae730ff27b","unis":"/assets/generated/subjects/social.unis.json?v=325e2c21ea","guides":"/assets/generated/subjects/social.guides.json?v=565f788664"},"bytes":{"core":2562,"books":341741,"routes":106030,"unis":134065,"guides":24743}};window.RT_SUBJECT_QUEUE=[];(["catGroups","isProv","provLast","hRange","byDiffAsc","byDiffDesc","diffColor","normQ","searchUnis","facBunri","isMed","resolveUni","pickBunri","levelFromHen","levelFromDone","moshiComparable","recalcStatus","targetHen","renderVerdict","go","syncHash","hashView","applyHash","coverSrcs","amazonURL","rakutenURL","coverHTML","buildFilters","setFilter","bookCardHTML","renderCatalog","findConnections","openModal","closeModal","buildRoutePicker","selectTier","availNow","toggleSubj","setCourse","renderSubjBar","syncMode","setMode","sugSync","sugClose","renderUniSug","pickUni","subjBadge","applyUni","renderDoneSug","addDone","removeDone","renderDoneChips","segAria","wireSeg","subjectPlan","nodeHTML","renderRoute","renderRouteBody","renderHome","startQuiz","activeQuizSteps","renderQuiz","pickOpt","nextQuiz","quizPicks","focusResult","renderQuizResult","applyQuiz","guidePagePath","renderGuide","toggleGuide","trapFocusables","modalOpened","modalClosed","openBox","syncRouteSegs","pickMask","applySharedUni","sharedUniName"]).forEach(function(n){if(window[n])return;window[n]=function(){window.RT_SUBJECT_QUEUE.push([n,[].slice.call(arguments)])};window[n].__rtStub=1});window.RT_SUBJECT_FLUSH=function(){var q=window.RT_SUBJECT_QUEUE;window.RT_SUBJECT_QUEUE=[];q.forEach(function(c){var f=window[c[0]];if(typeof f==="function"&&!f.__rtStub)f.apply(null,c[1])})};</script>
 <script src="/assets/js/cover-policies.js" defer></script>
 <script src="/assets/js/cover-resolver.js" defer></script>
+<script src="/assets/js/route-image.js" defer></script>
 <script src="/assets/js/progress.js" defer></script>
 <script src="/assets/js/progress-control.js" defer></script>
 <script src="/assets/js/refine.js" defer></script>
