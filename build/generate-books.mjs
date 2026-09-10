@@ -321,6 +321,14 @@ ${spec}
       <p class="spec__note">書名・出版社・ISBN・刊行年・問題数は公開されている書誌情報です。難易度・到達目安・想定学習時間は編集部の推定値で、<a href="/methodology/">算出方法</a>を公開しています。</p>
     </section>
 
+${/* 学習の記録は基本情報の直後に置く（購入ボタンの後ろだと、ページの下まで読まないと見つからない。仕様書 2.5） */ ''}    <section class="block">
+      <div class="eyebrow">Progress</div>
+      <h2 class="sec">この参考書の状態を記録する</h2>
+      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <div data-rt-progress data-subject-id="${esc(sub.dir)}" data-book-id="${esc(book.id)}" data-book-name="${esc(bn)}"></div>
+      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
+    </section>
+
     ${prov ? `<section class="block prose">
       <div class="eyebrow">Status</div>
       <h2 class="sec">この本の評価について</h2>
@@ -403,14 +411,6 @@ ${bookCards(next.list, sub, stages)}
       </script>
       ${placeholder ? `<p class="buy__note buy__note--warn"><b>${esc(PLACEHOLDER_LABEL)}。</b>${esc(PLACEHOLDER_NOTE)}</p>` : ''}
       <p class="buy__note">${aff ? `${affStores}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。` : ''}価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
-    </section>
-
-    <section class="block">
-      <div class="eyebrow">Progress</div>
-      <h2 class="sec">この参考書の状態を記録する</h2>
-      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
-      <div data-rt-progress data-subject-id="${esc(sub.dir)}" data-book-id="${esc(book.id)}" data-book-name="${esc(bn)}"></div>
-      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">

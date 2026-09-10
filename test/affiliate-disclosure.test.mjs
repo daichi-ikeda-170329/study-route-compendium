@@ -181,7 +181,10 @@ test('購入リンクにアフィリエイトの経路が残っている', () =>
       const f = path.join(dir, e.name, 'index.html');
       if (!fs.existsSync(f)) continue;
       const src = fs.readFileSync(f, 'utf8');
-      const buy = src.slice(src.indexOf('class="buy"'), src.indexOf('buy__note'));
+      // 購入節の注記（buy__note）は購入ボタンの後ろにある。学習の記録の節（基本情報の直後。
+      // 仕様書 2.5）も noscript に同じクラスを使うので、購入節の開始から探す
+      const at = src.indexOf('class="buy"');
+      const buy = at < 0 ? '' : src.slice(at, src.indexOf('buy__note', at));
       if (!buy) continue;
       // 電子版しか無い等で購入リンクを持たない本があるので、リンクがある本だけ見る
       if (!/class="az"/.test(buy) && !/class="rk"/.test(buy)) continue;
@@ -206,7 +209,8 @@ test('広告リンクの注記が、ID がある販売サイトの名前で出�
   const pages = sampleBookPages();
   for (const p of pages) {
     if (!/class="az"|class="rk"/.test(p.src)) continue;
-    const note = p.src.slice(p.src.indexOf('buy__note'), p.src.indexOf('buy__note') + 400);
+    const at = p.src.indexOf('buy__note', p.src.indexOf('class="buy"'));
+    const note = p.src.slice(at, at + 400);
     if (!AFF) continue;
     assert.match(note, /広告リンクです/, `${p.rel}: 購入リンクの広告注記が消えている`);
   }

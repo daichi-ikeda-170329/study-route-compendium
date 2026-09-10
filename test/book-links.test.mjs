@@ -77,3 +77,11 @@ test('書籍ページの「あとに進む」にも同じ並びが出る', () =>
   const ids = [...html.slice(i).matchAll(/<a class="bcard" href="\/english\/books\/([a-z0-9-]+)\/"/g)].slice(0, 3).map(m => m[1]);
   assert.ok(['waseda-eigo', 'keio-eigo', 'todai25'].some(id => ids.includes(id)), `ページの先頭 3 冊: ${ids.join(', ')}`);
 });
+
+test('書籍ページの見出しは 基本情報 → 状態を記録する → どんな人に向いているか の順（仕様書 2.5）', () => {
+  for (const rel of ['english/books/rules4/index.html', 'math/books/ao/index.html']) {
+    const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    const h2 = [...html.matchAll(/<h2 class="sec">([^<]*)<\/h2>/g)].map(m => m[1]);
+    assert.deepEqual(h2.slice(0, 3), ['基本情報', 'この参考書の状態を記録する', 'どんな人に向いているか'], `${rel}: ${h2.join(' / ')}`);
+  }
+});
