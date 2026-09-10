@@ -10,6 +10,8 @@ import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { isPlaceholder, recordType } from './lib/record-type.mjs';
 import { validateSubjectData } from './lib/validate-subject-data.mjs';
+import { SOURCES_FILE, validateUniversitySources } from './lib/university-sources.mjs';
+import fs from 'node:fs';
 import { verificationOf, verifiedFieldIsWellFormed, loadVerification, STATUSES } from './lib/verification.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -95,6 +97,17 @@ for (const s of SUBJECTS) {
 
 for (const [isbn, keys] of isbnSeen) {
   if (keys.length > 1) bad(`ISBN ${isbn} を ${keys.length} 件が共有している: ${keys.join(', ')}`);
+}
+
+/* ---------- 大学別ページの出典（build/data/university-sources.json） ---------- */
+{
+  const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8'));
+  const slugs = new Set(ledger.universities.map(u => u.slug));
+  if (fs.existsSync(SOURCES_FILE)) {
+    let raw = null;
+    try { raw = JSON.parse(fs.readFileSync(SOURCES_FILE, 'utf8')); } catch (e) { bad(`university-sources.json を読めない: ${e.message}`); }
+    if (raw) for (const p of validateUniversitySources(raw, slugs)) bad(p);
+  }
 }
 
 /* ---------- 確認状態 ---------- */

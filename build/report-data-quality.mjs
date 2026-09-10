@@ -20,6 +20,7 @@ import { tally } from './lib/tally.mjs';
 import { isPlaceholder } from './lib/record-type.mjs';
 import { verificationOf, loadVerification, UNVERIFIED_MARK, FACT_FIELDS } from './lib/verification.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
+import { loadUniversitySources } from './lib/university-sources.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STDOUT = process.argv.includes('--stdout');
@@ -120,6 +121,13 @@ function main() {
     staleChecks: staleChecks.length,
     textMarkRemaining: rows.filter(r => r.textMark).length,
     extras,
+    universitySources: (() => {
+      /* 大学別ページの出典（build/data/university-sources.json）の登録状況（仕様書 3.2） */
+      const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8')).universities;
+      const src = loadUniversitySources();
+      const registered = ledger.filter(u => src[u.slug]).length;
+      return { total: ledger.length, registered, unregistered: ledger.length - registered };
+    })(),
   };
 
   // 生成日は**中身が変わった日**。実行日を書くと、データを一切変えていない日に
@@ -188,6 +196,15 @@ function main() {
       const tot = bySubject[s.dir].total;
       return `| ${s.ja} | ${tot} | ${EXTRA_FIELDS.map(f => `${x[f]}（${Math.round((x[f] / tot) * 1000) / 10}%）`).join(' | ')} |`;
     }),
+    '',
+    '## 大学別ページの出典',
+    '',
+    '`build/data/university-sources.json` に年度・確認日・公式 URL を登録した大学の数。',
+    '未登録の大学のページは「募集要項で確認してください」とだけ出す（年度を推測で書かない）。',
+    '',
+    `- 大学別ページ: ${json.universitySources.total} 校`,
+    `- 出典を登録済み: ${json.universitySources.registered} 校`,
+    `- 出典未登録: ${json.universitySources.unregistered} 校`,
     '',
     '## 書誌データベースとの食い違い',
     '',

@@ -1,0 +1,302 @@
+{
+ "_note": "大学別ページ（/univ/<slug>/）の出典。大学公式サイトで確かめたものだけを載せる（build/lib/university-sources.mjs に形の説明）。調査の経緯は docs/remediation-progress.md の 3.2 の行。",
+ "schemaVersion": 1,
+ "universities": {
+  "todai": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://www.u-tokyo.ac.jp/ja/admissions/undergraduate/e01_02_01.html"
+  },
+  "kyodai": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://www.kyoto-u.ac.jp/ja/admissions/undergrad"
+  },
+  "hitotsubashi": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://juken.hit-u.ac.jp/admission/info/"
+  },
+  "tokyotech": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://admissions.isct.ac.jp/ja/013/undergraduate"
+  },
+  "waseda": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://www.waseda.jp/inst/admission/undergraduate/system/general/",
+   "faculties": [
+    {
+     "name": "政治経済学部",
+     "method": "一般選抜",
+     "subjects": "大学入学共通テスト（外国語・国語・数学Ⅰ,A＋地歴・公民/数学Ⅱ,B,C/理科/情報から1）・学部独自試験「総合問題」",
+     "note": "共通テストは各25点で計100点。総合問題は120分・100点（日英両言語の長文を読み解く形式、記述式を含む）。",
+     "source": "https://www.waseda.jp/fpse/pse/applicants/admissions/"
+    },
+    {
+     "name": "法学部",
+     "method": "一般選抜",
+     "subjects": "外国語（英語。ドイツ語・フランス語・中国語は共通テストを利用）・国語・地歴・公民（世界史/日本史/政治・経済）または数学（共通テストを利用）",
+     "note": "2027年度一般選抜概要。外国語60点（英語90分）、国語50点（90分）、地歴・公民または数学40点（60分）。全科目の得点を統計処理で標準化。",
+     "source": "https://www.waseda.jp/folaw/law/applicants/admission/"
+    },
+    {
+     "name": "文学部",
+     "method": "一般選抜",
+     "subjects": "外国語（英語）・国語・地歴（世界史または日本史）",
+     "note": "2027年度。英語90分75点、国語90分75点、地歴60分50点。",
+     "source": "https://www.waseda.jp/flas/hss/applicants/admission/"
+    },
+    {
+     "name": "文学部",
+     "method": "一般選抜（共通テスト利用方式）",
+     "subjects": "英語・国語（本学の試験）・大学入学共通テスト1科目（地歴・公民/数学/理科/情報から）",
+     "note": "2027年度。英語90分75点、国語90分75点、共通テスト50点（100点を換算）。『歴史総合,世界史探究』『歴史総合,日本史探究』は共通テストの対象科目に含まれない。",
+     "source": "https://www.waseda.jp/flas/hss/applicants/admission/"
+    },
+    {
+     "name": "文化構想学部",
+     "method": "一般選抜",
+     "subjects": "外国語（英語）・国語・地歴（世界史または日本史）",
+     "note": "2027年度。英語90分75点、国語90分75点、地歴60分50点。",
+     "source": "https://www.waseda.jp/flas/cms/applicants/admission/"
+    },
+    {
+     "name": "文化構想学部",
+     "method": "一般選抜（共通テスト利用方式）",
+     "subjects": "英語・国語（本学の試験）・大学入学共通テスト1科目（地歴・公民/数学/理科/情報から）",
+     "note": "2027年度。英語90分75点、国語90分75点、共通テスト50点（100点を換算）。",
+     "source": "https://www.waseda.jp/flas/cms/applicants/admission/"
+    },
+    {
+     "name": "人間科学部",
+     "method": "一般選抜（国英型／数英型）",
+     "subjects": "国英型：共通テスト（国語・選択1科目）＋本学の試験（英語・国語）／数英型：共通テスト（数学Ⅰ,A・数学Ⅱ,B,C・選択1科目）＋本学の試験（英語・数学）",
+     "note": "2027年度入試概要。国英型は共通テスト国語20点・選択40点、本学の英語50点・国語40点。数英型は共通テスト数学各10点・選択40点、本学の英語50点・数学40点。",
+     "source": "https://www.waseda.jp/fhum/hum/applicants/admission/"
+    },
+    {
+     "name": "基幹理工学部",
+     "method": "一般選抜",
+     "subjects": "外国語（英語）・数学・理科（物理・化学・生物から2科目）",
+     "note": "2027年度一般選抜概要。外国語120点、数学120点、理科120点（1科目60点）。基幹・創造・先進の3学部は同一日・同一問題。学系単位で募集し、学系ごとに理科の解答パターンの指定あり。",
+     "source": "https://www.waseda.jp/fsci/admissions_us/application/"
+    },
+    {
+     "name": "創造理工学部",
+     "method": "一般選抜",
+     "subjects": "外国語（英語）・数学・理科（物理・化学・生物から2科目）。建築学科は空間表現（鉛筆デッサンなど）も課す",
+     "note": "2027年度一般選抜概要。外国語120点、数学120点、理科120点（1科目60点）。建築学科の空間表現は40点・2時間。",
+     "source": "https://www.waseda.jp/fsci/admissions_us/application/"
+    },
+    {
+     "name": "先進理工学部",
+     "method": "一般選抜",
+     "subjects": "外国語（英語）・数学・理科（物理・化学・生物から2科目）",
+     "note": "2027年度一般選抜概要。外国語120点、数学120点、理科120点（1科目60点）。物理学科・応用物理学科・化学・生命化学科・応用化学科では理科得点に重み付けあり。",
+     "source": "https://www.waseda.jp/fsci/admissions_us/application/"
+    }
+   ]
+  },
+  "keio": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://www.keio.ac.jp/ja/admissions/faculty/examinations/general-admissions/",
+   "faculties": [
+    {
+     "name": "文学部",
+     "method": "一般選抜",
+     "subjects": "外国語（英語独自試験・英語外部試験利用・ドイツ語・フランス語から1）・地理歴史（世界史または日本史）・小論文",
+     "note": "外国語150点、地理歴史100点、小論文100点。英語外部試験利用は英検CSE総合スコア2500以上。第2次試験は行わない。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "経済学部",
+     "method": "一般選抜（A方式）",
+     "subjects": "外国語（英語）・数学",
+     "note": "外国語200点、数学200点（数学Ⅰ・Ⅱ・A・B・C）。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "経済学部",
+     "method": "一般選抜（B方式）",
+     "subjects": "外国語（英語）・地理歴史（世界史または日本史）",
+     "note": "外国語200点、地理歴史200点（出題範囲は1500年以降が中心）。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "法学部",
+     "method": "一般選抜",
+     "subjects": "外国語（英語）・地理歴史（世界史または日本史）・小論文",
+     "note": "外国語200点、地理歴史150点、小論文100点。法律学科・政治学科共通。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "商学部",
+     "method": "一般選抜（A方式）",
+     "subjects": "外国語（英語）・地理歴史（世界史・日本史・地理から1）・数学",
+     "note": "外国語200点、地理歴史100点、数学100点。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "商学部",
+     "method": "一般選抜（B方式）",
+     "subjects": "外国語（英語）・地理歴史（世界史・日本史・地理から1）・論文テスト",
+     "note": "外国語200点、地理歴史100点、論文テスト100点。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "医学部",
+     "method": "一般選抜",
+     "subjects": "第1次：理科（物理・化学・生物から2）・数学・外国語（英語）／第2次：小論文・面接",
+     "note": "理科200点、数学150点、外国語150点。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "理工学部",
+     "method": "一般選抜",
+     "subjects": "理科（物理・化学）・数学・外国語（英語）",
+     "note": "理科200点（物理100点・化学100点）、数学150点、外国語150点。第2次試験は行わない。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "総合政策学部",
+     "method": "一般選抜",
+     "subjects": "「外国語」「数学」「外国語および数学」「情報および数学」から1つ・小論文",
+     "note": "選択した教科200点、小論文200点。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "環境情報学部",
+     "method": "一般選抜",
+     "subjects": "「外国語」「数学」「外国語および数学」「情報および数学」から1つ・小論文",
+     "note": "選択した教科200点、小論文200点。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "看護医療学部",
+     "method": "一般選抜",
+     "subjects": "第1次：外国語（英語）・数学/化学/生物から1・小論文／第2次：面接",
+     "note": "外国語300点、選択科目200点。小論文は第1次試験の選考では使わず、第2次試験の選考に使う。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    },
+    {
+     "name": "薬学部",
+     "method": "一般選抜",
+     "subjects": "理科（化学）・外国語（英語）・数学",
+     "note": "化学150点、外国語100点、数学100点。薬学科・薬科学科共通。",
+     "source": "https://www.keio.ac.jp/files/d76245e2bdc5e5a3f397c40b2ae40047b4d41cd3ea399c3b4dbf969c3ad989a7"
+    }
+   ]
+  },
+  "sophia": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://adm.sophia.ac.jp/jpn/gakubu_ippan_ad/",
+   "faculties": [
+    {
+     "name": "神学部",
+     "method": "TEAPスコア利用方式（全学統一日程入試）",
+     "subjects": "英語（TEAPスコア）・国語・地理歴史（日本史探究または世界史探究）",
+     "note": "TEAP 150点、国語60分100点、地理歴史90分100点。神学科は2段階選抜で、第2次試験として面接を行う。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/p178_27_Teap.pdf"
+    },
+    {
+     "name": "神学部",
+     "method": "学部学科試験・共通テスト併用方式",
+     "subjects": "大学入学共通テスト（外国語・国語・地理歴史または公民）・学部学科試験",
+     "note": "共通テストは外国語60点、国語40点、地理歴史または公民40点。学部学科試験（キリスト教と聖書の基礎に関する理解力と思考力を問う試験）75分100点。2段階選抜で面接を行う。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/P180-182_27_heiyou_ALL.pdf"
+    },
+    {
+     "name": "文学部",
+     "method": "TEAPスコア利用方式（全学統一日程入試）",
+     "subjects": "英語（TEAPスコア）・国語・地理歴史（哲学科は地理歴史または数学）",
+     "note": "TEAP 150点、国語60分100点、地理歴史（または数学）90分100点。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/p178_27_Teap.pdf"
+    },
+    {
+     "name": "総合人間科学部",
+     "method": "TEAPスコア利用方式（全学統一日程入試）",
+     "subjects": "英語（TEAPスコア）・国語・地理歴史または数学（看護学科は国語・数学）",
+     "note": "TEAP 150点、国語60分100点、地理歴史または数学（看護学科は数学）90分100点。心理学科・看護学科は2段階選抜で面接を行う。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/p178_27_Teap.pdf"
+    },
+    {
+     "name": "法学部",
+     "method": "TEAPスコア利用方式（全学統一日程入試）",
+     "subjects": "英語（TEAPスコア）・国語・地理歴史または数学",
+     "note": "TEAP 150点、国語60分100点、地理歴史または数学90分100点。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/p178_27_Teap.pdf"
+    },
+    {
+     "name": "法学部",
+     "method": "学部学科試験・共通テスト併用方式",
+     "subjects": "大学入学共通テスト（外国語・国語・地理歴史/公民/数学から1）・学部共通試験",
+     "note": "共通テストは外国語60点、国語40点、選択40点。学部共通試験（社会（国際関係や環境問題を含む）と法・政治に関する試験）75分100点。法律・国際関係法・地球環境法学科共通。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/P180-182_27_heiyou_ALL.pdf"
+    },
+    {
+     "name": "経済学部",
+     "method": "TEAPスコア利用方式（全学統一日程入試）",
+     "subjects": "英語（TEAPスコア）＋経済学科（文系）は国語・数学、経営学科は国語・地理歴史または数学、経済学科（理系）は数学",
+     "note": "経済学科（文系）はTEAP 150点・国語100点・数学100点。経営学科はTEAP 200点・国語100点・地理歴史または数学150点。経済学科（理系・午後実施）はTEAP 100点・数学100点。国語は60分、それ以外は90分。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/p178_27_Teap.pdf"
+    },
+    {
+     "name": "外国語学部",
+     "method": "TEAPスコア利用方式（全学統一日程入試）",
+     "subjects": "英語（TEAPスコア）・国語・地理歴史または数学",
+     "note": "TEAP 150点、国語60分100点、地理歴史または数学90分100点。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/p178_27_Teap.pdf"
+    },
+    {
+     "name": "外国語学部",
+     "method": "学部学科試験・共通テスト併用方式",
+     "subjects": "大学入学共通テスト（外国語・国語・地理歴史/公民/数学から1）・学部共通試験2種",
+     "note": "共通テストは各40点（英語学科の外国語は英語のみ）。学部共通試験は、①外国語学習に対する適性を測る試験（出題は主に英語）60分50点、②外国研究に必要な基礎的知識・日本語の読解力・論理力・思考力を測る試験 60分50点。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/P180-182_27_heiyou_ALL.pdf"
+    },
+    {
+     "name": "総合グローバル学部",
+     "method": "TEAPスコア利用方式（全学統一日程入試）",
+     "subjects": "英語（TEAPスコア）・国語・地理歴史または数学",
+     "note": "TEAP 150点、国語60分100点、地理歴史または数学90分100点。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/p178_27_Teap.pdf"
+    },
+    {
+     "name": "総合グローバル学部",
+     "method": "学部学科試験・共通テスト併用方式",
+     "subjects": "大学入学共通テスト（外国語・国語・地理歴史または公民）・学部学科試験",
+     "note": "共通テストは各40点。学部学科試験（グローバル化する人間社会について、資料の理解力と思考力を問う試験。英語の設問を含む）75分80点。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/P180-182_27_heiyou_ALL.pdf"
+    },
+    {
+     "name": "理工学部",
+     "method": "TEAPスコア利用方式（全学統一日程入試）",
+     "subjects": "英語（TEAPスコア）・数学・理科（物理・化学・生物から2科目）",
+     "note": "TEAP 100点、数学90分150点、理科90分150点（各75点）。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/p178_27_Teap.pdf"
+    },
+    {
+     "name": "理工学部",
+     "method": "学部学科試験・共通テスト併用方式",
+     "subjects": "大学入学共通テスト（外国語・数学・理科1科目）・学部共通試験（数学・理科1科目）",
+     "note": "共通テストは外国語80点、数学60点（各30点）、理科60点。学部共通試験は数学90分100点、理科90分100点。",
+     "source": "https://adm.sophia.ac.jp/assets/uploads/sites/2/2026/05/P180-182_27_heiyou_ALL.pdf"
+    }
+   ]
+  },
+  "tus": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://www.tus.ac.jp/admissions/university/list/general/"
+  },
+  "icu": {
+   "year": 2027,
+   "checked": "2026-09-10",
+   "url": "https://www.icu.ac.jp/admissions/undergraduate/exam/general/"
+  }
+ }
+}

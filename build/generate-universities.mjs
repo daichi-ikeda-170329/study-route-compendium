@@ -58,6 +58,7 @@ import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { NON_TRACK, trackKeys, trackLabel, groupTracks } from './lib/tracks.mjs';
 import { beforeRoute, beforeSentence } from './lib/route-start.mjs';
 import { tierGroup } from './lib/tiers.mjs';
+import { loadUniversitySources } from './lib/university-sources.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -102,6 +103,8 @@ const MAX_BOOKS_PER_TRACK = 4;
    ============================================================ */
 
 const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8'));
+/** 出典（年度・確認日・公式 URL・学部×方式）。登録の無い大学は undefined */
+const SOURCES = loadUniversitySources();
 
 const data = {};
 const counts = {};
@@ -395,10 +398,30 @@ function renderUniversity(uni, all, config) {
 
   /* 更新日は「読者に見える中身が変わった日」。大学のデータと台帳の slug が
      材料で、サイト全体の再生成では動かない（build/lib/updated.mjs の方針） */
+  const src = SOURCES[slug];
   const updated = recordDate(`univ/${slug}`, {
     slug, name,
     subjects: perSubject.map(p => ({ dir: p.sub.dir, t: p.u.t, h: p.u.h, no: p.u.no, fx: p.u.fx })),
+    ...(src ? { src } : {}),
   });
+
+  /* 出典。**確かめた大学だけ**年度・確認日・公式サイトを出す。登録の無い大学に
+     年度を推測で書かない（build/data/university-sources.json、build/lib/university-sources.mjs） */
+  const sourceLine = src
+    /* 「選抜要項」と書かない。私立の多くは確認時点で要項の本体が未公開で、公表されていたのは
+       入試の概要・科目と配点だったため（2026-09-10 の確認） */
+    ? `<p class="usource">出典: ${esc(name)}の${src.year}年度入試の公表資料（選抜要項・入試概要など。${esc(src.checked)} 確認） <a rel="nofollow noopener noreferrer" target="_blank" href="${esc(src.url)}">公式サイト</a></p>`
+    : '<p class="usource">出題形式は年度により変わります。出願前に募集要項で確認してください。</p>';
+  const faculties = src && Array.isArray(src.faculties) && src.faculties.length ? src.faculties : null;
+  const facultyTable = faculties ? `      <div class="ufac-wrap">
+        <table class="ufac">
+          <caption>${esc(name)}の学部と入試方式（${src.year}年度。大学公式の公表資料から、確かめられた学部・方式だけを載せています。${esc(src.checked)} 確認）</caption>
+          <thead><tr><th scope="col">学部</th><th scope="col">方式</th><th scope="col">科目</th><th scope="col">備考</th></tr></thead>
+          <tbody>
+${faculties.map(f => `            <tr><th scope="row">${esc(f.name)}</th><td>${esc(f.method)}</td><td>${esc(f.subjects)}</td><td>${esc(f.note || '')}</td></tr>`).join('\n')}
+          </tbody>
+        </table>
+      </div>` : '';
 
   const med = medicalInfo(perSubject);
 
@@ -600,6 +623,15 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
 .unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
 .unote__go{margin-left:10px;font-size:12px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:4px 0;display:inline-block}
+.usource{font-size:11.5px;color:var(--muted);line-height:1.8;margin-top:6px}
+.usource a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px;padding:4px 0;display:inline-block}
+.ufac-wrap{overflow-x:auto;margin-top:16px;border:1px solid var(--line);box-shadow:var(--sh-s);background:var(--surface)}
+.ufac{border-collapse:collapse;width:100%;min-width:560px;font-size:12.5px}
+.ufac caption{text-align:left;font-size:11.5px;color:var(--muted);padding:10px 14px 0;caption-side:top}
+.ufac th,.ufac td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top;line-height:1.65}
+.ufac thead th{background:var(--surface-2);font-size:11px;color:var(--muted);font-weight:700;white-space:nowrap}
+.ufac tbody th{font-weight:700;color:var(--ink);white-space:nowrap}
+.ufac tr:last-child th,.ufac tr:last-child td{border-bottom:none}
 .usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
@@ -636,6 +668,7 @@ ${portalHeader()}
     <h1 class="sec" style="font-size:29px">${esc(name)}の参考書ルート</h1>
     <p class="sec-lead">${esc(name)}（${esc(kind)}／${esc(tier.sub)}）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何がどう問われるかと、その出題に噛み合う参考書をまとめたページです。${med ? '医学部医学科は他学部と条件が変わるので、別に節を設けています。' : ''}学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
     <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
+    ${sourceLine}
     <dl class="uhead">
       <div><dt>志望レベル</dt><dd>${tierLabel(tier)}</dd></div>
       <div><dt>区分</dt><dd>${esc(kind || '—')}</dd></div>
@@ -656,6 +689,7 @@ ${med ? '      <a href="#med">医学部医学科</a>\n' : ''}${perSubject.map(p 
     <div class="eyebrow">Exam format</div>
     <h2 class="sec">${esc(name)}の入試はどう組み立てられているか</h2>
     <p class="sec-lead">科目別の対策に入る前に、${esc(name)}の入試がどういう形で行われるかを押さえておきます。ここが分かっていないと、同じ大学の別方式の過去問を解いて手応えを取り違えます。</p>
+${facultyTable}
     <div class="unote">
       <p>${esc(KIND_NOTES[kind] || '入試の組み立ては募集要項で確認してください。')}</p>
 ${stageRows.length ? `      <dl>
