@@ -115,3 +115,21 @@ test('並び順の説明はスコアの決め方を書く', () => {
   assert.match(html, /並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています/);
   assert.doesNotMatch(html, /並び順はおすすめの度合いで/);
 });
+
+/* ---------- 大学ページの重複（タスク 2.6） ---------- */
+
+test('大学ページに同じ文が 2 回出ず、「最も高い到達度が要る科目」を出さない', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'univ/waseda/index.html'), 'utf8')
+    .replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
+  const seen = new Set();
+  for (const m of html.matchAll(/<(p|dd)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
+    for (const piece of m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().split(/(?<=。)/)) {
+      const t = piece.trim();
+      if (t.length < 20) continue;
+      assert.ok(!seen.has(t), `同じ文が 2 回ある: ${t}`);
+      seen.add(t);
+    }
+  }
+  assert.doesNotMatch(html, /最も高い到達度が要る科目/);
+  assert.match(html, /個別試験（二次）の国語<\/dt><dd>課されます。<a class="unote__go" href="#sub-japanese">/);
+});

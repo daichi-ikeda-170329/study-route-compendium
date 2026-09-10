@@ -77,6 +77,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .ufacts div{background:var(--surface);padding:14px 17px}
 .ufacts dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
+.ufacts dd a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
 .usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
 .upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
@@ -106,7 +107,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .unote dl>div{background:var(--surface);padding:12px 15px}
 .unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
-.unote__sub{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.8}
+.unote__go{margin-left:10px;font-size:12px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:4px 0;display:inline-block}
 .usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
@@ -181,7 +182,6 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div><dt>志望レベル</dt><dd>地方旧帝</dd></div>
       <div><dt>区分</dt><dd>国立</dd></div>
       <div><dt>目標の目安</dt><dd>偏差値 60〜61</dd></div>
-      <div><dt>最も高い到達度が要る科目</dt><dd>理科</dd></div>
     </dl>
     <div class="unav">
       <a href="#exam">入試の組み立て</a>
@@ -229,9 +229,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="unote">
       <p>国公立大学は、共通テストと個別試験（二次）の二段構えです。共通テストは科目数が多い代わりに出題形式が固定されていて、個別試験は科目が絞られる代わりに記述の比重が上がります。どちらの配点が重いかは学部・日程で変わるので、募集要項の配点表を先に見てから、下の科目別の説明を読んでください。</p>
       <dl>
-        <div><dt>個別試験（二次）の国語</dt><dd>課されます。<span class="unote__sub">文系 現古漢 3問100分</span></dd></div>
-        <div><dt>個別試験（二次）の理科</dt><dd>課されます。<span class="unote__sub">理科2科目120分(時間配分自由)/配点 工学部150点・理学部150点など</span></dd></div>
-        <div><dt>個別試験（二次）の社会</dt><dd>課されません。<span class="unote__sub">個別試験に社会なし(二次は英・数・国)。共通テスト文・法・経営2科目、経済は選択、理系1科目</span></dd></div>
+        <div><dt>個別試験（二次）の国語</dt><dd>課されます。<a class="unote__go" href="#sub-japanese">詳しくは国語の節へ</a></dd></div>
+        <div><dt>個別試験（二次）の理科</dt><dd>課されます。<a class="unote__go" href="#sub-science">詳しくは理科の節へ</a></dd></div>
+        <div><dt>個別試験（二次）の社会</dt><dd>課されません。<a class="unote__go" href="#sub-social">詳しくは社会の節へ</a></dd></div>
       </dl>
       <p style="margin-top:12px">英語と数学は、学部・学科によって課されるかどうかも配点も大きく変わるため、ここでは可否を出していません。科目別の説明と募集要項で確認してください。</p>
     </div>
@@ -264,6 +264,10 @@ gtag('config', 'G-DQ5WFXEFMX', {
     </table>
   </section>
 
+  <div class="block unote unote--read">
+    <p><b>科目ごとの節の読み方。</b>「ここで問われる力と、その対策」は、各科目の出題説明に出てくる要素のうち当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。「おすすめの参考書」の並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。</p>
+  </div>
+
     <section class="block usec" id="sub-english" style="--sc:#B5432A">
       <div class="eyebrow">ENGLISH</div>
       <h2 class="sec">神戸大学の英語</h2>
@@ -272,7 +276,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 60 前後／和訳・速読・英作文</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">神戸大学の英語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">神戸大学の英語の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>和訳・記述</b><span>構文を正確に取れているかがそのまま採点対象になる。長文演習の量を増やす前に、英文解釈の型を 1 冊で固めるほうが結果的に速い。</span></li>
         <li><b>長文の分量・速読</b><span>読む速度は語彙と構文が固まってから伸びる。時間を計った演習に切り替え、1 題あたりの持ち時間を先に決めてから解く。</span></li>
@@ -312,7 +316,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         </li>
       </ul>
       <h3 class="usec__h3">神戸大学におすすめの参考書</h3>
-      <p class="usec__note">地方旧帝の英語ルートに入っている本と出題形式別の重点対策の本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は英語のルートを見てください。</p>
+      <p class="usec__note">地方旧帝の英語ルートに入っている本と出題形式別の重点対策の本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。進める順番ではないので、順番は英語のルートを見てください。</p>
       <ul class="ubooks">
         <li class="ubook">
           <a class="ubook__cov" href="/english/books/haitore-wabun/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>英作文ハイパートレーニング 和文英訳編</b><em>桐原書店</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4342207788.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4342207788.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4342207788.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784342207785.jpg|https://books.google.com/books/content?vid=ISBN9784342207785&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784342207785.jpg|https://www.gakusan.com/bookimage_s/9784342207785.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
@@ -389,7 +393,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 60 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">神戸大学の国語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">神戸大学の国語の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>記述・論述</b><span>設問の条件（字数・要素・指示語の処理）を満たせているかで点が決まる。解答を書いたあとに、模範解答と要素単位で照合する手順を固定する。</span></li>
         <li><b>古文</b><span>古文は単語と文法を先に固めないと、読解演習の効率が上がらない。単語 300 語程度と助動詞・敬語を短期間で通してから読解に入る。</span></li>
@@ -398,7 +402,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <li><b>評論の抽象度</b><span>抽象度の高い評論は、語彙不足と論理の追えなさが同時に効いて崩れる。設問を解く前に、段落ごとの要点を一言でまとめる練習を挟む。</span></li>
       </ul>
       <h3 class="usec__h3">神戸大学におすすめの参考書</h3>
-      <p class="usec__note">地方旧帝・神戸の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は国語のルートを見てください。</p>
+      <p class="usec__note">地方旧帝・神戸の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。現代文・古文・漢文に分けて出しています。進める順番ではないので、順番は国語のルートを見てください。</p>
       <h4 class="ubooks__h">現代文</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -540,12 +544,12 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 60 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">神戸大学の数学の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">神戸大学の数学の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>標準問題の完成度</b><span>難問より、典型問題を落とさないことで差が付く形式。網羅系を 1 冊決め、解法を再現できるかで周回する。</span></li>
       </ul>
       <h3 class="usec__h3">神戸大学におすすめの参考書</h3>
-      <p class="usec__note">地方旧帝の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを8冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は数学のルートを見てください。</p>
+      <p class="usec__note">地方旧帝の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを8冊選びました。文系・理系に分けて出しています。進める順番ではないので、順番は数学のルートを見てください。</p>
       <h4 class="ubooks__h">文系</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -644,12 +648,12 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>出題の特徴</dt><dd>物理は大問3題(力学・電磁気・熱または波動)で空所補充と記述の混成、難度は標準で典型問題の確実な処理が合否を分ける。化学は大問4題(理論2・無機1・有機1)で計算と論述(30〜80字)が多く、理論の結晶格子・平衡・電池、有機の構造決定が定番。高分子も頻出。生物は大問4題で知識問題と考察・論述のバランス型、論述は60〜100字程度で設問数が多いため時間配分に注意。</dd></div>
         <div><dt>出題される分野</dt><dd>物理・化学・生物・地学が出題されます。</dd></div>
         <div><dt>学部ごとの科目指定</dt><dd>工学部は物理・化学必須(一部学科は選択あり)/理学部は物化生地から2(学科指定あり)/農・海洋政策は物化生から2</dd></div>
-        <div><dt>医学部医学科の場合</dt><dd>医学科:物化生から2科目、理科120分</dd></div>
+        <div><dt>医学部医学科の場合</dt><dd>上の<a href="#med">「神戸大学の医学部医学科について」</a>にまとめています。</dd></div>
         <div><dt>文系学部の場合</dt><dd>文系学部は共テ理科基礎2科目(または発展1科目)</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 61 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">神戸大学の理科の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">神戸大学の理科の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>論述・考察</b><span>知識を書き出すだけでは点にならない。実験設定から結論までの筋道を、決められた字数で書く練習を別に取る。</span></li>
         <li><b>構造決定・有機</b><span>構造決定は手順が決まっているので、演習量がそのまま速度になる。官能基の検出反応と、分子式からの不飽和度の計算を反射で出せるようにする。</span></li>
@@ -658,7 +662,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <li><b>時間配分</b><span>2 科目まとめて時間が与えられる形式では、科目ごとの持ち時間を自分で決める必要がある。時間を計った通し演習で配分を先に固定する。</span></li>
       </ul>
       <h3 class="usec__h3">神戸大学におすすめの参考書</h3>
-      <p class="usec__note">地方旧帝・神戸の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを16冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は理科のルートを見てください。</p>
+      <p class="usec__note">地方旧帝・神戸の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを16冊選びました。物理・化学・生物・地学に分けて出しています。進める順番ではないので、順番は理科のルートを見てください。</p>
       <h4 class="ubooks__h">物理</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -846,7 +850,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 60 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">神戸大学の社会の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">神戸大学の社会の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>史料・資料の読み取り</b><span>資料集は「読むもの」ではなく「引くもの」として使う。演習で出た資料を必ず資料集で確認する往復を習慣にする。</span></li>
         <li><b>用語・一問一答</b><span>用語の精度が直接得点になる形式。書いて答える出題があるなら、読めるだけでなく漢字で書けるところまで詰める。</span></li>
@@ -854,7 +858,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <li><b>マーク式・共通テスト</b><span>資料の読み取りに比重が移った形式なので、知識だけでは頭打ちになる。時間を計った演習で処理速度を上げる。</span></li>
       </ul>
       <h3 class="usec__h3">神戸大学におすすめの参考書</h3>
-      <p class="usec__note">共通テスト対策の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを24冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は社会のルートを見てください。</p>
+      <p class="usec__note">共通テスト対策の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを24冊選びました。日本史・世界史・地理・公共・政治・経済・倫理に分けて出しています。進める順番ではないので、順番は社会のルートを見てください。</p>
       <h4 class="ubooks__h">日本史</h4>
       <ul class="ubooks">
         <li class="ubook">

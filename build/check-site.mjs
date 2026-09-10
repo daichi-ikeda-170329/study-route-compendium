@@ -515,6 +515,23 @@ function checkHtml(files) {
       }
     }
 
+    // 大学別ページの中で、同じ文が 2 回出ていないか。段落（<p> / <dd>）の本文を「。」で文に
+    // 分けて比べる（段落ごと比べると、補足の <span> に入った同じ文を見逃す）。
+    // 2026-09-10 まで「個別試験の国語」の補足に、国語の節の「試験の構成」と同じ文が丸ごと出ていた。
+    // おすすめの本ごとの理由ラベル（<span class="ubook__why">）は項目ごとの定型なので見ない
+    if (/^univ\/[^/]+\/index\.html$/.test(at)) {
+      const seen = new Set();
+      scan: for (const m of markup.matchAll(/<(p|dd)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
+        const text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+        for (const piece of text.split(/(?<=。)/)) {
+          const t = piece.trim();
+          if (t.length < 20) continue;
+          if (seen.has(t)) { err(at, `同じ文が 2 回出ている: 「${t.slice(0, 40)}…」`); break scan; }
+          seen.add(t);
+        }
+      }
+    }
+
     // 内部略称の書名を単独で出していないか（表示は build/lib/booktitle.mjs の displayName を通す）
     if (SHORTHAND_RE) {
       const m = markup.match(SHORTHAND_RE);

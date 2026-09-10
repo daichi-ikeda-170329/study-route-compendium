@@ -77,6 +77,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .ufacts div{background:var(--surface);padding:14px 17px}
 .ufacts dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
+.ufacts dd a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
 .usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
 .upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
@@ -106,7 +107,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .unote dl>div{background:var(--surface);padding:12px 15px}
 .unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
-.unote__sub{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.8}
+.unote__go{margin-left:10px;font-size:12px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:4px 0;display:inline-block}
 .usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
@@ -181,7 +182,6 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div><dt>志望レベル</dt><dd>私立医学部</dd></div>
       <div><dt>区分</dt><dd>私立</dd></div>
       <div><dt>目標の目安</dt><dd>偏差値 59〜65</dd></div>
-      <div><dt>最も高い到達度が要る科目</dt><dd>理科</dd></div>
     </dl>
     <div class="unav">
       <a href="#exam">入試の組み立て</a>
@@ -229,9 +229,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="unote">
       <p>私立大学は、同じ大学でも入試方式によって問題そのものが変わります。学部別日程は学部ごとに作られた独自問題で、出題傾向も時間配分もそこで決まります。全学部統一方式は複数学部を 1 つの問題で選抜するため標準的な構成になりやすく、取りこぼしが直接響きます。共通テスト利用方式は個別試験を課さない代わりに高い得点率が必要です。下の科目別の説明にある「試験の構成」は方式ごとに書き分けてあるので、受ける方式を決めてから読んでください。</p>
       <dl>
-        <div><dt>個別試験（二次）の国語</dt><dd>課されません。<span class="unote__sub">国語なし(医:一次 英語・数学・理科2科目/二次 小論文・面接/薬:英数理)/共テ利用方式は共テ国語を含む</span></dd></div>
-        <div><dt>個別試験（二次）の理科</dt><dd>課されます。<span class="unote__sub">医学科:理科2科目120分/200点。薬学部:化学1科目</span></dd></div>
-        <div><dt>個別試験（二次）の社会</dt><dd>課されません。<span class="unote__sub">個別試験に地歴公民なし(共通テスト利用方式でのみ地歴公民1科目を使用)</span></dd></div>
+        <div><dt>個別試験（二次）の国語</dt><dd>課されません。<a class="unote__go" href="#sub-japanese">詳しくは国語の節へ</a></dd></div>
+        <div><dt>個別試験（二次）の理科</dt><dd>課されます。<a class="unote__go" href="#sub-science">詳しくは理科の節へ</a></dd></div>
+        <div><dt>個別試験（二次）の社会</dt><dd>課されません。<a class="unote__go" href="#sub-social">詳しくは社会の節へ</a></dd></div>
       </dl>
       <p style="margin-top:12px">英語と数学は、学部・学科によって課されるかどうかも配点も大きく変わるため、ここでは可否を出していません。科目別の説明と募集要項で確認してください。</p>
     </div>
@@ -264,6 +264,10 @@ gtag('config', 'G-DQ5WFXEFMX', {
     </table>
   </section>
 
+  <div class="block unote unote--read">
+    <p><b>科目ごとの節の読み方。</b>「ここで問われる力と、その対策」は、各科目の出題説明に出てくる要素のうち当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。「おすすめの参考書」の並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。</p>
+  </div>
+
     <section class="block usec" id="sub-english" style="--sc:#B5432A">
       <div class="eyebrow">ENGLISH</div>
       <h2 class="sec">大阪医科薬科大学の英語</h2>
@@ -272,7 +276,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 64 前後／和訳・記述・英作文</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">大阪医科薬科大学の英語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">大阪医科薬科大学の英語の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>和訳・記述</b><span>構文を正確に取れているかがそのまま採点対象になる。長文演習の量を増やす前に、英文解釈の型を 1 冊で固めるほうが結果的に速い。</span></li>
       </ul>
@@ -311,7 +315,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         </li>
       </ul>
       <h3 class="usec__h3">大阪医科薬科大学におすすめの参考書</h3>
-      <p class="usec__note">私立医学部の英語ルートに入っている本と出題形式別の重点対策の本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は英語のルートを見てください。</p>
+      <p class="usec__note">私立医学部の英語ルートに入っている本と出題形式別の重点対策の本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。進める順番ではないので、順番は英語のルートを見てください。</p>
       <ul class="ubooks">
         <li class="ubook">
           <a class="ubook__cov" href="/english/books/jukou-ge/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#5B4E9E"><span class="rt-cov__ph"><b>英文熟考 下</b><em>旺文社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4010351268.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4010351268.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010351268.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4010351268.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4010351268.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4010351268.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784010351260.jpg|https://books.google.com/books/content?vid=ISBN9784010351260&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784010351260.jpg|https://www.gakusan.com/bookimage_s/9784010351260.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
@@ -388,12 +392,12 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 59 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">大阪医科薬科大学の国語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">大阪医科薬科大学の国語の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>マーク式・共通テスト</b><span>選択肢の切り方には型がある。本文の根拠と選択肢の言い換えを一対一で対応させる読み方を、解説の詳しい問題集で身につける。</span></li>
       </ul>
       <h3 class="usec__h3">大阪医科薬科大学におすすめの参考書</h3>
-      <p class="usec__note">共通テスト対策の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は国語のルートを見てください。</p>
+      <p class="usec__note">共通テスト対策の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。進める順番ではないので、順番は国語のルートを見てください。</p>
       <ul class="ubooks">
         <li class="ubook">
           <a class="ubook__cov" href="/japanese/books/tanki-kyote-gendai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>短期攻略 共通テスト現代文</b><em>駿台文庫</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4796123946.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4796123946.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796123946.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4796123946.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4796123946.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4796123946.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784796123945.jpg|https://books.google.com/books/content?vid=ISBN9784796123945&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784796123945.jpg|https://www.gakusan.com/bookimage_s/9784796123945.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
@@ -468,13 +472,13 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 64 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">大阪医科薬科大学の数学の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">大阪医科薬科大学の数学の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>記述・証明</b><span>答案の書き方まで採点される。解けたかどうかで止めず、模範解答と自分の答案を論理の飛びで比べる。添削を受けられる環境があると速い。</span></li>
         <li><b>発想力・難問</b><span>誘導が少ない問題は、解法の暗記だけでは手が出ない。1 問に時間をかけて考え切る演習を週に数問だけ入れる。</span></li>
       </ul>
       <h3 class="usec__h3">大阪医科薬科大学におすすめの参考書</h3>
-      <p class="usec__note">私立医学部の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は数学のルートを見てください。</p>
+      <p class="usec__note">私立医学部の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。進める順番ではないので、順番は数学のルートを見てください。</p>
       <ul class="ubooks">
         <li class="ubook">
           <a class="ubook__cov" href="/math/books/shiritsu-idai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#B5432A"><span class="rt-cov__ph"><b>私立医大の数学</b><em>教学社</em></span><img src="https://m.media-amazon.com/images/I/51Zwcx9UtML._SL500_.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://m.media-amazon.com/images/I/51Zwcx9UtML._SL500_.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325222995.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325222995.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325222995.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325222995.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325222995.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325222996.jpg|https://books.google.com/books/content?vid=ISBN9784325222996&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325222996.jpg|https://www.gakusan.com/bookimage_s/9784325222996.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
@@ -549,11 +553,11 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>出題の特徴</dt><dd>医学科は全問記述式で私立医の中でも骨のある出題。物理は力学・電磁気を軸に熱・波動・原子が加わり、導出過程の記述と論述、近似計算が多い。化学は理論・有機中心で、構造決定に加え長文の考察問題、計算問題が多く難度高め。生物は実験考察・論述中心で、100字級の論述が複数あり分量が多い。薬学部は化学必須で標準~やや難の記述式、有機構造決定と理論計算が中心。医学科は記述対策を含む難問演習が必要。</dd></div>
         <div><dt>出題される分野</dt><dd>物理・化学・生物が出題されます。地学は出題されません。</dd></div>
         <div><dt>学部ごとの科目指定</dt><dd>医学科:理科2科目。薬学部:英・数・化学(化学必須、要確認)。看護学部:英+数/国+理科1科目等</dd></div>
-        <div><dt>医学部医学科の場合</dt><dd>医学科:物化生から2科目(地学不可)。前期1次は英100・数100・理科200、2次は小論文・面接。後期・共テ利用あり</dd></div>
+        <div><dt>医学部医学科の場合</dt><dd>上の<a href="#med">「大阪医科薬科大学の医学部医学科について」</a>にまとめています。</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 65 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">大阪医科薬科大学の理科の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">大阪医科薬科大学の理科の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>論述・考察</b><span>知識を書き出すだけでは点にならない。実験設定から結論までの筋道を、決められた字数で書く練習を別に取る。</span></li>
         <li><b>構造決定・有機</b><span>構造決定は手順が決まっているので、演習量がそのまま速度になる。官能基の検出反応と、分子式からの不飽和度の計算を反射で出せるようにする。</span></li>
@@ -562,7 +566,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <li><b>時間配分</b><span>2 科目まとめて時間が与えられる形式では、科目ごとの持ち時間を自分で決める必要がある。時間を計った通し演習で配分を先に固定する。</span></li>
       </ul>
       <h3 class="usec__h3">大阪医科薬科大学におすすめの参考書</h3>
-      <p class="usec__note">医学部医学科の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は理科のルートを見てください。</p>
+      <p class="usec__note">医学部医学科の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。物理・化学・生物に分けて出しています。進める順番ではないので、順番は理科のルートを見てください。</p>
       <h4 class="ubooks__h">物理</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -707,12 +711,12 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 59 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">大阪医科薬科大学の社会の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">大阪医科薬科大学の社会の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>マーク式・共通テスト</b><span>資料の読み取りに比重が移った形式なので、知識だけでは頭打ちになる。時間を計った演習で処理速度を上げる。</span></li>
       </ul>
       <h3 class="usec__h3">大阪医科薬科大学におすすめの参考書</h3>
-      <p class="usec__note">共通テスト対策の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを24冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は社会のルートを見てください。</p>
+      <p class="usec__note">共通テスト対策の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを24冊選びました。日本史・世界史・地理・公共・政治・経済・倫理に分けて出しています。進める順番ではないので、順番は社会のルートを見てください。</p>
       <h4 class="ubooks__h">日本史</h4>
       <ul class="ubooks">
         <li class="ubook">

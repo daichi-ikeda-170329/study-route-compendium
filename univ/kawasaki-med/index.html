@@ -77,6 +77,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .ufacts div{background:var(--surface);padding:14px 17px}
 .ufacts dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
+.ufacts dd a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
 .usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
 .upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
@@ -106,7 +107,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .unote dl>div{background:var(--surface);padding:12px 15px}
 .unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
-.unote__sub{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.8}
+.unote__go{margin-left:10px;font-size:12px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:4px 0;display:inline-block}
 .usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
@@ -181,7 +182,6 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div><dt>志望レベル</dt><dd>私立医学部</dd></div>
       <div><dt>区分</dt><dd>私立</dd></div>
       <div><dt>目標の目安</dt><dd>偏差値 54〜60</dd></div>
-      <div><dt>最も高い到達度が要る科目</dt><dd>理科</dd></div>
     </dl>
     <div class="unav">
       <a href="#exam">入試の組み立て</a>
@@ -229,9 +229,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="unote">
       <p>私立大学は、同じ大学でも入試方式によって問題そのものが変わります。学部別日程は学部ごとに作られた独自問題で、出題傾向も時間配分もそこで決まります。全学部統一方式は複数学部を 1 つの問題で選抜するため標準的な構成になりやすく、取りこぼしが直接響きます。共通テスト利用方式は個別試験を課さない代わりに高い得点率が必要です。下の科目別の説明にある「試験の構成」は方式ごとに書き分けてあるので、受ける方式を決めてから読んでください。</p>
       <dl>
-        <div><dt>個別試験（二次）の国語</dt><dd>課されません。<span class="unote__sub">国語なし(医:一次 英語・数学・理科2科目/二次 小論文・面接)</span></dd></div>
-        <div><dt>個別試験（二次）の理科</dt><dd>課されます。<span class="unote__sub">理科2科目120分/150点(要確認)</span></dd></div>
-        <div><dt>個別試験（二次）の社会</dt><dd>課されません。<span class="unote__sub">個別試験・共通テスト利用とも地歴公民の使用なし</span></dd></div>
+        <div><dt>個別試験（二次）の国語</dt><dd>課されません。<a class="unote__go" href="#sub-japanese">詳しくは国語の節へ</a></dd></div>
+        <div><dt>個別試験（二次）の理科</dt><dd>課されます。<a class="unote__go" href="#sub-science">詳しくは理科の節へ</a></dd></div>
+        <div><dt>個別試験（二次）の社会</dt><dd>課されません。<a class="unote__go" href="#sub-social">詳しくは社会の節へ</a></dd></div>
       </dl>
       <p style="margin-top:12px">英語と数学は、学部・学科によって課されるかどうかも配点も大きく変わるため、ここでは可否を出していません。科目別の説明と募集要項で確認してください。</p>
     </div>
@@ -264,6 +264,10 @@ gtag('config', 'G-DQ5WFXEFMX', {
     </table>
   </section>
 
+  <div class="block unote unote--read">
+    <p><b>科目ごとの節の読み方。</b>「ここで問われる力と、その対策」は、各科目の出題説明に出てくる要素のうち当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。「おすすめの参考書」の並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。</p>
+  </div>
+
     <section class="block usec" id="sub-english" style="--sc:#B5432A">
       <div class="eyebrow">ENGLISH</div>
       <h2 class="sec">川崎医科大学の英語</h2>
@@ -272,7 +276,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 59 前後／文法・語彙・速読</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">川崎医科大学の英語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">川崎医科大学の英語の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>長文の分量・速読</b><span>読む速度は語彙と構文が固まってから伸びる。時間を計った演習に切り替え、1 題あたりの持ち時間を先に決めてから解く。</span></li>
         <li><b>文法・語法の独立問題</b><span>独立した大問として出る場合、知識の穴がそのまま失点になる。網羅系を 1 冊に決めて周回し、間違えた項目だけ総合英語に戻って読む。</span></li>
@@ -314,7 +318,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         </li>
       </ul>
       <h3 class="usec__h3">川崎医科大学におすすめの参考書</h3>
-      <p class="usec__note">私立医学部の英語ルートに入っている本と出題形式別の重点対策の本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は英語のルートを見てください。</p>
+      <p class="usec__note">私立医学部の英語ルートに入っている本と出題形式別の重点対策の本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。進める順番ではないので、順番は英語のルートを見てください。</p>
       <ul class="ubooks">
         <li class="ubook">
           <a class="ubook__cov" href="/english/books/shiritsui-eigo/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#3D4657"><span class="rt-cov__ph"><b>私立医大の英語</b><em>教学社</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4325247971.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4325247971.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325247971.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4325247971.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4325247971.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4325247971.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784325247975.jpg|https://books.google.com/books/content?vid=ISBN9784325247975&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784325247975.jpg|https://www.gakusan.com/bookimage_s/9784325247975.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
@@ -391,13 +395,13 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 54 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">川崎医科大学の国語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">川崎医科大学の国語の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>記述・論述</b><span>設問の条件（字数・要素・指示語の処理）を満たせているかで点が決まる。解答を書いたあとに、模範解答と要素単位で照合する手順を固定する。</span></li>
         <li><b>マーク式・共通テスト</b><span>選択肢の切り方には型がある。本文の根拠と選択肢の言い換えを一対一で対応させる読み方を、解説の詳しい問題集で身につける。</span></li>
       </ul>
       <h3 class="usec__h3">川崎医科大学におすすめの参考書</h3>
-      <p class="usec__note">共通テスト対策の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は国語のルートを見てください。</p>
+      <p class="usec__note">共通テスト対策の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。進める順番ではないので、順番は国語のルートを見てください。</p>
       <ul class="ubooks">
         <li class="ubook">
           <a class="ubook__cov" href="/japanese/books/kimeru-gendai/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#2F6E4F"><span class="rt-cov__ph"><b>きめる!共通テスト現代文</b><em>Gakken</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4053057914.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4053057914.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057914.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4053057914.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4053057914.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4053057914.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784053057914.jpg|https://books.google.com/books/content?vid=ISBN9784053057914&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784053057914.jpg|https://www.gakusan.com/bookimage_s/9784053057914.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
@@ -472,12 +476,12 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 59 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">川崎医科大学の数学の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">川崎医科大学の数学の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>標準問題の完成度</b><span>難問より、典型問題を落とさないことで差が付く形式。網羅系を 1 冊決め、解法を再現できるかで周回する。</span></li>
       </ul>
       <h3 class="usec__h3">川崎医科大学におすすめの参考書</h3>
-      <p class="usec__note">私立医学部の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は数学のルートを見てください。</p>
+      <p class="usec__note">私立医学部の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを6冊選びました。進める順番ではないので、順番は数学のルートを見てください。</p>
       <ul class="ubooks">
         <li class="ubook">
           <a class="ubook__cov" href="/math/books/ao/" tabindex="-1" aria-hidden="true"><span class="rt-cov" style="--cc:#24427C"><span class="rt-cov__ph"><b>青チャート</b><em>数研出版</em></span><img src="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg" alt="" width="50" height="70" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-srcs="https://images-fe.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://m.media-amazon.com/images/P/4410105787.09.LZZZZZZZ.jpg|https://images-fe.ssl-images-amazon.com/images/P/4410105787.01.LZZZZZZZ.jpg|https://images-na.ssl-images-amazon.com/images/P/4410105787.01.LZZZZZZZ.jpg|https://www.gakusan.com/bookimage/9784410105784.jpg|https://books.google.com/books/content?vid=ISBN9784410105784&amp;printsec=frontcover&amp;img=1&amp;zoom=1|https://cover.openbd.jp/9784410105784.jpg|https://www.gakusan.com/bookimage_s/9784410105784.jpg" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}"></span></a>
@@ -552,11 +556,11 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>出題の特徴</dt><dd>マーク式中心で標準レベル。物理は力学・電磁気・熱・波動・原子から幅広く出題され、問題数が多く処理速度が問われる。化学は理論・無機・有機全範囲から小問集合形式で出題され、知識の正確さと典型計算力が重要。生物は知識問題が中心で、遺伝・代謝・生理・生態など教科書範囲から広く出題、考察は基本的。全体に難問は少ないが分量が多いため、標準問題集を反復してマーク式の速答力を養うルートが適する。</dd></div>
         <div><dt>出題される分野</dt><dd>物理・化学・生物が出題されます。地学は出題されません。</dd></div>
         <div><dt>学部ごとの科目指定</dt><dd>医学科のみ。英・数+理科2科目</dd></div>
-        <div><dt>医学部医学科の場合</dt><dd>医学科:物化生から2科目(地学不可)。1次は英100・数100・理科150(2科目)、2次は小論文・面接(要確認)</dd></div>
+        <div><dt>医学部医学科の場合</dt><dd>上の<a href="#med">「川崎医科大学の医学部医学科について」</a>にまとめています。</dd></div>
         <div><dt>目標の目安</dt><dd>偏差値 60 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">川崎医科大学の理科の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">川崎医科大学の理科の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>論述・考察</b><span>知識を書き出すだけでは点にならない。実験設定から結論までの筋道を、決められた字数で書く練習を別に取る。</span></li>
         <li><b>構造決定・有機</b><span>構造決定は手順が決まっているので、演習量がそのまま速度になる。官能基の検出反応と、分子式からの不飽和度の計算を反射で出せるようにする。</span></li>
@@ -565,7 +569,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <li><b>時間配分</b><span>2 科目まとめて時間が与えられる形式では、科目ごとの持ち時間を自分で決める必要がある。時間を計った通し演習で配分を先に固定する。</span></li>
       </ul>
       <h3 class="usec__h3">川崎医科大学におすすめの参考書</h3>
-      <p class="usec__note">医学部医学科の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は理科のルートを見てください。</p>
+      <p class="usec__note">医学部医学科の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。物理・化学・生物に分けて出しています。進める順番ではないので、順番は理科のルートを見てください。</p>
       <h4 class="ubooks__h">物理</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -709,12 +713,12 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 54 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">川崎医科大学の社会の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">川崎医科大学の社会の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>マーク式・共通テスト</b><span>資料の読み取りに比重が移った形式なので、知識だけでは頭打ちになる。時間を計った演習で処理速度を上げる。</span></li>
       </ul>
       <h3 class="usec__h3">川崎医科大学におすすめの参考書</h3>
-      <p class="usec__note">共通テスト対策の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを24冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は社会のルートを見てください。</p>
+      <p class="usec__note">共通テスト対策の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを24冊選びました。日本史・世界史・地理・公共・政治・経済・倫理に分けて出しています。進める順番ではないので、順番は社会のルートを見てください。</p>
       <h4 class="ubooks__h">日本史</h4>
       <ul class="ubooks">
         <li class="ubook">

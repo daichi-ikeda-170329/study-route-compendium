@@ -77,6 +77,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .ufacts div{background:var(--surface);padding:14px 17px}
 .ufacts dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
+.ufacts dd a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
 .usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
 .upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
@@ -106,7 +107,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .unote dl>div{background:var(--surface);padding:12px 15px}
 .unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
-.unote__sub{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.8}
+.unote__go{margin-left:10px;font-size:12px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:4px 0;display:inline-block}
 .usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
@@ -181,7 +182,6 @@ gtag('config', 'G-DQ5WFXEFMX', {
       <div><dt>志望レベル</dt><dd>MARCH・関関同立</dd></div>
       <div><dt>区分</dt><dd>私立</dd></div>
       <div><dt>目標の目安</dt><dd>偏差値 57〜61</dd></div>
-      <div><dt>最も高い到達度が要る科目</dt><dd>国語</dd></div>
     </dl>
     <div class="unav">
       <a href="#exam">入試の組み立て</a>
@@ -228,9 +228,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <div class="unote">
       <p>私立大学は、同じ大学でも入試方式によって問題そのものが変わります。学部別日程は学部ごとに作られた独自問題で、出題傾向も時間配分もそこで決まります。全学部統一方式は複数学部を 1 つの問題で選抜するため標準的な構成になりやすく、取りこぼしが直接響きます。共通テスト利用方式は個別試験を課さない代わりに高い得点率が必要です。下の科目別の説明にある「試験の構成」は方式ごとに書き分けてあるので、受ける方式を決めてから読んでください。</p>
       <dl>
-        <div><dt>個別試験（二次）の国語</dt><dd>課されます。<span class="unote__sub">全学部日程・学部個別日程とも 75分 現代文1+古文1(漢文なし)/理工・生命医科・文化情報(理系型)・スポーツ健康(理系型)は国語なし</span></dd></div>
-        <div><dt>個別試験（二次）の理科</dt><dd>課されます。<span class="unote__sub">全学部日程(理系)・学部個別:理科1科目75分 150点(英語200・数学200)</span></dd></div>
-        <div><dt>個別試験（二次）の社会</dt><dd>課されます。<span class="unote__sub">地歴・公民1科目 75分(全学部日程文系・学部個別日程とも『歴史総合,日本史探究』『歴史総合,世界史探究』『公共,政治・経済』から1)。個別試験で地理探究は選択不可</span></dd></div>
+        <div><dt>個別試験（二次）の国語</dt><dd>課されます。<a class="unote__go" href="#sub-japanese">詳しくは国語の節へ</a></dd></div>
+        <div><dt>個別試験（二次）の理科</dt><dd>課されます。<a class="unote__go" href="#sub-science">詳しくは理科の節へ</a></dd></div>
+        <div><dt>個別試験（二次）の社会</dt><dd>課されます。<a class="unote__go" href="#sub-social">詳しくは社会の節へ</a></dd></div>
       </dl>
       <p style="margin-top:12px">英語と数学は、学部・学科によって課されるかどうかも配点も大きく変わるため、ここでは可否を出していません。科目別の説明と募集要項で確認してください。</p>
     </div>
@@ -250,6 +250,10 @@ gtag('config', 'G-DQ5WFXEFMX', {
     </table>
   </section>
 
+  <div class="block unote unote--read">
+    <p><b>科目ごとの節の読み方。</b>「ここで問われる力と、その対策」は、各科目の出題説明に出てくる要素のうち当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。「おすすめの参考書」の並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。</p>
+  </div>
+
     <section class="block usec" id="sub-english" style="--sc:#B5432A">
       <div class="eyebrow">ENGLISH</div>
       <h2 class="sec">同志社大学の英語</h2>
@@ -258,7 +262,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 59 前後／超長文・和訳・英作文</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">同志社大学の英語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">同志社大学の英語の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>和文英訳</b><span>日本語をそのまま英語に置き換えようとすると崩れる。まず日本語を平易な日本語へ言い換えてから訳す手順（和文和訳）を身につけ、例文を暗唱して使える構文を増やす。</span></li>
         <li><b>和訳・記述</b><span>構文を正確に取れているかがそのまま採点対象になる。長文演習の量を増やす前に、英文解釈の型を 1 冊で固めるほうが結果的に速い。</span></li>
@@ -301,7 +305,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         </li>
       </ul>
       <h3 class="usec__h3">同志社大学におすすめの参考書</h3>
-      <p class="usec__note">MARCH・関関同立の英語ルートに入っている本と出題形式別の重点対策の本のうち、上に挙げた出題の特徴と噛み合うものを8冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は英語のルートを見てください。</p>
+      <p class="usec__note">MARCH・関関同立の英語ルートに入っている本と出題形式別の重点対策の本のうち、上に挙げた出題の特徴と噛み合うものを8冊選びました。国公立二次型（記述）・私立個別型（マーク）に分けて出しています。進める順番ではないので、順番は英語のルートを見てください。</p>
       <h4 class="ubooks__h">国公立二次型（記述）</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -402,7 +406,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 61 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">同志社大学の国語の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">同志社大学の国語の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>記述・論述</b><span>設問の条件（字数・要素・指示語の処理）を満たせているかで点が決まる。解答を書いたあとに、模範解答と要素単位で照合する手順を固定する。</span></li>
         <li><b>古文</b><span>古文は単語と文法を先に固めないと、読解演習の効率が上がらない。単語 300 語程度と助動詞・敬語を短期間で通してから読解に入る。</span></li>
@@ -412,7 +416,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <li><b>評論の抽象度</b><span>抽象度の高い評論は、語彙不足と論理の追えなさが同時に効いて崩れる。設問を解く前に、段落ごとの要点を一言でまとめる練習を挟む。</span></li>
       </ul>
       <h3 class="usec__h3">同志社大学におすすめの参考書</h3>
-      <p class="usec__note">MARCH・関関同立の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを8冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は国語のルートを見てください。</p>
+      <p class="usec__note">MARCH・関関同立の国語ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを8冊選びました。現代文・古文に分けて出しています。進める順番ではないので、順番は国語のルートを見てください。</p>
       <h4 class="ubooks__h">現代文</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -511,14 +515,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 57 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">同志社大学の数学の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">同志社大学の数学の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>記述・証明</b><span>答案の書き方まで採点される。解けたかどうかで止めず、模範解答と自分の答案を論理の飛びで比べる。添削を受けられる環境があると速い。</span></li>
         <li><b>発想力・難問</b><span>誘導が少ない問題は、解法の暗記だけでは手が出ない。1 問に時間をかけて考え切る演習を週に数問だけ入れる。</span></li>
         <li><b>標準問題の完成度</b><span>難問より、典型問題を落とさないことで差が付く形式。網羅系を 1 冊決め、解法を再現できるかで周回する。</span></li>
       </ul>
       <h3 class="usec__h3">同志社大学におすすめの参考書</h3>
-      <p class="usec__note">MARCH・関関同立の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを8冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は数学のルートを見てください。</p>
+      <p class="usec__note">MARCH・関関同立の数学ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを8冊選びました。文系・理系に分けて出しています。進める順番ではないので、順番は数学のルートを見てください。</p>
       <h4 class="ubooks__h">文系</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -621,7 +625,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 58 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">同志社大学の理科の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">同志社大学の理科の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>論述・考察</b><span>知識を書き出すだけでは点にならない。実験設定から結論までの筋道を、決められた字数で書く練習を別に取る。</span></li>
         <li><b>構造決定・有機</b><span>構造決定は手順が決まっているので、演習量がそのまま速度になる。官能基の検出反応と、分子式からの不飽和度の計算を反射で出せるようにする。</span></li>
@@ -630,7 +634,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <li><b>時間配分</b><span>2 科目まとめて時間が与えられる形式では、科目ごとの持ち時間を自分で決める必要がある。時間を計った通し演習で配分を先に固定する。</span></li>
       </ul>
       <h3 class="usec__h3">同志社大学におすすめの参考書</h3>
-      <p class="usec__note">MARCH・関関同立の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は理科のルートを見てください。</p>
+      <p class="usec__note">MARCH・関関同立の理科ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。物理・化学・生物に分けて出しています。進める順番ではないので、順番は理科のルートを見てください。</p>
       <h4 class="ubooks__h">物理</h4>
       <ul class="ubooks">
         <li class="ubook">
@@ -776,14 +780,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <div><dt>目標の目安</dt><dd>偏差値 61 前後</dd></div>
       </dl>
       <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">同志社大学の社会の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">同志社大学の社会の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
         <li><b>史料・資料の読み取り</b><span>資料集は「読むもの」ではなく「引くもの」として使う。演習で出た資料を必ず資料集で確認する往復を習慣にする。</span></li>
         <li><b>用語・一問一答</b><span>用語の精度が直接得点になる形式。書いて答える出題があるなら、読めるだけでなく漢字で書けるところまで詰める。</span></li>
         <li><b>文化史</b><span>文化史は後回しにされやすく、そのまま失点になりやすい分野。通史とは別に時間を取って一気に片付ける。</span></li>
       </ul>
       <h3 class="usec__h3">同志社大学におすすめの参考書</h3>
-      <p class="usec__note">MARCH・関関同立の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。分野・受験区分ごとに分けて出しています。並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は社会のルートを見てください。</p>
+      <p class="usec__note">MARCH・関関同立の社会ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを12冊選びました。日本史・世界史・政治・経済に分けて出しています。進める順番ではないので、順番は社会のルートを見てください。</p>
       <h4 class="ubooks__h">日本史</h4>
       <ul class="ubooks">
         <li class="ubook">

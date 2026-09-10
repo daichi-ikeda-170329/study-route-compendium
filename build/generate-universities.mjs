@@ -327,9 +327,11 @@ function secondStageRows(perSubject) {
   const ja = bySub(perSubject, 'japanese');
   const sc = bySub(perSubject, 'science');
   const so = bySub(perSubject, 'social');
-  if (ja) rows.push({ name: '国語', has: ja.u.g !== 0, time: ja.u.time || '' });
-  if (sc) rows.push({ name: '理科', has: sc.u.need !== 0, time: sc.u.time || '' });
-  if (so) rows.push({ name: '社会', has: so.u.n2 !== 0, time: so.u.time || '' });
+  /* 試験の構成（time）は科目の節の「試験の構成」に出している。ここで同じ文を
+     もう一度出すと 1 ページに同じ文が 2 回並ぶので、可否だけを出して節へ送る（仕様書 2.6） */
+  if (ja) rows.push({ name: '国語', dir: 'japanese', has: ja.u.g !== 0 });
+  if (sc) rows.push({ name: '理科', dir: 'science', has: sc.u.need !== 0 });
+  if (so) rows.push({ name: '社会', dir: 'social', has: so.u.n2 !== 0 });
   return rows;
 }
 
@@ -442,7 +444,9 @@ ${alts.length ? `            <span class="ubook__note">代わりに使える本�
     const avail = availNote(d, p.sub.dir, p.u);
     if (avail) facts.push({ dt: '出題される分野', dd: avail });
     if (p.u.fix) facts.push({ dt: '学部ごとの科目指定', dd: p.u.fix });
-    if (p.u.med) facts.push({ dt: '医学部医学科の場合', dd: p.u.med });
+    /* 医学科の条件は上の「医学部医学科について」の節に同じ文で出している。
+       ここでもう一度出すと 1 ページに同じ文が 2 回並ぶので、節へ送る（仕様書 2.6） */
+    if (p.u.med) facts.push({ dt: '医学部医学科の場合', html: `上の<a href="#med">「${esc(name)}の医学部医学科について」</a>にまとめています。` });
     if (p.u.bun) facts.push({ dt: '文系学部の場合', dd: p.u.bun });
     const kyote = p.sub.dir === 'social' ? kyoteNote(p.u) : '';
     if (kyote) facts.push({ dt: '共通テスト', dd: kyote });
@@ -452,15 +456,15 @@ ${alts.length ? `            <span class="ubook__note">代わりに使える本�
       <div class="eyebrow">${esc(p.sub.en)}</div>
       <h2 class="sec">${esc(name)}の${esc(p.sub.ja)}</h2>
       <dl class="ufacts">
-${facts.map(f => `        <div><dt>${esc(f.dt)}</dt><dd>${esc(f.dd)}</dd></div>`).join('\n')}
+${facts.map(f => `        <div><dt>${esc(f.dt)}</dt><dd>${f.html ?? esc(f.dd)}</dd></div>`).join('\n')}
       </dl>
 ${features.length ? `      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">${esc(name)}の${esc(p.sub.ja)}の説明に出てくる出題の要素を取り出したものです。当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。</p>
+      <p class="usec__note">${esc(name)}の${esc(p.sub.ja)}の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
 ${features.map(f => `        <li><b>${esc(f.key)}</b><span>${esc(f.tip)}</span></li>`).join('\n')}
       </ul>
 ` : ''}${focusHtml}${nBooks ? `      <h3 class="usec__h3">${esc(name)}におすすめの参考書</h3>
-      <p class="usec__note">${esc(p.tier.name)}の${esc(p.sub.ja)}ルートに入っている本${focusRows.length ? 'と出題形式別の重点対策の本' : ''}のうち、上に挙げた出題の特徴と噛み合うものを${nBooks}冊選びました。${lists.length > 1 ? '分野・受験区分ごとに分けて出しています。' : ''}並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は${esc(p.sub.ja)}のルートを見てください。</p>
+      <p class="usec__note">${esc(p.tier.name)}の${esc(p.sub.ja)}ルートに入っている本${focusRows.length ? 'と出題形式別の重点対策の本' : ''}のうち、上に挙げた出題の特徴と噛み合うものを${nBooks}冊選びました。${lists.length > 1 ? `${esc(lists.map(l => l.label).join('・'))}に分けて出しています。` : ''}進める順番ではないので、順番は${esc(p.sub.ja)}のルートを見てください。</p>
 ${lists.map(l => `${l.label ? `      <h4 class="ubooks__h">${esc(l.label)}${l.limited ? '<span> — 学部・入試方式による</span>' : ''}</h4>
 ` : ''}      <ul class="ubooks">
 ${l.books.map(b => {
@@ -496,7 +500,6 @@ ${befores.map(x => `      <p class="usec__before">${beforeSentence(d, x.g, x.b)}
   const { azUrl, rkUrl } = kakomonLinks(name, config);
 
   const hs = perSubject.map(p => p.u.h).filter(h => typeof h === 'number');
-  const hardest = perSubject.slice().sort((a, b) => (b.u.h || 0) - (a.u.h || 0))[0];
 
   const title = clip(`${name}の参考書ルート｜全科目の出題傾向と対策 - ルート大全`, 60);
   const desc = clip(`${name}（${tier.sub}）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、`
@@ -555,6 +558,7 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
 .ufacts div{background:var(--surface);padding:14px 17px}
 .ufacts dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
+.ufacts dd a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
 .usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
 .upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
@@ -584,7 +588,7 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
 .unote dl>div{background:var(--surface);padding:12px 15px}
 .unote dt{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.05em}
 .unote dd{font-size:13px;color:var(--ink);margin-top:5px;line-height:1.85}
-.unote__sub{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.8}
+.unote__go{margin-left:10px;font-size:12px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:4px 0;display:inline-block}
 .usec__more{margin-top:18px;font-size:13px;line-height:1.8}
 .usec__more a{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px;padding:4px 0;display:inline-block}
 .usec__tracks{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
@@ -624,7 +628,6 @@ ${portalHeader()}
       <div><dt>志望レベル</dt><dd>${esc(tier.name)}</dd></div>
       <div><dt>区分</dt><dd>${esc(kind || '—')}</dd></div>
       <div><dt>目標の目安</dt><dd>${hs.length ? `偏差値 ${Math.min(...hs)}〜${Math.max(...hs)}` : '—'}</dd></div>
-      <div><dt>最も高い到達度が要る科目</dt><dd>${esc(hardest.sub.ja)}</dd></div>
     </dl>
     <div class="unav">
       <a href="#exam">入試の組み立て</a>
@@ -644,7 +647,7 @@ ${med ? '      <a href="#med">医学部医学科</a>\n' : ''}${perSubject.map(p 
     <div class="unote">
       <p>${esc(KIND_NOTES[kind] || '入試の組み立ては募集要項で確認してください。')}</p>
 ${stageRows.length ? `      <dl>
-${stageRows.map(r => `        <div><dt>個別試験（二次）の${esc(r.name)}</dt><dd>${r.has ? '課されます。' : '課されません。'}${r.time ? `<span class="unote__sub">${esc(r.time)}</span>` : ''}</dd></div>`).join('\n')}
+${stageRows.map(r => `        <div><dt>個別試験（二次）の${esc(r.name)}</dt><dd>${r.has ? '課されます。' : '課されません。'}<a class="unote__go" href="#sub-${r.dir}">詳しくは${esc(r.name)}の節へ</a></dd></div>`).join('\n')}
       </dl>
       <p style="margin-top:12px">英語と数学は、学部・学科によって課されるかどうかも配点も大きく変わるため、ここでは可否を出していません。科目別の説明と募集要項で確認してください。</p>` : ''}
     </div>
@@ -674,6 +677,10 @@ ${med.notes.map(n => `        <div><dt>${esc(n.dt)}</dt><dd>${esc(n.dd)}</dd></d
 ${perSubject.map(p => `      <tr><th scope="row">${esc(p.sub.ja)}</th><td class="mono">${esc(String(p.u.h))}</td><td class="mono">${esc(p.tier.name)}</td></tr>`).join('\n')}
     </table>
   </section>
+
+  <div class="block unote unote--read">
+    <p><b>科目ごとの節の読み方。</b>「ここで問われる力と、その対策」は、各科目の出題説明に出てくる要素のうち当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。「おすすめの参考書」の並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。</p>
+  </div>
 
 ${sections}
 
