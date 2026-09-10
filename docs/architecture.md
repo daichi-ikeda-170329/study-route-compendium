@@ -206,7 +206,7 @@ node build/generate-books.mjs math ao
 | `build/lib/cover.mjs` | 書影の候補 URL と、一覧・ルートに並べる小さな書影のマークアップ |
 | `build/lib/cards.mjs` | 参考書 1 冊のカード（`.bcard`）。一覧・書籍ページ・解説記事で共有する |
 | `build/lib/newbooks.mjs` | 新刊（評価が未了の本）の判定と並び順。**サイト全体でこの判定だけを根拠にする** |
-| `build/lib/rank.mjs` | 難易度順の比較子。生成ページの並びはここ 1 か所で決まる（「[難易度順の並び](data-model.md#難易度順の並び)」を参照） |
+| `build/lib/rank.mjs` | 難易度順の比較子。実装は `assets/js/subject-common.js` にあり、科目トップと同じ関数を読んで出す（「[難易度順の並び](data-model.md#難易度順の並び)」を参照） |
 | `build/lib/flow.mjs` | 役割どうしの接続表。「次に進む本」で役割が飛ばないようにする |
 | `build/lib/scale.mjs` | 難易度 10 段階の定義と表示。数字の意味はここ 1 か所で決まる |
 | `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 |
@@ -305,7 +305,7 @@ node build/generate-books.mjs math ao
 
 ### 画面を URL で指す
 
-科目トップは 1 枚の HTML の中で画面を切り替える作り（描画は `assets/js/subject-<科目>.js`）だが、5 つの画面はそれぞれハッシュで指せる。画面が変わると履歴に積む（ブラウザの戻るで 1 画面ずつ戻る）。ポータルや外部からの直リンクの宛先になるので、画面を増やしたら `VIEWS` に足す。
+科目トップは 1 枚の HTML の中で画面を切り替える作り（描画は `assets/js/subject-<科目>.js`）だが、5 つの画面はそれぞれハッシュで指せる。画面が変わると履歴に積む（ブラウザの戻るで 1 画面ずつ戻る）。ポータルや外部からの直リンクの宛先になるので、画面を増やしたら各科目の JS の `VIEWS` に足す。切り替えの処理（`go` / `syncHash` / `applyHash`・戻る/進むの受け手）は `assets/js/subject-common.js` の `createNav()` にある。
 
 | ハッシュ | 画面 |
 |---|---|

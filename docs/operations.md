@@ -294,15 +294,16 @@ AdSense のポリシー違反になるため、ラベルで明確に分ける。
 
 公式アカウントは `@route_taizen`。運用設計の正本は [docs/x-account-plan.md](docs/x-account-plan.md)。
 
-ハンドルは `build/lib/extract.mjs` の `X_HANDLE` に持たせてある。ただし
-`assets/js/share.js` と手書き HTML（ポータル・科目トップ 7 枚）にも同じ値が
-書いてあるので、**変えるときは `rg route_taizen` で全箇所を出してから直す。**
+ハンドルの正本は `assets/js/subject-common.js` の `X_HANDLE` の 1 か所だけ（2026-09-11 から。
+改修仕様書 5.5）。**変えるときはここを直して `npm run build` を流す。**ほかの置き場はすべてここから読むか、
+生成で書き込まれる。
 
-| 置き場 | 用途 |
+| 読む側 | 用途 |
 |---|---|
-| `build/lib/extract.mjs` の `X_HANDLE` | 生成ページの `twitter:site`・共有ボタンの `via=`・フッターの導線 |
-| `assets/js/share.js` の `X_HANDLE` | 診断結果とルート画面の共有ボタンの `via=` |
-| 手書き HTML 8 枚（ポータル・科目トップ 7 枚） | `twitter:site` メタとフッターの導線（404 は `twitter:card` を持たないので対象外） |
+| `build/lib/extract.mjs` の `X_HANDLE`（subject-common.js を読んで再 export） | 生成ページの `twitter:site`・共有ボタンの `via=`・フッターの導線 |
+| `assets/js/share.js`（押された時点で `window.RTCommon.X_HANDLE` を読む） | 診断結果とルート画面の共有ボタンの `via=` |
+| `build/apply-site-meta.mjs` | 手書き HTML 8 枚（ポータル・科目トップ 7 枚）の `twitter:site` メタと、ポータルの JSON-LD の `sameAs` |
+| `build/apply-footer.mjs` | 手書き HTML 9 枚（404 を含む）のフッターの導線 |
 
 ### 画像を書き出す
 

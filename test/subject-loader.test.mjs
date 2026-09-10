@@ -251,3 +251,28 @@ test('講師ルートの注記の文言は legal.mjs を正本に core アセッ
   const app = fs.readFileSync(path.join(ROOT, 'assets/js/subject-english.js'), 'utf8');
   assert.doesNotMatch(app, /推奨や監修ではありません/, '注記の文言を JS に直書きしている');
 });
+
+test('科目トップは共通の関数（subject-common.js）を科目の JS より前に読む（仕様書 5.5）', async () => {
+  const { contentHash } = await import('../build/lib/subject-assets.mjs');
+  const hash = contentHash(fs.readFileSync(path.join(ROOT, 'assets/js/subject-common.js'), 'utf8'));
+  for (const s of SUBJECTS) {
+    const html = fs.readFileSync(path.join(ROOT, s.dir, 'index.html'), 'utf8');
+    const common = html.indexOf(`<script src="/assets/js/subject-common.js?v=${hash}" defer></script>`);
+    const app = html.indexOf(`<script src="/assets/js/subject-${s.dir}.js`);
+    const loader = html.indexOf('<script src="/assets/js/subject-loader.js"');
+    assert.ok(common > 0, `${s.dir}: subject-common.js の script タグが無いか、?v= が中身と合っていない`);
+    assert.ok(common < app && app < loader, `${s.dir}: subject-common.js → subject-${s.dir}.js → subject-loader.js の順になっていない`);
+  }
+});
+
+test('7 科目で同じ関数を科目の JS に書き写していない（仕様書 5.5）', () => {
+  const shared = ['isProv', 'provLast', 'hRange', 'byDiffAsc', 'byDiffDesc', 'diffColor', 'isbn10Of',
+    'coverSrcs', 'covErr', 'amazonURL', 'rakutenURL', 'go', 'syncHash', 'applyHash', 'hashView',
+    'trapFocusables', 'modalOpened', 'modalClosed', 'openBox'];
+  const bad = [];
+  for (const s of SUBJECTS) {
+    const src = fs.readFileSync(path.join(ROOT, 'assets/js', `subject-${s.dir}.js`), 'utf8');
+    for (const fn of shared) if (new RegExp(`^function ${fn}\\(`, 'm').test(src)) bad.push(`${s.dir}: ${fn}`);
+  }
+  assert.deepEqual(bad, [], `assets/js/subject-common.js から受ける:\n${bad.join('\n')}`);
+});

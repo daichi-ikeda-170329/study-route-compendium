@@ -49,6 +49,13 @@ const ASSET_MAX = 500_000;
 /** 科目ごとの描画コード（実測の最大は subject-science.js の 98,794） */
 const SUBJECT_APP_MAX = 150_000;
 
+/**
+ * 科目トップの描画コードの合計（7 科目＋共通の assets/js/subject-common.js）。
+ * 共通の関数を 1 本にまとめる前（2026-09-11、commit 5bbb90fe4）の 7 本の合計が 518,726。
+ * まとめた直後は 472,380。書き写しに戻すと超える（仕様書 5.5）
+ */
+const SUBJECT_APPS_TOTAL_MAX = 518_726;
+
 test('科目トップの HTML がバイト予算に収まっている', () => {
   const over = [];
   for (const s of SUBJECTS) {
@@ -109,6 +116,14 @@ test('科目ごとの描画コードが予算に収まっている', () => {
     if (n >= SUBJECT_APP_MAX) over.push(`${rel}: ${n.toLocaleString()} バイト（上限 ${SUBJECT_APP_MAX.toLocaleString()}）`);
   }
   assert.deepEqual(over, [], over.join('\n'));
+});
+
+test('科目トップの描画コードの合計が、共通の関数をまとめる前より小さい', () => {
+  const files = [...SUBJECTS.map(s => `assets/js/subject-${s.dir}.js`), 'assets/js/subject-common.js'];
+  const total = files.reduce((n, rel) => n + bytes(rel), 0);
+  assert.ok(total < SUBJECT_APPS_TOTAL_MAX,
+    `科目トップの描画コードが合計 ${total.toLocaleString()} バイト（まとめる前は ${SUBJECT_APPS_TOTAL_MAX.toLocaleString()}）。`
+    + ' 7 科目で同じ関数は assets/js/subject-common.js に置き、科目の JS に書き写さない');
 });
 
 test('全ページ共通の検索索引が膨らんでいない', () => {

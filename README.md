@@ -11,7 +11,7 @@
 
 サイトは 2 層でできている。
 
-- **科目トップ**（`<科目>/index.html`）— 1 枚の HTML の中で図鑑・ルート・診断・学習ガイドを切り替える。HTML は markup と事前描画（`build/prerender-tops.mjs`）だけで、描画コードは `assets/js/subject-<科目>.js`、CSS は `assets/css/subject-<科目>.css`。データは `assets/js/subject-loader.js` が配信用の JSON を取ってから描く
+- **科目トップ**（`<科目>/index.html`）— 1 枚の HTML の中で図鑑・ルート・診断・学習ガイドを切り替える。HTML は markup と事前描画（`build/prerender-tops.mjs`）だけで、描画コードは `assets/js/subject-<科目>.js`（7 科目で同じ関数は `assets/js/subject-common.js`）、CSS は `assets/css/subject-<科目>.css`。データは `assets/js/subject-loader.js` が配信用の JSON を取ってから描く
 - **生成ページ**（書籍・志望校別ルート・大学別・記事・学習ガイド・信頼性ページほか）— `data/subjects/<科目>/` を正本として `build/` のスクリプトが出力する。**手で編集しない**
 
 収益はページ内の書籍リンク（Amazon アソシエイト・楽天アフィリエイト）と Google AdSense による。

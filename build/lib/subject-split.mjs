@@ -30,6 +30,17 @@ export function topLevelFunctions(code) {
   return [...new Set([...code.matchAll(/^function ([A-Za-z_$][\w$]*)\s*\(/gm)].map(m => m[1]))];
 }
 
+/**
+ * `window.NAME = NAME;` の形で window へ載せ直している名前をすべて拾う。
+ *
+ * 2026-09-11 に共通の関数を assets/js/subject-common.js へ移したので（仕様書 5.5）、
+ * `go` `covLoad` `covErr` は科目の JS の `function` 宣言ではなくなった。
+ * インライン属性から呼ばれる名前は、宣言の形ではなく「載せ直しているか」で拾う。
+ */
+export function exposedNames(code) {
+  return [...new Set([...code.matchAll(/\bwindow\.([A-Za-z_$][\w$]*) = \1;/g)].map(m => m[1]))];
+}
+
 /** 行頭の `const|let|var NAME` をすべて拾う（window へ載せ直す候補の判定に使う） */
 export function topLevelBindings(code) {
   return new Set([...code.matchAll(/^(?:const|let|var) ([A-Za-z_$][\w$]*)\b/gm)].map(m => m[1]));

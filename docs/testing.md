@@ -31,7 +31,7 @@ npm run check:search-style  # 検索ボックスの CSS が全ページへ配ら
 | `test/pace.test.mjs` | 日程の計算（分野の等分・仕上げの後置・端数の切り上げ） | `pace.js` を触った |
 | `test/mobile-layout.test.mjs` | 科目トップが狭い画面で崩れる書き方に戻っていないか（タブバー・デスクトップナビが `button` と `a` を同じ規則で整えているか・`.tabbar` が列数を決め打ちしていないか・`a` と `img` の既定値を打ち消しているか・`.opt-fields` の子に `min-width:0` があるか） | 科目トップの CSS・タブバー・ナビの項目を触った |
 | `test/style-guide.test.mjs` | `docs/style-guide.md` 2 節の禁止語と `build/lib/words.mjs` が一致していること・機械で見ない語に条文の理由があること・`BANNED_ALLOW` が書名で代替できるものを持たないこと | スタイルガイドの語を増減した / `build/lib/words.mjs` を触った |
-| `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・**難易度順の比較子（科目トップと `build/lib/rank.mjs` の両方を実際に動かす）**・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った / 並べ替えを触った |
+| `test/new-books.test.mjs` | 注入マーカーの往復・難易度を持たない本の描画・科目トップ全枚に分岐が入っていること・**難易度順の比較子（`assets/js/subject-common.js` を実際に動かし、`build/lib/rank.mjs` が同じ関数であることを `===` で確かめる）**・F 型の本文・調査先の出版社名 | 新刊まわりを触った / 科目トップの図鑑・モーダルを触った / 並べ替えを触った |
 | `build/check-site.mjs` | データと出力 HTML の全件検査（下の表を参照） | 何かを変えたら毎回 |
 | `build/prerender-tops.mjs --check` | 科目トップに静的化した中身がデータとずれていないか | `BOOKS` / `ROUTES` / `GUIDES` を触った |
 | `build/gen-ogp.mjs --check` | OGP 画像がデータとずれていないか（冊数・書名・役割・難易度・到達目安） | `BOOKS` を触った |
@@ -74,4 +74,4 @@ npm run check:search-style  # 検索ボックスの CSS が全ページへ配ら
 
 診断は、科目ページから `QUIZ` を取り出し、到達しうる回答の組み合わせをすべて列挙して往復を確認する。あわせて不正な URL を 30 ケース以上、壊れた保存データの読み込みも検証する。
 
-ルート共有の `encode` / `apply` は科目トップの描画コード側にあるので、`test/helpers.mjs` の `loadPage()` が `assets/js/subject-<科目>.js` を vm 上で走らせ、`RTShare` を差し替えて設定を受け取る。全科目・全志望レベルで `encode → apply → encode` が同じトークンに戻ること、実在しない値のトークンを拒むこと、大学名が `UNIS` と一致したときだけ志望校モードになることを確かめている。
+ルート共有の `encode` / `apply` は科目トップの描画コード側にあるので、`test/helpers.mjs` の `loadPage()` が `assets/js/subject-common.js` と `assets/js/subject-<科目>.js` をこの順に vm 上で走らせ（ブラウザと同じ順）、`RTShare` を差し替えて設定を受け取る。全科目・全志望レベルで `encode → apply → encode` が同じトークンに戻ること、実在しない値のトークンを拒むこと、大学名が `UNIS` と一致したときだけ志望校モードになることを確かめている。

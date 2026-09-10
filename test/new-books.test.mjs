@@ -19,6 +19,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'vm';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 import { serializeBook, replaceBlock } from '../build/apply-new-books.mjs';
@@ -26,7 +27,7 @@ import { isProvisional, provisionalLast, PROVISIONAL_LABEL, loadNewBooks } from 
 import { bookCard } from '../build/lib/cards.mjs';
 import { SUBJECTS } from '../build/lib/extract.mjs';
 import { loadSubjectData } from '../build/lib/load-subject-data.mjs';
-import { subjectAppSource, subjectHtml, subjectMigrated } from './helpers.mjs';
+import { subjectAppSource, subjectHtml, subjectMigrated, subjectCommonSource } from './helpers.mjs';
 import { hensachiRange, byDifficultyAsc, byDifficultyDesc } from '../build/lib/rank.mjs';
 import { postF, weightedLen, X_LIMIT } from '../build/gen-x-posts.mjs';
 
@@ -157,17 +158,17 @@ test('科目トップすべてに評価未了の分岐が入っている', () =>
     // CSS は科目トップの <style> に残るので、見る先を分ける
     const src = subjectAppSource(s.dir);
     const html = subjectHtml(s.dir);
-    assert.ok(src.includes('function isProv(b)'), `${s.dir}: isProv が無い`);
-    assert.ok(src.includes('function provLast(a,b)'), `${s.dir}: provLast が無い`);
+    // 判定・並び・色は共通の関数（assets/js/subject-common.js）から受ける。科目ごとに書き写さない（仕様書 5.5）
+    assert.match(src, /^const \{[^}]*\bisProv\b[^}]*\} = RTCommon;$/m, `${s.dir}: isProv を RTCommon から受けていない`);
+    for (const fn of ['isProv', 'provLast', 'hRange', 'byDiffAsc', 'byDiffDesc', 'diffColor']) {
+      assert.ok(!src.includes(`function ${fn}(`), `${s.dir}: ${fn} を自前で定義している（subject-common.js を使う）`);
+    }
     assert.ok(src.includes(`const PROV_LABEL = "${PROVISIONAL_LABEL}"`),
       `${s.dir}: 文言が build/lib/newbooks.mjs と食い違っている`);
-    assert.ok(src.includes('if(d==null) return "var(--line)"'), `${s.dir}: diffColor に guard が無い`);
     assert.ok(src.includes('const dots = isProv(b) ?'), `${s.dir}: カードのドットに分岐が無い`);
     assert.ok(src.includes('isProv(b) ? `<span class="bc-prov">'), `${s.dir}: カードのバッジが無い`);
     assert.ok(src.includes('(b.pros||[])'), `${s.dir}: pros の guard が無い（TypeError で描画が止まる）`);
     assert.ok(src.includes('(b.cons||[])'), `${s.dir}: cons の guard が無い`);
-    assert.ok(src.includes('function byDiffAsc(a,b)'), `${s.dir}: やさしい順の比較子が無い`);
-    assert.ok(src.includes('function byDiffDesc(a,b)'), `${s.dir}: 難しい順の比較子が無い`);
     assert.ok(html.includes('.bc-prov{'), `${s.dir}: バッジの CSS が無い`);
     if (subjectMigrated(s.dir)) {
       // 移行済み科目では新刊は data/subjects/<科目>/books.json へ入る。
@@ -183,42 +184,43 @@ test('科目トップすべてに評価未了の分岐が入っている', () =>
 
 test('科目トップの難易度順は、偏差値まで見て並び、評価未了の本を末尾に置く', () => {
   // 文字列の一致だけでは「guard が消えていないこと」しか分からないので、
-  // 科目トップの比較子を実際に動かして並びを確かめる。
-  // 生成側（build/lib/rank.mjs）と同じ結果になっていなければならない。
-  for (const s of SUBJECTS) {
-    const src = subjectAppSource(s.dir);
-    const i = src.indexOf('function hRange(b){');
-    const j = src.indexOf('\n}\n', src.indexOf('function byDiffDesc(a,b){', i));
-    assert.ok(i > 0 && j > i, `${s.dir}: 比較子の定義が見つからない`);
-    const code = 'function provLast(a,b){ return (isProv(a)?1:0)-(isProv(b)?1:0); }'
-      + 'function isProv(b){ return !!b && b.provisional === true; }'
-      + src.slice(i, j + 3) + ';({hRange, byDiffAsc, byDiffDesc})';
-    const { hRange, byDiffAsc, byDiffDesc } = vm.runInNewContext(code);
+  // 科目トップが読む共通の関数（assets/js/subject-common.js）をブラウザと同じく
+  // window の下で実際に動かして並びを確かめる
+  const win = {};
+  vm.runInNewContext(subjectCommonSource(), { window: win });
+  const { hRange, byDiffAsc, byDiffDesc, diffColor } = win.RTCommon;
+  assert.equal(diffColor(null), 'var(--line)', '新刊（難易度なし）に色を付けない');
 
-    assert.deepEqual([...hRange({ hensachi: '45〜60' })], [45, 60]);
-    assert.deepEqual([...hRange({ hensachi: '〜50(導入)' })], [0, 50]);
-    assert.deepEqual([...hRange({ hensachi: '50〜75(3段階)' })], [50, 75]);
-    assert.deepEqual([...hRange({})], [999, 999], '偏差値が無い本でも NaN を返さない');
-    assert.deepEqual([...hRange({ hensachi: '共テ7割〜9割' })], [999, 999],
-      '得点率の書き方は偏差値として並べない');
-    assert.deepEqual([...hRange({ hensachi: '68〜' })], [68, 68]);
+  assert.deepEqual([...hRange({ hensachi: '45〜60' })], [45, 60]);
+  assert.deepEqual([...hRange({ hensachi: '〜50(導入)' })], [0, 50]);
+  assert.deepEqual([...hRange({ hensachi: '50〜75(3段階)' })], [50, 75]);
+  assert.deepEqual([...hRange({})], [999, 999], '偏差値が無い本でも NaN を返さない');
+  assert.deepEqual([...hRange({ hensachi: '共テ7割〜9割' })], [999, 999],
+    '得点率の書き方は偏差値として並べない');
+  assert.deepEqual([...hRange({ hensachi: '68〜' })], [68, 68]);
 
-    const easy = { name: 'a', diff: 5, hensachi: '40〜50' };
-    const hard = { name: 'b', diff: 5, hensachi: '50〜60' };
-    const prov = { name: 'c', provisional: true };
-    assert.deepEqual([hard, prov, easy].sort(byDiffAsc).map(b => b.name), ['a', 'b', 'c'],
-      `${s.dir}: 同じ難易度は偏差値の低い順・評価未了は末尾`);
-    assert.deepEqual([easy, prov, hard].sort(byDiffDesc).map(b => b.name), ['b', 'a', 'c'],
-      `${s.dir}: 難しい順でも評価未了は末尾`);
+  const easy = { name: 'a', diff: 5, hensachi: '40〜50' };
+  const hard = { name: 'b', diff: 5, hensachi: '50〜60' };
+  const prov = { name: 'c', provisional: true };
+  assert.deepEqual([hard, prov, easy].sort(byDiffAsc).map(b => b.name), ['a', 'b', 'c'],
+    '同じ難易度は偏差値の低い順・評価未了は末尾');
+  assert.deepEqual([easy, prov, hard].sort(byDiffDesc).map(b => b.name), ['b', 'a', 'c'],
+    '難しい順でも評価未了は末尾');
 
-    // 得点率で書いてある本は、降順でも先頭へ出さない（[999,999] をそのまま降順に通すと先頭に来る）
-    const wari = { name: 'd', diff: 5, hensachi: '共テ7割〜9割' };
-    assert.deepEqual([wari, hard, easy].sort(byDiffAsc).map(b => b.name), ['a', 'b', 'd'], `${s.dir}: 昇順`);
-    assert.deepEqual([wari, easy, hard].sort(byDiffDesc).map(b => b.name), ['b', 'a', 'd'], `${s.dir}: 降順`);
-  }
+  // 得点率で書いてある本は、降順でも先頭へ出さない（[999,999] をそのまま降順に通すと先頭に来る）
+  const wari = { name: 'd', diff: 5, hensachi: '共テ7割〜9割' };
+  assert.deepEqual([wari, hard, easy].sort(byDiffAsc).map(b => b.name), ['a', 'b', 'd'], '昇順');
+  assert.deepEqual([wari, easy, hard].sort(byDiffDesc).map(b => b.name), ['b', 'a', 'd'], '降順');
 });
 
-test('生成側の難易度順（build/lib/rank.mjs）も同じ規則で並ぶ', () => {
+test('生成側の難易度順（build/lib/rank.mjs）は科目トップと同じ関数そのもの', () => {
+  // 2026-09-11 まで実装が 2 つあり、両方を動かして結果の一致を確かめていた。
+  // 1 つにまとめたので、同じ関数であることを確かめる（仕様書 5.5）
+  const RTCommon = createRequire(import.meta.url)('../assets/js/subject-common.js');
+  assert.equal(byDifficultyAsc, RTCommon.byDiffAsc);
+  assert.equal(byDifficultyDesc, RTCommon.byDiffDesc);
+  assert.equal(hensachiRange, RTCommon.hRange);
+
   assert.deepEqual(hensachiRange({ hensachi: '〜50(高校基礎)' }), [0, 50]);
   assert.deepEqual(hensachiRange({ hensachi: '共テ7割〜9割' }), [999, 999]);
   assert.deepEqual(hensachiRange({ hensachi: '68〜' }), [68, 68]);

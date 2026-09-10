@@ -11,6 +11,8 @@
  * 同じ変換をやり直す必要が出たら `git show 9d4f6a85:build/migrate-subject.mjs` で取り出す。
  */
 
+import { createRequire } from 'node:module';
+
 /*
  * アフィリエイト表記の判定は build/lib/load-subject-data.mjs へ移した。
  *
@@ -49,11 +51,13 @@ export const SUBJECTS = [
 export const ORIGIN = 'https://route-taizen.com';
 
 /**
- * 公式 X アカウントのハンドル（@ を除く）。
- * 共有ボタンの via= と twitter:site メタに使う。手書き HTML（ポータル・科目トップ 5 枚・404）と
- * assets/js/share.js にも同じ値を書いてあるので、変えるときは `rg route_taizen` で全箇所を出す。
+ * 公式 X アカウントのハンドル（@ を除く）。共有ボタンの via= と twitter:site メタに使う。
+ *
+ * 正本は assets/js/subject-common.js の X_HANDLE（仕様書 5.5）。ブラウザの share.js も同じ値を読む。
+ * 手書き HTML の twitter:site と JSON-LD の sameAs は build/apply-site-meta.mjs が、
+ * フッターのリンクは build/apply-footer.mjs がこの値で書き込む。
  */
-export const X_HANDLE = 'route_taizen';
+export const X_HANDLE = createRequire(import.meta.url)('../../assets/js/subject-common.js').X_HANDLE;
 
 /** 分野コード（BOOKS[].sub）の表示名。科目をまたいで衝突しないので 1 つの辞書で足りる */
 export const SUB_LABELS = {

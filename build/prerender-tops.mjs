@@ -152,8 +152,10 @@ function collect(src, dir) {
   const migrated = isMigrated(ROOT, dir);
   ctx.window.RT_SUBJECT_APP = null;
 
+  // 共通の関数（assets/js/subject-common.js）を先に読む。ブラウザでも科目の JS より前に読まれる
   const scripts = migrated
-    ? [fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8')]
+    ? [fs.readFileSync(path.join(ROOT, 'assets', 'js', 'subject-common.js'), 'utf8'),
+      fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8')]
     : [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
 
   for (const code of scripts) {

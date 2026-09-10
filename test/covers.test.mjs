@@ -39,9 +39,11 @@ test('候補の作り方が assets/js/cover-resolver.js の 1 か所だけにあ
       'books.google.com', 'gakusan.com', 'm.media-amazon.com']) {
       if (src.includes(host)) bad.push(`assets/js/subject-${s.dir}.js が ${host} を直接書いている`);
     }
-    assert.match(src, /window\.RTCoverResolver\.coverSrcs/,
-      `${s.dir}: 共通の resolver を呼んでいない`);
+    // 候補の取り出しは共通の関数（assets/js/subject-common.js）だけが持つ（仕様書 5.5）
+    assert.ok(!src.includes('function coverSrcs('), `${s.dir}: coverSrcs を自前で定義している`);
   }
+  const common = fs.readFileSync(path.join(ROOT, 'assets/js/subject-common.js'), 'utf8');
+  assert.match(common, /global\.RTCoverResolver\.coverSrcs/, 'subject-common.js が共通の resolver を呼んでいない');
 
   // 生成側も同じ
   const lib = fs.readFileSync(path.join(ROOT, 'build/lib/cover.mjs'), 'utf8');

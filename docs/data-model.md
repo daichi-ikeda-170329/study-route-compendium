@@ -113,14 +113,14 @@ for (const s of SUBJECTS) for (const b of loadSubjectData('.', s.dir).books) { t
 console.log(n + ' / ' + t);"
 ```
 
-実装は 2 か所にある（生成ページは `build/lib/rank.mjs`、科目トップは `assets/js/subject-<科目>.js` の描画コード）。`test/new-books.test.mjs` が両方を動かして一致を確かめる。
+実装は `assets/js/subject-common.js` の `byDiffAsc()` / `byDiffDesc()` / `hRange()` の 1 か所だけ（2026-09-11 から。改修仕様書 5.5）。
 
-| 置き場 | 使う画面 |
+| 読む側 | 使う画面 |
 |---|---|
-| `build/lib/rank.mjs` の `byDifficultyAsc()` / `byDifficultyDesc()` / `hensachiRange()` | 生成ページ |
-| 科目トップの `byDiffAsc()` / `byDiffDesc()` / `hRange()` | 科目トップの図鑑 |
+| `build/lib/rank.mjs` の `byDifficultyAsc()` / `byDifficultyDesc()` / `hensachiRange()`（`createRequire` で読んで名前を付け替えただけ） | 生成ページ |
+| 科目トップ（`assets/js/subject-<科目>.js` が `window.RTCommon` から受ける） | 科目トップの図鑑 |
 
-`test/new-books.test.mjs` が両方を実際に動かして、同じ並びになることと評価未了の本が末尾に来ることを確かめている。
+`test/new-books.test.mjs` が共通の関数を実際に動かして並び（評価未了の本が末尾に来ること）を確かめ、`rank.mjs` の関数が同じ関数そのもの（`===`）であることを確かめる。
 
 ## 難易度スケール
 

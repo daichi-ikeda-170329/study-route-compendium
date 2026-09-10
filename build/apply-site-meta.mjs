@@ -1,5 +1,5 @@
 /**
- * 年度コピーを build/data/site-meta.json の値へそろえる。
+ * 年度コピーを build/data/site-meta.json の値へそろえる。X のアカウント名（twitter:site・sameAs）も書く。
  *
  *   node build/apply-site-meta.mjs          書き換える
  *   node build/apply-site-meta.mjs --check  ずれているかだけ見る（書き込まない）
@@ -19,7 +19,7 @@ import {
   ADMISSION_YEAR, ADMISSION_LABEL, ADMISSION_LABEL_SHORT,
   ADMISSION_META_SENTENCE, CURRICULUM_LABEL, STALE_YEAR_PATTERNS, footerBlurb,
 } from './lib/site-meta.mjs';
-import { SUBJECTS } from './lib/extract.mjs';
+import { SUBJECTS, X_HANDLE } from './lib/extract.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
@@ -63,6 +63,20 @@ const RULES = [
     re: /(?:20\d\d年度の)?新課程には対応していますか？/g,
     to: `${CURRICULUM_LABEL}には対応していますか？`,
     min: 2,
+  },
+  /* X のアカウント名。正本は assets/js/subject-common.js の X_HANDLE（仕様書 5.5）。
+     フッターのリンクは build/apply-footer.mjs が書く */
+  {
+    label: 'twitter:site',
+    re: /(<meta name="twitter:site" content="@)[^"]*(">)/g,
+    to: `$1${X_HANDLE}$2`,
+    min: 8,
+  },
+  {
+    label: 'JSON-LD の sameAs（X）',
+    re: /("sameAs": \["https:\/\/x\.com\/)[^"]*("\])/g,
+    to: `$1${X_HANDLE}$2`,
+    min: 1,
   },
 ];
 

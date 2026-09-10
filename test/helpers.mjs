@@ -59,6 +59,11 @@ export function subjectAppSource(dir) {
   return fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8');
 }
 
+/** 科目トップ 7 枚の共通の関数（assets/js/subject-common.js）。科目の JS より先に読む */
+export function subjectCommonSource() {
+  return fs.readFileSync(path.join(ROOT, 'assets', 'js', 'subject-common.js'), 'utf8');
+}
+
 /**
  * 科目トップの HTML（markup と CSS）。CSS の検査はこちらを見る。
  * CSS は 2026-09-10 に assets/css/subject-<科目>.css へ出したので、末尾に <style> として
@@ -111,8 +116,9 @@ export function allAnswerCombos(quiz) {
 export function loadPage(dir) {
   const migrated = subjectMigrated(dir);
   const src = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+  /* 共通の関数（assets/js/subject-common.js）を先に読む。ブラウザでも科目の JS より前に読まれる */
   const scripts = migrated
-    ? [fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8')]
+    ? [subjectCommonSource(), fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8')]
     : [...src.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
 
   const captured = {};

@@ -26,7 +26,7 @@ import { fileURLToPath } from 'node:url';
 import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData, isMigrated } from './lib/load-subject-data.mjs';
 import { ASSET_KINDS, ASSET_DIR, buildAssets, contentHash } from './lib/subject-assets.mjs';
-import { topLevelFunctions, EXPOSED_STATE, topLevelBindings } from './lib/subject-split.mjs';
+import { topLevelFunctions, EXPOSED_STATE, topLevelBindings, exposedNames } from './lib/subject-split.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
@@ -90,6 +90,23 @@ function replaceAppVersion(src, dir, hash) {
   return src.replace(re, `$1?v=${hash}$3`);
 }
 
+/**
+ * 共通の関数（assets/js/subject-common.js。仕様書 5.5）の script タグを、科目の JS の直前に置く。
+ * 科目の JS は起動時（subject-loader.js が RT_SUBJECT_APP を呼んだとき）に window.RTCommon を読むので、
+ * それより前に読まれていればよい。defer 同士は書いた順に実行される。
+ * タグが無ければ足し、あれば `?v=` だけ差し替える。
+ */
+const COMMON_REL = 'assets/js/subject-common.js';
+const commonHash = contentHash(fs.readFileSync(path.join(ROOT, COMMON_REL), 'utf8'));
+function placeCommon(src, dir, hash) {
+  const tag = `<script src="/${COMMON_REL}?v=${hash}" defer></script>\n`;
+  const re = /<script src="\/assets\/js\/subject-common\.js(?:\?v=[0-9a-f]+)?" defer><\/script>\n/;
+  const body = src.replace(re, '');
+  const app = body.indexOf(`<script src="/assets/js/subject-${dir}.js`);
+  if (app < 0) throw new Error(`${dir}/index.html に subject-${dir}.js の script タグが無い`);
+  return body.slice(0, app) + tag + body.slice(app);
+}
+
 let wrote = 0;
 const stale = [];
 
@@ -121,8 +138,9 @@ for (const s of SUBJECTS) {
   const appSrc = fs.readFileSync(appAbs, 'utf8');
   const appHash = contentHash(appSrc);
 
-  // HTML の onclick から呼ばれる名前。起動前に押されたときの受け皿に使う
-  const fns = topLevelFunctions(appSrc);
+  // HTML の onclick から呼ばれる名前。起動前に押されたときの受け皿に使う。
+  // go などは共通の関数（subject-common.js）から受けて window へ載せ直しているので、それも拾う
+  const fns = [...new Set([...topLevelFunctions(appSrc), ...exposedNames(appSrc).filter(n => !EXPOSED_STATE.includes(n))])];
   const bindings = topLevelBindings(appSrc);
   const api = [...fns, ...EXPOSED_STATE.filter(n => bindings.has(n))].sort();
 
@@ -135,6 +153,7 @@ for (const s of SUBJECTS) {
   if (out === null) throw new Error(`${s.dir}/index.html にマニフェストの区間が無い`);
   out = replaceAppVersion(out, s.dir, appHash);
   if (out === null) throw new Error(`${s.dir}/index.html に subject-${s.dir}.js の script タグが無い`);
+  out = placeCommon(out, s.dir, commonHash);
   const cssRel = `assets/css/subject-${s.dir}.css`;
   if (!fs.existsSync(path.join(ROOT, cssRel))) throw new Error(`${cssRel} が無い`);
   out = replaceCssVersion(out, s.dir, contentHash(fs.readFileSync(path.join(ROOT, cssRel), 'utf8')));

@@ -486,6 +486,7 @@ test('指紋は選択肢の並べ替えを検出する', () => {
    ============================================================ */
 
 import { shareBar } from '../build/lib/parts.mjs';
+import { X_HANDLE } from '../build/lib/extract.mjs';
 
 /** intent URL を分解する。生成ページ側は HTML 属性なので &amp; を戻してから読む */
 function parseIntent(href) {
@@ -498,7 +499,7 @@ test('科目トップの共有は x.com/intent/post に本文・URL・タグを�
   const { base, params } = parseIntent(RTShare.__test.intentURL('【ルート大全】\n英語：MARCH のルートで進めます', url));
 
   assert.equal(base, 'https://x.com/intent/post');
-  assert.equal(params.get('via'), 'route_taizen');
+  assert.equal(params.get('via'), X_HANDLE);
   /* url= を併用すると本文の末尾に連結されて改行が崩れるので、付いていないこと自体が仕様 */
   assert.equal(params.get('url'), null);
   assert.equal(
@@ -512,7 +513,7 @@ test('生成ページの共有帯も同じ組み立てになっている', () =>
   const { base, params } = parseIntent(html.match(/href="(https:\/\/[^"]+)"/)[1]);
 
   assert.equal(base, 'https://x.com/intent/post');
-  assert.equal(params.get('via'), 'route_taizen');
+  assert.equal(params.get('via'), X_HANDLE);
   assert.equal(params.get('url'), null);
   assert.equal(
     params.get('text'),

@@ -21,10 +21,17 @@
 
   /**
    * 公式 X アカウントのハンドル（@ を除く）。共有ボタンの via= に使う。
-   * build/lib/extract.mjs の X_HANDLE と手書き HTML にも同じ値がある。
-   * 変えるときは `rg route_taizen` で全箇所を出す。
+   * 正本は assets/js/subject-common.js の X_HANDLE（仕様書 5.5）。ブラウザでは window.RTCommon、
+   * Node（テスト）では require で読む。読めなければ via= を付けない（別の名前を名乗らないため）。
+   * 押された時点で読むので、subject-common.js がこのファイルより後に読まれても構わない。
    */
-  var X_HANDLE = "route_taizen";
+  function xHandle() {
+    var c = global.RTCommon;
+    if (!c && typeof require === "function") {
+      try { c = require("./subject-common.js"); } catch (e) { c = null; }
+    }
+    return (c && c.X_HANDLE) || "";
+  }
 
   /**
    * X の投稿画面の URL。twitter.com/intent/tweet は x.com へ 301 で転送されるだけなので、
@@ -47,11 +54,12 @@
    *   （空行）
    *   共有 URL
    *   （空行）
-   *   ハッシュタグ  ← この後ろに X が " via @route_taizen" を足す
+   *   ハッシュタグ  ← この後ろに X が " via @<X_HANDLE>" を足す
    */
   function intentURL(body, url) {
     var text = String(body) + "\n\n" + String(url) + "\n\n" + X_TAGS;
-    return X_INTENT + "?text=" + encodeURIComponent(text) + "&via=" + X_HANDLE;
+    var h = xHandle();
+    return X_INTENT + "?text=" + encodeURIComponent(text) + (h ? "&via=" + h : "");
   }
 
   /** 共有 URL のスキーマバージョン。質問構成を変えたら必ず上げる（README の運用ルール参照） */

@@ -15,7 +15,7 @@
 |---|---|---|
 | 参考書・ルート・大学・学習ガイドのデータ | `data/subjects/<科目>/` の JSON（読み口は `build/lib/load-subject-data.mjs` だけ） | `docs/data-model.md` |
 | 生成ページの作り | `build/generate-*.mjs`・`build/lib/` | `docs/architecture.md` |
-| 科目トップの画面の動き・CSS | `assets/js/subject-<科目>.js`・`assets/css/subject-<科目>.css` | 同上 |
+| 科目トップの画面の動き・CSS | `assets/js/subject-<科目>.js`・`assets/css/subject-<科目>.css`（7 科目で同じ関数は `assets/js/subject-common.js`。科目の JS に書き写さない） | 同上 |
 | 記事・信頼性ページの本文 | `build/content/` | `docs/style-guide.md` |
 | 運用（新刊・アフィリエイト・OGP・X） | 各スクリプト | `docs/operations.md` |
 

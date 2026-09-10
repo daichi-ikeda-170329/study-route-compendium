@@ -20,13 +20,22 @@ var TIERS  = DATA.tiers;
 var GUIDES = DATA.guides;
 var UNIS   = DATA.unis;
 var BOOKS  = DATA.books;
-/* 読者に見せる書名。内部略称の本はビルド時に正式名称を dn として配信している
-   （build/lib/booktitle.mjs の displayName。静的ページと同じ規則）。並べ替え・検索には name を使う */
-const bookName = b => (b && (b.dn || b.name)) || "";
 /* 起動（ハッシュ・共有 URL の復元）が終わるまでは画面遷移を履歴に積まない（go を参照） */
 let NAV_BOOTED = false;
 /* この科目のディレクトリ名（URL の組み立てに使う） */
 const SUBJ_DIR = "math";
+/* 7 科目で同じ関数は assets/js/subject-common.js（window.RTCommon）にある。**ここに写さない**（仕様書 5.5）。
+   この科目だけの差分は、その関数の定義のところに理由を書いてある */
+const RTCommon = window.RTCommon;
+const { isProv, byDiffAsc, byDiffDesc, diffColor, bookName, normQ, coverHTML, covLoad, covErr, trapFocusables, modalOpened, modalClosed, openBox } = RTCommon;
+const amazonURL = b => RTCommon.amazonURL(b, CONFIG.amazonTag);
+const rakutenURL = b => RTCommon.rakutenURL(b, CONFIG.rakutenId);
+/* 画面の切り替え。S と起動済みフラグはこのファイルが持つので、関数で渡す */
+const VIEWS = ["home","catalog","route","quiz","guide"];
+const { go, applyHash } = RTCommon.createNav({
+  views: VIEWS, state: () => S, booted: () => NAV_BOOTED,
+  onView: view => { if(view==="quiz" && !quizState.started) startQuiz(); },
+});
 
 /* 共通スクリプトのグローバルを window から受け取る（自動生成）。
    これが無いと下の `var X = (typeof X !== "undefined" && X) || …` が
@@ -36,7 +45,7 @@ var RTPace = window.RTPace;
 /* HTML のインライン属性（onclick="go('catalog')" など）から呼ばれる名前を window へ載せ直す。
    function 宣言は巻き上げ済みなので本体より先に載せられる。本体の途中で例外が出ても
    画面の操作が死なないよう、あえてここで載せる。以下は自動生成。 */
-window.isProv = isProv; window.provLast = provLast; window.hRange = hRange; window.byDiffAsc = byDiffAsc; window.byDiffDesc = byDiffDesc; window.diffColor = diffColor; window.normQ = normQ; window.searchUnis = searchUnis; window.facBunri = facBunri; window.isMed = isMed; window.resolveUni = resolveUni; window.pickBunri = pickBunri; window.levelFromHen = levelFromHen; window.levelFromDone = levelFromDone; window.moshiComparable = moshiComparable; window.recalcStatus = recalcStatus; window.targetHen = targetHen; window.renderVerdict = renderVerdict; window.go = go; window.syncHash = syncHash; window.applyHash = applyHash; window.coverSrcs = coverSrcs; window.amazonURL = amazonURL; window.rakutenURL = rakutenURL; window.coverHTML = coverHTML; window.covLoad = covLoad; window.covErr = covErr; window.buildFilters = buildFilters; window.setFilter = setFilter; window.bookCardHTML = bookCardHTML; window.renderCatalog = renderCatalog; window.findConnections = findConnections; window.openModal = openModal; window.closeModal = closeModal; window.buildRoutePicker = buildRoutePicker; window.selectTier = selectTier; window.syncMode = syncMode; window.setMode = setMode; window.sugSync = sugSync; window.sugClose = sugClose; window.renderUniSug = renderUniSug; window.pickUni = pickUni; window.applyUni = applyUni; window.renderDoneSug = renderDoneSug; window.addDone = addDone; window.removeDone = removeDone; window.renderDoneChips = renderDoneChips; window.segAria = segAria; window.wireSeg = wireSeg; window.renderRoute = renderRoute; window.renderRouteBody = renderRouteBody; window.renderHome = renderHome; window.startQuiz = startQuiz; window.activeQuizSteps = activeQuizSteps; window.renderQuiz = renderQuiz; window.pickOpt = pickOpt; window.nextQuiz = nextQuiz; window.focusResult = focusResult; window.renderQuizResult = renderQuizResult; window.applyQuiz = applyQuiz; window.renderGuide = renderGuide; window.toggleGuide = toggleGuide; window.trapFocusables = trapFocusables; window.modalOpened = modalOpened; window.modalClosed = modalClosed; window.openBox = openBox; window.syncRouteSegs = syncRouteSegs; window.applySharedUni = applySharedUni; window.sharedUniName = sharedUniName;
+window.searchUnis = searchUnis; window.facBunri = facBunri; window.isMed = isMed; window.resolveUni = resolveUni; window.pickBunri = pickBunri; window.levelFromHen = levelFromHen; window.levelFromDone = levelFromDone; window.moshiComparable = moshiComparable; window.recalcStatus = recalcStatus; window.targetHen = targetHen; window.renderVerdict = renderVerdict; window.go = go; window.covLoad = covLoad; window.covErr = covErr; window.buildFilters = buildFilters; window.setFilter = setFilter; window.bookCardHTML = bookCardHTML; window.renderCatalog = renderCatalog; window.findConnections = findConnections; window.openModal = openModal; window.closeModal = closeModal; window.buildRoutePicker = buildRoutePicker; window.selectTier = selectTier; window.syncMode = syncMode; window.setMode = setMode; window.sugSync = sugSync; window.sugClose = sugClose; window.renderUniSug = renderUniSug; window.pickUni = pickUni; window.applyUni = applyUni; window.renderDoneSug = renderDoneSug; window.addDone = addDone; window.removeDone = removeDone; window.renderDoneChips = renderDoneChips; window.segAria = segAria; window.wireSeg = wireSeg; window.renderRoute = renderRoute; window.renderRouteBody = renderRouteBody; window.renderHome = renderHome; window.startQuiz = startQuiz; window.activeQuizSteps = activeQuizSteps; window.renderQuiz = renderQuiz; window.pickOpt = pickOpt; window.nextQuiz = nextQuiz; window.focusResult = focusResult; window.renderQuizResult = renderQuizResult; window.applyQuiz = applyQuiz; window.renderGuide = renderGuide; window.toggleGuide = toggleGuide; window.syncRouteSegs = syncRouteSegs; window.applySharedUni = applySharedUni; window.sharedUniName = sharedUniName;
 
 
 /* 診断結果の共有・保存（assets/js/share.js）。
@@ -102,10 +111,8 @@ if (!AFF && !ADSENSE) document.getElementById("prBar")?.remove();
      3. d<=2 ? … : 最難関 形の分類     → 比較が全部 false になり最難関に化ける
    3 は静かに間違うので最も危ない。 */
 const PROV_LABEL = "新刊・評価準備中";
-function isProv(b){ return !!b && b.provisional === true; }
 /* 難易度順の並びで末尾へ落とす。diff の無い本を a.diff-b.diff に通すと NaN になり、
    比較子が非対称になって並び順が実行ごとに変わる */
-function provLast(a,b){ return (isProv(a)?1:0) - (isProv(b)?1:0); }
 /* 難易度の並び順。diff（1〜10）が同じ本は目安偏差値（下限→上限→書名）で細かく並べる。
    diff だけで並べると、同じ diff の中で「40〜55 → 〜48 → 35〜50」のように偏差値が
    前後して、画面では難易度順に見えない。生成側は build/lib/rank.mjs が同じ処理を持つ。 */
@@ -113,37 +120,9 @@ function provLast(a,b){ return (isProv(a)?1:0) - (isProv(b)?1:0); }
    「共テ7割〜9割」「東大合格レベル」のように偏差値で書いていない本は [999,999] を
    返し、同じ難易度の中では数値で書いてある本のうしろへまとめる（混ぜると、得点率の
    数字が偏差値として並んでしまう）。 */
-function hRange(b){
-  const s = String((b && b.hensachi) || "");
-  const nums = (s.match(/\d{2}/g) || []).map(Number).filter(n => n >= 25 && n <= 85);
-  if(!nums.length) return [999, 999];
-  return [/^\s*[〜~]/.test(s) ? 0 : nums[0], nums[nums.length - 1]];
-}
 /* 評価未了（diff を持たない）本は常に末尾。昇順・降順のどちらでも末尾に置く */
-function byDiffAsc(a,b){
-  return provLast(a,b) || (a.diff||0)-(b.diff||0)
-    || hRange(a)[0]-hRange(b)[0] || hRange(a)[1]-hRange(b)[1]
-    || String(a.name).localeCompare(String(b.name),"ja");
-}
 /* 降順でも、評価未了の本と偏差値を書いていない本は末尾に置く
    （[999,999] をそのまま降順に通すと先頭へ出てしまう） */
-function byDiffDesc(a,b){
-  const ra = hRange(a), rb = hRange(b), unknown = r => (r[0]===999 ? 1 : 0);
-  return provLast(a,b) || (b.diff||0)-(a.diff||0)
-    || unknown(ra)-unknown(rb) || rb[0]-ra[0] || rb[1]-ra[1]
-    || String(a.name).localeCompare(String(b.name),"ja");
-}
-function diffColor(d){
-  if(d==null) return "var(--line)";   /* 新刊は難易度を持たない。色も付けない */
-  if(d<=2) return "#2F8659";
-  if(d<=4) return "#2E7D9A";
-  if(d<=6) return "#24427C";
-  if(d<=7) return "#5B4E9E";
-  if(d<=8) return "#B5432A";
-  return "#8C2437";
-}
-
-
 
 
 /* ADDED BOOKS — 未掲載参考書の追加登録分。ここから下も BOOKS の一部として扱う */
@@ -190,13 +169,10 @@ function diffColor(d){
    ============================================================ */
 
 
-
 /* 共テ・中堅私大ルートは文理共通 */
 
 
-
 /* 私立医学部ルート(理系専用) */
-
 
 
 /* ============================================================
@@ -257,11 +233,6 @@ const bookById = id => BOOKS.find(b=>b.id===id);
 /* ============================================================
    志望校マッチング
    ============================================================ */
-function normQ(s){
-  return (s||"").trim().toLowerCase()
-    .replace(/[Ａ-Ｚａ-ｚ０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0))
-    .replace(/[ 　・,、]/g,"");
-}
 function searchUnis(q){
   const n = normQ(q);
   if(!n) return [];
@@ -438,111 +409,6 @@ function renderVerdict(){
     <b>この情報をルートに反映しました。</b>${S.done.size?`登録した${S.done.size}冊は<b style="color:var(--ok)">習得済み</b>として表示し、`:""}現在地より下の段階は「スキップ可」として薄く表示しています。${S.henAdj!=null&&tgt&&S.henAdj>=tgt?"すでに目標水準に届いているので、過去問演習と弱点分野の補強を主軸にしてください。":"「▶ ここから」と表示された1冊から着手してください。"}`;
 }
 
-/* 画面はハッシュで指し示せる（/<科目>/#catalog など）。ポータルや外部からの直リンクの宛先になる。
-   履歴には積まない（replaceState）。この SPA は「戻る」を画面遷移として扱っていないため、
-   pushState にすると戻るたびに 1 画面ずつ遡ることになり、サイトを離れられなくなる。 */
-const VIEWS = ["home","catalog","route","quiz","guide"];
-function go(view, opts){
-  /* 画面（VIEWS）が変わるときだけ履歴に積む。起動中（ハッシュ・共有 URL の復元）と、
-     同じ画面の中での状態変更、戻る/進む（popstate）からの呼び出しは積まない */
-  const push = NAV_BOOTED && view !== S.view && !(opts && opts.push === false);
-  S.view = view;
-  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v.id==="view-"+view));
-  document.querySelectorAll("#navDesktop button, #tabbar button").forEach(b=>{
-    const on = b.dataset.view===view;
-    b.classList.toggle("active", on);
-    /* 見た目の色だけでなく、支援技術にも「いまここ」を伝える */
-    if(on) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
-  });
-  window.scrollTo({top:0});
-  if(view==="quiz" && !quizState.started) startQuiz();
-  syncHash(view, push);
-}
-function syncHash(view, push){
-  try{
-    const want = view==="home" ? "" : "#"+view;
-    const url = location.pathname + location.search + want;
-    /* 2026-09-10 まで常に replaceState だった。図鑑→ルート→診断と動いたあとに
-       ブラウザの「戻る」を押すと、一気にサイトの外へ出ていた（仕様書 2.3） */
-    if(push){ history.pushState({view: view}, "", url); return; }
-    if(location.hash === want && history.state && history.state.view === view) return;
-    history.replaceState({view: view}, "", url);
-  }catch(e){ /* history に触れない環境では URL が追従しないだけ */ }
-}
-/** いまのハッシュが指す画面。未知のハッシュなら空文字 */
-function hashView(){
-  const v = (location.hash || "").slice(1);
-  return VIEWS.indexOf(v) >= 0 ? v : "";
-}
-/** ハッシュが指す画面へ移る。未知のハッシュは無視して現在の画面のままにする。
-    ハッシュの変化はブラウザがすでに履歴に積んでいるので、ここでは積まない */
-function applyHash(){
-  const v = hashView();
-  if(v && v !== S.view) go(v, {push:false});
-}
-window.addEventListener("hashchange", applyHash);
-/* ブラウザの戻る/進む。積んだときの画面へ戻す（ハッシュが無い最初の項目はホーム） */
-window.addEventListener("popstate", function(e){
-  const v = (e.state && e.state.view) || hashView() || "home";
-  if(VIEWS.indexOf(v) >= 0 && v !== S.view) go(v, {push:false});
-});
-
-/* ============================================================
-   COVERS — 実表紙画像(Amazon→openBD)+自動フォールバック
-   ============================================================ */
-/* 書影は Amazon が提供する商品画像URLのみを参照します。
-   (Amazonアソシエイト・ヘルプ「Amazonが提供している商品画像URLを指定する形でご利用ください」に準拠。
-    画像の保存・再アップロード・加工は行っていません) */
-function coverSrcs(b){
-  /* 候補の作り方は assets/js/cover-resolver.js が唯一の正本。**ここに写さない。**
-     以前は 7 科目それぞれが自前の coverSrcs を持ち、中身が 4 通りに分かれていた
-     （数学・情報・小論文は Amazon の 2 候補だけ、社会は 10 候補）。同じ本なのに
-     科目によって表紙が出たり出なかったりしていた。
-     取得元の有効・無効は assets/js/cover-policies.js（生成物）が持つ。 */
-  return (window.RTCoverResolver
-    ? window.RTCoverResolver.coverSrcs(b, window.RT_COVER_POLICIES)
-    : []);
-}
-/* ---------- アフィリエイトリンク ---------- */
-function amazonURL(b){
-  /* ルート上の枠（志望校の過去問など）は特定の商品ではない。直リンクを出すと、
-     志望校が違う利用者を別大学の 1 冊へ送ってしまう。検索結果へ送る */
-  if(b.recordType === "routePlaceholder"){
-    const q = encodeURIComponent(b.official || b.name);
-    return `https://www.amazon.co.jp/s?k=${q}` + (CONFIG.amazonTag ? `&tag=${CONFIG.amazonTag}` : "");
-  }
-  const k = b.isbn10 || b.asin; if(!k) return null;
-  return `https://www.amazon.co.jp/dp/${k}/ref=nosim` + (CONFIG.amazonTag ? `?tag=${CONFIG.amazonTag}` : "");
-}
-function rakutenURL(b){
-  if(!CONFIG.rakutenId) return null;
-  const dest = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(b.isbn13 || b.name)}/`;
-  return `https://hb.afl.rakuten.co.jp/hgc/${CONFIG.rakutenId}/?pc=${encodeURIComponent(dest)}&m=${encodeURIComponent(dest)}`;
-}
-function coverHTML(b){
-  const n = bookName(b).length;
-  const cls = n>14 ? "xlong" : (n>9 ? "long" : "");
-  /* fb（書影が取れないときの代替色）は手で決める装飾。新刊はまだ持たないので既定色を当てる。
-     ここを素通りさせると b.fb.bg が TypeError になり、図鑑の描画そのものが止まる */
-  const fbc = b.fb || {bg:"linear-gradient(160deg,#8A8F9E,#5A6070)"};
-  const fbStyle = `background:${fbc.bg}${fbc.light ? ";color:#1B2233;text-shadow:none" : ""}`;
-  const fb = `<div class="bcov-fb${fbc.light ? " light" : ""}" style="${fbStyle}"><span class="fb-spine"></span><span class="fb-pub">${b.pub}</span><span class="fb-title ${cls}">${bookName(b)}</span><span class="fb-band">${b.subjects || ""}</span></div>`;
-  const srcs = coverSrcs(b);
-  if(!srcs.length) return `<div class="bcov fb">${fb}</div>`;
-  return `<div class="bcov"><img src="${srcs[0]}" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="${srcs.join("|")}" data-s="0" onload="covLoad(this)" onerror="covErr(this)">${fb}</div>`;
-}
-/* 書影の枠は、描き直しで入れ替わっていることがある（起動前に届いた読み込み完了を
-   あとから処理する場合など）。closest が null を返しうるので必ず確かめる */
-function covLoad(img){
-  if(img.naturalWidth<=1){ covErr(img); return; }
-  const w = img.closest(".bcov"); if(w) w.classList.add("ok");
-}
-function covErr(img){
-  const srcs = (img.dataset.srcs||"").split("|");
-  const next = (+img.dataset.s) + 1;
-  if(next < srcs.length){ img.dataset.s = String(next); img.src = srcs[next]; }
-  else { img.classList.add("hide"); const w = img.closest(".bcov"); if(w) w.classList.add("fb"); }
-}
 
 /* ============================================================
    CATALOG
@@ -1174,30 +1040,6 @@ document.addEventListener("keydown", e => {
   el.click();
 });
 
-/* ---------- モーダルのフォーカス管理 ----------
-   開いたらモーダル内へフォーカスを移し、Tab の移動をモーダル内に閉じ込め、
-   閉じたら元いた要素へ戻す。キーボードだけで操作する人が背景の
-   リンクに迷い込まないようにするため。 */
-let lastFocused = null;
-function trapFocusables(box){
-  return [...box.querySelectorAll('a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])')]
-    .filter(el => el.offsetParent !== null);
-}
-function modalOpened(boxId){
-  lastFocused = document.activeElement;
-  const box = document.getElementById(boxId);
-  const f = trapFocusables(box);
-  (f[0] || box).focus({preventScroll:true});
-}
-function modalClosed(){
-  if(lastFocused && document.contains(lastFocused)) lastFocused.focus({preventScroll:true});
-  lastFocused = null;
-}
-function openBox(){
-  const el = document.getElementById("bookModal");
-  if(el && el.classList.contains("open")) return document.getElementById("modalInner");
-  return null;
-}
 document.addEventListener("keydown",e=>{
   if(e.key==="Escape"){ closeModal(); return; }
   if(e.key!=="Tab") return;
