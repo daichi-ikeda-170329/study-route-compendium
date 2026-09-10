@@ -194,3 +194,35 @@ test('JavaScript が無くても書籍ページの説明とリンクが読める
   await expect(page.locator('a.az')).toBeVisible();
   await ctx.close();
 });
+
+test('学習ガイドは見出しだけで届き、3 番を開くと本文が入る', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/english/#guide', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  await expect(page.locator('#view-guide')).toBeVisible();
+  const card = page.locator('#g2');
+  // 本文は開く前は空（科目トップの HTML に 13 本ぶんの本文を持たない。仕様書 2.2）
+  await expect(card.locator('.g-body')).toBeEmpty();
+  await card.locator('.g-card__head').click();
+  await expect(card).toHaveClass(/open/);
+  await expect(card.locator('.g-card__head')).toHaveAttribute('aria-expanded', 'true');
+  await expect(card.locator('.g-body p').first()).toBeVisible();
+  // 閉じて開き直しても本文は二重にならない
+  const n = await card.locator('.g-body p').count();
+  await card.locator('.g-card__head').click();
+  await card.locator('.g-card__head').click();
+  expect(await card.locator('.g-body p').count()).toBe(n);
+  // 1 本 1 ページの静的な置き場へのリンク
+  await expect(card.locator('a.g-page')).toHaveAttribute('href', '/english/guides/basics/03/');
+  expect(errors).toEqual([]);
+});
+
+test('JS が無くても学習ガイドの見出しと記事一覧への案内が読める', async ({ browser }) => {
+  const ctx = await browser.newContext({ javaScriptEnabled: false });
+  const page = await ctx.newPage();
+  await page.goto('/english/', { waitUntil: 'domcontentloaded' });
+  const html = await page.content();
+  expect(html).toContain('学習ガイドの本文は記事一覧から読めます');
+  expect(await page.locator('#guideList .g-card h3').count()).toBeGreaterThan(5);
+  await ctx.close();
+});

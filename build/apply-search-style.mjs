@@ -19,7 +19,8 @@
  * このスクリプトが STYLE を読んで、
  *
  *   - assets/site.css の末尾（生成ページ 1,476 枚はこれを <link> で読む）
- *   - 手書き HTML 9 枚のインライン <style> の末尾
+ *   - 手書き HTML（ポータル・404）のインライン <style> の末尾
+ *   - 科目トップ 7 枚の CSS（assets/css/subject-<科目>.css。2026-09-10 に外へ出した）
  *
  * の 2 か所へ、マーカーで挟んだ同じ中身を書き込む。どちらも描画をブロックするので、
  * 最初の描画から正しい版面になる。search.js 側の差し込みは、この書き込みが無い
@@ -49,8 +50,14 @@ export function block(indent = '') {
   return `${indent}${START}\n${body}\n${indent}${END}`;
 }
 
-/** 手書き HTML。ここだけが site.css を読まない */
-export const HAND_WRITTEN = ['index.html', '404.html', ...SUBJECTS.map(s => `${s.dir}/index.html`)];
+/** 手書き HTML のうち、インライン <style> を持つもの。ここは site.css を読まない */
+export const HAND_WRITTEN = ['index.html', '404.html'];
+
+/**
+ * 科目トップの CSS。2026-09-10 にインライン <style> から assets/css/subject-<科目>.css へ
+ * 出した（仕様書 2.2）。どれも描画をブロックする <link> で読むので、ここへ書けば同じ効果になる
+ */
+export const SUBJECT_CSS = SUBJECTS.map(s => `assets/css/subject-${s.dir}.css`);
 
 /** すでにあるマーカー区間を差し替える。無ければ append() で足す */
 function replaceBlock(src, next) {
@@ -83,6 +90,7 @@ function applyToHtml(src, rel) {
 function main() {
   const targets = [
     { rel: 'assets/site.css', apply: applyToCss },
+    ...SUBJECT_CSS.map(rel => ({ rel, apply: applyToCss })),
     ...HAND_WRITTEN.map(rel => ({ rel, apply: (s) => applyToHtml(s, rel) })),
   ];
 

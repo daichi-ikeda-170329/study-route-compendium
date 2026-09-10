@@ -28,6 +28,7 @@ import { CATEGORIES, categoryOf } from './content/article-categories.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { articleContentDate, saveDates } from './lib/updated.mjs';
 import { COMBOS, POLICIES, comboTotal, routeTotal, tracksOf, monthsAt } from './lib/route-hours.mjs';
+import { guidePath } from './lib/subject-guides.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -193,6 +194,9 @@ function pickBooks(cond, dir) {
 }
 
 function renderBlock(bl, dir) {
+  /* 手書きの HTML をそのまま出すブロック。**サイト内の正本（guides.json）からだけ使う。**
+     外部の文字列を通すと XSS の入口になる（build/generate-guides-static.mjs が唯一の利用者） */
+  if (bl.html) return `      ${bl.html}`;
   if (bl.p) return `      <p>${inline(bl.p, dir)}</p>`;
   if (bl.h3) return `      <h3>${esc(bl.h3)}</h3>`;
   if (bl.ul) return `      <ul>\n${bl.ul.map(li => `        <li>${inline(li, dir)}</li>`).join('\n')}\n      </ul>`;
@@ -513,11 +517,20 @@ ${rows.map(r => `            <tr><th scope="row">${esc(r.name)}</th><td>${r.n}</
   throw new Error(`未知のブロック: ${JSON.stringify(bl).slice(0, 100)}`);
 }
 
+/**
+ * 記事 1 本のページ。学習ガイドの静的ページ（build/generate-guides-static.mjs）も同じ型で出すため
+ * articlePage として公開する。
+ */
+export function articlePage(a) {
+  return render(a);
+}
+
 function render(a) {
   /* 手で日付を書かず、中身が変わった日を使う。**記事 1 本ごとに求める。**
      articles.mjs には 53 本が同居しているので、ファイル単位で求めると
      1 本直すだけで全記事の更新日が動く（build/lib/updated.mjs の冒頭を参照） */
-  const updated = articleContentDate(a);
+  // a.updated は記事以外の正本から作るページ（学習ガイド）が自分で求めた更新日
+  const updated = a.updated || articleContentDate(a);
   const sub = a.subject ? SUBJECTS.find(s => s.dir === a.subject) : null;
   const cat = categoryOf(a.category);
   const base = sub ? `/${sub.dir}/guides/${a.slug}/` : `/guides/${a.slug}/`;
@@ -653,7 +666,10 @@ table.cmp td.rk__why{min-width:230px;color:var(--ink-2)}
 .award__meta{font-size:11.5px;color:var(--muted-2);margin-top:7px;line-height:1.7}
 .award__why{font-size:12.5px;color:var(--ink-2);margin-top:9px;line-height:1.85}
 /* 分布の棒。数字と割合は同じ行に文字で出しているので、棒は装飾に徹する */
-.hbar{display:block;height:9px;min-width:1px;width:var(--w);background:var(--sc);opacity:.55}
+.hbar{display:block;height:9px;min-width:1px;width:var(--w);background:var(--sc);opacity:.55}${a.sections.some(sec => sec.body.some(bl => bl.html && bl.html.includes('g-quote'))) ? `
+/* 学習ガイド（guides.json の本文）の引用。科目トップの .g-quote と同じ役割。
+   使うページにだけ出す（全記事に足すと、記事ページの sitemap の更新日まで動く） */
+.g-quote{margin:22px 0;padding:14px 18px;border-left:3px solid var(--sc);background:var(--surface);font-family:var(--serif);font-weight:700;font-size:15px;line-height:1.9;color:var(--ink)}` : ''}
 </style>
 </head>
 <body>
@@ -919,9 +935,28 @@ ${items.map(a => guideCard(a)).join('\n')}
     </div>
   </div>`).join('\n\n');
 
-  const jump = CATEGORIES
-    .filter(c => list.some(a => a.category === c.id))
-    .map(c => `      <a href="#${c.id}">${esc(c.label)}</a>`).join('\n');
+  /* 科目トップの学習ガイドを 1 本 1 ページにしたもの（build/generate-guides-static.mjs） */
+  const guides = (data[dir] && data[dir].guides) || [];
+  const guideSec = guides.length ? `  <div class="block gsec" id="study-basics">
+    <div class="gsec__h"><h2>学習の進め方</h2><span>Study — ${guides.length}本</span></div>
+    <p class="gsec__lead">${esc(sub.full)}のトップで読める学習ガイドを、1 本ずつ 1 ページにまとめたものです。参考書を選ぶ前に、進め方の土台を決めておくための話です。</p>
+    <div class="ggrid">
+${guides.map((g, i) => `      <a class="gcard" href="${guidePath(dir, i)}">
+        <div class="gcard__no">Study ${String(i + 1).padStart(2, '0')}</div>
+        <b>${esc(g.t)}</b>
+        <p>${esc(g.s)}</p>
+      </a>`).join('\n')}
+    </div>
+  </div>
+
+` : '';
+
+  const jump = [
+    ...(guides.length ? ['      <a href="#study-basics">学習の進め方</a>'] : []),
+    ...CATEGORIES
+      .filter(c => list.some(a => a.category === c.id))
+      .map(c => `      <a href="#${c.id}">${esc(c.label)}</a>`),
+  ].join('\n');
 
   const body = `  <div class="block" style="margin-top:26px">
     <div class="eyebrow">Guides</div>
@@ -932,7 +967,7 @@ ${jump}
     </nav>
   </div>
 
-${sections}
+${guideSec}${sections}
 
   <div class="block gsec">
     <div class="gsec__h"><h2>ほかの科目・ジャンルから探す</h2><span>MORE</span></div>
@@ -950,8 +985,11 @@ ${genreNav(allCounts)}
 
 /* ============================================================
    実行
+
+   import されたときは走らせない（articlePage を学習ガイドの静的ページが使うため）
    ============================================================ */
 
+function main() {
 /* ジャンル id は /guides/<ジャンル>/ という URL になる。科目に属さない記事は
    /guides/<slug>/ に出るので、両者がぶつかると同じパスに 2 枚書き出すことになる。
    静かに片方が消えるより、ここで止めるほうがよい */
@@ -1029,3 +1067,6 @@ console.log(`合計 ${n} ページを生成した（記事 ${ARTICLES.length} �
 /* 更新日の台帳を書き戻す。書き戻さないと次の実行で前回の日付を思い出せず、
    実際には変えていない日を「更新日」として出してしまう */
 saveDates();
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

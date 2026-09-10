@@ -23,6 +23,8 @@ var BOOKS  = DATA.books;
 /* 読者に見せる書名。内部略称の本はビルド時に正式名称を dn として配信している
    （build/lib/booktitle.mjs の displayName。静的ページと同じ規則）。並べ替え・検索には name を使う */
 const bookName = b => (b && (b.dn || b.name)) || "";
+/* この科目のディレクトリ名（URL の組み立てに使う） */
+const SUBJ_DIR = "math";
 
 /* 共通スクリプトのグローバルを window から受け取る（自動生成）。
    これが無いと下の `var X = (typeof X !== "undefined" && X) || …` が
@@ -1112,6 +1114,11 @@ function applyQuiz(tier,bunri,policy,level){
 /* ============================================================
    GUIDE / LEGAL
    ============================================================ */
+/* 学習ガイド。**本文は開いたときに入れる。** 事前描画（build/prerender-tops.mjs）もこの関数を
+   使うので、HTML には見出しだけが載る（本文 13 本ぶんを科目トップに持たない）。
+   本文を 1 本 1 ページで読める静的な置き場は /<科目>/guides/basics/<nn>/
+   （build/generate-guides-static.mjs。パスの組み方は build/lib/subject-guides.mjs の guidePath と同じ） */
+function guidePagePath(i){ return "/"+SUBJ_DIR+"/guides/basics/"+String(i+1).padStart(2,"0")+"/"; }
 function renderGuide(){
   document.getElementById("guideList").innerHTML = GUIDES.map((g,i)=>`
     <article class="g-card" id="g${i}">
@@ -1120,11 +1127,16 @@ function renderGuide(){
         <span class="g-ttl"><h3>${g.t}</h3><span>${g.s}</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body">${g.b}</div>
-    </article>`).join("");
+      <div class="g-body"></div>
+      <a class="g-page" href="${guidePagePath(i)}">1 ページで読む →</a>
+    </article>`).join("")
+    + `<noscript><p class="g-noscript"><a href="/${SUBJ_DIR}/guides/">学習ガイドの本文は記事一覧から読めます</a></p></noscript>`;
 }
 function toggleGuide(i){
   const el = document.getElementById("g"+i);
+  const body = el.querySelector(".g-body");
+  // 初めて開くときだけ本文を入れる（閉じて開き直しても入れ直さない）
+  if(!body.dataset.filled){ body.innerHTML = GUIDES[i].b; body.dataset.filled = "1"; }
   const open = el.classList.toggle("open");
   el.querySelector(".g-card__head").setAttribute("aria-expanded", open);
 }

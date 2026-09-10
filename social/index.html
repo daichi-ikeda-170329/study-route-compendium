@@ -36,721 +36,7 @@
      defer にするとその時点でまだ読めておらず、記録が落ちる -->
 <script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
-<style>
-:root{
-  --paper:#F6F4EF; --surface:#FFFFFF; --surface-2:#FAF9F6; --surface-3:#F1EFE8;
-  --ink:#1B2233; --ink-2:#39415A; --muted:#585E70; --muted-2:#656A7C;
-  --line:#E4E1D6; --line-2:#EDEBE2; --line-d:#CFCBBE;
-  --indigo:#24427C; --indigo-deep:#18305E; --indigo-soft:#E8EDF7;
-  --accent:#B5432A; --accent-deep:#93331F; --accent-soft:#F7E9E5;
-  --gold:#886C2E; --gold-soft:#F3EDDD;
-  --ok:#2F6E4F; --ok-soft:#E7F0EA;
-  --jp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,"Noto Sans JP",sans-serif;
-  --serif:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --sh-s:0 1px 2px rgba(27,34,51,.05),0 2px 6px rgba(27,34,51,.04);
-  --sh-m:0 4px 14px rgba(27,34,51,.09),0 1px 4px rgba(27,34,51,.05);
-  --sh-l:0 20px 50px rgba(27,34,51,.18);
-  --r-s:8px; --r-m:14px; --r-l:20px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-/* 動きを減らす設定にしている利用者には、遷移とアニメーションを無効にする */
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
-html{-webkit-text-size-adjust:100%}
-body{
-  font-family:var(--jp);background:var(--paper);color:var(--ink);
-  line-height:1.65;letter-spacing:.01em;-webkit-font-smoothing:antialiased;
-  padding-bottom:74px;overflow-x:hidden;
-  background-image:radial-gradient(rgba(27,34,51,.028) 1px,transparent 1px);
-  background-size:22px 22px;
-}
-@media(min-width:900px){body{padding-bottom:0}}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-input,select{font-family:inherit}
-/* リンクの既定色・下線は使わない。色はクラス側で決めるので、指定し忘れたリンクが
-   ブラウザ既定の青＋下線のまま出る事故をここで止める（assets/site.css と同じ規則）。 */
-a{color:inherit;text-decoration:none}
-/* 画像が親より広いと狭い画面で横にはみ出す。生成ページ側と同じく上限を付ける */
-img{display:block;max-width:100%}
-::selection{background:var(--indigo);color:#fff}
-:focus-visible{outline:2.5px solid var(--indigo);outline-offset:2px;border-radius:6px}
-.mono{font-family:var(--mono)}
-.serif{font-family:var(--serif)}
-
-/* ---------- Header ---------- */
-.app-header{position:sticky;top:0;z-index:60;background:rgba(246,244,239,.88);backdrop-filter:saturate(1.3) blur(12px);border-bottom:1px solid var(--line)}
-.app-header::after{content:"";display:block;height:2px;background:linear-gradient(90deg,var(--indigo) 0 33%,var(--accent) 33% 40%,transparent 40%)}
-.app-header__in{max-width:1140px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:14px}
-.logo{display:flex;align-items:center;gap:11px;cursor:pointer}
-.logo__mark{width:36px;height:36px;background:var(--ink);color:#fff;flex:none;display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:17px;border-radius:4px;position:relative}
-.logo__mark::after{content:"";position:absolute;right:-3px;bottom:-3px;width:10px;height:10px;background:var(--accent);border-radius:2px}
-.logo__txt{display:flex;flex-direction:column;line-height:1.1}
-.logo__txt b{font-family:var(--serif);font-weight:800;font-size:16.5px;letter-spacing:.05em}
-.logo__txt span{font-size:9.5px;color:var(--muted);font-family:var(--mono);letter-spacing:.14em;margin-top:2px}
-.nav-desktop{margin-left:auto;display:none;gap:2px;align-items:center}
-@media(min-width:900px){.nav-desktop{display:flex}}
-/* 項目は button とは限らない（情報・小論文は「参考書一覧」だけ別ページへの a）。
-   button だけに当てるとリンクが素のまま残るので、両方をまとめて整える。 */
-.nav-desktop button,.nav-desktop a{padding:9px 16px;font-weight:700;font-size:13.5px;color:var(--muted);transition:.15s;position:relative;letter-spacing:.02em}
-.nav-desktop button::after,.nav-desktop a::after{content:"";position:absolute;left:16px;right:16px;bottom:3px;height:2px;background:var(--accent);transform:scaleX(0);transition:.18s;transform-origin:left}
-.nav-desktop button:hover,.nav-desktop a:hover{color:var(--ink)}
-.nav-desktop button.active,.nav-desktop a.active{color:var(--ink)}
-.nav-desktop button.active::after,.nav-desktop a.active::after{transform:scaleX(1)}
-.hdr-tag{font-family:var(--mono);font-size:10px;color:var(--muted-2);border:1px solid var(--line);padding:3px 8px;border-radius:999px;margin-left:10px;display:none}
-@media(min-width:1000px){.hdr-tag{display:block}}
-
-/* ---------- Layout ---------- */
-.app-main{max-width:1140px;margin:0 auto;padding:0 18px}
-.view{display:none;animation:fade .3s ease}
-.view.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-.eyebrow{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.eyebrow::before{content:"";width:26px;height:1.5px;background:var(--accent)}
-h2.sec{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:.02em;margin-bottom:8px;line-height:1.3}
-@media(min-width:700px){h2.sec{font-size:29px}}
-.sec-lead{color:var(--muted);font-size:13.5px;max-width:60ch}
-
-/* ---------- Tabbar ---------- */
-/* 項目数はページごとに違う（情報・小論文は 4、他の科目は 5）。列数を決め打ちすると
-   数が変わったとたんに空き列ができて左に寄るので、並んだ数だけ等幅の列を作る。 */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:grid;grid-auto-flow:column;grid-auto-columns:1fr;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
-@media(min-width:900px){.tabbar{display:none}}
-/* 中身は button と a が混ざる。要素名ではなく「タブバーの直接の子」に当てて、
-   どちらで書いても同じ見た目になるようにする。min-height はタップ領域の下限。 */
-.tabbar>*{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 0;min-height:44px;color:var(--muted-2);border-radius:10px;font-size:9.5px;font-weight:700;line-height:1.3;text-align:center;transition:.15s}
-.tabbar>* svg{width:21px;height:21px;flex:none}
-.tabbar>*.active{color:var(--accent)}
-
-/* ================= HOME ================= */
-.hero{position:relative;padding:34px 0 10px}
-.hero__grid{display:grid;grid-template-columns:1fr;align-items:center}
-@media(min-width:1020px){.hero__grid{grid-template-columns:minmax(0,1fr) 330px;gap:44px}}
-.hero__main{grid-column:1;grid-row:1;min-width:0}
-.hero__deco{display:none;grid-column:2;grid-row:1;width:100%;pointer-events:none;opacity:.95}
-@media(min-width:1020px){.hero__deco{display:block}}
-.hero__deco .hd-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;fill:var(--muted)}
-.hero__badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);padding:6px 13px;border-radius:3px;font-size:11.5px;font-weight:700;color:var(--ink-2);box-shadow:var(--sh-s);margin-bottom:20px;letter-spacing:.04em}
-.hero__badge i{width:6px;height:6px;background:var(--accent);border-radius:1px}
-.hero h1{font-family:var(--serif);font-weight:800;font-size:34px;line-height:1.32;letter-spacing:.015em}
-@media(min-width:700px){.hero h1{font-size:50px;line-height:1.26}}
-.hl{position:relative;z-index:1;white-space:nowrap}
-.hl::after{content:"";position:absolute;left:-1px;right:-1px;bottom:4px;height:30%;background:var(--accent-soft);z-index:-1}
-.hl b{color:var(--accent-deep);font-weight:inherit}
-.hero p.lead{margin-top:18px;font-size:14.5px;color:var(--ink-2);max-width:56ch}
-.hero__cta{margin-top:26px;display:flex;flex-wrap:wrap;gap:11px}
-.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:14.5px;padding:14px 22px;border-radius:4px;transition:.16s;white-space:nowrap;letter-spacing:.03em}
-.btn-primary{background:var(--ink);color:#fff;box-shadow:var(--sh-m)}
-.btn-primary:hover{background:var(--indigo-deep);transform:translateY(-2px);box-shadow:var(--sh-l)}
-.btn-primary svg{transition:transform .16s}
-.btn-primary:hover svg{transform:translateX(3px)}
-.btn-ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line-d);box-shadow:var(--sh-s)}
-.btn-ghost:hover{border-color:var(--ink-2);transform:translateY(-2px)}
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px;box-shadow:var(--sh-s)}
-.stat{background:var(--surface);padding:18px 16px}
-.stat b{font-family:var(--mono);font-weight:600;font-size:27px;letter-spacing:-.02em;display:block;line-height:1;color:var(--ink)}
-.stat b small{font-size:11px;color:var(--muted);display:block;margin-top:3px;letter-spacing:.02em}
-.stat span{font-size:11px;color:var(--muted);font-weight:600;margin-top:7px;display:block;letter-spacing:.03em}
-.home-block{margin-top:48px}
-.route-preview{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
-@media(min-width:640px){.route-preview{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:960px){.route-preview{grid-template-columns:repeat(4,1fr)}}
-.rp-card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--tc,var(--indigo));padding:16px 16px 14px;cursor:pointer;transition:.18s;box-shadow:var(--sh-s);position:relative}
-.rp-card:hover{transform:translateY(-3px);box-shadow:var(--sh-m)}
-.rp-card__no{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.1em;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-/* 10px の小さな文字なので、カードごとの色（--tc）をそのまま使うと
-   コントラスト比 4.5:1 を割る色が出る（講師ルートの #2F8659 が 4.49）。
-   色分けはカード左の帯が担っているので、ここは固定色にする。 */
-.rp-card__no em{font-style:normal;color:var(--muted);font-weight:700}
-.rp-card h3{font-family:var(--serif);font-weight:800;font-size:16.5px;margin-bottom:3px;letter-spacing:.02em}
-.rp-card p{font-size:11.5px;color:var(--muted);min-height:32px;line-height:1.55}
-.guide-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
-@media(min-width:760px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
-.guide-card{background:var(--surface);border:1px solid var(--line);padding:22px 20px;box-shadow:var(--sh-s);position:relative}
-.guide-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--indigo)}
-.guide-card:nth-child(2)::before{background:var(--accent)}
-.guide-card:nth-child(3)::before{background:var(--gold)}
-.guide-num{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted-2);letter-spacing:.14em;margin-bottom:10px}
-.guide-card h3{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
-.guide-card p{font-size:12.5px;color:var(--muted);line-height:1.7}
-.guide-card p b{color:var(--ink-2)}
-
-/* ================= CATALOG ================= */
-.cat-controls{position:sticky;top:63px;z-index:40;background:var(--paper);padding:14px 0 10px;margin:0 -18px;padding-left:18px;padding-right:18px}
-.search-wrap{position:relative;margin-bottom:11px}
-.search-wrap svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted-2);pointer-events:none}
-#book-search{width:100%;padding:13px 16px 13px 45px;border-radius:4px;border:1px solid var(--line-d);background:var(--surface);font-size:14.5px;color:var(--ink);box-shadow:var(--sh-s);transition:.15s}
-#book-search:focus{border-color:var(--indigo);box-shadow:0 0 0 3px var(--indigo-soft);outline:none}
-#book-search::placeholder{color:var(--muted-2)}
-.filter-scroll{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.filter-scroll::-webkit-scrollbar{display:none}
-.chip{flex:none;padding:7px 13px;border-radius:3px;border:1px solid var(--line-d);background:var(--surface);font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;transition:.14s;letter-spacing:.02em}
-.chip:hover{color:var(--ink);border-color:var(--muted-2)}
-.chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-.cat-meta{display:flex;align-items:center;justify-content:space-between;margin:14px 0 14px;flex-wrap:wrap;gap:8px}
-/* ページの最終更新日。データが変わった日を build/prerender-tops.mjs が入れる */
-.page-updated{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted-2)}
-.cat-count{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
-.cat-count b{color:var(--ink);font-family:var(--mono);font-size:14px}
-.sort-sel{border:1px solid var(--line-d);background:var(--surface);border-radius:4px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--ink);box-shadow:var(--sh-s)}
-.book-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.cat-grp{grid-column:1/-1;display:flex;align-items:baseline;gap:11px;margin:30px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--gc,var(--ink));font-family:var(--serif);font-weight:800;font-size:18px;color:var(--ink);letter-spacing:.06em}
-.cat-grp:first-child{margin-top:4px}
-.cat-grp small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
-.cat-sec{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin:16px 0 2px;font-weight:900;font-size:14px;color:var(--ink);letter-spacing:.04em}
-.cat-sec::before{content:"";width:16px;height:2.5px;background:var(--sc,var(--accent));align-self:center}
-.cat-sec small{font-family:var(--mono);font-size:10px;color:var(--muted-2);font-weight:600;letter-spacing:.08em}
-/* 静的に出しておくカードの続き。build/prerender-tops.mjs が最後に足す枠で、
-   JS が起動して全冊を描き直すと消える。JS を切った環境と検索エンジンだけが見る。 */
-.cat-more{grid-column:1/-1;margin-top:14px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent)}
-.cat-more p{font-size:12.5px;line-height:1.85;color:var(--ink-2)}
-.cat-more a{display:inline-block;margin-top:9px;font-size:13px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:3px}
-.cat-empty{grid-column:1/-1;padding:26px 4px;color:var(--muted);font-size:13px}
-@media(min-width:560px){.book-grid{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:820px){.book-grid{grid-template-columns:repeat(4,1fr)}}
-@media(min-width:1040px){.book-grid{grid-template-columns:repeat(5,1fr)}}
-.book-card{background:var(--surface);border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:.18s;box-shadow:var(--sh-s);display:flex;flex-direction:column;border-radius:6px}
-.book-card:hover{transform:translateY(-4px);box-shadow:var(--sh-m);border-color:var(--line-d)}
-.book-card__cover{padding:16px 14px 12px;display:flex;justify-content:center;background:linear-gradient(180deg,var(--surface-3),var(--surface-2));border-bottom:1px solid var(--line-2)}
-.book-card__body{padding:11px 13px 13px;display:flex;flex-direction:column;gap:7px;flex:1}
-.bc-name{font-weight:900;font-size:13px;line-height:1.35;letter-spacing:-.01em}
-.bc-pub{font-size:10px;color:var(--muted-2);font-family:var(--mono);letter-spacing:.04em}
-.bc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;align-items:center}
-.tag{font-size:9.5px;font-weight:700;padding:3px 7px;border-radius:3px;letter-spacing:.03em;font-family:var(--mono)}
-.tag-stage{color:#fff}
-.bc-diff{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);font-weight:600}
-.diff-dots{display:flex;gap:2.5px}
-.diff-dots i{width:5px;height:9px;border-radius:1.5px;background:var(--line)}
-/* 新刊（評価が未了）。docs/new-books-plan.md の 7 節 */
-.bc-prov{display:inline-block;background:var(--gold-soft);color:var(--gold);border-radius:2px;padding:1px 6px;font-size:10px;font-weight:700}
-.spec-prov{display:inline-block;background:var(--gold-soft);color:var(--gold);border-radius:2px;padding:2px 7px;font-size:11px;font-weight:700}
-.bc-hensachi{font-size:10.5px;color:var(--muted);font-weight:600}
-.bc-hensachi b{font-family:var(--mono);color:var(--ink-2);font-weight:600}
-
-/* ---------- Real cover component ---------- */
-.bcov{position:relative;width:100%;max-width:118px;aspect-ratio:.71;flex:none;background:repeating-linear-gradient(-45deg,var(--surface-3) 0 6px,var(--line-2) 6px 7px);border-radius:3px}
-.bcov.ok,.bcov.fb{background:none}
-.bcov img{width:100%;height:100%;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 7px 12px rgba(27,34,51,.22));border-radius:2px}
-.bcov img.hide{display:none}
-.bcov .bcov-fb{position:absolute;inset:0;display:none;flex-direction:column;padding:10px 9px 9px 12px;color:#fff;border-radius:3px 6px 6px 3px;overflow:hidden;box-shadow:0 7px 14px rgba(27,34,51,.22)}
-.bcov.fb .bcov-fb{display:flex}
-.bcov .bcov-fb .fb-spine{position:absolute;left:0;top:0;bottom:0;width:5px;background:rgba(0,0,0,.16);z-index:1}
-.bcov .bcov-fb::after{content:"";position:absolute;left:5px;top:0;bottom:0;width:1.5px;background:rgba(255,255,255,.2);z-index:1}
-/* 表紙の色を模した背景は明るいものも暗いものもあるため、文字が乗る下半分に
-   影を敷いてコントラストを確保する。白文字のときだけ効かせる。 */
-.bcov .bcov-fb:not(.light)::before{content:"";position:absolute;left:0;right:0;bottom:0;top:auto;width:auto;height:72%;background:linear-gradient(to bottom,rgba(20,24,34,0),rgba(20,24,34,.62))}
-.bcov .bcov-fb>*{position:relative;z-index:2}
-.fb-pub{font-size:6.5px;font-weight:700;letter-spacing:.08em;opacity:.85;font-family:var(--mono);text-transform:uppercase}
-.fb-title{font-family:var(--serif);font-weight:800;font-size:12.5px;line-height:1.25;margin-top:auto;letter-spacing:0;word-break:break-word;text-shadow:0 1px 3px rgba(0,0,0,.5)}
-.fb-title.long{font-size:10.5px}
-.fb-title.xlong{font-size:9px}
-.fb-band{margin-top:6px;font-family:var(--mono);font-size:6.5px;font-weight:600;letter-spacing:.04em;padding:2px 5px;border-radius:2px;align-self:flex-start;background:rgba(255,255,255,.22)}
-
-/* ================= MODAL ================= */
-.modal-overlay{position:fixed;inset:0;z-index:100;background:rgba(20,26,42,.55);backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center;padding:0}
-.modal-overlay.open{display:flex}
-@media(min-width:700px){.modal-overlay{align-items:center;padding:26px}}
-.modal{background:var(--surface);width:100%;max-width:640px;max-height:92vh;overflow-y:auto;border-radius:16px 16px 0 0;box-shadow:var(--sh-l);animation:slideUp .3s cubic-bezier(.2,.8,.2,1)}
-@media(min-width:700px){.modal{border-radius:10px;max-height:88vh}}
-@keyframes slideUp{from{transform:translateY(30px);opacity:.6}to{transform:none;opacity:1}}
-.modal__grab{width:38px;height:4px;background:var(--line);border-radius:3px;margin:9px auto 0}
-@media(min-width:700px){.modal__grab{display:none}}
-.modal__head{padding:20px 24px 20px;display:flex;gap:18px;align-items:flex-start;position:relative;background:linear-gradient(180deg,var(--surface-2),var(--surface));border-bottom:1px solid var(--line-2)}
-.modal__cover{flex:none}
-.modal__cover .bcov{width:104px}
-.modal__titles{flex:1;padding-top:4px;min-width:0}
-.modal__stage{display:inline-block;margin-bottom:8px}
-.modal__titles h3{font-family:var(--serif);font-weight:800;font-size:20px;line-height:1.3;letter-spacing:.01em}
-.modal__pub{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:6px;font-family:var(--mono);letter-spacing:.02em}
-.modal__official{font-size:10.5px;color:var(--muted-2);margin-top:3px;line-height:1.5}
-.modal__close{position:absolute;top:14px;right:16px;width:34px;height:34px;border-radius:50%;background:var(--surface-3);display:grid;place-items:center;color:var(--muted);transition:.15s}
-.modal__close:hover{background:var(--line);color:var(--ink)}
-.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-2);border-bottom:1px solid var(--line-2)}
-@media(min-width:520px){.spec-grid{grid-template-columns:repeat(4,1fr)}}
-.spec{background:var(--surface);padding:13px 16px}
-.spec dt{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.05em;margin-bottom:5px}
-.spec dd{font-family:var(--mono);font-weight:600;font-size:14.5px;color:var(--ink);line-height:1.3}
-.spec dd small{font-size:10.5px;color:var(--muted);font-weight:500}
-.diffbar{height:5px;background:var(--surface-3);border-radius:3px;overflow:hidden;margin-top:7px}
-.diffbar i{display:block;height:100%;border-radius:3px}
-.modal__body{padding:22px 24px 28px}
-.mb-block{margin-bottom:22px}
-.mb-block:last-child{margin-bottom:0}
-.mb-block h6{font-weight:900;font-size:12px;letter-spacing:.06em;color:var(--ink-2);margin-bottom:9px;display:flex;align-items:center;gap:8px}
-.mb-block h6::before{content:"";width:14px;height:1.5px;background:var(--accent)}
-.mb-desc{font-size:13.5px;color:var(--ink-2);line-height:1.85}
-.pc-cols{display:grid;grid-template-columns:1fr;gap:11px}
-@media(min-width:520px){.pc-cols{grid-template-columns:1fr 1fr}}
-.pc-box{border:1px solid var(--line);border-radius:6px;padding:13px 15px;font-size:12.5px;background:var(--surface-2)}
-.pc-box h6::before{display:none}
-.pc-box.pros h6{color:var(--ok)}
-.pc-box.cons h6{color:var(--accent-deep)}
-.pc-box ul{list-style:none;display:flex;flex-direction:column;gap:6px}
-.pc-box li{display:flex;gap:8px;line-height:1.55;color:var(--ink-2)}
-.pc-box li::before{content:"";width:5px;height:5px;border-radius:50%;margin-top:8px;flex:none}
-.pc-box.pros li::before{background:var(--ok)}
-.pc-box.cons li::before{background:var(--accent)}
-.uni-tags{display:flex;flex-wrap:wrap;gap:6px}
-.uni-tag{font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:3px;background:var(--indigo-soft);color:var(--indigo-deep)}
-.connect-row{display:flex;flex-direction:column;gap:8px}
-.connect-item{display:flex;align-items:center;gap:11px;padding:10px 13px;border:1px solid var(--line);border-radius:6px;cursor:pointer;transition:.14s;background:var(--surface)}
-.connect-item:hover{border-color:var(--indigo);background:var(--indigo-soft)}
-.connect-item .ci-dir{font-size:9.5px;font-family:var(--mono);font-weight:600;color:var(--muted-2);letter-spacing:.06em;width:44px;flex:none}
-.connect-item .ci-txt{flex:1;min-width:0}
-.connect-item .ci-txt b{font-size:12.5px;font-weight:800;display:block;line-height:1.35}
-.connect-item .ci-txt span{font-size:10.5px;color:var(--muted)}
-.connect-item svg{color:var(--muted-2);flex:none}
-.amz-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--indigo-deep);border:1px solid var(--line-d);padding:9px 15px;border-radius:4px;transition:.14s;text-decoration:none;background:var(--surface)}
-.amz-link:hover{border-color:var(--indigo);background:var(--indigo-soft)}
-
-/* ================= QUIZ ================= */
-.quiz-shell{max-width:620px;margin:0 auto;padding:26px 0 44px}
-.quiz-progress{display:flex;gap:5px;margin-bottom:28px}
-.qp-seg{flex:1;height:4px;border-radius:2px;background:var(--line);transition:.3s}
-.qp-seg.done{background:var(--indigo)}
-.qp-seg.cur{background:var(--accent)}
-.quiz-step{animation:fade .3s ease}
-.quiz-q{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.14em;margin-bottom:10px}
-.quiz-title{font-family:var(--serif);font-weight:800;font-size:23px;line-height:1.35;margin-bottom:6px;letter-spacing:.01em}
-.quiz-sub{font-size:13.5px;color:var(--muted);margin-bottom:22px}
-.opt-list{display:flex;flex-direction:column;gap:10px}
-.opt{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);transition:.15s;text-align:left;box-shadow:var(--sh-s);width:100%}
-.opt:hover{border-color:var(--indigo);transform:translateX(3px)}
-.opt.sel{border-color:var(--indigo);background:var(--indigo-soft)}
-/* 診断結果の書籍リストで、通し番号や科目バッジを入れる枠。
-   設問の選択肢からは汎用の線画アイコンを外したので、ここだけで使う。 */
-.opt__ic{width:42px;height:42px;border-radius:8px;flex:none;display:grid;place-items:center;background:var(--surface-3);color:var(--ink-2)}
-/* 診断結果に並ぶ 1 冊目の書影。図鑑・ルートと同じ .bcov を小さくして使う */
-.opt__cov{flex:none;width:38px}
-.opt__cov .bcov{width:38px}
-.opt__cov .fb-pub,.opt__cov .fb-band{display:none}
-.opt__cov .fb-title{font-size:6.5px;line-height:1.2}
-.opt__txt{min-width:0}
-.opt__txt b{font-weight:800;font-size:15px;display:block;line-height:1.35}
-.opt__txt span{font-size:12px;color:var(--muted);display:block;margin-top:2px}
-.opt__check{margin-left:auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--line-d);flex:none;display:grid;place-items:center;transition:.15s}
-.opt.sel .opt__check{background:var(--indigo);border-color:var(--indigo)}
-.opt__check svg{opacity:0;transition:.15s;color:#fff}
-.opt.sel .opt__check svg{opacity:1}
-.quiz-nav{display:flex;gap:12px;margin-top:26px}
-.quiz-nav .btn{flex:1;justify-content:center}
-.btn-back{background:var(--surface);border:1px solid var(--line);color:var(--muted);flex:0 0 auto;padding:13px 18px}
-.btn-back:hover{color:var(--ink)}
-.result-hero{background:linear-gradient(135deg,var(--ink),var(--indigo-deep));color:#fff;border-radius:10px;padding:26px 24px;margin-bottom:10px;box-shadow:var(--sh-m);position:relative;overflow:hidden}
-.result-hero::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;border:26px solid rgba(181,67,42,.25)}
-.result-hero .rh-label{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.16em;color:#E8B296;margin-bottom:10px}
-.result-hero h3{font-family:var(--serif);font-weight:800;font-size:24px;line-height:1.3;position:relative;z-index:1}
-.result-hero p{font-size:13px;opacity:.88;margin-top:9px;max-width:46ch;position:relative;z-index:1}
-
-
-/* ================= PR / LEGAL / GUIDE ================= */
-.pr-bar{background:var(--surface-3);border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);text-align:center;padding:6px 16px;letter-spacing:.02em}
-.pr-bar b{color:var(--ink-2);font-weight:700}
-.aff-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.aff-btn{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;padding:11px 16px;border-radius:5px;text-decoration:none;transition:.15s;border:1px solid transparent;letter-spacing:.02em}
-.aff-btn.amz{background:#FF9900;color:#111;box-shadow:var(--sh-s)}
-.aff-btn.amz:hover{background:#F08804;transform:translateY(-1px);box-shadow:var(--sh-m)}
-.aff-btn.rkt{background:#BF0000;color:#fff;box-shadow:var(--sh-s)}
-.aff-btn.rkt:hover{background:#9E0000;transform:translateY(-1px);box-shadow:var(--sh-m)}
-.aff-note{font-size:10.5px;color:var(--muted-2);margin-top:8px;line-height:1.6}
-/* guide */
-.guide-list{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
-@media(min-width:720px){.guide-list{grid-template-columns:1fr 1fr;align-items:start}}
-.g-card{background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--sh-s);overflow:hidden;transition:.16s}
-.g-card:hover{box-shadow:var(--sh-m);transform:translateY(-2px)}
-.g-card__head{width:100%;text-align:left;padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
-.g-num{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;background:var(--ink);width:30px;height:30px;border-radius:5px;display:grid;place-items:center;flex:none;margin-top:2px}
-.g-card.open .g-num{background:var(--accent)}
-.g-ttl{flex:1;min-width:0}
-.g-ttl h3{font-family:var(--serif);font-weight:800;font-size:16px;line-height:1.4;letter-spacing:.02em;margin-bottom:5px}
-.g-ttl span{font-size:11.5px;color:var(--muted);line-height:1.6;display:block}
-.g-card__head .chev{flex:none;color:var(--muted-2);transition:transform .2s;margin-top:6px}
-.g-card.open .chev{transform:rotate(180deg)}
-.g-body{display:none;padding:0 20px 20px;border-top:1px solid var(--line-2);margin-top:-2px}
-.g-card.open .g-body{display:block;animation:fade .25s ease}
-.g-body p{font-size:13.5px;line-height:1.95;color:var(--ink-2);margin-top:14px}
-.g-body h4{font-family:var(--serif);font-weight:800;font-size:14px;margin-top:18px;color:var(--ink);letter-spacing:.02em}
-.g-body ul{margin-top:10px;padding-left:2px;list-style:none;display:flex;flex-direction:column;gap:7px}
-.g-body li{font-size:13px;line-height:1.8;color:var(--ink-2);display:flex;gap:9px}
-.g-body li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:9px;flex:none}
-.g-body b{font-weight:800;color:var(--ink)}
-.g-body .g-quote{background:var(--surface-2);border-left:3px solid var(--indigo);padding:12px 15px;margin-top:14px;border-radius:0 5px 5px 0;font-size:12.5px;line-height:1.8;color:var(--ink-2)}
-/* footer legal */
-.site-foot{border-top:1px solid var(--line);margin-top:48px;padding:28px 0 40px}
-.foot-links{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;margin-bottom:16px}
-/* タップ領域を 24px 以上にする（WCAG のターゲットサイズ）。見た目は変えない */
-.foot-links button{font-size:12px;font-weight:700;color:var(--ink-2);transition:.14s;display:inline-flex;align-items:center;min-height:26px}
-.foot-links button:hover{color:var(--accent)}
-.foot-legal{font-size:10.5px;color:var(--muted);line-height:1.85;text-align:center;max-width:84ch;margin:0 auto}
-.foot-legal b{color:var(--ink-2);font-weight:700}
-@media(min-width:900px){.tabbar{display:none}}
-
-/* ================= ROUTE ================= */
-.route-shell{padding:22px 0 44px}
-/* --- mode tabs --- */
-.mode-tabs{display:flex;gap:0;border-bottom:1px solid var(--line-d);margin-bottom:18px}
-.mtab{padding:11px 18px;font-size:13.5px;font-weight:800;color:var(--muted);position:relative;letter-spacing:.02em;transition:.15s}
-.mtab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2.5px;background:var(--accent);transform:scaleX(0);transition:.18s}
-.mtab:hover{color:var(--ink)}
-.mtab.on{color:var(--ink)}
-.mtab.on::after{transform:scaleX(1)}
-/* --- university input --- */
-.uni-form{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
-@media(min-width:700px){.uni-form{grid-template-columns:1.3fr 1fr}}
-.uni-field label{font-size:11.5px;font-weight:800;color:var(--ink-2);margin-bottom:7px;display:block;letter-spacing:.04em}
-.uni-field label em{font-style:normal;font-weight:600;color:var(--muted-2);font-size:10.5px;margin-left:5px}
-.uni-wrap{position:relative}
-.uni-wrap input{width:100%;padding:13px 15px;border-radius:6px;border:1.5px solid var(--line-d);background:var(--surface);font-size:15px;color:var(--ink);box-shadow:var(--sh-s);transition:.15s}
-.uni-wrap input:focus{border-color:var(--indigo);box-shadow:0 0 0 3px var(--indigo-soft);outline:none}
-.uni-wrap input::placeholder{color:var(--muted-2);font-size:13.5px}
-.sug{position:absolute;left:0;right:0;top:calc(100% + 5px);background:var(--surface);border:1px solid var(--line-d);border-radius:8px;box-shadow:var(--sh-l);z-index:30;max-height:290px;overflow-y:auto;display:none}
-.sug.open{display:block}
-.sug button{display:flex;width:100%;align-items:center;gap:10px;padding:11px 14px;text-align:left;border-bottom:1px solid var(--line-2);transition:.12s}
-.sug button:last-child{border-bottom:none}
-.sug button:hover,.sug button.cur{background:var(--indigo-soft)}
-.sug b{font-size:13.5px;font-weight:800;flex:1;min-width:0}
-.sug .sug-ty{font-size:9.5px;font-family:var(--mono);color:var(--muted);border:1px solid var(--line);padding:2px 6px;border-radius:3px;flex:none}
-.sug .sug-h{font-family:var(--mono);font-size:11px;color:var(--indigo-deep);font-weight:600;flex:none}
-.sug-empty{padding:14px;font-size:12.5px;color:var(--muted);text-align:center}
-/* --- uni verdict card --- */
-.uni-card{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--tc,var(--indigo));border-radius:8px;padding:16px 18px;box-shadow:var(--sh-s);margin-bottom:6px}
-.uni-card__top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.uni-card__top h4{font-family:var(--serif);font-weight:800;font-size:18px;letter-spacing:.02em}
-.uni-card__top span{font-size:12px;color:var(--muted);font-weight:700}
-.uni-card__map{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;margin-bottom:10px}
-.uni-card__map .tag{background:var(--tc,var(--indigo));color:#fff;padding:4px 10px;border-radius:3px;font-size:11px}
-.uni-card__map .arw{color:var(--muted-2)}
-.uni-card__note{font-size:12.5px;color:var(--ink-2);line-height:1.75;padding-top:10px;border-top:1px solid var(--line-2)}
-.uni-card__note b{font-weight:800;color:var(--accent-deep)}
-/* 判定の補足（模試の物差しが違うときの注記と、数字の出所） */
-.v-note{font-size:11.5px;color:var(--muted);line-height:1.75;margin:8px 0 0}
-.v-note b{color:var(--ink-2);font-weight:800}
-.v-src{display:block;font-size:10px;color:var(--muted-2);line-height:1.4;margin-top:2px}
-
-/* 志望校モードの「文理・受験科目」確認（assets/js/bunri.js）。
-   学部名からの推定は候補として出すだけで、本人が選ぶまでルートを出さない */
-.bnr{margin-top:10px;padding:14px 15px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
-.bnr-lead{font-size:13px;font-weight:700;color:var(--ink);line-height:1.7;margin:0 0 10px}
-.bnr-opts{display:flex;flex-wrap:wrap;gap:8px}
-.bnr-opt{flex:1 1 160px;min-height:44px;display:flex;flex-direction:column;justify-content:center;gap:2px;
-  padding:9px 12px;border:1px solid var(--line);border-radius:3px;background:var(--bg);cursor:pointer;
-  font:inherit;color:var(--ink);text-align:left}
-.bnr-opt b{font-size:12.5px;font-weight:800}
-.bnr-opt span{font-size:11px;color:var(--muted);line-height:1.5}
-.bnr-opt .bnr-hint{font-style:normal;font-size:10px;font-weight:700;color:var(--muted-2);
-  border:1px solid var(--line);border-radius:999px;padding:1px 6px;margin-left:6px;display:inline-block}
-.bnr-opt:hover{border-color:var(--accent)}
-.bnr-opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.bnr-opt.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
-.bnr-opt.on b::before{content:"\2713 ";font-weight:900}
-.bnr-opt--unknown{flex:1 1 100%}
-.bnr-diff{margin-top:10px;padding:10px 12px;border-left:3px solid var(--line-2);background:var(--bg)}
-.bnr-diff p{font-size:12px;color:var(--ink-2);line-height:1.8;margin:0 0 6px}
-.bnr-diff p:last-child{margin-bottom:0}
-.bnr-note{font-size:11.5px;color:var(--muted);line-height:1.7;margin:10px 0 0}
-@media(max-width:420px){.bnr-opt{flex:1 1 100%}}
-
-/* --- study status --- */
-.status-panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;box-shadow:var(--sh-s);margin-bottom:24px}
-.done-picker{position:relative}
-.done-picker input{width:100%;padding:11px 14px;border-radius:6px;border:1.5px solid var(--line-d);background:var(--surface-2);font-size:14px;transition:.15s}
-.done-picker input:focus{border-color:var(--indigo);background:var(--surface);box-shadow:0 0 0 3px var(--indigo-soft);outline:none}
-.done-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.done-chip{display:inline-flex;align-items:center;gap:7px;background:var(--ok-soft);border:1px solid #C6DFCF;color:var(--ok);font-size:11.5px;font-weight:700;padding:5px 8px 5px 11px;border-radius:4px}
-.done-chip button{color:var(--ok);opacity:.6;display:grid;place-items:center;transition:.12s}
-.done-chip button:hover{opacity:1}
-.hen-row{display:flex;gap:8px}
-.hen-row select{flex:1;min-width:0;border:1.5px solid var(--line-d);background:var(--surface);border-radius:6px;padding:11px 8px;font-size:13px;font-weight:600;color:var(--ink)}
-.hen-row input{width:88px;flex:none;border:1.5px solid var(--line-d);background:var(--surface);border-radius:6px;padding:11px 10px;font-size:15px;font-family:var(--mono);font-weight:600;color:var(--ink);text-align:center}
-.hen-row input:focus,.hen-row select:focus{border-color:var(--indigo);outline:none;box-shadow:0 0 0 3px var(--indigo-soft)}
-.verdict{margin-top:16px;padding:14px 16px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;font-size:12.5px;line-height:1.75;color:var(--ink-2);display:none}
-.verdict.on{display:block}
-.verdict b{font-weight:800}
-.verdict .v-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:9px;padding-bottom:9px;border-bottom:1px solid var(--line-2)}
-.verdict .v-item dt{font-size:9.5px;color:var(--muted);font-weight:700;letter-spacing:.06em}
-.verdict .v-item dd{font-family:var(--mono);font-weight:600;font-size:17px;color:var(--ink);margin-top:2px}
-.verdict .v-item dd small{font-size:10.5px;color:var(--muted);font-weight:500}
-.gap-bar{height:7px;background:var(--surface-3);border-radius:4px;overflow:hidden;margin:4px 0 10px;position:relative}
-.gap-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--indigo),var(--accent));border-radius:4px;transition:width .5s}
-.route-picker{margin-bottom:20px}
-.rpick-label{font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:9px;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
-.rpick-label::before{content:"";width:14px;height:1.5px;background:var(--accent)}
-.rpick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-@media(min-width:760px){.rpick-grid{grid-template-columns:repeat(4,1fr)}}
-.rpick{display:flex;flex-direction:column;gap:4px;padding:12px 13px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);transition:.15s;text-align:left;box-shadow:var(--sh-s);position:relative;overflow:hidden}
-.rpick::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tc,var(--indigo));opacity:.35;transition:.15s}
-.rpick:hover{border-color:var(--tc,var(--indigo))}
-.rpick.sel{border-color:var(--tc,var(--indigo));background:#fff;box-shadow:var(--sh-m)}
-.rpick.sel::before{opacity:1}
-.rpick__no{font-family:var(--mono);font-size:9px;color:var(--muted-2);letter-spacing:.12em}
-.rpick b{font-weight:800;font-size:13.5px;line-height:1.3}
-.rpick span{font-size:10px;color:var(--muted);line-height:1.4}
-.opt-panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;box-shadow:var(--sh-s);margin-bottom:24px}
-.opt-panel__title{font-weight:900;font-size:14px;margin-bottom:2px;display:flex;align-items:center;gap:8px;letter-spacing:.02em}
-.opt-panel__title svg{width:17px;height:17px;color:var(--accent)}
-.opt-panel__sub{font-size:12px;color:var(--muted);margin-bottom:16px}
-.opt-fields{display:grid;grid-template-columns:1fr;gap:14px}
-/* グリッドの子は既定で min-content より狭くならない。中の <select> は最長の選択肢の幅を
-   持つため、狭い画面ではその幅が枠を押し広げて横にはみ出す（320px 幅で確認）。
-   min-width:0 で縮めるようにする。要素側の inline style で列を上書きしても効く。 */
-.opt-fields>*{min-width:0}
-/* 2 列で並べたい箇所に付ける。狭い画面では中身が枠を超えるので 1 列に落とす。 */
-.opt-fields.two{grid-template-columns:1fr}
-@media(min-width:560px){.opt-fields.two{grid-template-columns:1fr 1fr}}
-@media(min-width:760px){.opt-fields{grid-template-columns:repeat(3,1fr)}}
-.opt-field > label{font-size:11.5px;font-weight:700;color:var(--ink-2);margin-bottom:7px;display:block;letter-spacing:.03em}
-.seg-ctrl{display:flex;gap:4px;background:var(--surface-3);padding:4px;border-radius:7px}
-.seg-ctrl button{flex:1;padding:9px 4px;border-radius:5px;font-size:12px;font-weight:700;color:var(--muted);transition:.14s;white-space:nowrap}
-.seg-ctrl button.on{background:var(--surface);color:var(--ink);box-shadow:var(--sh-s)}
-.seg-ctrl.compact button{font-size:11px;padding:8px 2px}
-.route-summary{display:flex;gap:10px;flex-wrap:wrap;background:linear-gradient(125deg,var(--ink) 0%,var(--indigo-deep) 100%);color:#fff;border-radius:10px;padding:18px 20px;margin-bottom:8px;box-shadow:var(--sh-m);position:relative;overflow:hidden}
-.route-summary::after{content:"";position:absolute;right:-30px;bottom:-60px;width:150px;height:150px;border-radius:50%;border:22px solid rgba(181,67,42,.22)}
-.rs-item{flex:1;min-width:72px;position:relative;z-index:1}
-.rs-item dt{font-size:9.5px;color:rgba(255,255,255,.62);font-weight:700;letter-spacing:.08em}
-.rs-item dd{font-family:var(--mono);font-weight:600;font-size:20px;margin-top:4px;line-height:1}
-.rs-item dd small{font-size:10.5px;opacity:.7;font-weight:500}
-.rs-goal{width:100%;padding-top:13px;margin-top:5px;border-top:1px solid rgba(255,255,255,.15);display:flex;align-items:center;gap:9px;font-size:12.5px;position:relative;z-index:1}
-.rs-goal svg{color:#E8B296;flex:none}
-.rs-goal b{font-weight:800}
-.climb{position:relative;padding:30px 0 18px;margin-top:6px}
-.climb__rail{position:absolute;left:33px;top:0;bottom:0;width:2px;background:var(--line-d)}
-@media(min-width:640px){.climb__rail{left:41px}}
-.climb__fill{position:absolute;left:33px;top:0;width:2px;background:linear-gradient(var(--accent),var(--indigo));transition:height .6s ease}
-@media(min-width:640px){.climb__fill{left:41px}}
-.climb-node{position:relative;display:flex;gap:15px;padding-bottom:20px;align-items:flex-start}
-@media(min-width:640px){.climb-node{gap:22px}}
-.cn-marker{width:68px;flex:none;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2}
-@media(min-width:640px){.cn-marker{width:84px}}
-.cn-step{width:36px;height:36px;border-radius:8px;background:var(--surface);border:2px solid var(--line-d);display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:14px;color:var(--muted);box-shadow:var(--sh-s);transition:.2s}
-.climb-node.active .cn-step{background:var(--ink);border-color:var(--ink);color:#fff}
-.climb-node.para .cn-step{border-style:dashed;background:var(--surface-2);font-size:11px}
-.climb-node.skip .cn-step{background:var(--surface-2);border-style:dashed;color:var(--muted-2)}
-.cn-lvl{font-family:var(--mono);font-size:8.5px;font-weight:600;color:var(--muted-2);margin-top:6px;text-align:center;line-height:1.3;letter-spacing:.02em}
-.cn-card{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:13px 14px;box-shadow:var(--sh-s);cursor:pointer;transition:.16s;display:flex;gap:13px;align-items:flex-start;position:relative;min-width:0}
-.cn-card:hover{transform:translateX(3px);box-shadow:var(--sh-m)}
-.climb-node.skip .cn-card{opacity:.58}
-.climb-node.done .cn-card{opacity:.62;background:var(--surface-2)}
-.climb-node.done .cn-step{background:var(--ok);border-color:var(--ok);color:#fff}
-.climb-node.start .cn-card{border-color:var(--accent);box-shadow:0 0 0 3px rgba(181,67,42,.1),var(--sh-m)}
-.climb-node.start .cn-step{background:var(--accent);border-color:var(--accent);color:#fff}
-.node-badge{position:absolute;top:11px;right:11px;font-size:8.5px;font-weight:700;font-family:var(--mono);padding:3px 7px;border-radius:3px;letter-spacing:.04em}
-.node-badge.done{color:#fff;background:var(--ok)}
-.node-badge.start{color:#fff;background:var(--accent)}
-.cn-card__cover{flex:none}
-.cn-card__cover .bcov{width:52px}
-.cn-card__cover .fb-title{font-size:7.5px}
-.cn-card__cover .fb-pub,.cn-card__cover .fb-band{display:none}
-.cn-info{flex:1;min-width:0}
-.cn-info__role{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.06em;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;color:#fff}
-.cn-info h3{font-weight:900;font-size:14px;line-height:1.3;margin-bottom:4px;letter-spacing:-.01em}
-.cn-info__note{font-size:11.5px;color:var(--muted);line-height:1.55}
-.cn-info__alt{font-size:10.5px;color:var(--indigo-deep);margin-top:7px;line-height:1.5}
-.cn-info__alt b{font-weight:700}
-.cn-info__alt button{color:var(--indigo-deep);text-decoration:underline;text-underline-offset:2px;font-size:10.5px;font-weight:600;padding:0 1px}
-.cn-info__alt button:hover{color:var(--accent-deep)}
-.cn-info__meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
-.cn-info__meta span{font-size:10.5px;color:var(--ink-2);font-weight:600;display:flex;align-items:center;gap:4px}
-.cn-info__meta span b{font-family:var(--mono);font-weight:600}
-.cn-info__meta svg{color:var(--muted-2)}
-.skip-badge{position:absolute;top:11px;right:11px;font-size:8.5px;font-weight:700;font-family:var(--mono);color:var(--muted);background:var(--surface-2);padding:3px 7px;border-radius:3px;border:1px solid var(--line)}
-.para-head{position:relative;display:flex;gap:15px;align-items:center;padding:4px 0 16px;z-index:2}
-@media(min-width:640px){.para-head{gap:22px}}
-.para-head__spacer{width:68px;flex:none}
-@media(min-width:640px){.para-head__spacer{width:84px}}
-.para-head b{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.08em;background:var(--paper);padding-right:10px}
-.climb-goal{position:relative;display:flex;gap:15px;align-items:center;padding-top:6px}
-@media(min-width:640px){.climb-goal{gap:22px}}
-.cg-marker{width:68px;flex:none;display:flex;justify-content:center;position:relative;z-index:2}
-@media(min-width:640px){.cg-marker{width:84px}}
-.cg-flag{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;box-shadow:0 6px 16px rgba(181,67,42,.4),0 0 0 5px rgba(181,67,42,.15)}
-.cg-flag svg{color:#fff}
-.cg-card{flex:1;background:linear-gradient(125deg,var(--accent-deep),var(--accent));color:#fff;border-radius:8px;padding:16px 18px;box-shadow:var(--sh-m)}
-.cg-card h4{font-family:var(--serif);font-weight:800;font-size:16px;margin-bottom:3px;letter-spacing:.02em}
-.cg-card p{font-size:12px;opacity:.92}
-.route-empty{text-align:center;padding:56px 20px;color:var(--muted)}
-.route-empty svg{color:var(--line-d);margin-bottom:14px}
-.route-empty p{font-size:13.5px}
-.note-card{display:flex;gap:11px;background:var(--gold-soft);border:1px solid #E5D9B8;border-radius:8px;padding:13px 16px;margin-top:20px}
-.note-card.info{background:var(--indigo-soft);border-color:#CDD8EC}
-.note-card svg{flex:none;margin-top:2px;color:var(--gold)}
-.note-card.info svg{color:var(--indigo)}
-.note-card p{font-size:12px;line-height:1.65;color:var(--ink-2)}
-.note-card p b{font-weight:800}
-.disclaimer{margin:40px 0 20px;padding:16px 18px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;font-size:11px;color:var(--muted);line-height:1.7}
-.disclaimer b{color:var(--ink-2)}
-.app-foot{text-align:center;padding:26px 16px 36px;color:var(--muted-2);font-size:10.5px;line-height:1.8}
-.app-foot span{font-family:var(--mono);letter-spacing:.06em}
-
-/* ================= SUBJECT BAR (国語版追加) ================= */
-.subj-bar{position:sticky;top:63px;z-index:35;background:var(--paper);padding:10px 0 12px;margin:0 -18px 8px;padding-left:18px;padding-right:18px;border-bottom:1px solid var(--line)}
-.subj-bar__label{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.subj-bar__label::before{content:"";width:14px;height:1.5px;background:var(--accent)}
-.subj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.sbtn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 6px;border:2px solid var(--line-d);border-radius:8px;background:var(--surface);font-weight:900;font-size:14px;letter-spacing:.04em;color:var(--ink-2);transition:.15s;box-shadow:var(--sh-s);position:relative;overflow:hidden}
-.sbtn small{font-size:9.5px;font-weight:600;color:var(--muted-2);font-family:var(--mono);letter-spacing:.06em}
-.sbtn::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--sc,var(--ink));opacity:.5}
-.sbtn:hover{border-color:var(--sc,var(--ink));transform:translateY(-1px)}
-.sbtn.on{background:var(--sc,var(--ink));border-color:var(--sc,var(--ink));color:#fff;box-shadow:var(--sh-m)}
-.sbtn.on small{color:rgba(255,255,255,.75)}
-.sbtn.on::before{opacity:0}
-@media(min-width:700px){.sbtn{font-size:15.5px;padding:14px 8px;flex-direction:row;gap:9px}.sbtn small{font-size:10px}}
-.subj-head{position:relative;display:flex;gap:15px;align-items:center;padding:18px 0 14px;z-index:2}
-@media(min-width:640px){.subj-head{gap:22px}}
-.subj-head__spacer{width:68px;flex:none;display:flex;justify-content:center}
-@media(min-width:640px){.subj-head__spacer{width:84px}}
-.subj-head__mark{width:40px;height:40px;border-radius:10px;background:var(--sc,var(--ink));color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:18px;box-shadow:var(--sh-m)}
-.subj-head__ttl{flex:1;min-width:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.subj-head__ttl h4{font-family:var(--serif);font-weight:800;font-size:18px;letter-spacing:.04em;color:var(--sc,var(--ink))}
-.subj-head__ttl span{font-size:11.5px;color:var(--muted);font-weight:700}
-.subj-head__ttl .sh-meta{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);margin-left:auto}
-.subj-note{flex:1;margin:0 0 14px;padding:10px 13px;border-radius:6px;background:var(--gold-soft);border:1px solid #E5D9B8;font-size:12px;line-height:1.6;color:var(--ink-2)}
-.subj-note.info{background:var(--indigo-soft);border-color:#CDD8EC}
-.subj-note b{font-weight:800}
-.subj-note-row{position:relative;display:flex;gap:15px;z-index:2}
-@media(min-width:640px){.subj-note-row{gap:22px}}
-.uni-card__subj{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.uni-card__subj span{font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:3px;border:1px solid var(--line-d);color:var(--muted);font-family:var(--mono);letter-spacing:.04em}
-.uni-card__subj span.req{background:var(--ok-soft);border-color:#C6DFCF;color:var(--ok)}
-.uni-card__subj span.no{background:var(--surface-3);color:var(--muted-2);text-decoration:line-through}
-.uni-card__subj span.some{background:var(--gold-soft);border-color:#E5D9B8;color:var(--gold)}
-
-/* ================= 社会版:6科目セレクタ ================= */
-.subj-bar__label{justify-content:flex-start}
-.subj-bar__count{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:.06em}
-.subj-bar__hint{margin-top:9px;font-size:11.5px;line-height:1.65;color:var(--muted)}
-.subj-bar__hint b{color:var(--ink-2);font-weight:800}
-.subj-grid{grid-template-columns:repeat(3,1fr)}
-@media(min-width:700px){.subj-grid{grid-template-columns:repeat(6,1fr)}}
-.sbtn{padding:11px 4px;font-size:13px}
-.sbtn small{font-size:8.5px;letter-spacing:.04em}
-@media(min-width:700px){.sbtn{font-size:14px;padding:12px 4px;flex-direction:column;gap:3px}.sbtn small{font-size:8.5px}}
-.sbtn.na{opacity:.5}
-.sbtn.na small{color:var(--accent)}
-.sbtn.na.on{opacity:1}
-.sbtn.na::after{content:"";position:absolute;right:6px;top:6px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
-.uni-card__subj span{font-size:10px;padding:4px 8px}
-.spec-grid{grid-template-columns:repeat(2,1fr)}
-@media(min-width:520px){.spec-grid{grid-template-columns:repeat(4,1fr)}}
-
-/* ---------- Sitewide subject bar (portal cross-links) ---------- */
-.xbar{background:var(--ink);color:#E8EAF0}
-.xbar__in{max-width:1140px;margin:0 auto;padding:0 14px;display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none}
-.xbar__in::-webkit-scrollbar{display:none}
-.xbar__brand{display:flex;align-items:center;gap:6px;font-family:var(--serif);font-weight:800;font-size:12px;letter-spacing:.08em;white-space:nowrap;padding:8px 12px 8px 0;color:#fff;border-right:1px solid rgba(255,255,255,.14);margin-right:6px;transition:.15s}
-.xbar__brand:hover{color:#F0C8BC}
-.xbar__brand svg{width:12px;height:12px;flex:none}
-.xbar a.xl{font-size:11.5px;font-weight:700;padding:8px 11px;white-space:nowrap;color:#B7BDCC;transition:.15s;position:relative;letter-spacing:.03em;text-decoration:none}
-.xbar a.xl:hover{color:#fff}
-.xbar a.xl[aria-current="page"]{color:#fff}
-.xbar a.xl[aria-current="page"]::after{content:"";position:absolute;left:11px;right:11px;bottom:4px;height:2px;background:var(--accent)}
-
-/* ---------- Footer: other subjects ---------- */
-.foot-subjects{max-width:1140px;margin:0 auto 22px;padding:0 4px}
-.foot-subjects__t{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--muted-2);margin-bottom:11px;text-align:center;text-transform:uppercase}
-.foot-subjects__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-@media(min-width:700px){.foot-subjects__list{grid-template-columns:repeat(4,minmax(0,1fr))}}
-/* 科目が増減しても崩れないよう、列数ではなく 1 列の下限幅で折り返させる */
-@media(min-width:1000px){.foot-subjects__list{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}}
-.foot-subjects a{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);padding:10px 10px;transition:.16s;text-decoration:none;box-shadow:var(--sh-s)}
-.foot-subjects a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--line-d)}
-.foot-subjects a[aria-current="page"]{background:var(--surface-3);box-shadow:none;pointer-events:none}
-.fs-mark{width:26px;height:26px;flex:none;display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:13px;color:#fff;background:var(--fsc);border-radius:3px}
-.fs-txt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
-/* 「小論文ルート大全」（8 字）が 1 行に収まる字幅。ここを広げると折り返す */
-.fs-txt b{font-size:11.5px;font-weight:700;letter-spacing:0;color:var(--ink);white-space:nowrap;overflow-wrap:anywhere}@media(max-width:420px){.fs-txt b{white-space:normal}}
-.fs-txt span{font-family:var(--mono);font-size:9px;color:var(--muted-2);letter-spacing:.04em;margin-top:2px}
-
-/* ---------- 参考書の詳細ページへの導線 ---------- */
-.foot-links a{font-size:12px;font-weight:700;color:var(--ink-2);transition:.14s;text-decoration:none;display:inline-flex;align-items:center;min-height:26px}
-.foot-links a:hover{color:var(--accent)}
-.detail-btn{display:flex;align-items:center;gap:11px;background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--indigo);padding:13px 15px;font-size:13px;font-weight:700;color:var(--ink);transition:.16s;text-decoration:none;line-height:1.5}
-.detail-btn:hover{background:var(--indigo-soft);border-color:var(--indigo);border-left-color:var(--indigo)}
-.detail-btn svg{width:15px;height:15px;flex:none;margin-left:auto;color:var(--indigo);transition:transform .16s}
-.detail-btn:hover svg{transform:translateX(3px)}
-.detail-btn small{color:var(--muted);font-weight:600;font-size:11.5px;display:block;margin-top:3px;line-height:1.6}
-.cat-index{display:flex;align-items:center;gap:13px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);padding:15px 17px;margin-top:18px;box-shadow:var(--sh-s);transition:.16s;text-decoration:none}
-.cat-index:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:var(--line-d);border-left-color:var(--accent)}
-.cat-index__t{min-width:0}
-.cat-index__t b{display:block;font-size:13.5px;font-weight:700;letter-spacing:.02em;color:var(--ink)}
-.cat-index__t small{display:block;font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.6;font-weight:600}
-.cat-index svg{width:16px;height:16px;flex:none;margin-left:auto;color:var(--accent);transition:transform .16s}
-.cat-index:hover svg{transform:translateX(3px)}
-
-/* ============================================================
-   アクセシビリティの下敷き
-
-   - フォーカスは CSS で消さない。:focus-visible を必ず見えるようにする。
-   - タップ対象は 44x44 CSS px 以上（WCAG 2.2 の Target Size (Minimum)）。
-   - 320px 幅で横スクロールを起こさない。広い中身は自分の枠の中だけで
-     横に流す。ページ全体が横に動くと、ズームした人が本文を追えなくなる。
-   - 動きを減らす設定では不要なアニメーションを止める。
-   ============================================================ */
-
-/* box-shadow のリングだけに頼らず、キーボード操作では必ず輪郭を出す */
-input:focus-visible, select:focus-visible, textarea:focus-visible,
-button:focus-visible, a:focus-visible, [tabindex]:focus-visible,
-[role="button"]:focus-visible, [role="option"]:focus-visible {
-  outline: 2.5px solid var(--indigo, #24427C);
-  outline-offset: 2px;
-}
-
-/* 押せるものは 44px 以上。アイコンだけのボタンが小さくなりやすい */
-.tabbar button, .tabbar a,
-.nav-desktop button, .nav-desktop a,
-.seg-ctrl button,
-.sug [role="option"],
-.opt-list .opt {
-  min-height: 44px;
-}
-.sug [role="option"] { display: flex; align-items: center; gap: 8px; }
-
-/* 320px でページ全体が横に動かないようにする。
-   **overflow-x:hidden で隠さない。** 隠すと原因が残ったまま検査も素通りする。
-   はみ出しやすいのは長い書名・URL・等幅の数字なので、折り返しを許す */
-body { overflow-wrap: anywhere; }
-.mono, code { overflow-wrap: anywhere; }
-img, svg, video, iframe { max-width: 100%; }
-
-/* 表は枠の中だけで横に流す。ページごと動かさない */
-.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.table-scroll > table { min-width: max-content; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-/* rt-search:start — build/apply-search-style.mjs が assets/js/search.js の STYLE から書き込む。手で編集しない */
-:root{--rt-search-css:1}
-.app-header__in{flex-wrap:wrap}
-.rt-search{position:relative;flex:1 1 100%;order:9;min-width:0}
-@media(min-width:1100px){.rt-search{flex:0 1 250px;order:0;min-width:170px}}
-.rt-search__in{display:flex;align-items:center;gap:8px;height:38px;padding:0 12px;border:1px solid var(--line-d,#D8D4C8);border-radius:6px;background:var(--surface,#fff);transition:.15s}
-.rt-search__in:focus-within{border-color:var(--sc,#24427C);box-shadow:0 0 0 3px rgba(36,66,124,.09)}
-.rt-search__in>svg{flex:none;color:var(--muted-2,#8B8578)}
-.rt-search input{flex:1;min-width:0;border:0;outline:0;background:none;font-family:inherit;font-size:13px;color:var(--ink,#22242B);-webkit-appearance:none;appearance:none}
-.rt-search input::-webkit-search-cancel-button{-webkit-appearance:none}
-.rt-search input::placeholder{color:var(--muted-2,#8B8578)}
-.rt-search__pop{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:90;background:var(--surface,#fff);border:1px solid var(--line-d,#D8D4C8);border-radius:6px;box-shadow:0 18px 40px rgba(30,28,24,.16);max-height:min(64vh,430px);overflow-y:auto;overscroll-behavior:contain}
-.rt-search__pop.open{display:block}
-@media(min-width:1100px){.rt-search__pop{width:380px}}
-.rt-search__hit{display:flex;align-items:flex-start;gap:10px;width:100%;padding:10px 13px;border:0;border-top:1px solid var(--line-2,#EDEAE1);background:none;text-align:left;font-family:inherit;cursor:pointer}
-.rt-search__hit:first-child{border-top:0}
-.rt-search__hit.cur,.rt-search__hit:hover{background:var(--surface-2,#F6F4EF)}
-.rt-search__mark{flex:none;width:22px;height:22px;margin-top:1px;border-radius:3px;color:#fff;background:var(--mc,#22242B);display:grid;place-items:center;font-size:11px;font-weight:700}
-.rt-search__txt{min-width:0;flex:1}
-.rt-search__txt b{display:block;font-size:13px;font-weight:700;line-height:1.45;color:var(--ink,#22242B)}
-.rt-search__txt span{display:block;margin-top:2px;font-size:10.5px;color:var(--muted,#6F6A5E);letter-spacing:.02em}
-.rt-search__note{padding:13px;font-size:12px;line-height:1.6;color:var(--muted,#6F6A5E)}
-.rt-search__note b{font-weight:700;color:var(--ink-2,#3A3D46)}
-.rt-search__more{display:flex;flex-direction:column;gap:2px;padding:12px 14px;min-height:44px;border-top:1px solid var(--line-2,#EDEAE1);font-size:13px;font-weight:700;text-decoration:none;color:inherit}
-.rt-search__more span{font-weight:400;font-size:11.5px;color:var(--muted-2,#8B8578)}
-.rt-search__more:hover{background:var(--surface-2,#F6F4EF)}
-.rt-search__more:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
-/* rt-search:end */
-</style>
+<link rel="stylesheet" href="/assets/css/subject-social.css?v=dbcc0f12f0">
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
 <!-- Google アナリティクス 4 -->
@@ -1252,7 +538,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>社会で最初にやるべきは、勉強ではなく「科目選択」</h3><span>志望校で使えない科目を選ぶと、覚えた知識がまるごと無駄になります</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>英語や数学と違い、社会には<b>「どの科目で受けるか」という分岐</b>が最初にあります。そしてこの選択は、勉強法よりもはるかに大きく合否を左右します。理由は単純で、<b>志望校で選べない科目を選んでしまうと、その勉強が丸ごと使えなくなる</b>からです。</p><h4>まず確認すべき3つ</h4><ul><li><b>その大学・学部で選択できる科目は何か</b> — 私大は「日本史・世界史から1」しか選べない学部が非常に多く、地理・公民は使えないことが珍しくありません。慶應義塾大学は文・法・経済(B方式)で日本史・世界史のみ(商学部のみ地理が選択可)です</li><li><b>必要な科目数は何科目か</b> — 国公立文系は共通テストで2科目必要なことがあり、東大文科は二次でも地歴2科目。私大文系と理系は基本1科目です</li><li><b>共通テストだけか、二次でも使うか</b> — 二次で使うなら論述対策まで必要ですが、共通テストだけなら資料読解とマーク形式の対策で足ります。到達点がまったく違います</li></ul><h4>選び方の目安</h4><p>暗記が苦にならず、範囲を狭く深く詰めたいなら<b>日本史</b>。国ごとの縦の流れと時代ごとの横の繋がりを整理するのが得意で、論述で差をつけたいなら<b>世界史</b>。暗記量を最小にして他教科に時間を回したいなら<b>地理</b>か<b>公民</b>。ただし地理・公民は使える大学が限られるので、必ず①の確認が先です。</p><div class="g-quote">併願校まで含めて考えてください。第一志望で地理が使えても、併願する私大で地理が使えなければ、その大学は受けられなくなります。受験校リストを先に作り、全校で使える科目を選ぶのが安全です。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/01/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g1">
       <button class="g-card__head" onclick="toggleGuide(1)" aria-expanded="false">
@@ -1260,7 +547,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>通史が先、用語は並行。順番を逆にすると伸びません</h3><span>一問一答から始めた人が、いつまでも点が繋がらない理由</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>社会でもっとも多い失敗が、<b>いきなり一問一答や用語集から始めること</b>です。用語は覚えられても、入試で問われるのは「なぜそれが起きたか」「その次に何が起きたか」という繋がりなので、点で覚えた知識は得点になりません。</p><h4>正しい順序</h4><ul><li><b>①通史講義で流れを作る</b> — 実況中継・ナビゲーター・「なぜ」と「流れ」など、講師が因果関係を説明してくれる本を一気に通す。ここでは覚えようとしないこと。理解して先に進む</li><li><b>②教科書で言葉を固める</b> — 講義で理解した内容を、入試の出題基準である教科書の文章で確認する。論述の答案語彙もここから作る</li><li><b>③問題集で確認する</b> — 通史が一周してから演習に入る。ここで初めて「覚えていない用語」が可視化される</li><li><b>並行:用語集・一問一答・図説</b> — ①〜③のあいだ、毎日15〜20分ずつ回し続ける</li></ul><h4>「一周」を早く終える</h4><p>通史の一周は、完璧を目指さず<b>1〜2か月で終える</b>のが理想です。1周目で全部覚えようとして古代で止まり、近現代に手が回らないまま本番を迎える受験生が毎年大量にいます。近現代は配点が最も大きい分野なので、これは致命的です。</p><div class="g-quote">目安として、通史講義は「2周目に入る前に最後まで到達する」。1周目は理解7割・記憶3割でよく、記憶は2周目以降と並行枠の一問一答が担当します。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/02/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g2">
       <button class="g-card__head" onclick="toggleGuide(2)" aria-expanded="false">
@@ -1268,7 +556,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>一問一答は「使いどころ」を間違えなければ最強</h3><span>最初の1冊にすると害になり、通史のあとに使うと武器になります</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>東進の一問一答や山川の一問一答は、社会でもっとも売れている教材であり、同時にもっとも誤用されている教材でもあります。<b>単体で使うと点が繋がらず、通史と併走させると異常な効率を発揮する</b>という、使い方依存の道具です。</p><h4>正しい使い方</h4><ul><li><b>講義で進んだ範囲だけを、その日のうちに回す</b> — 「今日は鎌倉幕府の成立まで進んだから、その章の一問一答を回す」。これで理解と記憶が同時に定着します</li><li><b>星(頻出度)で絞る</b> — 東進の完全版は難関私大用の難語まで入っています。共通テスト・日東駒専志望が星1まで手を出すのは時間の浪費です。志望校レベルに応じて範囲を切ること</li><li><b>逆引きもする</b> — 答え側(用語)を見て説明を言えるかを試す。入試は用語を答えさせるだけでなく、用語の内容を問うてくるからです</li></ul><h4>やってはいけない使い方</h4><p>通史をやらずに一問一答から始める、全範囲を最初から星1まで覚えようとする、赤シートで隠して「見たことがある」だけで先に進む。この3つは典型的な失敗パターンです。</p><div class="g-quote">一問一答は「覚えるための本」ではなく「覚えたかを確認する本」です。インプットは講義と教科書、確認が一問一答、と役割を分けて考えてください。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/03/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g3">
       <button class="g-card__head" onclick="toggleGuide(3)" aria-expanded="false">
@@ -1276,7 +565,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>図説・資料集を持っていない受験生は、毎年ここで落とす</h3><span>文化史の写真、統計、地図。文字だけでは絶対に解けない問題があります</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>『詳説日本史図録』『世界史図録タペストリー』『新詳地理資料COMPLETE』といった図説・資料集は、多くの受験生が学校で配られながら机の奥で眠らせています。しかし入試には、<b>図版・地図・統計を見ていないと物理的に答えられない問題</b>が必ず出ます。</p><h4>図説が必要になる場面</h4><ul><li><b>文化史の写真問題</b> — 仏像・絵画・建築の写真を見て名称や時代を答える。日本史・世界史の私大では定番で、教科書の小さな図版だけでは足りません</li><li><b>歴史地図</b> — 領土の変遷、遠征のルート、条約による国境線。世界史はとくに地図問題の比重が高い</li><li><b>統計・グラフ</b> — 地理はもちろん、共通テストの歴史でもグラフ読解が増えています</li><li><b>共通テストの資料問題</b> — 新課程の共通テストは初見資料の読み取りが中心です。日頃から資料に触れているかどうかが処理速度の差になります</li></ul><h4>使い方</h4><p>通読するものではありません。<b>講義や問題演習で出てきた語を、その都度図説で引く</b>のが正しい使い方です。「桓武天皇」が出てきたら平安京の地図を見る、「産業革命」が出てきたら年表と分布図を見る。この習慣が半年続くと、資料問題が別物に見えるようになります。</p></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/04/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g4">
       <button class="g-card__head" onclick="toggleGuide(4)" aria-expanded="false">
@@ -1284,7 +574,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>論述は「知識」ではなく「型」で書く</h3><span>東大600字も一橋400字も、まず設問文の分解から始まります</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>国公立二次や一橋・東大の論述で「知識はあるのに書けない」という受験生は非常に多い。原因は知識量ではなく、<b>答案の組み立て方を練習していない</b>ことです。</p><h4>論述答案の作り方</h4><ul><li><b>①設問を分解する</b> — 「〜の背景を、A・Bの語を用いて説明せよ」なら、聞かれているのは背景(原因)であって経過ではありません。指定語句は<b>答案の骨組みの指示</b>であり、必ず全部使い、使う順序も自分で設計します</li><li><b>②骨組みをメモする</b> — いきなり書き始めない。要素を箇条書きで並べ、因果の順に並べ替えてから文章化します。ここに全体の3分の1の時間を使って構いません</li><li><b>③字数に合わせて要素数を決める</b> — 目安は100字あたり要素2〜3個。600字なら12〜15要素。字数から逆算すると「どこまで詳しく書くか」が決まります</li><li><b>④採点基準で自己採点する</b> — 模範解答と見比べて「似ているか」ではなく、<b>要素が入っているか</b>で採点します</li></ul><h4>添削は必ず受ける</h4><p>論述は自己採点に限界があります。学校や塾の先生に週1〜2題持っていってください。<b>第三者の採点を受けた答案の枚数</b>が、二次の得点をほぼ決めます。</p><div class="g-quote">大学別の字数感覚は早めに掴んでください。東大日本史は1行30字×6行程度の設問が並び、一橋は400字×3題、京大は300字級。同じ「論述」でも要求される情報密度がまったく違います。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/05/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g5">
       <button class="g-card__head" onclick="toggleGuide(5)" aria-expanded="false">
@@ -1292,7 +583,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>共通テストの社会は「暗記テスト」ではなくなった</h3><span>初見の資料を読ませる問題が主役。知識だけでは8割で止まります</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>2025年入試からの新課程で、共通テストの地歴公民は「歴史総合,日本史探究」「歴史総合,世界史探究」「地理総合,地理探究」「公共,倫理」「公共,政治・経済」という科目構成になりました。形式面での最大の特徴は、<b>初見の資料・史料・グラフ・会話文を読ませる問題が中心になった</b>ことです。</p><h4>求められる力</h4><ul><li><b>資料読解</b> — 知らない史料でも、リード文と設問から状況を推定して答える。知識は判断材料であって答えそのものではありません</li><li><b>年代・順序の感覚</b> — 年号そのものより「どちらが先か」「同時期に何が起きていたか」。日本史と世界史の同時代把握(歴史総合分野)も問われます</li><li><b>処理速度</b> — 資料が長く、時間が足りなくなる受験生が多い。時間を計った演習が必須です</li></ul><h4>対策の順序</h4><p>①通史と用語の土台をつくる → ②共テ対策の講義系(きめる!・面白いほど・集中講義)で設問形式と解法を学ぶ → ③過去問・実戦問題集(黒本・青本)で時間を計って通し演習。③は秋以降、<b>週1セット</b>を目安に。</p><div class="g-quote">「知識は入っているのに7割で止まる」人は、演習不足ではなく<b>資料の読み方</b>の問題であることがほとんどです。間違えた問題を、知識不足なのか読解ミスなのかで分類してみてください。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/06/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g6">
       <button class="g-card__head" onclick="toggleGuide(6)" aria-expanded="false">
@@ -1300,7 +592,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>近現代・戦後史を、必ず間に合わせる</h3><span>配点が最も大きいのに、最も手薄になる分野です</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>日本史・世界史ともに、<b>近現代の配点は全体の3〜4割</b>を占めます。それにもかかわらず、通史学習の順番が古代からであるために、多くの受験生が近現代を薄いまま本番を迎えます。これは社会で最も再現性の高い失点パターンです。</p><h4>なぜ手薄になるのか</h4><ul><li>古代を丁寧にやりすぎて時間切れになる</li><li>学校の授業が3学期になっても戦後まで届かない</li><li>用語が抽象的(条約・政党・経済政策)で覚えにくく後回しにされる</li></ul><h4>対策</h4><p><b>通史の1周目は前半を速く、後半を厚く</b>配分してください。古代・中世は理解重視で流し、近世以降でペースを落とす。講義系が巻分かれしているシリーズなら、近現代の巻を先に読んでしまうのも有効です。共通テストでも私大でも、戦後史(冷戦・高度経済成長・55年体制・国際関係)は必出だと考えてください。</p><div class="g-quote">夏の終わりまでに「近現代を1周した状態」を作ること。ここを守れれば、秋以降の演習が一気に機能し始めます。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/07/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g7">
       <button class="g-card__head" onclick="toggleGuide(7)" aria-expanded="false">
@@ -1308,7 +601,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>文化史・テーマ史は、別枠で一気に片づける</h3><span>通史の流れに混ぜると、いつまでも定着しません</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>日本史・世界史の文化史(美術・文学・思想・宗教)は、通史の中に散らばっているため、通しで勉強すると印象が薄く、忘れやすい分野です。しかし私大では配点の1〜2割を占めることも珍しくありません。</p><h4>まとめて処理する</h4><p>文化史は<b>通史とは別に、専用の教材で一気にやる</b>のが効率的です。『スピードマスター日本文化史』『時代と流れで覚える!文化史』のような薄い専門書を、通史が一周したあとの時期に2〜3週間で仕上げます。この方式なら、時代を横断して「同じジャンルの流れ」で覚えられるので定着が段違いです。</p><h4>写真とセットで</h4><p>文化史は必ず<b>図説の写真と一緒に</b>覚えてください。名称だけ覚えても、写真を見せられて答えられなければ得点になりません。仏像・建築・絵画は、視覚記憶とセットにするのが最短です。</p><h4>テーマ史も同様</h4><p>土地制度史、貨幣・経済史、外交史、女性史といったテーマ史は、一橋大をはじめとする論述型の大学で頻出です。通史が終わったあとに「縦に串刺しする」作業として行うと、論述の骨組みがそのまま手に入ります。</p></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/08/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g8">
       <button class="g-card__head" onclick="toggleGuide(8)" aria-expanded="false">
@@ -1316,7 +610,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>地理は暗記科目ではありません</h3><span>覚える量は最小、その代わり「考え方」を身につける科目です</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>地理は、社会の中でもっとも暗記量が少ない科目です。その代わり、<b>統計と地図から推論する力</b>が求められます。日本史・世界史のように「覚えた分だけ伸びる」わけではないので、勉強法を間違えると伸び悩みます。</p><h4>地理の勉強の中身</h4><ul><li><b>系統地理</b> — 気候・地形・農業・工業・人口など、テーマごとの「原理」を理解する。なぜその場所でその作物が作られるのかを説明できる状態にする</li><li><b>地誌</b> — 系統地理で学んだ原理を、地域ごとに当てはめて確認する</li><li><b>統計</b> — 上位国を丸暗記するのではなく、「なぜこの国が上位なのか」を原理で説明できるようにする。これができれば知らない統計でも推測できます</li></ul><h4>地図帳とデータブックは必携</h4><p>知らない地名が出たら必ず地図帳で位置を確認する習慣を作ってください。位置が分かれば気候が分かり、気候が分かれば農業が分かる。この連鎖が地理の得点力です。統計は『データブック オブ・ザ・ワールド』で最新値を確認します。</p><div class="g-quote">地理は短期間で7〜8割まで行きやすい一方、9割超えが難しい科目でもあります。共通テストで確実に8割取りたい理系や、他教科に時間を割きたい人には最適な選択です。ただし<b>使える大学が限られる</b>点だけは必ず確認してください。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/09/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g9">
       <button class="g-card__head" onclick="toggleGuide(9)" aria-expanded="false">
@@ -1324,7 +619,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>公民科目(公共・政経・倫理)の費用対効果</h3><span>共通テスト専用なら、最短で仕上がる選択肢です</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>新課程の共通テストでは、公民は「公共,倫理」「公共,政治・経済」という組み合わせで出題されます。地歴に比べて<b>必要な学習時間が明らかに短い</b>のが最大の特徴です。</p><h4>それぞれの性格</h4><ul><li><b>政治・経済</b> — 憲法・統治機構・国際政治・経済理論・時事。計算問題(需給・GDP・為替)があり、経済分野で差がつきます。時事的な出題があるので直前期のニュース確認が有効</li><li><b>倫理</b> — 西洋思想・東洋思想・日本思想・青年期心理。人物と思想内容を結びつける理解型で、暗記量は社会科の中で最小クラス。読書が好きな人には最も楽な科目</li><li><b>公共</b> — 両者の土台となる分野(民主主義の原理、法、経済の基礎、現代社会の課題)。単独ではなく倫理・政経とセットで出題されます</li></ul><h4>注意点</h4><p>公民は<b>二次試験・私大一般入試で使える大学がきわめて少ない</b>科目です。政治・経済は早稲田(政経・法・商・社学など)や一部のMARCHで選択できますが、国公立二次ではほぼ出題されません。倫理にいたっては一般入試での選択肢は事実上ありません。</p><div class="g-quote">「理系で共通テストの社会1科目だけ必要」という人にとっては、倫理または地理が最も費用対効果の高い選択です。逆に文系で二次でも社会を使うなら、公民を主軸にはできません。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/10/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g10">
       <button class="g-card__head" onclick="toggleGuide(10)" aria-expanded="false">
@@ -1332,7 +628,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>参考書は「冊数」ではなく「完成度」で決まる</h3><span>1冊を仕上げる基準を、言葉で定義できていますか</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>社会は市販教材が非常に多く、<b>何冊も薄く触ってどれも完成していない</b>という状態に陥りやすい教科です。講義系を2種類つまみ食いし、一問一答を2冊持ち、問題集も途中。冊数だけ見れば十分なのに、模試の偏差値が動かない。</p><h4>「終わった」の定義</h4><ul><li><b>講義系</b> — 本を閉じて、その時代の流れを自分の言葉で人に説明できる</li><li><b>用語集・一問一答</b> — ランダムに開いて9割即答できる。逆に用語から内容も説明できる</li><li><b>問題集</b> — 間違えた問題を、解説を見ずに「なぜその答えになるか」を説明しながら解き直せる</li><li><b>論述</b> — 同じ設問を白紙から再現でき、要素の抜けがない</li></ul><p>この基準を満たしていない本が残っているなら、次の1冊に進むより、その本を仕上げる方が確実に点が上がります。とくに講義系は<b>1つの著者の型を最後まで通す</b>ことが重要で、複数を混ぜると理解の軸がぶれます。</p><div class="g-quote">目安として、講義系は2周、用語・一問一答は3周以上、問題集は間違えた問題だけ2周。ただし周回数は結果であって目的ではありません。上の基準を満たしたときが「終わり」です。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/11/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g11">
       <button class="g-card__head" onclick="toggleGuide(11)" aria-expanded="false">
@@ -1340,7 +637,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>過去問はいつから、どう使うか</h3><span>社会は大学ごとの形式差が最も大きい科目です</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>社会は、大学ごとの出題形式の差が非常に大きい科目です。東大の大論述、一橋の400字×3、京大の300字級、早稲田の教科書外の難語、慶應の史料と論述、MARCHの正誤判定、共通テストの資料読解。同じ科目名でも、要求される力がまったく違います。</p><h4>過去問の2つの役割</h4><p>ひとつは<b>仕上げの演習</b>、もうひとつは<b>設計図の入手</b>です。後者は早ければ早いほど価値があります。</p><ul><li>大問構成・時代/地域の配分が分かる(近現代中心か、前近代も出るか)</li><li>論述の字数と指定語句の有無から、必要な答案作成力の水準が分かる</li><li>史料・図版・統計の比重が分かる</li><li>正誤判定のレベル(教科書内か、教科書外か)が分かる</li></ul><h4>推奨するタイミング</h4><p>高3の春〜夏に<b>1年分だけ</b>時間を計って解いてみてください。目的は点を取ることではなく、ゴールの形を知ることです。そのうえで通史と標準演習が終わった段階(秋以降)から本格的に年度を重ねます。25カ年シリーズがある東大・一橋・京大志望者は、分野別・テーマ別に解けるので早めの着手も有効です。</p><div class="g-quote">私大は学部ごとに形式が大きく異なります。志望学部の赤本を最低3年分、併願学部も1年分ずつは確認してください。</div></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/12/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g12">
       <button class="g-card__head" onclick="toggleGuide(12)" aria-expanded="false">
@@ -1348,7 +646,8 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>模試の偏差値をどう読むか</h3><span>社会の偏差値は、分野別の得点率を見ないと意味がありません</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>「社会の偏差値55」という情報だけでは、何をすべきかほとんど分かりません。<b>どの模試か</b>と、<b>どの時代・分野で落としているか</b>の2つを見る必要があります。</p><h4>主要模試の難易度と母集団</h4><ul><li><b>進研模試(ベネッセ)</b> — 受験者数が最も多く、偏差値は高めに出る</li><li><b>全統模試(河合塾)</b> — 最も標準的な指標。本サイトの到達目安もこれに準拠</li><li><b>駿台全国模試</b> — 難関大志望者中心の母集団で、偏差値は低めに出る</li></ul><p>同じ実力でも<b>進研で65、全統で55、駿台全国で45</b>といった開きが生じます。数字を比べるときは必ず模試名を確認してください。</p><h4>分野別に見る</h4><p>社会の模試成績表には時代別・分野別の得点率が載っています。総合偏差値より、この内訳が重要です。「近現代が4割」なら通史の後半が終わっていないサイン、「文化史が3割」なら文化史を別枠で処理する時期、「資料問題だけ落ちる」なら読解演習が足りていません。</p><p>本サイトの到達目安は全統記述模試（河合塾）の帯で付けています。<b>模試のあいだに一律に足し引きできる対応関係はありません</b>ので、当サイトでは他の模試の偏差値を換算しません。全統記述以外を選んだ場合は、目標との差を数字で出さず、完了済みの参考書と自己評価を中心に現在地を判定します。既習の参考書を登録すると、現在地より下の段階は「スキップ可」として表示されます。</p></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/13/">1 ページで読む →</a>
     </article>
     <article class="g-card" id="g13">
       <button class="g-card__head" onclick="toggleGuide(13)" aria-expanded="false">
@@ -1356,8 +655,9 @@ gtag('config', 'G-DQ5WFXEFMX', {
         <span class="g-ttl"><h3>新課程(2025年入試〜)で変わったこと</h3><span>買う前に、その参考書が「探究」対応版かを確認してください</span></span>
         <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="g-body"><p>2022年度入学生からの新課程により、2025年入試以降の社会は科目構成が変わりました。参考書を選ぶ際は、<b>新課程に対応した版かどうか</b>を必ず確認してください。</p><h4>主な変更点</h4><ul><li><b>科目名の変更</b> — 「日本史B」→「日本史探究」、「世界史B」→「世界史探究」、「地理B」→「地理探究」。共通テストは「歴史総合,日本史探究」「歴史総合,世界史探究」「地理総合,地理探究」という組み合わせで出題されます</li><li><b>「歴史総合」の追加</b> — 日本史・世界史を近現代で横断的に扱う必履修科目。共通テストの歴史科目には歴史総合分野が含まれるため、<b>日本史選択者も世界史の近現代を、世界史選択者も日本史の近現代を</b>ある程度おさえる必要があります</li><li><b>公民の再編</b> — 「現代社会」が廃止され「公共」が必履修に。共通テストは「公共,倫理」「公共,政治・経済」の組み合わせ。旧「倫理,政治・経済」はなくなりました</li><li><b>資料活用型の設問の増加</b> — 探究科目の趣旨を反映し、初見資料の読解・考察を求める設問が全科目で増えています</li></ul><h4>参考書の見分け方</h4><p>共通テスト対策書と教科書準拠教材は<b>2024年以降の改訂版(タイトルに「探究」が入っているもの)</b>を選んでください。一方、私大・二次向けの論述演習書や史料集は課程変更の影響が小さく、刊行年が古くても実用上の問題はほとんどありません。本サイトでは主要シリーズの新課程対応版を収録しています。</p></div>
-    </article></div>
+      <div class="g-body"></div>
+      <a class="g-page" href="/social/guides/basics/14/">1 ページで読む →</a>
+    </article><noscript><p class="g-noscript"><a href="/social/guides/">学習ガイドの本文は記事一覧から読めます</a></p></noscript></div>
   </section>
 
   <!-- usage-note:start --><div class="disclaimer" id="usageNote"><b>ご利用にあたって:</b>掲載している難易度・到達偏差値・想定学習時間は、書誌情報と入試の出題レベルとの対応から編集部が推定した目安です（<a href="/methodology/">算出方法</a>）。学習成果を保証するものではありません。大学ごとの出題傾向・入試方式は年度により変わるため、出願前に必ず募集要項をご確認ください。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。当サイトはアフィリエイト広告を利用しています。</div><!-- usage-note:end -->
@@ -1453,13 +753,13 @@ gtag('config', 'G-DQ5WFXEFMX', {
 <script src="/assets/js/share.js" defer></script>
 <script src="/assets/js/pace.js" defer></script>
 <div id="rtLoadStatus" class="rt-load-status" role="status" aria-live="polite" hidden></div>
-<script>/* RT_SUBJECT_ASSETS — build/generate-subject-assets.mjs が書き換える。手で編集しない */window.RT_SUBJECT_ASSETS={"v":1,"subject":"social","files":{"core":"/assets/generated/subjects/social.core.json?v=8582dd790a","books":"/assets/generated/subjects/social.books.json?v=16b155396f","routes":"/assets/generated/subjects/social.routes.json?v=ae730ff27b","unis":"/assets/generated/subjects/social.unis.json?v=325e2c21ea","guides":"/assets/generated/subjects/social.guides.json?v=565f788664"},"bytes":{"core":2359,"books":341741,"routes":106030,"unis":134065,"guides":24743}};window.RT_SUBJECT_QUEUE=[];(["catGroups","isProv","provLast","hRange","byDiffAsc","byDiffDesc","diffColor","normQ","searchUnis","facBunri","isMed","resolveUni","pickBunri","levelFromHen","levelFromDone","moshiComparable","recalcStatus","targetHen","renderVerdict","go","syncHash","applyHash","coverSrcs","amazonURL","rakutenURL","coverHTML","buildFilters","setFilter","bookCardHTML","renderCatalog","findConnections","openModal","closeModal","buildRoutePicker","selectTier","availNow","toggleSubj","setCourse","renderSubjBar","syncMode","setMode","sugSync","sugClose","renderUniSug","pickUni","subjBadge","applyUni","renderDoneSug","addDone","removeDone","renderDoneChips","segAria","wireSeg","subjectPlan","nodeHTML","renderRoute","renderRouteBody","renderHome","startQuiz","activeQuizSteps","renderQuiz","pickOpt","nextQuiz","quizPicks","focusResult","renderQuizResult","applyQuiz","renderGuide","toggleGuide","trapFocusables","modalOpened","modalClosed","openBox","syncRouteSegs","pickMask","applySharedUni","sharedUniName"]).forEach(function(n){if(window[n])return;window[n]=function(){window.RT_SUBJECT_QUEUE.push([n,[].slice.call(arguments)])};window[n].__rtStub=1});window.RT_SUBJECT_FLUSH=function(){var q=window.RT_SUBJECT_QUEUE;window.RT_SUBJECT_QUEUE=[];q.forEach(function(c){var f=window[c[0]];if(typeof f==="function"&&!f.__rtStub)f.apply(null,c[1])})};</script>
+<script>/* RT_SUBJECT_ASSETS — build/generate-subject-assets.mjs が書き換える。手で編集しない */window.RT_SUBJECT_ASSETS={"v":1,"subject":"social","files":{"core":"/assets/generated/subjects/social.core.json?v=8582dd790a","books":"/assets/generated/subjects/social.books.json?v=16b155396f","routes":"/assets/generated/subjects/social.routes.json?v=ae730ff27b","unis":"/assets/generated/subjects/social.unis.json?v=325e2c21ea","guides":"/assets/generated/subjects/social.guides.json?v=565f788664"},"bytes":{"core":2359,"books":341741,"routes":106030,"unis":134065,"guides":24743}};window.RT_SUBJECT_QUEUE=[];(["catGroups","isProv","provLast","hRange","byDiffAsc","byDiffDesc","diffColor","normQ","searchUnis","facBunri","isMed","resolveUni","pickBunri","levelFromHen","levelFromDone","moshiComparable","recalcStatus","targetHen","renderVerdict","go","syncHash","applyHash","coverSrcs","amazonURL","rakutenURL","coverHTML","buildFilters","setFilter","bookCardHTML","renderCatalog","findConnections","openModal","closeModal","buildRoutePicker","selectTier","availNow","toggleSubj","setCourse","renderSubjBar","syncMode","setMode","sugSync","sugClose","renderUniSug","pickUni","subjBadge","applyUni","renderDoneSug","addDone","removeDone","renderDoneChips","segAria","wireSeg","subjectPlan","nodeHTML","renderRoute","renderRouteBody","renderHome","startQuiz","activeQuizSteps","renderQuiz","pickOpt","nextQuiz","quizPicks","focusResult","renderQuizResult","applyQuiz","guidePagePath","renderGuide","toggleGuide","trapFocusables","modalOpened","modalClosed","openBox","syncRouteSegs","pickMask","applySharedUni","sharedUniName"]).forEach(function(n){if(window[n])return;window[n]=function(){window.RT_SUBJECT_QUEUE.push([n,[].slice.call(arguments)])};window[n].__rtStub=1});window.RT_SUBJECT_FLUSH=function(){var q=window.RT_SUBJECT_QUEUE;window.RT_SUBJECT_QUEUE=[];q.forEach(function(c){var f=window[c[0]];if(typeof f==="function"&&!f.__rtStub)f.apply(null,c[1])})};</script>
 <script src="/assets/js/cover-policies.js" defer></script>
 <script src="/assets/js/cover-resolver.js" defer></script>
 <script src="/assets/js/progress.js" defer></script>
 <script src="/assets/js/progress-control.js" defer></script>
 <script src="/assets/js/refine.js" defer></script>
-<script src="/assets/js/subject-social.js?v=629ee33ebe" defer></script>
+<script src="/assets/js/subject-social.js?v=e1af235ca8" defer></script>
 <script src="/assets/js/subject-loader.js" defer></script>
 <script type="application/ld+json">
 {

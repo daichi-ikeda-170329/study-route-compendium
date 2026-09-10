@@ -28,11 +28,17 @@ import { SUBJECTS } from '../build/lib/extract.mjs';
 const bytes = (rel) => fs.statSync(path.join(ROOT, rel)).size;
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 
-/** 科目トップ HTML の上限。理科・社会が 165〜167KB なので、そこから余裕を見た値 */
-const SUBJECT_HTML_MAX = 250_000;
+/**
+ * 科目トップ HTML の上限。2026-09-10 に学習ガイドの本文と CSS を外へ出し、
+ * 最大の英語が 69,928 バイトになった（仕様書 2.2。それまでは 144,695）。実測 + 10%。
+ */
+const SUBJECT_HTML_MAX = 77_000;
 
-/** 理科は最大の科目。ここを締めておくと他は自然に収まる */
-const SCIENCE_HTML_MAX = 200_000;
+/** 理科は描画コードとデータが最大の科目。HTML も上と同じ基準（実測 68,092 + 10%）で締める */
+const SCIENCE_HTML_MAX = 75_000;
+
+/** 科目トップの CSS（assets/css/subject-<科目>.css）。実測の最大は理科の 62,153。+10% */
+const SUBJECT_CSS_MAX = 68_500;
 
 /** 全ページ共通の検索索引。S8 で膨らませないための歯止め（実測 235,925） */
 const BOOK_INDEX_MAX = 300_000;
@@ -52,7 +58,27 @@ test('科目トップの HTML がバイト予算に収まっている', () => {
   assert.deepEqual(over, [], over.join('\n'));
 });
 
-test('理科の科目トップが 200,000 バイト未満', () => {
+test('英語の科目トップが 100KB 未満（仕様書 2.2 の受け入れ条件）', () => {
+  const n = bytes('english/index.html');
+  assert.ok(n < 100_000, `english/index.html が ${n.toLocaleString()} バイト`);
+});
+
+test('科目トップの CSS が予算に収まり、描画前に読まれる', () => {
+  const over = [];
+  for (const s of SUBJECTS) {
+    const rel = `assets/css/subject-${s.dir}.css`;
+    const n = bytes(rel);
+    if (n >= SUBJECT_CSS_MAX) over.push(`${rel}: ${n.toLocaleString()} バイト（上限 ${SUBJECT_CSS_MAX.toLocaleString()}）`);
+    const html = read(`${s.dir}/index.html`);
+    // media="print" などで遅らせると、CSS が届く前の素の版面が一瞬出て CLS になる
+    assert.match(html, new RegExp(`<link rel="stylesheet" href="/assets/css/subject-${s.dir}\\.css\\?v=[0-9a-f]{10}">`),
+      `${s.dir}: 自分の CSS を描画ブロックの <link> で読んでいない`);
+    assert.doesNotMatch(html, /<style>/, `${s.dir}: インライン <style> が戻っている（CSS は ${rel}）`);
+  }
+  assert.deepEqual(over, [], over.join('\n'));
+});
+
+test('理科の科目トップが予算に収まっている', () => {
   const n = bytes('science/index.html');
   assert.ok(n < SCIENCE_HTML_MAX,
     `science/index.html が ${n.toLocaleString()} バイト（上限 ${SCIENCE_HTML_MAX.toLocaleString()}）`);
@@ -112,7 +138,8 @@ test('科目トップの画像は、読み込む前から場所が決まって�
      `.bcov img{width:100%;height:100%}` がその中を埋める。
      **属性が無いこと自体は問題ではない。箱が決まっていないことが問題。** */
   for (const s of SUBJECTS) {
-    const html = read(`${s.dir}/index.html`);
+    // CSS は assets/css/subject-<科目>.css にある（2026-09-10 に外へ出した）。両方を見る
+    const html = read(`${s.dir}/index.html`) + read(`assets/css/subject-${s.dir}.css`);
 
     assert.match(html, /\.bcov\{[^}]*aspect-ratio:/,
       `${s.dir}: .bcov に aspect-ratio が無い。書影の箱が決まらず、読み込みで版面がずれる`);

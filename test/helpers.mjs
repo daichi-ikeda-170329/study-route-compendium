@@ -59,9 +59,19 @@ export function subjectAppSource(dir) {
   return fs.readFileSync(path.join(ROOT, 'assets', 'js', `subject-${dir}.js`), 'utf8');
 }
 
-/** 科目トップの HTML（markup と <style>）。CSS の検査はこちらを見る */
+/**
+ * 科目トップの HTML（markup と CSS）。CSS の検査はこちらを見る。
+ * CSS は 2026-09-10 に assets/css/subject-<科目>.css へ出したので、末尾に <style> として
+ * つないで返す（検査側が「HTML の中の <style>」を前提に書かれているため）
+ */
 export function subjectHtml(dir) {
-  return fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+  const html = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+  return `${html}\n<style>\n${subjectCss(dir)}\n</style>`;
+}
+
+/** 科目トップの CSS（assets/css/subject-<科目>.css） */
+export function subjectCss(dir) {
+  return fs.readFileSync(path.join(ROOT, 'assets', 'css', `subject-${dir}.css`), 'utf8');
 }
 
 /** その科目のデータが data/subjects/ にあるか。7 科目すべて true のはず */

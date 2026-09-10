@@ -17,7 +17,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { block, HAND_WRITTEN } from '../build/apply-search-style.mjs';
+import { block, HAND_WRITTEN, SUBJECT_CSS } from '../build/apply-search-style.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BLOCK = block();
@@ -46,13 +46,16 @@ test('検索ボックスを持つページは、CSS を描画前に受け取っ�
     const src = fs.readFileSync(p, 'utf8');
     const linked = src.includes('rel="stylesheet" href="/assets/site.css"');
     const inlined = src.includes(BLOCK);
-    if (!linked && !inlined) bad.push(path.relative(ROOT, p));
+    // 科目トップは自分の CSS を描画ブロックの <link> で読む。その中に配布物が入っていればよい
+    const own = src.match(/rel="stylesheet" href="\/(assets\/css\/subject-[a-z]+\.css)\?v=[0-9a-f]+"/);
+    const viaOwn = own && fs.readFileSync(path.join(ROOT, own[1]), 'utf8').includes(BLOCK);
+    if (!linked && !inlined && !viaOwn) bad.push(path.relative(ROOT, p));
   }
   assert.deepEqual(bad, [], `CSS が JS 頼みのページが残っている:\n  ${bad.join('\n  ')}`);
 });
 
 test('配った CSS が search.js の STYLE と一致している', () => {
-  const targets = ['assets/site.css', ...HAND_WRITTEN];
+  const targets = ['assets/site.css', ...SUBJECT_CSS, ...HAND_WRITTEN];
   const bad = [];
   for (const rel of targets) {
     const src = fs.readFileSync(path.join(ROOT, rel), 'utf8');

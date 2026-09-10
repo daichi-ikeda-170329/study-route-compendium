@@ -66,6 +66,13 @@ for (const s of SUBJECTS) {
       add(urls, `${s.dir}/${sub}/${id}`, priority, sub === 'routes' ? 'weekly' : 'monthly');
     }
   }
+  // 学習ガイドの静的ページ（/<科目>/guides/basics/<nn>/。build/generate-guides-static.mjs）
+  const basics = path.join(ROOT, s.dir, 'guides', 'basics');
+  if (fs.existsSync(basics)) {
+    for (const d of fs.readdirSync(basics, { withFileTypes: true }).filter(x => x.isDirectory()).map(x => x.name).sort()) {
+      if (fs.existsSync(path.join(basics, d, 'index.html'))) add(urls, `${s.dir}/guides/basics/${d}`, '0.7', 'monthly');
+    }
+  }
 }
 
 /* 大学別ページ（/univ/…）。志望校名で検索する人が最初に着くページなので、

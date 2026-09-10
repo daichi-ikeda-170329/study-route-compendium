@@ -32,7 +32,13 @@ const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input'
   'link', 'meta', 'param', 'source', 'track', 'wbr', 'path', 'circle', 'rect',
   'line', 'polyline', 'polygon', 'ellipse', 'stop', 'use']);
 
-const read = (dir) => fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+/* 科目トップの CSS は assets/css/subject-<科目>.css にある（2026-09-10 に外へ出した）。
+   検査は「HTML の <style>」を読む作りなので、あれば末尾に <style> としてつなぐ */
+const read = (dir) => {
+  const html = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+  const css = path.join(ROOT, 'assets', 'css', `subject-${dir}.css`);
+  return fs.existsSync(css) ? `${html}\n<style>\n${fs.readFileSync(css, 'utf8')}\n</style>` : html;
+};
 
 /** <style> の中身をつなげて返す。コメントは落とす */
 function styleSheet(src) {

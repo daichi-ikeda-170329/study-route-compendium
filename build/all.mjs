@@ -44,6 +44,7 @@ const STEPS = [
   { name: '志望校別ルート',        script: 'generate-routes.mjs',   checkArgs: null },
   { name: '大学別ページ',          script: 'generate-universities.mjs', checkArgs: null },
   { name: '解説記事',              script: 'generate-articles.mjs', checkArgs: null },
+  { name: '学習ガイドの静的ページ', script: 'generate-guides-static.mjs', checkArgs: null },
   { name: '法務・信頼性ページ',    script: 'generate-legal.mjs',    checkArgs: null },
   { name: '学習の記録ページ',      script: 'generate-progress.mjs', checkArgs: null },
   { name: '科目の配信アセット',    script: 'generate-subject-assets.mjs', checkArgs: ['--check'] },

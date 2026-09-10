@@ -72,6 +72,17 @@ function replaceManifest(src, body) {
   return src.slice(0, i + MANIFEST_BEGIN.length) + body + src.slice(j);
 }
 
+/**
+ * 科目トップの CSS（assets/css/subject-<科目>.css）の `?v=` を差し替える。
+ * 2026-09-10 にインライン <style> から外へ出した（HTML を軽くするため。仕様書 2.2）。
+ * ファイル名を固定して ?v= だけ変えるのは JS・データと同じ理由（ファイル冒頭の説明）。
+ */
+function replaceCssVersion(src, dir, hash) {
+  const re = new RegExp(`(href="/assets/css/subject-${dir}\\.css)(\\?v=[0-9a-f]+)?(")`);
+  if (!re.test(src)) return null;
+  return src.replace(re, `$1?v=${hash}$3`);
+}
+
 /** app スクリプトの `?v=` を差し替える */
 function replaceAppVersion(src, dir, hash) {
   const re = new RegExp(`(src="/assets/js/subject-${dir}\\.js)(\\?v=[0-9a-f]+)?(")`);
@@ -124,6 +135,10 @@ for (const s of SUBJECTS) {
   if (out === null) throw new Error(`${s.dir}/index.html にマニフェストの区間が無い`);
   out = replaceAppVersion(out, s.dir, appHash);
   if (out === null) throw new Error(`${s.dir}/index.html に subject-${s.dir}.js の script タグが無い`);
+  const cssRel = `assets/css/subject-${s.dir}.css`;
+  if (!fs.existsSync(path.join(ROOT, cssRel))) throw new Error(`${cssRel} が無い`);
+  out = replaceCssVersion(out, s.dir, contentHash(fs.readFileSync(path.join(ROOT, cssRel), 'utf8')));
+  if (out === null) throw new Error(`${s.dir}/index.html に ${cssRel} の link タグが無い`);
 
   if (out !== src) {
     if (CHECK) stale.push(`${s.dir}/index.html`);

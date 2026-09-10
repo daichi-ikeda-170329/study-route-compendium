@@ -1229,6 +1229,58 @@
    "h": "c478b6d490a5",
    "d": "2026-09-10"
   },
+  "file:english/guides/basics/01/index.html": {
+   "h": "ceeb7af942c6",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/02/index.html": {
+   "h": "d8c811d183cd",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/03/index.html": {
+   "h": "893e75248511",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/04/index.html": {
+   "h": "d42c0661bb5c",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/05/index.html": {
+   "h": "8a0deed18e35",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/06/index.html": {
+   "h": "cba7db16291f",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/07/index.html": {
+   "h": "1b44d7483680",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/08/index.html": {
+   "h": "3412b30b2a72",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/09/index.html": {
+   "h": "8c0bb1de9833",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/10/index.html": {
+   "h": "2917b0a668ea",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/11/index.html": {
+   "h": "3594ab8ffb94",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/12/index.html": {
+   "h": "a0a55e59b08e",
+   "d": "2026-09-10"
+  },
+  "file:english/guides/basics/13/index.html": {
+   "h": "59dbe1cc102d",
+   "d": "2026-09-10"
+  },
   "file:english/guides/bunpo-comparison/index.html": {
    "h": "37d9d306dfc5",
    "d": "2026-09-08"
@@ -1239,14 +1291,14 @@
   },
   "file:english/guides/eigo-jikan-haibun/index.html": {
    "h": "e8ced3ac0a7b",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:english/guides/eisaku-comparison/index.html": {
    "h": "bd25062f2040",
    "d": "2026-09-09"
   },
   "file:english/guides/index.html": {
-   "h": "fab8d9e8e763",
+   "h": "445647dd8086",
    "d": "2026-09-10"
   },
   "file:english/guides/kaishaku-comparison/index.html": {
@@ -1263,11 +1315,11 @@
   },
   "file:english/guides/nextstage-vs-vintage/index.html": {
    "h": "d527d749b155",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:english/guides/porepore-vs-gijutsu100/index.html": {
    "h": "eb38227d2fc9",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:english/guides/tango-comparison/index.html": {
    "h": "d41e1c3bc036",
@@ -1275,11 +1327,11 @@
   },
   "file:english/guides/tango-ranking/index.html": {
    "h": "3e40598fcfcf",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:english/guides/target-vs-sistan/index.html": {
    "h": "d98cb1e1024a",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:english/index.html": {
    "h": "fec61b3c4d30",
@@ -1311,11 +1363,11 @@
   },
   "file:guides/juryokyu-ranking/index.html": {
    "h": "43ae063cfaa0",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:guides/kaburi-check/index.html": {
    "h": "394ff460b58f",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:guides/kakomon-timing/index.html": {
    "h": "c8b52b188e7d",
@@ -1327,7 +1379,7 @@
   },
   "file:guides/nanido-bunpu/index.html": {
    "h": "39423bf493e9",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:guides/nokori-jikan-select/index.html": {
    "h": "260dc015b842",
@@ -1347,7 +1399,7 @@
   },
   "file:guides/shuppansha-map/index.html": {
    "h": "46c7309910ba",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:guides/shuukai-sekkei/index.html": {
    "h": "7b98e42fa6ce",
@@ -1363,7 +1415,7 @@
   },
   "file:guides/tsumazuki-awards/index.html": {
    "h": "94c4d48a1d6f",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:guides/versus/index.html": {
    "h": "9d7cbd5bc20e",
@@ -1371,7 +1423,55 @@
   },
   "file:japanese/guides/access-vs-rules/index.html": {
    "h": "dc9b2aed7e68",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/01/index.html": {
+   "h": "49fb4a6c08f6",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/02/index.html": {
+   "h": "d988d6176d6d",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/03/index.html": {
+   "h": "4c8e298b3f66",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/04/index.html": {
+   "h": "bb44d2816ec0",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/05/index.html": {
+   "h": "abb77742baca",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/06/index.html": {
+   "h": "f0327cabadbf",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/07/index.html": {
+   "h": "25fa60181d1b",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/08/index.html": {
+   "h": "7ff62fae0044",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/09/index.html": {
+   "h": "c122a0ace7a8",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/10/index.html": {
+   "h": "0622ffdc55eb",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/11/index.html": {
+   "h": "29d802a117ad",
+   "d": "2026-09-10"
+  },
+  "file:japanese/guides/basics/12/index.html": {
+   "h": "d11531bb1e61",
+   "d": "2026-09-10"
   },
   "file:japanese/guides/gendaibun-goi/index.html": {
    "h": "f68c1a7155f5",
@@ -1382,7 +1482,7 @@
    "d": "2026-09-08"
   },
   "file:japanese/guides/index.html": {
-   "h": "4267defb46e0",
+   "h": "cf3a67f290f2",
    "d": "2026-09-10"
   },
   "file:japanese/guides/kanbun-start/index.html": {
@@ -1395,7 +1495,7 @@
   },
   "file:japanese/guides/kobun-tango-ranking/index.html": {
    "h": "b6f49d260bca",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:japanese/index.html": {
    "h": "e6cb791391dd",
@@ -1407,7 +1507,55 @@
   },
   "file:math/guides/ao-vs-fg/index.html": {
    "h": "90426c911152",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/01/index.html": {
+   "h": "5f97d3365560",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/02/index.html": {
+   "h": "f7b18ba1f09f",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/03/index.html": {
+   "h": "c471184bfaaf",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/04/index.html": {
+   "h": "3f028b659473",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/05/index.html": {
+   "h": "d3c164989b7b",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/06/index.html": {
+   "h": "d9365a8cb524",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/07/index.html": {
+   "h": "9126e0695644",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/08/index.html": {
+   "h": "90487ef4e4d1",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/09/index.html": {
+   "h": "dc786fa7fab6",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/10/index.html": {
+   "h": "2fa68f9819b7",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/11/index.html": {
+   "h": "f8b793cc8a75",
+   "d": "2026-09-10"
+  },
+  "file:math/guides/basics/12/index.html": {
+   "h": "886b3c432aed",
+   "d": "2026-09-10"
   },
   "file:math/guides/bunkei-sugaku/index.html": {
    "h": "5cea039e855b",
@@ -1422,7 +1570,7 @@
    "d": "2026-09-08"
   },
   "file:math/guides/index.html": {
-   "h": "60480825aac6",
+   "h": "c61c94fd4404",
    "d": "2026-09-10"
   },
   "file:math/guides/moura-comparison/index.html": {
@@ -1431,15 +1579,55 @@
   },
   "file:math/guides/moura-ranking/index.html": {
    "h": "c1577986e56b",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:math/guides/taio11-vs-hyomon/index.html": {
    "h": "2c17233f9689",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:math/index.html": {
    "h": "aa2c215c4194",
    "d": "2026-09-04"
+  },
+  "file:science/guides/basics/01/index.html": {
+   "h": "5efb4c67a3ad",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/02/index.html": {
+   "h": "063e5cbc33d5",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/03/index.html": {
+   "h": "0dc5ea97dae5",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/04/index.html": {
+   "h": "2c54afadafd3",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/05/index.html": {
+   "h": "eb0927250c87",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/06/index.html": {
+   "h": "74abf27a7b90",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/07/index.html": {
+   "h": "41b79ee4d8b5",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/08/index.html": {
+   "h": "b96accfdfcb8",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/09/index.html": {
+   "h": "76b92e27f6f0",
+   "d": "2026-09-10"
+  },
+  "file:science/guides/basics/10/index.html": {
+   "h": "efa2a456f93b",
+   "d": "2026-09-10"
   },
   "file:science/guides/butsuri-route/index.html": {
    "h": "b02d3e64a56c",
@@ -1450,16 +1638,16 @@
    "d": "2026-09-10"
   },
   "file:science/guides/index.html": {
-   "h": "b627db75a7ca",
+   "h": "700ead9f5e4b",
    "d": "2026-09-10"
   },
   "file:science/guides/juyo-vs-shinenshu/index.html": {
    "h": "00d93273c30f",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:science/guides/kagaku-mondaishu-ranking/index.html": {
    "h": "17599062da29",
-   "d": "2026-09-09"
+   "d": "2026-09-10"
   },
   "file:science/guides/kagaku-route/index.html": {
    "h": "57fb6cfb458a",
@@ -1485,6 +1673,62 @@
    "h": "c4d05bddd74d",
    "d": "2026-09-04"
   },
+  "file:social/guides/basics/01/index.html": {
+   "h": "46a09eef4fc1",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/02/index.html": {
+   "h": "4d426b841727",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/03/index.html": {
+   "h": "f7ae20ba70bc",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/04/index.html": {
+   "h": "456a75116782",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/05/index.html": {
+   "h": "7c64ce986eba",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/06/index.html": {
+   "h": "9b895113eb42",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/07/index.html": {
+   "h": "29bcd22c0621",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/08/index.html": {
+   "h": "cb291c67dbff",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/09/index.html": {
+   "h": "76dccc651315",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/10/index.html": {
+   "h": "0655b842aad1",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/11/index.html": {
+   "h": "b1226ff0c0f9",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/12/index.html": {
+   "h": "fe7cc615f12a",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/13/index.html": {
+   "h": "19f7bb08c620",
+   "d": "2026-09-10"
+  },
+  "file:social/guides/basics/14/index.html": {
+   "h": "a42fc1bf17a9",
+   "d": "2026-09-10"
+  },
   "file:social/guides/chiri-route/index.html": {
    "h": "ed7b16112cde",
    "d": "2026-09-09"
@@ -1494,7 +1738,7 @@
    "d": "2026-09-10"
   },
   "file:social/guides/index.html": {
-   "h": "7a17dbc1374d",
+   "h": "b92dfdaff248",
    "d": "2026-09-10"
   },
   "file:social/guides/nihonshi-route/index.html": {
@@ -1516,6 +1760,250 @@
   "file:social/index.html": {
    "h": "5d04183650eb",
    "d": "2026-09-04"
+  },
+  "guide/english/1": {
+   "h": "50e06af7e0b6",
+   "d": "2026-09-10"
+  },
+  "guide/english/10": {
+   "h": "c2a0acdbb6ad",
+   "d": "2026-09-10"
+  },
+  "guide/english/11": {
+   "h": "3485f87db0b6",
+   "d": "2026-09-10"
+  },
+  "guide/english/12": {
+   "h": "c72128d1197f",
+   "d": "2026-09-10"
+  },
+  "guide/english/13": {
+   "h": "e75d41e3486c",
+   "d": "2026-09-10"
+  },
+  "guide/english/2": {
+   "h": "f27b92481cc7",
+   "d": "2026-09-10"
+  },
+  "guide/english/3": {
+   "h": "7b542af73017",
+   "d": "2026-09-10"
+  },
+  "guide/english/4": {
+   "h": "85316e6aab8b",
+   "d": "2026-09-10"
+  },
+  "guide/english/5": {
+   "h": "8ffc6740fc06",
+   "d": "2026-09-10"
+  },
+  "guide/english/6": {
+   "h": "7162ec200a7a",
+   "d": "2026-09-10"
+  },
+  "guide/english/7": {
+   "h": "934afd973ef3",
+   "d": "2026-09-10"
+  },
+  "guide/english/8": {
+   "h": "1f93ec85d55e",
+   "d": "2026-09-10"
+  },
+  "guide/english/9": {
+   "h": "63579a84d2b1",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/1": {
+   "h": "3d12c0afb7ce",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/10": {
+   "h": "1bd38a0b3d10",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/11": {
+   "h": "a14a4974e815",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/12": {
+   "h": "4f8deffd0242",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/2": {
+   "h": "13e970f3c24a",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/3": {
+   "h": "e14edaf57952",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/4": {
+   "h": "fa5d7840f2a3",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/5": {
+   "h": "d3b115eb8cc2",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/6": {
+   "h": "520c39241494",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/7": {
+   "h": "243a59dd036a",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/8": {
+   "h": "16aab46c14a6",
+   "d": "2026-09-10"
+  },
+  "guide/japanese/9": {
+   "h": "447a2ae9616c",
+   "d": "2026-09-10"
+  },
+  "guide/math/1": {
+   "h": "de67861a8ae2",
+   "d": "2026-09-10"
+  },
+  "guide/math/10": {
+   "h": "d1c4039b17f3",
+   "d": "2026-09-10"
+  },
+  "guide/math/11": {
+   "h": "faace26882cd",
+   "d": "2026-09-10"
+  },
+  "guide/math/12": {
+   "h": "1b273064c974",
+   "d": "2026-09-10"
+  },
+  "guide/math/2": {
+   "h": "2beed167767b",
+   "d": "2026-09-10"
+  },
+  "guide/math/3": {
+   "h": "0431696933b3",
+   "d": "2026-09-10"
+  },
+  "guide/math/4": {
+   "h": "b13342e87438",
+   "d": "2026-09-10"
+  },
+  "guide/math/5": {
+   "h": "df75362b10f9",
+   "d": "2026-09-10"
+  },
+  "guide/math/6": {
+   "h": "753d72e22cc7",
+   "d": "2026-09-10"
+  },
+  "guide/math/7": {
+   "h": "c145eb40ccbf",
+   "d": "2026-09-10"
+  },
+  "guide/math/8": {
+   "h": "96543063c670",
+   "d": "2026-09-10"
+  },
+  "guide/math/9": {
+   "h": "ad742c131578",
+   "d": "2026-09-10"
+  },
+  "guide/science/1": {
+   "h": "112b50516a4f",
+   "d": "2026-09-10"
+  },
+  "guide/science/10": {
+   "h": "6848272d8401",
+   "d": "2026-09-10"
+  },
+  "guide/science/2": {
+   "h": "52c17ced4123",
+   "d": "2026-09-10"
+  },
+  "guide/science/3": {
+   "h": "9553fc86d61b",
+   "d": "2026-09-10"
+  },
+  "guide/science/4": {
+   "h": "4314d932ae9a",
+   "d": "2026-09-10"
+  },
+  "guide/science/5": {
+   "h": "4e3490f6d22f",
+   "d": "2026-09-10"
+  },
+  "guide/science/6": {
+   "h": "6e15311d62d2",
+   "d": "2026-09-10"
+  },
+  "guide/science/7": {
+   "h": "a68ce071348b",
+   "d": "2026-09-10"
+  },
+  "guide/science/8": {
+   "h": "6104125b4545",
+   "d": "2026-09-10"
+  },
+  "guide/science/9": {
+   "h": "cd1fa1e04e6a",
+   "d": "2026-09-10"
+  },
+  "guide/social/1": {
+   "h": "a3c6db204441",
+   "d": "2026-09-10"
+  },
+  "guide/social/10": {
+   "h": "ccefcf7c101b",
+   "d": "2026-09-10"
+  },
+  "guide/social/11": {
+   "h": "9a32c213b629",
+   "d": "2026-09-10"
+  },
+  "guide/social/12": {
+   "h": "3645e760190c",
+   "d": "2026-09-10"
+  },
+  "guide/social/13": {
+   "h": "452f74e78b99",
+   "d": "2026-09-10"
+  },
+  "guide/social/14": {
+   "h": "91b4d962aacc",
+   "d": "2026-09-10"
+  },
+  "guide/social/2": {
+   "h": "43e7e73c8333",
+   "d": "2026-09-10"
+  },
+  "guide/social/3": {
+   "h": "345136a4e022",
+   "d": "2026-09-10"
+  },
+  "guide/social/4": {
+   "h": "4d930c7d3f5b",
+   "d": "2026-09-10"
+  },
+  "guide/social/5": {
+   "h": "e7d433bbb919",
+   "d": "2026-09-10"
+  },
+  "guide/social/6": {
+   "h": "7fd55831a18c",
+   "d": "2026-09-10"
+  },
+  "guide/social/7": {
+   "h": "f838f548f70a",
+   "d": "2026-09-10"
+  },
+  "guide/social/8": {
+   "h": "57ca782e6d27",
+   "d": "2026-09-10"
+  },
+  "guide/social/9": {
+   "h": "a7f12f15953d",
+   "d": "2026-09-10"
   },
   "japanese/access-hatten": {
    "h": "243fc6ad36b7",
@@ -6074,31 +6562,31 @@
    "d": "2026-09-03"
   },
   "subject/english": {
-   "h": "c32cf92c02cb",
+   "h": "c7014f207ab4",
    "d": "2026-09-10"
   },
   "subject/japanese": {
-   "h": "98259e1aa813",
+   "h": "58f69c4bb99c",
    "d": "2026-09-10"
   },
   "subject/joho": {
-   "h": "a7df38c86225",
-   "d": "2026-09-08"
+   "h": "43f5dfe9d8f3",
+   "d": "2026-09-10"
   },
   "subject/math": {
-   "h": "0edf6960add1",
+   "h": "9236604b0684",
    "d": "2026-09-10"
   },
   "subject/science": {
-   "h": "3994f465fa66",
+   "h": "496d39355261",
    "d": "2026-09-10"
   },
   "subject/shoron": {
-   "h": "c364c45306c7",
-   "d": "2026-09-08"
+   "h": "81f4c4ca726b",
+   "d": "2026-09-10"
   },
   "subject/social": {
-   "h": "7af659ad1098",
+   "h": "0242d6ce4275",
    "d": "2026-09-10"
   },
   "top/english": {
