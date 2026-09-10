@@ -254,20 +254,8 @@ const SENSEIS = [
 /* ============================================================
    FOCUS — 志望校の出題傾向 → 重点対策教材
    ============================================================ */
-const FOCUS = {
- "和訳":      {id:"jukou-ge",   note:"下線部和訳が頻出。構文を正確に訳文へ落とす訓練を",alts:["toshizu","gijutsu100"]},
- "英作文":    {id:"dragon100",  note:"和文英訳が出る。暗唱例文で「書ける部品」を蓄える",alts:["haitore-wabun","takeoka-omoshiro"]},
- "自由英作文":{id:"haitore-jiyu",note:"自由英作文が出る。型と頻出テーマを事前に仕込む",alts:["eisaku-polaris2","hijii-sugu-jiyu"]},
- "要約":      {id:"yoshi-yoyaku",note:"要約・大意把握が出る。専用訓練の価値が非常に高い",alts:["discourse","todai-yoyaku"]},
- "リスニング":{id:"lis-platinum",note:"リスニングが課される。毎日の音声訓練+先読み技術を",alts:["kimutatsu-basic","kimeru-lis"]},
- "超長文":    {id:"yatte1000",  note:"超長文が名物。分量への耐性と時間配分の訓練を",alts:["kimutatsu-shidai"]},
- "速読":      {id:"sokudoku-tr",note:"分量勝負の形式。WPMを計測して読速を底上げ",alts:["hyper-training","chobun-platinum"]},
- "正誤":      {id:"ryomon500",  note:"正誤問題が名物。誤文訂正の専用演習を",alts:["hinshutsu1000"]},
- "会話文":    {id:"hinshutsu-polaris",note:"会話文・口語表現が頻出。知識問題を体系的に",alts:["chobun-platinum"]},
- "語彙":      {id:"pass-jun1",  note:"語彙水準が高い。単語帳2冊目で上位語彙まで",alts:["sokutan-jokyu","teppeki"]},
- "文法":      {id:"final-polaris",note:"文法・語法の独立問題が多い。ランダム演習で仕上げを",alts:["hinshutsu1000","ryomon500"]},
- "記述":      {id:"kijutsu-tr", note:"日本語記述の比重が高い。採点基準つきの記述訓練を",alts:["canpass-e"]}
-};
+/* 正本は data/subjects/english/focus.json（静的ページの大学別・ルートページも同じものを読む） */
+const FOCUS = DATA.focus || {};
 
 /* ============================================================
    QUIZ — 3分診断

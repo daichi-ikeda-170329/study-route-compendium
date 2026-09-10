@@ -365,6 +365,34 @@ function renderUniversity(uni, all, config) {
 
     /* ルートの先頭の本が難しいときは、その前にやる段階を 1 行添える（ルートページと同じ文）。
        本編が違うトラックで同じ本から始まるなら 1 回だけ */
+    /* 出題形式別の重点対策（focus.json）。大学の fx に書いてある形式だけを出す */
+    const focusRows = fx.map(k => ({ key: k, f: (d.focus || {})[k] })).filter(x => x.f);
+    const bookLink = (id) => {
+      const b = d.books.find(x => x.id === id);
+      return b ? `<a href="/${p.sub.dir}/books/${b.id}/">${esc(b.name)}</a>` : '';
+    };
+    const focusHtml = focusRows.length ? `      <h3 class="usec__h3">${esc(name)}の出題形式に合わせた重点対策</h3>
+      <p class="usec__note">ルートの本編とは別に、${esc(name)}の${esc(p.sub.ja)}で出る形式に対して追加する枠です。</p>
+      <ul class="ufocus">
+${focusRows.map(({ key, f }) => {
+    const b = d.books.find(x => x.id === f.id);
+    if (!b) return '';
+    const st = stages[b.stage] || {};
+    const alts = (f.alts || []).map(bookLink).filter(Boolean);
+    return `        <li class="ubook">
+          <a class="ubook__cov" href="/${p.sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || p.sub.color })}</a>
+          <div class="ubook__body">
+            <span class="ubook__tag">重点:${esc(key)}</span>
+            <a class="ubook__name" href="/${p.sub.dir}/books/${b.id}/">${esc(b.name)}</a>
+            <span class="ubook__meta">${esc(b.pub || '')}／難易度 ${b.diff}${b.hensachi ? `／${esc(b.hensachi)}` : ''}</span>
+            <span class="ubook__why">${esc(f.note)}</span>
+${alts.length ? `            <span class="ubook__note">代わりに使える本：${alts.join('、')}</span>` : ''}
+          </div>
+        </li>`;
+  }).filter(Boolean).join('\n')}
+      </ul>
+` : '';
+
     const seenStart = new Set();
     const befores = groups.map(g => ({ g, b: beforeRoute(d, p.u.t, g) }))
       .filter(x => x.b && !seenStart.has(x.b.book.id) && seenStart.add(x.b.book.id));
@@ -395,7 +423,7 @@ ${features.length ? `      <h3 class="usec__h3">ここで問われる力と、�
       <ul class="upoints">
 ${features.map(f => `        <li><b>${esc(f.key)}</b><span>${esc(f.tip)}</span></li>`).join('\n')}
       </ul>
-` : ''}${books.length ? `      <h3 class="usec__h3">${esc(name)}におすすめの参考書</h3>
+` : ''}${focusHtml}${books.length ? `      <h3 class="usec__h3">${esc(name)}におすすめの参考書</h3>
       <p class="usec__note">${esc(p.tier.name)}の${esc(p.sub.ja)}ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを${books.length}冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は${esc(p.sub.ja)}のルートを見てください。</p>
       <ul class="ubooks">
 ${books.map(b => {
@@ -494,6 +522,9 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
 .upoints li{background:var(--surface);padding:13px 16px}
 .upoints b{display:block;font-size:12.5px;font-weight:800;color:var(--sc);letter-spacing:.02em}
 .upoints span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.9;margin-top:5px}
+.ufocus{list-style:none;margin-top:12px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:720px){.ufocus{grid-template-columns:repeat(2,1fr)}}
+.ubook__note a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .ubooks{list-style:none;margin-top:12px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
 @media(min-width:720px){.ubooks{grid-template-columns:repeat(2,1fr)}}
 .ubook{display:flex;gap:13px;background:var(--surface);padding:13px 15px}

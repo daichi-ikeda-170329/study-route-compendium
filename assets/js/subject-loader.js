@@ -119,6 +119,7 @@
         config: core.config, stages: core.stages, tiers: core.tiers,
         books: books.books,
         routes: (routes && routes.routes) || {},
+        focus: (routes && routes.focus) || {},
         unis: unis ? unpackUnis(unis) : [],
         guides: (guides && guides.guides) || [],
       };

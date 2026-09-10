@@ -40,7 +40,11 @@ import path from 'node:path';
 import { SUBJECTS } from './extract.mjs';
 import { validateCanonicalFile } from './validate-subject-data.mjs';
 
-/** data/subjects/<科目>/ に置くファイルと、戻り値のどのキーに載るか */
+/**
+ * data/subjects/<科目>/ に置くファイルと、戻り値のどのキーに載るか。
+ * optional のファイルは無くてよい（無ければ空のオブジェクトとして読む）。
+ * **optional でないファイルが欠けていたら、その場で落とす**（黙って別の場所を読まない）。
+ */
 export const CANONICAL_FILES = [
   { file: 'books.json',        key: 'books',  kind: 'array'  },
   { file: 'universities.json', key: 'unis',   kind: 'array'  },
@@ -48,6 +52,8 @@ export const CANONICAL_FILES = [
   { file: 'guides.json',       key: 'guides', kind: 'array'  },
   { file: 'stages.json',       key: 'stages', kind: 'object' },
   { file: 'config.json',       key: 'config', kind: 'object' },
+  // 出題形式 → 重点対策の本（英語だけが持つ。もとは assets/js/subject-english.js の FOCUS 定数）
+  { file: 'focus.json',        key: 'focus',  kind: 'object', optional: true },
 ];
 
 /** 正本の置き場所 */
@@ -113,9 +119,11 @@ export function loadSubjectData(rootDir, dir, opts = {}) {
   const key = `${rootDir}::${dir}`;
   if (!fresh && cache.has(key)) return cache.get(key);
 
+  const has = (f) => fs.existsSync(path.join(subjectDir(rootDir, dir), f));
   const missing = CANONICAL_FILES
+    .filter(f => !f.optional)
     .map(f => f.file)
-    .filter(f => !fs.existsSync(path.join(subjectDir(rootDir, dir), f)));
+    .filter(f => !has(f));
   if (missing.length) {
     throw new Error(`${dir}: data/subjects/${dir}/ が足りない — ${missing.join(', ')}`);
   }
@@ -126,6 +134,7 @@ export function loadSubjectData(rootDir, dir, opts = {}) {
   const guides = readJson(rootDir, dir, 'guides.json');
   const stages = readJson(rootDir, dir, 'stages.json');
   const config = readJson(rootDir, dir, 'config.json');
+  const focus = has('focus.json') ? readJson(rootDir, dir, 'focus.json') : { focus: {} };
 
   const data = {
     dir,
@@ -136,6 +145,7 @@ export function loadSubjectData(rootDir, dir, opts = {}) {
     unis: unis.universities,
     guides: guides.guides,
     config: config.config,
+    focus: focus.focus || {},
   };
   assertNoFunctions(data, `data/subjects/${dir}`);
 

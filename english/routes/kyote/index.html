@@ -105,6 +105,14 @@ gtag('config', 'G-DQ5WFXEFMX', {
 .rside__cov{flex:none;display:block;--cw:40px}
 .rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.rfocus{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:16px;box-shadow:var(--sh-s)}
+@media(min-width:720px){.rfocus{grid-template-columns:repeat(2,1fr)}}
+.rfocus>div{background:var(--surface);padding:13px 16px}
+.rfocus dt{font-size:12px;font-weight:800;color:var(--sc);letter-spacing:.02em}
+.rfocus dd{font-size:13px;line-height:1.75;margin-top:5px}
+.rfocus dd>a{font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px;padding:3px 0;display:inline-block}
+.rfocus dd span{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
+.rfocus dd span a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .unis span,.unis a{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
 .unis a{transition:.15s}
@@ -372,6 +380,26 @@ gtag('config', 'G-DQ5WFXEFMX', {
       </div>
       
     </section>
+
+  <section class="block" id="focus">
+    <div class="eyebrow">Focus by format</div>
+    <h2 class="sec">出題形式別の重点対策（志望校で選ぶ）</h2>
+    <p class="sec-lead">志望校の出題形式に合わせて、上のルートに足す枠です。どの形式が出るかは<a href="/univ/">大学別ページ</a>で確認できます。</p>
+    <dl class="rfocus">
+      <div><dt>和訳</dt><dd><a href="/english/books/jukou-ge/">英文熟考 下</a><span>下線部和訳が頻出。構文を正確に訳文へ落とす訓練を</span><span>代わりに使える本：<a href="/english/books/toshizu/">英文読解の透視図</a>、<a href="/english/books/gijutsu100/">英文解釈の技術100</a></span></dd></div>
+      <div><dt>英作文</dt><dd><a href="/english/books/dragon100/">ドラゴン・イングリッシュ基本英文100</a><span>和文英訳が出る。暗唱例文で「書ける部品」を蓄える</span><span>代わりに使える本：<a href="/english/books/haitore-wabun/">英作文ハイパートレーニング 和文英訳編</a>、<a href="/english/books/takeoka-omoshiro/">竹岡広信の英作文が面白いほど書ける本</a></span></dd></div>
+      <div><dt>自由英作文</dt><dd><a href="/english/books/haitore-jiyu/">英作文ハイパートレーニング 自由英作文編 Plus</a><span>自由英作文が出る。型と頻出テーマを事前に仕込む</span><span>代わりに使える本：<a href="/english/books/eisaku-polaris2/">英作文ポラリス2(自由英作文編)</a>、<a href="/english/books/hijii-sugu-jiyu/">すぐ書ける自由英作文</a></span></dd></div>
+      <div><dt>要約</dt><dd><a href="/english/books/yoshi-yoyaku/">英文要旨要約トレーニング</a><span>要約・大意把握が出る。専用訓練の価値が非常に高い</span><span>代わりに使える本：<a href="/english/books/discourse/">ディスコースマーカー英文読解</a>、<a href="/english/books/todai-yoyaku/">東大の英語 要約問題 UNLIMITED</a></span></dd></div>
+      <div><dt>リスニング</dt><dd><a href="/english/books/lis-platinum/">英語リスニング プラチナルール</a><span>リスニングが課される。毎日の音声訓練+先読み技術を</span><span>代わりに使える本：<a href="/english/books/kimutatsu-basic/">キムタツの東大英語リスニング BASIC</a>、<a href="/english/books/kimeru-lis/">きめる!共通テスト英語リスニング</a></span></dd></div>
+      <div><dt>超長文</dt><dd><a href="/english/books/yatte1000/">やっておきたい英語長文1000</a><span>超長文が名物。分量への耐性と時間配分の訓練を</span><span>代わりに使える本：<a href="/english/books/kimutatsu-shidai/">キムタツの私立大学英語リーディング</a></span></dd></div>
+      <div><dt>速読</dt><dd><a href="/english/books/sokudoku-tr/">英語長文プラス 速読トレーニング</a><span>分量勝負の形式。WPMを計測して読速を底上げ</span><span>代わりに使える本：<a href="/english/books/hyper-training/">英語長文ハイパートレーニング</a>、<a href="/english/books/chobun-platinum/">英語長文プラチナルール</a></span></dd></div>
+      <div><dt>正誤</dt><dd><a href="/english/books/ryomon500/">英文法・語法 良問500+4技能</a><span>正誤問題が名物。誤文訂正の専用演習を</span><span>代わりに使える本：<a href="/english/books/hinshutsu1000/">頻出英文法・語法問題1000</a></span></dd></div>
+      <div><dt>会話文</dt><dd><a href="/english/books/hinshutsu-polaris/">英語頻出問題ポラリス</a><span>会話文・口語表現が頻出。知識問題を体系的に</span><span>代わりに使える本：<a href="/english/books/chobun-platinum/">英語長文プラチナルール</a></span></dd></div>
+      <div><dt>語彙</dt><dd><a href="/english/books/pass-jun1/">英検準1級 でる順パス単</a><span>語彙水準が高い。単語帳2冊目で上位語彙まで</span><span>代わりに使える本：<a href="/english/books/sokutan-jokyu/">速読英単語 上級編</a>、<a href="/english/books/teppeki/">鉄緑会東大英単語熟語 鉄壁</a></span></dd></div>
+      <div><dt>文法</dt><dd><a href="/english/books/final-polaris/">英文法ファイナル演習ポラリス</a><span>文法・語法の独立問題が多い。ランダム演習で仕上げを</span><span>代わりに使える本：<a href="/english/books/hinshutsu1000/">頻出英文法・語法問題1000</a>、<a href="/english/books/ryomon500/">英文法・語法 良問500+4技能</a></span></dd></div>
+      <div><dt>記述</dt><dd><a href="/english/books/kijutsu-tr/">英語長文プラス 記述式トレーニング</a><span>日本語記述の比重が高い。採点基準つきの記述訓練を</span><span>代わりに使える本：<a href="/english/books/canpass-e/">国公立標準問題集 CanPass 英語</a></span></dd></div>
+    </dl>
+  </section>
 
   
 

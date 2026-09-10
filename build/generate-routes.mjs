@@ -195,6 +195,27 @@ ${bodies}
 
   const others = d.tiers.filter(t => t.id !== tier.id && norm[t.id]);
 
+  /* 出題形式別の重点対策（data/subjects/<科目>/focus.json）。持っている科目（英語）だけ出す。
+     どの形式が出るかは大学で決まるので、ここでは全形式を並べて大学別ページへ送る */
+  const focusRows = Object.entries(d.focus || {}).filter(([, f]) => bookById.has(f.id));
+  const bookA = (id) => {
+    const b = bookById.get(id);
+    return b ? `<a href="/${sub.dir}/books/${b.id}/">${esc(b.name)}</a>` : '';
+  };
+  const focusSection = focusRows.length ? `  <section class="block" id="focus">
+    <div class="eyebrow">Focus by format</div>
+    <h2 class="sec">出題形式別の重点対策（志望校で選ぶ）</h2>
+    <p class="sec-lead">志望校の出題形式に合わせて、上のルートに足す枠です。どの形式が出るかは<a href="/univ/">大学別ページ</a>で確認できます。</p>
+    <dl class="rfocus">
+${focusRows.map(([key, f]) => {
+    const alts = (f.alts || []).map(bookA).filter(Boolean);
+    return `      <div><dt>${esc(key)}</dt><dd>${bookA(f.id)}<span>${esc(f.note)}</span>${alts.length ? `<span>代わりに使える本：${alts.join('、')}</span>` : ''}</dd></div>`;
+  }).join('\n')}
+    </dl>
+  </section>
+
+` : '';
+
   const ld = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -269,6 +290,14 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/${sub.ogp || `ogp-${sub.di
 .rside__cov{flex:none;display:block;--cw:40px}
 .rside__name{font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:3px 0;display:inline-block}
 .rside li span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.rfocus{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:16px;box-shadow:var(--sh-s)}
+@media(min-width:720px){.rfocus{grid-template-columns:repeat(2,1fr)}}
+.rfocus>div{background:var(--surface);padding:13px 16px}
+.rfocus dt{font-size:12px;font-weight:800;color:var(--sc);letter-spacing:.02em}
+.rfocus dd{font-size:13px;line-height:1.75;margin-top:5px}
+.rfocus dd>a{font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-d);text-underline-offset:3px;padding:3px 0;display:inline-block}
+.rfocus dd span{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
+.rfocus dd span a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .unis{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .unis span,.unis a{font-size:12px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;box-shadow:var(--sh-s)}
 .unis a{transition:.15s}
@@ -308,7 +337,7 @@ ${groups.map(g => g.keys.length > 1
 
 ${sections}
 
-  ${unis.length ? `<section class="block">
+${focusSection}  ${unis.length ? `<section class="block">
     <div class="eyebrow">Target</div>
     <h2 class="sec">この志望レベルに含まれる大学</h2>
     <p class="sec-lead">${esc(sub.full)}が「${esc(tier.name)}」として扱っている大学です。同じ大学でも学部・方式で必要な到達点は変わります。大学名を押すと、その大学の全科目の出題形式と参考書ルートを見られます。</p>

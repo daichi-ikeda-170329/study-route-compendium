@@ -182,6 +182,7 @@ export function loadPage(dir) {
     const DATA = {
       config: d.config, stages: d.stages, tiers: d.tiers,
       routes: d.routes, unis: d.unis, guides: d.guides, books: d.books,
+      focus: d.focus,
     };
     if (typeof ctx.window.RT_SUBJECT_APP !== 'function') {
       throw new Error(`${dir}: assets/js/subject-${dir}.js が RT_SUBJECT_APP を定義していない`);

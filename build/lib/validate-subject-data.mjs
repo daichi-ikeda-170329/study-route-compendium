@@ -124,10 +124,23 @@ export function validateSubjectData(dir, data) {
     }
   }
 
+  /* 出題形式別の重点対策（focus.json）。本が実在し、大学の fx がすべて引けること */
+  const focus = data.focus || {};
+  for (const [k, f] of Object.entries(focus)) {
+    if (!f || typeof f !== 'object') { bad(`focus「${k}」がオブジェクトでない`); continue; }
+    if (typeof f.id !== 'string' || !known.has(f.id)) bad(`focus「${k}」の本「${f.id}」が BOOKS に無い`);
+    if (typeof f.note !== 'string' || !f.note) bad(`focus「${k}」に note が無い`);
+    if (f.alts !== undefined && !Array.isArray(f.alts)) bad(`focus「${k}」の alts が配列でない`);
+    for (const a of f.alts || []) if (!known.has(a)) bad(`focus「${k}」の代替「${a}」が BOOKS に無い`);
+  }
+
   /* 大学 */
   for (const u of data.unis) {
     if (!u.n) bad('UNIS に名前の無い項目がある');
     if (u.t && !data.routes[u.t]) bad(`UNIS「${u.n}」の志望レベル「${u.t}」にルートが無い`);
+    for (const k of u.fx || []) {
+      if (!focus[k]) bad(`UNIS「${u.n}」の出題形式「${k}」が focus.json に無い`);
+    }
   }
 
   return problems;

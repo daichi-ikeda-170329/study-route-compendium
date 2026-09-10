@@ -49,6 +49,8 @@ function makeMigratedRoot(dirs = SUBJECTS.map(s => s.dir), skipFiles = []) {
       'guides.json': { guides: d.guides },
       'stages.json': { stages: d.stages },
       'config.json': { config: d.config },
+      // optional。持っている科目（英語）だけ書き出す
+      ...(Object.keys(d.focus).length ? { 'focus.json': { focus: d.focus } } : {}),
     };
     for (const [f, o] of Object.entries(payload)) {
       if (skipFiles.includes(f)) continue;
@@ -189,8 +191,34 @@ test('canonical の書式は、1 レコード 1 行で差分が読める', () =>
 
 test('canonical のファイル一覧が読み込み側と揃っている', () => {
   assert.deepEqual(CANONICAL_FILES.map(f => f.file).sort(), [
-    'books.json', 'config.json', 'guides.json', 'routes.json', 'stages.json', 'universities.json',
+    'books.json', 'config.json', 'focus.json', 'guides.json', 'routes.json', 'stages.json', 'universities.json',
   ]);
+  assert.deepEqual(CANONICAL_FILES.filter(f => f.optional).map(f => f.file), ['focus.json'],
+    'optional にしてよいのは focus.json だけ（他が欠けたら落とす）');
+});
+
+test('focus.json は optional で、無い科目は空のオブジェクトとして読む', () => {
+  for (const s of SUBJECTS) {
+    const d = loadSubjectData(ROOT, s.dir);
+    assert.equal(typeof d.focus, 'object', `${s.dir}: focus がオブジェクトでない`);
+    if (s.dir === 'english') assert.equal(Object.keys(d.focus).length, 12, '英語の focus は 12 キー');
+    else assert.deepEqual(d.focus, {}, `${s.dir}: focus を持たないはず`);
+  }
+});
+
+test('focus は routes の配信アセットに載り、科目トップの JS は定数を持たない', async () => {
+  const { buildAssets } = await import('../build/lib/subject-assets.mjs');
+  const en = buildAssets(loadSubjectData(ROOT, 'english'));
+  assert.equal(Object.keys(en.routes.focus).length, 12, '英語の routes アセットに focus が無い');
+  const ma = buildAssets(loadSubjectData(ROOT, 'math'));
+  assert.equal(ma.routes.focus, undefined, 'focus を持たない科目のアセットに空の focus を出している');
+  // 配信済みのファイルにも載っている（生成し忘れの検出）
+  const shipped = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets/generated/subjects/english.routes.json'), 'utf8'));
+  assert.equal(Object.keys(shipped.focus || {}).length, 12, 'assets/generated/subjects/english.routes.json に focus が無い');
+  const loader = fs.readFileSync(path.join(ROOT, 'assets/js/subject-loader.js'), 'utf8');
+  assert.match(loader, /focus:\s*\(routes && routes\.focus\)/, 'subject-loader.js が focus を DATA に渡していない');
+  const app = fs.readFileSync(path.join(ROOT, 'assets/js/subject-english.js'), 'utf8');
+  assert.match(app, /const FOCUS = DATA\.focus \|\| \{\};/, 'subject-english.js が FOCUS をデータから受けていない');
 });
 
 test('科目データの読み口が 1 本だけになっている', () => {

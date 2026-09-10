@@ -238,7 +238,7 @@ export function recommendBooks(o) {
       if (cur.isAlt && !isAlt) cur.isAlt = false;
       return;
     }
-    cand.set(id, { book: b, tracks: new Set(track ? [track] : []), role: role || '', note: note || '', isAlt });
+    cand.set(id, { book: b, tracks: new Set(track ? [track] : []), role: role || '', note: note || '', isAlt, focus: null });
   };
   for (const track of tracks) {
     const v = node[track];
@@ -259,6 +259,30 @@ export function recommendBooks(o) {
       if (k !== '*' && tracks.length && !tracks.includes(k)) continue;
       for (const s of lists[k]) addCand(s.id, k === '*' ? '' : k, s.role || '', s.note || '', false);
     }
+  }
+
+  /* 出題形式別の重点対策（data/subjects/<科目>/focus.json）も候補に入れる。
+     ルートの本編・代替・並行枠だけだと、早稲田のように「自由英作文」「超長文」を問う大学でも
+     英作文・超長文の本が 1 冊も候補に上がらない（2026-09-10 まで）。
+     引く形式は、大学の fx（データに書いてある重点対策）と、出題説明から当たった特徴のうち
+     focus に同じ名前があるもの。どちらもデータにある語だけで、推測は足さない */
+  const focus = d.focus || {};
+  const focusKeys = [...new Set([
+    ...(uni.fx || []),
+    ...features.map(f => f.key).filter(k => focus[k]),
+  ])];
+  for (const key of focusKeys) {
+    const f = focus[key];
+    if (!f) continue;
+    const mark = (id, main) => {
+      addCand(id, '', '', main ? f.note : '', !main);
+      const c = cand.get(id);
+      if (!c) return;
+      // 同じ本が複数の形式に当たるときは、本編として当たった形式を優先する
+      if (!c.focus || (main && !c.focus.main)) c.focus = { key, main };
+    };
+    mark(f.id, true);
+    for (const a of f.alts || []) mark(a, false);
   }
 
   const scored = [];
@@ -310,13 +334,21 @@ export function recommendBooks(o) {
       reasons.push(`「${f.key}」に対応`);
     }
 
-    /* 5. ルート本編の本を、代替候補より上に置く */
+    /* 5. 出題形式別の重点対策の本。本編 +7、代替 +4 */
+    if (c.focus) {
+      score += c.focus.main ? 7 : 4;
+      reasons.push(`「${c.focus.key}」対策として`);
+    }
+
+    /* 6. ルート本編の本を、代替候補より上に置く */
     if (!c.isAlt) score += 2;
 
-    /* 6. 目標偏差値との距離 */
+    /* 7. 目標偏差値との距離 */
     score += levelFit(b, uni.h);
 
-    scored.push({ ...c, tracks: [...c.tracks], score, reasons });
+    // ルートに載っていない重点対策の本は、ルート上の役割の代わりに「重点:形式」を出す
+    const role = c.role || (c.focus ? `重点:${c.focus.key}` : '');
+    scored.push({ ...c, role, tracks: [...c.tracks], score, reasons });
   }
 
   scored.sort((x, y) => y.score - x.score
