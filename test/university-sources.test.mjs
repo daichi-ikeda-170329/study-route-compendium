@@ -42,3 +42,13 @@ test('出典を登録していない大学は、年度を書かず確認を促�
   assert.match(html, /<p class="usource">出題形式は年度により変わります。出願前に募集要項で確認してください。<\/p>/);
   assert.doesNotMatch(html, /class="ufac"/);
 });
+
+test('大学別ページの og:image は大学ごとの画像を指し、ファイルが実在する（仕様書 3.3）', () => {
+  for (const slug of ['waseda', 'fun', 'todai']) {
+    const html = fs.readFileSync(path.join(ROOT, 'univ', slug, 'index.html'), 'utf8');
+    assert.ok(html.includes(`<meta property="og:image" content="https://route-taizen.com/assets/ogp/univ/${slug}.png">`), `${slug}: og:image が大学の画像でない`);
+    assert.ok(fs.existsSync(path.join(ROOT, 'assets/ogp/univ', `${slug}.png`)), `${slug}: 画像が無い`);
+  }
+  const hashes = JSON.parse(fs.readFileSync(path.join(ROOT, 'build/data/ogp-hashes.json'), 'utf8')).files;
+  assert.equal(Object.keys(hashes).filter(k => k.startsWith('assets/ogp/univ/')).length, slugs.size, '台帳の大学数と画像の数が合わない');
+});

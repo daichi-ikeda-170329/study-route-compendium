@@ -574,7 +574,7 @@ ${befores.map(x => `      <p class="usec__before">${beforeSentence(d, x.g, x.b)}
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
-${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
+${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp/univ/${slug}.png` })}
 <style>
 :root{--sc:${tier.color || '#5B4E9E'}}
 .uhead{display:flex;flex-wrap:wrap;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:20px;box-shadow:var(--sh-s)}

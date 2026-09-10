@@ -179,3 +179,37 @@ ${meta}
 ${footer()}
 </svg>`;
 }
+
+/**
+ * 大学別ページ（/univ/<slug>/）の OGP（仕様書 3.3）。
+ *
+ * 大学名を大きく出し、科目共通の志望レベルの帯（build/lib/tiers.mjs の TIER_GROUP）と、
+ * 5 科目の目標偏差値を横に並べる。**数字は引数で受ける**（universities.json の h）。
+ *
+ * @param {object} o name 大学名 / kind 区分（国立・私立…）/ group 帯の名前 / color 帯の色 /
+ *   scores [{ja: '英語', h: 67, color: '#B5432A'}]（5 科目）
+ */
+export function univSvg(o) {
+  // 大学名は 1 行で収める。長いときだけ字を詰める（最長は「〇〇県立〇〇大学」程度）
+  const size = Math.min(88, Math.floor(1040 / Math.max(widthEm(o.name), 1)));
+  const n = o.scores.length || 1;
+  const gap = 14;
+  const boxW = Math.floor((1056 - gap * (n - 1)) / n);
+  const boxes = o.scores.map((s, i) => {
+    const x = 72 + i * (boxW + gap);
+    return `<g><rect x="${x}" y="356" width="${boxW}" height="132" rx="8" fill="#FFFFFF" stroke="${INK}" stroke-opacity="0.12"/>`
+      + `<rect x="${x}" y="356" width="${boxW}" height="8" rx="4" fill="${s.color}"/>`
+      + `<text x="${x + boxW / 2}" y="404" text-anchor="middle" font-family="${SANS}" font-size="26" font-weight="700" fill="${INK2}">${esc(s.ja)}</text>`
+      + `<text x="${x + boxW / 2}" y="462" text-anchor="middle" font-family="${SANS}" font-size="42" font-weight="700" fill="${s.color}">${esc(String(s.h))}</text></g>`;
+  }).join('\n');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+${DEFS}
+${base(o.color)}
+<text x="72" y="86" font-family="${SANS}" font-size="24" font-weight="700" letter-spacing="3" fill="${o.color}">大学別 参考書ルート　—　${esc(o.group)}</text>
+<text x="72" y="${118 + size}" font-family="${SERIF}" font-size="${size}" font-weight="800" letter-spacing="2" fill="${INK}">${esc(o.name)}</text>
+<text x="72" y="318" font-family="${SANS}" font-size="28" font-weight="400" fill="${INK2}">${esc(o.kind ? `${o.kind}・` : '')}科目ごとの目標偏差値と、出題に合わせた参考書</text>
+${boxes}
+${footer()}
+</svg>`;
+}

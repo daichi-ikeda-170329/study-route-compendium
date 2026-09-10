@@ -4,6 +4,7 @@
  *   node build/gen-ogp.mjs                全部
  *   node build/gen-ogp.mjs --subjects     科目別と共通だけ
  *   node build/gen-ogp.mjs --books        書籍別だけ
+ *   node build/gen-ogp.mjs --univ         大学別（/univ/<slug>/）だけ
  *   node build/gen-ogp.mjs --check        データとずれていれば終了コード 1 で落ちる
  *
  * **なぜ要るか。** 2026-08 に置かれた assets/ogp*.png は、元の SVG も生成手順も
@@ -31,15 +32,18 @@ import { displayName } from './lib/booktitle.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { ensureFonts } from './ogp/fonts.mjs';
-import { subjectSvg, bookSvg, W } from './ogp/templates.mjs';
+import { subjectSvg, bookSvg, univSvg, W } from './ogp/templates.mjs';
+import { tierGroup } from './lib/tiers.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const CHECK = args.includes('--check');
 const ONLY_SUBJECTS = args.includes('--subjects');
 const ONLY_BOOKS = args.includes('--books');
-const doSubjects = !ONLY_BOOKS;
-const doBooks = !ONLY_SUBJECTS;
+const ONLY_UNIV = args.includes('--univ');
+const doSubjects = !ONLY_BOOKS && !ONLY_UNIV;
+const doBooks = !ONLY_SUBJECTS && !ONLY_UNIV;
+const doUniv = !ONLY_SUBJECTS && !ONLY_BOOKS;
 
 /** 生成物と SVG の対応台帳。生成物なので手で触らない */
 const HASH_FILE = path.join(ROOT, 'build', 'data', 'ogp-hashes.json');
@@ -153,6 +157,31 @@ async function genBooks(data, hashes) {
 }
 
 /* ============================================================
+   大学別
+   ============================================================ */
+
+/**
+ * 大学別ページの OGP。対象は build/data/university-slugs.json の台帳（大学別ページと同じ 160 校）。
+ * 目標偏差値は 5 科目の universities.json の h。1 科目でも欠けたら落とす
+ * （build/generate-universities.mjs も同じ条件でページを作らない）。
+ */
+async function genUniversities(data, hashes) {
+  const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8')).universities;
+  const routeSubjects = SUBJECTS.filter(s => !s.catalogOnly);
+  for (const row of ledger) {
+    const per = routeSubjects.map(s => ({ s, u: data[s.dir].unis.find(x => x.n === row.name) }));
+    const missing = per.filter(p => !p.u).map(p => p.s.dir);
+    if (missing.length) throw new Error(`${row.name}: ${missing.join(', ')} に大学のデータが無い（OGP を作れない）`);
+    const tier = data.english.tiers.find(t => t.id === row.tier) || {};
+    await emit(`assets/ogp/univ/${row.slug}.png`, univSvg({
+      name: row.name, kind: per[0].u.ty || '', group: tierGroup(row.tier) || tier.name || '',
+      color: tier.color || '#5B4E9E',
+      scores: per.map(p => ({ ja: p.s.ja, h: p.u.h, color: p.s.color })),
+    }), hashes);
+  }
+}
+
+/* ============================================================
    実行
    ============================================================ */
 
@@ -164,6 +193,7 @@ if (!CHECK) fonts = await ensureFonts();
 const hashes = loadHashes();
 if (doSubjects) await genSubjects(data, hashes);
 if (doBooks) await genBooks(data, hashes);
+if (doUniv) await genUniversities(data, hashes);
 
 // 台帳に残っているのに BOOKS から消えた本の画像は、孤児になるので消す
 if (!CHECK) {
@@ -175,7 +205,7 @@ if (!CHECK) {
       if (!fs.statSync(sd).isDirectory()) continue;
       for (const f of fs.readdirSync(sd)) {
         const rel = `assets/ogp/${sub}/${f}`;
-        if (!alive.has(rel)) { fs.unlinkSync(path.join(ROOT, rel)); console.log(`  × ${rel}（BOOKS に無い）`); }
+        if (!alive.has(rel)) { fs.unlinkSync(path.join(ROOT, rel)); console.log(`  × ${rel}（台帳に無い）`); }
       }
     }
   }
