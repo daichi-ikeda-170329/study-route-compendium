@@ -10,6 +10,7 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { esc } from './extract.mjs';
+import { displayName } from './booktitle.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -74,7 +75,7 @@ function imgTag(srcs, alt) {
 export function coverBox(b, opts = {}) {
   const color = opts.color || 'var(--sc)';
   return `<span class="rt-cov" style="--cc:${color}">`
-    + `<span class="rt-cov__ph"><b>${esc(b.name)}</b><em>${esc(b.pub || '')}</em></span>`
+    + `<span class="rt-cov__ph"><b>${esc(displayName(b, opts.dir))}</b><em>${esc(b.pub || '')}</em></span>`
     + imgTag(coverSrcs(b), opts.alt || '')
     + `</span>`;
 }

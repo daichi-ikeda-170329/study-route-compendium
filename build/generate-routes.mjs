@@ -18,6 +18,7 @@ import { firstStageLabel, beforeRoute, beforeSentence } from './lib/route-start.
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
+import { displayName } from './lib/booktitle.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { subjectContentDate, saveDates } from './lib/updated.mjs';
 
@@ -73,13 +74,13 @@ function stepList(steps, bookById, sub, stages) {
     const alts = (s.alts || []).map(id => bookById.get(id)).filter(Boolean);
     return `        <li class="rstep">
           <span class="rstep__no">${String(i + 1).padStart(2, '0')}</span>
-          <a class="rstep__cov" href="/${sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || sub.color })}</a>
+          <a class="rstep__cov" href="/${sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || sub.color, dir: sub.dir })}</a>
           <div class="rstep__body">
             <span class="rstep__role">${esc(s.role || '')}</span>
-            <a class="rstep__name" href="/${sub.dir}/books/${b.id}/">${esc(b.name)}</a>
+            <a class="rstep__name" href="/${sub.dir}/books/${b.id}/">${esc(displayName(b, sub.dir))}</a>
             <span class="rstep__meta">${esc(b.pub)}／難易度 ${b.diff}／${esc(b.hensachi || '')}</span>
             ${s.note ? `<p class="rstep__note">${esc(s.note)}</p>` : ''}
-            ${alts.length ? `<p class="rstep__alts">代わりに使える本：${alts.map(a => `<a href="/${sub.dir}/books/${a.id}/">${esc(a.name)}</a>`).join('、')}</p>` : ''}
+            ${alts.length ? `<p class="rstep__alts">代わりに使える本：${alts.map(a => `<a href="/${sub.dir}/books/${a.id}/">${esc(displayName(a, sub.dir))}</a>`).join('、')}</p>` : ''}
           </div>
         </li>`;
   }).filter(Boolean).join('\n');
@@ -91,8 +92,8 @@ function sideList(steps, bookById, sub, stages) {
     if (!b) return '';
     const st = stages[b.stage] || {};
     return `          <li>
-            <a class="rside__cov" href="/${sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || sub.color })}</a>
-            <div><a class="rside__name" href="/${sub.dir}/books/${b.id}/">${esc(b.name)}</a>${s.note ? `<span>${esc(s.note)}</span>` : ''}</div>
+            <a class="rside__cov" href="/${sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || sub.color, dir: sub.dir })}</a>
+            <div><a class="rside__name" href="/${sub.dir}/books/${b.id}/">${esc(displayName(b, sub.dir))}</a>${s.note ? `<span>${esc(s.note)}</span>` : ''}</div>
           </li>`;
   }).filter(Boolean).join('\n');
 }
@@ -200,7 +201,7 @@ ${bodies}
   const focusRows = Object.entries(d.focus || {}).filter(([, f]) => bookById.has(f.id));
   const bookA = (id) => {
     const b = bookById.get(id);
-    return b ? `<a href="/${sub.dir}/books/${b.id}/">${esc(b.name)}</a>` : '';
+    return b ? `<a href="/${sub.dir}/books/${b.id}/">${esc(displayName(b, sub.dir))}</a>` : '';
   };
   const focusSection = focusRows.length ? `  <section class="block" id="focus">
     <div class="eyebrow">Focus by format</div>

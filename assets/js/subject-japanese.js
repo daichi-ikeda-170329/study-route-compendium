@@ -20,6 +20,9 @@ var TIERS  = DATA.tiers;
 var GUIDES = DATA.guides;
 var UNIS   = DATA.unis;
 var BOOKS  = DATA.books;
+/* 読者に見せる書名。内部略称の本はビルド時に正式名称を dn として配信している
+   （build/lib/booktitle.mjs の displayName。静的ページと同じ規則）。並べ替え・検索には name を使う */
+const bookName = b => (b && (b.dn || b.name)) || "";
 
 /* 共通スクリプトのグローバルを window から受け取る（自動生成）。
    これが無いと下の `var X = (typeof X !== "undefined" && X) || …` が
@@ -482,13 +485,13 @@ function rakutenURL(b){
   return `https://hb.afl.rakuten.co.jp/hgc/${CONFIG.rakutenId}/?pc=${encodeURIComponent(dest)}&m=${encodeURIComponent(dest)}`;
 }
 function coverHTML(b){
-  const n = b.name.length;
+  const n = bookName(b).length;
   const cls = n>14 ? "xlong" : (n>9 ? "long" : "");
   /* fb（書影が取れないときの代替色）は手で決める装飾。新刊はまだ持たないので既定色を当てる。
      ここを素通りさせると b.fb.bg が TypeError になり、図鑑の描画そのものが止まる */
   const fbc = b.fb || {bg:"linear-gradient(160deg,#8A8F9E,#5A6070)"};
   const fbStyle = `background:${fbc.bg}${fbc.light ? ";color:#1B2233;text-shadow:none" : ""}`;
-  const fb = `<div class="bcov-fb${fbc.light ? " light" : ""}" style="${fbStyle}"><span class="fb-spine"></span><span class="fb-pub">${b.pub}</span><span class="fb-title ${cls}">${b.name}</span><span class="fb-band">${b.subjects || ""}</span></div>`;
+  const fb = `<div class="bcov-fb${fbc.light ? " light" : ""}" style="${fbStyle}"><span class="fb-spine"></span><span class="fb-pub">${b.pub}</span><span class="fb-title ${cls}">${bookName(b)}</span><span class="fb-band">${b.subjects || ""}</span></div>`;
   const srcs = coverSrcs(b);
   if(!srcs.length) return `<div class="bcov fb">${fb}</div>`;
   return `<div class="bcov"><img src="${srcs[0]}" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="${srcs.join("|")}" data-s="0" onload="covLoad(this)" onerror="covErr(this)">${fb}</div>`;
@@ -530,7 +533,7 @@ function bookCardHTML(b){
   return `<div class="book-card" role="button" tabindex="0" onclick="openModal('${b.id}')">
     <div class="book-card__cover">${coverHTML(b)}</div>
     <div class="book-card__body">
-      <div class="bc-name">${b.name}</div>
+      <div class="bc-name">${bookName(b)}</div>
       <div class="bc-pub">${b.pub}</div>
       <div class="bc-diff"><span class="diff-dots">${dots}</span></div>
       <div class="bc-hensachi">${isProv(b) ? `<span class="bc-prov">${PROV_LABEL}</span>` : `目安 <b>${b.hensachi}</b>`}</div>
@@ -617,7 +620,7 @@ function openModal(id){
     const p = bookById(pid);
     return `<div class="connect-item" onclick="openModal('${p.id}')">
       <span class="ci-dir">${dir}</span>
-      <div class="ci-txt"><b>${p.name}</b><span>${STAGES[p.stage].label} ・ ${p.pub}</span></div>
+      <div class="ci-txt"><b>${bookName(p)}</b><span>${STAGES[p.stage].label} ・ ${p.pub}</span></div>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </div>`;
   }).join("");
@@ -625,7 +628,7 @@ function openModal(id){
   const ext = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4 10 14M9 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`;
   const detail = `<div class="mb-block"><h6>この参考書をもっと詳しく</h6>
     <a class="detail-btn" href="/japanese/books/${b.id}/">
-      <span>「${b.name}」の詳細ページ<small>${isProv(b) ? "書誌情報と役割（評価は準備中）" : "レベル・向いている人・同じレベルの他の選択肢・次に進む本"}</small></span>
+      <span>「${bookName(b)}」の詳細ページ<small>${isProv(b) ? "書誌情報と役割（評価は準備中）" : "レベル・向いている人・同じレベルの他の選択肢・次に進む本"}</small></span>
       <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a></div>`;
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
@@ -643,7 +646,7 @@ function openModal(id){
       <div class="modal__titles">
         <span class="tag tag-stage modal__stage" style="background:${st.color}">${st.label}</span>
         <span class="tag modal__stage" style="background:${sc}1A;color:${sc};margin-left:4px">${b.subjects}</span>
-        <h3>${b.name}</h3>
+        <h3>${bookName(b)}</h3>
         <div class="modal__pub">${b.pub} ・ ${b.year}${b.isbn13?` ・ ISBN ${b.isbn13}`:""}</div>
         <div class="modal__official">${b.official}</div>
       </div>
@@ -816,7 +819,7 @@ function renderDoneSug(q){
   doneSugList = BOOKS.filter(b=>!S.done.has(b.id) && normQ(b.name+b.official+b.pub).includes(n)).slice(0,8);
   box.classList.add("open");
   box.innerHTML = doneSugList.length
-    ? doneSugList.map((b,i)=>`<button type="button" role="option" aria-selected="false" onclick="addDone(${i})"><b>${b.name}</b><span class="sug-ty">${STAGES[b.stage].short}</span><span class="sug-h">${b.pub}</span></button>`).join("")
+    ? doneSugList.map((b,i)=>`<button type="button" role="option" aria-selected="false" onclick="addDone(${i})"><b>${bookName(b)}</b><span class="sug-ty">${STAGES[b.stage].short}</span><span class="sug-h">${b.pub}</span></button>`).join("")
     : `<div class="sug-empty">該当する参考書が見つかりません</div>`;
   doneSugIdx = -1;
   sugSync("doneInput","doneSug",doneSugIdx);
@@ -832,7 +835,7 @@ function removeDone(id){ S.done.delete(id); renderDoneChips(); recalcStatus(); }
 function renderDoneChips(){
   document.getElementById("doneChips").innerHTML = [...S.done].map(id=>{
     const b = bookById(id); if(!b) return "";
-    return `<span class="done-chip">${b.name}<button onclick="removeDone('${id}')" aria-label="削除"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></span>`;
+    return `<span class="done-chip">${bookName(b)}<button onclick="removeDone('${id}')" aria-label="削除"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></span>`;
   }).join("");
 }
 /** 二択・多択の切り替えボタンの選択状態を aria-pressed に反映する。
@@ -877,7 +880,7 @@ function nodeHTML(s, i, st0, startIdx, b, extraCls){
     : (i===startIdx ? `<span class="node-badge start">▶ ここから</span>` : ""));
   const st = STAGES[b.stage];
   const altHtml = s.alts && s.alts.length ? `<div class="cn-info__alt"><b>代替:</b> ${s.alts.map(a=>{
-    const ab=bookById(a); return `<button onclick="event.stopPropagation();openModal('${a}')">${ab.name}</button>`;
+    const ab=bookById(a); return `<button onclick="event.stopPropagation();openModal('${a}')">${bookName(ab)}</button>`;
   }).join(" / ")}</div>` : "";
   return `<div class="climb-node${cls}${extraCls||""}" data-book-id="${b.id}" data-subject-id="japanese" data-h="${b.h}" data-hours="${String(b.hours||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;")}">
     <div class="cn-marker"><div class="cn-step">${st0==="done"?"✓":i+1}</div><div class="cn-lvl">${LVL_NAME[s.lvl]}</div></div>
@@ -886,7 +889,7 @@ function nodeHTML(s, i, st0, startIdx, b, extraCls){
       <div class="cn-card__cover">${coverHTML(b)}</div>
       <div class="cn-info">
         <span class="cn-info__role" style="background:${st.color}">${s.role}</span>
-        <h3>${b.name}</h3>
+        <h3>${bookName(b)}</h3>
         <div class="cn-info__note">${s.note}</div>
         ${altHtml}
         <div class="cn-info__meta">
@@ -954,9 +957,9 @@ function renderRouteBody(){
             <div class="cn-card__cover">${coverHTML(b)}</div>
             <div class="cn-info">
               <span class="cn-info__role" style="background:${st.color}">${st.label}</span>
-              <h4>${b.name}</h4>
+              <h4>${bookName(b)}</h4>
               <div class="cn-info__note">${p.note}</div>
-              ${p.alts&&p.alts.length?`<div class="cn-info__alt"><b>代替:</b> ${p.alts.map(a=>{const ab=bookById(a);return `<button onclick="event.stopPropagation();openModal('${a}')">${ab.name}</button>`;}).join(" / ")}</div>`:""}
+              ${p.alts&&p.alts.length?`<div class="cn-info__alt"><b>代替:</b> ${p.alts.map(a=>{const ab=bookById(a);return `<button onclick="event.stopPropagation();openModal('${a}')">${bookName(ab)}</button>`;}).join(" / ")}</div>`:""}
             </div>
           </div>
         </div>`;
@@ -1138,7 +1141,7 @@ function renderQuizResult(){
               return `<button class="opt" onclick="openModal('${b.id}')">
                 <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:var(--ink);color:#fff">仕</span>
                 <span class="opt__cov">${coverHTML(b)}</span>
-                <span class="opt__txt"><b>${b.name}</b><span>${subjTxt}の仕上げ ・ ${st.label} ・ ${b.hours}</span></span>
+                <span class="opt__txt"><b>${bookName(b)}</b><span>${subjTxt}の仕上げ ・ ${st.label} ・ ${b.hours}</span></span>
               </button>`;}).join("")
              || `<div class="opt" style="pointer-events:none;background:var(--surface-2)">
                 <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:var(--ink);color:#fff">仕</span>
@@ -1155,7 +1158,7 @@ function renderQuizResult(){
               return `<button class="opt" onclick="openModal('${b.id}')">
                 <span class="opt__ic mono" style="font-size:13px;font-weight:700;background:${SUBJ[f.k].color};color:#fff">${SUBJ[f.k].short}</span>
                 <span class="opt__cov">${coverHTML(b)}</span>
-                <span class="opt__txt"><b>${b.name}</b><span>${f.done?`${SUBJ[f.k].label}は仕上げ段階`:`${SUBJ[f.k].label}の1冊目`} ・ ${st.label} ・ ${b.hours}</span></span>
+                <span class="opt__txt"><b>${bookName(b)}</b><span>${f.done?`${SUBJ[f.k].label}は仕上げ段階`:`${SUBJ[f.k].label}の1冊目`} ・ ${st.label} ・ ${b.hours}</span></span>
               </button>`;}).join("")}
         <div style="text-align:center;color:var(--muted);font-size:12px;font-weight:600">${allDone?"… 過去問の詳細と併用できる教材はルート画面で":"… 各科目の続きと仕上げの過去問はルート画面で"}</div>
       </div>

@@ -27,6 +27,7 @@ import sharp from 'sharp';
 
 import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
+import { displayName } from './lib/booktitle.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { ensureFonts } from './ogp/fonts.mjs';
@@ -143,7 +144,7 @@ async function genBooks(data, hashes) {
     for (const b of d.books) {
       const st = d.stages[b.stage] || {};
       await emit(`assets/ogp/${s.dir}/${b.id}.png`, bookSvg({
-        name: b.name, subject: s.full, color: s.color,
+        name: displayName(b, s.dir), subject: s.full, color: s.color,
         role: st.short || st.label || '参考書', roleColor: st.color || s.color,
         lines: bookLines(b),
       }), hashes);

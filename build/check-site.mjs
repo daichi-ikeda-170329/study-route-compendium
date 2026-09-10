@@ -25,6 +25,7 @@ import { STAGE_FLOW } from './lib/flow.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { isProvisional } from './lib/newbooks.mjs';
 import { BANNED_WORDS, BANNED_PHRASES, BANNED_ALLOW } from './lib/words.mjs';
+import { displayName } from './lib/booktitle.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WARN_OK = process.argv.includes('--warn-ok');
@@ -88,6 +89,28 @@ const STAGE_KEYWORDS = {
 
 const data = {};
 for (const s of SUBJECTS) data[s.dir] = loadSubjectData(ROOT, s.dir);
+
+/* 内部略称の書名（build/lib/booktitle.mjs の displayName が正式名称へ差し替える本の name）。
+   これがカード・ルートの行・おすすめの行の書名要素（<b> と、書名用の class を持つ <a>）に
+   単独で出ていたら、表示名を通し忘れた箇所がある。
+   記事の本文リンク（[[id|ラベル]]）は書き手が文脈に合わせて選んだ表記なので見ない。
+   別の本の表示名として正当に使われている文字列（重なり回避で name に戻した本）も除く */
+const SHORTHAND_NAMES = (() => {
+  const shown = new Set();
+  const short = new Set();
+  for (const s of SUBJECTS) {
+    for (const b of data[s.dir].books) {
+      const dn = displayName(b, s.dir);
+      shown.add(dn);
+      if (dn !== b.name) short.add(b.name);
+    }
+  }
+  return [...short].filter(n => !shown.has(n));
+})();
+const escText = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+const SHORTHAND_RE = SHORTHAND_NAMES.length
+  ? new RegExp(`<(b|a class="(?:bcard|rstep__name|rside__name|ubook__name)[^"]*"[^>]*)>(${SHORTHAND_NAMES.map(n => escText(n).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})</(?:b|a)>`)
+  : null;
 
 function checkData() {
   const required = ['id', 'name', 'pub', 'stage', 'subjects'];
@@ -486,6 +509,12 @@ function checkHtml(files) {
       } else {
         trackBodies.set(ols, m[1]);
       }
+    }
+
+    // 内部略称の書名を単独で出していないか（表示は build/lib/booktitle.mjs の displayName を通す）
+    if (SHORTHAND_RE) {
+      const m = markup.match(SHORTHAND_RE);
+      if (m) err(at, `内部略称の書名「${m[2]}」をそのまま出している（displayName を通す）`);
     }
 
     // 最終更新日

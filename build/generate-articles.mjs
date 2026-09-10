@@ -22,6 +22,7 @@ import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { coverBox } from './lib/cover.mjs';
+import { displayName } from './lib/booktitle.mjs';
 import { ARTICLES } from './content/articles.mjs';
 import { CATEGORIES, categoryOf } from './content/article-categories.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -46,7 +47,7 @@ function lookup(dir, id, ctxLabel) {
 
 function bookLink(dir, id, label) {
   const b = lookup(dir, id, 'bookLink');
-  return `<a href="/${dir}/books/${b.id}/">${esc(label || b.name)}</a>`;
+  return `<a href="/${dir}/books/${b.id}/">${esc(label || displayName(b, dir))}</a>`;
 }
 
 /**

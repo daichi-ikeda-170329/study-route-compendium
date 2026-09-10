@@ -26,6 +26,7 @@ import vm from 'vm';
 import { fileURLToPath } from 'url';
 import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData, isMigrated } from './lib/load-subject-data.mjs';
+import { clientBooks } from './lib/subject-assets.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -168,7 +169,7 @@ function collect(src, dir) {
     const d = loadSubjectData(ROOT, dir);
     const DATA = {
       config: d.config, stages: d.stages, tiers: d.tiers,
-      routes: d.routes, unis: d.unis, guides: d.guides, books: d.books,
+      routes: d.routes, unis: d.unis, guides: d.guides, books: clientBooks(d), focus: d.focus,
     };
     if (typeof ctx.window.RT_SUBJECT_APP !== 'function') {
       throw new Error(`${dir}: assets/js/subject-${dir}.js が RT_SUBJECT_APP を定義していない`);

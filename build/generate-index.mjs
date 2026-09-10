@@ -9,6 +9,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
+import { displayName } from './lib/booktitle.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -82,7 +83,7 @@ ${body}
         name: `${sub.ja}の参考書一覧`,
         numberOfItems: n,
         itemListElement: d.books.map((b, i) => ({
-          '@type': 'ListItem', position: i + 1, name: b.name,
+          '@type': 'ListItem', position: i + 1, name: displayName(b, sub.dir),
           url: `${ORIGIN}/${sub.dir}/books/${b.id}/`,
         })),
       },

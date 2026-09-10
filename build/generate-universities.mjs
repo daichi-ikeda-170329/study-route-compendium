@@ -63,6 +63,7 @@ import { adUnit } from './lib/ads.mjs';
 import { isPlaceholder, placeholderSearchUrl } from './lib/record-type.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 import { coverBox } from './lib/cover.mjs';
+import { displayName } from './lib/booktitle.mjs';
 import { matchFeatures, recommendBooks, availableTracks } from './lib/uni-picks.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -404,7 +405,7 @@ function renderUniversity(uni, all, config) {
     const focusRows = fx.map(k => ({ key: k, f: (d.focus || {})[k] })).filter(x => x.f);
     const bookLink = (id) => {
       const b = d.books.find(x => x.id === id);
-      return b ? `<a href="/${p.sub.dir}/books/${b.id}/">${esc(b.name)}</a>` : '';
+      return b ? `<a href="/${p.sub.dir}/books/${b.id}/">${esc(displayName(b, p.sub.dir))}</a>` : '';
     };
     const focusHtml = focusRows.length ? `      <h3 class="usec__h3">${esc(name)}の出題形式に合わせた重点対策</h3>
       <p class="usec__note">ルートの本編とは別に、${esc(name)}の${esc(p.sub.ja)}で出る形式に対して追加する枠です。</p>
@@ -415,10 +416,10 @@ ${focusRows.map(({ key, f }) => {
     const st = stages[b.stage] || {};
     const alts = (f.alts || []).map(bookLink).filter(Boolean);
     return `        <li class="ubook">
-          <a class="ubook__cov" href="/${p.sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || p.sub.color })}</a>
+          <a class="ubook__cov" href="/${p.sub.dir}/books/${b.id}/" tabindex="-1" aria-hidden="true">${coverBox(b, { color: st.color || p.sub.color, dir: p.sub.dir })}</a>
           <div class="ubook__body">
             <span class="ubook__tag">重点:${esc(key)}</span>
-            <a class="ubook__name" href="/${p.sub.dir}/books/${b.id}/">${esc(b.name)}</a>
+            <a class="ubook__name" href="/${p.sub.dir}/books/${b.id}/">${esc(displayName(b, p.sub.dir))}</a>
             <span class="ubook__meta">${esc(b.pub || '')}／難易度 ${b.diff}${b.hensachi ? `／${esc(b.hensachi)}` : ''}</span>
             <span class="ubook__why">${esc(f.note)}</span>
 ${alts.length ? `            <span class="ubook__note">代わりに使える本：${alts.join('、')}</span>` : ''}
@@ -472,10 +473,10 @@ ${l.books.map(b => {
     const why = [b.role, ...b.reasons.slice(0, 3)].filter(Boolean).join('／');
     const also = b.also && b.also.length ? `（${b.also.join('・')}でも使う）` : '';
     return `        <li class="ubook">
-          <a class="ubook__cov" href="/${p.sub.dir}/books/${b.book.id}/" tabindex="-1" aria-hidden="true">${coverBox(b.book, { color: st.color || p.sub.color })}</a>
+          <a class="ubook__cov" href="/${p.sub.dir}/books/${b.book.id}/" tabindex="-1" aria-hidden="true">${coverBox(b.book, { color: st.color || p.sub.color, dir: p.sub.dir })}</a>
           <div class="ubook__body">
             <span class="ubook__tag">${[tl, st.label || ''].filter(Boolean).map(esc).join('／')}</span>
-            <a class="ubook__name" href="/${p.sub.dir}/books/${b.book.id}/">${esc(b.book.name)}</a>${also ? `<span class="ubook__also">${esc(also)}</span>` : ''}
+            <a class="ubook__name" href="/${p.sub.dir}/books/${b.book.id}/">${esc(displayName(b.book, p.sub.dir))}</a>${also ? `<span class="ubook__also">${esc(also)}</span>` : ''}
             <span class="ubook__meta">${esc(b.book.pub || '')}／難易度 ${b.book.diff}${b.book.hensachi ? `／${esc(b.book.hensachi)}` : ''}</span>
 ${why ? `            <span class="ubook__why">${esc(why)}</span>` : ''}
 ${b.note ? `            <span class="ubook__note">${esc(b.note)}</span>` : ''}

@@ -8,6 +8,7 @@
  */
 import { esc, clip } from './extract.mjs';
 import { coverBox } from './cover.mjs';
+import { displayName } from './booktitle.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './newbooks.mjs';
 import { seriesOf, hensachiPlain } from './series.mjs';
 
@@ -43,7 +44,7 @@ export function bookCard(b, sub, stages) {
           ${coverBox(b, { color })}
           <div class="bcard__meta">
             <div class="bcard__top"><span class="bcard__stage">${esc(st.short || '')}</span><span class="bcard__pub">${esc(b.pub || '')}</span></div>
-            <b>${esc(b.name)}</b>
+            <b>${esc(displayName(b, sub.dir))}</b>
           </div>
         </div>
         <p>${esc(clip(b.desc || `${b.pub} から刊行された新刊。評価は準備中です。`, 72))}</p>

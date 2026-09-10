@@ -13,7 +13,7 @@ import { fileURLToPath } from 'url';
 import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
-import { authorsOf, searchName, withAuthor } from './lib/booktitle.mjs';
+import { authorsOf, searchName, withAuthor, displayName } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -50,7 +50,7 @@ function diffPhrase(d) {
  * 書くと、すぐ上のスペック表を文章で言い直しているだけになる。同じ役割の
  * 何冊の中のどこか、は表に無い情報で、しかも本ごとに変わる。
  */
-function positionSentence(book, books, st, fieldName) {
+function positionSentence(book, books, st, fieldName, bn) {
   const peers = books.filter(b => !isProvisional(b) && b.stage === book.stage
     && (book.sub ? b.sub === book.sub : true));
   if (peers.length < 4) return '';
@@ -62,7 +62,7 @@ function positionSentence(book, books, st, fieldName) {
         : ratio < 0.8 ? '難しいほう'
           : 'もっとも難しい側';
   return `${fieldName}の「${st.label}」には ${peers.length} 冊を収録しています。`
-    + `難易度 ${book.diff} の${book.name}は、そのうち${where}にあたります`
+    + `難易度 ${book.diff} の${bn}は、そのうち${where}にあたります`
     + `（この役割で難易度が ${book.diff} より下の本は ${lower} 冊）。`;
 }
 
@@ -191,7 +191,9 @@ function renderBook(book, ctx) {
   const affStores = [affAz ? 'Amazon' : null, affRk ? '楽天ブックス' : null].filter(Boolean).join('・');
 
   const fieldName = subLabel ? `${sub.ja}（${subLabel}）` : sub.ja;
-  const position = prov ? '' : positionSentence(book, books, st, fieldName);
+  // 読者に見せる書名（内部略称なら正式名称。build/lib/booktitle.mjs の displayName）
+  const bn = displayName(book, sub.dir);
+  const position = prov ? '' : positionSentence(book, books, st, fieldName, bn);
 
   // 検索されるときの書名。内部略称の本は正式名称由来に、著者名が
   // 書名の一部として通っている本（「関正生の英文法ポラリス」など）は著者名込みにする。
@@ -237,7 +239,7 @@ function renderBook(book, ctx) {
      取り違えさせることになる（build/lib/record-type.mjs） */
   const coverAlt = placeholder
     ? `${book.name}の見本として置いた、大学赤本シリーズ「東京大学（理科）」の表紙`
-    : `${book.name}の表紙`;
+    : `${bn}の表紙`;
   /* 事実として確かめた項目と、編集部が推定した項目を分けて出す。
      verified と「現物を確認した」を同じ意味にしない（build/lib/verification.mjs） */
   const ver = verificationOf(sub.dir, book);
@@ -249,7 +251,9 @@ function renderBook(book, ctx) {
         '@type': 'Book',
         '@id': `${url}#book`,
         name: book.official || book.name,
-        alternateName: book.name,
+        /* 別名は読者が呼ぶ名前。編集上の内部略称（「実況中継①」）は検索語にならないうえ
+           別の本と同名のことがあるので出さない（build/lib/booktitle.mjs の displayName） */
+        ...(bn === book.name ? { alternateName: book.name } : {}),
         /* 書誌データベースで実在を確かめられた ISBN だけを出す。
            確かめていない番号を構造化データで主張しない（指示書 14.4） */
         ...(book.isbn13 && ver.fields.isbn13 && ver.fields.isbn13.status === 'verified'
@@ -308,10 +312,10 @@ function renderBook(book, ctx) {
   ].map(([k, v]) => `      <div><dt>${k}</dt><dd>${v}</dd></div>`).join('\n');
 
   const nextLead = next.kind === 'same'
-    ? `${book.name}を終えたあと、同じ「${st.label}」の枠内でもう一段レベルを上げるなら、次の参考書が候補になります。`
+    ? `${bn}を終えたあと、同じ「${st.label}」の枠内でもう一段レベルを上げるなら、次の参考書が候補になります。`
     : next.kind === 'later'
-      ? `${book.name}のあとは次の段階に進みます。${fieldName}のルートでは、以下が接続先の候補です。`
-      : `${book.name}のあとの候補です。同じ「${st.label}」でレベルを上げる道と、次の段階へ進む道の両方を並べています。どちらを選ぶかは、この本の内容がどこまで身についたかで決めてください。`;
+      ? `${bn}のあとは次の段階に進みます。${fieldName}のルートでは、以下が接続先の候補です。`
+      : `${bn}のあとの候補です。同じ「${st.label}」でレベルを上げる道と、次の段階へ進む道の両方を並べています。どちらを選ぶかは、この本の内容がどこまで身についたかで決めてください。`;
 
   return `<!DOCTYPE html>
 <html lang="ja">
@@ -333,7 +337,7 @@ ${header(sub)}
   <article>
     <div class="bk-hero">
       <div class="bk-cover">
-        <div class="ph"><b>${esc(book.name)}</b><span>${esc(book.pub)}</span></div>
+        <div class="ph"><b>${esc(bn)}</b><span>${esc(book.pub)}</span></div>
         ${covers.length ? `<img src="${esc(covers[0])}" alt="${esc(coverAlt)}" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="${esc(covers.join('|'))}" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">` : ''}
       </div>
       <div>
@@ -368,8 +372,8 @@ ${spec}
     ${prov ? `<section class="block prose">
       <div class="eyebrow">Status</div>
       <h2 class="sec">この本の評価について</h2>
-      <p>${esc(book.name)}は${esc(st.label)}に位置づけられる${esc(fieldName)}の参考書です。${book.year ? `${book.year} 年の刊行で、` : ''}掲載したばかりのため、難易度・到達目安・強み・注意点・向いている人はまだ書いていません。</p>
-      <p>このサイトの難易度は 10 段階で、収録している ${sub.full}の参考書すべてを同じ物差しで並べています。現物を確認しないまま数字を置くと、その物差し自体が狂います。${esc(book.name)}についても、確認が済んでから追記します。</p>
+      <p>${esc(bn)}は${esc(st.label)}に位置づけられる${esc(fieldName)}の参考書です。${book.year ? `${book.year} 年の刊行で、` : ''}掲載したばかりのため、難易度・到達目安・強み・注意点・向いている人はまだ書いていません。</p>
+      <p>このサイトの難易度は 10 段階で、収録している ${sub.full}の参考書すべてを同じ物差しで並べています。現物を確認しないまま数字を置くと、その物差し自体が狂います。${esc(bn)}についても、確認が済んでから追記します。</p>
       <p>いま分かっているのは、下の基本情報に載せた書誌情報と、${esc(st.label)}という役割だけです。志望校から逆算した参考書ルートは、評価が済んだ本だけで組んでいます。${sub.full}の<a href="/${sub.dir}/" style="color:var(--indigo);font-weight:700">ルート画面</a>をご覧ください。</p>
     </section>${adUnit('inArticle')}` : `<section class="block prose">
       <div class="eyebrow">Who is it for</div>
@@ -404,7 +408,7 @@ ${(book.cons || []).map(c => `          <li>${esc(c)}</li>`).join('\n')}
     ${alts.length ? `<section class="block">
       <div class="eyebrow">Alternatives</div>
       <h2 class="sec">同じ役割・同じレベルの参考書</h2>
-      <p class="sec-lead">${esc(book.name)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。相性で選んで構いません。ここから 1 冊を選び切ることが大切で、複数を並行させる必要はありません。</p>
+      <p class="sec-lead">${esc(bn)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。相性で選んで構いません。ここから 1 冊を選び切ることが大切で、複数を並行させる必要はありません。</p>
 ${bookCards(alts, sub, stages)}
     </section>` : ''}
 
@@ -453,12 +457,12 @@ ${bookCards(next.list, sub, stages)}
       <div class="eyebrow">Progress</div>
       <h2 class="sec">この参考書の状態を記録する</h2>
       <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
-      <div data-rt-progress data-subject-id="${esc(sub.dir)}" data-book-id="${esc(book.id)}" data-book-name="${esc(book.name)}"></div>
+      <div data-rt-progress data-subject-id="${esc(sub.dir)}" data-book-id="${esc(book.id)}" data-book-name="${esc(bn)}"></div>
       <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
 
     <div class="cta">
-      <h2>${esc(book.name)}は、あなたのルートの何冊目か</h2>
+      <h2>${esc(bn)}は、あなたのルートの何冊目か</h2>
       <p>1 冊単位で選ぶより、志望校までの並びの中で位置を決めたほうが迷いません。${esc(sub.full)}では、志望校と現在地から ${counts[sub.dir]} 冊の中を通る道を組み立てられます。</p>
       <div class="cta__btns">
         <a class="p" href="/${sub.dir}/">${esc(sub.ja)}のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>

@@ -20,6 +20,9 @@ var TIERS  = DATA.tiers;
 var GUIDES = DATA.guides;
 var UNIS   = DATA.unis;
 var BOOKS  = DATA.books;
+/* 読者に見せる書名。内部略称の本はビルド時に正式名称を dn として配信している
+   （build/lib/booktitle.mjs の displayName。静的ページと同じ規則）。並べ替え・検索には name を使う */
+const bookName = b => (b && (b.dn || b.name)) || "";
 
 /* HTML のインライン属性（onclick="go('catalog')" など）から呼ばれる名前を window へ載せ直す。
    function 宣言は巻き上げ済みなので本体より先に載せられる。本体の途中で例外が出ても
@@ -189,13 +192,13 @@ function rakutenURL(b){
   return `https://hb.afl.rakuten.co.jp/hgc/${CONFIG.rakutenId}/?pc=${encodeURIComponent(dest)}&m=${encodeURIComponent(dest)}`;
 }
 function coverHTML(b){
-  const n = b.name.length;
+  const n = bookName(b).length;
   const cls = n>14 ? "xlong" : (n>9 ? "long" : "");
   /* fb（書影が取れないときの代替色）は手で決める装飾。新刊はまだ持たないので既定色を当てる。
      ここを素通りさせると b.fb.bg が TypeError になり、図鑑の描画そのものが止まる */
   const fbc = b.fb || {bg:"linear-gradient(160deg,#8A8F9E,#5A6070)"};
   const fbStyle = `background:${fbc.bg}${fbc.light ? ";color:#1B2233;text-shadow:none" : ""}`;
-  const fb = `<div class="bcov-fb${fbc.light ? " light" : ""}" style="${fbStyle}"><span class="fb-spine"></span><span class="fb-pub">${b.pub}</span><span class="fb-title ${cls}">${b.name}</span><span class="fb-band">${b.subjects || ""}</span></div>`;
+  const fb = `<div class="bcov-fb${fbc.light ? " light" : ""}" style="${fbStyle}"><span class="fb-spine"></span><span class="fb-pub">${b.pub}</span><span class="fb-title ${cls}">${bookName(b)}</span><span class="fb-band">${b.subjects || ""}</span></div>`;
   const srcs = coverSrcs(b);
   if(!srcs.length) return `<div class="bcov fb">${fb}</div>`;
   return `<div class="bcov"><img src="${srcs[0]}" alt="" loading="lazy" referrerpolicy="no-referrer" data-srcs="${srcs.join("|")}" data-s="0" onload="covLoad(this)" onerror="covErr(this)">${fb}</div>`;
@@ -237,7 +240,7 @@ function bookCardHTML(b){
   return `<div class="book-card" role="button" tabindex="0" onclick="openModal('${b.id}')">
     <div class="book-card__cover">${coverHTML(b)}</div>
     <div class="book-card__body">
-      <div class="bc-name">${b.name}</div>
+      <div class="bc-name">${bookName(b)}</div>
       <div class="bc-pub">${b.pub}</div>
       <div class="bc-diff"><span class="diff-dots">${dots}</span></div>
       <div class="bc-hensachi">${isProv(b) ? `<span class="bc-prov">${PROV_LABEL}</span>` : `目安 <b>${b.hensachi}</b>`}</div>
@@ -308,7 +311,7 @@ function openModal(id){
     const p = bookById(pid);
     return `<div class="connect-item" onclick="openModal('${p.id}')">
       <span class="ci-dir">${dir}</span>
-      <div class="ci-txt"><b>${p.name}</b><span>${STAGES[p.stage].label} ・ ${p.pub}</span></div>
+      <div class="ci-txt"><b>${bookName(p)}</b><span>${STAGES[p.stage].label} ・ ${p.pub}</span></div>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </div>`;
   }).join("");
@@ -316,7 +319,7 @@ function openModal(id){
   const ext = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4 10 14M9 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>`;
   const detail = `<div class="mb-block"><h6>この参考書をもっと詳しく</h6>
     <a class="detail-btn" href="/joho/books/${b.id}/">
-      <span>「${b.name}」の詳細ページ<small>${isProv(b) ? "書誌情報と役割（評価は準備中）" : "レベル・向いている人・同じレベルの他の選択肢・次に進む本"}</small></span>
+      <span>「${bookName(b)}」の詳細ページ<small>${isProv(b) ? "書誌情報と役割（評価は準備中）" : "レベル・向いている人・同じレベルの他の選択肢・次に進む本"}</small></span>
       <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a></div>`;
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
@@ -332,7 +335,7 @@ function openModal(id){
       <div class="modal__cover">${coverHTML(b)}</div>
       <div class="modal__titles">
         <span class="tag tag-stage modal__stage" style="background:${st.color}">${st.label}</span>
-        <h3>${b.name}</h3>
+        <h3>${bookName(b)}</h3>
         <div class="modal__pub">${b.pub} ・ ${b.year}${b.isbn13?` ・ ISBN ${b.isbn13}`:""}</div>
         <div class="modal__official">${b.official}</div>
       </div>

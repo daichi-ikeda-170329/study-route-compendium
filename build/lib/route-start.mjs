@@ -9,6 +9,7 @@
  *   beforeRoute()      先頭の本が難しいときの「ここより前の段階」の案内
  */
 import { esc } from './extract.mjs';
+import { displayName } from './booktitle.mjs';
 import { prevTierOf } from './tiers.mjs';
 import { trackKeys } from './tracks.mjs';
 
@@ -79,7 +80,7 @@ export function beforeRoute(d, tierId, group) {
  * @param {object} before  beforeRoute の戻り（null でないこと）
  */
 export function beforeSentence(d, group, before) {
-  const link = (b) => `<a href="/${d.dir}/books/${b.id}/">${esc(b.name)}</a>`;
+  const link = (b) => `<a href="/${d.dir}/books/${b.id}/">${esc(displayName(b, d.dir))}</a>`;
   // 導入書そのものが難しい場合、「導入をまだ固めていない」とは書けない
   const cond = firstStageLabel(group.seq, d) === '導入'
     ? 'この難易度から入るのが重いと感じる場合は'
