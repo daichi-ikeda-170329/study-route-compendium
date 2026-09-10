@@ -18,8 +18,7 @@ import { coverSrcs } from './lib/cover.mjs';
 import { bookCards } from './lib/cards.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
-import { byDifficultyAsc } from './lib/rank.mjs';
-import { nextStages } from './lib/flow.mjs';
+import { pickAlternatives, pickNext } from './lib/book-links.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { degreeLine, bandOf } from './lib/scale.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
@@ -66,54 +65,7 @@ function positionSentence(book, books, st, fieldName, bn) {
     + `（この役割で難易度が ${book.diff} より下の本は ${lower} 冊）。`;
 }
 
-/** 同じ役割・近い難易度の本（横の選択肢） */
-function pickAlternatives(book, books, max = 6) {
-  // 難易度を持たない本は、近さを測れないので横にも縦にも並べない。
-  // NaN 比較で暗黙に空になるが、意図として明示しておく
-  if (isProvisional(book)) return [];
-  return books
-    .filter(b => !isProvisional(b) && b.id !== book.id && b.stage === book.stage
-      && (book.sub ? b.sub === book.sub : true)
-      && Math.abs(b.diff - book.diff) <= 1)
-    .sort((a, b) => Math.abs(a.diff - book.diff) - Math.abs(b.diff - book.diff) || byDifficultyAsc(a, b))
-    .slice(0, max);
-}
-
-/**
- * この本のあとに進む本（縦の接続）。
- * 同じ役割の上位と、次の段階の本を並べる。
- * 「同じレベルの選択肢」として既に出した本は、重複を避けるため除外する。
- */
-function pickNext(book, books, stages, exclude, dir, max = 6) {
-  if (isProvisional(book)) return { list: [], kind: 'same' };
-  const skip = new Set([book.id, ...exclude.map(b => b.id)]);
-  const sameRole = books
-    .filter(b => !isProvisional(b) && !skip.has(b.id) && b.stage === book.stage
-      && (book.sub ? b.sub === book.sub : true) && b.diff > book.diff)
-    .sort(byDifficultyAsc)
-    .slice(0, 3);
-
-  // 次の段階は build/lib/flow.mjs が持つ接続表に限る。
-  // STAGES の並び順で「自分より後ろ」を全部拾うと、英文解釈のページに英作文が
-  // 並ぶような役割の飛びが出る（解釈 → 英作文は積み上げの順序ではない）。
-  // 1 つの役割で枠を埋めきらないよう、役割ごとに 2 冊までにする。
-  const allowed = nextStages(dir, book.stage);
-  const byStage = new Map();
-  books
-    .filter(b => !isProvisional(b) && !skip.has(b.id) && allowed.includes(b.stage)
-      && (book.sub ? b.sub === book.sub : true) && b.diff >= book.diff)
-    .sort(byDifficultyAsc)
-    .forEach(b => {
-      const arr = byStage.get(b.stage) || [];
-      if (arr.length < 2) { arr.push(b); byStage.set(b.stage, arr); }
-    });
-  const later = allowed
-    .flatMap(k => byStage.get(k) || [])
-    .slice(0, max - sameRole.length);
-
-  const kind = sameRole.length && later.length ? 'mixed' : later.length ? 'later' : 'same';
-  return { list: [...sameRole, ...later].slice(0, max), kind };
-}
+/* 横の選択肢（pickAlternatives）と縦の接続（pickNext）は build/lib/book-links.mjs にある */
 
 function amazonUrl(b, tag) {
   // ルート上の枠（志望校の過去問など）は特定の商品ではない。/dp/ の直リンクを
@@ -173,7 +125,7 @@ function renderBook(book, ctx) {
   // その科目の全ページの日付が動かないよう、git の日付ではなくハッシュで見る
   const updated = recordDate(`${sub.dir}/${book.id}`, book);
   const alts = pickAlternatives(book, books);
-  const next = pickNext(book, books, stages, alts, sub.dir);
+  const next = pickNext(book, books, alts, sub.dir, ctx.routes);
   const covers = coverSrcs(book);
   const az = amazonUrl(book, config.amazonTag);
   const rk = rakutenUrl(book, config.rakutenId);
@@ -513,7 +465,7 @@ for (const sub of targets) {
     const outDir = path.join(ROOT, sub.dir, 'books', book.id);
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.join(outDir, 'index.html'),
-      renderBook(book, { sub, books: d.books, stages: d.stages, counts, config }));
+      renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, counts, config }));
     written++;
   }
   console.log(`  ✓ ${sub.dir}: ${list.length} ページ`);
