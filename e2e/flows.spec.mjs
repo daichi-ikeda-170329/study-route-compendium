@@ -274,6 +274,27 @@ test('全科目で、いまの画面のナビに aria-current が付く', async 
   }
 });
 
+test('書籍モーダルは Tab を中に閉じ込め、Escape で閉じると開いたカードへ戻る', async ({ page }) => {
+  /* モーダルのフォーカス管理は assets/js/subject-common.js にある（仕様書 5.5） */
+  const errors = collectErrors(page);
+  await page.goto('/english/#catalog', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  const card = page.locator('#view-catalog [role="button"][onclick^="openModal"]').first();
+  await card.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#bookModal')).toHaveClass(/\bopen\b/);
+  const inside = () => page.evaluate(() => document.getElementById('modalInner').contains(document.activeElement));
+  expect(await inside()).toBe(true);
+  for (let i = 0; i < 30; i++) await page.keyboard.press('Tab');
+  expect(await inside()).toBe(true);
+  for (let i = 0; i < 10; i++) await page.keyboard.press('Shift+Tab');
+  expect(await inside()).toBe(true);
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#bookModal')).not.toHaveClass(/\bopen\b/);
+  await expect(card).toBeFocused();
+  expect(errors).toEqual([]);
+});
+
 test('診断の設問を進めても履歴は積まず、戻る 1 回で診断から出る', async ({ page }) => {
   await page.goto('/english/', { waitUntil: 'domcontentloaded' });
   await waitForApp(page);
