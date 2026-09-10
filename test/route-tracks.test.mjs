@@ -218,3 +218,17 @@ test('大学ページの「科目ごとの目標」の志望レベルは、主�
   assert.deepEqual(main, ['早慶上智', '早慶上智', '早慶上智', '早慶上智', '早慶上智']);
   assert.match(html, /<td class="utier">早慶上智<small>早慶理工・上智・理科大<\/small><\/td>/);
 });
+
+/* ---------- 冊数・想定時間・月数（タスク 4.1） ---------- */
+
+test('ルートページの冊数・想定時間は route-hours.mjs の計算と一致し、記事の表とも一致する', async () => {
+  const { routeTotal, monthsAt } = await import('../build/lib/route-hours.mjs');
+  const en = loadSubjectData(ROOT, 'english');
+  const t = routeTotal(en, 'sokei', 'bun', 'omni');
+  const html = read('english/routes/sokei/index.html');
+  assert.ok(html.includes(`${t.books} 冊・想定 ${t.hours} 時間（1 周分の目安）— 1 日 1 時間なら約 ${monthsAt(t.hours, 1)} か月`), '王道網羅型の行が無い');
+  assert.match(html, /<dt>想定時間（王道網羅型）<\/dt><dd>\d+ 時間/);
+  const article = read('guides/route-hours/index.html');
+  assert.ok(article.includes(`<a href="/english/routes/sokei/">英語</a></th><td>${t.books}冊</td><td>${t.hours.toLocaleString('en-US')}時間</td>`),
+    '記事の表の英語・早慶の行と数値が合わない');
+});

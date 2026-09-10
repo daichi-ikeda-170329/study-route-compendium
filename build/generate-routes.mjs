@@ -15,6 +15,7 @@ import { fileURLToPath } from 'url';
 import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { NON_TRACK, trackRank, trackLabel, groupTracks } from './lib/tracks.mjs';
 import { firstStageLabel, beforeRoute, beforeSentence } from './lib/route-start.mjs';
+import { routeTotal, monthsAt } from './lib/route-hours.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
@@ -156,6 +157,25 @@ ${sideList(part.list, bookById, sub, d.stages)}
       </div>`;
   }).join('\n      ');
 
+  /* 冊数・想定時間・月数（仕様書 4.1）。**数字は本文に固定せず、毎回 build/lib/route-hours.mjs で計算する**
+     （/guides/route-hours/ の記事と同じ関数なので、表の数値と一致する）。
+     routeTotal は本編に加えて「並行して進める本」「最後の仕上げ」も数える。重点対策の枠は数えない */
+  const hoursLine = (t) => `${t.books} 冊・想定 ${t.hours} 時間（1 周分の目安）— 1 日 1 時間なら約 ${monthsAt(t.hours, 1)} か月、`
+    + `2 時間なら約 ${monthsAt(t.hours, 2)} か月、3 時間なら約 ${monthsAt(t.hours, 3)} か月`
+    + `${t.missing ? `（想定時間が未設定の本 ${t.missing} 冊を除く）` : ''}`;
+  const policyHours = (g, policy) => {
+    const rows = g.keys.map(k => ({ k, t: routeTotal(d, tier.id, k, policy) })).filter(x => x.t);
+    if (!rows.length) return '';
+    const lines = [...new Set(rows.map(x => hoursLine(x.t)))];
+    // まとめたトラックで並行枠が違うと合計も違う。そのときはトラックごとに書く
+    const body = lines.length === 1 ? esc(lines[0])
+      : rows.map(x => `${esc(trackLabel(d, x.k, 'short'))}: ${esc(hoursLine(x.t))}`).join('<br>');
+    return `        <p class="rpol__h">${body}。並行して進める本・最後の仕上げを含み、重点対策の枠は含みません。</p>\n`;
+  };
+  const omniHours = trackKeys.map(k => routeTotal(d, tier.id, k, 'omni')).filter(Boolean).map(t => t.hours);
+  const omniHoursLabel = !omniHours.length ? '' : Math.min(...omniHours) === Math.max(...omniHours)
+    ? `${omniHours[0]} 時間` : `${Math.min(...omniHours)}〜${Math.max(...omniHours)} 時間`;
+
   const sections = groups.map(g => {
     const common = g.keys.length > 1;
     const label = common ? `${g.keys.map(k => trackLabel(d, k)).join('・')}共通` : trackLabel(d, g.keys[0]);
@@ -163,7 +183,7 @@ ${sideList(part.list, bookById, sub, d.stages)}
     const seq = g.seq;
     const bodies = POLICIES.filter(p => (seq[p.key] || []).length).map(p => `      <div class="rpol">
         <h3 class="rpol__t"><b>${p.label}</b><span>${(seq[p.key] || []).length}冊</span></h3>
-        <p class="rpol__n">${p.note}</p>
+${policyHours(g, p.key)}        <p class="rpol__n">${p.note}</p>
         <ol class="rsteps">
 ${stepList(seq[p.key], bookById, sub, d.stages)}
         </ol>
@@ -261,6 +281,8 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/${sub.ogp || `ogp-${sub.di
 .rpol__t{font-family:var(--serif);font-weight:800;font-size:16px;letter-spacing:.03em;display:flex;align-items:baseline;gap:10px}
 .rpol__t span{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:600}
 .rpol__n{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.75}
+.rpol__h{font-size:12.5px;color:var(--ink-2);font-weight:700;margin-top:8px;line-height:1.75}
+.tier-head dd small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;margin-top:2px}
 .rsteps{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:0}
 .rstep{display:flex;gap:12px;padding:14px 0;border-top:1px dashed var(--line)}
 .rstep:first-child{border-top:none;padding-top:4px}
@@ -323,6 +345,7 @@ ${header(sub)}
       <div><dt>目標</dt><dd>${esc(tier.goal)}</dd></div>
       <div><dt>想定レベル</dt><dd>${esc(tier.hensachi)}</dd></div>
       <div><dt>収録冊数</dt><dd>${used.size} 冊</dd></div>
+      ${omniHoursLabel ? `<div><dt>想定時間（王道網羅型）</dt><dd>${omniHoursLabel}<small>1 周分の目安</small></dd></div>` : ''}
     </dl>
     ${trackKeys.length > 1 ? `<div class="tnav">
 ${groups.map(g => g.keys.length > 1
