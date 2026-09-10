@@ -124,12 +124,15 @@ test('大学ページに同じ文が 2 回出ず、「最も高い到達度が�
   const seen = new Set();
   for (const m of html.matchAll(/<(p|dd)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
     for (const piece of m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().split(/(?<=。)/)) {
-      const t = piece.trim();
+      // 句点の有無では区別しない（節末の補足の <span> は句点で終わらない）
+      const t = piece.trim().replace(/。$/, '');
       if (t.length < 20) continue;
       assert.ok(!seen.has(t), `同じ文が 2 回ある: ${t}`);
       seen.add(t);
     }
   }
   assert.doesNotMatch(html, /最も高い到達度が要る科目/);
+  // 「出題される分野」に書いた「〜は学部・入試方式によって扱いが変わります」を節末で繰り返さない
+  assert.match(html, /<span class="usec__tracks">物理・化学・生物別に用意しています<\/span>/);
   assert.match(html, /個別試験（二次）の国語<\/dt><dd>課されます。<a class="unote__go" href="#sub-japanese">/);
 });

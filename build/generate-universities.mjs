@@ -491,6 +491,10 @@ ${alts.length ? `            <span class="ubook__note">代わりに使える本�
       || '公表されている情報から特定できていません。募集要項と過去問で確認してください。' });
     const avail = availNote(d, p.sub.dir, p.u);
     if (avail) facts.push({ dt: '出題される分野', dd: avail });
+    /* 節末の「〜別に用意しています」に添える一文。上の「出題される分野」に同じ文が出ているときは
+       繰り返さない（2026-09-11 の目視確認で、早稲田の理科・社会に同じ文が 2 回出ていた。仕様書 2.6） */
+    const limitedSentence = limited.length ? `${limited.map(t => trackLabel(d, t, 'short')).join('・')}は学部・入試方式によって扱いが変わります` : '';
+    const limitedNote = limitedSentence && !avail.includes(limitedSentence) ? limitedSentence : '';
     if (p.u.fix) facts.push({ dt: '学部ごとの科目指定', dd: p.u.fix });
     /* 医学科の条件は上の「医学部医学科について」の節に同じ文で出している。
        ここでもう一度出すと 1 ページに同じ文が 2 回並ぶので、節へ送る（仕様書 2.6） */
@@ -536,7 +540,7 @@ ${b.note ? `            <span class="ubook__note">${esc(b.note)}</span>` : ''}
         </li>`;
   }).join('\n')}
       </ul>`).join('\n')}
-` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${groups.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(trackLabel(d, t, 'short'))).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(trackLabel(d, t, 'short'))).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
+` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${groups.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(trackLabel(d, t, 'short'))).join('・')}別に用意しています${limitedNote ? `。${esc(limitedNote)}` : ''}</span>` : ''}</p>
 ${befores.map(x => `      <p class="usec__before">${beforeSentence(d, x.g, x.b)}</p>`).join('\n')}
     </section>`;
   }).join('\n\n');

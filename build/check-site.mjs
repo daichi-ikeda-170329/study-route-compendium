@@ -532,7 +532,8 @@ function checkHtml(files) {
       scan: for (const m of markup.matchAll(/<(p|dd)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
         const text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
         for (const piece of text.split(/(?<=。)/)) {
-          const t = piece.trim();
+          // 文末の「。」の有無では区別しない（補足の <span> は句点で終わらないことがある）
+          const t = piece.trim().replace(/。$/, '');
           if (t.length < 20) continue;
           if (seen.has(t)) { err(at, `同じ文が 2 回出ている: 「${t.slice(0, 40)}…」`); break scan; }
           seen.add(t);
