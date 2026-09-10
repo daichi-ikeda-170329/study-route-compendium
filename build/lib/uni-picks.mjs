@@ -200,6 +200,54 @@ function levelFit(book, targetH) {
 }
 
 /**
+ * シリーズの判定に使う書名の正規形。巻・分冊・編・分野の違いを落とす。
+ *
+ *   物理のエッセンス 熱・電磁気・原子 / 物理のエッセンス 力学・波動 → 物理のエッセンス
+ *   名問の森 力学・熱・波動I / 名問の森 波動II・電磁気・原子       → 名問の森
+ *   実況中継① / 実況中継②                                     → 実況中継
+ *
+ * 2026-09-10 まで大学別ページのおすすめに「物理のエッセンス 熱・電磁気・原子」だけが
+ * 並び、力学編が無いという並びが出ていた。同じシリーズからはルート上で先に来る 1 冊だけを
+ * 候補に残すために使う。
+ *
+ * **数字は単独の 1 桁（巻数）だけを落とす。** ターゲット1400 / 1900、解釈の技術70 / 100 の
+ * ような数字は別の本を表すので残す。「上・中・下」も末尾の巻表記だけを落とす
+ * （「上級編」「中学」の上・中まで消すと別の書名が同じになる）。
+ */
+export function seriesKey(name) {
+  return String(name || '')
+    .replace(/[（(][^）)]*[）)]/g, '')
+    .replace(/[①②③④⑤⑥⑦⑧⑨⑩]/g, '')
+    .replace(/(必修編|難関大編|入門編|基礎編|発展編|標準編|応用編)/g, '')
+    .replace(/(II・B・C|III・C|I・A|IIIC|IIB|IA)/g, '')
+    .replace(/(力学|熱|波動|電磁気|原子)/g, '')
+    .replace(/(?<![A-Za-z])(III|II|I|Ⅲ|Ⅱ|Ⅰ)(?![A-Za-z])/g, '')
+    .replace(/(?<![0-9０-９])[1-9１-９](?![0-9０-９])/g, '')
+    .replace(/\s[上中下]巻?$/, '')
+    .replace(/[・\s　]+/g, '')
+    .trim();
+}
+
+/**
+ * おすすめの 1 周目で重複を避ける単位。役割の近い段をまとめる。
+ * 例: 英語の単語と熟語はどちらも「語彙」。単語帳と熟語帳だけで枠を 2 つ使わない。
+ * 書いていない段はその段だけで 1 グループ。
+ */
+export const STAGE_GROUPS = {
+  english:  { tango: 'vocab', jukugo: 'vocab', kaishaku: 'read', chobun: 'read' },
+  math:     { core: 'typical', std: 'typical' },
+  japanese: { core: 'drill', std: 'drill' },
+  science:  { core: 'drill', std: 'drill' },
+  social:   { intro: 'flow', text: 'flow', core: 'drill', std: 'drill' },
+};
+
+const stageGroup = (dir, stage) => ((STAGE_GROUPS[dir] || {})[stage]) || stage;
+
+/** ルート上の位置。小さいほど先に来る（lvl → 本編配列の index） */
+const LAST = { lvl: 99, idx: 99 };
+const posLess = (a, b) => a.lvl - b.lvl || a.idx - b.idx;
+
+/**
  * その大学におすすめの参考書を選ぶ。
  *
  * @param {object} o.d        科目データ（loadSubjectData の戻り）
@@ -223,12 +271,13 @@ export function recommendBooks(o) {
   /* 候補を集める。ルート本編の本と、その代替候補（alts）の両方を見る。
      代替候補まで見るのは、大学ごとの出題に噛み合う本がそこに入っているため
      （自由英作文が出る大学に対する「最難関大の英作文」など）。 */
-  const cand = new Map();   // id → {book, tracks:Set, role, note, isAlt}
-  const addCand = (id, track, role, note, isAlt) => {
+  const cand = new Map();   // id → {book, tracks:Set, role, note, isAlt, pos}
+  const addCand = (id, track, role, note, isAlt, pos = LAST) => {
     const b = bookById.get(id);
     if (!b || b.recordType === 'routePlaceholder') return;
     const cur = cand.get(id);
     if (cur) {
+      if (posLess(pos, cur.pos) < 0) cur.pos = pos;
       /* 同じ本が文系と理系の両方に載っていることがある。トラックは足していく。
          先に見たほうだけを表示すると、理系ルートにも入っている本に「文系」とだけ
          書かれることになり、理系の読者がその本を自分向けでないと読み飛ばす */
@@ -238,16 +287,17 @@ export function recommendBooks(o) {
       if (cur.isAlt && !isAlt) cur.isAlt = false;
       return;
     }
-    cand.set(id, { book: b, tracks: new Set(track ? [track] : []), role: role || '', note: note || '', isAlt, focus: null });
+    cand.set(id, { book: b, tracks: new Set(track ? [track] : []), role: role || '', note: note || '', isAlt, focus: null, pos });
   };
   for (const track of tracks) {
     const v = node[track];
     if (!v) continue;
     const steps = Array.isArray(v) ? v : (v.omni || v.quick || []);
-    for (const s of steps) {
-      addCand(s.id, track, s.role || '', s.note || '', false);
-      for (const a of s.alts || []) addCand(a, track, s.role || '', '', true);
-    }
+    steps.forEach((s, idx) => {
+      const pos = { lvl: typeof s.lvl === 'number' ? s.lvl : LAST.lvl, idx };
+      addCand(s.id, track, s.role || '', s.note || '', false, pos);
+      for (const a of s.alts || []) addCand(a, track, s.role || '', '', true, pos);
+    });
   }
   /* 並行して進める本（para）も候補に入れる。単語・熟語・リスニングはここに置かれていて、
      本編だけを見ると語彙の本が 1 冊も出ない志望レベルがある */
@@ -285,8 +335,20 @@ export function recommendBooks(o) {
     for (const a of f.alts || []) mark(a, false);
   }
 
+  /* 同じシリーズの巻が複数あるときは、ルート上で先に来る 1 冊だけを残す。
+     「エッセンスの熱編だけ」「実況中継の③だけ」のような、途中の巻から始まる並びを出さない */
+  const bySeries = new Map();
+  for (const c of cand.values()) {
+    const k = seriesKey(c.book.name);
+    const cur = bySeries.get(k);
+    if (!cur || posLess(c.pos, cur.pos) < 0
+      || (!posLess(c.pos, cur.pos) && c.book.id.localeCompare(cur.book.id) < 0)) bySeries.set(k, c);
+  }
+  const kept = new Set([...bySeries.values()]);
+
   const scored = [];
   for (const c of cand.values()) {
+    if (!kept.has(c)) continue;
     const b = c.book;
     const hay = `${b.name} ${b.official || ''} ${b.style || ''} ${b.subjects || ''} ${c.role} ${c.note}`;
     let score = 0;
@@ -351,18 +413,21 @@ export function recommendBooks(o) {
     scored.push({ ...c, role, tracks: [...c.tracks], score, reasons });
   }
 
+  /* 同点ならルート上で先に来る本を上に置く（土台の本が先に来る）。その次に難易度 */
   scored.sort((x, y) => y.score - x.score
+    || posLess(x.pos, y.pos)
     || (x.book.diff || 0) - (y.book.diff || 0)
     || x.book.id.localeCompare(y.book.id));
 
-  /* stage が重ならないように取る（単語だけ 6 冊、のような並びを避ける）。
-     足りなければ 2 周目で埋める */
+  /* 役割のグループ（STAGE_GROUPS）が重ならないように取る（単語と熟語だけで枠を埋める、
+     のような並びを避ける）。足りなければ 2 周目で埋める */
   const out = [];
   const usedStage = new Set();
   for (const s of scored) {
     if (out.length >= max) break;
-    if (usedStage.has(s.book.stage)) continue;
-    usedStage.add(s.book.stage);
+    const g = stageGroup(d.dir, s.book.stage);
+    if (usedStage.has(g)) continue;
+    usedStage.add(g);
     out.push(s);
   }
   for (const s of scored) {

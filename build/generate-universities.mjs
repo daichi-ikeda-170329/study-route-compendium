@@ -80,8 +80,10 @@ function tierRank(t) {
   return Number.isFinite(n) ? n : 99;
 }
 
-/** 1 科目あたりに出すおすすめ参考書の上限 */
+/** 1 科目あたりに出すおすすめ参考書の上限（トラックを分けないとき） */
 const MAX_BOOKS_PER_SUBJECT = 6;
+/** トラック（文系・理系、物理・化学…）ごとに分けて出すときの 1 トラックあたりの上限 */
+const MAX_BOOKS_PER_TRACK = 4;
 
 /* ============================================================
    データの読み込み
@@ -173,10 +175,42 @@ function pickBooks(d, sub, u, tierId, isMed) {
 
   const { keep, limited } = availableTracks(sub.dir, u, allTracks);
   const features = matchFeatures(sub.dir, uniText(u));
-  const books = recommendBooks({
-    d, uni: u, tierId, tracks: keep, features, isMed, max: MAX_BOOKS_PER_SUBJECT,
+  const groups = groupTracks(d.routes[tierId], keep);
+
+  /* 本編が同じトラックしか無いなら 1 つのリスト。
+     違うトラックが 2 つ以上あるなら、トラック（のグループ）ごとに分けて出す。
+     2026-09-10 まで 1 つのリストに混ぜていたため、文系プラチカと理系プラチカが並び、
+     読者がどちらを取るべきか分からなかった */
+  if (groups.length < 2) {
+    const books = recommendBooks({
+      d, uni: u, tierId, tracks: keep, features, isMed, max: MAX_BOOKS_PER_SUBJECT,
+    });
+    return { lists: [{ keys: keep, label: '', limited: false, books }], tracks: keep, allTracks, limited, features };
+  }
+
+  // 「学部・入試方式による」トラックは末尾に回す
+  const isLimited = (g) => g.keys.every(k => limited.includes(k));
+  const ordered = [...groups.filter(g => !isLimited(g)), ...groups.filter(isLimited)];
+  const shown = new Map();   // 本の id → 最初に出したリストの項目
+  const lists = ordered.map(g => {
+    const label = g.keys.map(k => trackLabel(d, k)).join('・');
+    // 他のトラックで出した本を飛ばしても 4 冊埋まるよう、多めに取ってから詰める
+    const all = recommendBooks({
+      d, uni: u, tierId, tracks: g.keys, features, isMed, max: MAX_BOOKS_PER_TRACK * 3,
+    });
+    const books = [];
+    for (const b of all) {
+      if (books.length >= MAX_BOOKS_PER_TRACK) break;
+      const first = shown.get(b.book.id);
+      // 複数のトラックに載る本は最初のトラックにだけ出し、「〜でも使う」と添える
+      if (first) { first.also.push(label); continue; }
+      const item = { ...b, also: [] };
+      books.push(item);
+      shown.set(b.book.id, item);
+    }
+    return { keys: g.keys, label, limited: isLimited(g), books };
   });
-  return { books, tracks: keep, allTracks, limited, features };
+  return { lists, tracks: keep, allTracks, limited, features };
 }
 
 /** 特徴語を探す対象。**データにある文字列だけ**を連結する（推測を混ぜない） */
@@ -356,7 +390,8 @@ function renderUniversity(uni, all, config) {
 
   const sections = perSubject.map(p => {
     const d = data[p.sub.dir];
-    const { books, tracks, limited, features } = pickBooks(d, p.sub, p.u, p.u.t, !!med);
+    const { lists, tracks, limited, features } = pickBooks(d, p.sub, p.u, p.u.t, !!med);
+    const nBooks = lists.reduce((a, l) => a + l.books.length, 0);
     const total = tierBookCount(d, p.u.t);
     const routeUrl = `/${p.sub.dir}/routes/${p.u.t}/`;
     const fx = Array.isArray(p.u.fx) ? p.u.fx : [];
@@ -423,28 +458,31 @@ ${features.length ? `      <h3 class="usec__h3">ここで問われる力と、�
       <ul class="upoints">
 ${features.map(f => `        <li><b>${esc(f.key)}</b><span>${esc(f.tip)}</span></li>`).join('\n')}
       </ul>
-` : ''}${focusHtml}${books.length ? `      <h3 class="usec__h3">${esc(name)}におすすめの参考書</h3>
-      <p class="usec__note">${esc(p.tier.name)}の${esc(p.sub.ja)}ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを${books.length}冊選びました。並び順はおすすめの度合いで、進める順番ではありません。順番は${esc(p.sub.ja)}のルートを見てください。</p>
-      <ul class="ubooks">
-${books.map(b => {
+` : ''}${focusHtml}${nBooks ? `      <h3 class="usec__h3">${esc(name)}におすすめの参考書</h3>
+      <p class="usec__note">${esc(p.tier.name)}の${esc(p.sub.ja)}ルートに入っている本${focusRows.length ? 'と出題形式別の重点対策の本' : ''}のうち、上に挙げた出題の特徴と噛み合うものを${nBooks}冊選びました。${lists.length > 1 ? '分野・受験区分ごとに分けて出しています。' : ''}並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。進める順番ではないので、順番は${esc(p.sub.ja)}のルートを見てください。</p>
+${lists.map(l => `${l.label ? `      <h4 class="ubooks__h">${esc(l.label)}${l.limited ? '<span> — 学部・入試方式による</span>' : ''}</h4>
+` : ''}      <ul class="ubooks">
+${l.books.map(b => {
     const st = stages[b.book.stage] || {};
-    /* トラック名は、その本が「一部のトラックにしか載っていない」ときだけ出す。
-       全トラックに載っている本に「文系」と書くと、理系の読者が読み飛ばす */
-    const tl = (tracks.length > 1 && b.tracks.length && b.tracks.length < tracks.length)
+    /* トラック名は、1 つのリストに複数のトラックを混ぜていて、その本が
+       「一部のトラックにしか載っていない」ときだけ出す。全トラックに載っている本に
+       トラック名を書くと、他のトラックの読者が読み飛ばす */
+    const tl = (!l.label && tracks.length > 1 && b.tracks.length && b.tracks.length < tracks.length)
       ? b.tracks.map(t => trackLabel(d, t, 'short')).join('・') : '';
     const why = [b.role, ...b.reasons.slice(0, 3)].filter(Boolean).join('／');
+    const also = b.also && b.also.length ? `（${b.also.join('・')}でも使う）` : '';
     return `        <li class="ubook">
           <a class="ubook__cov" href="/${p.sub.dir}/books/${b.book.id}/" tabindex="-1" aria-hidden="true">${coverBox(b.book, { color: st.color || p.sub.color })}</a>
           <div class="ubook__body">
             <span class="ubook__tag">${[tl, st.label || ''].filter(Boolean).map(esc).join('／')}</span>
-            <a class="ubook__name" href="/${p.sub.dir}/books/${b.book.id}/">${esc(b.book.name)}</a>
+            <a class="ubook__name" href="/${p.sub.dir}/books/${b.book.id}/">${esc(b.book.name)}</a>${also ? `<span class="ubook__also">${esc(also)}</span>` : ''}
             <span class="ubook__meta">${esc(b.book.pub || '')}／難易度 ${b.book.diff}${b.book.hensachi ? `／${esc(b.book.hensachi)}` : ''}</span>
 ${why ? `            <span class="ubook__why">${esc(why)}</span>` : ''}
 ${b.note ? `            <span class="ubook__note">${esc(b.note)}</span>` : ''}
           </div>
         </li>`;
   }).join('\n')}
-      </ul>
+      </ul>`).join('\n')}
 ` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${groups.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(trackLabel(d, t, 'short'))).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(trackLabel(d, t, 'short'))).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
 ${befores.map(x => `      <p class="usec__before">${beforeSentence(d, x.g, x.b)}</p>`).join('\n')}
     </section>`;
@@ -522,6 +560,9 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp.png` })}
 .upoints li{background:var(--surface);padding:13px 16px}
 .upoints b{display:block;font-size:12.5px;font-weight:800;color:var(--sc);letter-spacing:.02em}
 .upoints span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.9;margin-top:5px}
+.ubooks__h{font-size:12.5px;font-weight:800;color:var(--sc);letter-spacing:.03em;margin-top:16px}
+.ubooks__h span{font-weight:700;color:var(--muted)}
+.ubook__also{display:block;font-size:11px;color:var(--muted);margin-top:2px}
 .ufocus{list-style:none;margin-top:12px;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
 @media(min-width:720px){.ufocus{grid-template-columns:repeat(2,1fr)}}
 .ubook__note a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}

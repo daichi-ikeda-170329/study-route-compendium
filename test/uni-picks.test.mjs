@@ -61,3 +61,57 @@ test('英語のルートページに 12 形式の重点対策の節がある（�
   const ma = fs.readFileSync(path.join(ROOT, 'math/routes/march/index.html'), 'utf8');
   assert.doesNotMatch(ma, /id="focus"/);
 });
+
+/* ---------- トラック別・シリーズ・並び順（タスク 1.5） ---------- */
+
+const { seriesKey, STAGE_GROUPS } = await import('../build/lib/uni-picks.mjs');
+
+test('seriesKey: 巻・分冊・分野の違いを落とす', () => {
+  assert.equal(seriesKey('物理のエッセンス 熱・電磁気・原子'), seriesKey('物理のエッセンス 力学・波動'));
+  assert.equal(seriesKey('名問の森 力学・熱・波動I'), seriesKey('名問の森 波動II・電磁気・原子'));
+  assert.equal(seriesKey('実況中継①'), seriesKey('実況中継③'));
+  assert.equal(seriesKey('浜島清利 物理講義の実況中継(1)'), seriesKey('浜島清利 物理講義の実況中継(2)'));
+  assert.equal(seriesKey('The Rules 1'), seriesKey('The Rules 4'));
+});
+
+test('seriesKey: 別の本を表す数字・語は残す', () => {
+  assert.notEqual(seriesKey('ターゲット1400'), seriesKey('ターゲット1900'));
+  assert.notEqual(seriesKey('入門英文解釈の技術70'), seriesKey('基礎英文解釈の技術100'));
+  assert.match(seriesKey('速読英単語 上級編'), /上級/, '上級編の「上」は巻表記ではない');
+  assert.match(seriesKey('中学英語をもう一度ひとつひとつわかりやすく'), /^中学/, '書名の途中の「中」を落とさない');
+});
+
+test('同じシリーズからはルート上で先に来る 1 冊だけを出す', () => {
+  for (const name of ['早稲田大学', '東京大学', '大阪大学']) {
+    for (const dir of ['science', 'social', 'english', 'math', 'japanese']) {
+      const r = picks(dir, name, 12);
+      const keys = r.map(x => seriesKey(x.book.name));
+      assert.equal(new Set(keys).size, keys.length, `${name} ${dir}: 同じシリーズが 2 冊ある: ${r.map(x => x.book.name).join(' / ')}`);
+    }
+  }
+});
+
+test('STAGE_GROUPS の段は実在する', () => {
+  for (const [dir, map] of Object.entries(STAGE_GROUPS)) {
+    const stages = loadSubjectData(ROOT, dir).stages;
+    for (const st of Object.keys(map)) assert.ok(stages[st], `${dir}: STAGE_GROUPS の「${st}」が stages.json に無い`);
+  }
+});
+
+test('早稲田の数学は文系・理系、理科は物理・化学・生物（学部・入試方式による）に分かれる', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'univ/waseda/index.html'), 'utf8');
+  const sec = (dir, next) => html.slice(html.indexOf(`id="sub-${dir}"`), html.indexOf(`id="sub-${next}"`));
+  const heads = (h) => [...h.matchAll(/<h4 class="ubooks__h">(.*?)<\/h4>/g)].map(m => m[1].replace(/<[^>]+>/g, ''));
+  assert.deepEqual(heads(sec('math', 'science')), ['文系', '理系']);
+  assert.deepEqual(heads(sec('science', 'social')), ['物理', '化学', '生物 — 学部・入試方式による']);
+  assert.deepEqual(heads(sec('english', 'japanese')), [], '英語は本編が共通なので 1 リスト');
+  // 物理で「エッセンスの熱編」だけが単独で出ない
+  const phys = sec('science', 'social').split('<h4')[1];
+  assert.ok(!/熱・電磁気・原子/.test(phys) || /力学・波動/.test(phys), '物理のエッセンス 熱編だけが出ている');
+});
+
+test('並び順の説明はスコアの決め方を書く', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'univ/waseda/index.html'), 'utf8');
+  assert.match(html, /並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています/);
+  assert.doesNotMatch(html, /並び順はおすすめの度合いで/);
+});
