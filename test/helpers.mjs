@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const require = createRequire(import.meta.url);
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const { loadSubjectData } = await import('../build/lib/load-subject-data.mjs');
-const { clientBooks } = await import('../build/lib/subject-assets.mjs');
+const { clientBooks, clientLegal: buildLegal } = await import('../build/lib/subject-assets.mjs');
 
 /** localStorage を差し替えたうえで share.js を新しく読み込む */
 export function loadShare({ localStorage } = {}) {
@@ -191,7 +191,7 @@ export function loadPage(dir) {
     }
     const d = loadSubjectData(ROOT, dir);
     const DATA = {
-      config: d.config, stages: d.stages, tiers: d.tiers,
+      config: d.config, stages: d.stages, tiers: d.tiers, legal: buildLegal(),
       routes: d.routes, unis: d.unis, guides: d.guides, books: clientBooks(d),
       focus: d.focus,
     };

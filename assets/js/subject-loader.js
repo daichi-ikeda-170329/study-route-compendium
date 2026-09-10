@@ -116,7 +116,7 @@
     ]).then(function (r) {
       var core = r[0], books = r[1], routes = r[2], unis = r[3], guides = r[4];
       var DATA = {
-        config: core.config, stages: core.stages, tiers: core.tiers,
+        config: core.config, stages: core.stages, tiers: core.tiers, legal: core.legal || {},
         books: books.books,
         routes: (routes && routes.routes) || {},
         focus: (routes && routes.focus) || {},

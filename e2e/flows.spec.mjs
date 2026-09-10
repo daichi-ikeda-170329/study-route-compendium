@@ -299,3 +299,14 @@ test('共有 URL を開いて結果が出るまでに履歴を増やさない', 
   expect(await p2.evaluate(() => history.length)).toBe(baseline);
   await p2.close();
 });
+
+test('講師ルートを表示すると、ルートの冒頭に非公式の注記が出る（仕様書 3.5）', async ({ page }) => {
+  const errors = collectErrors(page);
+  await page.goto('/english/#route', { waitUntil: 'domcontentloaded' });
+  await waitForApp(page);
+  await page.evaluate(() => { window.selectSensei('seki'); });
+  const first = page.locator('#routeOutput > *').first();
+  await expect(first).toHaveClass(/sensei-top/);
+  await expect(first).toContainText('このルートは当サイトが市販の著作をもとに独自に構成したもので、関正生本人・所属予備校・出版社の推奨や監修ではありません。');
+  expect(errors).toEqual([]);
+});

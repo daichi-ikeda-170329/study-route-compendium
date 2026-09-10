@@ -242,3 +242,12 @@ test('科目データの読み口が 1 本だけになっている', () => {
   assert.deepEqual(bad, [],
     `科目データの読み口は build/lib/load-subject-data.mjs の 1 本だけにする:\n${bad.join('\n')}`);
 });
+
+test('講師ルートの注記の文言は legal.mjs を正本に core アセットで配る（仕様書 3.5）', async () => {
+  const { buildAssets } = await import('../build/lib/subject-assets.mjs');
+  const { SENSEI_NOTE } = await import('../build/content/legal.mjs');
+  const en = buildAssets(loadSubjectData(ROOT, 'english'));
+  assert.equal(en.core.legal.senseiNote, SENSEI_NOTE('{name}'));
+  const app = fs.readFileSync(path.join(ROOT, 'assets/js/subject-english.js'), 'utf8');
+  assert.doesNotMatch(app, /推奨や監修ではありません/, '注記の文言を JS に直書きしている');
+});

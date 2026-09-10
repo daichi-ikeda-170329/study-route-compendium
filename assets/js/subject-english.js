@@ -1087,8 +1087,7 @@ function renderRouteBody(){
     ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg><p><b>${S.uni.n}${S.fac?" "+S.fac.trim():""}に合わせて調整しています</b>（到達目安から志望レベルを判定し、出題形式に対応する重点対策の枠を足しています）。${S.uni.no}。下部の「重点対策」は本学の英語の傾向に合わせた追加枠です。過去問の段は志望校の赤本に読み替えて進めてください。</p></div>`
     : "";
   const senseiNote = sensei
-    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><p><b>${sensei.name}(${sensei.kana} / ${sensei.tag}):</b>${sensei.desc}<br><b>補完メモ:</b>${sensei.lack}</p></div>
-       <div class="note-card"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 16h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><p><b>このルートは非公式です。</b>${sensei.name}は、講師ご本人・所属予備校・出版社とは無関係に、当サイトが市販の著作をもとに独自に構成したものです。ご本人の推奨・監修を受けたものではありません。<a href="/disclaimer/" style="color:var(--indigo);font-weight:700">免責事項</a></p></div>`
+    ? `<div class="note-card info"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><p><b>${sensei.name}(${sensei.kana} / ${sensei.tag}):</b>${sensei.desc}<br><b>補完メモ:</b>${sensei.lack}</p></div>`
     : "";
   const polNote = sensei
     ? "講師ルート:解説の言葉づかい・方法論が全編で一貫しているため、本と本の間で「流儀の違い」に戸惑うことがなく、独学でも迷いにくいのが最大の利点です。"
@@ -1103,7 +1102,13 @@ function renderRouteBody(){
   const goalCard = sensei
     ? `<h4>${sensei.name} 完走</h4><p>${sensei.sub}。過去問で志望校の形式に合わせて仕上げれば完成です。</p>`
     : `<h4>${tier.goal}</h4><p>${tier.name}(${trackName(S.bunri,"short")})ルート完走。過去問で合格点を安定させたら完成です。</p>`;
+  /* 講師ルートの非公式の注記。ルートの冒頭に出す（文言の正本は build/content/legal.mjs の SENSEI_NOTE。
+     講師名は「〇〇ルート」の「ルート」を除いて差し込む） */
+  const senseiTop = sensei && DATA.legal && DATA.legal.senseiNote
+    ? `<div class="note-card sensei-top"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 16h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><p><b>非公式のルートです。</b>${DATA.legal.senseiNote.replace("{name}", sensei.name.replace(/ルート$/, ""))}<a href="/disclaimer/" style="color:var(--indigo);font-weight:700">免責事項</a></p></div>`
+    : "";
   out.innerHTML = `
+    ${senseiTop}
     <div class="route-summary">
       <dl style="display:contents">
         <div class="rs-item"><dt>残りの教材</dt><dd>${active}<small> 冊</small></dd></div>

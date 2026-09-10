@@ -26,7 +26,7 @@ import vm from 'vm';
 import { fileURLToPath } from 'url';
 import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData, isMigrated } from './lib/load-subject-data.mjs';
-import { clientBooks } from './lib/subject-assets.mjs';
+import { clientBooks, clientLegal as buildLegal } from './lib/subject-assets.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 import { affiliateEnabled } from './lib/load-subject-data.mjs';
 import { USAGE_NOTE } from './content/legal.mjs';
@@ -167,7 +167,7 @@ function collect(src, dir) {
   if (migrated) {
     const d = loadSubjectData(ROOT, dir);
     const DATA = {
-      config: d.config, stages: d.stages, tiers: d.tiers,
+      config: d.config, stages: d.stages, tiers: d.tiers, legal: buildLegal(),
       routes: d.routes, unis: d.unis, guides: d.guides, books: clientBooks(d), focus: d.focus,
     };
     if (typeof ctx.window.RT_SUBJECT_APP !== 'function') {

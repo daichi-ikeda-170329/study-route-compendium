@@ -401,3 +401,15 @@ export function USAGE_NOTE(ctx) {
     + '出願前に必ず募集要項をご確認ください。書影は Amazon 等が提供する商品画像 URL を参照して表示しています。'
     + (ctx.aff ? '当サイトはアフィリエイト広告を利用しています。' : '');
 }
+
+/**
+ * 講師名を冠したルートの非公式の注記。科目トップのルート画面で、講師ルートを表示したときに
+ * ルートの冒頭へ出す（仕様書 3.5）。フッターと /disclaimer/ の注記と同じ趣旨。
+ * 配信用の科目データ（build/lib/subject-assets.mjs の core.legal.senseiNote）には
+ * `{name}` を残した形で渡し、assets/js/subject-english.js が講師名を差し込む。
+ *
+ * @param {string} name 講師名（「ルート」を付けない。例: 関正生）
+ */
+export function SENSEI_NOTE(name) {
+  return `このルートは当サイトが市販の著作をもとに独自に構成したもので、${name}本人・所属予備校・出版社の推奨や監修ではありません。`;
+}
