@@ -264,6 +264,16 @@ test('図鑑→ルート→診断と動いたあと、戻るで 1 画面ずつ�
   expect(errors).toEqual([]);
 });
 
+test('全科目で、いまの画面のナビに aria-current が付く', async ({ page }) => {
+  for (const dir of ['english', 'joho', 'shoron']) {
+    await page.goto(`/${dir}/`, { waitUntil: 'domcontentloaded' });
+    await waitForApp(page);
+    await nav(page, 'catalog').click();
+    await expect(nav(page, 'catalog')).toHaveAttribute('aria-current', 'page');
+    await expect(nav(page, 'home')).not.toHaveAttribute('aria-current', 'page');
+  }
+});
+
 test('診断の設問を進めても履歴は積まず、戻る 1 回で診断から出る', async ({ page }) => {
   await page.goto('/english/', { waitUntil: 'domcontentloaded' });
   await waitForApp(page);

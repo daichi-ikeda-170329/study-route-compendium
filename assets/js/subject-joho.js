@@ -144,7 +144,12 @@ function go(view, opts){
   const push = NAV_BOOTED && view !== S.view && !(opts && opts.push === false);
   S.view = view;
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active", v.id==="view-"+view));
-  document.querySelectorAll("#navDesktop button, #tabbar button").forEach(b=>b.classList.toggle("active", b.dataset.view===view));
+  document.querySelectorAll("#navDesktop button, #tabbar button").forEach(b=>{
+    const on = b.dataset.view===view;
+    b.classList.toggle("active", on);
+    /* 見た目の色だけでなく、支援技術にも「いまここ」を伝える */
+    if(on) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
+  });
   window.scrollTo({top:0});
   syncHash(view, push);
 }
