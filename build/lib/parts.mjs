@@ -74,13 +74,30 @@ ${analytics()}${adsenseLoader() ? '\n' + adsenseLoader() : ''}`;
  */
 export const GA_ID = 'G-DQ5WFXEFMX';
 
+/**
+ * Consent Mode v2 の既定値（仕様書 5.3）。**gtag('config') と AdSense のタグより前に置く。**
+ *
+ * EEA・英国・スイスからのアクセスでは、同意が得られるまで解析・広告の Cookie を使わない
+ * （region 付きの宣言が region 無しより優先される）。日本など他の地域は従来どおり。
+ * この地域向けの同意バナーは置いていない（IP の地域を JS から判定できず、全員に出すと
+ * 日本の読者の体験を落とすため）。代わりに /privacy/ に書いてある（build/content/legal.mjs）。
+ *
+ * 生成ページは analytics() の中に、手書き HTML（ポータル・科目トップ・404）は
+ * build/apply-consent.mjs がマーカーの間に、同じこの文字列を書き込む。
+ */
+export const CONSENT_REGIONS = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT',
+  'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO', 'GB', 'CH'];
+export const CONSENT_DEFAULT = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:${JSON.stringify(CONSENT_REGIONS).replace(/"/g, "'")},wait_for_update:500});
+gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});`;
+
 export function analytics() {
   const id = GA_ID;
   return `<!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
+${CONSENT_DEFAULT}
 gtag('js', new Date());
 gtag('config', '${id}', {
   /* **共有 URL の query と hash を GA4 へ渡さない。**

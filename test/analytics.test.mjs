@@ -148,3 +148,42 @@ test('外部の書影に referrerpolicy が付いている（ページ URL を�
   }
   assert.deepEqual(bad.slice(0, 5), [], bad.slice(0, 5).join('\n'));
 });
+
+/* ---------- 同意モード（改修仕様書 5.3） ---------- */
+
+test('全ページの <head> で、同意の既定値が gtag(\'config\') と AdSense のタグより前にある', async () => {
+  const { default: fsm } = await import('node:fs');
+  const { default: pathm } = await import('node:path');
+  const { ROOT: root } = await import('./helpers.mjs');
+  const skip = new Set(['.git', 'node_modules', 'dist', 'docs', 'build', 'test', 'data', 'e2e', 'test-results', 'playwright-report', '.agents', '.claude']);
+  const files = [];
+  const walk = (d) => {
+    for (const e of fsm.readdirSync(d, { withFileTypes: true })) {
+      if (skip.has(e.name)) continue;
+      const p = pathm.join(d, e.name);
+      if (e.isDirectory()) walk(p); else if (e.name.endsWith('.html')) files.push(p);
+    }
+  };
+  walk(root);
+  assert.ok(files.length > 1000, `HTML が ${files.length} 枚しか見つからない`);
+  const bad = [];
+  for (const f of files) {
+    const src = fsm.readFileSync(f, 'utf8');
+    const cfg = src.indexOf("gtag('config'");
+    if (cfg < 0) continue;
+    const consent = src.indexOf("gtag('consent','default'");
+    const ads = src.indexOf('adsbygoogle.js');
+    if (consent < 0 || consent > cfg || (ads >= 0 && consent > ads)) bad.push(pathm.relative(root, f));
+  }
+  assert.deepEqual(bad.slice(0, 10), [], `同意の既定値が遅い・無いページ: ${bad.length} 枚`);
+});
+
+test('EEA・英国・スイスは既定で拒否、それ以外は許可', async () => {
+  const { CONSENT_DEFAULT, CONSENT_REGIONS } = await import('../build/lib/parts.mjs');
+  assert.ok(CONSENT_REGIONS.includes('GB') && CONSENT_REGIONS.includes('CH') && CONSENT_REGIONS.includes('DE'));
+  assert.ok(!CONSENT_REGIONS.includes('JP'));
+  const i = CONSENT_DEFAULT.indexOf("analytics_storage:'denied'");
+  const j = CONSENT_DEFAULT.indexOf("analytics_storage:'granted'");
+  assert.ok(i > 0 && j > i, 'region 付きの拒否を先に、許可をあとに宣言していない');
+});
+

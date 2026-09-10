@@ -84,6 +84,14 @@ p.lead{font-size:13.5px;color:var(--ink-2);max-width:44ch;margin:0 auto 30px}
 .rt-search__more:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
 /* rt-search:end */
 </style>
+<!-- consent-default:start — build/apply-consent.mjs が build/lib/parts.mjs の CONSENT_DEFAULT から書き込む。手で編集しない -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
+</script>
+<!-- consent-default:end -->
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704595822429716" crossorigin="anonymous"></script>
 <!-- Google アナリティクス 4 -->

@@ -65,3 +65,14 @@ Google アナリティクス 4 の既定の保持期間に従う。管理画面�
 1. `assets/js/analytics.js` の `EVENTS` に足す
 2. この表に足す
 3. `test/analytics.test.mjs` が両者を突き合わせる。片方だけ増やすと落ちる
+
+## 同意モード（Consent Mode v2）
+
+2026-09-11 から、GA4 と AdSense のタグより前に同意の既定値を宣言している（改修仕様書 5.3）。
+
+- EEA・英国・スイス（`build/lib/parts.mjs` の `CONSENT_REGIONS`）: `ad_storage` `ad_user_data` `ad_personalization` `analytics_storage` をすべて `denied`、`wait_for_update: 500`
+- それ以外の地域: すべて `granted`（region 付きの宣言が優先されるので、日本からのアクセスは従来どおり）
+- 正本は `build/lib/parts.mjs` の `CONSENT_DEFAULT`。生成ページは `analytics()` の中、手書き HTML（ポータル・科目トップ 7 枚・404）は `build/apply-consent.mjs` がマーカーの間に書き込む
+- 上の地域向けの同意バナーは**置いていない**（IP の地域を JS から判定できず、全員に出すと日本の読者の体験を落とすため）。代わりに `/privacy/` に「同意が得られるまで解析・広告の Cookie を使わない」と書いている
+- `test/analytics.test.mjs` が、全ページで `gtag('consent','default'` が `gtag('config'` より前にあることを見る
+

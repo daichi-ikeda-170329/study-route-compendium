@@ -48,6 +48,8 @@
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
 gtag('js', new Date());
 gtag('config', 'G-DQ5WFXEFMX', {
   /* **共有 URL の query と hash を GA4 へ渡さない。**
@@ -151,6 +153,7 @@ gtag('config', 'G-DQ5WFXEFMX', {
     <section class="block prose" id="s6">
       <h2 class="sec">広告配信の停止（オプトアウト）について</h2>
       <p>Cookie の使用を望まれない場合は、お使いのブラウザの設定から Cookie を無効にすることで、情報の収集を拒否できます。設定方法はブラウザのヘルプをご確認ください。</p>
+      <p>欧州経済領域（EEA）・英国・スイスからのアクセスでは、同意が得られるまで解析・広告の Cookie を使いません（Google の同意モードで既定値を「拒否」にしています）。</p>
       <ul>
         <li>Amazon における情報の取り扱いについては、Amazon.co.jp のプライバシー規約をご確認ください。</li>
         <li>楽天における情報の取り扱いについては、楽天グループのプライバシーポリシーをご確認ください。</li>
