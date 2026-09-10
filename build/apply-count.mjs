@@ -26,7 +26,7 @@
  *      build/data/count-ignore.json に理由付きで登録して黙らせる。
  *
  * 画像に焼き込んだ冊数はここでは扱えない。
- *   assets/x-header.png … SVG が正本にあるので月 1 回焼き直す（README の X アカウント節）
+ *   assets/x-header.png … SVG が正本にあるので月 1 回焼き直す（docs/operations.md の「X アカウント」）
  *   assets/ogp*.png     … build/gen-ogp.mjs が BOOKS から数え直して焼き直す
  */
 import fs from 'fs';
@@ -141,17 +141,17 @@ function rules(oldS, newS) {
  */
 function anchors(t) {
   return [
-    { file: 'README.md', why: 'cover を直接持つ本の数',
+    { file: 'docs/data-model.md', why: 'cover を直接持つ本の数',
       re: /(最優先で参照する。現在 )([\d,]+)( 冊が該当する)/g, value: t.covers },
-    { file: 'README.md', why: '内部略称とみなした本の数',
+    { file: 'docs/data-model.md', why: '内部略称とみなした本の数',
       re: /(整えて使う。現在 )([\d,]+)( 冊が該当する)/g, value: t.shorthand },
-    { file: 'README.md', why: 'authors.json に著者名がある本の数',
+    { file: 'docs/data-model.md', why: 'authors.json に著者名がある本の数',
       re: /(人名を取得する。)([\d,]+)( 冊分ある)/g, value: t.authors },
-    { file: 'README.md', why: 'authors.json に著者名がある本の数（構成表）',
+    { file: 'docs/architecture.md', why: 'authors.json に著者名がある本の数（構成表）',
       re: /(実在確認済み )([\d,]+)( 冊分）)/g, value: t.authors },
-    { file: 'README.md', why: '著者名が判明しない本の数（収録 − authors.json）',
+    { file: 'docs/data-model.md', why: '著者名が判明しない本の数（収録 − authors.json）',
       re: /(判明しない )([\d,]+)( 冊)/g, value: t.authorless },
-    { file: 'README.md', why: 'title と h1 を著者名込みにする本の数',
+    { file: 'docs/data-model.md', why: 'title と h1 を著者名込みにする本の数',
       re: /(。)([\d,]+)( 冊が該当する。書名にすでに)/g, value: t.withAuthor },
     { file: 'build/lib/rank.mjs', why: '収録冊数',
       re: /(収録 )([\d,]+)( 冊のうち)/g, value: t.total },
@@ -410,7 +410,7 @@ function main() {
         note: old.note, note2: old.note2, ...next,
       }, null, 2)}\n`, 'utf8');
       console.log(`置換 ${hits} 件。count-state.json を更新した`);
-      console.log('画像に焼き込んだ冊数は別手順。OGP は node build/gen-ogp.mjs、X のヘッダーは README の X アカウント節を見る');
+      console.log('画像に焼き込んだ冊数は別手順。OGP は node build/gen-ogp.mjs、X のヘッダーは docs/operations.md の X アカウント節を見る');
     }
   }
 

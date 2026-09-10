@@ -22,7 +22,7 @@
  *   mismatch   … 応答はあるが別の商品を指している可能性
  *
  * 書影が全候補とも駄目な本は、BOOKS[].nocover を立てるか、出版社の商品画像を
- * BOOKS[].cover に入れる（README の「書影」の節）。
+ * BOOKS[].cover に入れる（docs/data-model.md の「書影」の節）。
  */
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -149,7 +149,7 @@ if (JSON_OUT) {
     for (const p of byKind.transient.slice(0, 20)) console.log(`  - [一時] ${p.target}: ${p.message}`);
     if (byKind.transient.length > 20) console.log(`  … ほか一時的なもの ${byKind.transient.length - 20} 件`);
     console.log('\n書影が取れない本は、出版社の商品画像を BOOKS[].cover に入れるか、');
-    console.log('どこにも画像が無いと確認できたら BOOKS[].nocover を立てる（README の「書影」の節）。');
+    console.log('どこにも画像が無いと確認できたら BOOKS[].nocover を立てる（docs/data-model.md の「書影」の節）。');
     console.log('一時的な不調（429 / 5xx / タイムアウト）はデータの不備ではない。翌週の結果と見比べる。');
   }
 }
