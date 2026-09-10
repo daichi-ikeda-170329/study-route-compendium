@@ -29,3 +29,15 @@ test('README は 300 行以内で、案内している docs が実在する', ()
     assert.ok(fs.existsSync(path.join(ROOT, m[1])), `${m[1]} が無い`);
   }
 });
+
+test('LICENSE と data/LICENSE.md があり、README から参照され、公開物には入らない（改修仕様書 5.4）', async () => {
+  assert.ok(fs.existsSync(path.join(ROOT, 'LICENSE')));
+  assert.ok(fs.existsSync(path.join(ROOT, 'data/LICENSE.md')));
+  assert.match(fs.readFileSync(path.join(ROOT, 'LICENSE'), 'utf8'), /MIT License/);
+  assert.match(fs.readFileSync(path.join(ROOT, 'data/LICENSE.md'), 'utf8'), /All rights reserved/);
+  assert.match(readme, /`LICENSE`/);
+  assert.match(readme, /`data\/LICENSE\.md`/);
+  const src = fs.readFileSync(path.join(ROOT, 'build/build-public.mjs'), 'utf8');
+  const allowFiles = src.slice(src.indexOf('const ALLOW_FILES'), src.indexOf('];', src.indexOf('const ALLOW_FILES')));
+  assert.doesNotMatch(allowFiles, /LICENSE/, 'LICENSE を公開物の許可リストに入れない');
+});

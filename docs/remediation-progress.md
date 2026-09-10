@@ -73,6 +73,7 @@
 | 2026-09-11 | 5.1 README の分割 | (このコミット) | README を 1,381 行→198 行に（概要・収録数・ディレクトリの要点・ビルドと検査・データの正本・docs への案内・運営者の手動設定）。本文は `docs/architecture.md` `data-model.md` `operations.md` `sharing.md` `testing.md` へ見出しごと移し、節の間のリンクを移動先へ張り替えた。`extractSubject` のコード例・「単一 HTML の SPA」・「科目 HTML の BOOKS 配列」を現在の仕組みに書き換え、各 docs の冒頭に理由を書いた。`apply-count` のアンカー 6 つを移動先のファイルへ向けた |
 | 2026-09-11 | 5.2 OGP を CI で作る | (このコミット) | 1,558 枚（書籍 1,390・大学 160・科目と共通 8）の追跡を外した（履歴は書き換えない）。フォントは `actions/cache@v4` で使い回す。**本番で画像が 200 になるか（`check:production`）は push 後の確認**（未確認） |
 | 2026-09-11 | 5.3 Consent Mode v2 | (このコミット) | 正本は `parts.mjs` の `CONSENT_DEFAULT`。手書き HTML は AdSense のタグが GA4 より前にあるので、`build/apply-consent.mjs`（新設・STEPS 入り）が AdSense の直前に書き込む。同意バナーは置かない（仕様書どおり） |
+| 2026-09-11 | 5.4 LICENSE | (このコミット) | 運営者の判断（2026-09-10 のセッションで既定案を承認）で、プログラムとマークアップは MIT、文章と評価データは著作権留保（`data/LICENSE.md`）。著作権者名は「ルート大全 編集部」。`LICENSE` は `dist/` に入れない |
 
 ## 次にやること
 
