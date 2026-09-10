@@ -34,6 +34,16 @@ export const ADMISSION_LABEL = SITE_META.admissionLabel;
 export const ADMISSION_LABEL_SHORT = SITE_META.admissionLabelShort;
 
 /**
+ * ポータルのフッター文。n は収録冊数（カンマ付きで入れる）。
+ * 2026-09-10 まで「2026年度入試（新課程）に対応しています」のまま、年度の置換から漏れていた。
+ */
+export function footerBlurb(n) {
+  return String(SITE_META.footerBlurb)
+    .replace('{N}', Number(n).toLocaleString('en-US'))
+    .replace('{admissionLabel}', ADMISSION_LABEL);
+}
+
+/**
  * meta description / og:description の末尾に付ける一文。
  * 「◯◯年度入試対応・完全無料」を置き換える。断定しない表現にしてある。
  */

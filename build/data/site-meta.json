@@ -7,5 +7,7 @@
   "admissionLabelShort": "2027年度に向けて更新中",
   "curriculumLabel": "新課程",
   "countUnitLabel": "冊",
+  "footerBlurb": "大学受験の参考書{N}冊を科目別・難易度別に整理し、志望校から逆算した参考書ルートを提示する無料サイトです。{admissionLabel}。",
+  "noteOnFooterBlurb": "ポータル（index.html）のフッター文。{N} は収録冊数で、build/data/count-state.json の前回値から埋める（冊数の置換は build/apply-count.mjs が受け持つ）。{admissionLabel} は admissionLabel。",
   "noteOnStatus": "admissionStatus は rolling（順次確認・更新中）だけを使う。全件を確認し終えた事実が無い状態で verified へ上げない。「完全対応」と書かないのはそのため。"
 }

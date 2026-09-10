@@ -83,8 +83,14 @@ function truth() {
   }
 
   const authors = Object.keys(JSON.parse(fs.readFileSync(AUTHORS_FILE, 'utf8')).authors).length;
+  /* 大学別ページ（/univ/<slug>/）を持つ大学は台帳の件数。理科だけに収録している大学は
+     台帳に無い（5 科目そろわないのでページにしない）。ポータルでこの内訳を説明する */
+  const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8')).universities;
+  const ledgerNames = new Set(ledger.map(u => u.name));
+  const sciOnly = loadSubjectData(ROOT, 'science').unis.filter(u => !ledgerNames.has(u.n)).length;
   return {
     total, subjects, picks, unis, uniTotal: uniNames.size,
+    uniPages: ledger.length, uniSciOnly: sciOnly,
     covers, nonHensachi, shorthand, withAuthor: withAuthorCount,
     authors, authorless: total - authors,
   };
@@ -154,6 +160,13 @@ function anchors(t) {
     // ポータルのヒーロー統計。全科目を合わせた収録大学数（科目ごとの数とは別）
     { file: 'index.html', why: '収録大学（全科目の和集合）',
       re: /(<div class="stat"><b>)([\d,]+)(<\/b><span>収録大学（全科目）<\/span><\/div>)/g, value: t.uniTotal },
+    // ポータルの志望校節。ヒーローの「181」と「全 160 校」が並んで読者に食い違って見えたので、内訳を書く
+    { file: 'index.html', why: '収録大学（大学別ページ）',
+      re: /(5 科目すべてのデータがそろう )([\d,]+)( 校に用意しています)/g, value: t.uniPages },
+    { file: 'index.html', why: '収録大学（理科のみ）',
+      re: /(理科のみ収録している )([\d,]+)( 校を含めると)/g, value: t.uniSciOnly },
+    { file: 'index.html', why: '収録大学（全科目）',
+      re: /(校を含めると )([\d,]+)( 校）)/g, value: t.uniTotal },
   ];
 }
 

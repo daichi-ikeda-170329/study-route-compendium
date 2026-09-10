@@ -1042,10 +1042,7 @@ function renderHome(){
       <h3>${t.name}</h3><p>${t.sub} — ${t.goal}</p>
     </div>`;
   }).join("");
-  const disc = `<b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの出題科目(古文・漢文の有無、記述の形式)は編集時点の公開情報にもとづく目安であり、必ず最新の入試要項でご確認ください。2025年入試からの新課程(共通テスト国語の90分・5題化など)により、旧課程版参考書の買い替えにはご注意ください。書影はAmazonおよび公開書誌データベースが提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
-  document.getElementById("homeDisclaimer").innerHTML = disc;
-  document.getElementById("catDisclaimer").innerHTML = disc;
-  document.getElementById("guideDisclaimer").innerHTML = disc;
+  /* 利用上の注記（id="usageNote"）はページに 1 回だけ、ビルド時に書き込む（build/content/legal.mjs の USAGE_NOTE） */
 }
 
 /* ============================================================

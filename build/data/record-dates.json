@@ -1226,8 +1226,8 @@
    "d": "2026-09-09"
   },
   "file:build/content/legal.mjs": {
-   "h": "86b59f8908eb",
-   "d": "2026-09-04"
+   "h": "c478b6d490a5",
+   "d": "2026-09-10"
   },
   "file:english/guides/bunpo-comparison/index.html": {
    "h": "37d9d306dfc5",
@@ -6074,11 +6074,11 @@
    "d": "2026-09-03"
   },
   "subject/english": {
-   "h": "75aca4e4936c",
-   "d": "2026-09-08"
+   "h": "c32cf92c02cb",
+   "d": "2026-09-10"
   },
   "subject/japanese": {
-   "h": "c06d87482823",
+   "h": "98259e1aa813",
    "d": "2026-09-10"
   },
   "subject/joho": {
@@ -6086,11 +6086,11 @@
    "d": "2026-09-08"
   },
   "subject/math": {
-   "h": "3a81d79cee4e",
-   "d": "2026-09-08"
+   "h": "0edf6960add1",
+   "d": "2026-09-10"
   },
   "subject/science": {
-   "h": "bd75285d7a4a",
+   "h": "3994f465fa66",
    "d": "2026-09-10"
   },
   "subject/shoron": {
@@ -6098,7 +6098,7 @@
    "d": "2026-09-08"
   },
   "subject/social": {
-   "h": "0583effec2fd",
+   "h": "7af659ad1098",
    "d": "2026-09-10"
   },
   "top/english": {

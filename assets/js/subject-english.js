@@ -1128,10 +1128,7 @@ function renderHome(){
       <h3>${s.name}</h3><p>${s.tag} — ${s.sub}</p>
     </div>`;
   }).join("");
-  const disc = `<b>ご利用にあたって:</b>本サイトの難易度・到達偏差値・目安時間は、各出版社の公表情報と、大手予備校・塾が公開する学習ルート解説をもとにした<b>目安</b>です。効果には個人差があります。大学ごとの出題傾向・入試方式(英語外部試験の利用可否を含む)は年度により変更されるため、出願前に必ず募集要項をご確認ください。書影はAmazon等が提供する商品画像URLを参照して表示しています(画像の保存・加工は行っていません)。${AFF?"当サイトはアフィリエイト広告を利用しています。":""}`;
-  document.getElementById("homeDisclaimer").innerHTML = disc;
-  document.getElementById("catDisclaimer").innerHTML = disc;
-  document.getElementById("guideDisclaimer").innerHTML = disc;
+  /* 利用上の注記（id="usageNote"）はページに 1 回だけ、ビルド時に書き込む（build/content/legal.mjs の USAGE_NOTE） */
 }
 
 /* ============================================================

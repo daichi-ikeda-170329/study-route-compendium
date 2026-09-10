@@ -74,3 +74,34 @@ test('検出パターンは書名・刊行年を巻き込まない', () => {
   for (const re of STALE_YEAR_PATTERNS) for (const m of safe.matchAll(re)) hits.push(m[0]);
   assert.deepEqual(hits, [], `書名・刊行年を誤検出している: ${hits.join(', ')}`);
 });
+
+/* ---------- タスク 2.1: 数字・年度・根拠説明の統一 ---------- */
+
+test('ポータルのフッター文は site-meta.json の footerBlurb から出ている', async () => {
+  const { footerBlurb } = await import('../build/lib/site-meta.mjs');
+  const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const state = JSON.parse(fs.readFileSync(path.join(ROOT, 'build/data/count-state.json'), 'utf8'));
+  assert.ok(html.includes(`<!-- site-meta:blurb:start --><p>${footerBlurb(state.total)}</p><!-- site-meta:blurb:end -->`),
+    'フッター文が footerBlurb と一致しない');
+  assert.doesNotMatch(html, /2026年度入試/, 'index.html に古い年度が残っている');
+});
+
+test('科目トップの「ご利用にあたって」は 1 ページに 1 回だけ、根拠の説明は 1 種類', async () => {
+  const { USAGE_NOTE } = await import('../build/content/legal.mjs');
+  for (const dir of ['english', 'japanese', 'math', 'science', 'social']) {
+    const html = fs.readFileSync(path.join(ROOT, dir, 'index.html'), 'utf8');
+    assert.equal((html.match(/ご利用にあたって/g) || []).length, 1, `${dir}: 「ご利用にあたって」が 1 回でない`);
+    assert.ok(html.includes(USAGE_NOTE({ aff: true })) || html.includes(USAGE_NOTE({ aff: false })),
+      `${dir}: 文面が build/content/legal.mjs の USAGE_NOTE と違う`);
+    assert.doesNotMatch(html, /大手予備校・塾が公開する学習ルート解説をもとにした/, `${dir}: 古い根拠の説明が残っている`);
+    const js = fs.readFileSync(path.join(ROOT, 'assets/js', `subject-${dir}.js`), 'utf8');
+    assert.doesNotMatch(js, /ご利用にあたって/, `${dir}: JS が「ご利用にあたって」を描いている（正本は legal.mjs）`);
+  }
+});
+
+test('ポータルの志望校節は、大学別ページの校数と理科のみの校数の内訳を書く', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build/data/university-slugs.json'), 'utf8')).universities;
+  assert.ok(html.includes(`5 科目すべてのデータがそろう ${ledger.length} 校に用意しています`));
+  assert.doesNotMatch(html, /全 \d+ 校を収録しています/);
+});

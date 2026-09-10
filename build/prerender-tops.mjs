@@ -28,6 +28,8 @@ import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData, isMigrated } from './lib/load-subject-data.mjs';
 import { clientBooks } from './lib/subject-assets.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
+import { affiliateEnabled } from './lib/load-subject-data.mjs';
+import { USAGE_NOTE } from './content/legal.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
@@ -50,9 +52,6 @@ const TARGETS = [
   { id: 'filterScroll', render: 'renderCatalog' },
   { id: 'homeRoutes', render: 'renderHome' },
   { id: 'homeSenseis', render: 'renderHome' },
-  { id: 'homeDisclaimer', render: 'renderHome' },
-  { id: 'catDisclaimer', render: 'renderHome' },
-  { id: 'guideDisclaimer', render: 'renderHome' },
   { id: 'guideList', render: 'renderGuide' },
 ];
 
@@ -261,6 +260,18 @@ for (const sub of SUBJECTS) {
     if (!out) { missing.push(t.id); continue; }
     if (out.changed) n++;
     src = out.src;
+  }
+  /* 「ご利用にあたって」。ページ内で 1 回だけ、マーカーの間に書き込む（文面の正本は legal.mjs）。
+     マーカーを持つのはルートを持つ 5 科目。持たない科目（情報・小論文）は飛ばす */
+  const US = '<!-- usage-note:start -->', UE = '<!-- usage-note:end -->';
+  const ui = src.indexOf(US), uj = src.indexOf(UE);
+  if (ui >= 0 && uj > ui) {
+    const block = `${US}<div class="disclaimer" id="usageNote">${USAGE_NOTE({ aff: affiliateEnabled(ROOT) })}</div>${UE}`;
+    const next = src.slice(0, ui) + block + src.slice(uj + UE.length);
+    if (next !== src) n++;
+    src = next;
+  } else if (!sub.catalogOnly) {
+    missing.push('usage-note のマーカー');
   }
   if (missing.length) console.warn(`  ! ${sub.dir}: 要素が見つからない — ${missing.join(', ')}`);
 

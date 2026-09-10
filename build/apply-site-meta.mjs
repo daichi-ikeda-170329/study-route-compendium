@@ -17,7 +17,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   ADMISSION_YEAR, ADMISSION_LABEL, ADMISSION_LABEL_SHORT,
-  ADMISSION_META_SENTENCE, CURRICULUM_LABEL, STALE_YEAR_PATTERNS,
+  ADMISSION_META_SENTENCE, CURRICULUM_LABEL, STALE_YEAR_PATTERNS, footerBlurb,
 } from './lib/site-meta.mjs';
 import { SUBJECTS } from './lib/extract.mjs';
 
@@ -66,6 +66,17 @@ const RULES = [
   },
 ];
 
+/**
+ * ポータルのフッター文。マーカーの間を site-meta.json の footerBlurb で置き換える。
+ * 冊数は count-state.json の前回値で埋める（冊数を変えるのは build/apply-count.mjs の役目。
+ * ここで実データから数え直すと、apply-count の「前回値→新値」の置換と二重に動く）。
+ */
+const BLURB_RE = /(<!-- site-meta:blurb:start -->)[\s\S]*?(<!-- site-meta:blurb:end -->)/g;
+function blurbHtml() {
+  const state = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'count-state.json'), 'utf8'));
+  return `<p>${footerBlurb(state.total)}</p>`;
+}
+
 /** 年度を変えても中身が追従することを確かめるため、テストから同じ処理を呼べるようにする */
 export function applyToSource(src) {
   let out = src;
@@ -75,6 +86,9 @@ export function applyToSource(src) {
     out = out.replace(r.re, r.to);
     hits[r.label] = (before.match(r.re) || []).length;
   }
+  const beforeBlurb = out;
+  out = out.replace(BLURB_RE, (m, a, b) => `${a}${blurbHtml()}${b}`);
+  hits['ポータルのフッター文'] = (beforeBlurb.match(BLURB_RE) || []).length;
   return { out, hits };
 }
 
@@ -111,6 +125,10 @@ function main() {
   }
 
   let bad = false;
+  if ((total['ポータルのフッター文'] || 0) < 1) {
+    console.error('規則が当たらない: ポータルのフッター文（index.html の site-meta:blurb マーカー）');
+    bad = true;
+  }
   for (const r of RULES) {
     const n = total[r.label] || 0;
     if (n < r.min) {
