@@ -413,7 +413,7 @@ function renderUniversity(uni, all, config) {
     ? `<p class="usource">出典: ${esc(name)}の${src.year}年度入試の公表資料（選抜要項・入試概要など。${esc(src.checked)} 確認） <a rel="nofollow noopener noreferrer" target="_blank" href="${esc(src.url)}">公式サイト</a></p>`
     : '<p class="usource">出題形式は年度により変わります。出願前に募集要項で確認してください。</p>';
   const faculties = src && Array.isArray(src.faculties) && src.faculties.length ? src.faculties : null;
-  const facultyTable = faculties ? `      <div class="ufac-wrap">
+  const facultyTable = faculties ? `      <div class="ufac-wrap" tabindex="0" role="region" aria-label="${esc(name)}の学部と入試方式の表（横にスクロールできます）">
         <table class="ufac">
           <caption>${esc(name)}の学部と入試方式（${src.year}年度。大学公式の公表資料から、確かめられた学部・方式だけを載せています。${esc(src.checked)} 確認）</caption>
           <thead><tr><th scope="col">学部</th><th scope="col">方式</th><th scope="col">科目</th><th scope="col">備考</th></tr></thead>
