@@ -73,8 +73,10 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
-    # デプロイ job にだけ必要最小限の権限を与える
+    # デプロイ job にだけ必要最小限の権限を与える。contents: read は IndexNow の通知で
+    # sitemap.xml とキーファイルを読むための checkout に使う
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
@@ -83,3 +85,17 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+
+      # ここから下は公開のあとの通知。**失敗してもデプロイは成功のまま**にする
+      # （通知が届かなくても公開物は正しい。次の push でもう一度送られる）。
+      # IndexNow は Bing・Yahoo・DuckDuckGo・Yandex 向け。Google は対応していないので、
+      # Search Console のサイトマップ送信は運営者の手作業（docs/deployment-runbook.md の 7 節）
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: IndexNow へ全 URL を通知する
+        continue-on-error: true
+        run: node build/submit-indexnow.mjs

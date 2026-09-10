@@ -1292,7 +1292,7 @@ https://route-taizen.com/test/…         404
 `docs/search-console-indexing.md` にまとめてある。**件数を見て慌てる前にそちらを読む。**
 
 - [ ] 所有権の確認（DNS の TXT か、`2d7e64a…txt` のファイル）
-- [ ] `https://route-taizen.com/sitemap.xml` を送信
+- [ ] `https://route-taizen.com/sitemap.xml` を送信（**コードでは代替できない手作業**。手順は `docs/deployment-runbook.md` の「Search Console にサイトマップを送信する」。IndexNow は `pages.yml` がデプロイ後に自動で送る）
 - [ ] カバレッジで index 登録の状況と、除外の理由を確認
 - [ ] 「ページにリダイレクトがあります」に出ている URL を書き出し、
       `docs/search-console-indexing.md` の 3 種類のどれかを判定する

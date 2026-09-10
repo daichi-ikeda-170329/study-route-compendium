@@ -8,6 +8,8 @@
 | 内容 | 正本 |
 |---|---|
 | 手動設定の実施状況（Search Console の送信・確認） | `README.md` の「運営者が行う手動設定」 |
+| サイトマップの送信手順（運営者の手作業。コードでは代替できない） | `docs/deployment-runbook.md` の「Search Console にサイトマップを送信する」 |
+| IndexNow への通知（デプロイ後に自動） | `.github/workflows/pages.yml` の deploy job |
 | 公開サイトのリダイレクト実測 | `build/check-production.mjs`（`npm run check:production`） |
 | リポジトリ側の URL 表記の検査 | `build/check-site.mjs`（`npm run check:site`） |
 | 理由ごとの判断 | **この文書** |

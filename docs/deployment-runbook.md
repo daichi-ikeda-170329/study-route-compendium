@@ -132,7 +132,30 @@ localhost だけで決定的に固定している。
 コードからは完結しない。実施状況の正本は `README.md` の「運営者が行う手動設定」。
 
 - GitHub リポジトリの Description と Topics を実態に合わせる（`参考書1,052冊` が残っている）。
-- Search Console でのサイトマップ送信。
+- Search Console でのサイトマップ送信（下の「Search Console にサイトマップを送信する」）。
 - AdSense の自動広告の除外設定。
 - CMP / Consent Mode の方針判断。
 - ライセンスの選択、公開連絡先の用意。
+
+### Search Console にサイトマップを送信する（運営者の手作業）
+
+**コードでは代替できない。** Google は IndexNow に対応しておらず、Search Console への
+サイトマップ送信は所有者のアカウントでログインして行う操作のため、workflow からは行えない
+（Search Console API で送るにも所有者の OAuth 認証が要り、リポジトリに資格情報を置かない方針）。
+
+1. <https://search.google.com/search-console> に、プロパティ `route-taizen.com` の所有者のアカウントでログインする
+2. 左の「サイトマップ」を開く
+3. 「新しいサイトマップの追加」に `https://route-taizen.com/sitemap.xml` を入れて送信する
+4. 状態が「成功しました」になり、検出された URL の数が `sitemap.xml` の `<loc>` の数と
+   おおむね合っていることを確かめる（`grep -c '<loc>' sitemap.xml` で数えられる）
+5. 実施した日を `README.md` の「運営者が行う手動設定」の Search Console の行に書く
+
+一度送信すれば、以後は Google が定期的に読み直す。ページを大きく増やしたときは
+同じ画面で「再送信」してよい。インデックス状況の読み方は `docs/search-console-indexing.md`。
+
+### IndexNow への通知（自動）
+
+`.github/workflows/pages.yml` の deploy job が、公開のあとに `node build/submit-indexnow.mjs`
+を流して `sitemap.xml` の全 URL を通知する。送信件数と HTTP の応答は Actions のログに出る。
+**失敗してもデプロイは失敗にしない**（`continue-on-error: true`）。手で送り直すときは
+同じコマンドを手元で流す（`--dry` で送信内容だけを確かめられる）。
