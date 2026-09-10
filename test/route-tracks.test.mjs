@@ -66,3 +66,73 @@ test('大学別ページの英語節もトラック名を文系・理系と書�
   assert.ok(en.length > 0, '英語節が見つからない');
   assert.doesNotMatch(en, /文系|理系/, '英語節に文系・理系が出ている');
 });
+
+/* ---------- 本編が同じトラックをまとめる（タスク 1.2） ---------- */
+
+const { groupTracks } = await import('../build/lib/tracks.mjs');
+
+const seq = (note = '型を作る') => ({
+  omni: [{ id: 'a', role: '文法', lvl: 1, note, alts: ['x', 'y'] }, { id: 'b', role: '長文', lvl: 2 }],
+  quick: [{ id: 'a', role: '文法', lvl: 1 }],
+});
+
+test('groupTracks: 本編が同じなら 1 グループ', () => {
+  const g = groupTracks({ bun: seq(), ri: seq(), para: { bun: [{ id: 'p' }], ri: [{ id: 'p' }] } });
+  assert.equal(g.length, 1);
+  assert.deepEqual(g[0].keys, ['bun', 'ri']);
+  assert.equal(g[0].para.length, 1, 'para も同じなら 1 つにまとめる');
+  assert.deepEqual(g[0].para[0].keys, ['bun', 'ri']);
+});
+
+test('groupTracks: キーの並び順が違うだけなら同じとみなす', () => {
+  const a = seq();
+  const b = { quick: seq().quick, omni: seq().omni.map(s => Object.fromEntries(Object.entries(s).reverse())) };
+  assert.equal(groupTracks({ bun: a, ri: b }).length, 1);
+});
+
+test('groupTracks: note が 1 文字違えば 2 グループ', () => {
+  const g = groupTracks({ bun: seq('型を作る'), ri: seq('型を作れ') });
+  assert.equal(g.length, 2);
+  assert.deepEqual(g.map(x => x.keys), [['bun'], ['ri']]);
+});
+
+test('groupTracks: alts の順序違いも別グループ（保守的に）', () => {
+  const b = seq();
+  b.omni[0].alts = ['y', 'x'];
+  assert.equal(groupTracks({ bun: seq(), ri: b }).length, 2);
+});
+
+test('groupTracks: para だけ違うときは本編を 1 グループにし、para はトラック別に持つ', () => {
+  // 仕様書は para の違いも別グループとしていたが、実データでは本編が同じ段階でも
+  // para は全段階で違っていたため、本編だけで判定する（2026-09-10 運営者判断）
+  const g = groupTracks({ bun: seq(), ri: seq(), para: { bun: [{ id: 'p', note: '熟語で差をつける' }], ri: [{ id: 'p', note: '熟語・語法で差をつける' }] } });
+  assert.equal(g.length, 1);
+  assert.equal(g[0].para.length, 2);
+  assert.deepEqual(g[0].para.map(x => x.keys), [['bun'], ['ri']]);
+});
+
+test('groupTracks: para が全トラック共通の配列でも扱える', () => {
+  const g = groupTracks({ gendai: seq('a'), kobun: seq('b'), para: [{ id: 'p' }] });
+  assert.equal(g.length, 2);
+  assert.deepEqual(g[0].para[0].list, [{ id: 'p' }]);
+});
+
+test('groupTracks: only で使うトラックを絞れる', () => {
+  const g = groupTracks({ bun: seq('a'), ri: seq('b') }, ['ri']);
+  assert.deepEqual(g.map(x => x.keys), [['ri']]);
+});
+
+const countSections = (rel) => (read(rel).match(/<section class="block" id="track-[a-z]+">/g) || []).length;
+
+test('本編が同じ段階はルート本編を 1 回だけ出す', () => {
+  assert.equal(countSections('english/routes/sokei/index.html'), 1);
+  assert.match(read('english/routes/sokei/index.html'), /id="track-common"/);
+  assert.match(read('english/routes/sokei/index.html'), /国公立二次型（記述）・私立個別型（マーク）共通のルート/);
+  assert.equal(countSections('math/routes/kyote/index.html'), 1);
+  assert.match(read('math/routes/kyote/index.html'), /本編の並びは文系・理系で違いはありません/);
+});
+
+test('本編が違う段階はトラックごとの節のまま', () => {
+  assert.equal(countSections('english/routes/march/index.html'), 2);
+  assert.equal(countSections('math/routes/march/index.html'), 2);
+});

@@ -474,6 +474,20 @@ function checkHtml(files) {
       if (!p.endsWith('/')) err(at, `自サイトへの絶対リンクに末尾スラッシュが無い（本番で 301 になる）: ${url}`);
     }
 
+    // 志望校別ルートで、同じ本編（<ol> 以下）を持つトラックの節が 2 つ以上並んでいないか。
+    // 2026-09-10 まで英語の 8 段階で同じ 8 冊＋6 冊が見出しだけ変えて 2 回出ていた。
+    // 本編が同じトラックは build/lib/tracks.mjs の groupTracks で 1 節にまとめる
+    const trackBodies = new Map();
+    for (const m of markup.matchAll(/<section class="block" id="track-([a-z]+)">([\s\S]*?)<\/section>/g)) {
+      const ols = [...m[2].matchAll(/<ol[\s\S]*?<\/ol>/g)].map(x => x[0]).join('\n');
+      if (!ols) continue;
+      if (trackBodies.has(ols)) {
+        err(at, `トラック「${trackBodies.get(ols)}」と「${m[1]}」の本編が同じ（groupTracks でまとめる）`);
+      } else {
+        trackBodies.set(ols, m[1]);
+      }
+    }
+
     // 最終更新日
     if (isBook && !/<time datetime="\d{4}-\d{2}-\d{2}">/.test(src)) {
       err(at, '最終更新日（<time datetime>）が無い');

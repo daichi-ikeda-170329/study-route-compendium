@@ -55,7 +55,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
-import { NON_TRACK, trackKeys, trackLabel } from './lib/tracks.mjs';
+import { NON_TRACK, trackKeys, trackLabel, groupTracks } from './lib/tracks.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, portalHeader, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { adUnit } from './lib/ads.mjs';
@@ -409,7 +409,7 @@ ${b.note ? `            <span class="ubook__note">${esc(b.note)}</span>` : ''}
         </li>`;
   }).join('\n')}
       </ul>
-` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${tracks.length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(trackLabel(d, t, 'short'))).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(trackLabel(d, t, 'short'))).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
+` : ''}      <p class="usec__more"><a href="${routeUrl}">${esc(p.tier.name)}の${esc(p.sub.ja)}参考書ルート（全${total}冊）を見る</a>${groupTracks(d.routes[p.u.t], tracks).length > 1 ? `<span class="usec__tracks">${tracks.map(t => esc(trackLabel(d, t, 'short'))).join('・')}別に用意しています${limited.length ? `。${limited.map(t => esc(trackLabel(d, t, 'short'))).join('・')}は学部・入試方式によって扱いが変わります` : ''}</span>` : ''}</p>
     </section>`;
   }).join('\n\n');
 

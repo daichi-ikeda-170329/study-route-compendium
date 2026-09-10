@@ -13,7 +13,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
-import { NON_TRACK, trackRank, trackLabel } from './lib/tracks.mjs';
+import { NON_TRACK, trackRank, trackLabel, groupTracks } from './lib/tracks.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
@@ -110,9 +110,25 @@ function render(sub, d, tier, norm, counts) {
   for (const tk of trackKeys) for (const p of POLICIES) (node.tracks[tk][p.key] || []).forEach(s => used.add(s.id));
   for (const kind of ['para', 'final']) for (const k of Object.keys(node[kind])) node[kind][k].forEach(s => used.add(s.id));
 
+  /* 本編が同じトラックは 1 節にまとめる（build/lib/tracks.mjs の groupTracks）。
+     まとめないと、英語の 8 段階で同じ 8 冊＋6 冊が見出しだけ変えて 2 回並ぶ */
+  const groups = groupTracks(d.routes[tier.id]);
+  const shorts = (keys) => keys.map(k => trackLabel(d, k, 'short')).join('・');
+  const merged = trackKeys.length > 1 && groups.length === 1;
+  const sideSplit = groups.some(g => ['para', 'final'].some(kind => g[kind].length > 1));
+
+  /* リード文とメタ説明のトラックの書き方。
+     分かれている → 「A・B別にまとめています」
+     本編が同じ   → 「本編の並びは A・B で違いはありません」（並行枠だけ違うならそう書く） */
+  const trackLead = trackKeys.length < 2 ? 'まとめています。'
+    : !merged ? `${esc(shorts(trackKeys))}別にまとめています。`
+      : `まとめています。本編の並びは${esc(shorts(trackKeys))}で違いはありません${sideSplit ? '（並行して進める本だけを分けて載せています）' : ''}。`;
+  const trackDesc = trackKeys.length < 2 ? ''
+    : !merged ? `${shorts(trackKeys)}別。` : `本編は${shorts(trackKeys)}で共通。`;
+
   const title = `${tier.name}の${sub.ja}参考書ルート｜${tier.sub} - ${sub.full}`;
   const desc = clip(`${tier.name}（${tier.sub}）を目指す人向けの${sub.ja}参考書ルート。`
-    + `目標は${tier.goal}。導入から過去問まで何をどの順で進めるかを、${used.size}冊の中から並べています。`, 120);
+    + `目標は${tier.goal}。導入から過去問まで何をどの順で進めるかを、${used.size}冊の中から並べています。${trackDesc}`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -121,9 +137,23 @@ function render(sub, d, tier, norm, counts) {
     { name: tier.name, url, absUrl: url },
   ];
 
-  const sections = trackKeys.map(tk => {
-    const label = trackLabel(d, tk);
-    const seq = node.tracks[tk];
+  const sideBlock = (g, kind, title, note) => g[kind].map(part => {
+    // グループ内でトラックごとに中身が違うときだけ、どのトラック向けかを見出しに添える
+    const whose = g.keys.length > 1 && part.keys.length < g.keys.length ? `（${esc(shorts(part.keys))}）` : '';
+    return `<div class="rside">
+        <h3>${title}${whose}</h3>
+        <p>${note}</p>
+        <ul>
+${sideList(part.list, bookById, sub, d.stages)}
+        </ul>
+      </div>`;
+  }).join('\n      ');
+
+  const sections = groups.map(g => {
+    const common = g.keys.length > 1;
+    const label = common ? `${g.keys.map(k => trackLabel(d, k)).join('・')}共通` : trackLabel(d, g.keys[0]);
+    const id = common ? 'track-common' : `track-${g.keys[0]}`;
+    const seq = g.seq;
     const bodies = POLICIES.filter(p => (seq[p.key] || []).length).map(p => `      <div class="rpol">
         <h3 class="rpol__t"><b>${p.label}</b><span>${(seq[p.key] || []).length}冊</span></h3>
         <p class="rpol__n">${p.note}</p>
@@ -132,29 +162,19 @@ ${stepList(seq[p.key], bookById, sub, d.stages)}
         </ol>
       </div>`).join('\n');
 
-    const para = node.para[tk] || node.para['*'] || [];
-    const final = node.final[tk] || node.final['*'] || [];
+    const para = sideBlock(g, 'para', '並行して進める本',
+      '上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。');
+    const final = sideBlock(g, 'final', '最後の仕上げ',
+      '直前期に取り組む総仕上げです。上のルートを終えてから着手します。');
 
-    return `    <section class="block" id="track-${tk}">
-      <div class="eyebrow">${esc(label)}</div>
+    return `    <section class="block" id="${id}">
+      <div class="eyebrow">${esc(common ? '共通' : label)}</div>
       <h2 class="sec">${esc(label)}のルート</h2>
       <div class="rpols">
 ${bodies}
       </div>
-      ${para.length ? `<div class="rside">
-        <h3>並行して進める本</h3>
-        <p>上の順番とは別に、期間を通して毎日並行させる本です。ルートの「次の1冊」を待つ必要はありません。</p>
-        <ul>
-${sideList(para, bookById, sub, d.stages)}
-        </ul>
-      </div>` : ''}
-      ${final.length ? `<div class="rside">
-        <h3>最後の仕上げ</h3>
-        <p>直前期に取り組む総仕上げです。上のルートを終えてから着手します。</p>
-        <ul>
-${sideList(final, bookById, sub, d.stages)}
-        </ul>
-      </div>` : ''}
+      ${para}
+      ${final}
     </section>`;
   }).join('\n\n');
 
@@ -246,7 +266,7 @@ ${header(sub)}
   <div class="block" style="margin-top:26px">
     <div class="eyebrow">Route by target</div>
     <h1 class="sec" style="font-size:29px">${esc(tier.name)}の${esc(sub.ja)}参考書ルート</h1>
-    <p class="sec-lead">${esc(tier.sub)}を目指す人に向けた${esc(sub.ja)}の並びです。導入から過去問まで、${used.size}冊の中から「何を・どの順で」やるかを${trackKeys.map(k => esc(trackLabel(d, k, 'short'))).join('・')}別にまとめています。すでに終えた段階は飛ばして構いません。</p>
+    <p class="sec-lead">${esc(tier.sub)}を目指す人に向けた${esc(sub.ja)}の並びです。導入から過去問まで、${used.size}冊の中から「何を・どの順で」やるかを${trackLead}すでに終えた段階は飛ばして構いません。</p>
     <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
     <dl class="tier-head">
       <div><dt>目標</dt><dd>${esc(tier.goal)}</dd></div>
@@ -254,7 +274,9 @@ ${header(sub)}
       <div><dt>収録冊数</dt><dd>${used.size} 冊</dd></div>
     </dl>
     ${trackKeys.length > 1 ? `<div class="tnav">
-${trackKeys.map(tk => `      <a href="#track-${tk}">${esc(trackLabel(d, tk))}のルート</a>`).join('\n')}
+${groups.map(g => g.keys.length > 1
+    ? `      <a href="#track-common">${esc(g.keys.map(k => trackLabel(d, k)).join('・'))}共通のルート</a>`
+    : `      <a href="#track-${g.keys[0]}">${esc(trackLabel(d, g.keys[0]))}のルート</a>`).join('\n')}
     </div>` : ''}
     ${shareBar({
       url,
