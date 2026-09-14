@@ -142,10 +142,10 @@ https://route-taizen.com/test/…         404
 未登録の理由ごとの読み方（どれがこちらの不備で、どれが待つだけか）は
 `docs/search-console-indexing.md` にまとめてある。**件数を見て慌てる前にそちらを読む。**
 
-- [ ] 所有権の確認（DNS の TXT か、`2d7e64a…txt` のファイル）
-- [ ] `https://route-taizen.com/sitemap.xml` を送信（**コードでは代替できない手作業**。手順は `docs/deployment-runbook.md` の「Search Console にサイトマップを送信する」。IndexNow は `pages.yml` がデプロイ後に自動で送る）
+- [x] 所有権の確認（DNS の TXT か、`2d7e64a…txt` のファイル）
+- [x] `https://route-taizen.com/sitemap.xml` を送信（**2026-09-14 に運営者が送信済みと確認**。**コードでは代替できない手作業**。手順は `docs/deployment-runbook.md` の「Search Console にサイトマップを送信する」。IndexNow は `pages.yml` がデプロイ後に自動で送る）
 - [ ] カバレッジで index 登録の状況と、除外の理由を確認
-- [ ] 「ページにリダイレクトがあります」に出ている URL を書き出し、
+- [x] 「ページにリダイレクトがあります」に出ている URL を書き出し（**2026-09-14 に運営者が確認済み**。2 件ともホスト正規化）、
       `docs/search-console-indexing.md` の 3 種類のどれかを判定する
       （`http://` と `www.` はホスト正規化。**正しい状態なので消さない**）
 - [ ] 主要クエリの表示回数・CTR・平均掲載順位をページ単位で確認

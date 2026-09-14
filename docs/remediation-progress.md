@@ -121,7 +121,7 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
 
 ## OWNER ACTION（運営者しかできない。**この表が正本**）
 
-最終更新: 2026-09-05（`chore/owner-actions`）。
+最終更新: 2026-09-14（3・4 を運営者の確認で更新）。その前は 2026-09-05（`chore/owner-actions`）。
 最終報告 `docs/remediation-final-report-2026-09-05.md` の OWNER ACTION 節は、
 2026-09-05 時点の記録として残してある。**いまの状態はこの表を見る。**
 
@@ -129,8 +129,8 @@ LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像では�
 |---|---|---|---|---|
 | 1 | GitHub の Description が `参考書1,052冊` のまま（実際は 1,390 冊） | リポジトリ admin | `gh repo view --json description` に `1,052` が出ない | **完了**（2026-09-05）。実行後の値は「大学受験の参考書を科目・目的別に整理し、学習ルートと進捗管理を提供する静的サイト」 |
 | 2 | GitHub の Topics が未設定 | 同上 | `gh repo view --json repositoryTopics` が `null` でない | **完了**（2026-09-05）。`static-site` / `github-pages` / `education` / `japanese` |
-| 3 | 書影の利用条件の確認 | 法務・運営の判断 | `npm run check:covers` の「利用条件が未確認の取得元」が 0 件 | **未実施（6 件）。** 下調べは `docs/cover-policy.md` 8 節に置いた。`ndl` は API 終了のため停止済みで対象外 |
-| 4 | 実機での QA（macOS/iOS/iPadOS Safari・実機 Firefox） | 実機 | `docs/qa-report-YYYY-MM-DD.md` の「実機での確認」表が埋まる | **未実施。** この環境に実機が無い |
+| 3 | 書影の利用条件の確認 | 法務・運営の判断 | `npm run check:covers` の「利用条件が未確認の取得元」が 0 件 | **運営者は確認済み（2026-09-14）。確認結果の記入が残り。** `build/data/cover-provider-policies.json` に結果がまだ書かれていないため、2026-09-14 時点の `npm run check:covers` は「利用条件が未確認の取得元 6 件」のまま。取得元ごとの判断は運営者しか持っていないので、推測では埋めない。下調べは `docs/cover-policy.md` 8 節。`ndl` は API 終了のため停止済みで対象外 |
+| 4 | 実機での QA（macOS/iOS/iPadOS Safari・実機 Firefox） | 実機 | `docs/qa-report-YYYY-MM-DD.md` の「実機での確認」表が埋まる | **運営者が実施済み（2026-09-14 に確認）。** 実機での結果は `docs/qa-report-*.md` の表にはまだ書かれていない |
 | 5 | KPI の実数を入れる | Search Console / GA4 / AdSense の管理画面 | `docs/kpi-baseline.json` の値が `null` でなくなる | **未実施。** 手順は `docs/kpi-import-guide.md` |
 | 6 | 書体の読み込み方針 | 見た目の判断 | — | **判断は不要になった。** `display=optional` は効かないと実測で確定（CLS 0.216→0.213）。代わりに Google Fonts のスタイルシートを非同期化し、LCP 10.99s→6.91s / Performance 53→66。`docs/performance-report.md` 2.1・4.2・5.2 |
 | 7 | 本番の性能を信頼できる方法で測る | — | どちらかの数字を `docs/performance-report.md` へ追記 | **一部完了。** 反映後の本番を 5 run 測り `docs/performance-report.md` 6.6 に記録した（中央値 Performance 69 / LCP 5.50s / CLS 0.216。**目標 3 つとも未達**）。ただし**機械 1 台の値でばらつきが大きい**。PageSpeed Insights は匿名 API の日次上限で実行できなかった。**実利用者の値は Search Console の Core Web Vitals（CrUX）で見る** — これは運営者の作業 |
