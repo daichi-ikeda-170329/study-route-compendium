@@ -103,6 +103,25 @@ export function trackedUrl(pathname, campaign) {
   return `${ORIGIN}${pathname}?utm_source=x&utm_medium=social&utm_campaign=${campaign}`;
 }
 
+/**
+ * 投稿の本文と、返信に貼る部分（「▼ …」の案内行と URL）に分ける。
+ *
+ * 2026-09-18 の見直し（docs/x-account-plan.md の 8 節）。09-01〜09-18 の 26 投稿は
+ * すべて本文に URL を入れていて、表示回数が 1 桁にとどまった。X は外部リンクを含む
+ * 投稿の表示を抑えるため、URL は本文に入れず、投稿の直後に自分で返信して貼る。
+ * 各型の組み立て（postA など）は変えず、書き出しのときに分ける。
+ *
+ * @returns {{main: string, reply: string}} reply は URL を含まない投稿では空
+ */
+export function splitForReply(text) {
+  const lines = text.split('\n');
+  const i = lines.findIndex(l => /^▼/.test(l) || /^https?:\/\//.test(l));
+  if (i < 0) return { main: text, reply: '' };
+  const main = lines.slice(0, i).join('\n').replace(/\n+$/, '');
+  const reply = lines.slice(i).join('\n').trim();
+  return { main, reply };
+}
+
 /* ============================================================
    A 型：図鑑カード
    ============================================================ */
@@ -640,8 +659,12 @@ function main() {
   md.push('## 使い方');
   md.push('');
   md.push('1. X をブラウザで開く。**予約投稿はブラウザ版でしか使えない**（アプリからは設定できない）');
-  md.push('2. 下のコードブロックをそのままコピーして投稿画面に貼る');
+  md.push('2. 下の 1 つ目のコードブロック（本文）をそのままコピーして投稿画面に貼る');
   md.push('3. カレンダーのアイコンから日時を指定して予約する');
+  md.push('4. 投稿された直後に、2 つ目のコードブロック（URL）を**自分の投稿への返信**として貼る');
+  md.push('');
+  md.push('**本文に URL を入れない。** X は外部リンクを含む投稿の表示を抑える。09-01〜09-18 の 26 投稿は');
+  md.push('すべて本文に URL があり、表示回数が 1 桁にとどまった（docs/x-account-plan.md の 8 節）。');
   md.push('');
   md.push(`文字数は X の重み付け（全角 2・半角 1・URL は一律 ${URL_WEIGHT}）で数えてある。上限は ${X_LIMIT}。`);
   md.push('');
@@ -668,12 +691,28 @@ function main() {
     for (const r of rows.filter(x => x.type === type)) {
       md.push(`### ${r.date} ${SLOTS[type]} — ${r.post ? r.post.note : `${type} 型`}`);
       md.push('');
+      if (!r.post) {
+        md.push('```');
+        md.push('（未執筆）');
+        md.push('```');
+        md.push('');
+        continue;
+      }
+      const { main, reply } = splitForReply(r.post.text);
       md.push('```');
-      md.push(r.post ? r.post.text : '（未執筆）');
+      md.push(main);
       md.push('```');
       md.push('');
-      if (r.post) md.push(`文字数 ${weightedLen(r.post.text)} / ${X_LIMIT}`);
-      if (r.post) md.push('');
+      md.push(`文字数 ${weightedLen(main)} / ${X_LIMIT}`);
+      md.push('');
+      if (reply) {
+        md.push('投稿の直後に、自分の投稿へ返信として貼る（本文には URL を入れない）:');
+        md.push('');
+        md.push('```');
+        md.push(reply);
+        md.push('```');
+        md.push('');
+      }
     }
   };
 
