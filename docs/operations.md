@@ -447,7 +447,7 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 | 独自ドメイン | 有効（2026-08-22〜） | `route-taizen.com`。HTTPS 強制済み | Xserver で保有、DNS は Cloudflare |
 | Cloudflare DNS | 有効 | 権威 DNS。`darwin` / `yolanda`.ns.cloudflare.com | Cloudflare ダッシュボード |
 | Google Search Console | 所有権確認メタ設置済み。**サイトマップは送信済み**（2026-09-14 に運営者が確認） | インデックス登録・検索順位の把握 | ポータルと科目トップの `<head>`。送信する URL は `https://route-taizen.com/sitemap.xml` |
-| Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`） | アクセス解析 | 手書き HTML 9 件（ポータル・科目トップ 7 枚・404）と `build/lib/parts.mjs` の `analytics()` |
+| Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`）。**2026-09-19 に本番以外からの送信を止めた**（それまで GitHub Actions の E2E が 28 日で 13,799 ユーザーぶん送っており、全体の 49.2% を占めていた）。イベントデータの保持は 14 か月・Search Console とリンク済み | アクセス解析 | 手書き HTML 9 件（ポータル・科目トップ 7 枚・404）と `build/lib/parts.mjs` の `analytics()` |
 | Google AdSense | ID 設置済み・**審査に落ちた**（`ca-pub-4704595822429716`）。2026-09-05 に「ポリシー違反：有用性の低いコンテンツ」の通知。**その後に再審査を申請し、結果待ち**（2026-09-14 に運営者が確認。2026-09-18 に管理画面「サイト」で承認状況「準備中」・最終変更 2026-09-11 15:08 JST を確認。ads.txt のステータスは「不明」だが `https://route-taizen.com/ads.txt` は 200 で正しい 1 行を返す。「[審査に出すときの注意](#審査に出すときの注意)」を参照） | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
 | 楽天アフィリエイト | 導入済み | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.rakutenId` |
 | Amazon アソシエイト | 導入済み（`routetaizen-22`） | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.amazonTag` |

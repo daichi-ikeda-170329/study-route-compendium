@@ -144,21 +144,23 @@ https://route-taizen.com/test/…         404
 
 - [x] 所有権の確認（DNS の TXT か、`2d7e64a…txt` のファイル）
 - [x] `https://route-taizen.com/sitemap.xml` を送信（**2026-09-14 に運営者が送信済みと確認**。**コードでは代替できない手作業**。手順は `docs/deployment-runbook.md` の「Search Console にサイトマップを送信する」。IndexNow は `pages.yml` がデプロイ後に自動で送る）
-- [ ] カバレッジで index 登録の状況と、除外の理由を確認
+- [x] カバレッジで index 登録の状況と、除外の理由を確認（**2026-09-18 に確認**。登録済み 1,140 / 検出-未登録 607。`docs/search-console-indexing.md` の実測表）
 - [x] 「ページにリダイレクトがあります」に出ている URL を書き出し（**2026-09-14 に運営者が確認済み**。2 件ともホスト正規化）、
       `docs/search-console-indexing.md` の 3 種類のどれかを判定する
       （`http://` と `www.` はホスト正規化。**正しい状態なので消さない**）
-- [ ] 主要クエリの表示回数・CTR・平均掲載順位をページ単位で確認
+- [x] 主要クエリの表示回数・CTR・平均掲載順位をページ単位で確認（**2026-09-18 に確認**。`docs/growth-plan-2026-09-18.md` の 1 節）
 - [ ] リッチリザルト検査で、書籍ページのパンくずと `Book` を確認
 - [ ] 数値を `docs/kpi-snapshots.md` へ**期間つきで**記録（**推測で埋めない**。
       28 日集計 CSV から取り込む場合だけ `npm run import:kpi`）
-- [ ] 実測した件数を `docs/search-console-indexing.md` の「4. 実測の記録」へ 1 行足す
+- [x] 実測した件数を `docs/search-console-indexing.md` の「4. 実測の記録」へ 1 行足す（2026-09-07・2026-09-18）
 
 ### Google アナリティクス 4
 
 - [ ] イベントが `docs/analytics-events.md` の表と一致しているか確認
-- [ ] データ保持期間の設定を確認
+- [x] データ保持期間の設定を確認（**2026-09-19 にイベントデータの保持を 2 か月 → 14 か月へ変更**。24 時間後に有効）
 - [ ] Google シグナルを使うかどうかを判断（使うと収集範囲が広がる）
+- [x] Search Console のプロパティを GA4 にリンク（**2026-09-19 に作成**。sc-domain:route-taizen.com ↔ ウェブストリーム 15515594368。GA4 の「Google オーガニック検索クエリ」レポートが使えるようになる）
+- [ ] Bing Webmaster Tools に登録（Google アカウントでのサインインが新規アカウント作成にあたるため、Claude は行わない。Search Console からの取り込みで完了する）
 
 ### Google AdSense
 
@@ -169,7 +171,7 @@ https://route-taizen.com/test/…         404
 
 ### 同意管理（CMP）
 
-- [ ] 欧州経済領域・英国・スイスからのアクセスがあるかを GA4 で確認
+- [x] 欧州経済領域・英国・スイスからのアクセスがあるかを GA4 で確認（**2026-09-19 に確認**。28 日で France 4・Germany 4・Poland 4 の計 12 ユーザー＝全体の 0.04%。**ある**が極小。詳細は `docs/growth-plan-2026-09-18.md` の 6.2）
 - [ ] ある場合、Google 認定 CMP と Consent Mode v2 の設定が要る（AdSense の
       管理画面から設定する）。**法令上どこまで必要かは運営者の確認事項**として
       未判断のままにしてある
