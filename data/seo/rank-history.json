@@ -20,6 +20,23 @@
         }
       ],
       "note": "WebSearch（米国インデックス）で検索したが route-taizen.com は結果に出ず、順位を確認できなかった。docs/search-console-indexing.md の実測（2026-09-07 時点で 1130 ページが登録済み）から、これは圏外の証拠ではなく計測手段の限界。GSC を有効にするまで順位の実測値は無い。"
+    },
+    {
+      "date": "2026-09-18",
+      "source": "websearch",
+      "measurements": [
+        {
+          "keyword": "青チャート Focus Gold どっち",
+          "rank": null,
+          "url": "https://route-taizen.com/math/guides/ao-vs-fg/"
+        },
+        {
+          "keyword": "ネクステージ ヴィンテージ 違い",
+          "rank": null,
+          "url": "https://route-taizen.com/english/guides/nextstage-vs-vintage/"
+        }
+      ],
+      "note": "2026-09-18 WebSearch で上位に route-taizen.com なし。GSC 直近 7 日の 15 クエリ・28 日の上位ページにも比較記事は出ていない"
     }
   ]
 }

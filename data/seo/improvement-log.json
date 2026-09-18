@@ -8,8 +8,8 @@
     {
       "keyword": "青チャート Focus Gold どっち",
       "targetPath": "/math/guides/ao-vs-fg/",
-      "status": "observing",
-      "nextReviewDate": "2026-09-16",
+      "status": "active",
+      "nextReviewDate": null,
       "actions": [
         {
           "date": "2026-09-09",
@@ -25,6 +25,14 @@
           "sources": [
             "https://www.shinko-keirinbunkenweb.shop/new/2024-03-29-170621.html"
           ]
+        }
+      ],
+      "reviews": [
+        {
+          "date": "2026-09-18",
+          "result": "効果なし",
+          "rankSource": "gsc-ui",
+          "note": "Search Console の管理画面（直近 7 日 09-09〜09-15）で対象ページの表示は確認できず、クエリ 15 件にも含まれない。28 日間でも表示のあった上位ページに入っていない。WebSearch でも上位に無し。次に触るときは前回（表記・購入可否の追記）と違う方法にする。ただし 2026-09-18 時点でサイト全体の検索表示が 8 月コアアップデート以降 1/30 に落ちており、記事単体の改善では判定できない（docs/growth-plan-2026-09-18.md）"
         }
       ]
     }
