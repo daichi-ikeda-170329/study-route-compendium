@@ -35,6 +35,28 @@ test('契約に書いたイベントと実装の allowlist が一致する', () 
   assert.deepEqual(missing, [], `実装にあって docs/analytics-events.md に無いイベント: ${missing.join(', ')}`);
 });
 
+test('契約の「送っている」表に載せたイベントは、実際に呼び出しがある', () => {
+  /* 2026-09-19 まで docs/analytics-events.md の表は allowlist をそのまま並べていて、
+     読むと「科目トップを開いたら subject_open を送っている」と取れた。実際には
+     科目トップの計測は 1 つも実装されておらず、9 件が契約だけの状態だった
+     （実ブラウザで図鑑・ルート・診断を操作しても track が呼ばれない）。
+     表を「送っている」「まだ呼び出しが無い」に分けたので、前者に嘘が混ざらないよう見張る。 */
+  const section = DOC.split('### 送っている（呼び出しがある）')[1];
+  assert.ok(section, 'docs/analytics-events.md に「送っている」の節が無い');
+  const declared = new Set([...section.split('### 許可しているが')[0]
+    .matchAll(/`([a-z][a-z0-9_]+)`/g)].map(m => m[1])
+    .filter(n => Object.prototype.hasOwnProperty.call(A.EVENTS, n)));
+  assert.ok(declared.size >= 6, `「送っている」の節からイベントを読めていない（${declared.size} 件）`);
+
+  const src = files(['.js', '.mjs', '.html'])
+    .filter(f => !f.endsWith(path.join('assets', 'js', 'analytics.js')))
+    .map(f => fs.readFileSync(f, 'utf8')).join('\n');
+  const called = new Set([...src.matchAll(/track\(\s*["']([a-z][a-z0-9_]+)["']/g)].map(m => m[1]));
+
+  const lying = [...declared].filter(n => !called.has(n));
+  assert.deepEqual(lying, [], `「送っている」と書いてあるのに呼び出しが無い: ${lying.join(', ')}`);
+});
+
 test('allowlist に無いイベントは送れない', () => {
   for (const n of ['secret', 'page_view_with_hensachi', 'route_save_cloud', '']) {
     assert.equal(A.sanitize(n, {}).ok, false, `${n} が通ってしまう`);

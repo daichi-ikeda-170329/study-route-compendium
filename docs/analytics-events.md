@@ -22,22 +22,45 @@
 
 ## 送ってよいイベント
 
-| イベント | 許可するパラメータ | いつ |
+**この表は「送ってよい」ものの一覧（allowlist）であって、「送っている」ものの一覧ではない。**
+`assets/js/analytics.js` が許可しているだけで呼び出しがまだ無いイベントがある。
+**2026-09-19 に実測して区別した**（科目トップを実ブラウザで開き、図鑑・ルート・診断を
+操作して `RTAnalytics.track` が呼ばれるかを見た。1 件も呼ばれなかった）。
+実装するときは呼び出しを足すだけでよく、この表は変えなくてよい。
+
+### 送っている（呼び出しがある）
+
+| イベント | 許可するパラメータ | いつ | 呼ぶ場所 |
+|---|---|---|---|
+| `book_search_open` | `subject_id`, `book_id` | 全体検索から書籍へ抜けた | `assets/js/search.js` |
+| `route_save` | `subject_id`, `storage`（`"local"` 固定） | ルートを保存した | `assets/js/share.js` |
+| `share_copy` / `share_native` / `share_x` | `subject_id` | 共有した | `assets/js/share.js` |
+| `shared_link_open` / `shared_route_open` | `subject_id` | 共有リンクから開かれた | `assets/js/share.js` |
+| `shared_link_invalid` / `shared_route_invalid` | `subject_id`, `reason` | 共有リンクを復元できなかった | `assets/js/share.js` |
+| `affiliate_click` | `subject_id`, `book_id`, `store` | 販売サイトへのリンクを押した | `build/generate-books.mjs`（書籍ページ） |
+
+### 許可しているが、まだ呼び出しが無い
+
+**科目トップ（図鑑・ルート・診断・ペース計算）の計測は 1 つも実装されていない。**
+allowlist と契約だけが先に書かれ、呼び出しは 2026-09-19 時点で入っていない
+（`1891ec25d` で allowlist を作ったときの対象は share.js・search.js・書籍ページの
+購入リンクの 3 つで、科目トップは最初から入っていない）。ページ単位の閲覧は GA4 の
+`page_view` で取れているので、足りないのは画面の中の行動だけである。
+
+| イベント | 許可するパラメータ | 実装したら送る場面 |
 |---|---|---|
 | `subject_open` | `subject_id` | 科目トップを開いた |
 | `catalog_filter` | `subject_id`, `filter_id` | 図鑑の絞り込みを使った |
 | `book_open` | `subject_id`, `book_id` | 書籍の詳細を開いた |
-| `book_search_open` | `subject_id`, `book_id` | 全体検索から書籍へ抜けた |
 | `route_start` | `subject_id`, `mode` | ルート作成を始めた |
 | `route_complete` | `subject_id`, `mode` | ルートが表示された |
-| `route_save` | `subject_id`, `storage`（`"local"` 固定） | ルートを保存した |
 | `pace_start` / `pace_complete` | `subject_id` | ペース計算 |
-| `share_copy` / `share_native` / `share_x` | `subject_id` | 共有した |
 | `route_share` | `subject_id`, `channel` | 共有した（新しい名前） |
-| `shared_link_open` / `shared_route_open` | `subject_id` | 共有リンクから開かれた |
-| `shared_link_invalid` / `shared_route_invalid` | `subject_id`, `reason` | 共有リンクを復元できなかった |
-| `affiliate_click` | `subject_id`, `book_id`, `store` | 販売サイトへのリンクを押した |
-| `book_buy_click` | `subject_id`, `book_id`, `store` | 同上（配信済みの名前。GA4 の集計を切らさないために残す） |
+| `book_buy_click` | `subject_id`, `book_id`, `store` | `affiliate_click` の旧名。GA4 の集計を切らさないために残してある |
+
+**実装の優先度は流入しだい。** 2026-09 時点の検索流入は 1 日 30〜40 表示で、
+診断完了率のような率をこの母数で測っても有意にならない。流入が戻ってから入れる
+（`docs/growth-plan-2026-09-18.md`）。
 
 値の形は `assets/js/analytics.js` の `CHECK` が持つ。
 `subject_id` は収録している 7 科目のいずれか、`book_id` と `filter_id` は
