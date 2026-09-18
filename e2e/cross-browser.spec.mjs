@@ -200,11 +200,20 @@ test('狭い画面でも自サイト由来の横はみ出しが無い', async ({
   if (!testInfo.project.name.includes('mobile')) {
     await page.setViewportSize({ width: 320, height: 640 });
   }
-  for (const url of ['/', '/math/', '/search/', '/progress/', '/math/books/ao/']) {
+  /* 参考書一覧・ルート・大学別を入れてある。**カードが大量に並ぶページを外さない。**
+     2026-09-19 まで対象が 5 枚（トップ・科目トップ・検索・記録・書籍 1 枚）だけで、
+     /math/books/ と /science/books/ が 320px で 7px 横スクロールするのを見逃していた
+     （.bcards の grid-template-columns:1fr が、書影の代替表示に入る長い出版社名で
+     中身の最小幅まで広がっていた）。 */
+  for (const url of ['/', '/math/', '/search/', '/progress/', '/math/books/ao/',
+    '/math/books/', '/science/books/', '/math/routes/top/', '/univ/todai/', '/guides/']) {
     await page.goto(url, { waitUntil: 'domcontentloaded' });
     await waitForApp(page);
     const r = await horizontalOverflow(page);
     expect(r.offenders, `${url} ではみ出している要素`).toEqual([]);
+    /* 要素単位で犯人を特定できなくても、ページ全体が横に動けば読者には崩れて見える。
+       body の padding や負のマージンなど、要素の矩形だけでは拾えない原因を捕まえる */
+    expect(r.scrollW, `${url} でページ全体が横スクロールする`).toBeLessThanOrEqual(r.docW + 1);
   }
 });
 

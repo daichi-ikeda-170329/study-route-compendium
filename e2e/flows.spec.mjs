@@ -419,3 +419,32 @@ test('診断結果の「画像で保存」でも PNG が保存される', async 
   ]);
   expect(await pngSize(download)).toEqual({ w: 1080, h: 1350 });
 });
+
+/* ============================================================
+   横スクロールが出ないこと（4 つの幅すべてで）
+   ============================================================ */
+
+/**
+ * **この検査は Chrome で走らせる。** 同じ検査が cross-browser.spec.mjs にもあるが、
+ * あちらは Safari と Firefox だけを対象にしていて（`testMatch`）、Safari は
+ * グリッドの最小幅の扱いが違うため今回の崩れを再現しない。
+ *
+ * 2026-09-19 まで /math/books/ と /science/books/ が 320px で 7px 横スクロール
+ * していたのを、両方の穴（対象ページに一覧が無い・Chrome で走っていない）が
+ * 重なって見逃していた。原因は .bcards の `grid-template-columns:1fr` が
+ * 中身の最小幅まで広がること（`minmax(0,1fr)` で解消）。
+ *
+ * project ごとに幅が違う（320 / 375 / 768 / 1366）ので、そのまま全幅の検査になる。
+ */
+test('どの幅でもページ全体が横スクロールしない', async ({ page }) => {
+  for (const url of ['/', '/math/', '/math/books/', '/science/books/', '/english/books/',
+    '/math/books/ao/', '/math/routes/top/', '/univ/todai/', '/guides/', '/search/', '/progress/']) {
+    await page.goto(url, { waitUntil: 'domcontentloaded' });
+    await waitForApp(page);
+    const r = await page.evaluate(() => ({
+      sw: document.documentElement.scrollWidth,
+      cw: document.documentElement.clientWidth,
+    }));
+    expect(r.sw, `${url} で横スクロールが出る（幅 ${r.cw}px）`).toBeLessThanOrEqual(r.cw + 1);
+  }
+});
