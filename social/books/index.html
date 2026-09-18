@@ -46,6 +46,11 @@
 <!-- Google アナリティクス 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ5WFXEFMX"></script>
 <script>
+/* 本番以外（localhost・CI の E2E・プレビュー）から GA4 へ送らない。
+   2026-09-18 に GA4 の直近 7 日が 2,294 ユーザー中 2,237 が Direct・1,428 が米国（GitHub Actions の
+   E2E）で、実際の読者の数十倍の水増しになっていた。assets/js/analytics.js の開発判定は
+   独自イベントにしか効かず、初期化時に自動で送られる page_view はここで止めるしかない */
+if (location.hostname !== 'route-taizen.com') window['ga-disable-G-DQ5WFXEFMX'] = true;
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
@@ -126,7 +131,7 @@ h3.grp span{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-w
     <h1 class="sec" style="font-size:29px">社会の参考書一覧　293冊</h1>
     <p class="sec-lead">社会ルート大全に収録している社会の参考書293冊を、役割別・難易度順に並べた索引です。各冊のページで、レベル・到達目安・向いている人・強みと注意点・次に進む本を確認できます。対象は日本史・世界史・地理・公民。</p>
     <p class="sec-lead">293冊は多すぎるという場合は、志望校ルートで実際に本線として選んだ本だけを集めた<a href="/social/osusume/">社会の参考書おすすめ</a>から見てください。</p>
-    <p class="page-updated">最終更新: <time datetime="2026-09-10">2026-09-10</time></p>
+    <p class="page-updated">最終更新: <time datetime="2026-09-18">2026-09-18</time></p>
     <details class="scale">
   <summary>難易度 10 段階の意味と、役割との違い</summary>
   <div class="scale__in">
@@ -3711,7 +3716,7 @@ h3.grp span{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);font-w
    "name": "社会の参考書一覧293冊｜難易度・役割つき索引 - 社会ルート大全",
    "description": "大学受験の社会参考書293冊を、役割別・難易度順に並べた索引。1 冊ごとにレベル・到達目安・向いている人・次に進む本を確認できます。日本史・世界史・地理・公民に対応。",
    "inLanguage": "ja",
-   "dateModified": "2026-09-10",
+   "dateModified": "2026-09-18",
    "isPartOf": {
     "@id": "https://route-taizen.com/#website"
    },

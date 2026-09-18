@@ -36,9 +36,14 @@
      defer にするとその時点でまだ読めておらず、記録が落ちる -->
 <script src="/assets/js/analytics.js" defer></script>
 <script src="/assets/js/search.js" defer></script>
-<link rel="stylesheet" href="/assets/css/subject-science.css?v=4278afd1fd">
+<link rel="stylesheet" href="/assets/css/subject-science.css?v=c227793c1b">
 <!-- consent-default:start — build/apply-consent.mjs が build/lib/parts.mjs の CONSENT_DEFAULT から書き込む。手で編集しない -->
 <script>
+/* 本番以外（localhost・CI の E2E・プレビュー）から GA4 へ送らない。
+   2026-09-18 に GA4 の直近 7 日が 2,294 ユーザー中 2,237 が Direct・1,428 が米国（GitHub Actions の
+   E2E）で、実際の読者の数十倍の水増しになっていた。assets/js/analytics.js の開発判定は
+   独自イベントにしか効かず、初期化時に自動で送られる page_view はここで止めるしかない */
+if (location.hostname !== 'route-taizen.com') window['ga-disable-G-DQ5WFXEFMX'] = true;
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
