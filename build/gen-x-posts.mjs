@@ -106,7 +106,7 @@ export function trackedUrl(pathname, campaign) {
 /**
  * 投稿の本文と、返信に貼る部分（「▼ …」の案内行と URL）に分ける。
  *
- * 2026-09-18 の見直し（docs/x-account-plan.md の 8 節）。09-01〜09-18 の 26 投稿は
+ * 2026-09-18 の見直し（docs/x-account-plan.md の 14 節）。09-01〜09-18 の 26 投稿は
  * すべて本文に URL を入れていて、表示回数が 1 桁にとどまった。X は外部リンクを含む
  * 投稿の表示を抑えるため、URL は本文に入れず、投稿の直後に自分で返信して貼る。
  * 各型の組み立て（postA など）は変えず、書き出しのときに分ける。
@@ -158,7 +158,7 @@ function postA(b, sub, adopt) {
     b.hensachi ? `到達目安：${b.hensachi}` : null,
     b.problems ? `量：${b.problems}` : null,
     b.hours ? `ペース：${b.hours}` : null,
-    adopt ? `志望校ルートでの採用：${adopt}回` : null,
+    adopt ? `志望校ルートでの登場：${adopt}回` : null,
     b.bestFor ? `向いている人：${b.bestFor}` : null,
   ].filter(Boolean);
   const tail = `\n▼ 役割と接続先はこちら\n${url}`;
@@ -272,8 +272,11 @@ function postsE(data) {
   }
 
   // 5. ルート採用回数が最も多い 1 冊
-  // 「何本のルートを組んだか」は志望レベルの総数。README の冊数と同じく、
-  // 数え方をここに書かずデータから出す（データが増えたときに文面が古くならない）
+  // 「何段階ぶん組んだか」は志望レベルの総数。README の冊数と同じく、
+  // 数え方をここに書かずデータから出す（データが増えたときに文面が古くならない）。
+  // **「ルート N 本」とは書かない。** 書籍ページの「志望校別ルート N 本」は
+  // 志望レベル×型×方針の本数（英語で 36）で、志望レベルの総数（全科目で 42）とは
+  // 単位が違う。2026-09 の手書き投稿で「42本のルート中23本」と混ざっていた
   const tierTotal = SUBJECTS.reduce((n, s) => n + data[s.dir].tiers.length, 0);
   const adoptTop = SUBJECTS
     .map(s => {
@@ -288,10 +291,10 @@ function postsE(data) {
     .sort((a, b) => b.n - a.n)[0];
   if (adoptTop) {
     push(
-      `志望校別ルート${tierTotal}本を組んで、最も多く登場した参考書。`,
+      `志望レベル${tierTotal}段階ぶんの志望校別ルートを組んで、最も多く登場した参考書。`,
       [
         `${searchName(adoptTop.b, adoptTop.sub.dir)}（${adoptTop.b.pub}）`,
-        `${adoptTop.n}本のルートで採用。`,
+        `ルートに${adoptTop.n}回登場（本編と並行枠を合わせた回数）。`,
         '志望校が違っても、ここは通る。',
       ],
       `/${adoptTop.sub.dir}/books/${adoptTop.b.id}/`,
@@ -434,6 +437,10 @@ function candidates(data) {
   const lines = [];
 
   lines.push('### 志望レベル（B 型のルート提示に使う）');
+  lines.push('');
+  lines.push('**ルートの本数を書くときは書籍ページの数字を写す。** 書籍ページの「志望校別ルート N 本のうち M 本の本編」は');
+  lines.push('志望レベル×型×方針で数えた本数で、下の志望レベルの段階数（全科目で足すと 42）とは単位が違う。');
+  lines.push('この候補データの「◯回」は本編と並行枠を合わせた登場回数。');
   lines.push('');
   for (const s of SUBJECTS) {
     const names = data[s.dir].tiers.map(t => t.name).join('・');
@@ -664,7 +671,7 @@ function main() {
   md.push('4. 投稿された直後に、2 つ目のコードブロック（URL）を**自分の投稿への返信**として貼る');
   md.push('');
   md.push('**本文に URL を入れない。** X は外部リンクを含む投稿の表示を抑える。09-01〜09-18 の 26 投稿は');
-  md.push('すべて本文に URL があり、表示回数が 1 桁にとどまった（docs/x-account-plan.md の 8 節）。');
+  md.push('すべて本文に URL があり、表示回数が 1 桁にとどまった（docs/x-account-plan.md の 14 節）。');
   md.push('');
   md.push(`文字数は X の重み付け（全角 2・半角 1・URL は一律 ${URL_WEIGHT}）で数えてある。上限は ${X_LIMIT}。`);
   md.push('');

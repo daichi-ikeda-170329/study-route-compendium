@@ -155,6 +155,10 @@ function anchors(t) {
       re: /(。)([\d,]+)( 冊が該当する。書名にすでに)/g, value: t.withAuthor },
     { file: 'build/lib/rank.mjs', why: '収録冊数',
       re: /(収録 )([\d,]+)( 冊のうち)/g, value: t.total },
+    // X のヘッダー画像の正本。2026-09-18 まで公開当初の冊数のまま X に出ていた。
+    // SVG を直したら PNG を焼き直して X に上げ直す（docs/operations.md の「画像を書き出す」）
+    { file: 'assets/x-header.svg', why: 'X ヘッダーの収録冊数',
+      re: /(font-weight="800">)([\d,]+)(冊<\/tspan>を図鑑化)/g, value: t.total },
     { file: 'build/lib/rank.mjs', why: '偏差値を数値で書いていない本の数',
       re: /(冊のうち )([\d,]+)( 冊がこの書き方)/g, value: t.nonHensachi },
     // ポータルのヒーロー統計。全科目を合わせた収録大学数（科目ごとの数とは別）

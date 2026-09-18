@@ -32,7 +32,7 @@
           font-family="Hiragino Mincho ProN, Yu Mincho, YuMincho, serif">ルート大全</text>
 
     <text x="2" y="304" font-size="32" font-weight="600" fill="#3A4256"
-          font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, sans-serif">参考書<tspan fill="#B5432A" font-weight="800">1,052冊</tspan>を図鑑化・ルート化</text>
+          font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, sans-serif">参考書<tspan fill="#B5432A" font-weight="800">1,390冊</tspan>を図鑑化・ルート化</text>
 
     <!-- 収録科目。OGP の科目チップと同じ作り（左に科目色の縦線を入れる） -->
     <g font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, sans-serif" font-size="24" font-weight="700">
