@@ -349,6 +349,14 @@ node build/gen-x-posts.mjs 2026-09    # 月を指定
 その月に選んだ本を覚えており、作り直すときはそれを「既出」から外して選び直すため。
 これがないと「新刊を調べてから月次ファイルを作り直す」という運用が成り立たない。
 
+**ただし `byMonth` にその月が無いファイルには効かない。** 2026-09 は `byMonth` が入る前に
+作られていて、2026-09-18 に `--force` で作り直したところ A 型 12 冊が全部別の本に替わり、
+手で書いた B・C・D 型も「未執筆」に戻った（`git checkout` で戻した）。**`byMonth` に無い月は
+`--force` で作り直さない。** 作り直す前に `used.json` の `byMonth` にその月があるか見る。
+
+投稿の本文と URL は分けて出す（2026-09-18 から）。本文に URL を入れず、投稿の直後に自分の投稿へ
+返信として貼る。理由は `docs/x-account-plan.md` の 14 節。
+
 `BOOKS` の `diff` は **1〜10 の 10 段階**である。投稿でも `build/lib/cards.mjs` と
 同じ 10 段階で書く。5 段階の星に丸めると、サイトを開いた読者が見る数字と食い違う。
 
@@ -440,7 +448,7 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 | Cloudflare DNS | 有効 | 権威 DNS。`darwin` / `yolanda`.ns.cloudflare.com | Cloudflare ダッシュボード |
 | Google Search Console | 所有権確認メタ設置済み。**サイトマップは送信済み**（2026-09-14 に運営者が確認） | インデックス登録・検索順位の把握 | ポータルと科目トップの `<head>`。送信する URL は `https://route-taizen.com/sitemap.xml` |
 | Google アナリティクス 4 | 導入済み（`G-DQ5WFXEFMX`） | アクセス解析 | 手書き HTML 9 件（ポータル・科目トップ 7 枚・404）と `build/lib/parts.mjs` の `analytics()` |
-| Google AdSense | ID 設置済み・**審査に落ちた**（`ca-pub-4704595822429716`）。2026-09-05 に「ポリシー違反：有用性の低いコンテンツ」の通知。**その後に再審査を申請し、結果待ち**（2026-09-14 に運営者が確認。「[審査に出すときの注意](#審査に出すときの注意)」を参照） | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
+| Google AdSense | ID 設置済み・**審査に落ちた**（`ca-pub-4704595822429716`）。2026-09-05 に「ポリシー違反：有用性の低いコンテンツ」の通知。**その後に再審査を申請し、結果待ち**（2026-09-14 に運営者が確認。2026-09-18 に管理画面「サイト」で承認状況「準備中」・最終変更 2026-09-11 15:08 JST を確認。ads.txt のステータスは「不明」だが `https://route-taizen.com/ads.txt` は 200 で正しい 1 行を返す。「[審査に出すときの注意](#審査に出すときの注意)」を参照） | ページ表示による収益化 | `build/lib/ads.mjs` の `ADSENSE_CLIENT`（`apply-adsense.mjs` が全箇所へ反映） |
 | 楽天アフィリエイト | 導入済み | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.rakutenId` |
 | Amazon アソシエイト | 導入済み（`routetaizen-22`） | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.amazonTag` |
 | IndexNow | 通知済み | Bing・Yahoo・DuckDuckGo・Yandex への即時インデックス通知 | サイト直下の `<キー>.txt` と `build/submit-indexnow.mjs` |
