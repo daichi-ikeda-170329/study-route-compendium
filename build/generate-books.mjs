@@ -25,9 +25,16 @@ import { recordDate, saveDates } from './lib/updated.mjs';
 import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL, placeholderSearchUrl } from './lib/record-type.mjs';
 import { verificationOf } from './lib/verification.mjs';
 import { bookIndexable, NOINDEX_META } from './lib/indexing.mjs';
+import { routePositions, adoptedPeers, tierUniversities } from './lib/route-position.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
+
+/* 大学名 → /univ/<slug>/。台帳に載っている大学だけをリンクにする（generate-routes.mjs と同じ台帳） */
+const UNIV_SLUG = new Map(
+  JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8'))
+    .universities.map(u => [u.name, u.slug]),
+);
 
 /* ============================================================
    文章生成のためのヘルパー
@@ -103,6 +110,83 @@ function rakutenUrl(b, id) {
   const dest = `https://search.rakuten.co.jp/search/mall/${isPlaceholder(b) ? b.name : (b.isbn13 || b.name)}/`;
   const e = encodeURIComponent(dest);
   return `https://hb.afl.rakuten.co.jp/hgc/${id}/?pc=${e}&m=${e}`;
+}
+
+/* ============================================================
+   志望校別ルートでの位置
+   ============================================================ */
+
+/**
+ * この本が志望校別ルートのどこに置かれているかを、ROUTES から数えて書く。
+ *
+ * 書誌と 200 字の解説のほかは共通テンプレートだったページに、その本でしか
+ * 成り立たない文（何冊目か・前後の本・そのルートでの狙い・代わりに使える本）を
+ * 足すための節。数字と本の名前はすべて ROUTES の実データで、ここで評価を書かない。
+ * 志望レベルの見出しは志望校別ルートのページへ、大学名は大学別ページへつなぐ
+ * （大学別ページ 160 枚は 2026-09-18 時点で内部リンクが薄く、検索エンジンに
+ * 検出はされてもクロールされていなかった）。
+ *
+ * 新刊（評価準備中）はルートに置いていないので出さない。ルートが無い科目
+ * （情報・小論文）も出さない。
+ */
+function routePositionSection(book, ctx, bn) {
+  const { sub, data: d } = ctx;
+  if (isProvisional(book) || !d.tiers || !d.tiers.length) return '';
+  const pos = routePositions(book, d);
+  if (!pos.lines) return '';
+  const link = (b) => `<a href="/${sub.dir}/books/${b.id}/">${esc(displayName(b, sub.dir))}</a>`;
+  const routeLink = (tier) => `<a href="/${sub.dir}/routes/${tier.id}/">${esc(tier.name)}</a>`;
+  const kindLabel = { para: '並行して進める本', final: '仕上げの本' };
+
+  const tiersOf = (arr) => [...new Set(arr.map(x => x.tier.id))];
+  const mainTiers = tiersOf(pos.main);
+
+  let lead;
+  let body = '';
+  if (pos.main.length) {
+    lead = `${esc(bn)}は、${esc(sub.ja)}の志望校別ルート ${pos.lines} 本のうち ${pos.adopted} 本の本編に入っています。`
+      + `志望レベル ${mainTiers.length} 段階で、何冊目に置き、前後に何を並べているかを示します。`;
+    body = `<ul class="rpos">
+${mainTiers.map(tid => {
+    const entries = pos.main.filter(x => x.tier.id === tid);
+    const tier = entries[0].tier;
+    const unis = tierUniversities(tier, d, UNIV_SLUG);
+    return `      <li class="rpos__tier">
+        <h3>${routeLink(tier)}<span>${esc(tier.sub || '')}</span></h3>
+        <ul class="rpos__lines">
+${entries.map(e => {
+      const around = e.prev && e.next ? `前は${link(e.prev)}、次は${link(e.next)}。`
+        : e.prev ? `前は${link(e.prev)}で、この本で締めます。`
+          : e.next ? `最初の 1 冊で、次は${link(e.next)}。` : '';
+      const alts = e.alts.length ? `代わりに使える本：${e.alts.map(link).join('、')}。` : '';
+      return `          <li><b>${esc(e.trackNames)}・${esc(e.policyName)}</b>：${e.total} 冊中 ${e.index} 冊目。${around}${alts}${e.note ? `<span class="rpos__note">このルートでの狙い：${esc(e.note)}</span>` : ''}</li>`;
+    }).join('\n')}
+        </ul>${unis.length ? `
+        <p class="rpos__unis">この段階の志望校の例：${unis.map(u => `<a href="/univ/${u.slug}/">${esc(u.name)}</a>`).join('・')}</p>` : ''}
+      </li>`;
+  }).join('\n')}
+    </ul>`;
+  } else if (pos.asAlt.length || pos.side.length) {
+    lead = `${esc(bn)}は、${esc(sub.ja)}の志望校別ルート ${pos.lines} 本の本編には置いていませんが、次の位置で使えるようにしています。`;
+    body = `<ul class="rpos__flat">
+${pos.asAlt.map(e => `      <li>${routeLink(e.tier)}の${esc(e.trackNames)}・${esc(e.policyName)}では、${e.total} 冊中 ${e.index} 冊目の${link(e.forBook)}の代わりに使える本として挙げています。${e.note ? `<span class="rpos__note">その段の狙い：${esc(e.note)}</span>` : ''}</li>`).join('\n')}
+${pos.side.map(e => `      <li>${routeLink(e.tier)}の${esc(e.trackNames)}では、${kindLabel[e.kind]}として置いています。${e.note ? `<span class="rpos__note">${esc(e.note)}</span>` : ''}</li>`).join('\n')}
+    </ul>`;
+  } else {
+    const peers = adoptedPeers(book, d);
+    const stLabel = (ctx.stages[book.stage] || {}).label || '';
+    lead = `${esc(bn)}は、${esc(sub.ja)}の志望校別ルート ${pos.lines} 本のいずれにも組み込んでいません。`
+      + (peers.length
+        ? `同じ「${esc(stLabel)}」の枠でルートに採用しているのは${peers.map(p => `${link(p.book)}（${p.count} 本）`).join('、')}です。相性でこの本を選ぶなら、その位置に差し替えて進めてください。`
+        : `同じ「${esc(stLabel)}」の枠からルートに採用している本もありません。`);
+  }
+
+  return `<section class="block">
+      <div class="eyebrow">Route position</div>
+      <h2 class="sec">志望校別ルートでの位置</h2>
+      <p class="sec-lead">${lead}</p>
+      ${body}
+    </section>`;
 }
 
 /* ============================================================
@@ -298,6 +382,7 @@ ${howto.map(h => `        <li><b>${esc(h.phase)}</b>${esc(h.do)}</li>`).join('\n
     </section>` : '',
   ].filter(Boolean).join('\n\n    ');
 
+  const routeSection = routePositionSection(book, ctx, bn);
   const prevSection = prevs.length ? `<section class="block">
       <div class="eyebrow">Before this book</div>
       <h2 class="sec">この本の前に置く本</h2>
@@ -421,7 +506,7 @@ ${(book.cons || []).map(c => `          <li>${esc(c)}</li>`).join('\n')}
       あくまで「このレベルの本を使う人が多い層」の目安です。同じ大学でも学部・方式で必要な到達点は変わります。${sub.full}の<a href="/${sub.dir}/" style="color:var(--indigo);font-weight:700">ルート画面</a>で志望校名を直接入れると、出題形式に合わせた並びが出ます。</p>
     </div>` : ''}
 
-    ${prevSection}${prevSection ? '\n\n    ' : ''}${alts.length ? `<section class="block">
+    ${routeSection}${routeSection ? '\n\n    ' : ''}${prevSection}${prevSection ? '\n\n    ' : ''}${alts.length ? `<section class="block">
       <div class="eyebrow">Alternatives</div>
       <h2 class="sec">同じ役割・同じレベルの参考書</h2>
       <p class="sec-lead">${esc(bn)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。相性で選んで構いません。ここから 1 冊を選び切ることが大切で、複数を並行させる必要はありません。</p>
@@ -526,7 +611,7 @@ for (const sub of targets) {
     const outDir = path.join(ROOT, sub.dir, 'books', book.id);
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.join(outDir, 'index.html'),
-      renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, tiers: d.tiers, counts, config }));
+      renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, tiers: d.tiers, counts, config, data: d }));
     written++;
   }
   console.log(`  ✓ ${sub.dir}: ${list.length} ページ`);
