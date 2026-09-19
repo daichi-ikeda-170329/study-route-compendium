@@ -452,7 +452,7 @@ URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` �
 | 楽天アフィリエイト | 導入済み | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.rakutenId` |
 | Amazon アソシエイト | 導入済み（`routetaizen-22`） | 書籍リンクの収益化 | 科目トップとポータルの `CONFIG.amazonTag` |
 | IndexNow | 通知済み | Bing・Yahoo・DuckDuckGo・Yandex への即時インデックス通知 | サイト直下の `<キー>.txt` と `build/submit-indexnow.mjs` |
-| Bing Webmaster Tools | 未登録 | Bing の掲載状況の確認 | — |
+| Bing Webmaster Tools | 登録済み（2026-09-19〜）。サイトマップは同日時点で未表示 | Bing の掲載状況の確認 | Bing Webmaster Tools の管理画面（サイト `route-taizen.com/`） |
 
 広告表記は ID の有無だけを根拠に自動で出し分ける。ID が入っている販売サイトだけを広告リンクとして扱い、もう一方はタグ無しの通常リンクとして扱う（未参加のプログラムの表記を出さないため）。詳細は「[アフィリエイト ID の設定](#アフィリエイト-id-の設定)」を参照。
 

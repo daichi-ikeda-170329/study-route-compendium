@@ -159,7 +159,7 @@ https://route-taizen.com/test/…         404
 - [x] データ保持期間の設定を確認（**2026-09-19 にイベントデータの保持を 2 か月 → 14 か月へ変更**。24 時間後に有効）
 - [ ] Google シグナルを使うかどうかを判断（使うと収集範囲が広がる）
 - [x] Search Console のプロパティを GA4 にリンク（**2026-09-19 に作成**。sc-domain:route-taizen.com ↔ ウェブストリーム 15515594368。GA4 の「Google オーガニック検索クエリ」レポートが使えるようになる）
-- [ ] Bing Webmaster Tools に登録（Google アカウントでのサインインが新規アカウント作成にあたるため、Claude は行わない。Search Console からの取り込みで完了する）
+- [x] Bing Webmaster Tools に登録（**2026-09-19 に運営者が登録**。管理画面でサイト `route-taizen.com/` を確認。同日時点でサイトマップ一覧は 0 件。robots.txt の `Sitemap:` 行と IndexNow で拾われるかを数日待って確かめ、出なければ管理画面の「Submit sitemap」から `https://route-taizen.com/sitemap.xml` を送る）
 
 ### Google AdSense
 
