@@ -83,7 +83,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     # デプロイ job にだけ必要最小限の権限を与える。contents: read は IndexNow の通知で
-    # sitemap.xml とキーファイルを読むための checkout に使う
+    # sitemap.xml・キーファイル・直前の push との差分を読むための checkout に使う
     permissions:
       contents: read
       pages: write
@@ -105,6 +105,18 @@ jobs:
         with:
           node-version: '22'
 
-      - name: IndexNow へ全 URL を通知する
+      # push で変わったページだけを送る。全 URL を毎回送ると Bing が
+      # 「IndexNow is in batch mode」と判定する（2026-09-19 に Bing Webmaster Tools で確認）。
+      # checkout は深さ 1 なので、比べる相手の before だけを追加で取る
+      - name: IndexNow へ変わったページを通知する
         continue-on-error: true
-        run: node build/submit-indexnow.mjs
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # 初回の push（before が 0000…）や force push で before を取れないときは送らない。
+          # 全件送信に戻すとバッチ扱いになるため
+          if git fetch --depth=1 origin "$BEFORE" && git diff --name-status -M "$BEFORE" HEAD > "$RUNNER_TEMP/changed.txt"; then
+            node build/submit-indexnow.mjs --changed "$RUNNER_TEMP/changed.txt"
+          else
+            echo "直前の push（$BEFORE）との差分を取れないため、IndexNow へは送らない"
+          fi

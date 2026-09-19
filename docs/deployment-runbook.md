@@ -155,7 +155,13 @@ localhost だけで決定的に固定している。
 
 ### IndexNow への通知（自動）
 
-`.github/workflows/pages.yml` の deploy job が、公開のあとに `node build/submit-indexnow.mjs`
-を流して `sitemap.xml` の全 URL を通知する。送信件数と HTTP の応答は Actions のログに出る。
+`.github/workflows/pages.yml` の deploy job が、公開のあとに `git diff --name-status` で直前の push との差分を取り、`node build/submit-indexnow.mjs --changed <差分>`
+を流して、**その push で変わったページだけ**を通知する（`<パス>/index.html` の追加・変更・削除から求める）。
+2026-09-18 までは毎回 `sitemap.xml` の全 URL（1,751 件）を送っていたが、Bing Webmaster Tools が
+「IndexNow is in batch mode」（重要度 Moderate）と判定したため、2026-09-19 に差分送信へ変えた。
+変わったページが無い push や、差分を取れない push（初回など）では何も送らない。
+送信件数と HTTP の応答は Actions のログに出る。
 **失敗してもデプロイは失敗にしない**（`continue-on-error: true`）。手で送り直すときは
-同じコマンドを手元で流す（`--dry` で送信内容だけを確かめられる）。
+`git diff --name-status -M <コミット> HEAD > /tmp/changed.txt` のあと
+`node build/submit-indexnow.mjs --changed /tmp/changed.txt` を手元で流す（`--changed` を外すと全件送信になるので、
+大量に作り直したとき以外は使わない。`--dry` で送信内容だけを確かめられる）。

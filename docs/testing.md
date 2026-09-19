@@ -68,6 +68,7 @@ npm run check:search-style  # 検索ボックスの CSS が全ページへ配ら
 | `test/footer.test.mjs` | フッターのリンク（`FOOTER_LINKS`）が手書き HTML と一致していること |
 | `test/new-page.test.mjs` | `/new/` と `new-books.json` の一致・X の F 型の本文 |
 | `test/readme.test.mjs` | README に廃止した仕組みの記述が残っていないこと・コマンドが `package.json` にあること |
+| `test/indexnow.test.mjs` | IndexNow の差分送信で、git の差分から送る URL を求める部分（ページ以外・sitemap に無いページを除く、削除とリネームの扱い）。2026-09-19 追加 |
 
 簡体字の判定表は `build/data/jis-kanji.txt`。作り直し方は `build/check-site.mjs` の
 コメントにコマンドごと書いてある。

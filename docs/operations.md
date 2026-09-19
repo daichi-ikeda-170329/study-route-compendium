@@ -413,9 +413,13 @@ node build/gen-ogp.mjs
 
 ページを増やしたら、本番へ反映したあとに IndexNow へ通知する。Bing・Yahoo・DuckDuckGo・Yandex に即座に伝わる（Google は IndexNow 非対応なので、Search Console のサイトマップ送信が別に必要）。
 
+通常は deploy job が push ごとに、変わったページだけを自動で送る（全件を毎回送ると Bing がバッチ扱いにするため）。手で送るときは次のとおり。
+
 ```bash
-node build/submit-indexnow.mjs --dry   # 送信内容の確認
-node build/submit-indexnow.mjs         # 送信
+git diff --name-status -M <コミット> HEAD > /tmp/changed.txt
+node build/submit-indexnow.mjs --changed /tmp/changed.txt --dry   # 送る URL の確認
+node build/submit-indexnow.mjs --changed /tmp/changed.txt         # 送信
+node build/submit-indexnow.mjs                                    # 全件送信（大量に作り直したときだけ）
 ```
 
 URL は `sitemap.xml` を正本にするので、先に `generate-sitemap.mjs` を流しておく。所有権はサイト直下の `<キー>.txt` で証明する。このファイルを消すと通知が通らなくなるので削除しない。
