@@ -171,6 +171,8 @@ timeout 12 秒・同時 4 本・再試行 1 回・識別できる User-Agent を
 
 **これは法務・運営の判断で、こちらでは決めない。**
 
+> **2026-09-20 時点の結果**: 運営者が 2026-09-14 に 7 取得元（個別指定の 16 ホストを含む）の利用条件を確認し、**すべて現状のまま使ってよい**と判断した（2026-09-20 本人回答）。`cover-provider-policies.json` の全 provider を `termsReviewed: true`・`lastReviewedAt: 2026-09-14` にし、`check:covers` の未確認は 0 件になった。**どの条文を根拠にしたか・規約の URL は受け取っていない**ので `termsUrl` は空のまま、`usageBasis` にはその旨を書いてある。`ndl` はサービス終了のため停止のまま。
+
 1. **稼働中の取得元**について、**利用条件を人が読む**（`npm run check:covers` が
    「利用条件が未確認」と出すものが対象。停止中のものは対象外）。下調べは 8 節にある。読んだら
    `build/data/cover-provider-policies.json` の該当 provider に
