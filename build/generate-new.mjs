@@ -32,8 +32,26 @@ const groups = SUBJECTS.map(s => ({
 })).filter(g => g.books.length);
 const total = groups.reduce((a, g) => a + g.books.length, 0);
 
+/* 直近の刊行年に出た本（評価は済んでいる）。
+   評価待ちは 0 冊の日が続くので、そのときこのページは「いま評価待ちの本はありません」の
+   1 行だけになり、フッターとポータルから来た人に何も渡せていなかった。
+   このページを見に来る動機は「最近出た本を知りたい」なので、収録済みの本のうち
+   いちばん新しい刊行年のものを科目別に並べる。**刊行年は書誌情報で、推定値ではない。**
+   年は data/subjects/<科目>/books.json の最大値から決める（西暦を固定で書かない）。 */
+const LATEST_YEAR = Math.max(...SUBJECTS.flatMap(s => data[s.dir].books.map(b => Number(b.year) || 0)));
+const latest = SUBJECTS.map(s => ({
+  s,
+  books: data[s.dir].books
+    .filter(b => Number(b.year) === LATEST_YEAR && !isProvisional(b))
+    .sort((a, b) => String(a.name).localeCompare(String(b.name), 'ja')),
+})).filter(g => g.books.length);
+const latestTotal = latest.reduce((a, g) => a + g.books.length, 0);
+
 const url = `${ORIGIN}/new/`;
-const updated = recordDate('page:new', groups.map(g => [g.s.dir, g.books.map(b => b.id)]));
+const updated = recordDate('page:new', [
+  groups.map(g => [g.s.dir, g.books.map(b => b.id)]),
+  latest.map(g => [g.s.dir, g.books.map(b => b.id)]),
+]);
 const title = `新刊・評価準備中の参考書 - ルート大全`;
 const desc = '収録したばかりで、難易度・到達目安の評価がまだ済んでいない参考書の一覧です。書名・出版社・ISBN・刊行年と役割だけを載せています。';
 const crumbItems = [
@@ -44,7 +62,7 @@ const crumbItems = [
 const body = total ? groups.map(({ s, books }) => `  <section class="block">
     <div class="eyebrow">${esc(s.en)}</div>
     <h2 class="sec">${esc(s.ja)}<span class="ncount">${books.length}冊</span></h2>
-    <ul class="nlist">
+    <ul class="nlist nlist--pending">
 ${books.map(b => {
     const st = data[s.dir].stages[b.stage] || {};
     const field = b.sub ? SUB_LABELS[b.sub] : '';
@@ -54,8 +72,29 @@ ${books.map(b => {
   }).join('\n')}
     </ul>
   </section>`).join('\n\n') : `  <section class="block">
-    <p class="nempty">いま評価待ちの本はありません。</p>
+    <p class="nempty">いま評価待ちの本はありません。収録しているすべての本について、難易度・到達目安・強みと注意点を書き終えています。</p>
+    <p class="nempty">新しく本を収録したとき、現物を確認するまでの間だけここに並びます。書誌情報だけを頼りに難易度を推定すると物差し自体が狂うので、確認が済むまで数字は出しません。判断の基準は<a href="/methodology/">データの作り方</a>にまとめています。</p>
   </section>`;
+
+/* 最新の刊行年に出た本。評価待ちの一覧とは別の節として下に置く */
+const latestBody = latestTotal ? `  <div class="block" style="margin-top:34px">
+    <div class="eyebrow">This year</div>
+    <h2 class="sec">${LATEST_YEAR} 年に刊行された参考書</h2>
+    <p class="sec-lead">収録している ${latestTotal} 冊が ${LATEST_YEAR} 年の刊行です。改訂版・新課程対応版を含みます。いずれも評価は済んでいるので、難易度と到達目安は各ページに出ています。</p>
+  </div>
+
+${latest.map(({ s, books }) => `  <section class="block">
+    <div class="eyebrow">${esc(s.en)}</div>
+    <h2 class="sec">${esc(s.ja)}<span class="ncount">${books.length}冊</span></h2>
+    <ul class="nlist nlist--latest">
+${books.map(b => {
+    const st = data[s.dir].stages[b.stage] || {};
+    const field = b.sub ? SUB_LABELS[b.sub] : '';
+    return `      <li><a href="/${s.dir}/books/${b.id}/">${esc(displayName(b, s.dir))}</a>
+        <span>${esc(b.pub || '—')}${esc([field, st.label].filter(Boolean).join('・') ? `／${[field, st.label].filter(Boolean).join('・')}` : '')}　難易度 ${b.diff}／${esc(b.hensachi || '—')}</span></li>`;
+  }).join('\n')}
+    </ul>
+  </section>`).join('\n\n')}` : '';
 
 const ld = {
   '@context': 'https://schema.org',
@@ -98,6 +137,8 @@ ${portalHeader()}
   </div>
 
 ${body}
+
+${latestBody}
 </main>
 
 ${footer('', counts)}

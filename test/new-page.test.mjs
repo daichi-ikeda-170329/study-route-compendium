@@ -17,9 +17,28 @@ test('/new/ は build/data/new-books.json と各科目の provisional の本と�
   const approved = loadNewBooks(ROOT).map(b => `${b.subject}:${b.id}`).sort();
   const prov = SUBJECTS.flatMap(s => loadSubjectData(ROOT, s.dir).books.filter(isProvisional).map(b => `${s.dir}:${b.id}`)).sort();
   assert.deepEqual(prov, approved, 'provisional の本と new-books.json が食い違う');
-  const listed = [...html.matchAll(/<li><a href="\/([a-z]+)\/books\/([a-z0-9_-]+)\/">/g)].map(m => `${m[1]}:${m[2]}`).sort();
+  /* 評価待ちの一覧（.nlist--pending）だけを見る。同じページの下には
+     「最新の刊行年に出た本」（.nlist--latest）も並ぶので、ページ全体から
+     リンクを拾うと評価済みの本が混ざる */
+  const pending = (html.match(/<ul class="nlist nlist--pending">[\s\S]*?<\/ul>/g) || []).join('');
+  const listed = [...pending.matchAll(/<li><a href="\/([a-z]+)\/books\/([a-z0-9_-]+)\/">/g)].map(m => `${m[1]}:${m[2]}`).sort();
   assert.deepEqual(listed, prov);
   if (!prov.length) assert.match(html, /いま評価待ちの本はありません。/);
+});
+
+test('/new/ の「最新の刊行年」の一覧は、その年の評価済みの本と一致する', () => {
+  /* 評価待ちが 0 冊の日が続くと、このページは 1 行だけになって何も渡せていなかった。
+     下に「いちばん新しい刊行年の本」を並べている（build/generate-new.mjs）。
+     並べる本は実データから決まるので、西暦も冊数もここでは固定しない */
+  const books = SUBJECTS.flatMap(s => loadSubjectData(ROOT, s.dir).books
+    .filter(b => b.year && !isProvisional(b)).map(b => ({ key: `${s.dir}:${b.id}`, year: Number(b.year) })));
+  const latestYear = Math.max(...books.map(b => b.year));
+  const expected = books.filter(b => b.year === latestYear).map(b => b.key).sort();
+
+  const latest = (html.match(/<ul class="nlist nlist--latest">[\s\S]*?<\/ul>/g) || []).join('');
+  const listed = [...latest.matchAll(/<li><a href="\/([a-z]+)\/books\/([a-z0-9_-]+)\/">/g)].map(m => `${m[1]}:${m[2]}`).sort();
+  assert.deepEqual(listed, expected, `${latestYear} 年の本の一覧が実データと食い違う`);
+  assert.match(html, new RegExp(`${expected.length} 冊が ${latestYear} 年の刊行です`));
 });
 
 test('/new/ は index で sitemap に載り、フッターとポータルから辿れる', () => {

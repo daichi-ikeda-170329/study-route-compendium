@@ -36,6 +36,7 @@ import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { tally } from './lib/tally.mjs';
 import { searchName, withAuthor } from './lib/booktitle.mjs';
+import { isProvisional } from './lib/newbooks.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const STATE_FILE = path.join(ROOT, 'build', 'data', 'count-state.json');
@@ -55,6 +56,10 @@ function truth() {
   const unis = {};       // dir -> その科目のルートが対応している大学数
   const uniNames = new Set();   // サイト全体の収録大学（科目をまたいだ和集合）
   let total = 0, covers = 0, nonHensachi = 0, shorthand = 0, withAuthorCount = 0;
+  /* いちばん新しい刊行年と、その年の冊数。/new/ が「◯◯◯冊が 20XX 年の刊行です」と
+     書くので、実データから出る値として数えておく。年が変われば冊数も変わるため、
+     count-ignore.json に固定値で登録すると翌年に必ず落ちる */
+  const yearCount = new Map();
 
   for (const s of SUBJECTS) {
     const d = loadSubjectData(ROOT, s.dir);
@@ -72,6 +77,8 @@ function truth() {
 
     for (const b of d.books) {
       if (b.cover) covers++;
+      // /new/ が並べるのは評価の済んだ本だけなので、数え方をそちらに合わせる
+      if (b.year && !isProvisional(b)) yearCount.set(Number(b.year), (yearCount.get(Number(b.year)) || 0) + 1);
       // rank.mjs の hensachiRange() と同じ判定。偏差値を数値で書いていない本を数える
       const nums = (String(b.hensachi || '').match(/\d{2}/g) || []).map(Number).filter(n => n >= 25 && n <= 85);
       if (!nums.length) nonHensachi++;
@@ -88,11 +95,13 @@ function truth() {
   const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8')).universities;
   const ledgerNames = new Set(ledger.map(u => u.name));
   const sciOnly = loadSubjectData(ROOT, 'science').unis.filter(u => !ledgerNames.has(u.n)).length;
+  const latestYear = yearCount.size ? Math.max(...yearCount.keys()) : null;
   return {
     total, subjects, picks, unis, uniTotal: uniNames.size,
     uniPages: ledger.length, uniSciOnly: sciOnly,
     covers, nonHensachi, shorthand, withAuthor: withAuthorCount,
     authors, authorless: total - authors,
+    latestYear, latestYearBooks: latestYear ? yearCount.get(latestYear) : 0,
   };
 }
 
@@ -337,6 +346,7 @@ function sweep(t) {
   const ok = new Set([
     t.total, t.covers, t.authors, t.authorless,
     t.nonHensachi, t.shorthand, t.withAuthor,
+    t.latestYearBooks,   // /new/ の「◯◯◯冊が 20XX 年の刊行です」
   ]);
   for (const s of SUBJECTS) {
     ok.add(t.subjects[s.dir]);
