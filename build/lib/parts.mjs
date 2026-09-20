@@ -265,6 +265,7 @@ export function crumbs(items) {
  */
 export const LEGAL_PAGES = [
   { slug: 'about', label: '運営者情報' },
+  { slug: 'contact', label: 'お問い合わせ' },
   { slug: 'methodology', label: 'データの作り方' },
   { slug: 'privacy', label: 'プライバシーポリシー' },
   { slug: 'disclaimer', label: '免責事項' },

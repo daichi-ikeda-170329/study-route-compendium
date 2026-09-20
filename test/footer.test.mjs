@@ -16,7 +16,8 @@ test('FOOTER_LINKS に詳細検索と学習の記録がある', () => {
   const hrefs = FOOTER_LINKS.site.map(l => l.href);
   assert.ok(hrefs.includes('/search/'));
   assert.ok(hrefs.includes('/progress/'));
-  assert.equal(FOOTER_LINKS.legal.length, 6, '信頼性ページは 6 つ');
+  assert.equal(FOOTER_LINKS.legal.length, 7, '信頼性ページは 7 つ');
+  assert.ok(FOOTER_LINKS.legal.some(l => l.href === '/contact/'), 'お問い合わせへの導線が全ページのフッターに要る');
 });
 
 test('手書き HTML 9 枚のフッターは FOOTER_LINKS と一致している', () => {

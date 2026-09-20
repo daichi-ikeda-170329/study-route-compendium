@@ -35,7 +35,7 @@ const ALLOW_FILES = [
 /** 公開してよいディレクトリ。中身は再帰的に入れる */
 const ALLOW_DIRS = [
   'assets',
-  'about', 'ads', 'changelog', 'disclaimer', 'guides', 'methodology', 'privacy',
+  'about', 'ads', 'changelog', 'contact', 'disclaimer', 'guides', 'methodology', 'privacy',
   /* 学習の記録（noindex,follow）。中身は端末の localStorage にしかないが、
      器の HTML と描画コードは配信する。ここへ足し忘れると、生成はされるのに
      本番で 404 になる（許可リスト方式のため） */
