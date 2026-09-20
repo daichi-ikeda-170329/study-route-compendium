@@ -46,6 +46,8 @@
 | `build/lib/ads.mjs` | Google AdSense の ID・広告枠。広告の出力はここ 1 か所で決まる | `apply-adsense.mjs` が書き換える |
 | `build/lib/flow.mjs` | 役割どうしの接続表。「次に進む本」の生成はここが正本 | 手で編集 |
 | `build/lib/route-hours.mjs` | ルート 1 本ぶんの冊数と想定学習時間の集計。記事の表はここから作る | 手で編集 |
+| `build/lib/compare-note.mjs` | 関連書カードに出す「そのページの本との差分」。相手の概要文を複製しないための節 | 手で編集 |
+| `build/lib/pace.mjs` | 想定学習時間を日数に割った「1 周にかかる期間」。総時間として読める本だけが対象 | 手で編集 |
 | `build/lib/scale.mjs` | 難易度 10 段階の定義と、その表示コンポーネント | 手で編集 |
 | `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 | 手で編集 |
 | `build/lib/words.mjs` | 禁止語・要注意語の一覧。`docs/style-guide.md` 2 節と同じものを持つ | 手で編集 |
@@ -208,6 +210,8 @@ node build/generate-books.mjs math ao
 | `build/lib/newbooks.mjs` | 新刊（評価が未了の本）の判定と並び順。**サイト全体でこの判定だけを根拠にする** |
 | `build/lib/rank.mjs` | 難易度順の比較子。実装は `assets/js/subject-common.js` にあり、科目トップと同じ関数を読んで出す（「[難易度順の並び](data-model.md#難易度順の並び)」を参照） |
 | `build/lib/flow.mjs` | 役割どうしの接続表。「次に進む本」で役割が飛ばないようにする |
+| `build/lib/compare-note.mjs` | 「同じ役割の本」「次に進む本」のカードに出す文。差分（難易度が何段違うか・想定時間が何時間違うか）＋相手の概要の 1 文目 |
+| `build/lib/pace.mjs` | 「1 周にかかる期間の目安」。`hours` が `"N〜Nh"` の本だけに出す（「随時参照」「通年並行」には出さない） |
 | `build/lib/scale.mjs` | 難易度 10 段階の定義と表示。数字の意味はここ 1 か所で決まる |
 | `build/lib/series.mjs` | 複数の巻を 1 レコードで扱っている本の判定 |
 | `build/lib/updated.mjs` | 最終更新日。git のコミット日と、レコード単位のハッシュ台帳 |
@@ -463,5 +467,7 @@ print(sorted(set(bad)) or 'リンク切れなし')
 正本は [docs/style-guide.md](docs/style-guide.md)。`build/check-site.mjs` がその機械で見られる部分（禁止語・非日本語文字・「本アプリ」・meta description の長さ・定型段落の重複）を検査する。**条文を変えたら検査も一緒に直す。**
 
 書籍ページの本文には「その本でしか成り立たない文」だけを書く。参考書の選び方の一般論は `/methodology/` と解説記事に 1 か所だけ置く。難易度の定義のような共通の説明は `build/lib/scale.mjs` のコンポーネントで出し、文章として書き下ろさない。
+
+**この方針は守られていないと気づけない。** 2026-09-20 に AdSense が「有用性の低いコンテンツ」でサイトを却下した時点で、書籍ページ 1,390 枚の本文は 78% がページをまたいで一致する文だった。1 ページずつ読んでも定型文は自然に見えるので、全ページを横に並べて数えないと分からない。`test/book-uniqueness.test.mjs` がその共通率を測っていて、固有率が 20% を割ると落ちる（2026-09-21 の実測は 25.2%）。**全ページに同じ 1 文を足す前に、それを `/methodology/` かリンク先へ置けないかを先に考える。**
 
 説明文（`desc` / `pros` / `cons` / `bestFor`）を大きく書き換えるときは、書き換え前のスナップショットを `data/_backup/` に置く（手順は `data/_backup/README.md`）。
