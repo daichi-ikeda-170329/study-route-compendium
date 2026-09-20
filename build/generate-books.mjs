@@ -16,6 +16,8 @@ import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './l
 import { authorsOf, searchName, withAuthor, displayName } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
 import { bookCards, bookCard } from './lib/cards.mjs';
+import { cardNote } from './lib/compare-note.mjs';
+import { pacePlan } from './lib/pace.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { pickAlternatives, pickNext, pickPrev } from './lib/book-links.mjs';
@@ -382,6 +384,16 @@ ${howto.map(h => `        <li><b>${esc(h.phase)}</b>${esc(h.do)}</li>`).join('\n
     </section>` : '',
   ].filter(Boolean).join('\n\n    ');
 
+  /* 1 周にかかる期間。BOOKS[].hours を日数に割るだけで、新しい推定は足していない。
+     総時間として読めない本（「随時参照」「通年並行」など）には出さない（build/lib/pace.mjs） */
+  const pace = prov ? null : pacePlan(book);
+  const paceSection = pace ? `<section class="block prose">
+      <div class="eyebrow">Pace</div>
+      <h2 class="sec">1 周にかかる期間の目安</h2>
+      <p>${esc(pace.sentence)}</p>
+      <p class="spec__note">上の想定学習時間を日数に割った目安です。既習範囲と理解度で前後します。</p>
+    </section>` : '';
+
   const routeSection = routePositionSection(book, ctx, bn);
   const prevSection = prevs.length ? `<section class="block">
       <div class="eyebrow">Before this book</div>
@@ -408,7 +420,7 @@ ${editions.map(e => `        <li><b>${e.year} 年</b>${esc(e.note)}</li>`).join(
     ? `${bn}を終えたあと、同じ「${st.label}」の枠内でもう一段レベルを上げるなら、次の参考書が候補になります。`
     : next.kind === 'later'
       ? `${bn}のあとは次の段階に進みます。${fieldName}のルートでは、以下が接続先の候補です。`
-      : `${bn}のあとの候補です。同じ「${st.label}」でレベルを上げる道と、次の段階へ進む道の両方を並べています。どちらを選ぶかは、この本の内容がどこまで身についたかで決めてください。`;
+      : `${bn}のあとの候補です。同じ「${st.label}」でレベルを上げる道と、次の段階へ進む道の両方を並べています。`;
 
   return `<!DOCTYPE html>
 <html lang="ja">
@@ -459,13 +471,13 @@ ${header(sub)}
 ${spec}
         </dl>
       </div>
-      <p class="spec__note">書名・出版社・ISBN・刊行年・問題数は公開されている書誌情報です。難易度・到達目安・想定学習時間は編集部の推定値で、<a href="/methodology/">算出方法</a>を公開しています。</p>
+      <p class="spec__note">書誌情報は出版社などの公開データ、難易度・到達目安・想定学習時間は編集部の推定値です（<a href="/methodology/">算出方法</a>）。</p>
     </section>
 
 ${/* 学習の記録は基本情報の直後に置く（購入ボタンの後ろだと、ページの下まで読まないと見つからない。仕様書 2.5） */ ''}    <section class="block">
       <div class="eyebrow">Progress</div>
       <h2 class="sec">この参考書の状態を記録する</h2>
-      <p>いま「未着手・学習中・完了・保留」のどれかを、<b>この端末の中だけ</b>に記録できます。アカウントは要りません。<a href="/progress/">学習の記録</a>でまとめて見られます。記録はサーバーへ送りません。</p>
+      <p>「未着手・学習中・完了・保留」を<b>この端末の中だけ</b>に記録できます。アカウントは要らず、サーバーへも送りません。<a href="/progress/">学習の記録</a>でまとめて見られます。</p>
       <div data-rt-progress data-subject-id="${esc(sub.dir)}" data-book-id="${esc(book.id)}" data-book-name="${esc(bn)}"></div>
       <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
     </section>
@@ -500,19 +512,19 @@ ${(book.cons || []).map(c => `          <li>${esc(c)}</li>`).join('\n')}
       </div>
     </div>`}
 
-    ${book.unis && book.unis.length ? `<div class="note">
+    ${paceSection}${paceSection ? '\n\n    ' : ''}${book.unis && book.unis.length ? `<div class="note">
       <h3>この本が視野に入る志望校</h3>
       <p>${book.unis.map(u => esc(u)).join(' ／ ')}<br>
-      あくまで「このレベルの本を使う人が多い層」の目安です。同じ大学でも学部・方式で必要な到達点は変わります。${sub.full}の<a href="/${sub.dir}/" style="color:var(--indigo);font-weight:700">ルート画面</a>で志望校名を直接入れると、出題形式に合わせた並びが出ます。</p>
+      同じ大学でも学部・方式で必要な到達点は変わります。${sub.full}の<a href="/${sub.dir}/" style="color:var(--indigo);font-weight:700">ルート画面</a>に志望校名を入れると、出題形式に合わせた並びが出ます。</p>
     </div>` : ''}
 
     ${routeSection}${routeSection ? '\n\n    ' : ''}${prevSection}${prevSection ? '\n\n    ' : ''}${alts.length ? `<section class="block">
       <div class="eyebrow">Alternatives</div>
       <h2 class="sec">同じ役割・同じレベルの参考書</h2>
-      <p class="sec-lead">${esc(bn)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。相性で選んで構いません。ここから 1 冊を選び切ることが大切で、複数を並行させる必要はありません。</p>
+      <p class="sec-lead">${esc(bn)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。この中から 1 冊を選び切れば足ります。</p>
       <div class="bcards">
 ${alts.map(a => `      <div class="bcmp">
-${bookCard(a, sub, stages)}
+${bookCard(a, sub, stages, { note: cardNote(book, a) })}
         <a class="bcmp__go" href="/compare/?a=${sub.dir}:${book.id}&amp;b=${sub.dir}:${a.id}">この本と比較</a>
       </div>`).join('\n')}
       </div>
@@ -522,7 +534,7 @@ ${bookCard(a, sub, stages)}
       <div class="eyebrow">Next step</div>
       <h2 class="sec">この本のあとに進む参考書</h2>
       <p class="sec-lead">${esc(nextLead)}</p>
-${bookCards(next.list, sub, stages)}
+${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
     </section>` : ''}
 
     ${editionSection}${editionSection ? '\n\n' : ''}    <section class="block">
@@ -556,12 +568,15 @@ ${bookCards(next.list, sub, stages)}
       });
       </script>
       ${placeholder ? `<p class="buy__note buy__note--warn"><b>${esc(PLACEHOLDER_LABEL)}。</b>${esc(PLACEHOLDER_NOTE)}</p>` : ''}
-      <p class="buy__note">${aff ? `${affStores}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります。紹介料の有無によって掲載順や評価を変えることはありません。` : ''}価格と在庫は変動するため、購入時は販売サイトの表示をご確認ください。改訂版が出ている場合があります。版を確認してから購入してください。</p>
+      ${/* 広告であることの開示は残し、説明は /ads/（フッターから辿れる）に寄せて 1 文に畳んだ。
+            以前の 150 字がそのまま 1,390 ページに並び、本文の 6.9% を占めていた。
+            **「広告リンクです」は 1 つの文字列のまま残す**（開示の検査が
+            test/affiliate-disclosure.test.mjs にあり、タグで分断すると通らない） */ ''}<p class="buy__note">${aff ? `${affStores}へのリンクは広告リンクです（紹介料が発生することがありますが、掲載順や評価は変わりません）。` : ''}価格・在庫・版は販売サイトの表示をご確認ください。</p>
     </section>
 
     <div class="cta">
       <h2>${esc(bn)}は、あなたのルートの何冊目か</h2>
-      <p>1 冊単位で選ぶより、志望校までの並びの中で位置を決めたほうが迷いません。${esc(sub.full)}では、志望校と現在地から ${counts[sub.dir]} 冊の中を通る道を組み立てられます。</p>
+      <p>${esc(sub.full)}では、志望校と現在地から ${counts[sub.dir]} 冊の中を通る道を組み立てられます。</p>
       <div class="cta__btns">
         <a class="p" href="/${sub.dir}/">${esc(sub.ja)}のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="g" href="/">全科目を見る</a>

@@ -16,8 +16,13 @@ import { seriesOf, hensachiPlain } from './series.mjs';
  * @param {object} b      BOOKS の 1 冊
  * @param {object} sub    SUBJECTS の 1 科目
  * @param {object} stages その科目の STAGES
+ * @param {object} [opts] note を渡すと、概要文の代わりにその文を出す。
+ *                        書籍ページの「同じ役割の本」「次に進む本」で、相手の
+ *                        概要文（ほかのページにも同じものが出る）ではなく
+ *                        「そのページの本との違い」を出すために使う。
+ *                        → build/lib/compare-note.mjs
  */
-export function bookCard(b, sub, stages) {
+export function bookCard(b, sub, stages, opts = {}) {
   const st = stages[b.stage] || {};
   const color = st.color || sub.color;
 
@@ -47,14 +52,17 @@ export function bookCard(b, sub, stages) {
             <b>${esc(displayName(b, sub.dir))}</b>
           </div>
         </div>
-        <p>${esc(clip(b.desc || `${b.pub} から刊行された新刊。評価は準備中です。`, 72))}</p>
+        <p>${esc(opts.note || clip(b.desc || `${b.pub} から刊行された新刊。評価は準備中です。`, 72))}</p>
         <div class="bcard__foot">${foot}</div>
       </a>`;
 }
 
-/** カードを並べるグリッド。style は呼び出し側の余白調整用 */
-export function bookCards(list, sub, stages, style = '') {
+/**
+ * カードを並べるグリッド。style は呼び出し側の余白調整用。
+ * note は「その 1 冊に出す文」を返す関数。渡すと概要文の代わりに使う（bookCard の opts）
+ */
+export function bookCards(list, sub, stages, style = '', note = null) {
   return `      <div class="bcards"${style ? ` style="${style}"` : ''}>
-${list.map(b => bookCard(b, sub, stages)).join('\n')}
+${list.map(b => bookCard(b, sub, stages, note ? { note: note(b) } : {})).join('\n')}
       </div>`;
 }
