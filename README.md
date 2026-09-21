@@ -107,11 +107,37 @@ npm run test:e2e           # E2E とアクセシビリティ（320/375/768/1366p
 ### GitHub Pages の配信元（切り替え済み）
 
 `.github/workflows/pages.yml` が作る `dist/` だけを配信している。
-2026-09-04 に切り替わったことを本番で確認済み。
+2026-09-04 に切り替え、**2026-09-21 に切り替え直した**（下の「一度戻っていた」を読む）。
 
 配信の反映待ち・切り分け・切り戻しの手順は **`docs/deployment-runbook.md`** にまとめてある。
 公開状態は `npm run check:production` で機械的に確かめる（終了コード 0 = 一致 / 1 = 食い違い /
 2 = 未検査。**2 を成功として扱わない**）。
+
+**一度戻っていた（2026-09-21 に発見）。** この節は「2026-09-04 に切り替わったことを本番で
+確認済み」と書いていたが、実際には配信元の設定が `legacy`（`main` の `/` をそのまま配信）に
+戻っていた。そのあいだ push のたびに **2 つのデプロイが両方走り**、先に終わったほうが
+配信されていた。
+
+- `pages-build-deployment`（GitHub が自動で動かすほう）… リポジトリ直下を全部公開する
+- 「Pages 公開」（`pages.yml`）… `dist/` だけを公開する
+
+そのため push 直後の数分だけ `/package.json` や `/build/all.mjs` が 200 を返し、
+OGP 画像（リポジトリに無く `dist/` にしか無い）が 404 になっていた。数分後には
+`dist/` 側が勝って正しい状態に戻るので、**落ち着いてから `check:production` を流すと
+通ってしまい、気づけなかった**。
+
+**設定そのものを見る。** 本番の URL が 404 を返すかどうかだけでは判断できない。
+
+```bash
+gh api repos/daichi-ikeda-170329/study-route-compendium/pages --jq '{build_type,source}'
+# → {"build_type":"workflow", …} なら dist/ 配信。"legacy" なら直下配信に戻っている
+```
+
+戻っていたら次で直す（2026-09-21 はこれで直した。Settings → Pages から手で変えてもよい）。
+
+```bash
+gh api repos/daichi-ikeda-170329/study-route-compendium/pages -X PUT -f build_type=workflow
+```
 
 ```
 https://route-taizen.com/               200
