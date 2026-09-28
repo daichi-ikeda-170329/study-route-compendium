@@ -529,7 +529,18 @@ Amazon・楽天のボタンと「広告リンク」の表示を置いた。ク�
 08-21〜09-25）。答えを検索結果の段階で見せるため、description に `problems` と
 `hours` を足した（例: 「約80題・学習50〜70時間」）。過去問の枠には付けない。
 
-### 8.4 判定
+### 8.4 Search Console で実施した運営者作業（2026-09-29・Claude in Chrome）
+
+- サイトマップ `https://route-taizen.com/sitemap.xml` を再送信した。その場で読み込まれ、
+  最終読み込み 2026-09-29・成功・1,752 件
+- 急落前に表示の多かった書籍ページ 8 枚の URL 検査で「インデックス登録をリクエスト」を押し、
+  すべて「リクエスト済み」を確認した: `math/books/shin-kaihou`・`science/books/urushibara-99`・
+  `science/books/jokyu-seiko`・`math/books/jitsuryoku-kyoka`・`math/books/toppakou`・
+  `science/books/genten-riron`・`science/books/kosei-jokyu`・`math/books/shinzui-v`
+  （`urushibara-99` は 1 回目に「送信中に問題が発生しました」で失敗し、再試行で通った）
+- 1 日の依頼数には上限があるため、残りの候補（`math/books/handai20`・`math/books/tarinai-seisu` ほか）は翌日以降
+
+### 8.5 判定
 
 - クロール統計で、09-29 以降に書籍ページの再クロールが増えるか（それまで 1 日数十件）
 - URL 検査で、代表ページの最終クロール日が 09-29 以降になるか
