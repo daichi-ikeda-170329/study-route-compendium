@@ -184,11 +184,8 @@ node build/apply-book-text.mjs           # 全科目に流し込む
 node build/apply-book-text.mjs english   # 科目を絞る
 ```
 
-`build/gen-x-posts.mjs` は X の投稿案を作るもので、サイトの生成物とは無関係。
-上の一括再生成には含めない（「X アカウント」の節を参照）。
-
-`build/gen-x-posts.mjs` は新刊調査の手順と F 型（新刊速報）も同じファイルに出す
-（「新刊の掲載」の節を参照）。
+`build/gen-x-posts.mjs` は X の投稿案（新刊調査の手順と F 型の新刊速報を含む）を作るもので、
+サイトの生成物とは無関係。上の一括再生成には含めない（`docs/operations.md` の「X アカウント」「新刊の掲載」を参照）。
 
 科目データ（`data/subjects/<科目>/` の `books.json` や `routes.json`）を編集したら、`generate-sitemap.mjs` を含めて全部を流し直す。生成物はリポジトリにコミットする（GitHub Pages はビルドを実行しないため）。
 
@@ -319,7 +316,7 @@ node build/generate-books.mjs math ao
 | `#quiz` | 3分診断 |
 | `#guide` | 学習ガイド |
 
-`go()` が `replaceState` で URL を書き換える。履歴には積まない。この SPA は「戻る」を画面遷移として扱っていないため、`pushState` にすると戻るたびに 1 画面ずつ遡ることになり、サイトを離れられなくなる。
+画面（view）が変わるときだけ `pushState` で履歴に積み、同じ画面の中の変化・起動時の復元（ハッシュ・共有 URL）・戻る/進むからの呼び出しは `replaceState` で書き換える（2026-09-10 までは常に `replaceState` だった）。
 
 ## 大学別ページ
 
