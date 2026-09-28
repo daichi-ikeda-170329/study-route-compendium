@@ -192,7 +192,9 @@ test('JavaScript が無くても書籍ページの説明とリンクが読める
   // 確認状況（.verif）は 2026-09-05 に外した。同じ「JS 無しでも本文が読める」を、
   // その位置に残った難易度の 1 行（build/lib/scale.mjs の degreeLine）で見る
   await expect(page.locator('.scale__line')).toBeVisible();
-  await expect(page.locator('a.az')).toBeVisible();
+  // 購入リンクは難易度の直下（.buy--hero）と最下部の 2 か所にある（2026-09-29 から）
+  await expect(page.locator('a.az')).toHaveCount(2);
+  await expect(page.locator('.buy--hero a.az')).toBeVisible();
   await ctx.close();
 });
 

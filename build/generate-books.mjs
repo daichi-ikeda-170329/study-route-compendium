@@ -473,6 +473,11 @@ ${header(sub)}
           <div class="bk-meter__t"><span>難易度</span><b>${book.diff} <small style="font-size:11px;color:var(--muted)">/ 10</small></b></div>
           <div class="bk-meter__bar">${meter}</div>
         </div>${series ? `<div class="bk-series"><b>${esc(series.label)}</b> — ${esc(series.note)}</div>` : ''}`}
+        ${placeholder ? '' : `<div class="buy buy--hero">
+          <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">Amazon で見る</a>
+          ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">楽天ブックス</a>` : ''}
+          ${aff ? '<span class="buy__pr">広告リンク</span>' : ''}
+        </div>`}
       </div>
     </div>
 
