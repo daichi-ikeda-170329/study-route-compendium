@@ -1,0 +1,400 @@
+# 未解決事項の対応状況（履歴）
+
+> **2026-09-29 に `docs/remediation-progress.md` から移した記録。** 中身は移した時点のまま変えていない。
+> ここにある OWNER ACTION 表・「次にやること」は古い。**いまの状態は `docs/remediation-progress.md` を見る。**
+
+最終更新: 2026-09-05 / 分岐元 SHA: `dabdb86de0f201ecf8d8d26da1f7c9367d179552`（`origin/main`）
+最終報告: `docs/remediation-final-report-2026-09-05.md`
+実装指示書: `/Users/ikedadaichi/Downloads/ルート大全未解決事項実装指示書.md`
+作業ブランチ: `fix/unresolved-items`
+
+> **指示書のパスについて。** 依頼文では `~/Downloads/route-taizen-plan.md` と書かれていたが、
+> 実ファイルは `~/Downloads/ルート大全未解決事項実装指示書.md` だった。Downloads 配下に他の候補が
+> 無いため、こちらを指示書として扱う。文脈が切れたらこのパスから読み直す。
+
+## チェックポイント
+
+| CP | 名前 | 状態 | コミット | 証跡 | 備考 |
+|---|---|---|---|---|---|
+| S0 | 基準の固定と進捗台帳 | DONE | (このコミット) | `docs/baseline-2026-09-05.md` / `docs/perf/lighthouse-mobile-with3p-baseline-s0.json` | localhost が本番値を再現することを確認 |
+| S1 | 公開物と main の一致 | DONE | (このコミット) | `build/check-production.mjs` / `docs/deployment-runbook.md` / `test/production-check.test.mjs` | Pages Source は 2026-09-04 に切替済み。本番検査 19/19 通過。Description 更新のみ OWNER ACTION |
+| S2 | 科目データの読み書き口を 1 本化 | DONE | 016dfe73 / (このコミット) | `build/lib/load-subject-data.mjs` / `test/affiliate-disclosure.test.mjs` / `test/subject-loader.test.mjs` | 生成物は 1 バイトも不変。`check:shape` 通過 |
+| S3 | 科目移行 前半（joho/shoron/math） | DONE | 9d4f6a85 / 4ec7d262 / 8c46c52d / c1d732f3 | `build/migrate-subject.mjs` / `data/subjects/{joho,shoron,math}/` | joho 153,728→97,472 / shoron 225,578→98,211 / math 471,171→143,139 バイト |
+| S4 | 科目移行 後半（science/english/japanese/social） | DONE | 92d09408 / 3 件 / 7f596b06 / 70b07c22 | `data/subjects/*/` / `test/subject-loader.test.mjs` | 7 科目すべて移行。全科目 250KB 予算内（最大 166,782） |
+| S5 | 性能予算の達成 | DONE（目標一部未達） | a893ad6c / (このコミット) | `docs/performance-report.md` / `test/performance-budget.test.mjs` | バイト予算は達成。Performance 47→53 / SI 7.53s→4.55s。目標 80 / 4.0s / 0.10 は未達で、残因は Google Fonts |
+| S6 | 進捗管理 | DONE | a28dc50a | `assets/js/progress.js` / `/progress/` / `test/progress.test.mjs` / `e2e/progress.spec.mjs` | 残り時間の下限・上限に同じ係数。既存キー無傷。ネットワーク流出 0 |
+| S7 | 任意の追加質問 | DONE | 23cf9908 | `assets/js/refine.js` / `e2e/refine.spec.mjs` | スキップ時の結果と共有 URL が完全一致することを HTML 突き合わせで固定 |
+| S8 | 詳細検索 | DONE | cc7e8c0a | `assets/generated/search-facets.json` / `/search/` / `test/search-facets.test.mjs` | v1 索引は 235,925 バイトのまま。欠損を「該当なし」に落とさない |
+| S9 | 書影の出所台帳 | DONE（判断待ち 1 件） | 2eb15283 | `docs/cover-policy.md` / `build/data/cover-*.json` / `test/covers.test.mjs` | resolver を 1 本化（候補は減らさない）。利用条件の確認は OWNER ACTION |
+| S10 | QA・Best Practices・KPI | DONE（実機と KPI 実数は BLOCKED_EXTERNAL） | aaf345ea / 741a5a65 / fafc5849 | `docs/qa-report-2026-09-05.md` / `docs/performance-report.md` §5.4 / `docs/kpi-import-guide.md` | BP は第三者遮断で 100。自サイト由来 0 |
+| S11 | 最終検証と報告 | DONE | (このコミット) | `docs/remediation-final-report-2026-09-05.md` | 全検証を §55 の順で実行。8 件を DONE / BLOCKED_EXTERNAL で分類 |
+
+## 未解決事項 8 件との対応
+
+| # | 事項 | 担当 CP | 状態 |
+|---|---|---|---|
+| 1 | 科目データの分離 | S1〜S5 | DONE（性能目標は一部未達。`docs/performance-report.md` に実測と残因） |
+| 2 | 進捗管理の拡張 | S6 | DONE |
+| 3 | 任意の追加質問 | S7 | DONE |
+| 4 | 検索の絞り込み拡張 | S8 | DONE |
+| 5 | 書影の出所台帳 | S9 | DONE（利用条件の確認だけ OWNER ACTION） |
+| 6 | 手動 QA | S10 | DONE（自動）+ BLOCKED_EXTERNAL（実機） |
+| 7 | Best Practices 77 の原因分離 | S10 | DONE（自サイト由来 0 と実証） |
+| 8 | KPI 基準値 | S10 | DONE（機構）+ BLOCKED_EXTERNAL（実数の投入） |
+
+## 2026-09-10 改修仕様書の対応
+
+仕様書: `/Users/ikedadaichi/Downloads/route-taizen-改修仕様書.md`（29 タスク、P0→P4 の順に実施）。
+最終報告: `docs/remediation-final-report-2026-09-11.md`。
+1 タスク 1 コミット（あとから見つけた修正は同じタスク番号の別コミット）。コミット欄は 2026-09-11 に実ハッシュへ置き換えた。
+
+| 日付 | タスク | コミット | 備考 |
+|---|---|---|---|
+| 2026-09-10 | 1.1 トラック表示名 | adbb92a4a | 正本を `config.json` の `trackLabels` に移し `build/lib/tracks.mjs` から引く。数学 JS の共有ラベルが「国公立二次型」になっていた誤りも同時に解消 |
+| 2026-09-10 | 1.2 同一トラックの統合 | bc80489a8 | **仕様書の前提と実データが食い違っていた。** 本編（omni・quick）が同じ段階は英語 8・数学 2 で仕様書どおりだが、para は全段階で違っていた。運営者判断で「本編だけで判定し、para はグループ内でトラック別に出す」とした。check-site に本編重複の検査を追加 |
+| 2026-09-10 | 1.3 ルートの始まりと「ここより前の段階」 | 5369afdfe | `build/lib/route-start.mjs`・`build/lib/tiers.mjs`（`prevTierOf`）を新設。手前のルートから挙げる本は「このルートに無く、先頭の本より易しい本」に絞った（社会で同シリーズの後ろの巻が挙がるのを防ぐ） |
+| 2026-09-10 | 1.4 出題形式別の重点対策 | 715798960 | `FOCUS` を `data/subjects/english/focus.json`（optional）へ移した。`recommendBooks` は大学の `fx` に加え、出題説明から当たった特徴のうち focus に同名があるもの（自由英作文・要約など）も候補にする（早稲田の `fx` は超長文・正誤・語彙で、英作文を入れる受け入れ条件は `fx` だけでは満たせないため）。大学ページの 1 文は見出しの直後に置いた（ページ内の他の h3 と同じ並び） |
+| 2026-09-10 | 1.5 大学ページのおすすめ選定 | 042d4758d | 本編の違うトラックが 2 つ以上あればトラック別に 4 冊。`seriesKey()` は仕様書の除去パターンに加え、単独のローマ数字（名問の森 I/II）を落とし、数字は単独の 1 桁だけを落とす（ターゲット1400/1900 を同一視しない）。`STAGE_GROUPS` は英語（語彙・読解）・数学（網羅と入試標準）・国語／理科（基礎演習と入試標準）・社会（導入と教科書、基礎演習と入試標準） |
+| 2026-09-10 | 1.6 内部略称の書名 | 9970df4a4 | **仕様書が挙げた「関東難関私大」「実況中継①」は既存の `isShorthand()`（24 冊）をすり抜けていた。** 判定に「同じ科目に同名の本がある」「正式名が書名＋分野名だけ（版表記の違いは除く）」を足した（表示が変わるのは 72 冊）。表示名が別の本と重なるときは name に戻す。SPA へは判定を複製せず、ビルド時に計算した `dn` を配信する。社会の説明文 11 か所の「実況中継①」等を「『〜授業の実況中継』第 N 巻」に書き換え、略称の本では構造化データの `alternateName` を出さない |
+| 2026-09-10 | 1.7 書籍ページのあとに進む本 | 5761fff3f | `pickNext` / `pickAlternatives` を `build/lib/book-links.mjs` へ移し、タグ一致 +3・同ルートの後ろ +2・文理一致 +1・枠 -2 で並べる。`tagParts` は `build/lib/unitags.mjs` に切り出して大学ページと共用。仕様書の `todai-eigo` は実在せず、東大は `todai25` |
+| 2026-09-10 | 2.1 数字・年度・根拠説明の統一 | 909bfbe86 | フッター文を `site-meta.json` の `footerBlurb` から書き込む（冊数は count-state の前回値）。志望校節に 160 / 21 / 181 の内訳を書き `apply-count` のアンカーに登録。「ご利用にあたって」は `legal.mjs` の `USAGE_NOTE` を事前描画でページに 1 回だけ出す（2.2 の一部を前倒し） |
+| 2026-09-10 | 2.2 科目トップの軽量化 | ed65b46ec | **ガイド本文を外すだけでは 146KB→127KB で 100KB を切れなかった**（最大の内訳はインライン CSS の 57KB）。各科目の CSS を中身を変えずに `assets/css/subject-<科目>.css` へ出し、描画ブロックの `<link>` で読む（`?v=` は `generate-subject-assets` が付け替え、検索 CSS も同ファイルへ書き込む）。英語トップは 69,928 バイト。ガイドは `/<科目>/guides/basics/<nn>/` に 61 本（`generate-guides-static.mjs`、記事と同じ `articlePage`） |
+| 2026-09-10 | 2.3 画面遷移を履歴に積む | b473a7b7a | 7 科目の `go` に「起動中（ハッシュ・共有 URL の復元）は積まない」フラグを置き、画面が変わるときだけ `pushState`。`popstate` で戻る/進むに追従。5.5 の統合前に各科目へ同じ変更を入れた |
+| 2026-09-10 | 2.4 フッターと導線の統一 | 1d450f6fb | `FOOTER_LINKS`（parts.mjs）から生成ページの `footer()` と手書き 9 枚（`apply-footer.mjs`、マーカー方式）を組む。「新刊・評価準備中 /new/」はページができる 4.4 で足す（先に足すと check-site のリンク切れで落ちる） |
+| 2026-09-10 | 2.5 書籍ページの記録操作を上部へ | a0f960035 | `progress-control.js` は `data-rt-progress` 属性で引くので位置に依存しない。`affiliate-disclosure.test` が「最初の buy__note までを購入節」とみなしていたため、購入節の開始から探すように直した |
+| 2026-09-10 | 2.6 大学ページの重複削減 | f09d68327 / 3e783a03f | 段落単位の比較では元の重複（dd 内の span）を検出できないため、check-site は「。」で分けた文単位で比べる。これで各科目節に 4〜5 回ずつ出ていた定型の説明文と、医学部節と理科節の医学科の条件（46 校）も見つかったので、共通の説明はページに 1 回、医学科は節へのリンクにした。**2026-09-11 の目視確認で取りこぼしを見つけた。** 理科・社会の節で「出題される分野」の行と節末の「〜別に用意しています」の補足に「〜は学部・入試方式によって扱いが変わります」が 2 回出ていた（91 校）。check-site の検査は補足の文が句点で終わらないため別の文と見なしていた。補足から外し、検査は文末の句点を外して比べる形にした（3e783a03f） |
+| 2026-09-10 | 2.7 志望レベル名のゆれ | 5e4b8b261 | `TIER_GROUP` / `tierGroup()` を `build/lib/tiers.mjs`（1.3 で作成済み）に追加。帯の名前と科目固有名が同じときは small を出さない |
+| 2026-09-10 | 3.1 書籍ページのオリジナル本文 | d5da19494 | 任意項目 6 つの型・値検査と描画、「この本の前に置く本」（`pickPrev`）、充足率レポートを追加。4 冊のデータは出典で確かめたものだけ: The Rules 4＝旺文社公式（224p・音声・アプリ。公式目次が「Lesson1－12」の 1 項目だけなので toc は入れない）、システム英単語＝駿台文庫公式（404 頁・音声。toc は公式特設サイトの収録ステージ表。版は CiNii Books）、ポレポレ＝代ゼミ公式（129 頁・目次 8 項目。版は国立国会図書館）、青チャート＝版元ドットコム（672p）と数研出版公式（全例題の解説動画・解答編。デジタル版は学校向けのため付属に入れない。2025 年に後継の改訂版あり）。howto / finish は編集部の推定 |
+| 2026-09-10 | 3.2 大学ページの出典・学部表 | 769e327d7 / 0a35af8c7 | 9 校（sokei・top）の公式入試ページ・年度（全校 2027）・確認日を登録。学部×方式は早稲田 10 行（商・教育・社学・国際教養・スポ科は学部ページに科目の記載が無く省略）・慶應 12 行（公式の 2027 年度 試験教科・科目・配点 PDF）・上智 13 行（TEAP 利用 9 学部＋併用 4 学部。画像 PDF を目で読んだため抜き取り照合を推奨）。私立は確認時点で 2027 年度の要項本体が未公開（概要のみ）なので、出典の文言は「〇〇年度入試の公表資料」にした。外部リンクはサイトの方針に合わせ noreferrer も付ける |
+| 2026-09-10 | 3.3 大学別 OGP 画像 | 771ac5476 | テンプレートは既存と同じく `build/ogp/templates.mjs` の関数 `univSvg`（SVG ファイルを置くと数字を差し込めなくなるため）。160 枚、`--univ` で大学別だけ作れる。all.mjs の既定の実行でも作る |
+| 2026-09-10 | 3.4 検索エンジンへの通知 | 621f7f31a | deploy job に IndexNow 送信を追加（`continue-on-error`、checkout 用に `contents: read`）。**Actions のログで送信件数を確かめるのは push 後**（未確認）。Search Console のサイトマップ送信は運営者の手作業として手順書に明記 |
+| 2026-09-10 | 3.5 講師ルートの非公式注記 | 9b87af08f | 文言は `legal.mjs` の `SENSEI_NOTE`、core アセットの `legal.senseiNote`（`{name}` 付き）で配り、ルートの冒頭に出す。要約の下にあった同趣旨の「このルートは非公式です」カードは置き換えた |
+| 2026-09-11 | 4.1 ルートの冊数・想定時間・月数 | b4cdd34a1 | **仕様書は「並行枠は合計に含めない（既存仕様どおり）」としていたが、`routeTotal()` は実際には並行して進める本・最後の仕上げを含めて数えている。** 記事の表と一致させる受け入れ条件を優先して関数はそのまま使い、表示を「並行して進める本・最後の仕上げを含み、重点対策の枠は含みません」とした |
+| 2026-09-11 | 4.2 2 冊比較ページ | 0b1b3a8f3 | `/compare/`（noindex,follow）。空の状態の候補は `search.js` の UI ではなく、同じ索引 `book-index.js` を読んで出す（ヘッダー検索は選ぶと書籍ページへ移動する作りのため）。カードは `<a>` なので、比較リンクはカードの外（直下）に置いた |
+| 2026-09-11 | 4.3 ルート・診断結果の画像書き出し | 3195f2363 | `assets/js/route-image.js`（Canvas 2D、書影なし、依存なし）。静的ページは `data-ri-*` 属性、SPA は既存の `.climb-node` / `.opt-list .opt` を読む。SPA のルート画面は共有ブロックが `#routeOutput` の外に描かれるため、囲む要素が無いときは表示中で行を持つ `[data-route-image]` を選ぶ。既存 e2e の「保存」ボタンの探し方が新しいボタンに当たったので除外した |
+| 2026-09-11 | 4.4 新刊・評価準備中の一覧 | df83c2368 | `/new/`（index・sitemap に掲載）。現時点で評価待ちは 0 冊なので「いま評価待ちの本はありません。」を出す。フッター（`FOOTER_LINKS`）・ポータルの参考書名から探す節・X の F 型本文から /new/ へ |
+| 2026-09-11 | 4.5 学部別ページ（任意） | cd5275f42 | **仕組みは入れたが、現時点で作られる学部ページは 0 枚。** 3.2 で確かめた学部の行（学部名・方式・科目・備考）と重点対策の形式名だけを固有テキストとして数えると、26 学部すべてが 300 字未満（最大は上智・外国語学部の 256 字）。仕様書の歯止めどおりページを作らず、ビルドのログに理由を出す。学部ごとの公式の出題方針などを台帳に足して 300 字を超えれば自動で生成され、親ページに「学部別に見る」が出る。focus は英語の出題説明に学部名つきで書かれている形式だけを入れた |
+| 2026-09-11 | 5.1 README の分割 | 240ad3e97 | README を 1,381 行→198 行に（概要・収録数・ディレクトリの要点・ビルドと検査・データの正本・docs への案内・運営者の手動設定）。本文は `docs/architecture.md` `data-model.md` `operations.md` `sharing.md` `testing.md` へ見出しごと移し、節の間のリンクを移動先へ張り替えた。`extractSubject` のコード例・「単一 HTML の SPA」・「科目 HTML の BOOKS 配列」を現在の仕組みに書き換え、各 docs の冒頭に理由を書いた。`apply-count` のアンカー 6 つを移動先のファイルへ向けた |
+| 2026-09-11 | 5.2 OGP を CI で作る | 8eff65c56 | 1,558 枚（書籍 1,390・大学 160・科目と共通 8）の追跡を外した（履歴は書き換えない）。フォントは `actions/cache@v4` で使い回す。**本番で画像が 200 になるか（`check:production`）は push 後の確認**（未確認） |
+| 2026-09-11 | 5.3 Consent Mode v2 | 8db76d181 | 正本は `parts.mjs` の `CONSENT_DEFAULT`。手書き HTML は AdSense のタグが GA4 より前にあるので、`build/apply-consent.mjs`（新設・STEPS 入り）が AdSense の直前に書き込む。同意バナーは置かない（仕様書どおり） |
+| 2026-09-11 | 5.4 LICENSE | 5bbb90fe4 | 運営者の判断（2026-09-10 のセッションで既定案を承認）で、プログラムとマークアップは MIT、文章と評価データは著作権留保（`data/LICENSE.md`）。著作権者名は「ルート大全 編集部」。`LICENSE` は `dist/` に入れない |
+| 2026-09-11 | 5.5 科目トップ JS の共通化 | ce7c499e4 / c1ee3b221 / ee642d4ba | 7 科目で同じ実装だった関数を `assets/js/subject-common.js`（`window.RTCommon`／Node からは require）へ移した。`go`/`syncHash`/`hashView`/`applyHash` と戻る/進むの受け手は `createNav()` にまとめ、`S`・起動済みフラグ・診断の開始は科目側から関数で渡す。`amazonURL`/`rakutenURL` は ID を引数に取り、科目側は `CONFIG` を渡す 1 行の包みだけ持つ。**そろえると挙動が変わる 3 つは科目側に残した**（理科の `normQ` は大学名の正規化で別物、国語・社会の `covLoad` は 60×60 以下も書影なし扱い、社会の `coverHTML` は属性値のエスケープと alt あり）。情報・小論文の `go` だけ `aria-current` を付けていなかったので、先に別コミット（ce7c499e4）でそろえてから移した。`window.X = X` の載せ直しは、共通側へ移した名前のうちインライン属性から呼ばれる `go`・`covLoad`・`covErr` だけ残した（他の JS からの参照は無かった）。起動前の受け皿（generate-subject-assets の shim）は `function` 宣言だけでなく載せ直している名前からも拾うようにした（`go` が宣言でなくなったため）。`build/lib/rank.mjs` は共通の関数を `createRequire` で読んで再 export し、テストは `===` で確かめる。`build/lib/cover.mjs` は以前から `assets/js/cover-resolver.js` を共有していて重複が無いので変えていない（仕様書は subject-common.js からの再 export を求めていたが、候補の正本は cover-resolver.js のまま）。`X_HANDLE` の正本も subject-common.js に移し、`extract.mjs` は再 export、`share.js` は押された時点で読み、手書き HTML の `twitter:site` とポータルの `sameAs` は `apply-site-meta.mjs` が書く。科目トップの JS 合計は 518,726 → 472,380 バイト（共通ファイル 15,036 を含む）。E2E 470 件（クロスブラウザ含む）通過。モーダルのフォーカス管理に E2E が無かったので、仕上げの確認で足した（ee642d4ba） |
+| 2026-09-11 | 完了確認（仕様書 6 節） | ca23fc588 / 67da666bb | `docs/qa-report-2026-09-11.md`。check:data・npm test 470・check:site・check:counts・build 2 回で差分なし・E2E 470（4 幅＋クロスブラウザ）。仕様書 6.5 の URL を目視で確かめ、大学ページの同じ文の重複を 1 件見つけて直した（2.6 の行）。デプロイ後（ca23fc588）に `check:production` 通過 27 / 不一致 0、本番の `assets/ogp/english/rules4.png` 200、IndexNow 1751 件 HTTP 200 を確かめた |
+
+## 次にやること
+
+**S0〜S11 は終わった。** 最終報告は `docs/remediation-final-report-2026-09-05.md`。
+
+**2026-09-05 追記。** OWNER ACTION 8 件のうち、こちらで片付けられる分を実施した
+（GitHub の Description と Topics、書体の方針、`ndl` の停止、利用条件の下調べ）。
+**いまの状態は下の OWNER ACTION 表が正本。**
+
+運営者にしかできないものとして残っているのは 4 件。
+
+1. 書影の利用条件の確認（`docs/cover-policy.md` 6・8 節）
+2. 実機での QA（`docs/qa-report-template.md`）
+3. KPI の実数投入（`docs/kpi-import-guide.md`）
+4. 同意管理（CMP）の方針
+
+## S4 時点の実測（S5 の出発点）
+
+| 科目 | 改修前 | S4 後 | 減 |
+|---|---:|---:|---:|
+| science | 977,442 | 165,157 | −83.1% |
+| social | 874,633 | 166,782 | −80.9% |
+| english | 607,760 | 151,126 | −75.1% |
+| japanese | 586,352 | 151,994 | −74.1% |
+| math | 471,171 | 143,139 | −69.6% |
+| shoron | 225,578 | 98,211 | −56.5% |
+| joho | 153,728 | 97,472 | −36.6% |
+
+**全科目が 250,000 バイトの予算に入った。science は 200,000 バイトの予算にも入っている。**
+
+Lighthouse（localhost / mobile / 5 run 中央値 / 第三者あり）:
+
+| 指標 | S0（改修前） | S4 後 |
+|---|---:|---:|
+| Performance | 47 | 57 |
+| LCP | 12.09s | 9.01〜10.21s |
+| CLS | 0.217 | 0.215 |
+| Best Practices | 77 | 77 |
+
+LCP 要素は自サイトの `p.lead`（テキスト）で、外部画像ではない。
+節約見込みの最大は `unused-css-rules`（約 1.2〜1.65 秒）。**次の一手は CSS。**
+
+## OWNER ACTION（運営者しかできない。**この表が正本**）
+
+最終更新: 2026-09-14（3・4 を運営者の確認で更新）。その前は 2026-09-05（`chore/owner-actions`）。
+最終報告 `docs/remediation-final-report-2026-09-05.md` の OWNER ACTION 節は、
+2026-09-05 時点の記録として残してある。**いまの状態はこの表を見る。**
+
+| # | 内容 | 必要な権限 | 完了判定 | 状態 |
+|---|---|---|---|---|
+| 1 | GitHub の Description が `参考書1,052冊` のまま（実際は 1,390 冊） | リポジトリ admin | `gh repo view --json description` に `1,052` が出ない | **完了**（2026-09-05）。実行後の値は「大学受験の参考書を科目・目的別に整理し、学習ルートと進捗管理を提供する静的サイト」 |
+| 2 | GitHub の Topics が未設定 | 同上 | `gh repo view --json repositoryTopics` が `null` でない | **完了**（2026-09-05）。`static-site` / `github-pages` / `education` / `japanese` |
+| 3 | 書影の利用条件の確認 | 法務・運営の判断 | `npm run check:covers` の「利用条件が未確認の取得元」が 0 件 | **運営者は確認済み（2026-09-14）。確認結果の記入が残り。** `build/data/cover-provider-policies.json` に結果がまだ書かれていないため、2026-09-14 時点の `npm run check:covers` は「利用条件が未確認の取得元 6 件」のまま。取得元ごとの判断は運営者しか持っていないので、推測では埋めない。下調べは `docs/cover-policy.md` 8 節。`ndl` は API 終了のため停止済みで対象外 |
+| 4 | 実機での QA（macOS/iOS/iPadOS Safari・実機 Firefox） | 実機 | `docs/qa-report-YYYY-MM-DD.md` の「実機での確認」表が埋まる | **運営者が実施済み（2026-09-14 に確認）。** 実機での結果は `docs/qa-report-*.md` の表にはまだ書かれていない |
+| 5 | KPI の実数を入れる | Search Console / GA4 / AdSense の管理画面 | `docs/kpi-baseline.json` の値が `null` でなくなる | **未実施。** 手順は `docs/kpi-import-guide.md` |
+| 6 | 書体の読み込み方針 | 見た目の判断 | — | **判断は不要になった。** `display=optional` は効かないと実測で確定（CLS 0.216→0.213）。代わりに Google Fonts のスタイルシートを非同期化し、LCP 10.99s→6.91s / Performance 53→66。`docs/performance-report.md` 2.1・4.2・5.2 |
+| 7 | 本番の性能を信頼できる方法で測る | — | どちらかの数字を `docs/performance-report.md` へ追記 | **一部完了。** 反映後の本番を 5 run 測り `docs/performance-report.md` 6.6 に記録した（中央値 Performance 69 / LCP 5.50s / CLS 0.216。**目標 3 つとも未達**）。ただし**機械 1 台の値でばらつきが大きい**。PageSpeed Insights は匿名 API の日次上限で実行できなかった。**実利用者の値は Search Console の Core Web Vitals（CrUX）で見る** — これは運営者の作業 |
+| 8 | 同意管理（CMP）の方針 | 対象地域と同意方針の判断 | — | **未判断。** Best Practices の残差は AdSense の第三者 cookie 1 件 |
+
+**2026-09-08 追記（7 の前提が変わった）。** CLS の原因は Google Fonts ではなく、
+`assets/js/search.js` が実行時に差し込んでいたヘッダー検索ボックスの CSS だった。
+描画をブロックする CSS として配り直した結果、`/science/` の CLS は **0.216 → 0.004**
+（5 run すべて 0.003〜0.004）になり、**目標 0.10 は達成した**。
+Performance は 66 → 76、LCP は 6.93s で横ばい。切り分けと数値は
+`docs/performance-report.md` 9 節。**LCP と Performance は引き続き未達**で、
+実利用者の値を Search Console の Core Web Vitals で見る作業（7）はそのまま残る。
+
+**1 と 2 は 2026-09-05 に実行した**（池田さんから「そちらでできることは全て許可する」の指示を受けたため）。
+実行前は「公開リポジトリの外向き設定なので確認を取る」として保留していた。
+
+## 引き継ぎメモ
+
+### S0 で決めたこと
+
+1. **`build/audit-performance.mjs` を S10 ではなく S0 で作った。**
+   指示書は §51（S10）でこのスクリプトを作ることになっているが、S0 でも「測り方を固定した
+   Lighthouse ベースライン」が要る。手打ちの `npx lighthouse` を S0 で使い S10 でスクリプト化すると、
+   指示書 §3.1 の「同じ処理の入口を 2 つ作らない」に反し、S0 と S5/S10 で測り方がずれる。
+   そこで S0 で作り、S10 では第三者遮断条件（`--block-third-party`）での再実行と報告に使う。
+   スクリプトは既に `--block-third-party` を持っている。
+
+2. **Lighthouse は 5 回流して中央値を採る（指示書 §7 の 3 回ではなく）。**
+   3 回で測ったとき 1 run だけ LCP 23.32 秒・CLS 0 の外れ値が出た（第三者読み込みが詰まった run）。
+   3 回だと外れ値が中央値の位置を動かすので 5 回に固定した。詳細は `docs/baseline-2026-09-05.md` §7。
+
+3. **`build/audit-performance.mjs` は git を呼ばない。**
+   `test/data-integrity.test.mjs` の「生成スクリプトが git のメタデータに依存していない」が
+   `build/**` 全体の `spawnSync('git')` を禁じている（浅いクローンで生成物が環境依存になる事故の再発防止）。
+   測定スクリプトも例外にせず、commit SHA は `--commit=` か `GITHUB_SHA` で受け取る。
+   `package.json` の `audit:performance` が `git rev-parse HEAD` を渡す。
+   **テストを緩めるのではなく、スクリプト側を規約に合わせた。**
+
+4. **Lighthouse は localhost で測る。** 本番（`https://route-taizen.com/`）を毎回叩くと
+   ネットワークとキャッシュで値がぶれ、改修の効果と切り分けられない。
+   localhost 計測が本番の監査値（Performance 47 / Best Practices 77 / CLS 0.216）を再現したので
+   （`docs/baseline-2026-09-05.md` §7）、比較は localhost で行い、本番との突き合わせは S10 で行う。
+   **報告では必ず「localhost で測った」と書く。**
+
+5. **Node は手元 v25.8.1 で作業する。** CI は 22 系。`build/*.mjs` は Node 標準 API しか使っておらず、
+   22 と 25 で挙動が変わる箇所は見当たらない。CI（`test.yml`）が 22 で回るので、
+   バージョン差で壊れるならそこで検出できる。
+
+### S1 で決めたこと
+
+1. **Pages Source の切替は `OWNER ACTION` ではなく完了済みとして扱う。**
+   指示書 §10 は「まだ GitHub Actions ではない」を前提にしているが、README の
+   「運営者が行う手動設定」に 2026-09-04 切替済みと書かれており、`npm run check:production` を
+   本番へ流して 19 項目すべて通過することを実測した（`/package.json`・`/build/all.mjs`・
+   `/README.md` などが 404）。指示書 §3 の「食い違ったら現行コードを正とする」に従う。
+
+2. **`check-production.mjs` は必須ゲートにしない。**
+   代わりに `test/production-check.test.mjs` が localhost に旧構成（リポジトリ直下配信）と
+   新構成（`dist/` 配信）の 2 つを立て、**旧構成で終了コード 1 になること**を決定的に固定した。
+   公開サイトへの HTTP は `.github/workflows/production.yml`（週次 + 手動）に置き、
+   終了コード 2（未検査）では CI を赤くしない。
+
+3. **README への引用 1 件を `count-ignore.json` に登録した。**
+   OWNER ACTION の完了判定として、現在の GitHub Description（`参考書1,052冊`）を README に
+   そのまま引用する必要がある。`apply-count.mjs` の `sweep()` がこれを「実データに無い冊数」として
+   拾って `check:counts` が落ちたので、理由付きで登録した。**テストは緩めていない。**
+   もう 1 件（`test/production-check.test.mjs` の `1,390冊`）は ignore に足さず、
+   期待値を `count-state.json` から組み立てる形に書き直して解消した。
+
+### S2 で決めたこと
+
+1. **`extractSubject()` の直接呼び出しを 0 にした。**
+   `build/` 19 本と `test/` 7 本を `loadSubjectData()` へ差し替え、残っていないことを
+   `test/subject-loader.test.mjs` の「科目データの読み口が 1 本だけになっている」で固定した。
+   `build/lib/extract.mjs` と `build/lib/load-subject-data.mjs` だけが例外。
+
+2. **移行が途中の科目は、黙って HTML へ落とさず落とす。**
+   `books.json` はあるが `routes.json` が無いような状態でフォールバックすると、
+   「移したつもりで移っていない」に気づけないまま生成が通る。ローダーは全 6 ファイルの
+   存在を確かめ、欠けていれば例外にする。
+
+3. **戻り値の比較に `assert.deepStrictEqual` を使わない。**
+   `extractSubject()` は vm 上で script を実行するので、返る配列は**別 realm の prototype** を
+   持つ。`deepStrictEqual` は prototype も比べるため、中身が同一でも落ちる。
+   キー順を揃えた JSON 文字列（`canonical()` 経由）で比べる。
+
+4. **`apply-new-books` の canonical 側の冪等性は「id を除いて入れ直す」で作った。**
+   マーカー区間は HTML にしか無いので使えない。`new-books.json` に載っている id を
+   既存書からいったん全部除き、末尾へ入れ直す。何度流しても同じ結果になり、
+   並び順もマーカー区間が BOOKS 末尾にある現行の見え方と揃う。
+
+### S3 で決めたこと・見つけたこと
+
+1. **app JS の外部化を S5 ではなく移行と同時に行った。**
+   指示書は §28.1（S5）で app JS を外へ出すことになっているが、app コードは
+   `BOOKS` などをスコープに閉じ込めて参照している。データだけ先に外へ出すと、
+   その間ずっと壊れた状態になる。**両方を同じコミットで動かすほうが安全**なので、
+   `build/migrate-subject.mjs` が同時に行う。S5 は `<style>` の外部化と予算の固定に使う。
+
+2. **アセットの取得は「初期表示のあとに 5 本まとめて」にした。**
+   指示書 §21 はタブを開いたときに `books` / `routes` / `unis` を個別に取る表を
+   示しているが、科目 app は同期前提の 1 スコープなので、タブ単位の遅延にすると
+   7 本の app それぞれで描画の入口を書き換えることになり、事故の面が広がる。
+   LCP を決めているのは事前描画済みのカードと CSS で、そこはどちらの案でも同じ。
+   **アセットはファイル単位に分けてあるので、必要になればタブ単位の遅延へ進める。**
+   効果は S5 の実測で確かめて報告する。
+
+3. **移行で 3 つの事故を見つけた。いずれも「黙って壊れる」形だった。**
+   - `build/generate-books.mjs` の `extractConfig()`（HTML 正規表現）→ 購入リンクから
+     アフィリエイト経路と `rel="sponsored"` が消える。指示書 §3.4 が挙げていない 3 か所目。
+   - 宣言のあとの `BOOKS.push(...)` / `TIERS.push(...)` が app に残る → 起動時に件数が増える
+     （math で 162 → 256）。`check:shape` では捕まらない。
+   - `var RTShare = (typeof RTShare !== "undefined" && RTShare) || {no-op}` が
+     関数スコープになり no-op に落ちる → 共有・診断・ペースが黙って死ぬ。
+   3 つとも、再発を捕まえる検査を同じコミットに入れた。
+
+4. **e2e の対象ページに国語・社会・小論文のトップが入っていなかった。**
+   7 科目のうち 4 科目しか見ていなかったので `KEY_PAGES` に足した。
+
+### S4 で決めたこと
+
+1. **`extractSubject()` と `build/migrate-subject.mjs` を削除した（指示書 §25・§26 のとおり）。**
+   移行が終わった時点で、この 2 つは実行できない（データが HTML に無い）。
+   残すと「使えないのに残っているコード」になり、読む人を迷わせる。
+   変換の中身は commit `9d4f6a85`〜`7f596b06` に残っており、
+   `git show 9d4f6a85:build/migrate-subject.mjs` で取り出せる。
+
+2. **フォールバック削除を「本番確認後」まで待たなかった。**
+   指示書 §25 は待ってもよいとしているが、**フォールバックには救済の価値が無い。**
+   データはもう HTML に無いので、落ちても `BOOKS を取り出せなかった` で失敗するだけ。
+   一方で残すと、移行が壊れても黙って通る経路になる。害だけがあるので即削除した。
+
+3. **e2e に `waitForApp()` を入れた。**
+   データが同期スクリプトだった頃は `domcontentloaded` で DOM が確定していたが、
+   いまは fetch のあとに描画する。待たずに測ると描画途中を見てしまい、
+   並行実行の負荷が高いときに axe が落ちた（実際に 1 件）。
+   **テストを緩めたのではなく、測る時点を正した。** そのあと 3 回連続で 188 件 pass。
+
+### S5 で決めたこと
+
+1. **`<style>` の外部化はしなかった（指示書 §28.2 からの逸脱）。**
+   実測が支持しなかった。インライン `<style>` は `render-blocking-insight` に挙がらず、
+   ネットワークの critical path に乗っていない。外へ出すと描画ブロックのリクエストが
+   1 本増える（指示書 §28.2 自身が「かえって悪化しうる」と書いている）。
+   バイト予算は外部化せずに達成済み。理由と実測は `docs/performance-report.md` §5.1。
+
+2. **代わりに `defer` を入れた。これが最も効いた。**
+   自前のスクリプト 4 本（share / pace / bunri / analytics）が描画をブロックしていた。
+   合計 4,676ms（5 本）→ 2,889ms（Google Fonts の 1 本のみ）。
+   Speed Index が 7.53s → 4.55s（−39.6%）。
+
+3. **Google Fonts は触らなかった。** 残る唯一の描画ブロック（2,889ms / 207,854 バイト）で、
+   CLS 0.217 の原因でもある（Lighthouse の `cls-culprits-insight` が挙げる原因は
+   すべて `Web font`）。非同期化すると CLS が悪化し、受入条件「CLS が S0 より悪化していない」に反する。
+   両立には `display=optional` への変更か自前配信が要るが、どちらも
+   **初回訪問者に見せる書体が変わる**ので、見た目の判断として運営者へ回した
+   （`docs/performance-report.md` §6、下の OWNER ACTION 3）。
+
+4. **性能目標 3 つは未達。達成と書かない。**
+   Performance 53（目標 80）/ LCP 11.06s（目標 4.0s）/ CLS 0.217（目標 0.10）。
+   バイト予算（全科目 250,000 未満・理科 200,000 未満）は達成。
+
+### S6 で決めたこと
+
+1. **コミットを 2 つに分けず 1 つにした（指示書 §35 からの逸脱）。**
+   指示書は「ストア」と「週次＋JSON 入出力」を分ける想定だが、`/progress/` の画面は
+   ストア無しでは空で、ストアは画面無しでは操作できない。片方だけのコミットは
+   単独でテストを通せないので、1 つにまとめた。
+
+2. **操作部品は科目ごとの描画コードへ書かず、後から差し込む形にした。**
+   ルートは描き直されるたびに HTML が作り直される。`assets/js/subject-<科目>.js` 5 本へ
+   同じ操作部品を書くと必ずずれるので、`assets/js/progress-control.js` が
+   `.climb-node[data-book-id]` を見つけて差し込み、`MutationObserver` で描き直しに追従する。
+
+3. **e2e に `waitForApp()` を広げた。**
+   `flows.spec.mjs` と `privacy.spec.mjs` も `domcontentloaded` の直後に科目アプリを
+   操作していた。データが同期スクリプトだった頃はそれで確定していたが、いまは fetch のあと。
+   並行実行の負荷が高いときに落ちた（実際に 1 件）。**測る時点を正した**だけで、
+   検査の中身は緩めていない。そのあと 3 回連続で 240 件 pass。
+
+4. **進捗に解析イベントを足さなかった。**
+   指示書 §4.2 が「進捗・追加回答・インポート内容は端末内だけ」としているので、
+   `docs/analytics-events.md` と `EVENTS` は触っていない。
+
+### S7 で決めたこと
+
+1. **「苦手分野」と「学校教材との重複」は質問しない（指示書 §37 の表から 2 行を落とした）。**
+   どちらも「人手で確かめた対応表がある場合だけ」という条件付きだったが、
+   その対応表がリポジトリに無い。分野名から教材を機械的に結び付けると推測になり、
+   「難易度や適性を推測しない」に反する。**質問を出さない**方を選んだ。
+   対応表を人が作って `build/data/` へ置いたときに足せる形にしてある。
+
+2. **スキップ時の一致を fixture ではなく実物の突き合わせで固定した。**
+   `e2e/refine.spec.mjs` の「追加質問を開かなければ、結果も共有 URL も変わらない」は、
+   `refine.js` を読み込まない状態（＝改修前）と読み込んだ状態で同じ診断を通し、
+   結果 HTML と共有 URL・表示名を突き合わせる。固定値を書くより強い。
+   書影の読み込み状態（`img` と `.bcov` の `ok` / `fb`）だけは比較から外している
+   （中身ではなく読み込みの進み具合なので、比べると環境で落ちる）。
+
+3. **移行で入っていた回帰を 1 件見つけて直した。**
+   `covLoad` / `covErr` が `img.closest(".bcov")` を null 検査していなかった。
+   起動前に届いた画像イベントを `RT_SUBJECT_FLUSH` があとから流すと、
+   そのときには図鑑が描き直されていて `closest` が null を返す。
+   null を確かめる形にし、画像の読み込み結果は溜めない（`NO_QUEUE`）ようにした。
+
+### S9 で決めたこと
+
+1. **`enabled` と `termsReviewed` を分けた（指示書 §44 からの逸脱）。**
+   §44 のとおり「確認できない provider は `enabled:false`」にすると、
+   **いま出ている 1,390 冊ぶんの書影が全部消える。** 公開中の見た目を大きく変える操作で、
+   運営者の判断が要る（§2「既存の表示を予告なく壊さない」）。
+   逆に `enabled:true` のまま「確認済み」と書けば偽りになる。
+   そこで「いま参照しているか（`enabled`）」と「人が規約を読んだか（`termsReviewed`）」を
+   別のフィールドにし、全部 `enabled:true` / `termsReviewed:false` ＝**事実そのまま**にした。
+   止めるかどうかは運営者が決める。判断の材料は `docs/cover-policy.md` §6。
+
+2. **resolver は「いちばん候補の多い科目」に合わせた。**
+   統一前は 5 通りに分かれていた（社会 10 / 国語 6 / 英語・理科 5 /
+   数学・情報・小論文 3 / 生成側 5）。少ないほうに合わせると、いま表紙が出ている本が
+   出なくなる。多いほうにそろえたので、増えることはあっても減らない。
+
+3. **取得元が想定より多かった。** 指示書 §44 は Amazon / NDL / openBD / 明示 URL の
+   4 つを挙げていたが、実際には **Google Books と学参ドットコム**も使われていた。
+   個別指定（`BOOKS[].cover`）は 16 ホスト。全部 policy と `docs/cover-policy.md` に書いた。
+
+4. **死んだデータを 1 件消した。** `subject-math.js` の `COVERS`（2,340 バイト）は、
+   移行時に「BOOKS へ流し込む文」を canonical データへ取り込んだ時点で参照されなくなっていた。
+
+### S10 で決めたこと・分かったこと
+
+1. **Best Practices 77 は、自サイト由来 0 と実証できた。**
+   広告・解析を遮断すると **5 run すべて 100**、落ちた audit 0 件。
+   落ちていた 2 件（`third-party-cookies` / `inspector-issues`）は、どちらも
+   `googleads.g.doubleclick.net` の `test_cookie` 1 つが原因だった。
+
+2. **遮断の指定が効いていなかったのを直した。**
+   `--blocked-url-patterns` をカンマ区切りで 1 つの引数にまとめると、
+   「カンマを含む 1 個のパターン」と解釈されて何も遮断されない。
+   気づいたのは「遮断したはずなのに Best Practices が 77 のまま」だったため。
+   **効いていない遮断で「第三者のせい」と結論づけずに済んだ。**
+
+3. **CLS は第三者ではない。** 遮断しても 0.215 のままで、Lighthouse が挙げる原因は
+   すべて Web font。S5 の判断（書体は触らず運営者へ回す）と整合する。
+
+4. **cross-browser は全 spec を掛け算しない。**
+   4 幅 × 3 ブラウザにすると実行時間が跳ね、落ちても読まれなくなる。
+   差が出るところだけを `e2e/cross-browser.spec.mjs` に集めた。
+
+5. **`pageerror: undefined` の切り分けに 3 手かけた。**
+   1 手目（stack を出す）2 手目（中身が空なら落とす）では足りず、
+   3 手目で `RT_DEBUG_ERRORS=1` を足して**素の中身を採って**から規則を決めた。
+   推測で 3 回目の修正をしなかったのが正解だった（実際は message が
+   文字列 `"undefined"` で、空文字ではなかった）。
+
+6. **KPI は機構だけを作り、実数は入れていない。**
+   雛形はすべて `null`。`docs/kpi-baseline.example.json` には「実数ではない」と明記した。
+
+### 事実確認済みの前提（作業開始時に実測した）
+
+- 総冊数 1,390。科目別 english 252 / japanese 192 / math 162 / science 373 / social 293 / joho 29 / shoron 89。
+- `npm test` は build 後に 253 件 pass / fail 0 / skipped 0。
+- `affiliateEnabled()` / `amazonEnabled()` はどちらも現在 `true`。
+  科目 HTML から `CONFIG` を外すと黙って `false` になる（指示書 §3.4）。S2 でテストを先に置く。
+- Best Practices 77 で落ちている audit は `third-party-cookies` と `inspector-issues` の 2 件。

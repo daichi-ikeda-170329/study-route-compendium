@@ -2,7 +2,7 @@
 
 作成日: 2026-09-05
 実装指示書: `/Users/ikedadaichi/Downloads/ルート大全未解決事項実装指示書.md`
-進捗台帳: `docs/remediation-progress.md`
+進捗台帳: `docs/archive/remediation-progress-history-2026-09-29.md`（2026-09-29 に移動。いまの OWNER ACTION は `docs/remediation-progress.md`）
 
 **数値はすべてコマンド出力の写し。実施していない項目は「未実施」と書く。**
 **「ほぼ完了」を「完了」と書かない。**

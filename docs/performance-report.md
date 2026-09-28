@@ -1,7 +1,7 @@
 # 性能の実測と、残っている要因
 
 最終更新: 2026-09-05
-測定者: 改修作業（`docs/remediation-progress.md` の S5）
+測定者: 改修作業（`docs/archive/remediation-progress-history-2026-09-29.md` の S5）
 **ここに書いた数値はすべてコマンド出力の写しで、推測値は 1 つも無い。**
 
 ---

@@ -2,7 +2,7 @@
 
 作成日: 2026-09-11
 仕様書: `/Users/ikedadaichi/Downloads/route-taizen-改修仕様書.md`
-進捗台帳: `docs/remediation-progress.md`（「2026-09-10 改修仕様書の対応」の節）
+進捗台帳: `docs/archive/remediation-progress-history-2026-09-29.md`（2026-09-29 に移動。「2026-09-10 改修仕様書の対応」の節）
 QA 報告: `docs/qa-report-2026-09-11.md`
 
 **数値はすべてコマンド出力の写し。実施していない項目は「未実施」と書く。**
@@ -52,7 +52,7 @@ QA 報告: `docs/qa-report-2026-09-11.md`
 | 5.5 | 科目トップ JS の共通化 | `ce7c499e4` / `c1ee3b221` / `ee642d4ba` |
 | — | 完了確認（仕様書 6 節）・QA 報告 | `ca23fc588` / `67da666bb` |
 
-各タスクの詳しい備考は `docs/remediation-progress.md` の同じ行にある。
+各タスクの詳しい備考は `docs/archive/remediation-progress-history-2026-09-29.md` の同じ行にある。
 
 ## 最後のタスク 5.5（科目トップ JS の共通化）
 

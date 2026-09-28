@@ -1,5 +1,5 @@
 {
- "_note": "大学別ページ（/univ/<slug>/）の出典。大学公式サイトで確かめたものだけを載せる（build/lib/university-sources.mjs に形の説明）。調査の経緯は docs/remediation-progress.md の 3.2 の行。",
+ "_note": "大学別ページ（/univ/<slug>/）の出典。大学公式サイトで確かめたものだけを載せる（build/lib/university-sources.mjs に形の説明）。調査の経緯は docs/archive/remediation-progress-history-2026-09-29.md の 3.2 の行。",
  "schemaVersion": 1,
  "universities": {
   "todai": {

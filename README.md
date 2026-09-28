@@ -97,7 +97,7 @@ npm run test:e2e           # E2E とアクセシビリティ（320/375/768/1366p
 | `docs/deployment-runbook.md` | 配信の反映・切り分け・切り戻し・Search Console へのサイトマップ送信 |
 | `docs/style-guide.md` | 文章のスタイルガイド（`check-site.mjs` が一部を機械で検査する） |
 | `docs/data-quality.md` | データ品質レポート（生成物） |
-| `docs/remediation-progress.md` | 改修の進捗と、決めたこと |
+| `docs/remediation-progress.md` | 運営者の残作業（OWNER ACTION）の正本と、改修で決めた守りごと（経緯は `docs/archive/`） |
 | `CONTRIBUTING.md` | 変更の進め方 |
 
 ## 運営者が行う手動設定
