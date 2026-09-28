@@ -216,7 +216,7 @@ Lighthouse が挙げる原因はすべて Web font で、広告・解析では�
 
 **外れ値を避けて都合のよい数字を採ることもしない。**
 本番の実力は PageSpeed Insights か Search Console の Core Web Vitals で見る。
-詳細は `docs/performance-report.md` §6.5。
+詳細は `docs/archive/performance-report-history-2026-09-29.md` §6.5（2026-09-29 に移動）。
 
 ## OWNER ACTION
 

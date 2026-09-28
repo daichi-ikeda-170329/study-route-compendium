@@ -1,8 +1,24 @@
 # 性能の実測と、残っている要因
 
-最終更新: 2026-09-05
+最終更新: 2026-09-08（計測）/ 2026-09-29（構成の整理）
 測定者: 改修作業（`docs/archive/remediation-progress-history-2026-09-29.md` の S5）
 **ここに書いた数値はすべてコマンド出力の写しで、推測値は 1 つも無い。**
+
+## いまの状態（2026-09-08 の計測が最新）
+
+| 指標 | 最新（localhost・`/science/`・5 run 中央値。9 節） | 目標 | 判定 |
+|---|---:|---:|---|
+| Performance | 76 | 80 以上 | **未達** |
+| LCP | 6.93s（Lantern の推定値） | 4.0s 以下 | **未達** |
+| CLS | 0.004 | 0.10 以下 | **達成** |
+
+- CLS の原因は `assets/js/search.js` が実行時に差し込んでいた検索ボックスの CSS で、描画をブロックする CSS として配り直して解消した（9 節）。Google Fonts ではなかった
+- LCP が未達なのは科目トップと参考書一覧だけで、Google Fonts でも広告でもない。相関しているのはページの重さ（9 節「LCP について分かったこと」）。**実利用者の値は Search Console の Core Web Vitals（CrUX）で見る**（`docs/remediation-progress.md` の OWNER ACTION 7）
+- 本番の最新は 2026-09-05 の 5 run（6.6 節。CLS の修正より前）。2026-09-19 に本番を PerformanceObserver で測った CLS は 3 ページとも 0.10 未満（`docs/growth-plan-2026-09-18.md` 6.9。Lighthouse とは測り方が違う）
+- 判断待ちは 2 つ: 書体の自前配信（6.2 節）、参考書一覧の `data-srcs` を外すか（9 節の末尾）
+
+4 節（覆った原因の切り分け）・6.1・6.5（外れ値の本番計測）・7 節（単発計測）は
+`docs/archive/performance-report-history-2026-09-29.md` へ移した。下の節番号は移す前のまま。
 
 ---
 
@@ -57,7 +73,7 @@ npm run audit:performance -- --runs=9 --path=/science/ --label=final-s11 --port=
 | Speed Index | 7.53s | 4.56s | **2.41s** | — |
 
 **3 つの目標はどれも依然として未達。** LCP は 12.09s → 6.91s（−43%）まで来たが 4.0s には遠く、
-CLS は動いていない。経緯と残因は 4 節と 5.2 節。
+CLS はこの時点では動いていない（2026-09-08 に 9 節の修正で 0.004 になった）。経緯は 5.2 節と 9 節。
 
 ### 科目トップの HTML バイト数（決定的な値。ぶれない）
 
@@ -106,83 +122,6 @@ HTML の解析がそこで止まっていた。
 S2〜S4 で描画コードを `subject-loader.js` の起動後に走らせる形にしたので、この前提は消えた。
 復元の記録は起動時に走り、`defer` な `analytics.js` より必ずあとになる。
 
-## 4. 何が残っているか — **Google Fonts が唯一の残因**
-
-`defer` を入れたあと、描画をブロックしているのは 1 本だけになった。
-
-```
-https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900
-  &family=Shippori+Mincho+B1:wght@600;700;800
-  &family=IBM+Plex+Mono:wght@400;500;600;700&display=swap
-  → 転送 207,854 バイト / 描画ブロック 2,889ms
-```
-
-日本語の書体は文字数が多いため、Google Fonts は `unicode-range` で 100 以上の
-サブセットに分けて配信する。そのため**スタイルシート自体が 207KB** ある。
-
-> **2026-09-05 追記。** この 2,889ms の描画ブロックは 5.2 の非同期化で無くなった。
-> 4 節と 4.1・4.2 は**非同期化する前**の状態を記録したもので、原因の切り分けとして残してある。
-> 非同期化したあとの数値は 2.1 節。
-
-### 4.1 CLS 0.217 の内訳（2026-09-05 に訂正）
-
-> **この節は 2026-09-05 に書き直した。**
-> それまでここには「CLS の原因はすべて Web font」と書いてあったが、**誤りだった。**
-> `cls-culprits-insight` が原因を挙げているのは全体の 1.5% にあたる 0.0032 だけで、
-> 残る 98% を占める `main.app-main` の 0.2126 には**原因が 1 つも挙がっていない**。
-> 「原因欄が空の行」を、原因が挙がっている行と同じ理由で説明してしまっていた。
-> 実際に切り分けた結果を下に置く。
-
-Lighthouse の `cls-culprits-insight` が挙げる内訳（`docs/perf/` の最新 run）。
-
-| ずれた要素 | スコア | 全体に占める割合 | Lighthouse が挙げた原因 |
-|---|---:|---:|---|
-| `body > main.app-main` | 0.2126 | **98.0%** | **挙がっていない** |
-| `body > div#prBar` | 0.0020 | 0.9% | Web font（Zen Kaku Gothic New ほか） |
-| `div.hero__main > h1` | 0.0012 | 0.6% | Web font（同上） |
-| 合計 | 0.2169 | 100% | |
-
-**広告や解析ではない。** 解析・広告だけを遮断して測っても CLS は変わらなかった
-（`docs/perf/lighthouse-mobile-no3p-s4-no3p.json`）。
-
-書影が原因でもない。`.bcov{aspect-ratio:.71}` と `.bcov img{width:100%;height:100%}` で
-箱が先に決まっており、画像が届いても版面は動かない
-（`test/performance-budget.test.mjs` の「科目トップの画像は、読み込む前から場所が決まっている」が固定）。
-
-### 4.2 切り分けの実測（2026-09-05）
-
-Playwright（Chromium 151・412×823・`layout-shift` を PerformanceObserver で合算）で、
-遮断する対象を変えて測った。
-
-| 条件 | CLS |
-|---|---:|
-| 通常 | 0.217 |
-| `fonts.googleapis.com` を遮断（**CSS ごと**止める） | **0.000** |
-| `fonts.gstatic.com` だけ遮断（書体ファイルだけ止め、CSS は通す） | 0.213 |
-| 自前 JS だけ遮断 | 0.059 |
-
-> **2026-09-08 追記。この節の結論は、いまのコードには当てはまらない。**
-> 引き金は Google Fonts ではなく、`assets/js/search.js` が実行時に差し込んでいた
-> ヘッダー検索ボックスの CSS だった。切り分けと修正後の数値は 9 節。
-
-**書体ファイルを止めても CLS は減らない。CSS を止めると 0 になる。**
-つまり「書体が差し替わったこと（swap）」ではなく、
-**Google Fonts のスタイルシートが描画をブロックしていること**が引き金になっている。
-描画がそこまで待たされるあいだに版面の計算が 1 度確定し、
-その後に版面が組み直されて `main.app-main` 全体がずれる。
-
-`font-display` を書き換えても効かないことも確かめた（同じ測り方、CSS を差し替えて計測）。
-
-| `font-display` | CLS |
-|---|---:|
-| `swap`（現状） | 0.216 |
-| `optional` | 0.213 |
-| `block` | 0.213 |
-| `fallback` | 0.213 |
-
-**減った 0.003 は、4.1 の表で Web font が原因と挙がっている分とちょうど一致する。**
-`display=optional` は「font の swap による 0.003」だけを消し、98% には触れない。
-
 ## 5. ここで**やらなかった**こと と、その理由
 
 ### 5.1 `<style>` の外部化（実装指示書 §28.2）
@@ -203,9 +142,8 @@ Playwright（Chromium 151・412×823・`layout-shift` を PerformanceObserver �
 
 ### 5.2 Google Fonts の非同期化 → **2026-09-05 に実施した**
 
-> **この節も書き直した。** ここには「CLS が悪化するのでやらない」と書いてあったが、
-> その根拠は 4.1 の誤った原因特定に乗っていた。9 run で実測したところ
-> **CLS は悪化せず、LCP が 4 秒縮んだ**ので、判断を撤回して実施した。
+当初は「CLS が悪化するのでやらない」としていたが、その根拠の原因特定が誤っていた
+（archive の 4.1）。9 run で実測すると **CLS は悪化せず、LCP が 4 秒縮んだ**ので実施した。
 
 `media="print"` → `onload="this.media='all'"` で、Google Fonts のスタイルシートを
 描画ブロックから外した。**書体そのものは今までどおり読み込む**（Chromium で
@@ -290,8 +228,8 @@ doubleclick / adsbygoogle / pagead を遮断する。**Google Fonts は遮断し
 
 ### CLS は第三者ではない
 
-第三者を遮断しても CLS は 0.215 のまま（遮断前 0.215）。
-**CLS の原因は広告ではなく書体の差し替え**である（4.1 節）。混同しない。
+第三者を遮断しても CLS は 0.215 のまま（遮断前 0.215）。**CLS の原因は広告ではない。**
+当時は書体の差し替えが原因と書いていたが誤りで、実際は `search.js` が差し込んでいた CSS だった（9 節）。
 
 ### この項目の完了条件について
 
@@ -301,33 +239,21 @@ doubleclick / adsbygoogle / pagead を遮断する。**Google Fonts は遮断し
 
 第三者サービス（AdSense / GA4）を続けるかどうかは運営判断である。
 **cookie 警告を消すためだけにサービスを削除しない。**
-CMP や Consent Mode を入れるかどうかも、対象地域と運営者の同意方針を確かめたうえでの判断で、
-こちらでは決めない（`README.md` の「同意管理（CMP）」に未判断のまま置いてある）。
+Consent Mode v2 の既定値は 2026-09-11 に導入済み。認定 CMP を入れるかどうかは、対象地域と
+運営者の同意方針を確かめたうえでの判断で、こちらでは決めない（`docs/remediation-progress.md` の OWNER ACTION 8）。
 **見せかけの同意バナーは作らない。法的適合を断定しない。**
 
 ## 6. 運営者に判断してもらいたいこと（OWNER ACTION）
 
-**目標 3 つの未達は、いずれも Google Fonts に帰着する。** ここから先は
-「見た目をどこまで守るか」の判断なので、こちらでは決めない。
-
-### 6.1 `display=optional` にするか → **判断は不要になった（試して、効かなかった）**
-
-2026-09-05 に実測した。**`display=optional` は CLS をほとんど動かさない**
-（0.216 → 0.213。9 run すべてで同じ）。Performance も LCP も変わらなかった。
-4.2 のとおり CLS の 98% は書体の差し替えとは別の原因なので、
-**「初回訪問者に指定の書体を見せない」代償を払う理由が無い。**
-
-したがって `display=swap` のまま残した。証跡は
-`docs/perf/lighthouse-mobile-with3p-font-optional.json`（9 run）。
-
-代わりに 5.2 の非同期化を入れた。こちらは LCP を 4 秒縮める。
+CLS は 9 節の修正で達成した。LCP の残因は Google Fonts ではない（9 節）。書体について残る判断は
+6.2 の自前配信だけで、「見た目をどこまで守るか」の判断なので、こちらでは決めない。
 
 ### 6.2 書体を自前で配信するか — **いまも判断待ち**
 
 `fonts.googleapis.com` を止めて測ると、上限がどこにあるかが見える
 （localhost / mobile / 5 run。`--blocked-url-patterns` で CSS ごと遮断）。
 
-| 指標 | 非同期化の後（いま） | Google Fonts を完全に止めた場合 |
+| 指標 | 非同期化の後（2026-09-05） | Google Fonts を完全に止めた場合 |
 |---|---:|---:|
 | Performance | 66 | **74** |
 | LCP | 6.91s | **6.93s** |
@@ -341,48 +267,10 @@ CMP や Consent Mode を入れるかどうかも、対象地域と運営者の�
 日本語書体はサブセット化しないと数 MB になるので、サブセット生成と更新の仕組みを持つことになる。
 **規模が大きいので、非同期化の効果を本番で確かめてから判断するのが順当。**
 
-## 6.5 本番での計測について（2026-09-05・マージ後）
-
-改修を main へ入れて Pages が反映されたあと、**本番**（`https://route-taizen.com/science/`）を
-同じ手順で 5 回測った。証跡は `docs/perf/lighthouse-mobile-with3p-production-after.json`。
-
-| run | Performance | LCP |
-|---:|---:|---:|
-| 1 | 44 | 20.2s |
-| 2 | 55 | 19.8s |
-| 3 | 44 | 20.4s |
-| 4 | 55 | 19.2s |
-| 5 | **76** | **5.1s** |
-| 中央値 | 55 | 19.79s |
-
-**この数字を本番の実力として扱わない。**
-
-5 run のうち 4 run で LCP が 19〜20 秒に張り付き、1 run だけ 5.1 秒だった。
-Speed Index の中央値も 16.16 秒で、localhost（4.56 秒）と比べて桁が違う。
-**この機械から外部（Google Fonts・AdSense）への通信が不安定なためで、
-サイトの側の問題ではない。** localhost では同じコードが安定して
-Performance 53 / Speed Index 4.56 秒を出している。
-
-外れ値を避けて「76 が本当の値」と書くこともしない。**どちらも根拠が無い。**
-
-### 本番の実力を知るには
-
-この環境からの Lighthouse では判断できない。運営者の側で次のどちらかを使う。
-
-1. **PageSpeed Insights**（`https://pagespeed.web.dev/`）に
-   `https://route-taizen.com/science/` を入れる。Google 側の回線から測るので、
-   この機械の通信事情に左右されない。
-2. **Search Console のウェブに関する主な指標（Core Web Vitals）** を見る。
-   実際の訪問者の値（CrUX）なので、いちばん実態に近い。ただし十分な訪問数が
-   たまるまで表示されない。
-
-**改修前の本番値（Performance 47 / LCP 10.7s / CLS 0.216）は監査時点に別環境で測ったもので、
-上の 5 run と同じ条件ではない。並べて「改善した／悪化した」と書けない。**
-
 ### 6.6 本番の再計測（2026-09-05・書体の非同期化を入れたあと）
 
 `942f893c` を main へ入れ、Pages に反映されたのを確認してから同じ手順で 5 回測った。
-**今回は 6.5 のような桁違いの外れは出ず、localhost の値と整合した。**
+**今回は前回（archive の 6.5）のような桁違いの外れは出ず、localhost の値と整合した。**
 
 | run | Performance | LCP | CLS | Speed Index |
 |---:|---:|---:|---:|---:|
@@ -401,7 +289,7 @@ mobile・`simulate` / 第三者は通常どおり / 5 run / 実行 2026-09-05。
 - **機械 1 台・回線 1 本から 5 回測った値**であって、実際の訪問者の値ではない。
 - **ばらつきが大きい**（Performance 65〜81、LCP 3.51〜7.12s）。中央値を 1 つの数として
   扱うより、「おおむね 65〜81 の帯」と読むほうが正しい。
-- 6.5 の計測（LCP が 19〜20 秒に張り付いた）と**同じ機械**である。
+- 前回の計測（archive の 6.5。LCP が 19〜20 秒に張り付いた）と**同じ機械**である。
   今回は安定したが、**この環境が常に信頼できると示せたわけではない。**
 - 目標（Performance 80 / LCP 4.0s / CLS 0.10）は、**中央値では 3 つとも未達**。
   5 run 中 1 run だけ Performance 81 / LCP 3.51s が出ているが、これを実力として書かない。
@@ -411,24 +299,6 @@ CLS 0.216 は localhost と同じで、本番でも動いていない。
 **実利用者の値は依然として Search Console の Core Web Vitals（CrUX）で見るのが正しい。**
 PageSpeed Insights も 2026-09-05 に試したが、匿名 API の日次上限
 （`pagespeedonline.googleapis.com`）に達していて実行できなかった。枠が戻れば使える。
-
-## 7. 参考: 他のページの単発計測
-
-**1 run のみの値で、中央値ではない。** ばらつきが大きいので傾向として読む。
-
-| ページ | 改修前（1 run） | 改修後（1 run） |
-|---|---:|---:|
-| `/` | Perf 74 / LCP 4.02s | Perf 71 / LCP 4.05s |
-| `/english/` | Perf 50 / LCP 8.09s | Perf 57 / LCP 9.61s |
-| `/japanese/` | Perf 50 / LCP 8.91s | Perf 43 / LCP 20.58s ※ |
-| `/math/` | Perf 51 / LCP 7.20s | Perf 53 / LCP 9.84s |
-| `/social/` | Perf 44 / LCP 21.48s ※ | Perf 52 / LCP 10.32s |
-| `/joho/` | Perf 59 / LCP 5.34s | Perf 60 / LCP 6.87s |
-| `/shoron/` | Perf 61 / LCP 5.63s | Perf 67 / LCP 7.25s |
-
-※ LCP 20 秒台は、この機械から Google Fonts / AdSense への取得が詰まった run。
-9 run 中央値で測った `/science/` では出ていない（改修後 9 run のうち 1 run のみ）。
-**単発値どうしの比較で結論を出さない。**
 
 ## 8. この文書を更新するとき
 
@@ -442,7 +312,7 @@ PageSpeed Insights も 2026-09-05 に試したが、匿名 API の日次上限
 
 ### 何が起きていたか
 
-4.2 節は「CLS の引き金は Google Fonts のスタイルシートが描画をブロックしていること」と
+4.2 節（archive へ移した）は「CLS の引き金は Google Fonts のスタイルシートが描画をブロックしていること」と
 結論づけていた。**現行のコードで測り直したところ、そうではなかった。**
 
 引き金は `assets/js/search.js` だった。ヘッダー検索ボックスの CSS を、このスクリプトが
@@ -452,7 +322,7 @@ PageSpeed Insights も 2026-09-05 に試したが、匿名 API の日次上限
 CSS が届く前のヘッダーは、検索欄がロゴの横に並ぶ 1 行になっている。
 `.rt-search{flex:1 1 100%;order:9}` が効いた瞬間に検索欄が 2 行目へ回り、
 ヘッダーが約 35px 高くなって、`main.app-main` から下が丸ごとずれる。
-これが 4.1 節の表で「原因が挙がっていない」まま 98% を占めていた
+これが 4.1 節（archive）の表で「原因が挙がっていない」まま 98% を占めていた
 `body > main.app-main` の 0.2126 の正体である。
 
 ### 切り分け（Playwright / Chromium・412×823・`layout-shift` を PerformanceObserver で合算）
@@ -528,7 +398,7 @@ CSS の正本は `search.js` の `STYLE` のまま残し、**配り方だけ変�
 - 相関しているのはページの重さである。`/science/books/` は HTML が 875KB、
   `/science/` は HTML 160KB に加えて表示直後に科目アセット 686KB を取りに行く。
 
-**したがって「LCP の残因は Google Fonts」という 4 節の見出しは、いまのコードでは成り立たない。**
+**したがって「LCP の残因は Google Fonts」という 4 節（archive）の見出しは、いまのコードでは成り立たない。**
 次に確かめるべきは、この 6.9s が実利用者にも起きているかどうかで、それは
 Search Console の Core Web Vitals（CrUX）で見る（`docs/remediation-progress.md` の OWNER ACTION 7）。
 **Lantern の推定値だけを根拠に、重さを削る大工事へ進まない。**
