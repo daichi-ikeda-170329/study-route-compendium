@@ -201,6 +201,40 @@ export function articleContentDate(a) {
   return recordDate(key, value);
 }
 
+/** 生成中のページに仮に入れておく更新日。`pageContentDate` が本文を見てから実際の日付に差し替える */
+export const DATE_PLACEHOLDER = '__RT_UPDATED__';
+
+/**
+ * 生成したページ 1 枚の「読者に見える本文が変わった日」。
+ *
+ * 書籍ページは以前、**その本のレコード**のハッシュだけで日付を決めていた。すると、
+ * 生成側で節を足しても（2026-09-18 の「志望校別ルートでの位置」、09-21 の関連書カードの
+ * 差分化・「1 周にかかる期間」）日付が動かず、1,371 枚が sitemap で 09-03 のままだった。
+ * 読者に見える中身は変わっているのに「変わっていない」と伝えるのは、偽更新の逆向きの誤りで、
+ * クロールが少ないサイトでは改善が Google に読まれない原因になる（2026-09-29 に修正）。
+ *
+ * 根拠は `<main>` のテキストだけにする。ヘッダー・フッター・`<head>`・スクリプト・
+ * 配信アセットのハッシュは入れないので、サイト共通の部品を直しても全ページの日付は動かない。
+ * 本文中の日付らしき並び（更新日そのもの）は外してから比べる。
+ *
+ * @param {string} key   台帳のキー（例 "math/shin-kaihou"）
+ * @param {string} html  `DATE_PLACEHOLDER` を更新日の位置に入れて生成したページ
+ * @returns {string}     プレースホルダーを実際の日付に置き換えたページ
+ */
+export function pageContentDate(key, html) {
+  const main = (html.match(/<main[\s\S]*<\/main>/) || [html])[0];
+  const text = stripManaged(main)
+    .replace(/<script[\s\S]*?<\/script>/g, '')
+    .replace(/<style[\s\S]*?<\/style>/g, '')
+    .replace(/<[^>]+>/g, ' ')
+    .split(DATE_PLACEHOLDER).join('')
+    .replace(/\d{4}-\d{2}-\d{2}/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const d = recordDate(key, text);
+  return html.split(DATE_PLACEHOLDER).join(d);
+}
+
 /** 台帳を書き戻す。変化が無ければ何もしない（差分を無駄に作らない） */
 export function saveDates() {
   if (!dirty) return;

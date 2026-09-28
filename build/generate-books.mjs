@@ -23,7 +23,7 @@ import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { pickAlternatives, pickNext, pickPrev } from './lib/book-links.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { degreeLine, bandOf } from './lib/scale.mjs';
-import { recordDate, saveDates } from './lib/updated.mjs';
+import { DATE_PLACEHOLDER, pageContentDate, saveDates } from './lib/updated.mjs';
 import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL, placeholderSearchUrl } from './lib/record-type.mjs';
 import { verificationOf } from './lib/verification.mjs';
 import { bookIndexable, NOINDEX_META } from './lib/indexing.mjs';
@@ -194,6 +194,19 @@ ${pos.side.map(e => `      <li>${routeLink(e.tier)}の${esc(e.trackNames)}では
 /* ============================================================
    1 冊分のページ
    ============================================================ */
+/**
+ * meta description に足す「問題数・学習時間」。検索は「〇〇 問題数」「〇〇 何日」の形が多く、
+ * 答えを検索結果の段階で見せるため（2026-09-29。Search Console のクエリ実測）。
+ * 過去問の枠など、数えられる構成を持たないものには付けない。
+ */
+function descFacts(book) {
+  if (isPlaceholder(book)) return '';
+  const parts = [];
+  if (book.problems && /\d/.test(book.problems)) parts.push(book.problems);
+  if (book.hours && /\d/.test(book.hours)) parts.push(`学習${book.hours.replace(/h$/, '時間')}`);
+  return parts.length ? `、${parts.join('・')}` : '';
+}
+
 function renderBook(book, ctx) {
   const { sub, books, stages, counts, config } = ctx;
   const st = stages[book.stage] || { label: '', short: '', color: sub.color };
@@ -207,9 +220,9 @@ function renderBook(book, ctx) {
   // レベル別に複数の巻をまとめている本。難易度の数字を単独で読ませないための注記を出す
   const series = prov ? null : seriesOf(book);
   const url = `${ORIGIN}/${sub.dir}/books/${book.id}/`;
-  // 更新日はレコードの中身が変わった日。科目 HTML を 1 文字直しただけで
-  // その科目の全ページの日付が動かないよう、git の日付ではなくハッシュで見る
-  const updated = recordDate(`${sub.dir}/${book.id}`, book);
+  // 更新日は仮の値で描画し、書き出す直前に pageContentDate が本文（<main>）のハッシュで決める。
+  // レコードだけを見ると、生成側で足した節の変化が日付に出ない（updated.mjs の pageContentDate）
+  const updated = DATE_PLACEHOLDER;
   const alts = pickAlternatives(book, books);
   const next = pickNext(book, books, alts, sub.dir, ctx.routes);
   const covers = coverSrcs(book);
@@ -261,7 +274,7 @@ function renderBook(book, ctx) {
   // 「自分に関係あるか」を判断できる要素（役割・難易度・向く人）だけを並べる。
   const desc = clip(prov
     ? `${pageName}（${by}${book.pub}）の書誌情報。${fieldName}の${st.label}に置かれる新刊で、難易度と到達目安は評価準備中です。`
-    : `${pageName}（${by}${book.pub}）のレベルと使い方。${fieldName}の${st.label}、難易度${book.diff}/10、到達目安${hensachiPlain(book)}。${book.bestFor}向け。`, 120);
+    : `${pageName}（${by}${book.pub}）のレベルと使い方。${fieldName}の${st.label}、難易度${book.diff}/10、到達目安${hensachiPlain(book)}${descFacts(book)}。${book.bestFor}向け。`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -625,8 +638,8 @@ for (const sub of targets) {
   for (const book of list) {
     const outDir = path.join(ROOT, sub.dir, 'books', book.id);
     fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(path.join(outDir, 'index.html'),
-      renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, tiers: d.tiers, counts, config, data: d }));
+    const html = renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, tiers: d.tiers, counts, config, data: d });
+    fs.writeFileSync(path.join(outDir, 'index.html'), pageContentDate(`${sub.dir}/${book.id}`, html));
     written++;
   }
   console.log(`  ✓ ${sub.dir}: ${list.length} ページ`);
