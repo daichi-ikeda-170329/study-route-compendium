@@ -29,6 +29,26 @@ $ npm run check:production
 `data/_backup/`・`package.json` を取得できた。**その状態に戻っていないことを、
 `/package.json` などが 404 であることで確かめている。**
 
+### 1.1 配信元の設定そのものを見る（2026-09-21 に戻っていたのを発見）
+
+2026-09-04 に切り替えたあと、配信元の設定が `legacy`（`main` の `/` をそのまま配信）に戻っていた。
+そのあいだ push のたびに GitHub の `pages-build-deployment`（リポジトリ直下を全部公開）と
+「Pages 公開」（`pages.yml`。`dist/` だけを公開）の **2 つのデプロイが両方走り**、先に終わったほうが
+配信されていた。push 直後の数分だけ `/package.json` や `/build/all.mjs` が 200 を返し、OGP 画像
+（`dist/` にしか無い）が 404 になっていたが、数分後には `dist/` 側が勝つので、**落ち着いてから
+`check:production` を流すと通ってしまい、気づけなかった。** 本番の URL だけでは判断できないので、設定を見る。
+
+```bash
+gh api repos/daichi-ikeda-170329/study-route-compendium/pages --jq '{build_type,source}'
+# → {"build_type":"workflow", …} なら dist/ 配信。"legacy" なら直下配信に戻っている
+```
+
+戻っていたら次で直す（2026-09-21 はこれで直した。Settings → Pages から手で変えてもよい）。
+
+```bash
+gh api repos/daichi-ikeda-170329/study-route-compendium/pages -X PUT -f build_type=workflow
+```
+
 > 実装指示書 §10 は「Pages の Source はまだ GitHub Actions ではない」を前提にしているが、
 > 2026-09-04 に切り替わり、`README.md` と commit `dabdb86d` に反映済み。
 > 指示書 §3 の「作業開始時に再測し、食い違ったら現行コードを正とする」に従い、

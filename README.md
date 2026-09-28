@@ -107,61 +107,16 @@ npm run test:e2e           # E2E とアクセシビリティ（320/375/768/1366p
 ### GitHub Pages の配信元（切り替え済み）
 
 `.github/workflows/pages.yml` が作る `dist/` だけを配信している。
-2026-09-04 に切り替え、**2026-09-21 に切り替え直した**（下の「一度戻っていた」を読む）。
+2026-09-04 に切り替え、**2026-09-21 に切り替え直した**（下を読む）。
 
 配信の反映待ち・切り分け・切り戻しの手順は **`docs/deployment-runbook.md`** にまとめてある。
 公開状態は `npm run check:production` で機械的に確かめる（終了コード 0 = 一致 / 1 = 食い違い /
 2 = 未検査。**2 を成功として扱わない**）。
 
-**一度戻っていた（2026-09-21 に発見）。** この節は「2026-09-04 に切り替わったことを本番で
-確認済み」と書いていたが、実際には配信元の設定が `legacy`（`main` の `/` をそのまま配信）に
-戻っていた。そのあいだ push のたびに **2 つのデプロイが両方走り**、先に終わったほうが
-配信されていた。
-
-- `pages-build-deployment`（GitHub が自動で動かすほう）… リポジトリ直下を全部公開する
-- 「Pages 公開」（`pages.yml`）… `dist/` だけを公開する
-
-そのため push 直後の数分だけ `/package.json` や `/build/all.mjs` が 200 を返し、
-OGP 画像（リポジトリに無く `dist/` にしか無い）が 404 になっていた。数分後には
-`dist/` 側が勝って正しい状態に戻るので、**落ち着いてから `check:production` を流すと
-通ってしまい、気づけなかった**。
-
-**設定そのものを見る。** 本番の URL が 404 を返すかどうかだけでは判断できない。
-
-```bash
-gh api repos/daichi-ikeda-170329/study-route-compendium/pages --jq '{build_type,source}'
-# → {"build_type":"workflow", …} なら dist/ 配信。"legacy" なら直下配信に戻っている
-```
-
-戻っていたら次で直す（2026-09-21 はこれで直した。Settings → Pages から手で変えてもよい）。
-
-```bash
-gh api repos/daichi-ikeda-170329/study-route-compendium/pages -X PUT -f build_type=workflow
-```
-
-```
-https://route-taizen.com/               200
-https://route-taizen.com/package.json   404
-https://route-taizen.com/build/all.mjs  404
-https://route-taizen.com/test/…         404
-```
-
-以前はリポジトリ直下がそのまま配信されていて、本番から `build/`・`test/`・
-`data/_backup/`・`package.json` を取得できた。
-
-**切り戻すとき**は Settings → Pages → Build and deployment → Source を
-「Deploy from a branch」に戻す。ただしその瞬間からリポジトリ直下が
-再び全部公開されるので、戻すのは配信が止まったときの緊急手段に限る。
-
-**やり直すとき**の順番（一度きりの手順だが、環境を作り直す場合のために残す）。
-
-1. `pages.yml` が入った状態で main へ push する（この時点では配信先は変わらない）
-2. Actions タブで「Pages 公開」が成功していることを確かめる
-3. Settings → Pages → Build and deployment → Source を **GitHub Actions** に変える
-4. 数分後、上の 404 になるべき URL が 404 を返すことを確かめる
-
-**2 を確かめる前に 3 をやらない。** workflow が失敗する状態で Source を変えると、
-配信が止まる。
+**2026-09-21 に、配信元の設定が `legacy`（リポジトリ直下を配信）に戻っていたのを見つけて直した。**
+本番の URL が 404 を返すかどうかだけでは判断できないので、設定そのものを
+`gh api …/pages --jq '{build_type,source}'` で見る（`"workflow"` なら正しい）。
+経緯・直し方・切り戻し・環境を作り直すときの順番は `docs/deployment-runbook.md` の 1.1・4・5 節。
 
 ### Google Search Console
 
@@ -203,12 +158,9 @@ https://route-taizen.com/test/…         404
 
 ### リポジトリの説明
 
-**実施済み（2026-09-05）。** それまでの Description は
-`ルート大全 — 大学受験の参考書1,052冊を科目別に図鑑化・ルート化した無料サイト` で、
-実際の 1,390 冊と食い違っていた。これはサイトの生成物ではなく GitHub の設定なので、
-`npm run build` では直らない。冊数を書かない文面に変え、Topics も併せて設定した
-（2026-09-08 に `gh repo view` で反映を再確認済み。Topics は
-`education` / `github-pages` / `japanese` / `static-site` の 4 つ）。
+**実施済み（2026-09-05）。** 以前の Description は `参考書1,052冊` を含み実数と食い違っていた。
+GitHub の設定なので `npm run build` では直らない。冊数を書かない文面に変え、Topics も設定した
+（2026-09-08 に `gh repo view` で再確認。Topics は `education` / `github-pages` / `japanese` / `static-site`）。
 
 - [x] Description と Topics を実態に合わせた（実行したコマンドと完了判定は `docs/operations.md` の「リポジトリの説明」）。
 
@@ -222,6 +174,6 @@ https://route-taizen.com/test/…         404
 
 ### 連絡先
 
-- [ ] 公開の連絡先メールアドレスは用意していない。セキュリティ上の報告は
-      GitHub Security Advisory へ案内している（`SECURITY.md`）。
-      公開の連絡先を作るかどうかは運営者の判断
+- [x] 2026-09-21 に運営者の判断で決めた。連絡先ページ `/contact/` を置き、**窓口は X（@route_taizen）の
+      返信または DM だけ**（メールアドレスは公開しない。`docs/growth-plan-2026-09-18.md` の 7.3）。
+      セキュリティ上の報告は GitHub Security Advisory へ案内している（`SECURITY.md`）
