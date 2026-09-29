@@ -43,9 +43,8 @@ echo '[{"keyword":"青チャート Focus Gold どっち","rank":3,"url":"https:/
 
 ## 順位の取り方
 
-**原則として Google Search Console を正とする。** ただし 2026-09-09 時点で GSC API は
-**まだセットアップされていない**（認証情報が無く、`fetch_gsc_ranks.mjs` は終了コード 2 で
-止まる）。それまでは WebSearch による目視を使う。
+**原則として Google Search Console を正とする。** `fetch_gsc_ranks.mjs` が終了コード 2 で
+止まる（認証情報が無い）ときは、WebSearch による目視を使う。
 
 - WebSearch の順位は**概算**。GSC が使えるようになったら GSC を正にする
 - `rank: null` + `impressions: 0` は未インデックスとは限らない。必要なら WebSearch で確認する
@@ -60,8 +59,8 @@ echo '[{"keyword":"青チャート Focus Gold どっち","rank":3,"url":"https:/
 4. 鍵を `private/gsc-service-account.json` に置く（`private/` は `.gitignore` 済み）。
    または環境変数 `GSC_SERVICE_ACCOUNT_JSON` にパスを渡す
 
-`fetch_gsc_ranks.mjs` は**まだ実データで検証していない。**初回実行時は終了コードと
-出力を必ず目で確かめる。
+`fetch_gsc_ranks.mjs` を実データで初めて動かすときは、終了コードと出力を必ず目で確かめる
+（`data/seo/rank-history.json` に `"source": "gsc"` の記録が 1 件も無ければ、まだ実データで動いていない）。
 
 ## Workflow
 

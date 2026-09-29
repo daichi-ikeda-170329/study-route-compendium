@@ -20,7 +20,7 @@
 - **生成の入口は `npm run build` 1 本。** データを変えたら差分が出なくなるまで流す（通常 2 回）。生成物はコミットする（CI が最新かを差分で確かめる）
 - **push の前に流す:** `npm run check:data` → `npm test` → `npm run check:site` → `npm run check:counts`。UI を触ったら `npm run test:e2e` も。手元の確認は `npm run serve`（`file://` では確かめない）
 - **推測で埋めない。** 分からない値は `null`、確認状態は `unverified` のまま。出典 URL と確認日の両方が無いものを `verified` にしない
-- **`main` へ push するとそのまま公開される。** 公開状態は `npm run check:production` で確かめる（終了コード 2 を成功扱いしない）
+- **`main` へ push するとそのまま公開される。** 上の検査が通っていれば、push の前に池田さんへ確認を取らなくてよい。公開状態は `npm run check:production` で確かめる（終了コード 2 を成功扱いしない）
 - 収益・順位・アクセスの CSV は `private/` に置き、コミットしない
 - 内容ごとにコミットを分ける（誤情報の修正・アクセシビリティ・データ構造・SEO・CI・文書を 1 つに混ぜない）
 
