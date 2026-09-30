@@ -156,7 +156,7 @@ https://route-taizen.com/english/?utm_source=x&utm_medium=social&utm_campaign=rt
 
 | 工程 | 担当 | 頻度 | Claude のトークン |
 |---|---|---|---|
-| A・E 型の本文生成 | `build/gen-x-posts.mjs` | GitHub Actions が月次実行 | **ゼロ** |
+| A・E 型の下書き | `build/gen-x-posts.mjs`（手で流す。自動では動かさない） | 月 1 回、必要なときだけ | ゼロ |
 | F 型の本文生成 | `build/gen-x-posts.mjs` | 同上（調査後に `--force` で作り直す） | **ゼロ** |
 | 新刊の調査 | Claude | **月 1 回**、B・C・D 型と同じセッション | 月 1 セッションのみ |
 | B・C・D 型の本文作成 | Claude | **月 1 回**、4 週分をまとめて | 月 1 セッションのみ |
@@ -171,7 +171,7 @@ https://route-taizen.com/english/?utm_source=x&utm_medium=social&utm_campaign=rt
 
 ### 生成物の受け渡し
 
-GitHub Actions が毎月 1 日に 4 週分を生成し、`docs/x-posts/YYYY-MM.md` としてコミットする。池田さんはそのファイルを開き、X のブラウザ版の予約投稿画面にコピペする。
+**2026-09-30 に自動生成をやめた（池田さん判断）。** 月末に池田さんが依頼し、Claude が前月の実績（X の表示回数・フォロワー・返事の件数・流入）を分析してから、翌月の全日分を `docs/x-posts/YYYY-MM.md` に書いてコミットする。手順は `.claude/skills/x-monthly-posts/`。池田さんはそのファイルを開き、X のブラウザ版の予約投稿画面にコピペする。
 
 ## 8. サイト側の実装
 

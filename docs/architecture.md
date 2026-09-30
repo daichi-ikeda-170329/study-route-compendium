@@ -72,12 +72,11 @@
 | `build/data/count-state.json` | 前回書き込んだ冊数。置換対象を一意に決めるために持つ | 生成（`apply-count.mjs`） |
 | `build/data/count-ignore.json` | 冊数ではないと確認した「◯◯◯冊」。`apply-count.mjs` の走査を黙らせる | 手で編集 |
 | `test/` | 共有・保存・検索・ペース・新刊・スタイルガイドのテスト。`node --test` で実行する | 手で編集 |
-| `docs/x-posts/` | X の投稿案。`YYYY-MM.md` に新刊調査の手順・カレンダー・本文が全部入る | 生成（`gen-x-posts.mjs`） |
+| `docs/x-posts/` | X の投稿文。`YYYY-MM.md` に前月の実測・方針・全日分の本文が入る。池田さんの月末の依頼で Claude が書く（`.claude/skills/x-monthly-posts/`） | 手で編集 |
 | `docs/` | 機能ごとの実装計画と調査記録 | 手で編集 |
 | `.github/workflows/test.yml` | push のたびにテストと `check-site.mjs`・`prerender-tops.mjs --check` を流す | 手で編集 |
 | `.github/workflows/counts.yml` | push のたびに冊数の整合を取り、直せないずれでジョブを落とす | 手で編集 |
 | `.github/workflows/links.yml` | 週 1 回、書影と商品ページの生存を確認する（落とさない） | 手で編集 |
-| `.github/workflows/x-posts.yml` | 毎月 1 日に X の投稿案を生成してコミットする | 手で編集 |
 
 科目トップの内部構造は 5 科目で共通で、次の要素を同じクラス名で持つ。情報・小論文はこのうち `.view` が「ホーム」と「図鑑」の 2 つだけになる。
 
@@ -184,7 +183,7 @@ node build/apply-book-text.mjs           # 全科目に流し込む
 node build/apply-book-text.mjs english   # 科目を絞る
 ```
 
-`build/gen-x-posts.mjs` は X の投稿案（新刊調査の手順と F 型の新刊速報を含む）を作るもので、
+`build/gen-x-posts.mjs` は X の投稿の下書き（A・E 型と候補データ）を手で出すときの道具で、自動では動かさない。
 サイトの生成物とは無関係。上の一括再生成には含めない（`docs/operations.md` の「X アカウント」「新刊の掲載」を参照）。
 
 科目データ（`data/subjects/<科目>/` の `books.json` や `routes.json`）を編集したら、`generate-sitemap.mjs` を含めて全部を流し直す。生成物はリポジトリにコミットする（GitHub Pages はビルドを実行しないため）。
