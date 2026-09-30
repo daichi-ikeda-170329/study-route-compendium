@@ -666,14 +666,14 @@ function main() {
   md.push('## 使い方');
   md.push('');
   md.push('1. X をブラウザで開く。**予約投稿はブラウザ版でしか使えない**（アプリからは設定できない）');
-  md.push('2. 下の 1 つ目のコードブロック（本文）をそのままコピーして投稿画面に貼る');
-  md.push('3. カレンダーのアイコンから日時を指定して予約する');
-  md.push('4. 投稿された直後に、2 つ目のコードブロック（URL）を**自分の投稿への返信**として貼る');
+  md.push('2. 見出しの日時を、投稿画面のカレンダーのアイコンで指定する');
+  md.push('3. 見出しの下のコードブロックを 1 つ貼って予約する。**1 日 1 ブロックで、それ以外にやることは無い**');
   md.push('');
-  md.push('**本文に URL を入れない。** X は外部リンクを含む投稿の表示を抑える。09-01〜09-18 の 26 投稿は');
-  md.push('すべて本文に URL があり、表示回数が 1 桁にとどまった（docs/x-account-plan.md の 14 節）。');
+  md.push('**URL は入れない。返信・スレッド・アンケートも使わない。** X は外部リンクを含む投稿の表示を抑え、');
+  md.push('予約投稿では URL を後から返信で足せない。サイトへの入口はプロフィールと固定ポストに集める');
+  md.push('（docs/x-account-plan.md の 14 節）。B・C・D 型を書くときも同じ条件で書く。');
   md.push('');
-  md.push(`文字数は X の重み付け（全角 2・半角 1・URL は一律 ${URL_WEIGHT}）で数えてある。上限は ${X_LIMIT}。`);
+  md.push(`文字数は X の重み付け（全角 2・半角 1）で数えてある。上限は ${X_LIMIT}。`);
   md.push('');
   md.push('**B・C・D 型は空欄で出る。** 判断が要るので Claude に書いてもらう。その際は');
   md.push('このファイル末尾の「候補データ」だけを渡せばよい（科目トップの HTML は読ませない）。');
@@ -705,21 +705,14 @@ function main() {
         md.push('');
         continue;
       }
-      const { main, reply } = splitForReply(r.post.text);
+      // 返信に回す案内行と URL は書き出さない（予約投稿だけで完結させる）
+      const { main } = splitForReply(r.post.text);
       md.push('```');
       md.push(main);
       md.push('```');
       md.push('');
       md.push(`文字数 ${weightedLen(main)} / ${X_LIMIT}`);
       md.push('');
-      if (reply) {
-        md.push('投稿の直後に、自分の投稿へ返信として貼る（本文には URL を入れない）:');
-        md.push('');
-        md.push('```');
-        md.push(reply);
-        md.push('```');
-        md.push('');
-      }
     }
   };
 
