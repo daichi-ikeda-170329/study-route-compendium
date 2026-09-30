@@ -103,25 +103,6 @@ export function trackedUrl(pathname, campaign) {
   return `${ORIGIN}${pathname}?utm_source=x&utm_medium=social&utm_campaign=${campaign}`;
 }
 
-/**
- * 投稿の本文と、返信に貼る部分（「▼ …」の案内行と URL）に分ける。
- *
- * 2026-09-18 の見直し（docs/x-account-plan.md の 14 節）。09-01〜09-18 の 26 投稿は
- * すべて本文に URL を入れていて、表示回数が 1 桁にとどまった。X は外部リンクを含む
- * 投稿の表示を抑えるため、URL は本文に入れず、投稿の直後に自分で返信して貼る。
- * 各型の組み立て（postA など）は変えず、書き出しのときに分ける。
- *
- * @returns {{main: string, reply: string}} reply は URL を含まない投稿では空
- */
-export function splitForReply(text) {
-  const lines = text.split('\n');
-  const i = lines.findIndex(l => /^▼/.test(l) || /^https?:\/\//.test(l));
-  if (i < 0) return { main: text, reply: '' };
-  const main = lines.slice(0, i).join('\n').replace(/\n+$/, '');
-  const reply = lines.slice(i).join('\n').trim();
-  return { main, reply };
-}
-
 /* ============================================================
    A 型：図鑑カード
    ============================================================ */
@@ -669,11 +650,10 @@ function main() {
   md.push('2. 見出しの日時を、投稿画面のカレンダーのアイコンで指定する');
   md.push('3. 見出しの下のコードブロックを 1 つ貼って予約する。**1 日 1 ブロックで、それ以外にやることは無い**');
   md.push('');
-  md.push('**URL は入れない。返信・スレッド・アンケートも使わない。** X は外部リンクを含む投稿の表示を抑え、');
-  md.push('予約投稿では URL を後から返信で足せない。サイトへの入口はプロフィールと固定ポストに集める');
-  md.push('（docs/x-account-plan.md の 14 節）。B・C・D 型を書くときも同じ条件で書く。');
+  md.push('**URL は本文の末尾に入れる。返信・スレッド・アンケートは使わない。** 予約投稿では、投稿の直後に');
+  md.push('返信で URL を足せないため（docs/x-account-plan.md の 14 節・決定 7）。B・C・D 型も同じ条件で書く。');
   md.push('');
-  md.push(`文字数は X の重み付け（全角 2・半角 1）で数えてある。上限は ${X_LIMIT}。`);
+  md.push(`文字数は X の重み付け（全角 2・半角 1・URL は一律 ${URL_WEIGHT}）で数えてある。上限は ${X_LIMIT}。`);
   md.push('');
   md.push('**B・C・D 型は空欄で出る。** 判断が要るので Claude に書いてもらう。その際は');
   md.push('このファイル末尾の「候補データ」だけを渡せばよい（科目トップの HTML は読ませない）。');
@@ -705,13 +685,13 @@ function main() {
         md.push('');
         continue;
       }
-      // 返信に回す案内行と URL は書き出さない（予約投稿だけで完結させる）
-      const { main } = splitForReply(r.post.text);
+      // URL は本文に入れたまま 1 ブロックで出す（予約投稿だけで完結させる。決定 7）
+      const text = r.post.text;
       md.push('```');
-      md.push(main);
+      md.push(text);
       md.push('```');
       md.push('');
-      md.push(`文字数 ${weightedLen(main)} / ${X_LIMIT}`);
+      md.push(`文字数 ${weightedLen(text)} / ${X_LIMIT}`);
       md.push('');
     }
   };
