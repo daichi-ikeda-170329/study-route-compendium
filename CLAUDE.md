@@ -12,8 +12,7 @@
 | テストの一覧と流すタイミング | `docs/testing.md` |
 | 配信の反映・切り分け・切り戻し | `docs/deployment-runbook.md` |
 | 文章のスタイル | `docs/style-guide.md` |
-| 検索順位の改善 | `.claude/skills/seo-rank-watch/` |
-| X の月次投稿（月末の依頼で作る。自動生成はしない） | `.claude/skills/x-monthly-posts/` |
+| 検索順位の改善・X の月次投稿 | `.claude/skills/`（seo-rank-watch・x-monthly-posts） |
 
 ## 最初に守ること
 
