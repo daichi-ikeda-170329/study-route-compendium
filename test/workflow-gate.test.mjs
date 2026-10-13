@@ -18,3 +18,13 @@ test('quality はworkflow_callで同じSHAのunitと全7画面projectを検査',
   assert.match(job(quality,'e2e'),/--project=desktop-1366 --project=tablet-768 --project=mobile-375 --project=narrow-320/);
   assert.match(job(quality,'e2e'),/run: npm run test:cross-browser/);
 });
+test('PRの検査待ちはmainの公開待ちを取り消さない',()=>{
+  const concurrency=pages.match(/^concurrency:\n((?:[ \t]+.*\n)+)/m)?.[1];
+  assert.ok(concurrency,'workflow concurrency exists');
+  const group=concurrency.match(/^\s+group:\s*(.+)$/m)?.[1];
+  assert.ok(group,'workflow concurrency group exists');
+  const groupFor=ref=>group.replaceAll('${{ github.ref }}',ref);
+  assert.notEqual(groupFor('refs/heads/main'),groupFor('refs/pull/42/merge'));
+  assert.notEqual(groupFor('refs/pull/42/merge'),groupFor('refs/pull/43/merge'));
+  assert.match(concurrency,/cancel-in-progress:\s*false/);
+});

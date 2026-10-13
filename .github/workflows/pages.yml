@@ -22,7 +22,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages
+  # pendingはcancel-in-progress:falseでも置換されるため、PRがmainの公開を取消さないよう分ける。
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
