@@ -21,8 +21,11 @@ npm run check:search-style  # 検索ボックスの CSS が全ページへ配ら
 ならない。ブラウザは `npx playwright install chromium` で入れる。
 
 テストと `check-site.mjs`・`prerender-tops.mjs` は Node 標準だけで動く。`gen-ogp.mjs --check`
-だけが依存パッケージを使うので、CI では先に `npm ci` を流している。すべて
-`.github/workflows/test.yml` が push のたびに流す。
+だけが依存パッケージを使うので、CI では先に `npm ci` を流している。
+これらの検査は、push・PR のたびに `.github/workflows/pages.yml` から
+`.github/workflows/test.yml` を `workflow_call` で呼び出して流す。Pages の公開は
+build と、呼び出した検査のユニットテスト・サイト検査・E2E の成功を待つ。
+テスト単独の手動実行も維持する。
 
 | ファイル | 見ているもの | 流すべきとき |
 |---|---|---|

@@ -26,6 +26,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # 同じコミットのunit・サイト検査・E2Eが成功するまで公開しない
+  quality:
+    uses: ./.github/workflows/test.yml
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -80,7 +84,7 @@ jobs:
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
+    needs: [build, quality]
     runs-on: ubuntu-latest
     # デプロイ job にだけ必要最小限の権限を与える。contents: read は IndexNow の通知で
     # sitemap.xml・キーファイル・直前の push との差分を読むための checkout に使う
