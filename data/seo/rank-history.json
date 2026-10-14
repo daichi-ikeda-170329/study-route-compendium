@@ -37,6 +37,20 @@
         }
       ],
       "note": "2026-09-18 WebSearch で上位に route-taizen.com なし。GSC 直近 7 日の 15 クエリ・28 日の上位ページにも比較記事は出ていない"
+    },
+    {
+      "date": "2026-10-14",
+      "source": "manual",
+      "measurements": [
+        {
+          "keyword": "化学 上級問題精講",
+          "rank": 8.4,
+          "impressions": 54,
+          "clicks": 4,
+          "url": "https://route-taizen.com/science/books/jokyu-seiko/"
+        }
+      ],
+      "note": "Search Console 管理画面（Claude in Chrome）の直近 28 日の平均掲載順位。API 未設定のため手で写した"
     }
   ]
 }

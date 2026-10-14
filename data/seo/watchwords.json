@@ -9,6 +9,11 @@
   ],
   "keywords": [
     {
+      "keyword": "化学 上級問題精講",
+      "targetPath": "/science/books/jokyu-seiko/",
+      "priority": "high"
+    },
+    {
       "keyword": "青チャート Focus Gold どっち",
       "targetPath": "/math/guides/ao-vs-fg/",
       "priority": "high"
