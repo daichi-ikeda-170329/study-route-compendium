@@ -106,43 +106,43 @@
  "textMarkRemaining": 159,
  "extras": {
   "english": {
-   "toc": 2,
-   "howto": 5,
-   "finish": 5,
-   "editions": 3,
-   "pages": 5,
+   "toc": 4,
+   "howto": 8,
+   "finish": 8,
+   "editions": 6,
+   "pages": 8,
    "media": 2
   },
   "japanese": {
-   "toc": 0,
-   "howto": 0,
-   "finish": 0,
-   "editions": 0,
-   "pages": 0,
-   "media": 0
-  },
-  "math": {
    "toc": 1,
    "howto": 3,
    "finish": 3,
-   "editions": 2,
-   "pages": 4,
+   "editions": 3,
+   "pages": 3,
+   "media": 0
+  },
+  "math": {
+   "toc": 2,
+   "howto": 6,
+   "finish": 6,
+   "editions": 5,
+   "pages": 7,
    "media": 1
   },
   "science": {
    "toc": 3,
-   "howto": 6,
-   "finish": 6,
-   "editions": 4,
-   "pages": 6,
+   "howto": 8,
+   "finish": 8,
+   "editions": 7,
+   "pages": 9,
    "media": 0
   },
   "social": {
    "toc": 1,
-   "howto": 1,
-   "finish": 1,
-   "editions": 0,
-   "pages": 1,
+   "howto": 2,
+   "finish": 2,
+   "editions": 1,
+   "pages": 2,
    "media": 0
   },
   "joho": {

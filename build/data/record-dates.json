@@ -726,7 +726,7 @@
    "d": "2026-09-28"
   },
   "english/leap": {
-   "h": "c6b827132379",
+   "h": "1a4029c77c93",
    "d": "2026-10-14"
   },
   "english/leap-basic": {
@@ -886,7 +886,7 @@
    "d": "2026-09-28"
   },
   "english/saizensen2500": {
-   "h": "57e85047a24e",
+   "h": "ca0e46b2c1f0",
    "d": "2026-10-14"
   },
   "english/scramble": {
@@ -1194,7 +1194,7 @@
    "d": "2026-10-14"
   },
   "english/yatte700": {
-   "h": "09cb99246151",
+   "h": "e64b63978b39",
    "d": "2026-10-14"
   },
   "english/yokubari": {
@@ -2066,8 +2066,8 @@
    "d": "2026-09-28"
   },
   "japanese/dojo": {
-   "h": "aad4f6be4680",
-   "d": "2026-09-28"
+   "h": "faaf4355999f",
+   "d": "2026-10-14"
   },
   "japanese/dojo-kiso": {
    "h": "950ad8d282db",
@@ -2238,7 +2238,7 @@
    "d": "2026-10-14"
   },
   "japanese/kanji-master1800": {
-   "h": "fd77510242c6",
+   "h": "9077935ec712",
    "d": "2026-10-14"
   },
   "japanese/kanki-kanbun-dokkai": {
@@ -2762,7 +2762,7 @@
    "d": "2026-09-28"
   },
   "japanese/zkai-kanji-goi2700": {
-   "h": "c0cbe98209cc",
+   "h": "ed179bde47ce",
    "d": "2026-10-14"
   },
   "japanese/ztr-kijutsu": {
@@ -3422,7 +3422,7 @@
    "d": "2026-09-28"
   },
   "math/tanki-kyote": {
-   "h": "8384c3981019",
+   "h": "f3984e16776a",
    "d": "2026-10-14"
   },
   "math/tanki-shuchu-zemi-sugaku-1a2bc": {
@@ -3438,7 +3438,7 @@
    "d": "2026-09-28"
   },
   "math/tarinai-seisu": {
-   "h": "6a5454003009",
+   "h": "bd4272b22d88",
    "d": "2026-10-14"
   },
   "math/tetsu-kiso": {
@@ -3482,7 +3482,7 @@
    "d": "2026-09-28"
   },
   "math/toppakou": {
-   "h": "9b1334d45fbe",
+   "h": "34dd87170386",
    "d": "2026-10-14"
   },
   "math/toshin-kyotsu-test-jissen-mondaishu-sugaku": {
@@ -3542,7 +3542,7 @@
    "d": "2026-09-20"
   },
   "report:data-quality": {
-   "h": "ceb7c24ef8e1",
+   "h": "f648346842c5",
    "d": "2026-10-14"
   },
   "science/access-note-kagaku": {
@@ -3598,7 +3598,7 @@
    "d": "2026-09-28"
   },
   "science/butsuri-kyoshitsu": {
-   "h": "5996fc727392",
+   "h": "e37c607f0209",
    "d": "2026-10-14"
   },
   "science/canpass-seibutsu": {
@@ -3670,7 +3670,7 @@
    "d": "2026-10-14"
   },
   "science/genten-yuki": {
-   "h": "9a2061f534f0",
+   "h": "95114bff51ab",
    "d": "2026-10-14"
   },
   "science/golden-route-kiso": {
@@ -4810,7 +4810,7 @@
    "d": "2026-09-28"
   },
   "science/tanki-butsuri": {
-   "h": "95d5881fc3d7",
+   "h": "e3fb496a004f",
    "d": "2026-10-14"
   },
   "science/tanki-chigaku": {
@@ -5834,7 +5834,7 @@
    "d": "2026-09-28"
   },
   "social/kawai-kurobon-sekaishi": {
-   "h": "740f976ac469",
+   "h": "084a2460eed4",
    "d": "2026-10-14"
   },
   "social/keisan-ronjutsu-seikei": {
@@ -6566,11 +6566,11 @@
    "d": "2026-09-28"
   },
   "subject/english": {
-   "h": "88470a250e73",
+   "h": "4a3e2df29335",
    "d": "2026-10-14"
   },
   "subject/japanese": {
-   "h": "d56d14c52677",
+   "h": "d52eeda68620",
    "d": "2026-10-14"
   },
   "subject/joho": {
@@ -6578,11 +6578,11 @@
    "d": "2026-09-20"
   },
   "subject/math": {
-   "h": "4eae81445a96",
+   "h": "aaa756acd4a0",
    "d": "2026-10-14"
   },
   "subject/science": {
-   "h": "aed4d577c2bf",
+   "h": "b16282296111",
    "d": "2026-10-14"
   },
   "subject/shoron": {
@@ -6590,15 +6590,15 @@
    "d": "2026-09-20"
   },
   "subject/social": {
-   "h": "05080e87dd27",
+   "h": "a450bef435c7",
    "d": "2026-10-14"
   },
   "top/english": {
-   "h": "11b1b6b3ed4c",
+   "h": "10c6b6b25b54",
    "d": "2026-10-14"
   },
   "top/japanese": {
-   "h": "adda9fa8beba",
+   "h": "13f072ace427",
    "d": "2026-10-14"
   },
   "top/joho": {
@@ -6606,11 +6606,11 @@
    "d": "2026-09-03"
   },
   "top/math": {
-   "h": "a40133454f54",
+   "h": "632d5209f3b2",
    "d": "2026-10-14"
   },
   "top/science": {
-   "h": "2130a15f47a4",
+   "h": "b9bb1ae709bd",
    "d": "2026-10-14"
   },
   "top/shoron": {
@@ -6618,7 +6618,7 @@
    "d": "2026-09-03"
   },
   "top/social": {
-   "h": "55a9065305f9",
+   "h": "09f43a2d31a6",
    "d": "2026-10-14"
   },
   "univ/aichi": {
