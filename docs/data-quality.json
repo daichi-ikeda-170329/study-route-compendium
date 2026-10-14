@@ -1,46 +1,46 @@
 {
  "generatedAt": "2026-10-14",
- "total": 1390,
+ "total": 1432,
  "byStatus": {
   "verified": 402,
   "partial": 727,
-  "unverified": 257,
+  "unverified": 299,
   "notApplicable": 4
  },
  "bySubject": {
   "english": {
-   "total": 252,
+   "total": 263,
    "verified": 86,
    "partial": 131,
-   "unverified": 34,
+   "unverified": 45,
    "notApplicable": 1
   },
   "japanese": {
-   "total": 192,
+   "total": 198,
    "verified": 91,
    "partial": 67,
-   "unverified": 33,
+   "unverified": 39,
    "notApplicable": 1
   },
   "math": {
-   "total": 162,
+   "total": 172,
    "verified": 25,
    "partial": 90,
-   "unverified": 46,
+   "unverified": 56,
    "notApplicable": 1
   },
   "science": {
-   "total": 373,
+   "total": 383,
    "verified": 123,
    "partial": 174,
-   "unverified": 75,
+   "unverified": 85,
    "notApplicable": 1
   },
   "social": {
-   "total": 293,
+   "total": 298,
    "verified": 71,
    "partial": 166,
-   "unverified": 56,
+   "unverified": 61,
    "notApplicable": 0
   },
   "joho": {
@@ -59,12 +59,12 @@
   }
  },
  "fieldGaps": {
-  "official": 668,
-  "author": 1044,
-  "problems": 1386,
-  "year": 664,
-  "pub": 384,
-  "isbn13": 257
+  "official": 710,
+  "author": 1086,
+  "problems": 1428,
+  "year": 706,
+  "pub": 426,
+  "isbn13": 299
  },
  "byPriority": {
   "route": {
@@ -90,8 +90,8 @@
   },
   "other": {
    "label": "その他",
-   "total": 767,
-   "unverified": 155,
+   "total": 809,
+   "unverified": 197,
    "partial": 415,
    "verified": 197
   }
@@ -110,7 +110,7 @@
    "howto": 11,
    "finish": 11,
    "editions": 8,
-   "pages": 10,
+   "pages": 21,
    "media": 3
   },
   "japanese": {
@@ -118,7 +118,7 @@
    "howto": 5,
    "finish": 5,
    "editions": 5,
-   "pages": 5,
+   "pages": 11,
    "media": 0
   },
   "math": {
@@ -126,7 +126,7 @@
    "howto": 8,
    "finish": 8,
    "editions": 8,
-   "pages": 9,
+   "pages": 17,
    "media": 1
   },
   "science": {
@@ -134,7 +134,7 @@
    "howto": 10,
    "finish": 10,
    "editions": 10,
-   "pages": 12,
+   "pages": 22,
    "media": 1
   },
   "social": {
@@ -142,7 +142,7 @@
    "howto": 3,
    "finish": 3,
    "editions": 2,
-   "pages": 3,
+   "pages": 6,
    "media": 0
   },
   "joho": {

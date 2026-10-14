@@ -184,10 +184,10 @@ test('詳細検索で複合の絞り込みができる', async ({ page }) => {
   await expect(page.locator('#sfResultsHead')).toContainText('冊', { timeout: 20000 });
 
   await page.locator('#sf-subjects-math').check();
-  await expect(page.locator('#sfResultsHead')).toHaveText(/162 冊/);
+  await expect(page.locator('#sfResultsHead')).toHaveText(/172 冊/);
   await page.locator('#sf-diffBands-adv').check();
   const n = Number((await page.locator('#sfResultsHead').textContent()).match(/(\d+) 冊/)[1]);
-  expect(n).toBeLessThan(162);
+  expect(n).toBeLessThan(172);
   expect(n).toBeGreaterThan(0);
 });
 

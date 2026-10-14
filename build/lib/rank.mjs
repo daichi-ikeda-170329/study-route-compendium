@@ -21,7 +21,7 @@ const RTCommon = createRequire(import.meta.url)('../../assets/js/subject-common.
  * 「共テ7割〜9割」「東大合格レベル」「全レベル」のように偏差値で書いていない本は
  * [999, 999] を返し、数値で書いてある本のうしろへまとめる。混ぜると得点率の数字が
  * 偏差値として並び、7 割の本が偏差値 40 の本より前に出てしまう。
- * 収録 1,390 冊のうち 207 冊がこの書き方である。
+ * 収録 1,432 冊のうち 249 冊がこの書き方である。
  */
 export const hensachiRange = RTCommon.hRange;
 

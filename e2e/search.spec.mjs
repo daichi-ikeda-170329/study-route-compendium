@@ -17,7 +17,7 @@ async function open(page) {
 test('最初は全冊が出る（絞り込んでいないので欠損も含む）', async ({ page }) => {
   const errors = collectErrors(page);
   await open(page);
-  await expect(page.locator('#sfResultsHead')).toHaveText(/^1390 冊$/);
+  await expect(page.locator('#sfResultsHead')).toHaveText(/^1432 冊$/);
   expect(errors).toEqual([]);
 });
 
@@ -32,11 +32,11 @@ test('科目・難易度帯・刊行年を組み合わせて絞り込める', as
   const head = page.locator('#sfResultsHead');
 
   await page.locator('#sf-subjects-math').check();
-  await expect(head).toHaveText(/162 冊/);
+  await expect(head).toHaveText(/172 冊/);
 
   await page.locator('#sf-diffBands-adv').check();
   const after = await head.textContent();
-  expect(Number(after.match(/(\d+) 冊/)[1]), '難易度で絞っても件数が減っていない').toBeLessThan(162);
+  expect(Number(after.match(/(\d+) 冊/)[1]), '難易度で絞っても件数が減っていない').toBeLessThan(172);
 
   await page.locator('#sf-yearBands-y2024').check();
   const last = await head.textContent();
@@ -88,16 +88,16 @@ test('出版社で絞っても、著者が分かっていない本が消えな�
 test('絞り込みを解除すると全冊に戻る', async ({ page }) => {
   await open(page);
   await page.locator('#sf-subjects-math').check();
-  await expect(page.locator('#sfResultsHead')).toHaveText(/162 冊/);
+  await expect(page.locator('#sfResultsHead')).toHaveText(/172 冊/);
   await page.locator('#sfReset').click();
-  await expect(page.locator('#sfResultsHead')).toHaveText(/^1390 冊$/);
+  await expect(page.locator('#sfResultsHead')).toHaveText(/^1432 冊$/);
   await expect(page.locator('#sf-subjects-math')).not.toBeChecked();
 });
 
 test('書名で探せる', async ({ page }) => {
   await open(page);
   await page.locator('#sfQuery').fill('ポラリス');
-  await expect(page.locator('#sfResultsHead')).not.toHaveText(/^1390 冊$/);
+  await expect(page.locator('#sfResultsHead')).not.toHaveText(/^1432 冊$/);
   await expect(page.locator('.sf-card').first()).toContainText('ポラリス');
 });
 
@@ -116,7 +116,7 @@ test('キーボードだけで絞り込める', async ({ page }) => {
   await cb.focus();
   await page.keyboard.press('Space');
   await expect(cb).toBeChecked();
-  await expect(page.locator('#sfResultsHead')).toHaveText(/162 冊/);
+  await expect(page.locator('#sfResultsHead')).toHaveText(/172 冊/);
 });
 
 test('件数の変化が読み上げに届く', async ({ page }) => {
@@ -124,7 +124,7 @@ test('件数の変化が読み上げに届く', async ({ page }) => {
   const live = page.locator('#sfStatus');
   await expect(live).toHaveAttribute('aria-live', 'polite');
   await page.locator('#sf-subjects-math').check();
-  await expect(live).toContainText('162 冊が該当しました');
+  await expect(live).toContainText('172 冊が該当しました');
 });
 
 test('320px でも横にはみ出さない', async ({ page }) => {

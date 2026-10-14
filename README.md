@@ -1,6 +1,6 @@
 # ルート大全
 
-大学受験の参考書 1,390 冊を科目別に図鑑化し、志望校から逆算した参考書ルートを提示する無料サイト。
+大学受験の参考書 1,432 冊を科目別に図鑑化し、志望校から逆算した参考書ルートを提示する無料サイト。
 
 公開 URL: https://route-taizen.com/
 リポジトリ: https://github.com/daichi-ikeda-170329/study-route-compendium
@@ -20,14 +20,14 @@
 
 | 科目 | ディレクトリ | 収録冊数 |
 |---|---|---|
-| 英語 | `english/` | 252 |
-| 国語 | `japanese/` | 192 |
-| 数学 | `math/` | 162 |
-| 理科 | `science/` | 373 |
-| 社会 | `social/` | 293 |
+| 英語 | `english/` | 263 |
+| 国語 | `japanese/` | 198 |
+| 数学 | `math/` | 172 |
+| 理科 | `science/` | 383 |
+| 社会 | `social/` | 298 |
 | 情報 | `joho/` | 29 |
 | 小論文 | `shoron/` | 89 |
-| 合計 | — | 1,390 |
+| 合計 | — | 1,432 |
 
 冊数は `data/subjects/<科目>/books.json` のレコード数で、`npm run check:counts`（`build/apply-count.mjs --check`）が
 ポータル・科目トップ・この表との一致を確かめる。公開ページ数は `sitemap.xml` の `<loc>` の数

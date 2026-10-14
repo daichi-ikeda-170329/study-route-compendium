@@ -3,7 +3,7 @@
  "subjects": {
   "english": {
    "counts": {
-    "books": 252,
+    "books": 263,
     "unis": 160,
     "tiers": 9,
     "guides": 13
@@ -267,12 +267,23 @@
     "zenkoku-daigaku-nyushi-mondai-seikai-eigo-shiritsu": "d9b7ea6d1ee3901b",
     "tokyo-kagakudai-rikogaku-no-eigo-20kanen": "2efa872321a68319",
     "hijii-eibun-kusho-hoju-mondai": "35a3426796a98394",
-    "hijii-dokkai-eibunpo-kobun-seiha": "d39a01a901fc1597"
+    "hijii-dokkai-eibunpo-kobun-seiha": "d39a01a901fc1597",
+    "scramble-basic-4th": "ffb6918f9fdd88a7",
+    "seki-kyotest-kakushin-input55": "21c9e6553262ebec",
+    "frame-reading-nyumon": "bac436d889199411",
+    "frame-reading-oyo": "77c224b2ef25098b",
+    "crack10": "1a49c81344d4c14b",
+    "logic42": "7fcf3d4933784aea",
+    "eibunpo-goho-shortcuts": "619507c99e2ee366",
+    "oversight": "19c5da00de86fdff",
+    "takeoka-eibunpo-drill-basic": "2f052081f45b3670",
+    "takeoka-eibunpo-drill-advanced": "f87f89ba66c96067",
+    "chokkyu-kaiho-eisakubun-jikkyo": "edc327ec66b8873c"
    }
   },
   "japanese": {
    "counts": {
-    "books": 192,
+    "books": 198,
     "unis": 160,
     "tiers": 8,
     "guides": 12
@@ -476,12 +487,18 @@
     "yazawa-ryomon-tokkun-1-basic": "1ebe56dc4a53ba5c",
     "yazawa-ryomon-tokkun-2-standard": "2fa26134d3ad20c8",
     "okamoto-stream-kobunpo-kiso": "21d30f0b32ffaab5",
-    "okamoto-stream-kobunpo-oyo": "bfdd6ab1139e2afb"
+    "okamoto-stream-kobunpo-oyo": "bfdd6ab1139e2afb",
+    "basic-lecture-gendaibun": "02dc7193a954a76a",
+    "gendaibun-joshiki-sukima": "99287ead8a9b06b5",
+    "okamoto-4jikan-kanbun-dokkai": "c81b55c42b7bfb4c",
+    "access-kyotest-hyoron": "8301cd4d3c0d424f",
+    "zero-kakusei-koten-bunpo": "43d27def33c721f2",
+    "shin-kobutan": "c107fd22f20df063"
    }
   },
   "math": {
    "counts": {
-    "books": 162,
+    "books": 172,
     "unis": 160,
     "tiers": 9,
     "guides": 12
@@ -655,12 +672,22 @@
     "ukaru-sugaku": "ee5dbbd53507fba0",
     "shuchu-kougi": "2f4dd4fec5736330",
     "nyushi-mondaishu": "941997581232a969",
-    "tankyu-kakuritsu": "0ec7017946d11004"
+    "tankyu-kakuritsu": "0ec7017946d11004",
+    "saisoku-keisan-1a2bc": "73dcc3259d425d12",
+    "saisoku-keisan-3c": "70e01a744db61759",
+    "bunyabetsu-futoshiki": "5f3772e60fc356c8",
+    "morimoto-rikei-150": "6479f8afa6ece8b4",
+    "bunkei-teppan100": "1869a9c926588238",
+    "meimon50-rikei": "0dcc8e5369e21a32",
+    "shin-sugaku-core-select": "40c3022c01564c60",
+    "gungun-sugaku-1a-basic": "c617c2a523e66f2c",
+    "gungun-rikei-sugaku-advanced": "d682d266f5dbd000",
+    "ichimonittou-2bc": "c83cdd18796e108d"
    }
   },
   "science": {
    "counts": {
-    "books": 373,
+    "books": 383,
     "unis": 181,
     "tiers": 8,
     "guides": 10
@@ -1045,12 +1072,22 @@
     "highscore-seibutsu-kiso": "abd66f85100f53ef",
     "kyogakusha-shinkatei-koryaku-seibutsu": "785a6ad0332fbd80",
     "todai-shokai-seibutsu-25": "04ca0bae88cc5faa",
-    "chigaku-yougoshu-keyword": "983140a6dc123931"
+    "chigaku-yougoshu-keyword": "983140a6dc123931",
+    "setsuda-riron": "459fd30e0f2b3f26",
+    "setsuda-muki": "049a086dd73160a4",
+    "setsuda-yuki": "bc53c7e47ddb8596",
+    "tamechika-miyaburu-rikigaku-hadou": "a7501ca69e4d1461",
+    "tamechika-miyaburu-denjiki": "2f56c40c00640cf3",
+    "ryomon-kaze-kagaku-riron": "0f2a59dd3686e80c",
+    "ryomon-kaze-kagaku-muki-yuki": "474dc34568a8572c",
+    "teppan100-butsuri": "bc21b85b0e0dcd5c",
+    "tetsuryokukai-toryumon-hado": "f5d25e143571cd03",
+    "level0-seibutsu-1": "04eb1e5dd914b087"
    }
   },
   "social": {
    "counts": {
-    "books": 293,
+    "books": 298,
     "unis": 160,
     "tiers": 8,
     "guides": 14
@@ -1355,7 +1392,12 @@
     "todai-nyushi-shokai-sekaishi": "d937674067896ad2",
     "todai-nyushi-shokai-chiri": "2c2ca92038b066a2",
     "zenkoku-nyushi-seikai-sekaishi": "aa15029612777c04",
-    "zenkoku-nyushi-seikai-chiri": "3e2e456ab35dc8c4"
+    "zenkoku-nyushi-seikai-chiri": "3e2e456ab35dc8c4",
+    "kato-sekaishi-1": "91de06580063a1d3",
+    "kanaya-nihonshi-themashi": "0552ffc10a03079b",
+    "kageyama-sekaiichi-seikei": "28106f714c1226e8",
+    "hatakeyama-kyotest-seikei": "8e05be1b84d4adc9",
+    "hatakeyama-kyotest-rinri": "b96b7357ec7f6110"
    }
   },
   "joho": {
