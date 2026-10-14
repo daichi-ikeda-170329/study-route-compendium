@@ -566,4 +566,4 @@ ten.tokyo-shoseki.co.jp/text/hs/rika/h-kyozai/、hon.gakken.jp/book/1130616800�
 - **新刊**: 2026 年 3〜10 月刊の 42 冊を評価準備中で収録（`88491cb93`）。合計 1,432 冊。noindex のまま図鑑・検索・購入リンクに出る。
   新刊が初めて画面に出たことで、バッジのコントラスト不足と sitemap 検査の誤検知が見つかり直した
 - **X の投稿案**: 10 月分の冊数を 1,432 に直した。**予約済みの投稿は 1,390 冊のまま**なので、気になれば X 側で直す（数字は過少なだけで誤りではない）
-- **次の照合候補**: `english:ultimate600` 以降は済み。表示順で `science:urushibara-kaiho-kenkyu`・`math:shinzui-v`・`science:rikei-hyojun-seibutsu` から
+- **次の照合候補**: 90 日の表示順で `science:urushibara-kaiho-kenkyu`・`math:shinzui-v`・`science:rikei-hyojun-seibutsu` から
