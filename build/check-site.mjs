@@ -24,6 +24,7 @@ import { LEGAL_PAGES, amazonDisclosure } from './lib/parts.mjs';
 import { STAGE_FLOW } from './lib/flow.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { isProvisional } from './lib/newbooks.mjs';
+import { bookIndexable } from './lib/indexing.mjs';
 import { BANNED_WORDS, BANNED_PHRASES, BANNED_ALLOW } from './lib/words.mjs';
 import { displayName } from './lib/booktitle.mjs';
 
@@ -586,7 +587,8 @@ function checkOrphans(files) {
     for (const b of data[s.dir].books) {
       const key = `${s.dir}/${b.id}`;
       if (!linked.has(key)) err(key, 'どのページからもリンクされていない（孤立ページ）');
-      if (sitemap && !sitemap.includes(`${ORIGIN}/${s.dir}/books/${b.id}/`)) {
+      // noindex の本（評価準備中の新刊）は sitemap に載せない設計（build/lib/indexing.mjs）
+      if (sitemap && bookIndexable(b).indexable && !sitemap.includes(`${ORIGIN}/${s.dir}/books/${b.id}/`)) {
         err(key, 'sitemap.xml に載っていない');
       }
     }

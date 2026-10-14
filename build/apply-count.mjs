@@ -52,10 +52,11 @@ const comma = n => n.toLocaleString('en-US');   // 1390 → "1,390"
  */
 function truth() {
   const subjects = {};   // dir -> 収録冊数
+  const evaluatedBy = {};   // dir -> 評価済み（新刊・評価準備中を除く）の冊数
   const picks = {};      // dir -> おすすめ（ルート本線で採用した本）の冊数。ルートを持たない科目は null
   const unis = {};       // dir -> その科目のルートが対応している大学数
   const uniNames = new Set();   // サイト全体の収録大学（科目をまたいだ和集合）
-  let total = 0, covers = 0, nonHensachi = 0, shorthand = 0, withAuthorCount = 0;
+  let total = 0, evaluated = 0, covers = 0, nonHensachi = 0, shorthand = 0, withAuthorCount = 0;
   /* いちばん新しい刊行年と、その年の冊数。/new/ が「◯◯◯冊が 20XX 年の刊行です」と
      書くので、実データから出る値として数えておく。年が変われば冊数も変わるため、
      count-ignore.json に固定値で登録すると翌年に必ず落ちる */
@@ -64,6 +65,7 @@ function truth() {
   for (const s of SUBJECTS) {
     const d = loadSubjectData(ROOT, s.dir);
     subjects[s.dir] = d.books.length;
+    evaluatedBy[s.dir] = d.books.filter(b => !isProvisional(b)).length;
     unis[s.dir] = d.unis.length;
     d.unis.forEach(u => uniNames.add(u.n));
     total += d.books.length;
@@ -77,6 +79,7 @@ function truth() {
 
     for (const b of d.books) {
       if (b.cover) covers++;
+      if (!isProvisional(b)) evaluated++;
       // /new/ が並べるのは評価の済んだ本だけなので、数え方をそちらに合わせる
       if (b.year && !isProvisional(b)) yearCount.set(Number(b.year), (yearCount.get(Number(b.year)) || 0) + 1);
       // rank.mjs の hensachiRange() と同じ判定。偏差値を数値で書いていない本を数える
@@ -97,7 +100,7 @@ function truth() {
   const sciOnly = loadSubjectData(ROOT, 'science').unis.filter(u => !ledgerNames.has(u.n)).length;
   const latestYear = yearCount.size ? Math.max(...yearCount.keys()) : null;
   return {
-    total, subjects, picks, unis, uniTotal: uniNames.size,
+    total, evaluated, evaluatedBy, subjects, picks, unis, uniTotal: uniNames.size,
     uniPages: ledger.length, uniSciOnly: sciOnly,
     covers, nonHensachi, shorthand, withAuthor: withAuthorCount,
     authors, authorless: total - authors,
@@ -347,9 +350,13 @@ function sweep(t) {
     t.total, t.covers, t.authors, t.authorless,
     t.nonHensachi, t.shorthand, t.withAuthor,
     t.latestYearBooks,   // /new/ の「◯◯◯冊が 20XX 年の刊行です」
+    // 評価済み（新刊・評価準備中を除く）の冊数。難易度・学習時間を持つ本だけを数える
+    // 記事（難易度分布・ルートの総学習時間）は収録総数ではなくこちらを書く
+    t.evaluated,
   ]);
   for (const s of SUBJECTS) {
     ok.add(t.subjects[s.dir]);
+    ok.add(t.evaluatedBy[s.dir]);
     if (t.picks[s.dir] !== null) {
       ok.add(t.picks[s.dir]);
       ok.add(t.subjects[s.dir] - t.picks[s.dir]);   // おすすめページの「残りの◯◯◯冊」

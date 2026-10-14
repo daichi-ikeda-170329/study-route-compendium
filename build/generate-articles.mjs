@@ -482,7 +482,7 @@ ${keys.map(k => {
         + `<td>${(n / total * 100).toFixed(1)}%</td>`
         + `<td><span class="hbar" style="--w:${max ? Math.round(n / max * 100) : 0}%" aria-hidden="true"></span></td></tr>`;
     }).join('\n')}
-          </tbody>`, c.caption || `${SUBJECTS.filter(s => (c.dirs || [c.dir || dir]).includes(s.dir)).map(s => s.ja).join('・')}の収録 ${total.toLocaleString('en-US')} 冊を数えたもの。`);
+          </tbody>`, c.caption || `${SUBJECTS.filter(s => (c.dirs || [c.dir || dir]).includes(s.dir)).map(s => s.ja).join('・')}の${by === 'diff' ? '難易度を付けた' : '収録'} ${total.toLocaleString('en-US')} 冊を数えたもの。`);
   }
 
   /* 役割ごとの冊数と想定学習時間。1 科目のなかで「どこに本が多いか」を見せる。
