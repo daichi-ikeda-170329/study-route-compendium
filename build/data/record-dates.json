@@ -270,7 +270,7 @@
    "d": "2026-09-28"
   },
   "english/database": {
-   "h": "c409d7d72c5c",
+   "h": "074f1b5b5bd5",
    "d": "2026-10-14"
   },
   "english/discourse": {
@@ -730,7 +730,7 @@
    "d": "2026-10-14"
   },
   "english/leap-basic": {
-   "h": "c4b01f2ba41b",
+   "h": "424e135d32b5",
    "d": "2026-10-14"
   },
   "english/linga": {
@@ -1150,8 +1150,8 @@
    "d": "2026-09-28"
   },
   "english/ultimate600": {
-   "h": "b125724d111d",
-   "d": "2026-09-28"
+   "h": "066751a66b8e",
+   "d": "2026-10-14"
   },
   "english/upgrade": {
    "h": "acf981ea3717",
@@ -2262,12 +2262,12 @@
    "d": "2026-09-28"
   },
   "japanese/kiso-kogi-nakano": {
-   "h": "a5f0dc7ef3a3",
+   "h": "fc8d79fe0dff",
    "d": "2026-10-14"
   },
   "japanese/kiso-seikou-g": {
-   "h": "1a28ebca782c",
-   "d": "2026-09-28"
+   "h": "0b72ca5be3bd",
+   "d": "2026-10-14"
   },
   "japanese/kiso-seikou-k": {
    "h": "e80315e88050",
@@ -2914,7 +2914,7 @@
    "d": "2026-09-28"
   },
   "math/bunkei-jissen": {
-   "h": "0c1a5d396d87",
+   "h": "e26cd117c94b",
    "d": "2026-10-14"
   },
   "math/bunkei-juyo": {
@@ -3158,7 +3158,7 @@
    "d": "2026-09-28"
   },
   "math/kuro-hon": {
-   "h": "0e63a9ccabd3",
+   "h": "6f1b2adbfa32",
    "d": "2026-10-14"
   },
   "math/kyodai-bunkei-sugaku-25kanen": {
@@ -3218,7 +3218,7 @@
    "d": "2026-09-28"
   },
   "math/master-seisu": {
-   "h": "43a4f522049b",
+   "h": "96aae9009707",
    "d": "2026-10-14"
   },
   "math/matsuda-160": {
@@ -3542,7 +3542,7 @@
    "d": "2026-09-20"
   },
   "report:data-quality": {
-   "h": "f648346842c5",
+   "h": "9b5ca11e5d0b",
    "d": "2026-10-14"
   },
   "science/access-note-kagaku": {
@@ -3750,7 +3750,7 @@
    "d": "2026-09-28"
   },
   "science/hiden-output": {
-   "h": "ff77845a9d55",
+   "h": "eb1358d377e2",
    "d": "2026-10-14"
   },
   "science/hiden-rikigaku": {
@@ -4198,7 +4198,7 @@
    "d": "2026-09-28"
   },
   "science/lead-alpha-seibutsu": {
-   "h": "25dbbef76b33",
+   "h": "a232253abb39",
    "d": "2026-10-14"
   },
   "science/lead-light-butsuri": {
@@ -4970,7 +4970,7 @@
    "d": "2026-09-28"
   },
   "science/urushibara-meikai": {
-   "h": "7426c43607ae",
+   "h": "d8c10044e480",
    "d": "2026-10-14"
   },
   "science/urushibara-rikigaku": {
@@ -5546,7 +5546,7 @@
    "d": "2026-09-28"
   },
   "social/chiri-shuchu-kogi": {
-   "h": "1513776445b0",
+   "h": "2f30af770eab",
    "d": "2026-10-14"
   },
   "social/chiri-speedmaster": {
@@ -6566,11 +6566,11 @@
    "d": "2026-09-28"
   },
   "subject/english": {
-   "h": "d77b77e9f6e8",
+   "h": "1d1af96bc08c",
    "d": "2026-10-14"
   },
   "subject/japanese": {
-   "h": "6eeb0f67e79d",
+   "h": "25ab364634f4",
    "d": "2026-10-14"
   },
   "subject/joho": {
@@ -6578,11 +6578,11 @@
    "d": "2026-09-20"
   },
   "subject/math": {
-   "h": "7cbfefbdd37e",
+   "h": "9d9e7ee86f4f",
    "d": "2026-10-14"
   },
   "subject/science": {
-   "h": "803f4ca651cf",
+   "h": "577975896b07",
    "d": "2026-10-14"
   },
   "subject/shoron": {
@@ -6590,15 +6590,15 @@
    "d": "2026-09-20"
   },
   "subject/social": {
-   "h": "bcee137b07eb",
+   "h": "242311e493e9",
    "d": "2026-10-14"
   },
   "top/english": {
-   "h": "efaf9adb5ca5",
+   "h": "087129227454",
    "d": "2026-10-14"
   },
   "top/japanese": {
-   "h": "3135c14fa353",
+   "h": "588ca9db8a62",
    "d": "2026-10-14"
   },
   "top/joho": {
@@ -6606,11 +6606,11 @@
    "d": "2026-09-03"
   },
   "top/math": {
-   "h": "4064533070f9",
+   "h": "2ab9f28390b3",
    "d": "2026-10-14"
   },
   "top/science": {
-   "h": "85c23f44208a",
+   "h": "69e4ee20f186",
    "d": "2026-10-14"
   },
   "top/shoron": {
@@ -6618,7 +6618,7 @@
    "d": "2026-09-03"
   },
   "top/social": {
-   "h": "24dd211bffa3",
+   "h": "bdf0849c585b",
    "d": "2026-10-14"
   },
   "univ/aichi": {
