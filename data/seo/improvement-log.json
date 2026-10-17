@@ -59,6 +59,34 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "keyword": "原点からの化学 レベル",
+      "targetPath": "/science/books/genten-riron/",
+      "status": "observing",
+      "nextReviewDate": "2026-10-25",
+      "actions": [
+        {
+          "date": "2026-10-18",
+          "rankAtAction": 4.2,
+          "rankSource": "gsc-ui",
+          "rankNote": "直近 28 日（09-17〜10-14）の平均掲載順位。表示 29・クリック 0。同じシリーズ名の検索は合計 表示 80・クリック 4（「原点からの化学 難易度」表示 18・6.9 位・クリック 0、「原点からの化学」表示 16・17.6 位）",
+          "needs": "「原点からの化学」シリーズを使うか、どの巻から使うかを決めたい難関大志望の受験生が、シリーズのレベルと5冊の役割分担を知りたい。",
+          "gap": [
+            "検索結果の 4 位前後に出ているのに、ページはシリーズの理論編 1 冊の説明だけで、シリーズのレベルや他の巻との分担に答えていなかった",
+            "「計算」「有機化学」など他の巻の名前を含む検索も理論編に来ていた"
+          ],
+          "done": "data/subjects/science/books.json の genten-riron の desc に、シリーズが 5 冊（理論・無機・有機・計算・発想法）であること、出版社が 5 冊とも中級・上級に分類していること、計算と無機・有機をどの巻が受け持つかを足した。同時に、同じシリーズの他 4 冊の誤り（計算編の約150題、発想法を演習書としていた点、無機の約15章）を公式ページに合わせて直した（90938625d）。",
+          "sources": [
+            "https://www.sundaibunko.jp/contents/book/15180/",
+            "https://www.sundaibunko.jp/contents/book/4002/",
+            "https://www.sundaibunko.jp/contents/book/1013/",
+            "https://www.sundaibunko.jp/contents/book/1017/",
+            "https://www.sundaibunko.jp/contents/book/1006/"
+          ]
+        }
+      ],
+      "reviews": []
     }
   ]
 }
