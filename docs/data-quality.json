@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-14",
+ "generatedAt": "2026-10-17",
  "total": 1432,
  "byStatus": {
   "verified": 402,
@@ -123,18 +123,18 @@
   },
   "math": {
    "toc": 2,
-   "howto": 8,
-   "finish": 8,
+   "howto": 9,
+   "finish": 9,
    "editions": 8,
-   "pages": 17,
+   "pages": 18,
    "media": 1
   },
   "science": {
    "toc": 4,
-   "howto": 10,
-   "finish": 10,
-   "editions": 10,
-   "pages": 22,
+   "howto": 17,
+   "finish": 17,
+   "editions": 16,
+   "pages": 28,
    "media": 1
   },
   "social": {

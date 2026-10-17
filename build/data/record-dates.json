@@ -3482,7 +3482,7 @@
    "d": "2026-10-14"
   },
   "math/shinzui-v": {
-   "h": "dd1b966f83c8",
+   "h": "0901f8a100de",
    "d": "2026-10-17"
   },
   "math/shiritsu-idai": {
@@ -3650,8 +3650,8 @@
    "d": "2026-10-14"
   },
   "report:data-quality": {
-   "h": "078816aef9a0",
-   "d": "2026-10-14"
+   "h": "cec5ff34281a",
+   "d": "2026-10-17"
   },
   "science/access-note-kagaku": {
    "h": "dbfa66ac97d6",
@@ -3762,15 +3762,15 @@
    "d": "2026-10-14"
   },
   "science/genten-hasso": {
-   "h": "0dfdecac5518",
+   "h": "aa878a206e38",
    "d": "2026-10-17"
   },
   "science/genten-keisan": {
-   "h": "521e0db3ab6f",
+   "h": "746c688dc95c",
    "d": "2026-10-17"
   },
   "science/genten-muki": {
-   "h": "22b529e97241",
+   "h": "3510e8b00a41",
    "d": "2026-10-17"
   },
   "science/genten-riron": {
@@ -3778,7 +3778,7 @@
    "d": "2026-10-17"
   },
   "science/genten-yuki": {
-   "h": "76501fad8884",
+   "h": "c47f246d8390",
    "d": "2026-10-17"
   },
   "science/golden-route-kiso": {
@@ -4626,11 +4626,11 @@
    "d": "2026-10-14"
   },
   "science/rikei-hyojun": {
-   "h": "69e87e82e0d3",
+   "h": "2ef6869f12f1",
    "d": "2026-10-17"
   },
   "science/rikei-hyojun-seibutsu": {
-   "h": "84d2c298a296",
+   "h": "534fed835552",
    "d": "2026-10-17"
   },
   "science/rikei-jokyu-seibutsu": {
@@ -5114,7 +5114,7 @@
    "d": "2026-10-14"
   },
   "science/urushibara-kaiho-kenkyu": {
-   "h": "abdb37d9d543",
+   "h": "59e890084f02",
    "d": "2026-10-17"
   },
   "science/urushibara-meikai": {
@@ -6746,11 +6746,11 @@
    "d": "2026-09-20"
   },
   "subject/math": {
-   "h": "86b1ba48574a",
+   "h": "fa5daca36737",
    "d": "2026-10-17"
   },
   "subject/science": {
-   "h": "856453f1b300",
+   "h": "1b83810f6402",
    "d": "2026-10-17"
   },
   "subject/shoron": {
@@ -6774,11 +6774,11 @@
    "d": "2026-09-03"
   },
   "top/math": {
-   "h": "fbe8f3739005",
+   "h": "096d8d8fd2c1",
    "d": "2026-10-17"
   },
   "top/science": {
-   "h": "ba76e742745c",
+   "h": "b280ad46bd05",
    "d": "2026-10-17"
   },
   "top/shoron": {
