@@ -1,0 +1,4 @@
+# security-scan（gitleaks）の誤検知。2026-10-18 に値を伏せたまま中身を確認: build/data のファイルハッシュ（秘密情報ではない）
+138e0f6800cb8714439f2f96c13212988951fa39:build/data/ogp-hashes.json:generic-api-key:264
+f7402cf88d1393c02d764fe1bbbe1da5b1c27d44:build/data/subject-snapshot.json:generic-api-key:302
+f7402cf88d1393c02d764fe1bbbe1da5b1c27d44:build/data/subject-snapshot.json:generic-api-key:303
