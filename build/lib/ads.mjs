@@ -10,6 +10,8 @@
 
 /** AdSense のパブリッシャー ID（例 "ca-pub-1234567890123456"）。空なら広告を出さない */
 export const ADSENSE_CLIENT = 'ca-pub-4704595822429716';
+/** 承認前は所有権の確認だけにする。承認後は apply-adsense.mjs <ID> で有効化する。 */
+export const ADSENSE_SERVING = false;
 
 /**
  * 手動で貼る広告ユニットのスロット ID。AdSense の管理画面で
@@ -25,14 +27,17 @@ export const AD_SLOTS = {
 export const ADSENSE = Boolean(ADSENSE_CLIENT);
 
 /**
- * AdSense のローダー。全ページの <head> に静的に置く。
+ * 所有権の確認用メタタグと、広告配信中だけ出すローダー。
  *
- * 審査時、Google のクローラーは HTML そのものからこのタグを探す。
- * JS で後から差し込む形にすると検出されないことがあるため、必ず静的に書き出す。
+ * 所有権は Google 公式のメタタグ方式で確認できる。承認前は大きな広告
+ * スクリプトを読み込まず、メタタグと ads.txt を静的に残す。
  */
-export function adsenseLoader() {
+export function adsenseLoader(serving = ADSENSE_SERVING) {
   if (!ADSENSE) return '';
+  const verification = `<meta name="google-adsense-account" content="${ADSENSE_CLIENT}">`;
+  if (!serving) return `<!-- Google AdSense -->\n${verification}`;
   return `<!-- Google AdSense -->
+${verification}
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></` + `script>`;
 }
 
@@ -56,7 +61,7 @@ export function adsenseLoader() {
  */
 export function adUnit(key, indent = '    ') {
   const slot = AD_SLOTS[key];
-  if (!ADSENSE || !slot) return '';
+  if (!ADSENSE || !ADSENSE_SERVING || !slot) return '';
   const i = indent;
   /* 遅延読み込み。ファーストビューの外に置く枠だけを対象にする
      （inArticle も bottom も本文の途中以降なので、どちらも該当する） */

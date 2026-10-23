@@ -216,17 +216,25 @@ node build/generate-books.mjs && node build/generate-index.mjs \
 「読まれるだけ」で収益が立つ一方、単価は低い（一般に 1,000 表示あたり数十〜数百円）。
 参考書の紹介リンク（Amazon・楽天）とは併用できる。
 
-### 状態は ID 1 つで決まる
+### ID と広告配信の状態
 
 アフィリエイト ID と同じ考え方で、**ID が入っていないあいだは広告も広告の表記も一切出力しない**。
 `build/lib/ads.mjs` の `ADSENSE_CLIENT` が空なら、生成されるページに AdSense 由来の記述は 1 文字も残らない。
 
 ID の置き場は 3 種類ある（生成側の定数・手書き HTML の `<head>`・手書き HTML の `CONFIG`）。
 手で書き換えると必ずどれかが取り残されるので、**書き換えは `build/apply-adsense.mjs` に集約する。**
+科目の `CONFIG` の正本は `data/subjects/<科目>/config.json` である。
+
+2026-10-23 時点では未承認のため、`ADSENSE_SERVING = false` として
+所有権確認のメタタグと `ads.txt` だけを残している。広告を出せない間の
+スクリプトの読み込みを避ける設定であり、審査の申請や承認とは別である。
+[Google 公式のサイト接続手順](https://support.google.com/adsense/answer/7584263?hl=ja)に
+メタタグによる確認方法がある。承認後は通常の有効化コマンドで広告配信を再開する。
 
 ```bash
 node build/apply-adsense.mjs --check                    # いまの状態を全箇所ぶん表示する
 node build/apply-adsense.mjs ca-pub-1234567890123456    # 有効にする
+node build/apply-adsense.mjs ca-pub-1234567890123456 --verify-only # 所有権の確認だけ
 node build/apply-adsense.mjs --off                      # 取り消す（ads.txt も消える）
 
 # 広告ユニットを作ったあとにスロット ID を入れる
@@ -240,15 +248,15 @@ node build/apply-adsense.mjs ca-pub-1234567890123456 \
 
 | 箇所 | 未設定 | 設定済み |
 |---|---|---|
-| 全ページの `<head>` | 何も入らない | AdSense のローダーを静的に出力 |
-| 本文中・本文末の広告枠 | 出さない | スロット ID がある枠だけ出す |
+| 全ページの `<head>` | 何も入らない | メタタグを静的に出力し、配信中だけローダーを追加 |
+| 本文中・本文末の広告枠 | 出さない | 配信中かつスロット ID がある枠だけ出す |
 | ページ最上部の PR バー | アフィリエイトの文だけ | 第三者配信広告の一文を追加（手書き HTML の静的な PR バーも `apply-adsense.mjs` が書き換える） |
 | プライバシーポリシー | AdSense の節を出さない | Cookie・パーソナライズ広告の停止方法を明記 |
 | 「広告について」 | AdSense の節を出さない | 第三者配信であることを明記 |
 | `ads.txt` | 存在しない | `google.com, pub-…, DIRECT, f08c47fec0942fa0` |
 
-ローダーは JS で差し込まず、**HTML に静的に書き出す**。審査時の Google のクローラーは
-HTML そのものからこのタグを探すため、動的に足すと検出されないことがある。
+確認用メタタグと、配信を有効にしたときのローダーは **HTML に静的に書き出す**。
+所有権の確認はメタタグか ads.txt でも行えるので、未承認時にローダーを配る必要はない。
 
 PR バーの文言は「掲載しています」ではなく**「掲載することがあります」**にしてある。
 審査の通過前や、広告ユニットを 1 つも置いていない状態では実際に広告が出ないため、

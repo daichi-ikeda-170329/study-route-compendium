@@ -1,0 +1,340 @@
+{
+  "note": "2026-10-23 の localhost mobile 計測。改修前1回、改修後3回の中央値。広告所有権確認メタタグを残して未承認時のスクリプトを停止。実ユーザーの計測ではない。改修後は baseCommit に未コミット差分を適用した状態。",
+  "before": {
+    "schemaVersion": 1,
+    "collectedAt": "2026-10-23T06:42:17.324Z",
+    "commit": null,
+    "lighthouseVersion": "13.5.0",
+    "chromeVersion": "Google Chrome 155.0.8059.85",
+    "target": "localhost (build/serve.mjs, .)",
+    "baseUrl": "http://127.0.0.1:4173",
+    "formFactor": "mobile",
+    "throttling": "simulate (lighthouse mobile default)",
+    "thirdParty": "allowed",
+    "runs": 1,
+    "pages": [
+      {
+        "path": "/science/books/jokyu-seiko/",
+        "url": "http://127.0.0.1:4173/science/books/jokyu-seiko/",
+        "runs": [
+          {
+            "performance": 70,
+            "accessibility": 100,
+            "bestPractices": 77,
+            "seo": 100,
+            "lcpMs": 2396.0705999999996,
+            "fcpMs": 1066.0114,
+            "cls": 0.002213923755441616,
+            "tbtMs": 2062.0423000000005,
+            "speedIndexMs": 1579.290388482305,
+            "ttiMs": 6844.72037,
+            "transferBytes": 1941149
+          }
+        ],
+        "median": {
+          "performance": 70,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 2396.071,
+          "fcpMs": 1066.011,
+          "cls": 0.002,
+          "tbtMs": 2062.042,
+          "speedIndexMs": 1579.29,
+          "ttiMs": 6844.72,
+          "transferBytes": 1941149
+        },
+        "failedBestPractices": [
+          {
+            "id": "third-party-cookies",
+            "title": "Uses third-party cookies",
+            "score": 0
+          },
+          {
+            "id": "inspector-issues",
+            "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+            "score": 0
+          }
+        ],
+        "diagnostics": {
+          "lcpElement": "<p class=\"bk-desc\">",
+          "lcpSelector": "article > div.bk-hero > div.bk-hero__body > p.bk-desc",
+          "lcpBreakdown": [
+            {
+              "label": "Time to first byte",
+              "ms": 7.7
+            },
+            {
+              "label": "Element render delay",
+              "ms": 237.1
+            }
+          ],
+          "opportunities": [
+            {
+              "id": "unminified-javascript",
+              "title": "Minify JavaScript",
+              "savingsMs": 160
+            },
+            {
+              "id": "unused-css-rules",
+              "title": "Reduce unused CSS",
+              "savingsMs": 160
+            },
+            {
+              "id": "unused-javascript",
+              "title": "Reduce unused JavaScript",
+              "savingsMs": 160
+            }
+          ]
+        }
+      },
+      {
+        "path": "/",
+        "url": "http://127.0.0.1:4173/",
+        "runs": [
+          {
+            "performance": 79,
+            "accessibility": 100,
+            "bestPractices": 77,
+            "seo": 100,
+            "lcpMs": 3478.927856357842,
+            "fcpMs": 1226.8288093929737,
+            "cls": 0.018408769929008126,
+            "tbtMs": 416,
+            "speedIndexMs": 4051.9206210955895,
+            "ttiMs": 6198.446712715683,
+            "transferBytes": 2016643
+          }
+        ],
+        "median": {
+          "performance": 79,
+          "accessibility": 100,
+          "bestPractices": 77,
+          "seo": 100,
+          "lcpMs": 3478.928,
+          "fcpMs": 1226.829,
+          "cls": 0.018,
+          "tbtMs": 416,
+          "speedIndexMs": 4051.921,
+          "ttiMs": 6198.447,
+          "transferBytes": 2016643
+        },
+        "failedBestPractices": [
+          {
+            "id": "third-party-cookies",
+            "title": "Uses third-party cookies",
+            "score": 0
+          },
+          {
+            "id": "inspector-issues",
+            "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+            "score": 0
+          }
+        ],
+        "diagnostics": {
+          "lcpElement": "<p class=\"lead\">",
+          "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+          "lcpBreakdown": [
+            {
+              "label": "Time to first byte",
+              "ms": 8.9
+            },
+            {
+              "label": "Element render delay",
+              "ms": 2160
+            }
+          ],
+          "opportunities": [
+            {
+              "id": "unused-javascript",
+              "title": "Reduce unused JavaScript",
+              "savingsMs": 430
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "after": {
+    "schemaVersion": 1,
+    "collectedAt": "2026-10-23T06:51:38.156Z",
+    "commit": null,
+    "lighthouseVersion": "13.5.0",
+    "chromeVersion": "Google Chrome 155.0.8059.85",
+    "target": "localhost (build/serve.mjs, .)",
+    "baseUrl": "http://127.0.0.1:4173",
+    "formFactor": "mobile",
+    "throttling": "simulate (lighthouse mobile default)",
+    "thirdParty": "allowed",
+    "runs": 3,
+    "pages": [
+      {
+        "path": "/science/books/jokyu-seiko/",
+        "url": "http://127.0.0.1:4173/science/books/jokyu-seiko/",
+        "runs": [
+          {
+            "performance": 96,
+            "accessibility": 100,
+            "bestPractices": 100,
+            "seo": 100,
+            "lcpMs": 1547.2929,
+            "fcpMs": 1052.2929,
+            "cls": 0.002213923755441616,
+            "tbtMs": 200.7312750000001,
+            "speedIndexMs": 1052.2929,
+            "ttiMs": 4095.3657975000006,
+            "transferBytes": 1664178
+          },
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "bestPractices": 100,
+            "seo": 100,
+            "lcpMs": 1651.201,
+            "fcpMs": 1051.201,
+            "cls": 0.002324929632939848,
+            "tbtMs": 39.5,
+            "speedIndexMs": 1051.201,
+            "ttiMs": 4208.22785,
+            "transferBytes": 1666041
+          },
+          {
+            "performance": 99,
+            "accessibility": 100,
+            "bestPractices": 100,
+            "seo": 100,
+            "lcpMs": 1652.1094,
+            "fcpMs": 1052.1094,
+            "cls": 0.0024748015430742405,
+            "tbtMs": 106.00000000000023,
+            "speedIndexMs": 1052.1094,
+            "ttiMs": 4214.25417,
+            "transferBytes": 1664227
+          }
+        ],
+        "median": {
+          "performance": 99,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcpMs": 1651.201,
+          "fcpMs": 1052.109,
+          "cls": 0.002,
+          "tbtMs": 106,
+          "speedIndexMs": 1052.109,
+          "ttiMs": 4208.228,
+          "transferBytes": 1664227
+        },
+        "failedBestPractices": [],
+        "diagnostics": {
+          "lcpElement": "<p class=\"bk-desc\">",
+          "lcpSelector": "article > div.bk-hero > div.bk-hero__body > p.bk-desc",
+          "lcpBreakdown": [
+            {
+              "label": "Time to first byte",
+              "ms": 4.1
+            },
+            {
+              "label": "Element render delay",
+              "ms": 109.3
+            }
+          ],
+          "opportunities": [
+            {
+              "id": "unminified-javascript",
+              "title": "Minify JavaScript",
+              "savingsMs": 150
+            },
+            {
+              "id": "unused-css-rules",
+              "title": "Reduce unused CSS",
+              "savingsMs": 150
+            }
+          ]
+        }
+      },
+      {
+        "path": "/",
+        "url": "http://127.0.0.1:4173/",
+        "runs": [
+          {
+            "performance": 99,
+            "accessibility": 100,
+            "bestPractices": 100,
+            "seo": 100,
+            "lcpMs": 1443.714386673137,
+            "fcpMs": 1143.714386673137,
+            "cls": 0.019002087795433543,
+            "tbtMs": 104,
+            "speedIndexMs": 1143.714386673137,
+            "ttiMs": 3909.6689000485276,
+            "transferBytes": 1729615
+          },
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "bestPractices": 100,
+            "seo": 100,
+            "lcpMs": 1351.6203583702465,
+            "fcpMs": 1003.8101791851233,
+            "cls": 0.019002087795433543,
+            "tbtMs": 88.99999999999989,
+            "speedIndexMs": 1003.8101791851233,
+            "ttiMs": 4234.475971036356,
+            "transferBytes": 1729614
+          },
+          {
+            "performance": 100,
+            "accessibility": 100,
+            "bestPractices": 100,
+            "seo": 100,
+            "lcpMs": 1351.6951079134203,
+            "fcpMs": 1002.8475539567102,
+            "cls": 0.01843091573998034,
+            "tbtMs": 63,
+            "speedIndexMs": 1002.8475539567102,
+            "ttiMs": 3981.265363307364,
+            "transferBytes": 1729608
+          }
+        ],
+        "median": {
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcpMs": 1351.695,
+          "fcpMs": 1003.81,
+          "cls": 0.019,
+          "tbtMs": 89,
+          "speedIndexMs": 1003.81,
+          "ttiMs": 3981.265,
+          "transferBytes": 1729614
+        },
+        "failedBestPractices": [],
+        "diagnostics": {
+          "lcpElement": "<p class=\"lead\">",
+          "lcpSelector": "div.hero > div.hero__grid > div.hero__main > p.lead",
+          "lcpBreakdown": [
+            {
+              "label": "Time to first byte",
+              "ms": 2.1
+            },
+            {
+              "label": "Element render delay",
+              "ms": 75
+            }
+          ],
+          "opportunities": [
+            {
+              "id": "unminified-javascript",
+              "title": "Minify JavaScript",
+              "savingsMs": 150
+            }
+          ]
+        }
+      }
+    ],
+    "baseCommit": "09cd47f27a3bd1c6c7fcd9cdca034a80818e5e53",
+    "uncommittedChanges": true
+  }
+}

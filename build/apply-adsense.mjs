@@ -2,6 +2,7 @@
  * Google AdSense の ID を、サイト全体へ一度に反映する。
  *
  *   node build/apply-adsense.mjs ca-pub-1234567890123456     # 有効にする
+ *   node build/apply-adsense.mjs ca-pub-… --verify-only      # 所有権の確認だけ（承認前）
  *   node build/apply-adsense.mjs ca-pub-… --in-article=1234567890 --bottom=9876543210
  *   node build/apply-adsense.mjs --off                       # 取り消す
  *   node build/apply-adsense.mjs --check                     # いまの状態を見る
@@ -17,7 +18,7 @@ import { fileURLToPath } from 'url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-/** ID を書き込む手書き HTML。CONFIG を持たない 404 は <head> だけ */
+/** ID を書き込む手書き HTML。科目の CONFIG は data/subjects/ にある。 */
 const HTML = [
   { file: 'index.html',          config: true },
   { file: 'english/index.html',  config: true },
@@ -25,6 +26,8 @@ const HTML = [
   { file: 'math/index.html',     config: true },
   { file: 'science/index.html',  config: true },
   { file: 'social/index.html',   config: true },
+  { file: 'joho/index.html',     config: true },
+  { file: 'shoron/index.html',   config: true },
   { file: '404.html',            config: false },
 ];
 
@@ -32,9 +35,10 @@ const ADS_MJS = 'build/lib/ads.mjs';
 const ADS_TXT = 'ads.txt';
 const GA_MARK = '<!-- Google アナリティクス 4 -->';
 /** <head> に静的に置くローダー。審査時のクローラーが HTML から直接探すため JS で作らない */
-const loaderBlock = id =>
-  `<!-- Google AdSense -->\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${id}" crossorigin="anonymous"></script>\n`;
-const LOADER_RE = /<!-- Google AdSense -->\n<script async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=[^"]*" crossorigin="anonymous"><\/script>\n/g;
+const loaderBlock = (id, verifyOnly) =>
+  `<!-- Google AdSense -->\n<meta name="google-adsense-account" content="${id}">\n`
+  + (verifyOnly ? '' : `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${id}" crossorigin="anonymous"></script>\n`);
+const LOADER_RE = /<!-- Google AdSense -->\n(?:<meta name="google-adsense-account" content="[^"]*">\n)?(?:<script async src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=[^"]*" crossorigin="anonymous"><\/script>\n)?/g;
 
 /**
  * 手書き HTML の PR バーに足す一文。生成ページ側（parts.mjs の prBarText）と同じ文言にする。
@@ -47,11 +51,13 @@ const PR_BAR_RE = /(<aside class="pr-bar" id="prBar"[^>]*>)([\s\S]*?)(<\/aside>)
 
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
+const configFile = h => h.file.includes('/') ? `data/subjects/${h.file.split('/')[0]}/config.json` : null;
 
 /* ---------- 引数 ---------- */
 const args = process.argv.slice(2);
 const opt = k => (args.find(a => a.startsWith(`--${k}=`)) || '').split('=')[1] || '';
 const off = args.includes('--off');
+const verifyOnly = args.includes('--verify-only');
 const check = args.includes('--check');
 const id = args.find(a => a.startsWith('ca-pub-')) || '';
 
@@ -73,15 +79,21 @@ for (const [k, v] of [['in-article', opt('in-article')], ['bottom', opt('bottom'
 /* ---------- 現状の確認 ---------- */
 if (check) {
   const cur = (read(ADS_MJS).match(/ADSENSE_CLIENT = '([^']*)'/) || [, ''])[1];
+  const serving = /ADSENSE_SERVING = true/.test(read(ADS_MJS));
   const slots = read(ADS_MJS).match(/inArticle: '([^']*)',[\s\S]*?bottom: '([^']*)'/) || [, '', ''];
   console.log(`ads.mjs の ADSENSE_CLIENT : ${cur || '(未設定)'}`);
+  console.log(`  広告スクリプトの配信    : ${serving ? '有効' : '無効（所有権の確認のみ）'}`);
   console.log(`  広告ユニット inArticle  : ${slots[1] || '(未設定 — 自動広告のみ)'}`);
   console.log(`  広告ユニット bottom     : ${slots[2] || '(未設定 — 自動広告のみ)'}`);
   for (const h of HTML) {
     const s = read(h.file);
     const head = (s.match(/adsbygoogle\.js\?client=([^"]*)/) || [, ''])[1];
-    const conf = h.config ? (s.match(/adsenseId:\s*"([^"]*)"/) || [, ''])[1] : '—';
-    console.log(`${h.file.padEnd(20)} head: ${(head || '(なし)').padEnd(26)} CONFIG: ${conf || '(空)'}`);
+    const meta = (s.match(/name="google-adsense-account" content="([^"]*)"/) || [, ''])[1];
+    const dataFile = configFile(h);
+    const conf = !h.config ? '—' : dataFile
+      ? JSON.parse(read(dataFile)).config.adsenseId
+      : (s.match(/adsenseId:\s*"([^"]*)"/) || [, ''])[1];
+    console.log(`${h.file.padEnd(20)} script: ${head ? '有効' : '無し'} meta: ${meta ? '有り' : '無し'} CONFIG: ${conf || '(空)'}`);
   }
   console.log(`${ADS_TXT.padEnd(20)} ${fs.existsSync(path.join(ROOT, ADS_TXT)) ? read(ADS_TXT).trim() : '(なし)'}`);
   process.exit(0);
@@ -92,6 +104,7 @@ const changed = [];
 
 let ads = read(ADS_MJS);
 ads = ads.replace(/ADSENSE_CLIENT = '[^']*'/, `ADSENSE_CLIENT = '${off ? '' : id}'`);
+ads = ads.replace(/ADSENSE_SERVING = (?:true|false)/, `ADSENSE_SERVING = ${!off && !verifyOnly}`);
 if (off) {
   ads = ads.replace(/inArticle: '[^']*'/, `inArticle: ''`).replace(/bottom: '[^']*'/, `bottom: ''`);
 } else {
@@ -109,9 +122,15 @@ for (const h of HTML) {
       console.error(`${h.file} に ${GA_MARK} が無い。挿入位置が見つからないので中断する。`);
       process.exit(1);
     }
-    s = s.replace(GA_MARK, loaderBlock(id) + GA_MARK);
+    s = s.replace(GA_MARK, loaderBlock(id, verifyOnly) + GA_MARK);
   }
   if (h.config) s = s.replace(/adsenseId:(\s*)"[^"]*"/, `adsenseId:$1"${off ? '' : id}"`);
+  const dataFile = configFile(h);
+  if (dataFile) {
+    const source = read(dataFile);
+    const next = source.replace(/"adsenseId":(\s*)"[^"]*"/, `"adsenseId":$1"${off ? '' : id}"`);
+    if (next !== source) { write(dataFile, next); changed.push(dataFile); }
+  }
   if (PR_BAR_RE.test(s)) {
     s = s.replace(PR_BAR_RE, (m, open, body, close) => {
       const base = body.replace(PR_SENTENCE, '');
@@ -131,15 +150,12 @@ if (off) {
   changed.push(ADS_TXT);
 }
 
-console.log(off ? 'AdSense の設定を取り消した。' : `AdSense の ID を ${id} に設定した。`);
+console.log(off ? 'AdSense の設定を取り消した。' : `AdSense を${verifyOnly ? '所有権の確認のみ' : '広告配信'}に設定した。`);
 console.log(changed.map(f => `  - ${f}`).join('\n'));
 console.log(`
 次にやること:
   1) 生成ページを作り直す
-     node build/generate-books.mjs && node build/generate-index.mjs \\
-       && node build/generate-picks.mjs && node build/generate-routes.mjs \\
-       && node build/generate-articles.mjs && node build/generate-search.mjs \\
-       && node build/generate-sitemap.mjs
-  2) node --test test/
-  3) git add -A && git commit && git push（GitHub Pages へ反映される）
+     npm run build
+  2) npm run check:data && npm test && npm run check:site && npm run check:counts
+  3) 今回の変更だけをコミットし、通常の push で GitHub Pages へ反映する
   4) node build/apply-adsense.mjs --check で全箇所に入ったか確認`);

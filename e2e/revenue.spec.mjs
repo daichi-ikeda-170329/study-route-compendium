@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { waitForApp } from './helpers.mjs';
+import { ADSENSE_SERVING } from '../build/lib/ads.mjs';
 
 // 実店舗へアクセスせず、通常のクリックで出る開発用イベントを確かめる。
 test.beforeEach(async ({ page }) => {
@@ -23,6 +24,21 @@ function destination(href) {
   expect(dest.searchParams.get('g')).toBe('001');
   return dest.searchParams.get('sitem');
 }
+
+test('所有権の確認だけの状態では、広告スクリプトを要求せずサイトを使える', async ({ page }) => {
+  test.skip(ADSENSE_SERVING, '広告配信を有効にした環境では対象外');
+  const ads = [];
+  page.on('request', request => {
+    if (/googlesyndication\.com.*adsbygoogle\.js/.test(request.url())) ads.push(request.url());
+  });
+  for (const url of ['/', '/science/', '/science/books/jokyu-seiko/']) {
+    await page.goto(url);
+    await waitForApp(page);
+    await expect(page.locator('meta[name="google-adsense-account"]')).toHaveAttribute('content', /^ca-pub-\d{16}$/);
+    await expect(page.locator('h1')).toBeVisible();
+  }
+  expect(ads).toEqual([]);
+});
 
 test('書籍の購入先が最初の画面にあり、上下の購入クリックを重複なく区別する', async ({ page }) => {
   await page.goto('/science/books/jokyu-seiko/');
