@@ -64,6 +64,18 @@ test('2 冊比較で選んだ本の店舗と購入クリックを計測する', 
   ]);
 });
 
+test('月刊誌は書籍に限定せず、雑誌ジャンルと誌名で探せる', async ({ page }) => {
+  for (const url of ['/math/books/gekkan-daisu/', '/compare/?a=math:gekkan-daisu&b=math:ao']) {
+    await page.goto(url);
+    const buy = page.locator('a[data-rt-buy="rakuten"]').first();
+    await expect(buy).toBeVisible();
+    const dest = new URL(new URL(await buy.getAttribute('href')).searchParams.get('pc'));
+    expect(dest.hostname).toBe('books.rakuten.co.jp');
+    expect(dest.searchParams.get('g')).toBe('007');
+    expect(dest.searchParams.get('sitem')).toBe('大学への数学');
+  }
+});
+
 test('全 7 科目の図鑑で、開いた本の購入クリックを 1 回だけ計測する', async ({ page }) => {
   for (const subject of ['english', 'japanese', 'math', 'science', 'social', 'joho', 'shoron']) {
     await page.goto(`/${subject}/#catalog`);

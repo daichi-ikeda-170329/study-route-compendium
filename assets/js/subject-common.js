@@ -131,8 +131,10 @@
   /** 楽天ブックスの検索結果。id は楽天アフィリエイト ID。未設定なら null（リンクを出さない） */
   function rakutenURL(b, id){
     if(!id) return null;
-    const query = b.recordType === "routePlaceholder" ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
-    const dest = `https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(query)}&g=001`;
+    const magazine = /月刊|雑誌|定期刊行/.test(b.style || "");
+    const query = magazine ? b.name.replace(/^月刊\s*/, "")
+      : b.recordType === "routePlaceholder" ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
+    const dest = `https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(query)}&g=${magazine ? '007' : '001'}`;
     return `https://hb.afl.rakuten.co.jp/hgc/${id}/?pc=${encodeURIComponent(dest)}&m=${encodeURIComponent(dest)}`;
   }
   function coverHTML(b){

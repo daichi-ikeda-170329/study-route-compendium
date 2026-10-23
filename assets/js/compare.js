@@ -79,8 +79,10 @@
   }
   function rakutenURL(b, cfg) {
     if (!cfg.rakutenId) return '';
-    var query = b.recordType === 'routePlaceholder' ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
-    var dest = 'https://books.rakuten.co.jp/search?sitem=' + encodeURIComponent(query) + '&g=001';
+    var magazine = /月刊|雑誌|定期刊行/.test(b.style || '');
+    var query = magazine ? b.name.replace(/^月刊\s*/, '')
+      : b.recordType === 'routePlaceholder' ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
+    var dest = 'https://books.rakuten.co.jp/search?sitem=' + encodeURIComponent(query) + '&g=' + (magazine ? '007' : '001');
     return 'https://hb.afl.rakuten.co.jp/hgc/' + cfg.rakutenId + '/?pc=' + encodeURIComponent(dest) + '&m=' + encodeURIComponent(dest);
   }
 

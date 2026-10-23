@@ -109,8 +109,10 @@ function amazonUrl(b, tag) {
 function rakutenUrl(b, id) {
   if (!id) return '';
   // 枠は ISBN を持たない。書名そのままの検索結果へ送る
-  const query = isPlaceholder(b) ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
-  const dest = `https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(query)}&g=001`;
+  const magazine = /月刊|雑誌|定期刊行/.test(b.style || '');
+  const query = magazine ? b.name.replace(/^月刊\s*/, '')
+    : isPlaceholder(b) ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
+  const dest = `https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(query)}&g=${magazine ? '007' : '001'}`;
   const e = encodeURIComponent(dest);
   return `https://hb.afl.rakuten.co.jp/hgc/${id}/?pc=${e}&m=${e}`;
 }
