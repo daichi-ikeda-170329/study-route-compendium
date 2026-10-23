@@ -51,6 +51,19 @@
         }
       ],
       "note": "Search Console 管理画面（Claude in Chrome）の直近 28 日の平均掲載順位。API 未設定のため手で写した"
+    },
+    {
+      "date": "2026-10-23",
+      "source": "manual",
+      "measurements": [
+        {
+          "keyword": "化学 上級問題精講",
+          "rank": 13,
+          "impressions": 1,
+          "clicks": 0
+        }
+      ],
+      "note": "Search Console管理画面の7日間（2026-10-14〜10-20）、完全一致クエリ。1表示なので効果判定には使わない。"
     }
   ]
 }

@@ -97,6 +97,11 @@
       "keyword": "英語 参考書 ルート",
       "targetPath": "/english/",
       "priority": "low"
+    },
+    {
+      "keyword": "原点からの化学 レベル",
+      "targetPath": "/science/books/genten-riron/",
+      "priority": "high"
     }
   ]
 }

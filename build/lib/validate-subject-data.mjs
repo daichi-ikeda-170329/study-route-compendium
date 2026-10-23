@@ -30,7 +30,7 @@ const TYPES = {
   stage: 'string', diff: 'number', hensachi: 'string',
   problems: 'string', hours: 'string', h: 'number', style: 'string',
   subjects: 'string', sub: 'string', bunri: 'string',
-  desc: 'string', bestFor: 'string', recordType: 'string',
+  desc: 'string', bestFor: 'string', recordType: 'string', pageTitle: 'string',
   basic: 'boolean', nocover: 'boolean', cover: 'string', coverExample: 'string',
   pros: 'array', cons: 'array', unis: 'array', alts: 'array',
   fb: 'object',
@@ -48,6 +48,9 @@ export const TOC_MAX = 12;
 /** 任意項目の中身の検査。型（TYPES）が合っている前提で呼ぶ */
 function checkBookExtras(b, bad) {
   const key = b.id;
+  if (typeof b.pageTitle === 'string' && (!b.pageTitle.trim() || b.pageTitle.length > 48)) {
+    bad(`${key}.pageTitle: 1〜48 文字のページタイトルにする`);
+  }
   if (typeof b.pages === 'number' && (!Number.isInteger(b.pages) || b.pages < 1)) bad(`${key}.pages: 1 以上の整数のはずが ${b.pages}`);
   if (Array.isArray(b.media)) {
     for (const m of b.media) if (!MEDIA_VALUES.includes(m)) bad(`${key}.media: 「${m}」は ${MEDIA_VALUES.join('・')} のどれでもない`);

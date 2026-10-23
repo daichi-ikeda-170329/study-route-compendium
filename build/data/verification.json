@@ -20550,32 +20550,32 @@
   },
   "science:jokyu-seiko": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-10-23",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010355343",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.obunsha.co.jp/product/detail/035534",
+     "checkedAt": "2026-10-23"
     },
     "official": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010355343",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.obunsha.co.jp/product/detail/035534",
+     "checkedAt": "2026-10-23"
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010355343",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.obunsha.co.jp/product/detail/035534",
+     "checkedAt": "2026-10-23"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010355343",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.obunsha.co.jp/product/detail/035534",
+     "checkedAt": "2026-10-23"
     }
    }
   },

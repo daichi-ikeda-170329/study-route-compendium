@@ -269,7 +269,7 @@ function renderBook(book, ctx) {
   // title で約束することになる。検索結果から来た読者の期待を外すので分ける
   const titleTail = prov ? '｜新刊・書誌情報'
     : titleName.length > 20 ? '｜レベルと使い方' : 'のレベルと使い方｜難易度・対象・次に進む本';
-  const title = `${titleName}${titleTail} - ${sub.full}`;
+  const title = `${book.pageTitle || `${titleName}${titleTail}`} - ${sub.full}`;
   const by = authors.length ? `${authors.join('・')}／` : '';
   // meta description は 120 字以内。本文の頭を写すのではなく、検索結果で
   // 「自分に関係あるか」を判断できる要素（役割・難易度・向く人）だけを並べる。
@@ -296,6 +296,10 @@ function renderBook(book, ctx) {
   /* 事実として確かめた項目と、編集部が推定した項目を分けて出す。
      verified と「現物を確認した」を同じ意味にしない（build/lib/verification.mjs） */
   const ver = verificationOf(sub.dir, book);
+  const publisherSources = [...new Map(Object.values(ver.fields)
+    .filter(v => v.status === 'verified' && v.sourceKind === 'publisher'
+      && /^https:\/\//.test(v.sourceUrl || '') && v.checkedAt)
+    .map(v => [v.sourceUrl, v])).values()];
   /* 固有の価値がまだ無いページは検索結果に載せない。既に流入のある URL を
      一律に noindex にはしない（build/lib/indexing.mjs） */
   const idx = bookIndexable(book);
@@ -492,7 +496,8 @@ ${placeholder ? '' : `        <div class="buy buy--hero" data-rt-placement="book
 ${spec}
         </dl>
       </div>
-      <p class="spec__note">書誌情報は出版社などの公開データ、難易度・到達目安・想定学習時間は編集部の推定値です（<a href="/methodology/">算出方法</a>）。</p>
+      <p class="spec__note">書誌情報は出版社などの公開データ、難易度・到達目安・想定学習時間は編集部の推定値です（<a href="/methodology/">算出方法</a>）。</p>${publisherSources.length ? `
+      <p class="spec__note">書誌情報の確認元: ${publisherSources.map(v => `<a href="${esc(v.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(book.pub)}の公式書籍情報</a>（${esc(v.checkedAt)} 確認）`).join('・')}。書名・出版社・刊行年・ISBN などの出典であり、難易度や使用感の根拠ではありません。</p>` : ''}
     </section>
 
 ${/* 学習の記録は基本情報の直後に置く（購入ボタンの後ろだと、ページの下まで読まないと見つからない。仕様書 2.5） */ ''}    <section class="block">

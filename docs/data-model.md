@@ -28,6 +28,7 @@
 | `id` | string（必須） | URL に使う id（`/<科目>/books/<id>/`）。**公開後に変えない** |
 | `name` | string（必須） | 図鑑の一覧で使う短い呼び名。表示は `displayName()`（下の「書名と著者名の決め方」）を通す |
 | `official` | string | 正式名称 |
+| `pageTitle` | string | 任意の書籍ページタイトル（1〜48 文字、科目サイト名は生成側が付ける）。未指定なら従来の書名と「レベルと使い方」を使う |
 | `stage` | string（必須） | 役割。`stages.json` のキー |
 | `sub` | string | 分野（現代文・物理・日本史 …）。国語・理科・社会だけ |
 | `pub` / `year` / `isbn10` / `isbn13` | string / number | 書誌情報 |

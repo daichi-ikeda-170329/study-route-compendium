@@ -15,6 +15,22 @@ const { pickPrev } = await import('../build/lib/book-links.mjs');
 const en = loadSubjectData(ROOT, 'english');
 const withBook = (patch) => ({ ...en, books: en.books.map(b => (b.id === 'rules4' ? { ...b, ...patch } : b)) });
 
+test('検索意図に合わせたページタイトルは空や長すぎる値を通さない', () => {
+  for (const pageTitle of ['', '   ', 'あ'.repeat(49), 42]) {
+    assert.ok(validateSubjectData('english', withBook({ pageTitle })).some(x => /pageTitle/.test(x)));
+  }
+  assert.deepEqual(validateSubjectData('english', withBook({ pageTitle: 'The Rules 4 の構成とレベル' })), []);
+});
+
+test('化学 上級問題精講の検索タイトルと出版社の確認元がページへ反映される', () => {
+  const book = loadSubjectData(ROOT, 'science').books.find(b => b.id === 'jokyu-seiko');
+  const src = fs.readFileSync(path.join(ROOT, 'science/books/jokyu-seiko/index.html'), 'utf8');
+  assert.ok(src.includes(`<title>${book.pageTitle} - 理科ルート大全</title>`));
+  assert.match(src, /書誌情報の確認元:[\s\S]*?https:\/\/www\.obunsha\.co\.jp\/product\/detail\/035534/);
+  assert.match(src, /2026-10-23 確認/);
+  assert.match(src, /難易度や使用感の根拠ではありません/);
+});
+
 test('toc に文字列を入れると形の検証で落ちる', () => {
   const p = validateSubjectData('english', withBook({ toc: '第1章 ルール' }));
   assert.ok(p.some(x => /rules4\.toc: array のはずが string/.test(x)), p.join('\n'));
