@@ -14,7 +14,7 @@ import { ROOT } from './helpers.mjs';
 import { ADMISSION_YEAR, ADMISSION_LABEL, STALE_YEAR_PATTERNS } from '../build/lib/site-meta.mjs';
 import { HAND_WRITTEN, applyToSource, findStaleYearCopy } from '../build/apply-site-meta.mjs';
 
-const SKIP_DIRS = new Set(['.git', 'node_modules', 'dist', 'data', 'changelog']);
+const SKIP_DIRS = new Set(['.git', 'node_modules', 'dist', 'test-results', 'playwright-report', 'work', 'data', 'changelog']);
 function htmlFiles(dir = ROOT, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP_DIRS.has(e.name)) continue;

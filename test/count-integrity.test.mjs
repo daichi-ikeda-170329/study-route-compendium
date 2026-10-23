@@ -25,7 +25,7 @@ for (const s of SUBJECTS) {
 }
 const byJa = new Map(SUBJECTS.map(s => [s.ja, counts[s.dir]]));
 
-const SKIP_DIRS = new Set(['.git', 'node_modules', 'dist', 'data']);
+const SKIP_DIRS = new Set(['.git', 'node_modules', 'dist', 'test-results', 'playwright-report', 'work', 'data']);
 function htmlFiles(dir = ROOT, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP_DIRS.has(e.name)) continue;
