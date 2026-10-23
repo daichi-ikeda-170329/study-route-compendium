@@ -7,7 +7,7 @@
  *   node build/check-links.mjs --stores    Amazon / 楽天の商品ページだけ
  *   node build/check-links.mjs --limit=50  先頭 50 冊だけ（手元での確認用）
  *   node build/check-links.mjs --json      機械可読な結果を標準出力へ出す
- *   node build/check-links.mjs --internal  内部リンクだけを見る（外部へ出ない・落ちる）
+ *   node build/check-links.mjs --internal  内部リンクを含むサイト検査（外部へ出ない・落ちる）
  *
  * 見つかった不備は一覧で出す。**外部リンクでは終了コードを 0 のままにする。**
  * 外部サービスの一時的な不調で毎週ジョブが赤くなると、本当の欠損に気づけなくなる。
@@ -25,6 +25,7 @@
  * BOOKS[].cover に入れる（docs/data-model.md の「書影」の節）。
  */
 import path from 'path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'url';
 import { SUBJECTS } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
@@ -37,6 +38,16 @@ const all = !only.covers && !only.stores;
 const LIMIT = Number((ARGS.find(a => a.startsWith('--limit=')) || '').split('=')[1] || 0);
 const JSON_OUT = ARGS.includes('--json');
 const INTERNAL = ARGS.includes('--internal');
+
+// 公開 HTML の内部リンク検査は check-site.mjs が持つ。外部リソースの検査より
+// 先に分岐し、--internal のときに書影や販売サイトへ問い合わせない。
+if (INTERNAL) {
+  const result = spawnSync(process.execPath, [path.join(ROOT, 'build/check-site.mjs')], {
+    cwd: ROOT, stdio: 'inherit',
+  });
+  if (result.error) console.error(`サイト検査を起動できない: ${result.error.message}`);
+  process.exit(result.status ?? 1);
+}
 
 /** 不備の分類。持続的なものだけがデータを直す対象になる */
 const KIND = { persistent: 'persistent', transient: 'transient', mismatch: 'mismatch' };
@@ -154,6 +165,4 @@ if (JSON_OUT) {
   }
 }
 
-/* 外部リンクでは落とさない（相手側の不調で毎週赤くなると読まれなくなる）。
-   内部リンクだけは自分たちの不備なので落とす */
-if (INTERNAL && byKind.persistent.length) process.exit(1);
+/* 外部リンクでは落とさない（相手側の不調で毎週赤くなると読まれなくなる）。 */
