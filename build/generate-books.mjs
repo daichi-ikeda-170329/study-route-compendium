@@ -94,8 +94,8 @@ function amazonUrl(b, tag) {
 
 /**
  * 楽天アフィリエイトのリンク。科目トップの rakutenURL() と同じ形にそろえる。
- * 遷移先は最後に一度だけエンコードする（内側でもエンコードすると二重になり、
- * 楽天側で検索語が復元できずヒットしなくなる）。
+ * 検索語を URL のパラメータに入れてから、遷移先 URL 全体をアフィリエイト用に
+ * エンコードする。楽天市場全体ではなく楽天ブックスの本だけを検索する。
  *
  * **遷移先は商品ページではなく ISBN の検索結果ページ。**楽天ブックスの商品 URL
  * （books.rakuten.co.jp/rb/<商品ID>/）に入っているのは楽天内部の商品 ID で、
@@ -109,7 +109,8 @@ function amazonUrl(b, tag) {
 function rakutenUrl(b, id) {
   if (!id) return '';
   // 枠は ISBN を持たない。書名そのままの検索結果へ送る
-  const dest = `https://search.rakuten.co.jp/search/mall/${isPlaceholder(b) ? b.name : (b.isbn13 || b.name)}/`;
+  const query = isPlaceholder(b) ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
+  const dest = `https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(query)}&g=001`;
   const e = encodeURIComponent(dest);
   return `https://hb.afl.rakuten.co.jp/hgc/${id}/?pc=${e}&m=${e}`;
 }
@@ -458,11 +459,18 @@ ${header(sub)}
         <div class="ph"><b>${esc(bn)}</b><span>${esc(book.pub)}</span></div>
         ${covers.length ? `<img src="${esc(covers[0])}" alt="${esc(coverAlt)}" width="186" height="260" loading="eager" referrerpolicy="no-referrer" data-srcs="${esc(covers.join('|'))}" data-s="0" onload="if(this.naturalWidth&lt;=1)this.onerror()" onerror="var s=this.dataset.srcs.split('|'),n=+this.dataset.s+1;if(s.length&gt;n){this.dataset.s=n;this.src=s[n]}else{this.remove()}">` : ''}
       </div>
-      <div>
+      <div class="bk-hero__body">
+        <div class="bk-heading">
         <span class="bk-tag"><i></i>${esc(st.label)}${subLabel ? ` — ${esc(subLabel)}` : ''}</span>
         <h1 class="bk-name">${esc(searchTitle)}</h1>
         <p class="bk-official">${esc(book.official || book.name)}／${by ? `${esc(authors.join('・'))}／` : ''}${esc(book.pub)}${book.year ? `（${book.year} 年）` : ''}</p>
         <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
+        </div>
+${placeholder ? '' : `        <div class="buy buy--hero" data-rt-placement="book_hero">
+          <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">Amazon で見る</a>
+          ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">楽天ブックスで検索</a>` : ''}
+          ${aff ? '<span class="buy__pr">広告リンク</span>' : ''}
+        </div>`}
         <p class="bk-desc">${prov
     ? `${esc(book.pub)}から刊行された新刊です。現物の確認が済んでいないため、難易度と到達目安の評価は準備中です。`
     : esc(book.desc)}</p>
@@ -473,11 +481,6 @@ ${header(sub)}
           <div class="bk-meter__t"><span>難易度</span><b>${book.diff} <small style="font-size:11px;color:var(--muted)">/ 10</small></b></div>
           <div class="bk-meter__bar">${meter}</div>
         </div>${series ? `<div class="bk-series"><b>${esc(series.label)}</b> — ${esc(series.note)}</div>` : ''}`}
-        ${placeholder ? '' : `<div class="buy buy--hero">
-          <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">Amazon で見る</a>
-          ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">楽天ブックス</a>` : ''}
-          ${aff ? '<span class="buy__pr">広告リンク</span>' : ''}
-        </div>`}
       </div>
     </div>
 
@@ -558,7 +561,7 @@ ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
     ${editionSection}${editionSection ? '\n\n' : ''}    <section class="block">
       <div class="eyebrow">Where to buy</div>
       <h2 class="sec">購入する</h2>
-      <div class="buy">
+      <div class="buy" data-rt-placement="book_footer">
         <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
           ${placeholder ? '志望校の過去問題集を検索' : 'Amazon で見る'}
@@ -568,23 +571,6 @@ ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
           楽天ブックスで検索
         </a>` : ''}
       </div>
-      <script>
-      /* 購入リンクのクリックを記録する。どの本が実際に踏まれたかを書籍単位で見るため。
-         **送信は assets/js/analytics.js の allowlist を必ず通す**（gtag をここから
-         直接呼ばない。許可していない値が外へ出る道を残さないため）。
-         計測の失敗でリンクの遷移を止めないよう、全体を try で囲う。 */
-      document.addEventListener("click", function (e) {
-        var a = e.target.closest ? e.target.closest("[data-rt-buy]") : null;
-        if (!a) return;
-        try {
-          if (window.RTAnalytics) window.RTAnalytics.track("affiliate_click", {
-            store: a.getAttribute("data-rt-buy"),
-            book_id: a.getAttribute("data-rt-bid"),
-            subject_id: a.getAttribute("data-rt-sub")
-          });
-        } catch (err) { /* 計測の失敗で購入導線を止めない */ }
-      });
-      </script>
       ${placeholder ? `<p class="buy__note buy__note--warn"><b>${esc(PLACEHOLDER_LABEL)}。</b>${esc(PLACEHOLDER_NOTE)}</p>` : ''}
       ${/* 広告であることの開示は残し、説明は /ads/（フッターから辿れる）に寄せて 1 文に畳んだ。
             以前の 150 字がそのまま 1,390 ページに並び、本文の 6.9% を占めていた。

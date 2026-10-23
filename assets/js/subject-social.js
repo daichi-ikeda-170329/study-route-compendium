@@ -560,9 +560,9 @@ function openModal(id){
       <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a></div>`;
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
-    <div class="aff-actions">
-      ${az?`<a class="aff-btn amz" href="${az}" target="_blank" rel="nofollow${AFF_AZ?' sponsored':''} noopener noreferrer">Amazonで見る${ext}</a>`:""}
-      ${rk?`<a class="aff-btn rkt" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener noreferrer">楽天ブックスで検索${ext}</a>`:""}
+    <div class="aff-actions" data-rt-placement="catalog_modal">
+      ${az?`<a class="aff-btn amz" data-rt-buy="amazon" data-rt-bid="${b.id}" data-rt-sub="social" href="${az}" target="_blank" rel="nofollow${AFF_AZ?' sponsored':''} noopener noreferrer">Amazonで見る${ext}</a>`:""}
+      ${rk?`<a class="aff-btn rkt" data-rt-buy="rakuten" data-rt-bid="${b.id}" data-rt-sub="social" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener noreferrer">楽天ブックスで検索${ext}</a>`:""}
     </div>
     <p class="aff-note">${AFF?`${AFF_STORES}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります(価格は変わりません)。`:""}版の改訂により内容が異なる場合がありますので、購入前に販売ページで最新版をご確認ください。</p>
   </div>` : "";

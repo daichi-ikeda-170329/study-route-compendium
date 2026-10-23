@@ -283,7 +283,7 @@ function kakomonLinks(name, config) {
 
   let rkUrl = '';
   if (config.rakutenId) {
-    const dest = `https://search.rakuten.co.jp/search/mall/${name} 赤本/`;
+    const dest = `https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(`${name} 赤本`)}&g=001`;
     const e = encodeURIComponent(dest);
     rkUrl = `https://hb.afl.rakuten.co.jp/hgc/${config.rakutenId}/?pc=${e}&m=${e}`;
   }

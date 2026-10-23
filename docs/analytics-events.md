@@ -37,14 +37,15 @@
 | `share_copy` / `share_native` / `share_x` | `subject_id` | 共有した | `assets/js/share.js` |
 | `shared_link_open` / `shared_route_open` | `subject_id` | 共有リンクから開かれた | `assets/js/share.js` |
 | `shared_link_invalid` / `shared_route_invalid` | `subject_id`, `reason` | 共有リンクを復元できなかった | `assets/js/share.js` |
-| `affiliate_click` | `subject_id`, `book_id`, `store` | 販売サイトへのリンクを押した | `build/generate-books.mjs`（書籍ページ） |
+| `affiliate_click` | `subject_id`, `book_id`, `store`, `placement` | 販売サイトへのリンクを押した | `assets/js/analytics.js`（書籍ページ・図鑑の詳細画面・2 冊比較を共通で計測） |
 
 ### 許可しているが、まだ呼び出しが無い
 
-**科目トップ（図鑑・ルート・診断・ペース計算）の計測は 1 つも実装されていない。**
+**科目トップの画面切り替え・ルート・診断・ペース計算の計測は未実装である。**
 allowlist と契約だけが先に書かれ、呼び出しは 2026-09-19 時点で入っていない
 （`1891ec25d` で allowlist を作ったときの対象は share.js・search.js・書籍ページの
-購入リンクの 3 つで、科目トップは最初から入っていない）。ページ単位の閲覧は GA4 の
+購入リンクの 3 つで、当時の科目トップは入っていない）。2026-10-23 に図鑑の
+購入クリックを追加した。ページ単位の閲覧は GA4 の
 `page_view` で取れているので、足りないのは画面の中の行動だけである。
 
 | イベント | 許可するパラメータ | 実装したら送る場面 |
@@ -65,6 +66,12 @@ allowlist と契約だけが先に書かれ、呼び出しは 2026-09-19 時点�
 値の形は `assets/js/analytics.js` の `CHECK` が持つ。
 `subject_id` は収録している 7 科目のいずれか、`book_id` と `filter_id` は
 `[a-z0-9][a-z0-9_-]*`、`store` は `amazon` か `rakuten` だけ。
+
+`placement` は `book_hero`（書籍上部）、`book_footer`（書籍下部）、
+`catalog_modal`（図鑑の詳細画面）、`compare`（2 冊比較）の固定値だけ。
+2026-10-23 から記録する。過去の計測に図鑑と比較の購入クリックは含まれないため、
+追加前後の件数の差を、そのまま改善効果と判断しない。
+購入クリックは販売サイトへの遷移であり、注文や売上の確定ではない。
 
 ## 送ってはいけないもの
 

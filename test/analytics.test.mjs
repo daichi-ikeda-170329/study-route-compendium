@@ -49,7 +49,6 @@ test('契約の「送っている」表に載せたイベントは、実際に�
   assert.ok(declared.size >= 6, `「送っている」の節からイベントを読めていない（${declared.size} 件）`);
 
   const src = files(['.js', '.mjs', '.html'])
-    .filter(f => !f.endsWith(path.join('assets', 'js', 'analytics.js')))
     .map(f => fs.readFileSync(f, 'utf8')).join('\n');
   const called = new Set([...src.matchAll(/track\(\s*["']([a-z][a-z0-9_]+)["']/g)].map(m => m[1]));
 
@@ -82,6 +81,10 @@ test('値の形が違えばそのパラメータは落ちる', () => {
   assert.deepEqual(A.sanitize('route_save', { subject_id: 'math', storage: 'cloud' }).params, { subject_id: 'math' });
   // 自由入力を book_id へ入れても通らない
   assert.deepEqual(A.sanitize('book_open', { subject_id: 'math', book_id: '東京大学 医学部' }).params, { subject_id: 'math' });
+  assert.deepEqual(A.sanitize('affiliate_click', { placement: '東京大学 医学部' }).params, {});
+  for (const placement of ['book_hero', 'book_footer', 'catalog_modal', 'compare']) {
+    assert.deepEqual(A.sanitize('affiliate_click', { placement }).params, { placement });
+  }
 });
 
 test('大学名・偏差値・回答を送る名前のパラメータが、そもそも定義されていない', () => {

@@ -34,6 +34,7 @@
     book_id: function (v) { return typeof v === 'string' && ID_RE.test(v); },
     filter_id: function (v) { return typeof v === 'string' && ID_RE.test(v); },
     store: function (v) { return v === 'amazon' || v === 'rakuten'; },
+    placement: function (v) { return ['book_hero', 'book_footer', 'catalog_modal', 'compare'].indexOf(v) >= 0; },
     /* 診断・ルートの入口。自由入力ではなく画面の種類だけ */
     mode: function (v) { return ['tier', 'uni', 'quiz', 'sensei'].indexOf(v) >= 0; },
     /* 共有の経路 */
@@ -74,7 +75,7 @@
     shared_link_invalid:  ['subject_id', 'reason'],
     shared_route_invalid: ['subject_id', 'reason'],
     /* 収益導線 */
-    affiliate_click: ['subject_id', 'book_id', 'store'],
+    affiliate_click: ['subject_id', 'book_id', 'store', 'placement'],
     book_buy_click:  ['subject_id', 'book_id', 'store'],
     /* 全体検索から書籍ページへ抜けた回数。検索語そのものは送らない */
     book_search_open: ['subject_id', 'book_id']
@@ -125,6 +126,23 @@
       if (typeof global.gtag === 'function') global.gtag('event', r.name, r.params);
     } catch (e) { /* 計測の失敗で機能を止めない */ }
     return r;
+  }
+
+  /* 静的な書籍ページと、描き直される図鑑・比較画面で同じ送信口を使う。
+     URL や入力値は読まず、明示された書籍 ID・科目・店舗・表示位置だけを扱う。 */
+  if (global.document && global.document.addEventListener) {
+    global.document.addEventListener('click', function (e) {
+      var link = e.target && e.target.closest ? e.target.closest('a[data-rt-buy]') : null;
+      if (!link) return;
+      var store = link.getAttribute('data-rt-buy');
+      var book = link.getAttribute('data-rt-bid');
+      var subject = link.getAttribute('data-rt-sub');
+      if (!CHECK.store(store) || !CHECK.book_id(book) || !CHECK.subject_id(subject)) return;
+      var group = link.closest('[data-rt-placement]');
+      var params = { store: store, book_id: book, subject_id: subject };
+      if (group) params.placement = group.getAttribute('data-rt-placement');
+      track('affiliate_click', params);
+    });
   }
 
   global.RTAnalytics = {

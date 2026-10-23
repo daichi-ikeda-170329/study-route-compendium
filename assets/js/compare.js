@@ -79,7 +79,8 @@
   }
   function rakutenURL(b, cfg) {
     if (!cfg.rakutenId) return '';
-    var dest = 'https://search.rakuten.co.jp/search/mall/' + encodeURIComponent(b.isbn13 || b.name) + '/';
+    var query = b.recordType === 'routePlaceholder' ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
+    var dest = 'https://books.rakuten.co.jp/search?sitem=' + encodeURIComponent(query) + '&g=001';
     return 'https://hb.afl.rakuten.co.jp/hgc/' + cfg.rakutenId + '/?pc=' + encodeURIComponent(dest) + '&m=' + encodeURIComponent(dest);
   }
 
@@ -120,8 +121,8 @@
       bestFor: esc(b.bestFor || '—'),
       pros: list(b.pros),
       cons: list(b.cons),
-      buy: '<span class="cmpx__buy"><a href="' + esc(amazonURL(b, cfg)) + '" target="_blank" rel="' + rel + '">Amazon で見る</a>'
-        + (rk ? '<a href="' + esc(rk) + '" target="_blank" rel="nofollow sponsored noopener noreferrer">楽天ブックスで検索</a>' : '') + '</span>',
+      buy: '<span class="cmpx__buy" data-rt-placement="compare"><a data-rt-buy="amazon" data-rt-bid="' + esc(b.id) + '" data-rt-sub="' + esc(x.key.dir) + '" href="' + esc(amazonURL(b, cfg)) + '" target="_blank" rel="' + rel + '">Amazon で見る</a>'
+        + (rk ? '<a data-rt-buy="rakuten" data-rt-bid="' + esc(b.id) + '" data-rt-sub="' + esc(x.key.dir) + '" href="' + esc(rk) + '" target="_blank" rel="nofollow sponsored noopener noreferrer">楽天ブックスで検索</a>' : '') + '</span>',
     };
   }
 
