@@ -66,6 +66,7 @@ build と、呼び出した検査のユニットテスト・サイト検査・E2
 | `test/uni-picks.test.mjs` | 大学別ページのおすすめ（重点対策・トラック別・シリーズ・並び順）と、ページ内の同じ文の重複 |
 | `test/display-name.test.mjs` | 読者に見せる書名（内部略称の判定・科目内で重ならないこと・配信データの `dn`） |
 | `test/book-links.test.mjs` | 書籍ページの「あとに進む本」「同じ役割・同じレベル」の並び・見出しの順・比較ページへのリンク |
+| `test/purchase.test.mjs` | 店舗への遷移先・広告表記・版の識別子・複数巻や過去問枠の誤誘導防止 |
 | `test/book-extras.test.mjs` | 書籍の任意項目（`pages` `media` `toc` `howto` `finish` `editions`）の検査と描画・「この本の前に置く本」 |
 | `test/university-sources.test.mjs` | 大学の出典台帳の形・出典行と学部表・大学別 OGP・学部別ページの判定 |
 | `test/footer.test.mjs` | フッターのリンク（`FOOTER_LINKS`）が手書き HTML と一致していること |

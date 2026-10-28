@@ -37,7 +37,7 @@
 | `share_copy` / `share_native` / `share_x` | `subject_id` | 共有した | `assets/js/share.js` |
 | `shared_link_open` / `shared_route_open` | `subject_id` | 共有リンクから開かれた | `assets/js/share.js` |
 | `shared_link_invalid` / `shared_route_invalid` | `subject_id`, `reason` | 共有リンクを復元できなかった | `assets/js/share.js` |
-| `affiliate_click` | `subject_id`, `book_id`, `store`, `placement` | 販売サイトへのリンクを押した | `assets/js/analytics.js`（書籍ページ・図鑑の詳細画面・2 冊比較を共通で計測） |
+| `affiliate_click` | `subject_id`, `book_id`, `store`, `placement` | 販売サイトへのリンクを押した | `assets/js/analytics.js`（書籍ページ・図鑑の詳細画面・2 冊比較・解説記事・志望校別ルートを共通で計測） |
 
 ### 許可しているが、まだ呼び出しが無い
 
@@ -68,8 +68,8 @@ allowlist と契約だけが先に書かれ、呼び出しは 2026-09-19 時点�
 `[a-z0-9][a-z0-9_-]*`、`store` は `amazon` か `rakuten` だけ。
 
 `placement` は `book_hero`（書籍上部）、`book_footer`（書籍下部）、
-`catalog_modal`（図鑑の詳細画面）、`compare`（2 冊比較）の固定値だけ。
-2026-10-23 から記録する。過去の計測に図鑑と比較の購入クリックは含まれないため、
+`catalog_modal`（図鑑の詳細画面）、`compare`（2 冊比較）、`article`（解説記事）、`route_step`（志望校別ルート）の固定値だけ。
+図鑑と比較は2026-10-23、解説記事と志望校別ルートは2026-10-28から記録する。以前の計測にはこれらのクリックが含まれないため、
 追加前後の件数の差を、そのまま改善効果と判断しない。
 購入クリックは販売サイトへの遷移であり、注文や売上の確定ではない。
 

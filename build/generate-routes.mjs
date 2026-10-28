@@ -20,6 +20,7 @@ import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { displayName } from './lib/booktitle.mjs';
+import { purchaseLinks } from './lib/purchase.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { subjectContentDate, saveDates } from './lib/updated.mjs';
 
@@ -71,12 +72,13 @@ function normalize(routes, tiers) {
    ページに並ぶルートのうち、最初のトラックの王道網羅型だけに付ける（画像に描くのは 1 本） */
 const riAttrs = (o) => Object.entries(o).map(([k, v]) => ` data-ri-${k}="${esc(String(v ?? ''))}"`).join('');
 
-function stepList(steps, bookById, sub, stages, mark = false) {
+function stepList(steps, bookById, sub, stages, config, mark = false) {
   return steps.map((s, i) => {
     const b = bookById.get(s.id);
     if (!b) return '';
     const st = stages[b.stage] || {};
     const alts = (s.alts || []).map(id => bookById.get(id)).filter(Boolean);
+    const purchase = purchaseLinks(b, sub.dir, config, 'route_step');
     const ri = mark ? ` data-ri-item${riAttrs({ no: i + 1, name: displayName(b, sub.dir), role: s.role || st.label || '', diff: b.diff ?? '' })}` : '';
     return `        <li class="rstep"${ri}>
           <span class="rstep__no">${String(i + 1).padStart(2, '0')}</span>
@@ -85,7 +87,7 @@ function stepList(steps, bookById, sub, stages, mark = false) {
             <span class="rstep__role">${esc(s.role || '')}</span>
             <a class="rstep__name" href="/${sub.dir}/books/${b.id}/">${esc(displayName(b, sub.dir))}</a>
             <span class="rstep__meta">${esc(b.pub)}／難易度 ${b.diff}／${esc(b.hensachi || '')}</span>
-            ${s.note ? `<p class="rstep__note">${esc(s.note)}</p>` : ''}
+            ${s.note ? `<p class="rstep__note">${esc(s.note)}</p>` : ''}${purchase ? `\n            ${purchase}` : ''}
             ${alts.length ? `<p class="rstep__alts">代わりに使える本：${alts.map(a => `<a href="/${sub.dir}/books/${a.id}/">${esc(displayName(a, sub.dir))}</a>`).join('、')}</p>` : ''}
           </div>
         </li>`;
@@ -192,7 +194,7 @@ ${sideList(part.list, bookById, sub, d.stages, g === firstGroup && kind === 'par
         <h3 class="rpol__t"><b>${p.label}</b><span>${(seq[p.key] || []).length}冊</span></h3>
 ${policyHours(g, p.key)}        <p class="rpol__n">${p.note}</p>
         <ol class="rsteps">
-${stepList(seq[p.key], bookById, sub, d.stages, g === firstGroup && p.key === 'omni')}
+${stepList(seq[p.key], bookById, sub, d.stages, d.config, g === firstGroup && p.key === 'omni')}
         </ol>
       </div>`).join('\n');
 

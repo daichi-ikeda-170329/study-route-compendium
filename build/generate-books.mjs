@@ -24,10 +24,11 @@ import { pickAlternatives, pickNext, pickPrev } from './lib/book-links.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
 import { degreeLine, bandOf } from './lib/scale.mjs';
 import { DATE_PLACEHOLDER, pageContentDate, saveDates } from './lib/updated.mjs';
-import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL, placeholderSearchUrl } from './lib/record-type.mjs';
+import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL } from './lib/record-type.mjs';
 import { verificationOf } from './lib/verification.mjs';
 import { bookIndexable, NOINDEX_META } from './lib/indexing.mjs';
 import { routePositions, adoptedPeers, tierUniversities } from './lib/route-position.mjs';
+import { amazonUrl, rakutenUrl } from './lib/purchase.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [onlyDir, onlyId] = process.argv.slice(2);
@@ -75,47 +76,6 @@ function positionSentence(book, books, st, fieldName, bn) {
 }
 
 /* 横の選択肢（pickAlternatives）と縦の接続（pickNext）は build/lib/book-links.mjs にある */
-
-function amazonUrl(b, tag) {
-  // ルート上の枠（志望校の過去問など）は特定の商品ではない。/dp/ の直リンクを
-  // 出すと、志望校が違う利用者を別大学の 1 冊へ送ってしまう
-  if (isPlaceholder(b)) {
-    const base = placeholderSearchUrl(b.official || b.name);
-    return tag ? `${base}&tag=${tag}` : base;
-  }
-  const key = b.isbn10 || b.asin;
-  const q = encodeURIComponent(b.official || b.name);
-  const base = key
-    ? `https://www.amazon.co.jp/dp/${key}/ref=nosim`
-    : `https://www.amazon.co.jp/s?k=${q}`;
-  if (!tag) return base;
-  return base + (key ? `?tag=${tag}` : `&tag=${tag}`);
-}
-
-/**
- * 楽天アフィリエイトのリンク。科目トップの rakutenURL() と同じ形にそろえる。
- * 検索語を URL のパラメータに入れてから、遷移先 URL 全体をアフィリエイト用に
- * エンコードする。楽天市場全体ではなく楽天ブックスの本だけを検索する。
- *
- * **遷移先は商品ページではなく ISBN の検索結果ページ。**楽天ブックスの商品 URL
- * （books.rakuten.co.jp/rb/<商品ID>/）に入っているのは楽天内部の商品 ID で、
- * ISBN からは作れない。対応表は楽天ブックス系 API（アプリ ID の登録が要る）
- * でしか取れず、このリポジトリはアプリ ID を持っていない。
- * 楽天のアプリ登録は IP アドレスの許可制で、GitHub Actions の実行 IP を
- * 登録しきれないため見送っている（経緯は docs/new-books-plan.md の 3 節）。
- * ボタンの文言を「楽天ブックスで検索」にして、遷移先と表示を一致させてある。
- * 商品 ID を引けるようにしたら、ここと科目トップの rakutenURL() の両方を直す。
- */
-function rakutenUrl(b, id) {
-  if (!id) return '';
-  // 枠は ISBN を持たない。書名そのままの検索結果へ送る
-  const magazine = /月刊|雑誌|定期刊行/.test(b.style || '');
-  const query = magazine ? b.name.replace(/^月刊\s*/, '')
-    : isPlaceholder(b) ? (b.official || b.name) : (b.isbn13 || b.official || b.name);
-  const dest = `https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(query)}&g=${magazine ? '007' : '001'}`;
-  const e = encodeURIComponent(dest);
-  return `https://hb.afl.rakuten.co.jp/hgc/${id}/?pc=${e}&m=${e}`;
-}
 
 /* ============================================================
    志望校別ルートでの位置

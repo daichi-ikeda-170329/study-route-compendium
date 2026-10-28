@@ -82,7 +82,7 @@ test('値の形が違えばそのパラメータは落ちる', () => {
   // 自由入力を book_id へ入れても通らない
   assert.deepEqual(A.sanitize('book_open', { subject_id: 'math', book_id: '東京大学 医学部' }).params, { subject_id: 'math' });
   assert.deepEqual(A.sanitize('affiliate_click', { placement: '東京大学 医学部' }).params, {});
-  for (const placement of ['book_hero', 'book_footer', 'catalog_modal', 'compare']) {
+  for (const placement of ['book_hero', 'book_footer', 'catalog_modal', 'compare', 'article', 'route_step']) {
     assert.deepEqual(A.sanitize('affiliate_click', { placement }).params, { placement });
   }
 });

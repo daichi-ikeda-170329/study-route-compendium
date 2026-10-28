@@ -34,7 +34,7 @@
     book_id: function (v) { return typeof v === 'string' && ID_RE.test(v); },
     filter_id: function (v) { return typeof v === 'string' && ID_RE.test(v); },
     store: function (v) { return v === 'amazon' || v === 'rakuten'; },
-    placement: function (v) { return ['book_hero', 'book_footer', 'catalog_modal', 'compare'].indexOf(v) >= 0; },
+    placement: function (v) { return ['book_hero', 'book_footer', 'catalog_modal', 'compare', 'article', 'route_step'].indexOf(v) >= 0; },
     /* 診断・ルートの入口。自由入力ではなく画面の種類だけ */
     mode: function (v) { return ['tier', 'uni', 'quiz', 'sensei'].indexOf(v) >= 0; },
     /* 共有の経路 */

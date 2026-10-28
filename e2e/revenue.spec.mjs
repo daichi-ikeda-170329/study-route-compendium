@@ -91,3 +91,38 @@ test('全 7 科目の図鑑で、開いた本の購入クリックを 1 回だ�
     ]);
   }
 });
+
+test('比較記事から選んだ本の販売先へ直接進み、記事のクリックとして記録する', async ({ page }) => {
+  await page.goto('/english/guides/nextstage-vs-vintage/');
+  const link = page.locator('[data-rt-placement="article"] [data-rt-buy="amazon"]').first();
+  await expect(link).toBeVisible();
+  const id = await link.getAttribute('data-rt-bid');
+  const href = new URL(await link.getAttribute('href'));
+  expect(href.hostname).toBe('www.amazon.co.jp');
+  expect(href.searchParams.get('tag')).toBeTruthy();
+  await link.click();
+  expect(await page.evaluate(() => window.purchaseEvents)).toEqual([
+    { subject_id: 'english', book_id: id, store: 'amazon', placement: 'article' },
+  ]);
+});
+
+test('志望校別ルートの一冊から購入先へ進んでも大学名を送らない', async ({ page }) => {
+  await page.goto('/science/routes/top/');
+  const link = page.locator('[data-rt-placement="route_step"] [data-rt-buy="rakuten"]').first();
+  await expect(link).toBeVisible();
+  const id = await link.getAttribute('data-rt-bid');
+  expect(destination(await link.getAttribute('href'))).toBeTruthy();
+  await link.click();
+  expect(await page.evaluate(() => window.purchaseEvents)).toEqual([
+    { subject_id: 'science', book_id: id, store: 'rakuten', placement: 'route_step' },
+  ]);
+});
+
+test('記事内の購入先は本文リンクの色に上書きされず44px以上で操作できる', async ({ page }) => {
+  await page.goto('/english/guides/nextstage-vs-vintage/');
+  const link = page.locator('.article-books [data-rt-buy="amazon"]').first();
+  await expect(link).toBeVisible();
+  const style = await link.evaluate(el => ({ color: getComputedStyle(el).color, height: el.getBoundingClientRect().height }));
+  expect(style.color).toBe('rgb(255, 255, 255)');
+  expect(style.height).toBeGreaterThanOrEqual(44);
+});

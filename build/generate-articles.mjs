@@ -20,7 +20,8 @@ import { fileURLToPath } from 'url';
 import { SUBJECTS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, portalHeader, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
-import { bookCards } from './lib/cards.mjs';
+import { bookCard } from './lib/cards.mjs';
+import { purchaseLinks } from './lib/purchase.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { displayName } from './lib/booktitle.mjs';
 import { ARTICLES } from './content/articles.mjs';
@@ -234,7 +235,8 @@ ${books.map(b => `            <tr><th scope="row">${bookRef(d, b.id)}</th>${cols
     const d = bl.dir || dir;
     const sub = SUBJECTS.find(s => s.dir === d);
     const list = bl.books.map(id => lookup(d, id, 'books'));
-    return bookCards(list, sub, data[d].stages, 'margin:20px 0');
+    return `<div class="bcards article-books" style="margin:20px 0">${list.map(b => `<div class="article-books__item">${bookCard(b, sub, data[d].stages)}${purchaseLinks(b, d, data[d].config, 'article')}</div>`).join('')}</div>
+      <p class="buy__note">購入する場合は、学校の指定・学習する範囲と巻・版を確認し、使う一冊を選んでください。価格・在庫は販売サイトで確認できます。${data[d].config.amazonTag || data[d].config.rakutenId ? '広告リンクです。' : ''}</p>`;
   }
   /* 志望レベル別の総学習時間。**記事本文に数字を書かない**ための表で、
      BOOKS の h と ROUTES から毎回計算し直す（build/lib/route-hours.mjs）。
@@ -327,7 +329,9 @@ ${rows.map(r => `            <tr><th scope="row"><a href="${r.href}">${esc(r.nam
     const d = bl.dir || dir;
     const list = bl.versus.map(id => lookup(d, id, 'versus'));
     if (list.length < 2 || list.length > 3) throw new Error('versus: 2〜3 冊で書く');
-    const panels = list.map(b => `        <div class="vs__col">
+    const panels = list.map(b => {
+      const purchase = purchaseLinks(b, d, data[d].config, 'article');
+      return `        <div class="vs__col">
           <div class="vs__head">
             ${bookCover(d, b)}
             <div class="vs__headtxt">
@@ -342,8 +346,9 @@ ${rows.map(r => `            <tr><th scope="row"><a href="${r.href}">${esc(r.nam
             <div><dt>想定時間</dt><dd>${esc(b.hours || '—')}</dd></div>
           </dl>
           ${Array.isArray(b.pros) && b.pros.length ? `<ul class="vs__pros">${b.pros.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
-          ${Array.isArray(b.cons) && b.cons.length ? `<ul class="vs__cons">${b.cons.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
-        </div>`).join('\n        <div class="vs__mark" aria-hidden="true">VS</div>\n');
+          ${Array.isArray(b.cons) && b.cons.length ? `<ul class="vs__cons">${b.cons.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}${purchase ? `\n          ${purchase}` : ''}
+        </div>`;
+    }).join('\n        <div class="vs__mark" aria-hidden="true">VS</div>\n');
     return `      <div class="vs vs--${list.length}">
 ${panels}
       </div>${bl.verdict ? `\n      <p class="vs__verdict">${inline(bl.verdict, d)}</p>` : ''}`;
