@@ -340,7 +340,18 @@ function renderBook(book, ctx) {
   const editions = Array.isArray(book.editions) && book.editions.length
     ? [...book.editions].sort((a, b) => b.year - a.year) : null;
   const prevs = prov ? [] : pickPrev(book, books, ctx.routes, ctx.tiers);
+  const seriesGuide = book.seriesGuide?.length ? `<section class="block prose">
+      <h2 class="sec">シリーズの巻を選ぶ</h2>
+      <p>分野や目的に合わせて選ぶための案内です。以下の選び分けは編集部の提案で、全巻をそろえる前提ではありません。各巻の書誌情報と使い方はリンク先で確認できます。</p>
+      <ul class="bk-series-guide">
+${book.seriesGuide.map(entry => {
+    const item = books.find(b => b.id === entry.id);
+    return `        <li><a href="/${sub.dir}/books/${item.id}/">${esc(item.official || item.name)}</a><span>${esc(entry.note)}</span></li>`;
+  }).join('\n')}
+      </ul>
+    </section>` : '';
   const extraBody = [
+    seriesGuide,
     toc ? `<section class="block prose">
       <div class="eyebrow">Contents</div>
       <h2 class="sec">構成</h2>

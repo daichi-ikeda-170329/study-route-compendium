@@ -542,3 +542,9 @@ img, svg, video, iframe { max-width: 100%; }
 .rt-search__more:hover{background:var(--surface-2,#F6F4EF)}
 .rt-search__more:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
 /* rt-search:end */
+
+/* シリーズは巻ごとの目的を読んで選ぶ。スマホでも各行を折り返す。 */
+.bk-series-guide li{padding:14px 0!important;border-bottom:1px solid var(--line)}
+.bk-series-guide li::before{display:none}
+.bk-series-guide a{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+.bk-series-guide span{display:block;font-size:13px;line-height:1.9;color:var(--ink-2)}

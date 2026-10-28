@@ -43,6 +43,7 @@
 | `cover` / `coverExample` / `nocover` / `fb` | — | 書影（下の「書影」） |
 | `pages` / `media` / `toc` | number / array / array | 書誌で確かめたページ数・付属（`音声` `アプリ` `電子版` `動画` `別冊解答`）・目次の大きな単位（12 項目まで）。推測で書かない |
 | `howto` / `finish` | array / string | 使い方の手順（`phase` は `1周目` `2周目` `3周目以降` `仕上げ`）・終わりの基準。編集部の推定 |
+| `seriesGuide` | array | 同科目のシリーズ各巻と選び分け。`{id, note}` を2〜8件。実在する書籍IDのみ、重複不可 |
 | `editions` | array | 改訂の履歴 `{year, note}`。書誌で確かめた版だけ |
 
 ### `routes.json`

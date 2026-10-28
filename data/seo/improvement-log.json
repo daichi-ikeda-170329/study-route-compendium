@@ -89,7 +89,7 @@
       "keyword": "原点からの化学 レベル",
       "targetPath": "/science/books/genten-riron/",
       "status": "observing",
-      "nextReviewDate": "2026-10-25",
+      "nextReviewDate": "2026-11-04",
       "actions": [
         {
           "date": "2026-10-18",
@@ -109,9 +109,36 @@
             "https://www.sundaibunko.jp/contents/book/1017/",
             "https://www.sundaibunko.jp/contents/book/1006/"
           ]
+        },
+        {
+          "date": "2026-10-28",
+          "rankAtAction": null,
+          "rankSource": "gsc-ui",
+          "needs": "シリーズ名で検索した受験生が、レベルだけでなく自分の苦手分野に対応する巻を選びたい。",
+          "gap": [
+            "上位の出版社ページは各巻の分類と内容を説明するが、目的ごとの選び分けは分散している。対象ページは5冊の名前を挙げるだけで、他の巻の詳細へ進めなかった。"
+          ],
+          "done": "タイトルにシリーズ5冊の違いを示し、理論・計算・無機・有機・発想法の目的と各巻の詳細へのリンクを追加した。選び分けは編集部の提案と明記。理論編の正式書名・出版社・ISBNを出版社ページで照合し、確認元と確認日を表示した。",
+          "sources": [
+            "https://www.sundaibunko.jp/contents/book/15180/",
+            "https://www.sundaibunko.jp/contents/book/1017/",
+            "https://www.sundaibunko.jp/contents/book/4002/",
+            "https://www.sundaibunko.jp/contents/book/1013/",
+            "https://www.sundaibunko.jp/contents/book/1006/"
+          ]
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "date": "2026-10-28",
+          "result": "判定保留（表示なし）",
+          "rankSource": "gsc-ui",
+          "rank": null,
+          "impressions": 0,
+          "clicks": 0,
+          "note": "直近7日（2026-10-19〜10-25）の完全一致クエリは表示なし。平均順位は未計測で、0位と解釈しない。対象ページ全体は直近28日91表示・3クリック。前回28日平均との差では効果判定できない。"
+        }
+      ]
     }
   ]
 }

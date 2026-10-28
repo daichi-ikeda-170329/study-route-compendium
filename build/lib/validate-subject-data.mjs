@@ -35,7 +35,7 @@ const TYPES = {
   pros: 'array', cons: 'array', unis: 'array', alts: 'array',
   fb: 'object',
   // 書籍ページの本文を厚くするための任意項目（仕様書 3.1）。無い本は従来どおりの表示
-  pages: 'number', media: 'array', toc: 'array', howto: 'array', finish: 'string', editions: 'array',
+  pages: 'number', media: 'array', toc: 'array', howto: 'array', finish: 'string', editions: 'array', seriesGuide: 'array',
 };
 
 /** media に書いてよい値（書籍ページの基本情報「付属」） */
@@ -111,6 +111,16 @@ export function validateSubjectData(dir, data) {
       if (got !== want) { bad(`${key}.${f}: ${want} のはずが ${got}`); typed = false; }
     }
     if (typed) checkBookExtras(b, bad);
+    if (Array.isArray(b.seriesGuide)) {
+      if (b.seriesGuide.length < 2 || b.seriesGuide.length > 8) bad(`${key}.seriesGuide: 2〜8 冊にする`);
+      const seen = new Set();
+      for (const entry of b.seriesGuide) {
+        if (!entry || typeof entry.id !== 'string' || !data.books.some(other => other.id === entry.id)) bad(`${key}.seriesGuide: 同じ科目に存在する id が必要`);
+        if (!entry || typeof entry.note !== 'string' || !entry.note.trim()) bad(`${key}.seriesGuide: 選び分けの note が必要`);
+        if (seen.has(entry?.id)) bad(`${key}.seriesGuide: id が重複している`);
+        seen.add(entry?.id);
+      }
+    }
 
     // 不明を空文字や 0 で表していないか。**空文字は「無い」ではなく「書き忘れ」の合図**
     for (const f of ['official', 'pub', 'isbn13', 'hensachi', 'problems', 'hours', 'style']) {

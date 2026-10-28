@@ -20831,30 +20831,26 @@
   },
   "science:genten-riron": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-10-28",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796116589",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.sundaibunko.jp/contents/book/15180/",
+     "checkedAt": "2026-10-28"
     },
     "official": {
-     "status": "unverified",
-     "mismatch": {
-      "kind": "variant",
-      "similarity": 0.87,
-      "ours": "原点からの化学 化学の理論〈改訂版〉",
-      "theirs": "化学の理論 : 原点からの化学"
-     },
-     "checkedAt": "2026-09-04"
+     "status": "verified",
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.sundaibunko.jp/contents/book/15180/",
+     "checkedAt": "2026-10-28"
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796116589",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.sundaibunko.jp/contents/book/15180/",
+     "checkedAt": "2026-10-28"
     },
     "year": {
      "status": "unverified"

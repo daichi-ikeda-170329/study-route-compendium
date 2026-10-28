@@ -84,3 +84,9 @@ test('任意項目を持つ本には新しい節が出て、持たない本に�
   for (const h of ['構成', '使い方の手順', '終わりの基準', '改訂の履歴']) assert.doesNotMatch(html, new RegExp(`<h2 class="sec">${h}</h2>`));
   assert.doesNotMatch(html, /<dt>ページ数<\/dt>|<dt>付属<\/dt>/);
 });
+
+test('シリーズの案内は未知の巻・重複・目的の欠落を拒否する', () => {
+  for (const seriesGuide of [[], [{ id: 'rules4', note: '目的' }], [{ id: 'rules4', note: '目的' }, { id: 'unknown', note: '目的' }], [{ id: 'rules4', note: '目的' }, { id: 'rules4', note: '重複' }], [{ id: 'rules4', note: '' }, { id: 'sistan', note: '目的' }]]) {
+    assert.ok(validateSubjectData('english', withBook({ seriesGuide })).some(x => /seriesGuide/.test(x)));
+  }
+});

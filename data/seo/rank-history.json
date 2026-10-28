@@ -64,6 +64,20 @@
         }
       ],
       "note": "Search Console管理画面の7日間（2026-10-14〜10-20）、完全一致クエリ。1表示なので効果判定には使わない。"
+    },
+    {
+      "date": "2026-10-28",
+      "source": "manual",
+      "measurements": [
+        {
+          "keyword": "原点からの化学 レベル",
+          "rank": null,
+          "impressions": 0,
+          "clicks": 0,
+          "url": "https://route-taizen.com/science/books/genten-riron/"
+        }
+      ],
+      "note": "Search Console管理画面、直近7日2026-10-19〜10-25の完全一致。表示なしのため平均順位は未計測。"
     }
   ]
 }

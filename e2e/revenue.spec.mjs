@@ -118,6 +118,15 @@ test('志望校別ルートの一冊から購入先へ進んでも大学名を�
   ]);
 });
 
+test('原点からの化学の5冊を目的で選び、各巻の詳細に進める', async ({ page }) => {
+  await page.goto('/science/books/genten-riron/');
+  const guide = page.locator('.bk-series-guide');
+  await expect(guide.locator('a')).toHaveCount(5);
+  await guide.getByRole('link', { name: '原点からの化学 化学の計算〈四訂版〉', exact: true }).click();
+  await expect(page).toHaveURL(/\/science\/books\/genten-keisan\/$/);
+  await expect(page.locator('h1')).toContainText('化学の計算');
+});
+
 test('記事内の購入先は本文リンクの色に上書きされず44px以上で操作できる', async ({ page }) => {
   await page.goto('/english/guides/nextstage-vs-vintage/');
   const link = page.locator('.article-books [data-rt-buy="amazon"]').first();

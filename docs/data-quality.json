@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-17",
+ "generatedAt": "2026-10-28",
  "total": 1432,
  "byStatus": {
   "verified": 402,
@@ -59,7 +59,7 @@
   }
  },
  "fieldGaps": {
-  "official": 710,
+  "official": 709,
   "author": 1086,
   "problems": 1428,
   "year": 706,
@@ -98,7 +98,7 @@
  },
  "duplicateIsbn": [],
  "mismatchCounts": {
-  "official": 411,
+  "official": 410,
   "pub": 33,
   "year": 139
  },
