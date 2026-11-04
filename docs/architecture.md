@@ -53,6 +53,7 @@
 | `build/lib/words.mjs` | 禁止語・要注意語の一覧。`docs/style-guide.md` 2 節と同じものを持つ | 手で編集 |
 | `build/lib/updated.mjs` | 最終更新日。レコードの中身が変わった日を台帳で持つ | 手で編集 |
 | `build/apply-search-style.mjs` | 検索ボックスの CSS を `search.js` の `STYLE` から `site.css` と手書き HTML 9 枚へ配る | 手で編集 |
+| `build/theme.css` / `build/apply-theme.mjs` | **サイト共通の見た目の正本**（色・書体・角丸・カード。2026-11-04〜）と、それを圧縮して `site.css`・科目トップの CSS 7 本・手書き HTML 2 枚の末尾へ配るスクリプト | `theme.css` は手で編集。配り先のマーカー内は触らない |
 | `build/apply-book-text.mjs` | `data/_rewrite/` の説明文を `data/subjects/<科目>/books.json` に流し込む | 手で編集 |
 | `build/gen-ogp.mjs` | OGP 画像の生成。`--check` でデータとのずれを落とす | 手で編集 |
 | `build/ogp/` | OGP の SVG テンプレートと、ラスタライズに使うフォントの用意 | 手で編集 |
@@ -107,29 +108,30 @@ npm run build -- --no-ogp  # OGP 画像を飛ばす（依存パッケージが�
 | 2 | 科目データの形 | `build/snapshot-subject-data.mjs` |
 | 3 | 年度表記 | `build/apply-site-meta.mjs` |
 | 4 | 検索ボックスの CSS | `build/apply-search-style.mjs` |
-| 5 | 手書き HTML のフッター | `build/apply-footer.mjs` |
-| 6 | 書籍ページ | `build/generate-books.mjs` |
-| 7 | 索引・おすすめ | `build/generate-index.mjs` |
-| 8 | おすすめ | `build/generate-picks.mjs` |
-| 9 | 志望校別ルート | `build/generate-routes.mjs` |
-| 10 | 大学別ページ | `build/generate-universities.mjs` |
-| 11 | 解説記事 | `build/generate-articles.mjs` |
-| 12 | 学習ガイドの静的ページ | `build/generate-guides-static.mjs` |
-| 13 | 法務・信頼性ページ | `build/generate-legal.mjs` |
-| 14 | 学習の記録ページ | `build/generate-progress.mjs` |
-| 15 | 科目の配信アセット | `build/generate-subject-assets.mjs` |
-| 16 | 書影の出所台帳 | `build/generate-cover-ledger.mjs` |
-| 17 | 検索の絞り込み索引 | `build/generate-search-facets.mjs` |
-| 18 | 詳細検索ページ | `build/generate-search-page.mjs` |
-| 19 | 2 冊比較ページ | `build/generate-compare.mjs` |
-| 20 | 新刊・評価準備中の一覧 | `build/generate-new.mjs` |
-| 21 | 検索インデックス | `build/generate-search.mjs` |
-| 22 | 科目トップの事前描画 | `build/prerender-tops.mjs` |
-| 23 | 収録冊数 | `build/apply-count.mjs` |
-| 24 | sitemap | `build/generate-sitemap.mjs` |
-| 25 | データ品質レポート | `build/report-data-quality.mjs` |
-| 26 | OGP 画像 | `build/gen-ogp.mjs` |
-| 27 | 公開用 dist/ | `build/build-public.mjs` |
+| 5 | 共通の見た目（テーマ） | `build/apply-theme.mjs` |
+| 6 | 手書き HTML のフッター | `build/apply-footer.mjs` |
+| 7 | 書籍ページ | `build/generate-books.mjs` |
+| 8 | 索引・おすすめ | `build/generate-index.mjs` |
+| 9 | おすすめ | `build/generate-picks.mjs` |
+| 10 | 志望校別ルート | `build/generate-routes.mjs` |
+| 11 | 大学別ページ | `build/generate-universities.mjs` |
+| 12 | 解説記事 | `build/generate-articles.mjs` |
+| 13 | 学習ガイドの静的ページ | `build/generate-guides-static.mjs` |
+| 14 | 法務・信頼性ページ | `build/generate-legal.mjs` |
+| 15 | 学習の記録ページ | `build/generate-progress.mjs` |
+| 16 | 科目の配信アセット | `build/generate-subject-assets.mjs` |
+| 17 | 書影の出所台帳 | `build/generate-cover-ledger.mjs` |
+| 18 | 検索の絞り込み索引 | `build/generate-search-facets.mjs` |
+| 19 | 詳細検索ページ | `build/generate-search-page.mjs` |
+| 20 | 2 冊比較ページ | `build/generate-compare.mjs` |
+| 21 | 新刊・評価準備中の一覧 | `build/generate-new.mjs` |
+| 22 | 検索インデックス | `build/generate-search.mjs` |
+| 23 | 科目トップの事前描画 | `build/prerender-tops.mjs` |
+| 24 | 収録冊数 | `build/apply-count.mjs` |
+| 25 | sitemap | `build/generate-sitemap.mjs` |
+| 26 | データ品質レポート | `build/report-data-quality.mjs` |
+| 27 | OGP 画像 | `build/gen-ogp.mjs` |
+| 28 | 公開用 dist/ | `build/build-public.mjs` |
 
 **`generate-sitemap.mjs` は生成のあと**。lastmod を各ページの `<time datetime>` から拾うので、
 先に流すと 1 世代古い日付が入る。**`prerender-tops.mjs` は `generate-*` のあと**で、
@@ -467,3 +469,18 @@ print(sorted(set(bad)) or 'リンク切れなし')
 **この方針は守られていないと気づけない。** 2026-09-20 に AdSense が「有用性の低いコンテンツ」でサイトを却下した時点で、書籍ページ 1,390 枚の本文は 78% がページをまたいで一致する文だった。1 ページずつ読んでも定型文は自然に見えるので、全ページを横に並べて数えないと分からない。`test/book-uniqueness.test.mjs` がその共通率を測っていて、固有率が 20% を割ると落ちる（2026-09-21 の実測は 25.2%）。**全ページに同じ 1 文を足す前に、それを `/methodology/` かリンク先へ置けないかを先に考える。**
 
 説明文（`desc` / `pros` / `cons` / `bestFor`）を大きく書き換えるときは、書き換え前のスナップショットを `data/_backup/` に置く（手順は `data/_backup/README.md`）。
+
+## サイト共通の見た目（2026-11-04〜）
+
+**正本は `build/theme.css` の 1 枚。** 和風の版面（明朝の見出し・生成りの地・方眼の点・英字の飾り見出し・
+朱の差し色・判子風のロゴ）を、ゴシック 1 書体の落ち着いた版面に替えた。
+
+- 書体は Inter（英数字）＋ Noto Sans JP（和文）。明朝と等幅は使わない（`--serif`・`--mono` も同じ書体を指す）
+- 地は白、主色は `--indigo`（#1F4DB8）1 色。`--accent` も同じ色にして、差し色を増やさない。科目色（`--sc`）は科目の印にだけ使う
+- 角丸はカード 12px・ボタンと入力欄 10px・小さな札 6px にそろえる。影は浮かせるためではなく、ホバーの合図にだけ使う
+- 英字の飾り見出し（`.eyebrow`）は出さない。見出し本体と余白で区切る
+- 1px の隙間で罫線を引く一覧（`.univ-grid` など）は、末尾の空きマスに地の色が出るので、マスごとの枠に替えた
+
+`build/apply-theme.mjs` が注釈と空白を落として各 CSS の**末尾**へ書き込む（後ろに置くので値はこちらが勝つ）。
+生成ページのインライン `<style>` にある部品（`.tcard`・`.ugrid` など）は、後から読まれるので `:root` を付けて勝たせている。
+ずれは `npm run build -- --check`（`check:generated`）で落ちる。
