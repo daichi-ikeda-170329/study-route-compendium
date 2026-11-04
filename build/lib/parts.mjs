@@ -321,7 +321,7 @@ export function footer(curDir, counts) {
   ).join('\n');
   return `<footer class="site-foot">
   <div class="site-foot__in">
-    <div class="foot-subjects__t">Other subjects — 他の科目もあります</div>
+    <div class="foot-subjects__t">ほかの科目</div>
     <div class="foot-subjects__list">
 ${items}
     </div>

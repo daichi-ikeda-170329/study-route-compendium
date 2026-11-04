@@ -544,7 +544,7 @@
     }
 
     return notice + shareBox({
-      head: "SHARE — このルートを共有する",
+      head: "このルートを共有する",
       url: url,
       label: label,
       tweet: "【ルート大全】\n" + label + "のルートで進めます",

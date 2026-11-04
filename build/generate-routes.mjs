@@ -367,7 +367,7 @@ ${groups.map(g => g.keys.length > 1
     ${shareBar({
       url,
       image: true,
-      head: 'SHARE — このルートを共有する',
+      head: 'このルートを共有する',
       text: `【ルート大全】${tier.name}の${sub.ja}参考書ルート（${used.size}冊）`,
     })}
   </div>

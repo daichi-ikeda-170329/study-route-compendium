@@ -212,3 +212,5 @@ h1,h2,h3{word-break:auto-phrase;text-wrap:pretty}
   .stat b{font-size:22px;flex:none;min-width:68px}
   .stat span{margin-top:0}
 }
+.feat__no,.sbtn small{display:none}
+.foot-subjects__t{letter-spacing:.02em;text-transform:none}

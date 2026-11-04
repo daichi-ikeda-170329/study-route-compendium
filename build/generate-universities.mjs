@@ -700,7 +700,7 @@ ${med ? '      <a href="#med">医学部医学科</a>\n' : ''}${perSubject.map(p 
     </div>
     ${shareBar({
       url,
-      head: 'SHARE — このページを共有する',
+      head: 'このページを共有する',
       text: `【ルート大全】${name}の参考書ルート（全科目の出題傾向と使う参考書）`,
     })}
   </div>
