@@ -14,7 +14,7 @@ export const W = 1200;
 export const H = 630;
 
 /** 地の色。サイトの theme-color と同じ */
-const BG = '#F6F4EF';
+const BG = '#FFFFFF';  // 2026-11-04 にサイトの版面と合わせて白地にした（それまでは生成り #F6F4EF）
 /** 文字色。濃い順に見出し・本文・添え物 */
 const INK = '#1B2437';
 const INK2 = '#3A4152';
@@ -72,7 +72,6 @@ export function wrap(text, maxEm, lines) {
 /** 全ページ共通の下地（地の色・点の模様・上端の帯） */
 function base(color) {
   return `<rect width="${W}" height="${H}" fill="${BG}"/>
-<rect width="${W}" height="${H}" fill="url(#dots)"/>
 <rect width="${W}" height="10" fill="${color}"/>`;
 }
 
@@ -90,10 +89,18 @@ function footer() {
 <text x="1128" y="562" text-anchor="end" font-family="${SANS}" font-size="21" font-weight="500" fill="${INK3}">登録不要・完全無料</text>`;
 }
 
-/** 右上の科目マーク（英・国・数…）を入れた四角 */
+/**
+ * 右上の印。2026-11-04 から、漢字 1 字（英・国・数…）ではなくサイトの印（favicon.svg と同じ
+ * 「道筋とゴール」の線）を科目色の角丸の中に描く。mark は呼び出し側との互換のために受け取るだけ
+ */
 function badge(mark, color) {
-  return `<rect x="932" y="72" width="208" height="200" rx="10" fill="${color}"/>
-<text x="1036" y="222" text-anchor="middle" font-family="${SERIF}" font-size="128" font-weight="800" fill="#FFFFFF">${esc(mark)}</text>`;
+  void mark;
+  return `<g transform="translate(940 72) scale(3.125)">
+<rect width="64" height="64" rx="14" fill="${color}"/>
+<path d="M16 47 L28 35 L36 41 L48 22" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="16" cy="47" r="4.5" fill="#FFFFFF"/>
+<circle cx="48" cy="20" r="6.5" fill="#FFFFFF"/>
+</g>`;
 }
 
 /**

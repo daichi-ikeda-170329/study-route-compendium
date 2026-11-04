@@ -13,7 +13,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
-import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd } from './lib/parts.mjs';
+import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
 import { authorsOf, searchName, withAuthor, displayName } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
 import { bookCards, bookCard } from './lib/cards.mjs';
@@ -445,8 +445,8 @@ ${header(sub)}
         <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
         </div>
 ${placeholder ? '' : `        <div class="buy buy--hero" data-rt-placement="book_hero">
-          <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">Amazon で見る</a>
-          ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">楽天ブックスで検索</a>` : ''}
+          <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">Amazonで価格を見る</a>
+          ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">楽天ブックスで探す</a>` : ''}
           ${aff ? '<span class="buy__pr">広告リンク</span>' : ''}
         </div>`}
         <p class="bk-desc">${prov
@@ -543,11 +543,11 @@ ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
       <div class="buy" data-rt-placement="book_footer">
         <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
-          ${placeholder ? '志望校の過去問題集を検索' : 'Amazon で見る'}
+          ${placeholder ? '志望校の過去問題集を検索' : 'Amazonで価格を見る'}
         </a>
         ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 4h5v16H6a1 1 0 0 1-1-1V4Zm9 0h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4V4Z" stroke-width="1.9" stroke-linejoin="round"/></svg>
-          楽天ブックスで検索
+          楽天ブックスで探す
         </a>` : ''}
       </div>
       ${placeholder ? `<p class="buy__note buy__note--warn"><b>${esc(PLACEHOLDER_LABEL)}。</b>${esc(PLACEHOLDER_NOTE)}</p>` : ''}
@@ -567,6 +567,10 @@ ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
     </div>${adUnit('bottom')}
   </article>
 </main>
+${/* 共有の帯は <main> の外に置く（更新日は <main> の文字で決めるので、帯の文言を直しても 1,432 冊の日付が動かない） */ ''}
+<aside class="wrap wrap--read bk-share" aria-label="このページを共有">
+    ${shareBar({ url: `${ORIGIN}/${sub.dir}/books/${book.id}/`, head: 'この参考書を共有する', text: `【ルート大全】${bn}のレベルと使い方` })}
+</aside>
 ${placeholder ? '' : `
 <div class="buybar" data-rt-placement="book_sticky" hidden>
   <span class="buybar__name">${esc(bn)}</span>

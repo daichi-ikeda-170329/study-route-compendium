@@ -30,7 +30,7 @@ export function amazonUrl(b, tag) {
  * でしか取れず、このリポジトリはアプリ ID を持っていない。
  * 楽天のアプリ登録は IP アドレスの許可制で、GitHub Actions の実行 IP を
  * 登録しきれないため見送っている（経緯は docs/new-books-plan.md の 3 節）。
- * ボタンの文言を「楽天ブックスで検索」にして、遷移先と表示を一致させてある。
+ * ボタンの文言を「楽天ブックスで探す」にして、遷移先と表示を一致させてある。
  * 商品 ID を引けるようにしたら、ここと科目トップの rakutenURL() の両方を直す。
  */
 export function rakutenUrl(b, id) {
@@ -54,8 +54,8 @@ export function purchaseLinks(book, dir, config, placement) {
   const rk = rakutenUrl(book, config.rakutenId);
   const link = (store, url, label, affiliate) => `<a class="${store === 'amazon' ? 'az' : 'rk'}" href="${esc(url)}" target="_blank" rel="nofollow${affiliate ? ' sponsored' : ''} noopener noreferrer" data-rt-buy="${store}" data-rt-bid="${esc(book.id)}" data-rt-sub="${esc(dir)}" aria-label="${esc(book.official || book.name)}：${label}">${label}</a>`;
   return `<p class="buy__edition">${esc(book.official || book.name)}${book.isbn13 ? `／ISBN ${esc(book.isbn13)}` : ''}</p><div class="buy buy--inline" data-rt-placement="${esc(placement)}">`
-    + link('amazon', az, 'Amazon で見る', config.amazonTag)
-    + (rk ? link('rakuten', rk, '楽天ブックスで検索', config.rakutenId) : '')
+    + link('amazon', az, 'Amazonで価格を見る', config.amazonTag)
+    + (rk ? link('rakuten', rk, '楽天ブックスで探す', config.rakutenId) : '')
     + (config.amazonTag || config.rakutenId ? '<span class="buy__pr">広告リンク</span>' : '')
     + '</div>';
 }

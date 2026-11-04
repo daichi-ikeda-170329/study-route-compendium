@@ -223,7 +223,7 @@ function openModal(id){
   const amazon = (az||rk) ? `<div class="mb-block"><h6>購入・詳細を見る</h6>
     <div class="aff-actions" data-rt-placement="catalog_modal">
       ${az?`<a class="aff-btn amz" data-rt-buy="amazon" data-rt-bid="${b.id}" data-rt-sub="shoron" href="${az}" target="_blank" rel="nofollow${AFF_AZ?' sponsored':''} noopener noreferrer">Amazonで見る${ext}</a>`:""}
-      ${rk?`<a class="aff-btn rkt" data-rt-buy="rakuten" data-rt-bid="${b.id}" data-rt-sub="shoron" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener noreferrer">楽天ブックスで検索${ext}</a>`:""}
+      ${rk?`<a class="aff-btn rkt" data-rt-buy="rakuten" data-rt-bid="${b.id}" data-rt-sub="shoron" href="${rk}" target="_blank" rel="nofollow${AFF_RK?' sponsored':''} noopener noreferrer">楽天ブックスで探す${ext}</a>`:""}
     </div>
     <p class="aff-note">${AFF?`${AFF_STORES}へのリンクは広告リンクです。リンク経由で購入された場合、当サイトに紹介料が発生することがあります(価格は変わりません)。`:""}版の改訂により内容が異なる場合がありますので、購入前に販売ページで最新版をご確認ください。</p>
   </div>` : "";

@@ -28,7 +28,7 @@ const CHECK = process.argv.includes('--check');
 const ALLOW_FILES = [
   'index.html', '404.html',
   'robots.txt', 'sitemap.xml', 'ads.txt',
-  'favicon.svg', 'CNAME', '.nojekyll',
+  'favicon.svg', 'manifest.webmanifest', 'CNAME', '.nojekyll',
   // IndexNow の鍵ファイル。ファイル名が鍵そのものなので、名前で拾わず拡張子で拾う
 ];
 

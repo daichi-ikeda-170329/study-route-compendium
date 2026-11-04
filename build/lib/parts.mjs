@@ -45,6 +45,8 @@ export function head(o) {
 <meta name="twitter:description" content="${esc(o.desc)}">
 <meta name="twitter:image" content="${img}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#1F4DB8">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -216,11 +218,14 @@ export function portalHeader() {
 export function shareBar(o) {
   const text = `${o.text}\n\n${o.url}\n\n#ルート大全 #大学受験`;
   const x = `https://x.com/intent/post?text=${encodeURIComponent(text)}&via=${X_HANDLE}`;
+  // LINE の公式の共有 URL（assets/js/share.js の lineURL() と同じ組み立て）
+  const line = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(o.url)}&text=${encodeURIComponent(o.text)}`;
   return `<div class="sharebar">
     <span class="sharebar__t">${esc(o.head)}</span>
     <a class="sharebar__b" href="${esc(x)}" target="_blank" rel="noopener noreferrer">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>
       Xで共有</a>
+    <a class="sharebar__b" href="${esc(line)}" target="_blank" rel="noopener noreferrer">LINEで送る</a>
     <button class="sharebar__b" type="button" data-rt-copy="${esc(o.url)}">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9h10v10H9zM5 15H4V4h11v1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       リンクをコピー</button>${o.image ? `

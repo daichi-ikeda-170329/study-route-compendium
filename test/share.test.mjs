@@ -528,3 +528,13 @@ test('共有される URL は診断・ルートの状態をそのまま含む', 
   assert.ok(params.get('text').includes(url));
   assert.equal(new URL(params.get('text').split('\n').find(l => l.startsWith('http'))).search, '?v=1&a=2.1.0.1.1');
 });
+
+test('LINE で送る: 公式の共有 URL に、ページの URL と本文をそれぞれ符号化して渡す（科目トップと生成ページで同じ形）', () => {
+  const url = 'https://route-taizen.com/english/routes/march/';
+  const body = '【ルート大全】MARCH・関関同立の英語参考書ルート（16冊）';
+  const want = 'https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(body);
+  assert.equal(RTShare.__test.lineURL(body, url), want);
+  const html = shareBar({ url, head: 'このルートを共有する', text: body });
+  assert.ok(html.includes(want.replace(/&/g, '&amp;')), '生成ページの共有バーに LINE の URL が無い');
+  assert.match(html, />LINEで送る<\/a>/);
+});

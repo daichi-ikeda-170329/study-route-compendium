@@ -56,6 +56,13 @@
    *   （空行）
    *   ハッシュタグ  ← この後ろに X が " via @<X_HANDLE>" を足す
    */
+  /** LINE の「LINEで送る」（公式の共有 URL。https://developers.line.biz/ja/docs/line-social-plugins/install-guide/using-line-share-buttons/）。
+      ロゴは使わず文字のボタンにする */
+  function lineURL(body, url) {
+    return "https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent(String(url))
+      + "&text=" + encodeURIComponent(String(body));
+  }
+
   function intentURL(body, url) {
     var text = String(body) + "\n\n" + String(url) + "\n\n" + X_TAGS;
     var h = xHandle();
@@ -483,6 +490,7 @@
     btns += '<a class="btn btn-ghost" href="' + esc(xURL) + '" target="_blank" rel="noopener noreferrer" onclick="RTShare.trackShareX()">'
       + '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L5.9 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2Zm-1.1 18h1.7L7.3 3.8H5.5L17.8 20Z"/></svg>'
       + 'Xで共有</a>';
+    btns += '<a class="btn btn-ghost" href="' + esc(lineURL(opts.tweet, opts.url)) + '" target="_blank" rel="noopener noreferrer">LINEで送る</a>';
     if (canNative) {
       btns += '<button type="button" class="btn btn-ghost" onclick="RTShare.shareNative(this)">'
         + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v13M8 7l4-4 4 4M5 14v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -920,6 +928,7 @@
     /* テスト専用。ブラウザからは使わない（test/share.test.mjs が localStorage 周りを検証するために参照する） */
     __test: {
       intentURL: intentURL,
+      lineURL: lineURL,
       loadStore: loadStore,
       saveStore: saveStore,
       validItem: validItem,

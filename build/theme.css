@@ -214,3 +214,4 @@ h1,h2,h3{word-break:auto-phrase;text-wrap:pretty}
 }
 .feat__no,.sbtn small{display:none}
 .foot-subjects__t{letter-spacing:.02em;text-transform:none}
+@media(max-width:374px){.buy--hero a{flex-basis:100%}}

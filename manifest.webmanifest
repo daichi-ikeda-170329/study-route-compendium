@@ -1,0 +1,16 @@
+{
+  "name": "ルート大全 — 大学受験の参考書ルート",
+  "short_name": "ルート大全",
+  "description": "大学受験の参考書を難易度・役割・接続で整理し、志望校から参考書ルートを組み立てる無料サイト",
+  "lang": "ja",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1F4DB8",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

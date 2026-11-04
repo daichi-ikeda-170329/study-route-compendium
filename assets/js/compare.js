@@ -123,8 +123,8 @@
       bestFor: esc(b.bestFor || '—'),
       pros: list(b.pros),
       cons: list(b.cons),
-      buy: '<span class="cmpx__buy" data-rt-placement="compare"><a data-rt-buy="amazon" data-rt-bid="' + esc(b.id) + '" data-rt-sub="' + esc(x.key.dir) + '" href="' + esc(amazonURL(b, cfg)) + '" target="_blank" rel="' + rel + '">Amazon で見る</a>'
-        + (rk ? '<a data-rt-buy="rakuten" data-rt-bid="' + esc(b.id) + '" data-rt-sub="' + esc(x.key.dir) + '" href="' + esc(rk) + '" target="_blank" rel="nofollow sponsored noopener noreferrer">楽天ブックスで検索</a>' : '') + '</span>',
+      buy: '<span class="cmpx__buy" data-rt-placement="compare"><a data-rt-buy="amazon" data-rt-bid="' + esc(b.id) + '" data-rt-sub="' + esc(x.key.dir) + '" href="' + esc(amazonURL(b, cfg)) + '" target="_blank" rel="' + rel + '">Amazonで価格を見る</a>'
+        + (rk ? '<a data-rt-buy="rakuten" data-rt-bid="' + esc(b.id) + '" data-rt-sub="' + esc(x.key.dir) + '" href="' + esc(rk) + '" target="_blank" rel="nofollow sponsored noopener noreferrer">楽天ブックスで探す</a>' : '') + '</span>',
     };
   }
 
