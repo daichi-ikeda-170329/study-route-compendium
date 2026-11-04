@@ -100,6 +100,10 @@ export function fileDate(relPath) {
   } catch {
     return today();   // まだ生成していないファイル
   }
+  /* HTML は <main> の文字だけを比べる（2026-11-04〜）。書体・広告表記・共通 CSS のような
+     サイト全体の版面を替えただけで、100 枚を超えるページの更新日が一斉に進むのを防ぐ（偽更新）。
+     比べ方は書籍ページの pageContentDate と同じ */
+  if (relPath.endsWith('.html')) return recordDate(`file:${relPath}`, mainText(content));
   /* 更新日そのものが中身に含まれると、日付が入るたびにハッシュが変わって
      毎回「今日」になる。日付らしき並びを外してから比べる */
   const stripped = stripManaged(content).replace(/\d{4}-\d{2}-\d{2}/g, '');
@@ -130,7 +134,11 @@ export function subjectContentDate(dir, data) {
   try {
     html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
   } catch { /* まだ無いなら空で扱う */ }
-  const markup = stripManaged(html)
+  /* <head>（書体・CSS の ?v= など配り方）と、全ページ共通の広告表記は勘定に入れない（2026-11-04〜）。
+     サイト全体の版面を替えただけで 7 科目と派生ページ全部の日付が進むのを防ぐ */
+  const body = (html.match(/<body[\s\S]*<\/body>/) || [html])[0];
+  const markup = stripManaged(body)
+    .replace(/<aside class="pr-bar"[\s\S]*?<\/aside>/g, '')
     .replace(/<script[\s\S]*?<\/script>/g, '')
     // 読み込み状態の受け皿は、データを外へ出す仕組みが置く足場で、読者に見える中身ではない
     .replace(/<div id="rtLoadStatus"[^>]*><\/div>\s*/g, '')
@@ -221,9 +229,10 @@ export const DATE_PLACEHOLDER = '__RT_UPDATED__';
  * @param {string} html  `DATE_PLACEHOLDER` を更新日の位置に入れて生成したページ
  * @returns {string}     プレースホルダーを実際の日付に置き換えたページ
  */
-export function pageContentDate(key, html) {
+/** ページの <main> の文字（タグ・スクリプト・日付を除く）。更新日のハッシュの材料 */
+export function mainText(html) {
   const main = (html.match(/<main[\s\S]*<\/main>/) || [html])[0];
-  const text = stripManaged(main)
+  return stripManaged(main)
     .replace(/<script[\s\S]*?<\/script>/g, '')
     .replace(/<style[\s\S]*?<\/style>/g, '')
     .replace(/<[^>]+>/g, ' ')
@@ -231,6 +240,10 @@ export function pageContentDate(key, html) {
     .replace(/\d{4}-\d{2}-\d{2}/g, '')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+export function pageContentDate(key, html) {
+  const text = mainText(html);
   const d = recordDate(key, text);
   return html.split(DATE_PLACEHOLDER).join(d);
 }
