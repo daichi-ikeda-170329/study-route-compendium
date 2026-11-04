@@ -233,6 +233,8 @@ export const DATE_PLACEHOLDER = '__RT_UPDATED__';
 export function mainText(html) {
   const main = (html.match(/<main[\s\S]*<\/main>/) || [html])[0];
   return stripManaged(main)
+    // ページ内の目次（build/lib/book-toc.mjs）は見出しの写しなので数えない
+    .replace(/<nav class="bk-secnav"[\s\S]*?<\/nav>/g, '')
     .replace(/<script[\s\S]*?<\/script>/g, '')
     .replace(/<style[\s\S]*?<\/style>/g, '')
     .replace(/<[^>]+>/g, ' ')

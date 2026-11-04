@@ -514,6 +514,26 @@ img, svg, video, iframe { max-width: 100%; }
 .bcmp>.bcard{flex:1}
 .bcmp__go{align-self:flex-start;margin-top:6px;font-size:12px;font-weight:700;color:var(--indigo);text-decoration:underline;text-underline-offset:2px;padding:4px 0}
 
+/* ---------- 書籍ページ: このページの目次（build/lib/book-toc.mjs） ---------- */
+.bk-secnav{display:flex;gap:8px;margin-top:28px;padding:2px 0 6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.bk-secnav::-webkit-scrollbar{display:none}
+.bk-secnav a{flex:none;display:inline-flex;align-items:center;min-height:36px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:13px;font-weight:600;color:var(--ink-2);white-space:nowrap}
+.bk-secnav a:hover{border-color:var(--line-d);background:var(--surface-2)}
+@media(min-width:760px){.bk-secnav{flex-wrap:wrap;overflow:visible}}
+h2.sec[id]{scroll-margin-top:96px}
+
+/* ---------- 書籍ページ: スマホの追従購入バー（assets/js/book-page.js） ---------- */
+.buybar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;align-items:center;gap:8px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(16,24,40,.08)}
+.buybar[hidden]{display:none}
+.buybar__name{flex:1;min-width:0;font-size:12.5px;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.buybar a{flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border-radius:10px;font-size:13px;font-weight:700}
+.buybar a.az{background:#14171F;color:#fff}
+.buybar a.rk{background:#fff;color:#BF0000;border:1px solid #BF0000}
+.buybar__pr{flex:none;font-size:10.5px;color:var(--muted)}
+body.has-buybar{padding-bottom:72px}
+@media(min-width:760px){.buybar{display:none!important}body.has-buybar{padding-bottom:0}}
+@media(max-width:374px){.buybar__name{display:none}}
+
 /* rt-search:start — build/apply-search-style.mjs が assets/js/search.js の STYLE から書き込む。手で編集しない */
 :root{--rt-search-css:1}
 .app-header__in{flex-wrap:wrap}

@@ -7,6 +7,7 @@
  *
  * 出力先は <科目>/books/<id>/index.html。
  */
+import { addSectionNav } from './lib/book-toc.mjs';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -430,7 +431,7 @@ ${header(sub)}
 <main class="wrap wrap--read">
   ${crumbs(crumbItems)}
 
-  <article>
+  <article data-rt-recent="${esc(JSON.stringify({ id: book.id, sub: sub.dir, sj: sub.ja, n: bn }))}">
     <div class="bk-hero">
       <div class="bk-cover">
         <div class="ph"><b>${esc(bn)}</b><span>${esc(book.pub)}</span></div>
@@ -566,6 +567,13 @@ ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
     </div>${adUnit('bottom')}
   </article>
 </main>
+${placeholder ? '' : `
+<div class="buybar" data-rt-placement="book_sticky" hidden>
+  <span class="buybar__name">${esc(bn)}</span>
+  <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">Amazon</a>
+  ${rk ? `<a class="rk" href="${esc(rk)}" target="_blank" rel="${relRk}" data-rt-buy="rakuten" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">楽天ブックス</a>` : ''}
+  ${aff ? '<span class="buybar__pr">広告</span>' : ''}
+</div>`}
 
 ${footer(sub.dir, counts)}
 
@@ -573,6 +581,7 @@ ${jsonLd(ld)}
 
 <script src="/assets/js/progress.js" defer></` + `script>
 <script src="/assets/js/progress-control.js" defer></` + `script>
+<script src="/assets/js/book-page.js" defer></` + `script>
 
 </body>
 </html>
@@ -607,7 +616,7 @@ for (const sub of targets) {
   for (const book of list) {
     const outDir = path.join(ROOT, sub.dir, 'books', book.id);
     fs.mkdirSync(outDir, { recursive: true });
-    const html = renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, tiers: d.tiers, counts, config, data: d });
+    const html = addSectionNav(renderBook(book, { sub, books: d.books, stages: d.stages, routes: d.routes, tiers: d.tiers, counts, config, data: d }));
     fs.writeFileSync(path.join(outDir, 'index.html'), pageContentDate(`${sub.dir}/${book.id}`, html));
     written++;
   }

@@ -67,7 +67,7 @@ allowlist と契約だけが先に書かれ、呼び出しは 2026-09-19 時点�
 `subject_id` は収録している 7 科目のいずれか、`book_id` と `filter_id` は
 `[a-z0-9][a-z0-9_-]*`、`store` は `amazon` か `rakuten` だけ。
 
-`placement` は `book_hero`（書籍上部）、`book_footer`（書籍下部）、
+`placement` は `book_hero`（書籍上部）、`book_footer`（書籍下部）、`book_sticky`（スマホで画面下に追従する購入バー。2026-11-04〜）、
 `catalog_modal`（図鑑の詳細画面）、`compare`（2 冊比較）、`article`（解説記事）、`route_step`（志望校別ルート）の固定値だけ。
 図鑑と比較は2026-10-23、解説記事と志望校別ルートは2026-10-28から記録する。以前の計測にはこれらのクリックが含まれないため、
 追加前後の件数の差を、そのまま改善効果と判断しない。

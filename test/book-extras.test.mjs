@@ -51,7 +51,7 @@ test('The Rules 4 の「この本の前に置く本」に rules3 か yatte700 �
   const prev = pickPrev(en.books.find(b => b.id === 'rules4'), en.books, en.routes, en.tiers).map(x => x.book.id);
   assert.ok(prev.includes('rules3') || prev.includes('yatte700'), prev.join(', '));
   const html = fs.readFileSync(path.join(ROOT, 'english/books/rules4/index.html'), 'utf8');
-  assert.match(html, /<h2 class="sec">この本の前に置く本<\/h2>/);
+  assert.match(html, /<h2 class="sec"[^>]*>この本の前に置く本<\/h2>/);
   assert.match(html, /href="\/english\/books\/(rules3|yatte700)\/"/);
 });
 
@@ -72,16 +72,16 @@ test('任意項目を持つ本には新しい節が出て、持たない本に�
   for (const [dir, id] of [['english', 'rules4'], ['english', 'sistan'], ['english', 'porepore'], ['math', 'ao']]) {
     const b = loadSubjectData(ROOT, dir).books.find(x => x.id === id);
     const html = fs.readFileSync(path.join(ROOT, `${dir}/books/${id}/index.html`), 'utf8');
-    if (b.toc) assert.match(html, /<h2 class="sec">構成<\/h2>/, `${id}: 構成が無い`);
-    if (b.howto) assert.match(html, /<h2 class="sec">使い方の手順<\/h2>/, `${id}: 使い方の手順が無い`);
-    if (b.finish) assert.match(html, /<h2 class="sec">終わりの基準<\/h2>/, `${id}: 終わりの基準が無い`);
-    if (b.editions) assert.match(html, /<h2 class="sec">改訂の履歴<\/h2>/, `${id}: 改訂の履歴が無い`);
+    if (b.toc) assert.match(html, /<h2 class="sec"[^>]*>構成<\/h2>/, `${id}: 構成が無い`);
+    if (b.howto) assert.match(html, /<h2 class="sec"[^>]*>使い方の手順<\/h2>/, `${id}: 使い方の手順が無い`);
+    if (b.finish) assert.match(html, /<h2 class="sec"[^>]*>終わりの基準<\/h2>/, `${id}: 終わりの基準が無い`);
+    if (b.editions) assert.match(html, /<h2 class="sec"[^>]*>改訂の履歴<\/h2>/, `${id}: 改訂の履歴が無い`);
     if (typeof b.pages === 'number') assert.match(html, /<dt>ページ数<\/dt>/, `${id}: ページ数が無い`);
     if (b.toc && b.howto) assert.doesNotMatch(html, /には \d+ 冊を収録しています/, `${id}: 定型の位置づけ文が残っている`);
   }
   const plain = en.books.find(b => !b.toc && !b.howto && !b.finish && !b.editions && b.pages === undefined && !b.media && !b.provisional);
   const html = fs.readFileSync(path.join(ROOT, `english/books/${plain.id}/index.html`), 'utf8');
-  for (const h of ['構成', '使い方の手順', '終わりの基準', '改訂の履歴']) assert.doesNotMatch(html, new RegExp(`<h2 class="sec">${h}</h2>`));
+  for (const h of ['構成', '使い方の手順', '終わりの基準', '改訂の履歴']) assert.doesNotMatch(html, new RegExp(`<h2 class="sec"[^>]*>${h}</h2>`));
   assert.doesNotMatch(html, /<dt>ページ数<\/dt>|<dt>付属<\/dt>/);
 });
 
