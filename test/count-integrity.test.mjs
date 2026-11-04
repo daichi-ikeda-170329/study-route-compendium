@@ -38,7 +38,7 @@ function htmlFiles(dir = ROOT, out = []) {
 const HTML = htmlFiles();
 
 test('全公開 HTML のフッターの科目別冊数が元データと一致する', () => {
-  const re = /<b>([^<]*?)ルート大全<\/b><span>([\d,]+) BOOKS<\/span>/g;
+  const re = /<b>([^<]*?)ルート大全<\/b><span>([\d,]+)冊<\/span>/g;
   const bad = [];
   let seen = 0;
   for (const file of HTML) {
@@ -56,8 +56,8 @@ test('全公開 HTML のフッターの科目別冊数が元データと一致�
 });
 
 test('フッター検査は理科の表示を変えれば落ちる（検査そのものが効いていることの確認）', () => {
-  const fixture = '<b>理科ルート大全</b><span>375 BOOKS</span>';
-  const m = /<b>([^<]*?)ルート大全<\/b><span>([\d,]+) BOOKS<\/span>/.exec(fixture);
+  const fixture = '<b>理科ルート大全</b><span>375冊</span>';
+  const m = /<b>([^<]*?)ルート大全<\/b><span>([\d,]+)冊<\/span>/.exec(fixture);
   assert.notEqual(byJa.get(m[1]), Number(m[2]), '375 が理科の実数と一致してしまっている。fixture を実数以外へ変える');
 });
 

@@ -316,7 +316,7 @@ export function footer(curDir, counts) {
   const items = SUBJECTS.map(s =>
     `      <a href="/${s.dir}/" style="--fsc:${s.color}"${s.dir === curDir ? ' aria-current="page"' : ''}>
         <span class="fs-mark" aria-hidden="true">${s.mark}</span>
-        <span class="fs-txt"><b>${s.full}</b><span>${counts[s.dir]} BOOKS</span></span>
+        <span class="fs-txt"><b>${s.full}</b><span>${counts[s.dir]}冊</span></span>
       </a>`
   ).join('\n');
   return `<footer class="site-foot">

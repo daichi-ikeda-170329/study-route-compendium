@@ -435,7 +435,7 @@ function renderIndex(sub, d, norm, counts) {
     const node = norm[t.id];
     for (const tk of Object.keys(node.tracks)) for (const p of POLICIES) (node.tracks[tk][p.key] || []).forEach(s => n.add(s.id));
     return `      <a class="tcard" href="/${sub.dir}/routes/${t.id}/" style="--tc:${t.color || sub.color}">
-        <div class="tcard__no">ROUTE ${String(i + 1).padStart(2, '0')}<span>${n.size}冊</span></div>
+        <div class="tcard__no">ルート ${String(i + 1).padStart(2, '0')}<span>${n.size}冊</span></div>
         <b>${esc(t.name)}</b>
         <span class="tcard__sub">${esc(t.sub)}</span>
         <div class="tcard__foot"><span>${esc(t.goal)}</span><span class="mono">${esc(t.hensachi)}</span></div>

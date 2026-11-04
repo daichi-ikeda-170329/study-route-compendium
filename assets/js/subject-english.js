@@ -633,7 +633,7 @@ function closeModal(){
 function buildRoutePicker(){
   document.getElementById("routePicker").innerHTML = TIERS.map(t=>`
     <button class="rpick${S.mode==="tier"&&S.tier===t.id?" sel":""}" style="--tc:${t.color}" onclick="selectTier('${t.id}')">
-      <span class="rpick__no">ROUTE ${t.no}</span>
+      <span class="rpick__no">ルート ${t.no}</span>
       <b>${t.name}</b><span>${t.sub}</span>
     </button>`).join("");
 }
@@ -992,13 +992,13 @@ function renderHome(){
     const g = ROUTES[t.id].ri || ROUTES[t.id].bun;
     const seq = g.quick || g.omni;
     return `<div class="rp-card" style="--tc:${t.color}" role="button" tabindex="0" onclick="selectTier('${t.id}');go('route')">
-      <div class="rp-card__no"><span>ROUTE ${t.no}</span><em>${seq.length} STEPS</em></div>
+      <div class="rp-card__no"><span>ルート ${t.no}</span><em>${seq.length} ステップ</em></div>
       <h3>${t.name}</h3><p>${t.sub} — ${t.goal}</p>
     </div>`;
   }).join("");
   document.getElementById("homeSenseis").innerHTML = SENSEIS.map(s=>{
     return `<div class="rp-card" style="--tc:${s.color}" role="button" tabindex="0" onclick="selectSensei('${s.id}');go('route')">
-      <div class="rp-card__no"><span>TEACHER ROUTE</span><em>${s.seq.length} STEPS</em></div>
+      <div class="rp-card__no"><span>講師のルート</span><em>${s.seq.length} ステップ</em></div>
       <h3>${s.name}</h3><p>${s.tag} — ${s.sub}</p>
     </div>`;
   }).join("");

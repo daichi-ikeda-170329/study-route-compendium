@@ -5,6 +5,11 @@
       "file": "README.md",
       "value": 1052,
       "reason": "GitHub リポジトリの Description に現在入っている古い文言をそのまま引用している箇所。運営者が gh repo edit で直したことを確かめるための照合対象なので、サイト側の冊数に追従させてはいけない。Description を直したらこの引用ごと消す。"
+    },
+    {
+      "file": "test/count-integrity.test.mjs",
+      "value": 375,
+      "reason": "フッターの科目別冊数を読む正規表現の単体テスト用の架空の値。2026-11-04 に表記を「n BOOKS」から「n冊」に替えたため、冊数の検索に掛かるようになった。実データに追従させない"
     }
   ]
 }

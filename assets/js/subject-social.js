@@ -614,7 +614,7 @@ function closeModal(){
 function buildRoutePicker(){
   document.getElementById("routePicker").innerHTML = TIERS.map(t=>`
     <button class="rpick${S.tier===t.id?" sel":""}" style="--tc:${t.color}" onclick="selectTier('${t.id}')">
-      <span class="rpick__no">ROUTE ${t.no}</span>
+      <span class="rpick__no">ルート ${t.no}</span>
       <b>${t.name}</b><span>${t.sub}</span>
     </button>`).join("");
 }
@@ -961,7 +961,7 @@ function renderRouteBody(){
     return `
       <div class="subj-head" style="--sc:${SUBJ[sk].color}">
         <div class="subj-head__spacer"><div class="subj-head__mark">${SUBJ[sk].short}</div></div>
-        <div class="subj-head__ttl"><h4>${SUBJ[sk].label}ルート</h4><span>${sActive} 冊 ・ 約 ${sHours}h</span><span class="sh-meta">${S.policy==="omni"?"OMNI":"QUICK"} / ${seq.length} STEPS</span></div>
+        <div class="subj-head__ttl"><h4>${SUBJ[sk].label}ルート</h4><span>${sActive} 冊 ・ 約 ${sHours}h</span><span class="sh-meta">${S.policy==="omni"?"OMNI":"QUICK"} / ${seq.length} ステップ</span></div>
       </div>
       ${plan.note?`<div class="subj-note-row"><div class="para-head__spacer"></div><div class="subj-note">${plan.note}</div></div>`:""}
       ${nodes}
@@ -1013,7 +1013,7 @@ function renderHome(){
     const seqs = SUBJ_KEYS.map(k=>(ROUTES[t.id][k]&&ROUTES[t.id][k].omni)||[]);
     const total = seqs.reduce((a,s)=>a+s.length,0);
     return `<div class="rp-card" style="--tc:${t.color}" role="button" tabindex="0" onclick="selectTier('${t.id}');go('route')">
-      <div class="rp-card__no"><span>ROUTE ${t.no}</span><em>${total} STEPS</em></div>
+      <div class="rp-card__no"><span>ルート ${t.no}</span><em>${total} ステップ</em></div>
       <h3>${t.name}</h3><p>${t.sub} — ${t.goal}</p>
     </div>`;
   }).join("");

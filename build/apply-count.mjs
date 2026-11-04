@@ -246,7 +246,7 @@ function subjectTopRules(total, picks, unis) {
 
 
 /**
- * フッターの科目別冊数「◯◯ルート大全 / n BOOKS」を、科目 ID と表示値の組で検査する。
+ * フッターの科目別冊数「◯◯ルート大全 / n冊」を、科目 ID と表示値の組で検査する。
  *
  * sweep() は「実データに存在する数字か」しか見ないので、**別の科目の正しい冊数を
  * 別の科目の欄に書いてしまった誤りを素通りさせる**。2026-09 に理科の欄だけが
@@ -258,7 +258,7 @@ function subjectTopRules(total, picks, unis) {
  */
 function applyFooterBooks(t, write) {
   const byJa = new Map(SUBJECTS.map(s => [s.ja, t.subjects[s.dir]]));
-  const re = /(<b>([^<]*?)ルート大全<\/b><span>)([\d,]+)( BOOKS<\/span>)/g;
+  const re = /(<b>([^<]*?)ルート大全<\/b><span>)([\d,]+)(冊<\/span>)/g;
   const missing = [];
   let hits = 0, files = 0, seen = 0;
 

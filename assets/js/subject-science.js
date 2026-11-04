@@ -634,7 +634,7 @@ function closeModal(){
 function buildRoutePicker(){
   document.getElementById("routePicker").innerHTML = TIERS.map(t=>`
     <button class="rpick${S.tier===t.id?" sel":""}" style="--tc:${t.color}" onclick="selectTier('${t.id}')">
-      <span class="rpick__no">ROUTE ${t.no}</span>
+      <span class="rpick__no">ルート ${t.no}</span>
       <b>${t.name}</b><span>${t.sub}</span>
     </button>`).join("");
 }
@@ -978,7 +978,7 @@ function renderRouteBody(){
     return `
       <div class="subj-head" style="--sc:${SUBJ[sk].color}">
         <div class="subj-head__spacer"><div class="subj-head__mark">${SUBJ[sk].short}</div></div>
-        <div class="subj-head__ttl"><h4>${SUBJ[sk].label}${S.basic?"基礎":""}ルート${S.basic?`<span class="sh-basic">文系・共テ</span>`:""}</h4><span>${sActive} 冊 ・ 約 ${sHours}h</span><span class="sh-meta">${S.policy==="omni"?"OMNI":"QUICK"} / ${seq.length} STEPS</span></div>
+        <div class="subj-head__ttl"><h4>${SUBJ[sk].label}${S.basic?"基礎":""}ルート${S.basic?`<span class="sh-basic">文系・共テ</span>`:""}</h4><span>${sActive} 冊 ・ 約 ${sHours}h</span><span class="sh-meta">${S.policy==="omni"?"OMNI":"QUICK"} / ${seq.length} ステップ</span></div>
       </div>
       ${plan.note?`<div class="subj-note-row"><div class="para-head__spacer"></div><div class="subj-note na-note">${plan.note}</div></div>`:""}
       ${nodes}
@@ -1049,7 +1049,7 @@ function renderHome(){
   document.getElementById("homeRoutes").innerHTML = TIERS.map(t=>{
     const total = SUBJ_KEYS.reduce((a,k)=>a+(ROUTES[t.id][k].omni||[]).length,0) + (ROUTES[t.id].final||[]).length;
     return `<div class="rp-card" style="--tc:${t.color}" role="button" tabindex="0" onclick="selectTier('${t.id}');go('route')">
-      <div class="rp-card__no"><span>ROUTE ${t.no}</span><em>${total} STEPS</em></div>
+      <div class="rp-card__no"><span>ルート ${t.no}</span><em>${total} ステップ</em></div>
       <h3>${t.name}</h3><p>${t.sub} — ${t.goal}</p>
     </div>`;
   }).join("");

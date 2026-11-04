@@ -189,3 +189,26 @@ h1,h2,h3{word-break:auto-phrase;text-wrap:pretty}
 }
 :root .unav a{border-radius:10px}
 .sharebar__t{letter-spacing:.04em}
+
+/* ---------- 印・アイコンを減らす（2026-11-04） ----------
+   色付きの四角に漢字 1 字を置く印（英・国・数・全…）や、灰色の箱に入れた飾りのアイコンは
+   「テンプレートの見た目」に寄るので出さない。科目は名前の文字で示し、色は文字色にだけ使う */
+.logo__mark,.subj__mark,.idx-mark,.fs-mark,.links .m,.subj-head__mark,.rt-search__mark,.feat__ic,.opt__ic{display:none!important}
+.logo{gap:0}
+.logo__txt b{font-size:17px;letter-spacing:.02em}
+.logo__txt span{display:none}
+.subj__en{display:none}
+.subj__head{gap:0}
+.subj__name{font-size:19px}
+.hero__badge i,.bk-tag i,.hero__quick a::before{display:none}
+.hero__badge{padding:5px 12px}
+.g-num{background:none;color:var(--muted);width:auto;height:auto;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.g-card.open .g-num{background:none;color:var(--indigo)}
+.cg-flag{box-shadow:none}
+.guide-num{display:none}
+@media(max-width:559px){
+  .stat-row{grid-template-columns:1fr}
+  .stat{display:flex;align-items:baseline;gap:14px;padding:12px 16px}
+  .stat b{font-size:22px;flex:none;min-width:68px}
+  .stat span{margin-top:0}
+}
