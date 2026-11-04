@@ -37,8 +37,12 @@ const SUBJECT_HTML_MAX = 77_000;
 /** 理科は描画コードとデータが最大の科目。HTML も上と同じ基準（実測 68,092 + 10%）で締める */
 const SCIENCE_HTML_MAX = 75_000;
 
-/** 科目トップの CSS（assets/css/subject-<科目>.css）。実測の最大は理科の 62,153。+10% */
-const SUBJECT_CSS_MAX = 68_500;
+/**
+ * 科目トップの CSS（assets/css/subject-<科目>.css）。実測の最大は理科の 62,153。+10%。
+ * 2026-11-04 に全ページ共通のデザイン（build/theme.css を圧縮して約 8KB）を末尾へ足し、
+ * 理科が 72,791 になった。同じ基準（実測 + 10%）で引き直す
+ */
+const SUBJECT_CSS_MAX = 80_000;
 
 /** 全ページ共通の検索索引。S8 で膨らませないための歯止め（実測 235,925） */
 const BOOK_INDEX_MAX = 300_000;

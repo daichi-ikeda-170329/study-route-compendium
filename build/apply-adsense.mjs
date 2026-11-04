@@ -46,7 +46,7 @@ const LOADER_RE = /<!-- Google AdSense -->\n(?:<meta name="google-adsense-accoun
  * 「掲載しています」ではなく「掲載することがあります」。審査の通過前や、
  * 広告ユニットを 1 つも置いていない状態でも事実に反しないため。
  */
-const PR_SENTENCE = 'また、Google AdSense による<b>第三者配信の広告</b>を掲載することがあります。';
+const PR_SENTENCE = 'また、Google AdSense の<b>第三者配信広告</b>を掲載することがあります。';
 const PR_BAR_RE = /(<aside class="pr-bar" id="prBar"[^>]*>)([\s\S]*?)(<\/aside>)/;
 
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
