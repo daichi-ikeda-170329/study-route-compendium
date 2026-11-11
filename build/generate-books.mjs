@@ -14,6 +14,7 @@ import { fileURLToPath } from 'url';
 import { SUBJECTS, SUB_LABELS, ORIGIN, esc, clip } from './lib/extract.mjs';
 import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { head, topBars, header, crumbs, footer, jsonLd, breadcrumbLd, shareBar } from './lib/parts.mjs';
+import { articlesForBook } from './lib/article-refs.mjs';
 import { authorsOf, searchName, withAuthor, displayName } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
 import { bookCards, bookCard } from './lib/cards.mjs';
@@ -387,6 +388,14 @@ ${howto.map(h => `        <li><b>${esc(h.phase)}</b>${esc(h.do)}</li>`).join('\n
     </section>` : '';
 
   const routeSection = routePositionSection(book, ctx, bn);
+  // この本を取り上げた解説記事（記事 → 書籍の逆引き。定型の説明文は置かず、記事名だけを並べる）
+  const arts = isProvisional(book) ? [] : articlesForBook(sub.dir, book.id);
+  const articleSection = arts.length ? `<section class="block">
+      <h2 class="sec">この本を取り上げた解説記事</h2>
+      <ul class="bk-arts">
+${arts.map(x => `        <li><a href="${x.href}">${esc(x.title)}</a></li>`).join('\n')}
+      </ul>
+    </section>` : '';
   const prevSection = prevs.length ? `<section class="block">
       <div class="eyebrow">Before this book</div>
       <h2 class="sec">この本の前に置く本</h2>
@@ -537,7 +546,7 @@ ${bookCard(a, sub, stages, { note: cardNote(book, a) })}
 ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
     </section>` : ''}
 
-    ${editionSection}${editionSection ? '\n\n' : ''}    <section class="block">
+    ${articleSection}${articleSection ? '\n\n    ' : ''}${editionSection}${editionSection ? '\n\n' : ''}    <section class="block">
       <div class="eyebrow">Where to buy</div>
       <h2 class="sec">購入する</h2>
       <div class="buy" data-rt-placement="book_footer">
