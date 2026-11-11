@@ -132,6 +132,7 @@ test('記事内の購入先は本文リンクの色に上書きされず44px以�
   const link = page.locator('.article-books [data-rt-buy="amazon"]').first();
   await expect(link).toBeVisible();
   const style = await link.evaluate(el => ({ color: getComputedStyle(el).color, height: el.getBoundingClientRect().height }));
-  expect(style.color).toBe('rgb(255, 255, 255)');
+  // Amazon のボタンは黄色地に濃い文字（build/theme.css の .buy a.az。2026-11-11）。本文リンクの青になっていないことを見る
+  expect(style.color).toBe('rgb(17, 24, 39)');
   expect(style.height).toBeGreaterThanOrEqual(44);
 });

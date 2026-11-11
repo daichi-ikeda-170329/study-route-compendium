@@ -1,18 +1,21 @@
-/* ルート大全 2026-11 デザイン（正本: build/theme.css。配るのは build/apply-theme.mjs） */
+/* ルート大全 2026-11 デザイン（正本: build/theme.css。配るのは build/apply-theme.mjs）
+   前半は 11-04 の版面（白地・ゴシック 1 書体）。末尾の「2026-11-11」の節が、その上に色の奥行き・
+   購入ボタンの色・スマホのヘッダー・カードの動きを足す。後ろの規則が勝つ */
 :root{
-  --paper:#FFFFFF; --surface:#FFFFFF; --surface-2:#F7F8FA; --surface-3:#F0F2F5;
-  --ink:#14171F; --ink-2:#3A404C; --muted:#596170; --muted-2:#636B7A;
-  --line:#E4E7EC; --line-2:#EEF0F3; --line-d:#D0D5DD;
+  --paper:#FFFFFF; --surface:#FFFFFF; --surface-2:#F6F8FC; --surface-3:#EEF1F7;
+  --ink:#0F1728; --ink-2:#333B4D; --muted:#566074; --muted-2:#5F697C;
+  --line:#E2E6EE; --line-2:#EDF0F5; --line-d:#CBD2DE;
   --indigo:#1F4DB8; --indigo-deep:#173C91; --indigo-soft:#EEF3FC;
   --accent:#1F4DB8; --accent-deep:#173C91; --accent-soft:#EEF3FC;
   --gold:#7E5E14; --gold-soft:#F8F2E2;
   --ok:#1D7348; --ok-soft:#E8F4EE;
   --jp:"Inter","Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
   --serif:var(--jp); --mono:var(--jp);
-  --sh-s:0 1px 2px rgba(16,24,40,.04);
-  --sh-m:0 6px 16px rgba(16,24,40,.07),0 1px 3px rgba(16,24,40,.05);
+  --sh-s:0 1px 2px rgba(15,23,40,.05);
+  --sh-m:0 8px 22px rgba(15,23,40,.08),0 1px 3px rgba(15,23,40,.05);
   --sh-l:0 16px 40px rgba(16,24,40,.12);
-  --r-s:8px; --r-m:12px; --r-l:16px;
+  --r-s:8px; --r-m:14px; --r-l:20px;
+  --tint:#F3F6FD; --navy:#0C1A3D; --buy:#FFB81C; --buy-h:#F5A800; --rk:#BF0000;
 }
 body{background:var(--paper);background-image:none;letter-spacing:0;font-feature-settings:"tnum" 0}
 ::selection{background:#CFDCF7;color:var(--ink)}
@@ -215,3 +218,182 @@ h1,h2,h3{word-break:auto-phrase;text-wrap:pretty}
 .feat__no,.sbtn small{display:none}
 .foot-subjects__t{letter-spacing:.02em;text-transform:none}
 @media(max-width:374px){.buy--hero a{flex-basis:100%}}
+
+/* =====================================================================
+   2026-11-11: 色の奥行き・購入ボタン・スマホのヘッダー・カードの動き
+   ねらいは 3 つ。(1) 最初の 1 画面で「何のサイトか」と次の一手が分かる
+   (2) 購入ボタンをページの中でいちばん目立つ色にする (3) スマホで本文までの距離を縮める
+   ===================================================================== */
+body{overflow-x:clip}
+h2.sec{font-size:23px}
+@media(min-width:700px){h2.sec{font-size:28px}}
+.sec-lead{font-size:14px;margin-top:2px}
+
+/* ---------- ヘッダー: スマホは印と検索を 1 行に収める（本文までの距離を約 50px 縮める） ---------- */
+.pr-bar{font-size:10.5px;padding:4px 14px;line-height:1.5}
+.xbar a.xl{padding:9px 11px;font-size:13px}
+.xbar a.xl[aria-current="page"]{color:var(--indigo)}
+.app-header{backdrop-filter:saturate(1.4) blur(14px);background:rgba(255,255,255,.9)}
+.logo__txt b{background:linear-gradient(100deg,var(--navy) 30%,var(--indigo));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.rt-search__in{height:42px;border-radius:999px;padding:0 16px;background:var(--surface-2);border-color:var(--line)}
+.rt-search input{font-size:16px}
+@media(min-width:700px){.rt-search input{font-size:13.5px}}
+@media(max-width:1099px){
+  .app-header__in{flex-wrap:nowrap;padding-top:8px;padding-bottom:8px;gap:10px}
+  .rt-search{flex:1 1 0;order:0}
+  .logo{flex:none;max-width:44%}
+  .logo__txt b{font-size:15px;white-space:nowrap}
+  .rt-search__pop{position:fixed;left:10px;right:10px;width:auto}
+}
+@media(max-width:899px){.hdr-cta,.app-header .nav-desktop{display:none}}
+
+/* ---------- ヒーロー: 画面幅いっぱいの淡い地と、太い見出し ---------- */
+.hero{padding:34px 0 30px;margin-bottom:8px}
+.hero::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);
+  background:radial-gradient(60% 90% at 88% 0%,rgba(59,110,240,.13),transparent 70%),radial-gradient(50% 80% at 0% 100%,rgba(255,184,28,.10),transparent 70%),linear-gradient(180deg,var(--tint),#fff)}
+.hero__badge{background:#fff;border-color:#D9E2F5;color:var(--indigo-deep);font-size:11.5px}
+.hero h1{font-size:34px;font-weight:800;line-height:1.3;letter-spacing:0}
+@media(min-width:700px){.hero{padding:56px 0 48px}.hero h1{font-size:54px;line-height:1.22}}
+.hl b{color:var(--indigo);background:linear-gradient(transparent 68%,rgba(255,184,28,.55) 68% 92%,transparent 92%)}
+.hero p.lead{font-size:15px;line-height:1.9}
+.hero__quick{gap:7px}
+.hero__quick a{background:#fff;border-color:var(--line);box-shadow:var(--sh-s);font-weight:700;min-height:40px;padding:6px 13px}
+.hero__quick a::before{display:block}
+.hero__quick a:hover{border-color:var(--qc);color:var(--qc);background:#fff}
+.stat-row{background:var(--navy);border:0;gap:0;box-shadow:0 18px 40px rgba(12,26,61,.22);border-radius:16px;
+  background-image:radial-gradient(120% 90% at 100% 0%,rgba(59,110,240,.55),transparent 60%)}
+.stat{background:none;border-top:1px solid rgba(255,255,255,.1)}
+.stat:first-child{border-top:0}
+.stat b{color:#fff;font-size:30px;font-weight:800}
+.stat span,.stat b small{color:#C3CDE6}
+@media(max-width:559px){.stat b{font-size:22px}}
+.page-updated{margin-top:14px}
+
+/* ---------- ボタン ---------- */
+.btn{border-radius:12px;min-height:52px;padding:14px 24px;font-size:15px;transition:transform .15s,box-shadow .15s,background .15s}
+.btn-primary{background:linear-gradient(180deg,#2A5BD0,var(--indigo));box-shadow:0 8px 20px rgba(31,77,184,.28),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn-primary:hover{background:linear-gradient(180deg,#2452C2,var(--indigo-deep));transform:translateY(-1px);box-shadow:0 12px 26px rgba(31,77,184,.32)}
+.btn-ghost{background:#fff;box-shadow:var(--sh-s)}
+.btn-ghost:hover{border-color:var(--indigo);color:var(--indigo);background:#fff}
+.hdr-cta a.primary{border-radius:999px;padding-left:18px;padding-right:18px}
+
+/* ---------- カード: 置いてあるときは静か、触ると 2px 浮く ---------- */
+.subj,.gportal a,.idx-grid a,.rp-card,.uni-card,.bcard,.book-card,.g-card,.guide-card,.cn-card,:root .tcard,:root .gcard,:root .ccard,.recent__list a,.univ-grid a{border-radius:14px;box-shadow:var(--sh-s);transition:transform .16s,box-shadow .16s,border-color .16s}
+.subj:hover,.gportal a:hover,.idx-grid a:hover,.rp-card:hover,.uni-card:hover,a.bcard:hover,.book-card:hover,.guide-card:hover,.cn-card:hover,:root .tcard:hover,:root .gcard:hover,:root .ccard:hover,.recent__list a:hover{transform:translateY(-2px);box-shadow:var(--sh-m);border-color:#B9C7E6}
+.univ-grid a{border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:46px}
+.univ-grid a::after{content:"›";color:var(--line-d);font-size:16px;line-height:1}
+.univ-grid a:hover{border-color:var(--indigo);background:var(--indigo-soft)}
+.univ-grid a:hover::after{color:var(--indigo)}
+
+/* 科目カード: 上に科目の色の帯、名前の前に色の点 */
+.subj{border-top:0;padding:0;background:#fff}
+.subj::before{content:"";height:5px;background:var(--sc);flex:none}
+.subj>*{margin-left:20px;margin-right:20px}
+.subj__head{margin-top:18px}
+.subj__name{font-weight:800}
+.subj__desc{margin-top:8px;font-size:13px;color:var(--muted)}
+.subj__foot{margin-top:14px;padding:12px 0 14px}
+.subj__count b{font-size:20px;font-weight:800}
+.subj__go{background:var(--sc);color:#fff;padding:7px 13px;border-radius:999px}
+.subj:hover{border-color:var(--sc)}
+@media(max-width:639px){
+  .subj__tags{display:none}
+  .subj__desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .subj-grid{gap:10px}
+}
+
+/* 一覧の行（科目の入口・記事の入口）: 右に矢印を置き、押せることを示す */
+.idx-grid a,.gportal a{border-left-width:1px;padding:15px 16px}
+.gportal a{position:relative;padding-right:38px}
+.gportal a::after{content:"";position:absolute;right:18px;top:50%;width:7px;height:7px;border-right:2px solid var(--line-d);border-top:2px solid var(--line-d);transform:translateY(-50%) rotate(45deg);transition:border-color .15s,right .15s}
+.gportal a:hover::after{border-color:var(--indigo);right:15px}
+.gportal b,.idx-txt b{font-size:14.5px}
+
+/* ルートの札: 志望レベルの色を上の帯と番号に使う */
+.rp-card{border-top:4px solid var(--tc,var(--indigo));padding:16px 18px 16px}
+.rp-card__no{font-weight:700}
+.rp-card__no em{background:var(--surface-2);padding:2px 8px;border-radius:999px;font-size:10.5px}
+.rp-card h3{font-size:17px;font-weight:800}
+.rp-card:hover{border-color:var(--line-d);border-top-color:var(--tc,var(--indigo))}
+
+/* 特長・手順・FAQ */
+.feat-grid{border:0;background:none;gap:12px;overflow:visible}
+.feat{border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh-s)}
+.feat h3{color:var(--navy);font-weight:800}
+.step{box-shadow:var(--sh-s);border-radius:14px}
+.step::before{color:var(--indigo);opacity:.28;font-weight:800;font-size:34px}
+.faq{border-radius:14px;overflow:hidden;box-shadow:var(--sh-s)}
+.faq summary{font-size:14.5px;min-height:56px}
+.faq__a{font-size:14px}
+
+/* ---------- 購入ボタン: ページの中でいちばん目立つ色にする ---------- */
+.buy a,.buybar a,:root .ubuy__btns a{min-height:50px;border-radius:12px;font-size:14.5px;font-weight:800;justify-content:center;transition:transform .15s,box-shadow .15s,background .15s}
+.buy a.az,.buybar a.az,:root .ubuy__btns a.az{background:linear-gradient(180deg,#FFC94A,var(--buy));color:#111827;border:1px solid #E5A100;box-shadow:0 6px 16px rgba(245,168,0,.32)}
+.buy a.az:hover,.buybar a.az:hover,:root .ubuy__btns a.az:hover{background:var(--buy-h);transform:translateY(-1px);box-shadow:0 10px 22px rgba(245,168,0,.38)}
+.buy a.rk,.buybar a.rk,:root .ubuy__btns a.rk{background:var(--rk);color:#fff;border:1px solid var(--rk);box-shadow:0 6px 16px rgba(191,0,0,.2)}
+.buy a.rk:hover,.buybar a.rk:hover,:root .ubuy__btns a.rk:hover{background:#A30000;transform:translateY(-1px)}
+.buy--hero a{padding:12px 22px;font-size:14px}
+.buy--inline a{min-height:44px;font-size:12.5px;box-shadow:none}
+.buybar{padding-top:8px;border-top:0;box-shadow:0 -8px 28px rgba(15,23,40,.14);backdrop-filter:blur(12px)}
+.buybar a{min-height:46px;font-size:13.5px;padding:0 16px}
+@media(max-width:559px){
+  .buy:not(.buy--inline) a{flex:1 1 0;padding-left:10px;padding-right:10px}
+  .buy__note,.buy__pr{flex-basis:100%}
+}
+@media(max-width:374px){.buy:not(.buy--inline) a{flex-basis:100%}}
+
+/* ---------- 書籍ページ ---------- */
+.bk-cover{border-radius:8px;box-shadow:0 2px 4px rgba(15,23,40,.08),0 18px 38px rgba(15,23,40,.18)}
+.bk-tag{background:var(--indigo-soft);border-color:transparent;color:var(--indigo-deep);font-weight:700;border-radius:999px;padding:4px 12px}
+h1.bk-name{font-weight:800;letter-spacing:0}
+.bk-desc{font-size:15px;line-height:1.95}
+.bk-meter{background:var(--surface-2);border:1px solid var(--line-2);border-radius:12px;padding:12px 14px;max-width:440px}
+.bk-meter__bar i{height:8px;border-radius:4px}
+.bk-meter__t b{font-size:18px;font-weight:800}
+.bk-secnav a{border-radius:999px;background:#fff;box-shadow:var(--sh-s);font-weight:700}
+.bk-secnav a:hover{border-color:var(--indigo);color:var(--indigo)}
+.spec{box-shadow:var(--sh-s)}
+.pc.good h3,.pc.good .pc__t{color:var(--ok)}
+.bcard{padding:16px 16px 14px}
+.bcard__head b,.bcard__name{font-weight:700}
+.rt-cov{box-shadow:0 1px 2px rgba(15,23,40,.1),0 6px 14px rgba(15,23,40,.12)}
+.bcmp__go{font-weight:700}
+.cta{border-radius:18px;padding:34px 28px;background:var(--navy);background-image:radial-gradient(90% 120% at 100% 0%,rgba(59,110,240,.6),transparent 60%);box-shadow:0 18px 40px rgba(12,26,61,.22)}
+.cta::after{display:none}
+.cta h2{font-weight:800;font-size:23px}
+.cta p{color:#C9D3EA}
+.cta__btns a{min-height:48px;border-radius:12px;padding:12px 22px}
+.cta__btns a.p{background:#fff;color:var(--navy)}
+.cta__btns a.g{border-color:rgba(255,255,255,.4)}
+.sharebar{background:var(--surface-2);border-color:var(--line-2)}
+.sharebar__b{background:#fff;min-height:44px}
+
+/* ---------- 記事・大学ページ ---------- */
+.prose p,.g-body p{line-height:1.95}
+.crumbs{color:var(--muted)}
+:root .uhead{background:linear-gradient(180deg,var(--tint),#fff)}
+:root .unav a,:root .stnav a{background:#fff;box-shadow:var(--sh-s);font-weight:700}
+:root .unav a:hover,:root .stnav a:hover{border-color:var(--indigo);color:var(--indigo)}
+
+/* ---------- 科目トップの下部タブ・フッター ---------- */
+.tabbar{background:rgba(255,255,255,.94);backdrop-filter:blur(16px);box-shadow:0 -6px 24px rgba(15,23,40,.08)}
+.tabbar>*{font-size:10.5px}
+.tabbar>*.active{color:var(--indigo);background:var(--indigo-soft)}
+.site-foot{background:linear-gradient(180deg,var(--surface-2),#fff)}
+.foot-subjects a,.foot-subjects__list a{background:#fff;box-shadow:var(--sh-s)}
+.foot-brand b{font-weight:800;color:var(--navy)}
+@media(prefers-reduced-motion:reduce){.subj:hover,.gportal a:hover,.idx-grid a:hover,.rp-card:hover,.btn:hover,.buy a:hover{transform:none}}
+
+/* ヒーローの数字: スマホでも横 3 列に並べ、縦の長さを使わない */
+@media(max-width:559px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .stat{display:block;padding:14px 10px;text-align:center;border-top:0;border-left:1px solid rgba(255,255,255,.12)}
+  .stat:first-child{border-left:0}
+  .stat b{min-width:0}
+  .stat span{margin-top:5px;font-size:10.5px;line-height:1.45}
+}
+span.xbar__brand{display:none}
+/* ページ下部の購入ボタンは、スマホでは 1 つずつ全幅に並べる（2 行に折れて読みにくくなるため） */
+@media(max-width:559px){.buy:not(.buy--inline):not(.buy--hero) a{flex-basis:100%}}
+.rt-search input::placeholder{font-size:13.5px}
+:root .ufac-wrap,:root .uhensa-wrap{border-radius:14px}
