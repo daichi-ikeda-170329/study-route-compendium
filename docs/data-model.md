@@ -70,7 +70,8 @@ step:   { id, role, lvl, note, alts: [id…] }
 `build/generate-universities.mjs` の説明にある。
 
 大学別ページの URL は `build/data/university-slugs.json`（公開後に slug を変えない）、出典の年度・確認日・
-公式 URL・学部×方式は `build/data/university-sources.json`（形は `build/lib/university-sources.mjs`）。
+公式 URL・学部×方式は `build/data/university-sources.json`（形は `build/lib/university-sources.mjs`）、
+大学が公表した入試問題から読んだ出題構成は `build/data/university-exams.json`（形は `build/lib/university-exams.mjs`）。
 
 ### 配信する形
 
