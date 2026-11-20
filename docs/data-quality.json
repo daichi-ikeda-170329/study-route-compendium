@@ -2,58 +2,58 @@
  "generatedAt": "2026-11-20",
  "total": 1432,
  "byStatus": {
-  "verified": 112,
-  "partial": 1271,
+  "verified": 1116,
+  "partial": 267,
   "unverified": 45,
   "notApplicable": 4
  },
  "bySubject": {
   "english": {
    "total": 263,
-   "verified": 41,
-   "partial": 215,
+   "verified": 215,
+   "partial": 41,
    "unverified": 6,
    "notApplicable": 1
   },
   "japanese": {
    "total": 198,
-   "verified": 22,
-   "partial": 173,
+   "verified": 169,
+   "partial": 26,
    "unverified": 2,
    "notApplicable": 1
   },
   "math": {
    "total": 172,
-   "verified": 8,
-   "partial": 147,
+   "verified": 86,
+   "partial": 69,
    "unverified": 16,
    "notApplicable": 1
   },
   "science": {
    "total": 383,
-   "verified": 19,
-   "partial": 353,
+   "verified": 332,
+   "partial": 40,
    "unverified": 10,
    "notApplicable": 1
   },
   "social": {
    "total": 298,
-   "verified": 14,
-   "partial": 276,
+   "verified": 229,
+   "partial": 61,
    "unverified": 8,
    "notApplicable": 0
   },
   "joho": {
    "total": 29,
-   "verified": 1,
-   "partial": 26,
+   "verified": 10,
+   "partial": 17,
    "unverified": 2,
    "notApplicable": 0
   },
   "shoron": {
    "total": 89,
-   "verified": 7,
-   "partial": 81,
+   "verified": 75,
+   "partial": 13,
    "unverified": 1,
    "notApplicable": 0
   }
@@ -71,29 +71,29 @@
    "label": "ルートに採用している教材（3 分診断の結果に出るものを含む）",
    "total": 542,
    "unverified": 16,
-   "partial": 476,
-   "verified": 46
+   "partial": 105,
+   "verified": 417
   },
   "joho": {
    "label": "情報科（市販書が少なく、記載の確度が低い）",
    "total": 29,
    "unverified": 2,
-   "partial": 26,
-   "verified": 1
+   "partial": 17,
+   "verified": 10
   },
   "curriculum": {
    "label": "新課程対応が要確認の教材",
    "total": 50,
    "unverified": 6,
-   "partial": 42,
-   "verified": 2
+   "partial": 4,
+   "verified": 40
   },
   "other": {
    "label": "その他",
    "total": 811,
    "unverified": 21,
-   "partial": 727,
-   "verified": 63
+   "partial": 141,
+   "verified": 649
   }
  },
  "duplicateIsbn": [],

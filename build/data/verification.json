@@ -9,7 +9,7 @@
  },
  "records": {
   "english:target1200": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64,7 +64,7 @@
    ]
   },
   "english:target1400": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -113,7 +113,7 @@
    ]
   },
   "english:target1900": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -162,7 +162,7 @@
    ]
   },
   "english:sistan-basic": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -421,7 +421,7 @@
    ]
   },
   "english:sokutan-jokyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -469,7 +469,7 @@
    ]
   },
   "english:stock3000": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -523,7 +523,7 @@
    ]
   },
   "english:stock4500": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -612,7 +612,7 @@
    }
   },
   "english:hijii-tango": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -695,7 +695,7 @@
    }
   },
   "english:rankjun2300": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -826,7 +826,7 @@
    ]
   },
   "english:teppeki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -873,7 +873,7 @@
    ]
   },
   "english:pass-jun1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -960,7 +960,7 @@
    }
   },
   "english:linga": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1008,7 +1008,7 @@
    ]
   },
   "english:extreme": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1062,7 +1062,7 @@
    "fields": {}
   },
   "english:target1000": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1166,7 +1166,7 @@
    ]
   },
   "english:sis-jukugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1210,7 +1210,7 @@
    ]
   },
   "english:kaitai-jukugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1278,7 +1278,7 @@
    ]
   },
   "english:hikkei-hyogen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1451,7 +1451,7 @@
    ]
   },
   "english:kiso10dr": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1496,7 +1496,7 @@
    ]
   },
   "english:narikawa-naze": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1533,7 +1533,7 @@
    ]
   },
   "english:evergreen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1652,7 +1652,7 @@
    ]
   },
   "english:shin-taizen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1699,7 +1699,7 @@
    ]
   },
   "english:fukamete-input": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1747,7 +1747,7 @@
    ]
   },
   "english:fukamete-output": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1794,7 +1794,7 @@
    ]
   },
   "english:polaris-b0": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1842,7 +1842,7 @@
    ]
   },
   "english:polaris-b1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1890,7 +1890,7 @@
    ]
   },
   "english:polaris-b2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -1938,7 +1938,7 @@
    ]
   },
   "english:polaris-b3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2056,7 +2056,7 @@
    }
   },
   "english:nextstage": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2103,7 +2103,7 @@
    ]
   },
   "english:vintage": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2134,7 +2134,7 @@
    ]
   },
   "english:scramble": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2190,7 +2190,7 @@
    ]
   },
   "english:powerstage": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2245,7 +2245,7 @@
    ]
   },
   "english:upgrade": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2382,7 +2382,7 @@
    ]
   },
   "english:hinshutsu1000": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2430,7 +2430,7 @@
    ]
   },
   "english:sokusen3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2478,7 +2478,7 @@
    ]
   },
   "english:gijutsu60": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2527,7 +2527,7 @@
    ]
   },
   "english:gijutsu70": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2583,7 +2583,7 @@
    ]
   },
   "english:gijutsu100k": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2631,7 +2631,7 @@
    ]
   },
   "english:gijutsu100": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2679,7 +2679,7 @@
    ]
   },
   "english:nyumon-eibun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2728,7 +2728,7 @@
    ]
   },
   "english:kiso-eibun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2901,7 +2901,7 @@
    ]
   },
   "english:jukou-jo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -2948,7 +2948,7 @@
    ]
   },
   "english:jukou-ge": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3078,7 +3078,7 @@
    ]
   },
   "english:toshizu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3126,7 +3126,7 @@
    ]
   },
   "english:kaishaku-kyoshitsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3174,7 +3174,7 @@
    ]
   },
   "english:classic-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3222,7 +3222,7 @@
    ]
   },
   "english:classic": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3270,7 +3270,7 @@
    ]
   },
   "english:kaishaku-polaris1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3317,7 +3317,7 @@
    ]
   },
   "english:kaishaku-polaris2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3364,7 +3364,7 @@
    ]
   },
   "english:sekaiichi-dokkai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3412,7 +3412,7 @@
    ]
   },
   "english:gensoku125": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3465,7 +3465,7 @@
    ]
   },
   "english:tonogi-hitome": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3564,7 +3564,7 @@
    ]
   },
   "english:essentials-max": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -3671,7 +3671,7 @@
    ]
   },
   "english:solution0": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4198,7 +4198,7 @@
    ]
   },
   "english:cho-polaris1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4246,7 +4246,7 @@
    ]
   },
   "english:cho-polaris2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4294,7 +4294,7 @@
    ]
   },
   "english:cho-polaris3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4429,7 +4429,7 @@
    }
   },
   "english:yatte300": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4477,7 +4477,7 @@
    ]
   },
   "english:yatte500": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4525,7 +4525,7 @@
    ]
   },
   "english:yatte700": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4573,7 +4573,7 @@
    ]
   },
   "english:yatte1000": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4698,7 +4698,7 @@
    "fields": {}
   },
   "english:discourse": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4749,7 +4749,7 @@
    "fields": {}
   },
   "english:supremacy": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4804,7 +4804,7 @@
    ]
   },
   "english:sokudoku-tr": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4858,7 +4858,7 @@
    ]
   },
   "english:kijutsu-tr": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4905,7 +4905,7 @@
    ]
   },
   "english:theme10-tr": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -4959,7 +4959,7 @@
    ]
   },
   "english:canpass-e": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5064,7 +5064,7 @@
    ]
   },
   "english:kimutatsu-shidai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5109,7 +5109,7 @@
    ]
   },
   "english:eisaku10dr": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5154,7 +5154,7 @@
    ]
   },
   "english:sekaiichi-eisaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5252,7 +5252,7 @@
    ]
   },
   "english:kihon300sen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5298,7 +5298,7 @@
    ]
   },
   "english:dragon100": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5352,7 +5352,7 @@
    ]
   },
   "english:haitore-wabun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5407,7 +5407,7 @@
    ]
   },
   "english:haitore-jiyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5567,7 +5567,7 @@
    ]
   },
   "english:eisaku-polaris2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5615,7 +5615,7 @@
    ]
   },
   "english:kiso-eisaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5669,7 +5669,7 @@
    ]
   },
   "english:takeoka-omoshiro": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5748,7 +5748,7 @@
    }
   },
   "english:yokubari": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5803,7 +5803,7 @@
    ]
   },
   "english:hijii-tadashiku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5857,7 +5857,7 @@
    ]
   },
   "english:hijii-sugu-jiyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5912,7 +5912,7 @@
    ]
   },
   "english:eisaku-training": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -5958,7 +5958,7 @@
    ]
   },
   "english:sainankan-eisaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6141,7 +6141,7 @@
    }
   },
   "english:lis-1satsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6196,7 +6196,7 @@
    ]
   },
   "english:lis-shuchu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6244,7 +6244,7 @@
    ]
   },
   "english:lis-1month": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6287,7 +6287,7 @@
    ]
   },
   "english:kimeru-lis": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6335,7 +6335,7 @@
    ]
   },
   "english:takeoka-lis": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6383,7 +6383,7 @@
    ]
   },
   "english:manten-kotsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6487,7 +6487,7 @@
    ]
   },
   "english:kimutatsu-basic": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6538,7 +6538,7 @@
    ]
   },
   "english:kimutatsu-todai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6588,7 +6588,7 @@
    ]
   },
   "english:tetsuryoku-lis": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6644,7 +6644,7 @@
    ]
   },
   "english:seki-kyote": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6698,7 +6698,7 @@
    "fields": {}
   },
   "english:kimeru-r": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6746,7 +6746,7 @@
    ]
   },
   "english:takeoka-r": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6793,7 +6793,7 @@
    ]
   },
   "english:r-1month": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6836,7 +6836,7 @@
    ]
   },
   "english:kyote-akahon-e": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6890,7 +6890,7 @@
    ]
   },
   "english:kako-review-e": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -6935,7 +6935,7 @@
    ]
   },
   "english:kurohon-e": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7201,7 +7201,7 @@
    ]
   },
   "english:todai-kakushin": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7249,7 +7249,7 @@
    ]
   },
   "english:kyodai25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7296,7 +7296,7 @@
    ]
   },
   "english:sekaiichi-kyodai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7441,7 +7441,7 @@
    ]
   },
   "english:sekaiichi-waseda": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7550,7 +7550,7 @@
    ]
   },
   "english:sekaiichi-keio": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7597,7 +7597,7 @@
    ]
   },
   "english:handai20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7644,7 +7644,7 @@
    ]
   },
   "english:meidai15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7690,7 +7690,7 @@
    ]
   },
   "english:tohoku15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7737,7 +7737,7 @@
    ]
   },
   "english:kyudai15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7784,7 +7784,7 @@
    ]
   },
   "english:hokudai15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7831,7 +7831,7 @@
    ]
   },
   "english:kobe15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -7979,7 +7979,7 @@
    ]
   },
   "english:yoshi-yoyaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8033,7 +8033,7 @@
    ]
   },
   "english:kikutan-basic-4000": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8076,7 +8076,7 @@
    ]
   },
   "english:kikutan-advanced-6000": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8119,7 +8119,7 @@
    ]
   },
   "english:kikutan-super-12000": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8162,7 +8162,7 @@
    ]
   },
   "english:distinction-2000": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8217,7 +8217,7 @@
    ]
   },
   "english:sokudoku-sokucho-core-1900-ver6": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8265,7 +8265,7 @@
    ]
   },
   "english:eiken-2kyu-derujun-pastan-shinso-5th": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8321,7 +8321,7 @@
    ]
   },
   "english:sparta-2-advanced": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8376,7 +8376,7 @@
    ]
   },
   "english:sparta-3-mastery": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8431,7 +8431,7 @@
    ]
   },
   "english:eijukugo-always-1001": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8527,7 +8527,7 @@
    ]
   },
   "english:sekaiichi-wakariyasui-eibunpo-color": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8575,7 +8575,7 @@
    ]
   },
   "english:yamaguchi-eibunpo-jikkyo-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8620,7 +8620,7 @@
    ]
   },
   "english:yamaguchi-eibunpo-jikkyo-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8720,7 +8720,7 @@
    ]
   },
   "english:eibunpo-gohou-random-select-600": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8858,7 +8858,7 @@
    ]
   },
   "english:breakthrough-sogo-eigo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8895,7 +8895,7 @@
    ]
   },
   "english:visual-eibun-kaishaku-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8941,7 +8941,7 @@
    ]
   },
   "english:visual-eibun-kaishaku-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -8987,7 +8987,7 @@
    ]
   },
   "english:eibun-kaishaku-kyoshitsu-nyumon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9034,7 +9034,7 @@
    ]
   },
   "english:eibun-kaishaku-kyoshitsu-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9081,7 +9081,7 @@
    ]
   },
   "english:eibun-hyojun-mondai-seiko": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9125,7 +9125,7 @@
    ]
   },
   "english:eigo-reading-kyohon-kihon-bunpo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9174,7 +9174,7 @@
    ]
   },
   "english:kobun-haaku-no-platica": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9214,7 +9214,7 @@
    ]
   },
   "english:shin-eigo-no-kobun-150": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9307,7 +9307,7 @@
    ]
   },
   "english:rise-kobun-kaishaku-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9344,7 +9344,7 @@
    ]
   },
   "english:eibun-wayaku-enshu-nyumon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9390,7 +9390,7 @@
    ]
   },
   "english:eibun-wayaku-enshu-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9436,7 +9436,7 @@
    ]
   },
   "english:eibun-wayaku-enshu-chukyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9482,7 +9482,7 @@
    ]
   },
   "english:eibun-wayaku-enshu-jokyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9528,7 +9528,7 @@
    ]
   },
   "english:eigo-kobun-shokai-shinsoban": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9572,7 +9572,7 @@
    ]
   },
   "english:tokigi-eibun-dokkai-senryakuteki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9616,7 +9616,7 @@
    ]
   },
   "english:oiwa-ichiban-hajime-eigo-chobun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9660,7 +9660,7 @@
    ]
   },
   "english:eigo-chobun-mondai-seiko-shinso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9704,7 +9704,7 @@
    ]
   },
   "english:kiso-eigo-chobun-mondai-seiko-3rd": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -9978,7 +9978,7 @@
    ]
   },
   "english:maitoshi-deru-hinshutsu-eigo-chobun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10022,7 +10022,7 @@
    ]
   },
   "english:oya-eisakubun-jikkyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10066,7 +10066,7 @@
    ]
   },
   "english:reikai-wabun-eiyaku-kyohon-bunpo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10112,7 +10112,7 @@
    ]
   },
   "english:reikai-wabun-eiyaku-kyohon-koshiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10157,7 +10157,7 @@
    ]
   },
   "english:shin-kihon-eibun-700sen-shinso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10212,7 +10212,7 @@
    ]
   },
   "english:eigo-listening-hyper-training-perfect": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10489,7 +10489,7 @@
    ]
   },
   "english:kyotsu-test-listening-level-0": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10702,7 +10702,7 @@
    ]
   },
   "english:kyotsu-test-shinkatei-koryaku-reading": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10749,7 +10749,7 @@
    ]
   },
   "english:kyotsu-test-shinkatei-koryaku-listening": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10796,7 +10796,7 @@
    ]
   },
   "english:mark-shiki-kiso-mondaishu-eigo-bunpo-goho-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10842,7 +10842,7 @@
    ]
   },
   "english:kyotsu-test-jissen-moshi-eigo-reading": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -10889,7 +10889,7 @@
    ]
   },
   "english:kyotsu-test-jissen-moshi-eigo-listening": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11054,7 +11054,7 @@
    ]
   },
   "english:chuo-daigaku-no-eigo-10th": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11162,7 +11162,7 @@
    ]
   },
   "english:tsukuba-daigaku-no-eigo-15kanen-2nd": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11270,7 +11270,7 @@
    ]
   },
   "english:kansai-daigaku-no-eigo-11th": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11317,7 +11317,7 @@
    ]
   },
   "english:kansai-gakuin-daigaku-no-eigo-11th": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11364,7 +11364,7 @@
    ]
   },
   "english:doshisha-daigaku-no-eigo-11th": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11411,7 +11411,7 @@
    ]
   },
   "english:ritsumeikan-daigaku-no-eigo-11th": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11458,7 +11458,7 @@
    ]
   },
   "english:todai-eigo-sokogi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11502,7 +11502,7 @@
    ]
   },
   "english:todai-nyushi-shokai-25nen-eigo-3rd": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11556,7 +11556,7 @@
    ]
   },
   "english:todai-nyushi-shokai-20nen-eigo-listening-3rd": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11610,7 +11610,7 @@
    ]
   },
   "english:kyodai-nyushi-shokai-25nen-eigo-3rd": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -11919,7 +11919,7 @@
    ]
   },
   "japanese:tamura-yasashiku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12024,7 +12024,7 @@
    ]
   },
   "japanese:zero-kakusei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12072,7 +12072,7 @@
    ]
   },
   "japanese:zero-kakusei-next": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12127,7 +12127,7 @@
    ]
   },
   "japanese:zero-kakusei-final": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12336,7 +12336,7 @@
    ]
   },
   "japanese:seidoku-kihon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12382,7 +12382,7 @@
    ]
   },
   "japanese:seidoku-toppa": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12428,7 +12428,7 @@
    ]
   },
   "japanese:kaihatsu-koza": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12472,7 +12472,7 @@
    ]
   },
   "japanese:kaitou-koza": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12545,7 +12545,7 @@
    }
   },
   "japanese:platinum-rule": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12593,7 +12593,7 @@
    ]
   },
   "japanese:access-kihon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12640,7 +12640,7 @@
    ]
   },
   "japanese:access-hatten": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -12687,7 +12687,7 @@
    ]
   },
   "japanese:access-kansei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13233,7 +13233,7 @@
    }
   },
   "japanese:hyojun-seikou-g": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13280,7 +13280,7 @@
    ]
   },
   "japanese:canpass-g": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13325,7 +13325,7 @@
    ]
   },
   "japanese:seisen-g": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13429,7 +13429,7 @@
    ]
   },
   "japanese:kakuto": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13468,7 +13468,7 @@
    ]
   },
   "japanese:jokyu-zero": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13522,7 +13522,7 @@
    ]
   },
   "japanese:jokyu1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13680,7 +13680,7 @@
    ]
   },
   "japanese:funaguchi-kijutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13775,7 +13775,7 @@
    ]
   },
   "japanese:ztr-shidai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13812,7 +13812,7 @@
    ]
   },
   "japanese:keyword-dokkai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13914,7 +13914,7 @@
    ]
   },
   "japanese:ikiru-keyword": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13958,7 +13958,7 @@
    ]
   },
   "japanese:gentan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -13996,7 +13996,7 @@
    ]
   },
   "japanese:dokkai-fukameru-tango": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14099,7 +14099,7 @@
    ]
   },
   "japanese:kanji-master1800": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14146,7 +14146,7 @@
    ]
   },
   "japanese:kanji-core2800": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14194,7 +14194,7 @@
    ]
   },
   "japanese:kanji-goi2400": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14249,7 +14249,7 @@
    ]
   },
   "japanese:ikiru-kanji": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14372,7 +14372,7 @@
    }
   },
   "japanese:jokyu-kanji-goi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14419,7 +14419,7 @@
    ]
   },
   "japanese:kimeru-gendai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14467,7 +14467,7 @@
    ]
   },
   "japanese:omoshiroi-gendai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14515,7 +14515,7 @@
    ]
   },
   "japanese:shuchu-gendai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14563,7 +14563,7 @@
    ]
   },
   "japanese:mark-kiso-g": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14616,7 +14616,7 @@
    ]
   },
   "japanese:tanki-kyote-gendai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14662,7 +14662,7 @@
    ]
   },
   "japanese:jitsuyobun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14709,7 +14709,7 @@
    ]
   },
   "japanese:kyote-shinkatei-gendai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14764,7 +14764,7 @@
    ]
   },
   "japanese:toshin-kyote-gendai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14819,7 +14819,7 @@
    ]
   },
   "japanese:kuro-hon-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14872,7 +14872,7 @@
    ]
   },
   "japanese:aohon-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14934,7 +14934,7 @@
    ]
   },
   "japanese:midori-hon-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -14988,7 +14988,7 @@
    ]
   },
   "japanese:kyote-akahon-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15041,7 +15041,7 @@
    ]
   },
   "japanese:kako-review-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15136,7 +15136,7 @@
    ]
   },
   "japanese:todai-gendai-premium": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15183,7 +15183,7 @@
    ]
   },
   "japanese:sekaiichi-todai-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15231,7 +15231,7 @@
    ]
   },
   "japanese:kyodai-gendai25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15278,7 +15278,7 @@
    ]
   },
   "japanese:hitotsubashi-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15326,7 +15326,7 @@
    ]
   },
   "japanese:kindai-bungo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15370,7 +15370,7 @@
    ]
   },
   "japanese:waseda-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15424,7 +15424,7 @@
    "fields": {}
   },
   "japanese:kobun-gorogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15470,7 +15470,7 @@
    ]
   },
   "japanese:tango315": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15525,7 +15525,7 @@
    ]
   },
   "japanese:tango330": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15563,7 +15563,7 @@
    ]
   },
   "japanese:madonna-tango": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15659,7 +15659,7 @@
    ]
   },
   "japanese:yomitoki-tango": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15703,7 +15703,7 @@
    ]
   },
   "japanese:group30": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15747,7 +15747,7 @@
    ]
   },
   "japanese:nitoryu634": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15799,7 +15799,7 @@
    ]
   },
   "japanese:yurugoyaku-tango": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -15854,7 +15854,7 @@
    ]
   },
   "japanese:dokkai-tango-training": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16096,7 +16096,7 @@
    ]
   },
   "japanese:yasashiku-bunpo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16148,7 +16148,7 @@
    ]
   },
   "japanese:madonna-kobun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16196,7 +16196,7 @@
    ]
   },
   "japanese:stepup30": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16249,7 +16249,7 @@
    ]
   },
   "japanese:stepup-trial": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16302,7 +16302,7 @@
    ]
   },
   "japanese:bunpo-30theme": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16350,7 +16350,7 @@
    ]
   },
   "japanese:bunpo-10drill": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16402,7 +16402,7 @@
    ]
   },
   "japanese:tomii-dokkai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16446,7 +16446,7 @@
    ]
   },
   "japanese:okamoto-dokkai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16494,7 +16494,7 @@
    ]
   },
   "japanese:yasawa3h-dokkai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16543,7 +16543,7 @@
    ]
   },
   "japanese:kobun-dokkai-gorogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16591,7 +16591,7 @@
    ]
   },
   "japanese:kaishaku-hoho": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16636,7 +16636,7 @@
    ]
   },
   "japanese:kaishaku-jissen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16682,7 +16682,7 @@
    ]
   },
   "japanese:kobun-jotatsu45": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16727,7 +16727,7 @@
    ]
   },
   "japanese:kobun-jotatsu56": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -16757,7 +16757,7 @@
    ]
   },
   "japanese:saikyo-kobun50": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17016,7 +17016,7 @@
    }
   },
   "japanese:kiso-seikou-k": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17063,7 +17063,7 @@
    ]
   },
   "japanese:tadoku-training": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17117,7 +17117,7 @@
    ]
   },
   "japanese:chuken-shidai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17157,7 +17157,7 @@
    ]
   },
   "japanese:yumei-shidai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17196,7 +17196,7 @@
    ]
   },
   "japanese:shutoken-nankan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17243,7 +17243,7 @@
    ]
   },
   "japanese:tokuten-k": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17284,7 +17284,7 @@
    ]
   },
   "japanese:seisen-k": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17330,7 +17330,7 @@
    ]
   },
   "japanese:canpass-koten": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17375,7 +17375,7 @@
    ]
   },
   "japanese:madonna-joshiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17424,7 +17424,7 @@
    ]
   },
   "japanese:sokudoku-joshiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17468,7 +17468,7 @@
    ]
   },
   "japanese:genji-joshiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17516,7 +17516,7 @@
    ]
   },
   "japanese:madonna-kaiho": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17561,7 +17561,7 @@
    ]
   },
   "japanese:mark-kiso-k": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17614,7 +17614,7 @@
    ]
   },
   "japanese:kimeru-kokan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17661,7 +17661,7 @@
    ]
   },
   "japanese:omoshiroi-kokan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17708,7 +17708,7 @@
    ]
   },
   "japanese:kyote-kobun-kotsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17754,7 +17754,7 @@
    ]
   },
   "japanese:tanki-kyote-kobun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17857,7 +17857,7 @@
    ]
   },
   "japanese:yama": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17904,7 +17904,7 @@
    ]
   },
   "japanese:terashi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17941,7 +17941,7 @@
    ]
   },
   "japanese:okamoto-kanbun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -17989,7 +17989,7 @@
    ]
   },
   "japanese:okamoto-3h-kanbun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18037,7 +18037,7 @@
    ]
   },
   "japanese:kanki-kanbun-dokkai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18085,7 +18085,7 @@
    ]
   },
   "japanese:miwa-kyoshitsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18139,7 +18139,7 @@
    ]
   },
   "japanese:hissei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18176,7 +18176,7 @@
    ]
   },
   "japanese:kanbun-gorogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18224,7 +18224,7 @@
    ]
   },
   "japanese:stepup10": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18268,7 +18268,7 @@
    ]
   },
   "japanese:jumpup-kanbun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18317,7 +18317,7 @@
    ]
   },
   "japanese:kanbun-10drill": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18362,7 +18362,7 @@
    ]
   },
   "japanese:kuke-keyword": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18406,7 +18406,7 @@
    ]
   },
   "japanese:dojo-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18453,7 +18453,7 @@
    ]
   },
   "japanese:dojo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18590,7 +18590,7 @@
    ]
   },
   "japanese:mark-kiso-kan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18633,7 +18633,7 @@
    ]
   },
   "japanese:kyote-kanbun-kotsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18679,7 +18679,7 @@
    ]
   },
   "japanese:kyote-kanbun-sugowaza": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18727,7 +18727,7 @@
    ]
   },
   "japanese:tanki-kyote-kanbun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18881,7 +18881,7 @@
    ]
   },
   "japanese:seisen-kan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18933,7 +18933,7 @@
    "fields": {}
   },
   "japanese:todai-koten25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -18981,7 +18981,7 @@
    ]
   },
   "japanese:tetsuryoku-koten": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19028,7 +19028,7 @@
    ]
   },
   "japanese:kyodai-koten25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19117,7 +19117,7 @@
    ]
   },
   "japanese:koshiba-gendaibun-1satsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19165,7 +19165,7 @@
    ]
   },
   "japanese:chikuma-hyoron-nyumon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19214,7 +19214,7 @@
    ]
   },
   "japanese:motoi-kobun-dokkai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19321,7 +19321,7 @@
    ]
   },
   "japanese:sokudoku-kobun-tango": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19365,7 +19365,7 @@
    ]
   },
   "japanese:tsuchiya-kobun-tango-222": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19409,7 +19409,7 @@
    ]
   },
   "japanese:jump-up-note-kotenbunpo-enshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19523,7 +19523,7 @@
    ]
   },
   "japanese:gendaibun-training-nyumon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19612,7 +19612,7 @@
    ]
   },
   "japanese:shin-tamura-gendaibun-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19649,7 +19649,7 @@
    ]
   },
   "japanese:gendaibun-training-hisshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19686,7 +19686,7 @@
    ]
   },
   "japanese:shin-tamura-gendaibun-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19729,7 +19729,7 @@
    "fields": {}
   },
   "japanese:toshin-kyotsu-jissen-kobun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19777,7 +19777,7 @@
    ]
   },
   "japanese:toshin-kyotsu-jissen-kanbun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19825,7 +19825,7 @@
    ]
   },
   "japanese:highscore-kyotsu-kobun-kanbun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19879,7 +19879,7 @@
    ]
   },
   "japanese:highscore-kyotsu-gendaibun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19933,7 +19933,7 @@
    ]
   },
   "japanese:daizemi-kyotsu-jissen-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -19986,7 +19986,7 @@
    ]
   },
   "japanese:obunsha-honban-moshi-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20042,7 +20042,7 @@
    ]
   },
   "japanese:todai-nyushi-shokai-25-gendaibun-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20086,7 +20086,7 @@
    ]
   },
   "japanese:todai-nyushi-shokai-25-koten-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20130,7 +20130,7 @@
    ]
   },
   "japanese:kyodai-nyushi-shokai-25-gendaibun-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20175,7 +20175,7 @@
    ]
   },
   "japanese:kyodai-nyushi-shokai-25-koten-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20220,7 +20220,7 @@
    ]
   },
   "japanese:handai-kokugo-15kanen-4": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20267,7 +20267,7 @@
    ]
   },
   "japanese:kobedai-kokugo-15kanen-4": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20369,7 +20369,7 @@
    ]
   },
   "japanese:daizemi-todai-pre-kokugo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20539,7 +20539,7 @@
    ]
   },
   "japanese:yagyu-koko-hajimeru-drill": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20586,7 +20586,7 @@
    ]
   },
   "japanese:yagyu-koko-tsunageru-drill": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20633,7 +20633,7 @@
    ]
   },
   "japanese:sou-4jikan-gendaibun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20681,7 +20681,7 @@
    ]
   },
   "japanese:sou-ryomon-tokkun-1-basic": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20736,7 +20736,7 @@
    ]
   },
   "japanese:sou-ryomon-tokkun-2-standard": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20791,7 +20791,7 @@
    ]
   },
   "japanese:yazawa-ryomon-tokkun-1-basic": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -20846,7 +20846,7 @@
    ]
   },
   "japanese:yazawa-ryomon-tokkun-2-standard": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -21219,7 +21219,7 @@
    }
   },
   "math:shikkari": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -21267,7 +21267,7 @@
    ]
   },
   "math:ukaru-keisan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -21313,7 +21313,7 @@
    ]
   },
   "math:ukaru-keisan3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -21800,7 +21800,7 @@
    }
   },
   "math:ryomon300": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -21906,7 +21906,7 @@
    ]
   },
   "math:bunkei-juyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -21959,7 +21959,7 @@
    ]
   },
   "math:bunkei-jissen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22020,7 +22020,7 @@
    ]
   },
   "math:kakushin-std": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22074,7 +22074,7 @@
    ]
   },
   "math:bunkei-kakushin": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22128,7 +22128,7 @@
    ]
   },
   "math:juyo-mondai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22195,7 +22195,7 @@
    "fields": {}
   },
   "math:golden": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22243,7 +22243,7 @@
    ]
   },
   "math:hissu101": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22446,7 +22446,7 @@
    ]
   },
   "math:yasari": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22500,7 +22500,7 @@
    ]
   },
   "math:hairi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22651,7 +22651,7 @@
    ]
   },
   "math:kakushin-nankan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22826,7 +22826,7 @@
    }
   },
   "math:tanki-kyote": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -22872,7 +22872,7 @@
    ]
   },
   "math:midori-chart": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23008,7 +23008,7 @@
    }
   },
   "math:master-seisu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23045,7 +23045,7 @@
    ]
   },
   "math:master-baai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23082,7 +23082,7 @@
    ]
   },
   "math:hatto-kakuritsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23120,7 +23120,7 @@
    ]
   },
   "math:kiso-gokui": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23210,7 +23210,7 @@
    ]
   },
   "math:sasaki-seisu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23378,7 +23378,7 @@
    "fields": {}
   },
   "math:todai-ri25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23426,7 +23426,7 @@
    ]
   },
   "math:todai-bun25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23524,7 +23524,7 @@
    ]
   },
   "math:sekaiichi-kyodai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23579,7 +23579,7 @@
    ]
   },
   "math:sekaiichi-handai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23698,7 +23698,7 @@
    }
   },
   "math:genkini-nobiru-sugaku-1a": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23750,7 +23750,7 @@
    ]
   },
   "math:succeed-sugaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23913,7 +23913,7 @@
    ]
   },
   "math:chart-koredake-70dai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23957,7 +23957,7 @@
    "fields": {}
   },
   "math:clear-sugaku-enshu-juken": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -23995,7 +23995,7 @@
    ]
   },
   "math:original-standard-sugaku-3c": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24151,7 +24151,7 @@
    ]
   },
   "math:sugaku-short-program": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24188,7 +24188,7 @@
    ]
   },
   "math:rikei-sugaku-no-kiwami": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24242,7 +24242,7 @@
    ]
   },
   "math:chart-igakubu-nyushi-sugaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24280,7 +24280,7 @@
    ]
   },
   "math:chart-sugaku-nanmonshu-100": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24318,7 +24318,7 @@
    ]
   },
   "math:jissen-sugaku-juyo-mondaishu-bunkei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24371,7 +24371,7 @@
    ]
   },
   "math:kaiho-no-tankyu-bisekibun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24617,7 +24617,7 @@
    }
   },
   "math:bunyabetsu-hyojun-mondai-seiko-vector": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24671,7 +24671,7 @@
    ]
   },
   "math:bunyabetsu-hyojun-mondai-seiko-nijikyokusen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24725,7 +24725,7 @@
    ]
   },
   "math:bunyabetsu-hyojun-mondai-seiko-kiseki-ryoiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24779,7 +24779,7 @@
    ]
   },
   "math:bunyabetsu-hyojun-mondai-seiko-bibunhoteishiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24826,7 +24826,7 @@
    ]
   },
   "math:kyodai-bunkei-sugaku-25kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24873,7 +24873,7 @@
    ]
   },
   "math:hokudai-rikei-sugaku-15kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24920,7 +24920,7 @@
    ]
   },
   "math:tokyo-kagakudai-sugaku-20kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -24968,7 +24968,7 @@
    ]
   },
   "math:tsukubadai-sugaku-15kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25016,7 +25016,7 @@
    ]
   },
   "math:nagoyadai-rikei-sugaku-15kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25063,7 +25063,7 @@
    ]
   },
   "math:handai-bunkei-sugaku-20kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25110,7 +25110,7 @@
    ]
   },
   "math:kobedai-sugaku-15kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25157,7 +25157,7 @@
    ]
   },
   "math:kyudai-rikei-sugaku-15kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25204,7 +25204,7 @@
    ]
   },
   "math:sekaiichi-wakariyasui-kyodai-bunkei-sugaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25258,7 +25258,7 @@
    ]
   },
   "math:chibadai-sugaku-15kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25417,7 +25417,7 @@
    }
   },
   "math:todai-bunkei-sugaku-keito-to-bunseki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25454,7 +25454,7 @@
    ]
   },
   "math:todai-sugaku-1ten-demo-oku-bunkei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25688,7 +25688,7 @@
    ]
   },
   "math:jitsuryoku-kyoka": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -25831,7 +25831,7 @@
    }
   },
   "math:tetsu-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26033,7 +26033,7 @@
    "fields": {}
   },
   "math:ronshou": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26078,7 +26078,7 @@
    ]
   },
   "math:shiritsu-idai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26212,7 +26212,7 @@
    }
   },
   "math:bunyabetsu-baai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26260,7 +26260,7 @@
    ]
   },
   "math:bunyabetsu-hoteishiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26374,7 +26374,7 @@
    }
   },
   "math:kako-review": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26426,7 +26426,7 @@
    ]
   },
   "math:todai-1ten": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26473,7 +26473,7 @@
    ]
   },
   "math:kyodai25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26513,7 +26513,7 @@
    ]
   },
   "math:hitotsubashi20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26561,7 +26561,7 @@
    ]
   },
   "math:handai20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26608,7 +26608,7 @@
    ]
   },
   "math:tohoku15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26747,7 +26747,7 @@
    "fields": {}
   },
   "math:matsuda-type60": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26790,7 +26790,7 @@
    "fields": {}
   },
   "math:matsuda-90": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -26827,7 +26827,7 @@
    ]
   },
   "math:matsuda-todai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27195,7 +27195,7 @@
    ]
   },
   "math:tankyu-kakuritsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27232,7 +27232,7 @@
    ]
   },
   "science:hashimoto-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27269,7 +27269,7 @@
    ]
   },
   "science:hashimoto-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27306,7 +27306,7 @@
    ]
   },
   "science:hashimoto-denjiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27343,7 +27343,7 @@
    ]
   },
   "science:hashimoto-netsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27380,7 +27380,7 @@
    ]
   },
   "science:hashimoto-daigensoku-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27427,7 +27427,7 @@
    ]
   },
   "science:hashimoto-daigensoku-denjiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27474,7 +27474,7 @@
    ]
   },
   "science:urushibara-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27522,7 +27522,7 @@
    ]
   },
   "science:urushibara-denjiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27570,7 +27570,7 @@
    ]
   },
   "science:urushibara-hadou": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27688,7 +27688,7 @@
    }
   },
   "science:urushibara-kaiho-kenkyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27790,7 +27790,7 @@
    ]
   },
   "science:hamashima-jikkyo2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27838,7 +27838,7 @@
    ]
   },
   "science:uchu-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -27885,7 +27885,7 @@
    ]
   },
   "science:uchu-denjiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28034,7 +28034,7 @@
    ]
   },
   "science:hiden-output": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28086,7 +28086,7 @@
    ]
   },
   "science:hiden-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28133,7 +28133,7 @@
    ]
   },
   "science:tamechika-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28180,7 +28180,7 @@
    ]
   },
   "science:tamechika-hadou": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28227,7 +28227,7 @@
    ]
   },
   "science:tamechika-note-kihon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28386,7 +28386,7 @@
    ]
   },
   "science:sakata-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28434,7 +28434,7 @@
    ]
   },
   "science:suzuki-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28481,7 +28481,7 @@
    ]
   },
   "science:suzuki-hadou": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28579,7 +28579,7 @@
    ]
   },
   "science:hitotsu-tokikata": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28626,7 +28626,7 @@
    ]
   },
   "science:kaiho-frame-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28680,7 +28680,7 @@
    ]
   },
   "science:kaiho-frame-denjiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28735,7 +28735,7 @@
    ]
   },
   "science:bisekibutsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28779,7 +28779,7 @@
    ]
   },
   "science:shin-butsuri-nyumon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28824,7 +28824,7 @@
    ]
   },
   "science:shin-butsuri-enshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28868,7 +28868,7 @@
    ]
   },
   "science:kosei-nyumon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28922,7 +28922,7 @@
    ]
   },
   "science:kosei-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -28976,7 +28976,7 @@
    ]
   },
   "science:kosei-hyojun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29031,7 +29031,7 @@
    ]
   },
   "science:kosei-shikoryoku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29116,7 +29116,7 @@
    }
   },
   "science:b-zen-level-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29172,7 +29172,7 @@
    ]
   },
   "science:b-zen-level-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29228,7 +29228,7 @@
    ]
   },
   "science:b-zen-level-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29284,7 +29284,7 @@
    ]
   },
   "science:b-zen-level-4": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29340,7 +29340,7 @@
    ]
   },
   "science:essence-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29386,7 +29386,7 @@
    ]
   },
   "science:essence-netsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29440,7 +29440,7 @@
    ]
   },
   "science:butsuri-kyoshitsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29562,7 +29562,7 @@
    ]
   },
   "science:meimon-mori-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29616,7 +29616,7 @@
    ]
   },
   "science:meimon-mori-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29792,7 +29792,7 @@
    ]
   },
   "science:nankei-rikigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29848,7 +29848,7 @@
    ]
   },
   "science:nankei-denjiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29904,7 +29904,7 @@
    ]
   },
   "science:taikei-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29952,7 +29952,7 @@
    ]
   },
   "science:b-nyushi-kakushin": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -29997,7 +29997,7 @@
    ]
   },
   "science:orito-dokushu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30208,7 +30208,7 @@
    ]
   },
   "science:juyo-mondaishu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30275,7 +30275,7 @@
    "fields": {}
   },
   "science:b-lead-alpha": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30321,7 +30321,7 @@
    ]
   },
   "science:lead-light-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30420,7 +30420,7 @@
    ]
   },
   "science:sensor-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30459,7 +30459,7 @@
    ]
   },
   "science:sensor-sogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30498,7 +30498,7 @@
    ]
   },
   "science:new-global": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30537,7 +30537,7 @@
    ]
   },
   "science:excel-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30575,7 +30575,7 @@
    ]
   },
   "science:level-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30612,7 +30612,7 @@
    ]
   },
   "science:level-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30664,7 +30664,7 @@
    ]
   },
   "science:level-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30701,7 +30701,7 @@
    ]
   },
   "science:level-4": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30738,7 +30738,7 @@
    ]
   },
   "science:ichimon-ittou": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30775,7 +30775,7 @@
    ]
   },
   "science:juyo-koshiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30822,7 +30822,7 @@
    ]
   },
   "science:kimeru-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30882,7 +30882,7 @@
    ]
   },
   "science:kimeru-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30930,7 +30930,7 @@
    ]
   },
   "science:omoshiro-kyotest": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -30977,7 +30977,7 @@
    ]
   },
   "science:tanki-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31021,7 +31021,7 @@
    ]
   },
   "science:tanki-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31066,7 +31066,7 @@
    ]
   },
   "science:mark-kiso-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31120,7 +31120,7 @@
    ]
   },
   "science:mark-kiso-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31174,7 +31174,7 @@
    ]
   },
   "science:kawai-sogo-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31227,7 +31227,7 @@
    ]
   },
   "science:kawai-sogo-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31280,7 +31280,7 @@
    ]
   },
   "science:sundai-jissen-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31398,7 +31398,7 @@
    ]
   },
   "science:zkai-jissen-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31451,7 +31451,7 @@
    ]
   },
   "science:toshin-jissen-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31499,7 +31499,7 @@
    ]
   },
   "science:toshin-jissen-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31546,7 +31546,7 @@
    ]
   },
   "science:yozemi-jissen-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31607,7 +31607,7 @@
    ]
   },
   "science:kawai-kakomon-review": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31660,7 +31660,7 @@
    ]
   },
   "science:kyogakusha-kyotest-kako": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31711,7 +31711,7 @@
    ]
   },
   "science:igakubu-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31813,7 +31813,7 @@
    ]
   },
   "science:kyodai-butsuri-25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31916,7 +31916,7 @@
    ]
   },
   "science:handai-butsuri-20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -31970,7 +31970,7 @@
    ]
   },
   "science:meidai-butsuri-15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32024,7 +32024,7 @@
    ]
   },
   "science:tohokudai-butsuri-15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32078,7 +32078,7 @@
    ]
   },
   "science:hokudai-butsuri-15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32132,7 +32132,7 @@
    ]
   },
   "science:kyudai-butsuri-15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32186,7 +32186,7 @@
    ]
   },
   "science:zenkoku-nyushi-seikai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32239,7 +32239,7 @@
    ]
   },
   "science:kamata-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32287,7 +32287,7 @@
    ]
   },
   "science:fukuma-muki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32335,7 +32335,7 @@
    ]
   },
   "science:kamata-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32383,7 +32383,7 @@
    ]
   },
   "science:kamata-mondai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32431,7 +32431,7 @@
    ]
   },
   "science:hashizume-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32478,7 +32478,7 @@
    ]
   },
   "science:hashizume-mukiyuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32525,7 +32525,7 @@
    ]
   },
   "science:okano-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32572,7 +32572,7 @@
    ]
   },
   "science:okano-mukiyuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32619,7 +32619,7 @@
    ]
   },
   "science:uchu-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32666,7 +32666,7 @@
    ]
   },
   "science:uchu-muki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32713,7 +32713,7 @@
    ]
   },
   "science:uchu-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32759,7 +32759,7 @@
    ]
   },
   "science:sakata-akira-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32807,7 +32807,7 @@
    ]
   },
   "science:sakata-akira-mukiyuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32855,7 +32855,7 @@
    ]
   },
   "science:sakata-akira-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32903,7 +32903,7 @@
    ]
   },
   "science:omiya-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32948,7 +32948,7 @@
    ]
   },
   "science:omiya-muki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -32992,7 +32992,7 @@
    ]
   },
   "science:omiya-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33039,7 +33039,7 @@
    ]
   },
   "science:terui-card-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33093,7 +33093,7 @@
    ]
   },
   "science:terui-card-muki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33147,7 +33147,7 @@
    ]
   },
   "science:terui-card-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33252,7 +33252,7 @@
    ]
   },
   "science:kameda-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33299,7 +33299,7 @@
    ]
   },
   "science:kameda-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33347,7 +33347,7 @@
    ]
   },
   "science:sakata-kaoru-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33395,7 +33395,7 @@
    ]
   },
   "science:sakata-kaoru-muki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33443,7 +33443,7 @@
    ]
   },
   "science:sakata-kaoru-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33491,7 +33491,7 @@
    ]
   },
   "science:kishi-kagakukiso-hajime": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33538,7 +33538,7 @@
    ]
   },
   "science:kishi-riron-hajime": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33582,7 +33582,7 @@
    ]
   },
   "science:tottemo-yasashii-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33630,7 +33630,7 @@
    ]
   },
   "science:tottemo-yasashii-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33678,7 +33678,7 @@
    ]
   },
   "science:hitotsu-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33724,7 +33724,7 @@
    ]
   },
   "science:chart-shinkagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33770,7 +33770,7 @@
    ]
   },
   "science:shinkenkyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33816,7 +33816,7 @@
    ]
   },
   "science:ichimonitto-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33863,7 +33863,7 @@
    ]
   },
   "science:ichimonitto-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33910,7 +33910,7 @@
    ]
   },
   "science:rankjun-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -33957,7 +33957,7 @@
    ]
   },
   "science:hayawakari-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34004,7 +34004,7 @@
    ]
   },
   "science:photoscience": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34052,7 +34052,7 @@
    ]
   },
   "science:k-square-zusetsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34089,7 +34089,7 @@
    ]
   },
   "science:k-newstage-zuhyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34180,7 +34180,7 @@
    ]
   },
   "science:lead-light-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34240,7 +34240,7 @@
    "fields": {}
   },
   "science:newglobal-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34277,7 +34277,7 @@
    ]
   },
   "science:excel-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34314,7 +34314,7 @@
    ]
   },
   "science:access-note-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34351,7 +34351,7 @@
    ]
   },
   "science:nyumon-seiko": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34404,7 +34404,7 @@
    ]
   },
   "science:kiso-seiko": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34457,7 +34457,7 @@
    ]
   },
   "science:k-zen-level-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34513,7 +34513,7 @@
    ]
   },
   "science:k-zen-level-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34569,7 +34569,7 @@
    ]
   },
   "science:k-zen-level-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34625,7 +34625,7 @@
    ]
   },
   "science:k-zen-level-4": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34681,7 +34681,7 @@
    ]
   },
   "science:level-betsu-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34725,7 +34725,7 @@
    ]
   },
   "science:level-betsu-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34769,7 +34769,7 @@
    ]
   },
   "science:level-betsu-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34813,7 +34813,7 @@
    ]
   },
   "science:level-betsu-4": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34857,7 +34857,7 @@
    ]
   },
   "science:shinkihon-enshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34906,7 +34906,7 @@
    ]
   },
   "science:sigma-kihon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -34952,7 +34952,7 @@
    ]
   },
   "science:juyo-mondai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35007,7 +35007,7 @@
    ]
   },
   "science:hyojun-seiko": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35111,7 +35111,7 @@
    }
   },
   "science:shinhyojun-enshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35158,7 +35158,7 @@
    ]
   },
   "science:rikei-hyojun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35211,7 +35211,7 @@
    ]
   },
   "science:k-nyushi-kakushin": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35256,7 +35256,7 @@
    ]
   },
   "science:keisan-hisshu120": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35310,7 +35310,7 @@
    ]
   },
   "science:yuki-kozo-hisshu50": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35355,7 +35355,7 @@
    ]
   },
   "science:yuki-kozo-yoten": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35410,7 +35410,7 @@
    ]
   },
   "science:shinenshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35456,7 +35456,7 @@
    ]
   },
   "science:yuki-enshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35509,7 +35509,7 @@
    ]
   },
   "science:genten-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35665,7 +35665,7 @@
    ]
   },
   "science:genten-keisan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35709,7 +35709,7 @@
    ]
   },
   "science:genten-hasso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35753,7 +35753,7 @@
    ]
   },
   "science:shinrikei-100sen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35806,7 +35806,7 @@
    ]
   },
   "science:kijutsu-ronjutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35851,7 +35851,7 @@
    ]
   },
   "science:igakubu-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35899,7 +35899,7 @@
    ]
   },
   "science:tetsuryokukai-todai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -35953,7 +35953,7 @@
    ]
   },
   "science:kimeru-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36006,7 +36006,7 @@
    ]
   },
   "science:kimeru-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36053,7 +36053,7 @@
    ]
   },
   "science:omoshiro-kyote-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36101,7 +36101,7 @@
    ]
   },
   "science:omoshiro-kyote-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36149,7 +36149,7 @@
    ]
   },
   "science:tanki-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36202,7 +36202,7 @@
    ]
   },
   "science:tanki-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36255,7 +36255,7 @@
    ]
   },
   "science:mark-kiso-rironmuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36302,7 +36302,7 @@
    ]
   },
   "science:mark-kiso-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36349,7 +36349,7 @@
    ]
   },
   "science:mark-kiso-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36395,7 +36395,7 @@
    ]
   },
   "science:kawai-sogo-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36448,7 +36448,7 @@
    ]
   },
   "science:kawai-sogo-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36501,7 +36501,7 @@
    ]
   },
   "science:sundai-jissen-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36617,7 +36617,7 @@
    ]
   },
   "science:zkai-jissen-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36669,7 +36669,7 @@
    ]
   },
   "science:zkai-jissen-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36715,7 +36715,7 @@
    ]
   },
   "science:kyogakusha-kakomon-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36767,7 +36767,7 @@
    ]
   },
   "science:toshin-jissen-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36872,7 +36872,7 @@
    ]
   },
   "science:highscore-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -36919,7 +36919,7 @@
    ]
   },
   "science:omoshiro-ichimonitto-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37029,7 +37029,7 @@
    ]
   },
   "science:kyodai-25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37075,7 +37075,7 @@
    ]
   },
   "science:kagakudai-20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37136,7 +37136,7 @@
    ]
   },
   "science:handai-20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37182,7 +37182,7 @@
    ]
   },
   "science:nagoya-15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37228,7 +37228,7 @@
    ]
   },
   "science:tohoku-15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37274,7 +37274,7 @@
    ]
   },
   "science:hokudai-15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37320,7 +37320,7 @@
    ]
   },
   "science:kyudai-15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37366,7 +37366,7 @@
    ]
   },
   "science:todai-shokai-25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37412,7 +37412,7 @@
    ]
   },
   "science:zenkoku-seikai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37459,7 +37459,7 @@
    ]
   },
   "science:tabe-kiso-hajimete": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37506,7 +37506,7 @@
    ]
   },
   "science:yamakawa-omoshiroi-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37553,7 +37553,7 @@
    ]
   },
   "science:yamakawa-omoshiroi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37601,7 +37601,7 @@
    ]
   },
   "science:uchu-ichi-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37647,7 +37647,7 @@
    ]
   },
   "science:omori-41ko-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37694,7 +37694,7 @@
    ]
   },
   "science:omori-saikyo-kogi-126": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37893,7 +37893,7 @@
    ]
   },
   "science:suzukawa-theme200": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -37947,7 +37947,7 @@
    ]
   },
   "science:suzukawa-theme75": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38002,7 +38002,7 @@
    ]
   },
   "science:rikai-shiyasui-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38049,7 +38049,7 @@
    ]
   },
   "science:rikai-shiyasui-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38095,7 +38095,7 @@
    ]
   },
   "science:yokuwakaru-kiso-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38141,7 +38141,7 @@
    ]
   },
   "science:wasureta-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38188,7 +38188,7 @@
    ]
   },
   "science:tabe-ichimon-itto": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38262,7 +38262,7 @@
    }
   },
   "science:rankjun-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38316,7 +38316,7 @@
    ]
   },
   "science:rankjun-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38362,7 +38362,7 @@
    ]
   },
   "science:speed-check-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38415,7 +38415,7 @@
    ]
   },
   "science:speed-check-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38522,7 +38522,7 @@
    ]
   },
   "science:seibutsu-yogoshu-sundai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38566,7 +38566,7 @@
    ]
   },
   "science:chishiki-no-shoten": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38641,7 +38641,7 @@
    }
   },
   "science:photoscience-zuroku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38696,7 +38696,7 @@
    ]
   },
   "science:s-square-zusetsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38733,7 +38733,7 @@
    ]
   },
   "science:s-newstage-zuhyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38771,7 +38771,7 @@
    ]
   },
   "science:scienceview-sogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38868,7 +38868,7 @@
    ]
   },
   "science:nyumon-mondai-seiko": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -38923,7 +38923,7 @@
    ]
   },
   "science:kiso-mondai-seiko": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39033,7 +39033,7 @@
    ]
   },
   "science:s-zen-level-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39082,7 +39082,7 @@
    ]
   },
   "science:s-zen-level-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39245,7 +39245,7 @@
    ]
   },
   "science:tabe-177mon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39331,7 +39331,7 @@
    ]
   },
   "science:golden-route-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39385,7 +39385,7 @@
    ]
   },
   "science:semi-kiso-mondaishu-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39431,7 +39431,7 @@
    ]
   },
   "science:sigma-kihon-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39490,7 +39490,7 @@
    "fields": {}
   },
   "science:lead-alpha-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39533,7 +39533,7 @@
    "fields": {}
   },
   "science:lead-light-note-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39581,7 +39581,7 @@
    ]
   },
   "science:lead-light-note-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39629,7 +39629,7 @@
    ]
   },
   "science:sensor-sogo-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39666,7 +39666,7 @@
    ]
   },
   "science:newglobal-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39704,7 +39704,7 @@
    ]
   },
   "science:excel-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39748,7 +39748,7 @@
    ]
   },
   "science:kango-mondaishu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39794,7 +39794,7 @@
    ]
   },
   "science:juyo-mondaishu-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39849,7 +39849,7 @@
    ]
   },
   "science:hyojun-mondai-seiko": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39897,7 +39897,7 @@
    ]
   },
   "science:jokyu-mondai-seiko": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -39959,7 +39959,7 @@
    ]
   },
   "science:rikei-hyojun-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40004,7 +40004,7 @@
    ]
   },
   "science:canpass-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40049,7 +40049,7 @@
    ]
   },
   "science:seibutsu-sogo-40": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40086,7 +40086,7 @@
    ]
   },
   "science:kihon-tettei-48": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40130,7 +40130,7 @@
    ]
   },
   "science:seibutsu-no-kensan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40184,7 +40184,7 @@
    ]
   },
   "science:rikei-jokyu-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40229,7 +40229,7 @@
    ]
   },
   "science:igakubu-no-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40329,7 +40329,7 @@
    ]
   },
   "science:omori-iden": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40377,7 +40377,7 @@
    ]
   },
   "science:omori-keisan-graph": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40424,7 +40424,7 @@
    ]
   },
   "science:omori-kijutsu-ronjutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40526,7 +40526,7 @@
    ]
   },
   "science:sekaiichi-jikken-kosatsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40573,7 +40573,7 @@
    ]
   },
   "science:kijutsu-kanzen-taisaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40611,7 +40611,7 @@
    ]
   },
   "science:iden-keisan-kakumei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40656,7 +40656,7 @@
    ]
   },
   "science:graph-data-yomikata": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40704,7 +40704,7 @@
    ]
   },
   "science:choufrequent-theme99": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40759,7 +40759,7 @@
    ]
   },
   "science:kimeru-kyotest-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40819,7 +40819,7 @@
    ]
   },
   "science:kimeru-kyotest-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40867,7 +40867,7 @@
    ]
   },
   "science:omoshiroi-kyotest-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40914,7 +40914,7 @@
    ]
   },
   "science:omoshiroi-kyotest-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -40961,7 +40961,7 @@
    ]
   },
   "science:tanki-koryaku-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41063,7 +41063,7 @@
    ]
   },
   "science:mark-kiso-seibutsu-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41110,7 +41110,7 @@
    ]
   },
   "science:korekakedake-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41157,7 +41157,7 @@
    ]
   },
   "science:shuchu-kogi-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41204,7 +41204,7 @@
    ]
   },
   "science:kyotest-kakomon-review-kawai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41257,7 +41257,7 @@
    ]
   },
   "science:kyotest-kakomon-kenkyu-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41309,7 +41309,7 @@
    ]
   },
   "science:akahon-kyote-rika-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41355,7 +41355,7 @@
    ]
   },
   "science:kyotest-sogo-kawai-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41408,7 +41408,7 @@
    ]
   },
   "science:kyotest-sogo-kawai-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41570,7 +41570,7 @@
    ]
   },
   "science:kyotest-jissen-zkai-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41622,7 +41622,7 @@
    ]
   },
   "science:kyotest-jissen-zkai-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41668,7 +41668,7 @@
    ]
   },
   "science:kyotest-jissen-toshin-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41712,7 +41712,7 @@
    ]
   },
   "science:kyotest-jissen-toshin-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41759,7 +41759,7 @@
    ]
   },
   "science:kyotest-jissen-yozemi-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41813,7 +41813,7 @@
    ]
   },
   "science:honban-moshi-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -41868,7 +41868,7 @@
    ]
   },
   "science:chokuzen-30days-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42025,7 +42025,7 @@
    ]
   },
   "science:kyodai-nyushi-shokai-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42070,7 +42070,7 @@
    ]
   },
   "science:zenkoku-nyushi-seikai-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42116,7 +42116,7 @@
    ]
   },
   "science:kango-omnia-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42163,7 +42163,7 @@
    ]
   },
   "science:aoki-hajitei-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42210,7 +42210,7 @@
    ]
   },
   "science:kimeru-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42258,7 +42258,7 @@
    ]
   },
   "science:omoshiroi-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42305,7 +42305,7 @@
    ]
   },
   "science:tanki-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42350,7 +42350,7 @@
    ]
   },
   "science:tanki-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42395,7 +42395,7 @@
    ]
   },
   "science:lead-light-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42455,7 +42455,7 @@
    "fields": {}
   },
   "science:sensor-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42492,7 +42492,7 @@
    ]
   },
   "science:sensor-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42529,7 +42529,7 @@
    ]
   },
   "science:newstage-chigaku-zuhyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42560,7 +42560,7 @@
    ]
   },
   "science:photoscience-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42607,7 +42607,7 @@
    ]
   },
   "science:square-zusetsu-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42644,7 +42644,7 @@
    ]
   },
   "science:hayawakari-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42699,7 +42699,7 @@
    ]
   },
   "science:ichimon-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42745,7 +42745,7 @@
    ]
   },
   "science:hitoride-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42789,7 +42789,7 @@
    ]
   },
   "science:mouichido-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42895,7 +42895,7 @@
    ]
   },
   "science:jikkyo-chukei-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42943,7 +42943,7 @@
    ]
   },
   "science:koredake-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -42989,7 +42989,7 @@
    ]
   },
   "science:hisshu-seiri-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43034,7 +43034,7 @@
    ]
   },
   "science:kuwashikute-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43075,7 +43075,7 @@
    ]
   },
   "science:mark-kiso-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43121,7 +43121,7 @@
    ]
   },
   "science:highscore-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43168,7 +43168,7 @@
    ]
   },
   "science:toshin-jissen-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43327,7 +43327,7 @@
    ]
   },
   "science:obunsha-honban-moshi-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43375,7 +43375,7 @@
    ]
   },
   "science:kawai-kako-review-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43420,7 +43420,7 @@
    ]
   },
   "science:keirin-kyokasho-chigaku-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43457,7 +43457,7 @@
    ]
   },
   "science:keirin-kyokasho-chigaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43601,7 +43601,7 @@
    "fields": {}
   },
   "science:rakumasu-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43703,7 +43703,7 @@
    ]
   },
   "science:ryomon-butsuri-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43802,7 +43802,7 @@
    ]
   },
   "science:nyushi-butsuri-plus": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43889,7 +43889,7 @@
    ]
   },
   "science:tetsuryokukai-butsuri-kohryaku-hint": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43935,7 +43935,7 @@
    ]
   },
   "science:kyogakusha-shinkatei-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -43982,7 +43982,7 @@
    ]
   },
   "science:obunsha-honban-moshi-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44076,7 +44076,7 @@
    }
   },
   "science:kyodai-nyushi-shokai-butsuri-25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44194,7 +44194,7 @@
    ]
   },
   "science:rakumasu-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44241,7 +44241,7 @@
    ]
   },
   "science:terui-mondaishu-riron-keisan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44317,7 +44317,7 @@
    }
   },
   "science:toshin-jissen-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44372,7 +44372,7 @@
    ]
   },
   "science:obunsha-honban-moshi-kagakukiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44428,7 +44428,7 @@
    ]
   },
   "science:kyogakusha-shinkatei-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44475,7 +44475,7 @@
    ]
   },
   "science:kawai-kakomon-review-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44521,7 +44521,7 @@
    ]
   },
   "science:kyodai-nyushi-shokai-kagaku-25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44582,7 +44582,7 @@
    ]
   },
   "science:seibutsu-atarashi-kangaeru-100sen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44626,7 +44626,7 @@
    ]
   },
   "science:s-zen-level-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44674,7 +44674,7 @@
    ]
   },
   "science:highscore-seibutsu-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44721,7 +44721,7 @@
    ]
   },
   "science:kyogakusha-shinkatei-koryaku-seibutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44866,7 +44866,7 @@
    ]
   },
   "social:koko-nihonshi-kyokasho": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44903,7 +44903,7 @@
    ]
   },
   "social:shosetsu-nihonshi-kyokasho": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44940,7 +44940,7 @@
    ]
   },
   "social:jikkyo-shuppan-nihonshi-kyokasho": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -44977,7 +44977,7 @@
    ]
   },
   "social:tokyoshoseki-nihonshi-kyokasho": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45014,7 +45014,7 @@
    ]
   },
   "social:shosetsu-nihonshi-kenkyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45116,7 +45116,7 @@
    ]
   },
   "social:kyokasho-yasashii-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45254,7 +45254,7 @@
    }
   },
   "social:kanaya-bunkashi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45301,7 +45301,7 @@
    ]
   },
   "social:yokuwakaru-nihonshi-tankyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45475,7 +45475,7 @@
    }
   },
   "social:kakikomi-kyokasho-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45522,7 +45522,7 @@
    ]
   },
   "social:yamakawa-ichimonitto-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45569,7 +45569,7 @@
    ]
   },
   "social:toshin-ichimonitto-kihon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45617,7 +45617,7 @@
    ]
   },
   "social:kanaya-nendai-anki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45663,7 +45663,7 @@
    ]
   },
   "social:shosetsu-nihonshi-note": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45710,7 +45710,7 @@
    ]
   },
   "social:jidai-nagare-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45757,7 +45757,7 @@
    ]
   },
   "social:ganso-nendai-anki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45805,7 +45805,7 @@
    ]
   },
   "social:yougoshu-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45917,7 +45917,7 @@
    ]
   },
   "social:toshin-ichimonitto-kanzen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -45965,7 +45965,7 @@
    ]
   },
   "social:toshin-shiryo-ichimonitto": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46002,7 +46002,7 @@
    ]
   },
   "social:shosetsu-nihonshi-zuroku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46096,7 +46096,7 @@
    ]
   },
   "social:zusetsu-nihonshi-tsuran": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46142,7 +46142,7 @@
    ]
   },
   "social:saishin-nihonshi-zuhyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46173,7 +46173,7 @@
    ]
   },
   "social:shosetsu-nihonshi-shiryoshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46210,7 +46210,7 @@
    ]
   },
   "social:speedmaster-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46316,7 +46316,7 @@
    ]
   },
   "social:speedmaster-bunkashi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46417,7 +46417,7 @@
    ]
   },
   "social:collab-mondaishu-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46617,7 +46617,7 @@
    ]
   },
   "social:historia-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46665,7 +46665,7 @@
    ]
   },
   "social:kouryaku-nihonshi-theme": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46777,7 +46777,7 @@
    ]
   },
   "social:jitsuryoku-nihonshi-100": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46845,7 +46845,7 @@
    ]
   },
   "social:hyojun-mondai-seiko-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46894,7 +46894,7 @@
    ]
   },
   "social:collab-mondaishu-jokyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -46942,7 +46942,7 @@
    ]
   },
   "social:kaite-fukameru-ronjutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47095,7 +47095,7 @@
    ]
   },
   "social:dankaishiki-ronjutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47196,7 +47196,7 @@
    ]
   },
   "social:kijutsu-ronjutsu-level3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47233,7 +47233,7 @@
    ]
   },
   "social:waseda-keio-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47280,7 +47280,7 @@
    ]
   },
   "social:koretadake-nihonshi-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47327,7 +47327,7 @@
    ]
   },
   "social:toshin-ichimonitto-kyotest": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47373,7 +47373,7 @@
    ]
   },
   "social:kimeru-kyotest-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47478,7 +47478,7 @@
    ]
   },
   "social:omoshiroi-kyotest-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47525,7 +47525,7 @@
    ]
   },
   "social:koretadake-nihonshi-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47572,7 +47572,7 @@
    ]
   },
   "social:koretadake-nihonshi-enshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47627,7 +47627,7 @@
    ]
   },
   "social:kyotest-bunkashi-kyogakusha": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47871,7 +47871,7 @@
    ]
   },
   "social:zenkoku-nyushi-seikai-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -47917,7 +47917,7 @@
    ]
   },
   "social:kyodai-nihonshi-20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48125,7 +48125,7 @@
    ]
   },
   "social:text-yamakawa-shosetsu-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48162,7 +48162,7 @@
    ]
   },
   "social:text-tokyoshoseki-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48200,7 +48200,7 @@
    ]
   },
   "social:text-teikoku-shinsho-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48238,7 +48238,7 @@
    ]
   },
   "social:text-yamakawa-shin-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48275,7 +48275,7 @@
    ]
   },
   "social:sekaishi-kenkyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48321,7 +48321,7 @@
    ]
   },
   "social:kyokasho-yasashii-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48368,7 +48368,7 @@
    ]
   },
   "social:ichidoyondara-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48696,7 +48696,7 @@
    }
   },
   "social:jidai-nagare-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48741,7 +48741,7 @@
    ]
   },
   "social:ganso-nendai-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48840,7 +48840,7 @@
    ]
   },
   "social:kakikomi-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48887,7 +48887,7 @@
    ]
   },
   "social:yamakawa-ichimonto-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48933,7 +48933,7 @@
    ]
   },
   "social:sekaishi-multi-training": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -48979,7 +48979,7 @@
    ]
   },
   "social:tate-sekaishi-tankyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49024,7 +49024,7 @@
    ]
   },
   "social:yoko-sekaishi-tankyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49069,7 +49069,7 @@
    ]
   },
   "social:yamakawa-yogoshu-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49179,7 +49179,7 @@
    ]
   },
   "social:yamakawa-zuroku-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49232,7 +49232,7 @@
    ]
   },
   "social:tapestry-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49279,7 +49279,7 @@
    ]
   },
   "social:globalwide-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49316,7 +49316,7 @@
    ]
   },
   "social:academia-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49346,7 +49346,7 @@
    ]
   },
   "social:speedmaster-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49512,7 +49512,7 @@
    ]
   },
   "social:kiso-mondai-seiko-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49566,7 +49566,7 @@
    ]
   },
   "social:hajimeru-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49619,7 +49619,7 @@
    ]
   },
   "social:ichikara-sekaishi-hisshu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49664,7 +49664,7 @@
    ]
   },
   "social:zenlevel-sekaishi-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49720,7 +49720,7 @@
    ]
   },
   "social:mayowazu-tokeru-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49766,7 +49766,7 @@
    ]
   },
   "social:historia-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49814,7 +49814,7 @@
    ]
   },
   "social:toshin-mondaishu-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49858,7 +49858,7 @@
    ]
   },
   "social:zenlevel-sekaishi-4": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49907,7 +49907,7 @@
    ]
   },
   "social:jitsuryoku-100dai-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -49961,7 +49961,7 @@
    ]
   },
   "social:hyojun-mondai-seiko-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50024,7 +50024,7 @@
    ]
   },
   "social:kanto-nankan-shidai-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50072,7 +50072,7 @@
    ]
   },
   "social:waseda-taisaku-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50117,7 +50117,7 @@
    ]
   },
   "social:mirumiru-ronjutsu-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50161,7 +50161,7 @@
    ]
   },
   "social:zenlevel-sekaishi-5": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50209,7 +50209,7 @@
    ]
   },
   "social:wakaru-tokeru-kakeru-ronjutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50253,7 +50253,7 @@
    ]
   },
   "social:dankaishiki-ronjutsu-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50305,7 +50305,7 @@
    ]
   },
   "social:45kajo-ronjutsu-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50335,7 +50335,7 @@
    ]
   },
   "social:ronjutsu-renshucho-new": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50429,7 +50429,7 @@
    ]
   },
   "social:omoshiroi-kyotest-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50475,7 +50475,7 @@
    ]
   },
   "social:kimeru-kyotest-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50528,7 +50528,7 @@
    ]
   },
   "social:shuchu-kogi-kyotest-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50583,7 +50583,7 @@
    ]
   },
   "social:zenlevel-sekaishi-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50689,7 +50689,7 @@
    ]
   },
   "social:kyotest-training-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50736,7 +50736,7 @@
    ]
   },
   "social:shinkatei-koryaku-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50832,7 +50832,7 @@
    ]
   },
   "social:kyotest-kakomon-kenkyu-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50877,7 +50877,7 @@
    ]
   },
   "social:kyotest-review-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50922,7 +50922,7 @@
    ]
   },
   "social:kyodai-sekaishi-20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -50969,7 +50969,7 @@
    ]
   },
   "social:waseda-sekaishi-kakomon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51017,7 +51017,7 @@
    ]
   },
   "social:todai-sekaishi-25": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51064,7 +51064,7 @@
    ]
   },
   "social:hitotsubashi-sekaishi-20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51111,7 +51111,7 @@
    ]
   },
   "social:chiri-teikoku-sougou": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51148,7 +51148,7 @@
    ]
   },
   "social:chiri-tokyosho-sougou": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51185,7 +51185,7 @@
    ]
   },
   "social:chiri-teikoku-tankyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51222,7 +51222,7 @@
    ]
   },
   "social:chiri-rikai-yasui": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51269,7 +51269,7 @@
    ]
   },
   "social:chiri-ninomiya-tankyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51306,7 +51306,7 @@
    ]
   },
   "social:chiri-yamaoka-kyoshitsu1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51447,7 +51447,7 @@
    ]
   },
   "social:chiri-uno-keito": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51493,7 +51493,7 @@
    ]
   },
   "social:chiri-uno-chishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51539,7 +51539,7 @@
    ]
   },
   "social:chiri-kimeru": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51587,7 +51587,7 @@
    ]
   },
   "social:chiri-omoshiro": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51669,7 +51669,7 @@
    }
   },
   "social:chiri-nakamura-jikan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51769,7 +51769,7 @@
    ]
   },
   "social:chiri-toukei-yomikata": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51817,7 +51817,7 @@
    ]
   },
   "social:chiri-yamakawa-note": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51864,7 +51864,7 @@
    ]
   },
   "social:chiri-zukai-yogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -51910,7 +51910,7 @@
    ]
   },
   "social:chiri-yamakawa-yogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52019,7 +52019,7 @@
    ]
   },
   "social:chiri-omoshiro-ichimonto": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52120,7 +52120,7 @@
    ]
   },
   "social:chiri-yogo-kanzen-g": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52160,7 +52160,7 @@
    ]
   },
   "social:chiri-shinsho-atlas": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52204,7 +52204,7 @@
    ]
   },
   "social:chiri-shokai-gendai-chizu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52251,7 +52251,7 @@
    ]
   },
   "social:chiri-complete": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52298,7 +52298,7 @@
    ]
   },
   "social:chiri-geo-zuhyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52335,7 +52335,7 @@
    ]
   },
   "social:chiri-databook": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52382,7 +52382,7 @@
    ]
   },
   "social:chiri-toukei-youran": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52429,7 +52429,7 @@
    ]
   },
   "social:chiri-nihon-kokusei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52476,7 +52476,7 @@
    ]
   },
   "social:chiri-zukai-chizu-shiryo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52522,7 +52522,7 @@
    ]
   },
   "social:chiri-shiryo-kenkyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52567,7 +52567,7 @@
    ]
   },
   "social:chiri-speedmaster": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52614,7 +52614,7 @@
    ]
   },
   "social:chiri-hajimeru": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52667,7 +52667,7 @@
    ]
   },
   "social:chiri-mark-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52721,7 +52721,7 @@
    ]
   },
   "social:chiri-100theme": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52780,7 +52780,7 @@
    "fields": {}
   },
   "social:chiri-100dai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52833,7 +52833,7 @@
    ]
   },
   "social:chiri-nattoku-ronjutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52923,7 +52923,7 @@
    ]
   },
   "social:chiri-tangen-training": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -52971,7 +52971,7 @@
    ]
   },
   "social:chiri-kosatsu80": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53019,7 +53019,7 @@
    ]
   },
   "social:chiri-segawa-keito": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53074,7 +53074,7 @@
    ]
   },
   "social:chiri-segawa-chishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53241,7 +53241,7 @@
    ]
   },
   "social:chiri-kakomon-kenkyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53285,7 +53285,7 @@
    ]
   },
   "social:chiri-review": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53399,7 +53399,7 @@
    ]
   },
   "social:chiri-hitotsubashi-akahon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53437,7 +53437,7 @@
    ]
   },
   "social:kyokasho-kokyo-tosho": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53474,7 +53474,7 @@
    ]
   },
   "social:kyokasho-kokyo-jikkyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53511,7 +53511,7 @@
    ]
   },
   "social:shimizu-kokyo-teinei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53556,7 +53556,7 @@
    ]
   },
   "social:kageyama-kt-kokyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53603,7 +53603,7 @@
    ]
   },
   "social:yamakawa-ichimon-kokyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53657,7 +53657,7 @@
    ]
   },
   "social:yamakawa-yogo-kokyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53711,7 +53711,7 @@
    ]
   },
   "social:live-kokyo-teikoku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53759,7 +53759,7 @@
    ]
   },
   "social:speedmaster-kokyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53806,7 +53806,7 @@
    ]
   },
   "social:kyokasho-seikei-tosho": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53843,7 +53843,7 @@
    ]
   },
   "social:yamakawa-seikei-kenkyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53890,7 +53890,7 @@
    ]
   },
   "social:kageyama-kt-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53937,7 +53937,7 @@
    ]
   },
   "social:kimeru-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -53983,7 +53983,7 @@
    ]
   },
   "social:saitan-route-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54137,7 +54137,7 @@
    ]
   },
   "social:omoshiro-toreru-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54184,7 +54184,7 @@
    ]
   },
   "social:hatakeyama-sokai-kogi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54238,7 +54238,7 @@
    ]
   },
   "social:target1400-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54286,7 +54286,7 @@
    ]
   },
   "social:shimizu-yogo-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54333,7 +54333,7 @@
    ]
   },
   "social:yamakawa-ichimon-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54380,7 +54380,7 @@
    ]
   },
   "social:yamakawa-yogo-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54528,7 +54528,7 @@
    ]
   },
   "social:zoomup-seikei-shiryo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54574,7 +54574,7 @@
    ]
   },
   "social:yamakawa-navi-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54627,7 +54627,7 @@
    ]
   },
   "social:speedmaster-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54674,7 +54674,7 @@
    ]
   },
   "social:markshiki-kiso-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54720,7 +54720,7 @@
    ]
   },
   "social:hatakeyama-sokai-mondai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54774,7 +54774,7 @@
    ]
   },
   "social:shidai-koryaku-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54827,7 +54827,7 @@
    ]
   },
   "social:hyojun-seiko-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54882,7 +54882,7 @@
    ]
   },
   "social:jitsuryoku-80-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54935,7 +54935,7 @@
    ]
   },
   "social:keisan-ronjutsu-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -54990,7 +54990,7 @@
    ]
   },
   "social:kanzen-master-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55139,7 +55139,7 @@
    ]
   },
   "social:tanki-koryaku-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55183,7 +55183,7 @@
    ]
   },
   "social:taipa-text-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55337,7 +55337,7 @@
    ]
   },
   "social:akahon-kt-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55546,7 +55546,7 @@
    ]
   },
   "social:rinri-kyokasho-tokyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55583,7 +55583,7 @@
    ]
   },
   "social:rinri-kyokasho-jikkyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55620,7 +55620,7 @@
    ]
   },
   "social:rinri-kyokasho-shimizu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55657,7 +55657,7 @@
    ]
   },
   "social:rinri-manga": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55705,7 +55705,7 @@
    ]
   },
   "social:rinri-kageyama": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55751,7 +55751,7 @@
    ]
   },
   "social:rinri-omoshiro": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55797,7 +55797,7 @@
    ]
   },
   "social:rinri-kimeru": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55844,7 +55844,7 @@
    ]
   },
   "social:rinri-hatakeyama-tanki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55950,7 +55950,7 @@
    ]
   },
   "social:rinri-hatakeyama-kougi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -55998,7 +55998,7 @@
    ]
   },
   "social:rinri-rikai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56044,7 +56044,7 @@
    ]
   },
   "social:rinri-seikei-omoshiro": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56092,7 +56092,7 @@
    ]
   },
   "social:rinri-yamakawa-ichimonto": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56139,7 +56139,7 @@
    ]
   },
   "social:rinri-target1500": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56186,7 +56186,7 @@
    ]
   },
   "social:rinri-yamakawa-yogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56232,7 +56232,7 @@
    ]
   },
   "social:rinri-shimizu-yogo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56280,7 +56280,7 @@
    ]
   },
   "social:rinri-toshin-ichimonto": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56375,7 +56375,7 @@
    ]
   },
   "social:rinri-theoria": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56464,7 +56464,7 @@
    ]
   },
   "social:rinri-speedmaster": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56511,7 +56511,7 @@
    ]
   },
   "social:rinri-passport": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56559,7 +56559,7 @@
    ]
   },
   "social:rinri-mark-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56655,7 +56655,7 @@
    ]
   },
   "social:rinri-hatakeyama-mondai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56702,7 +56702,7 @@
    ]
   },
   "social:rinri-master": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -56808,7 +56808,7 @@
    ]
   },
   "social:rinri-tanki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57175,7 +57175,7 @@
    ]
   },
   "social:ichidoyondara-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57229,7 +57229,7 @@
    "fields": {}
   },
   "social:sekaishi-nendai-onephrase": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57273,7 +57273,7 @@
    ]
   },
   "social:kijutsu-ronjutsu-level1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57310,7 +57310,7 @@
    ]
   },
   "social:kijutsu-ronjutsu-level2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57347,7 +57347,7 @@
    ]
   },
   "social:koretadake-sekaishi-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57394,7 +57394,7 @@
    ]
   },
   "social:koretadake-sekaishi-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57441,7 +57441,7 @@
    ]
   },
   "social:koretadake-chiri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57488,7 +57488,7 @@
    ]
   },
   "social:koretadake-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57635,7 +57635,7 @@
    ]
   },
   "social:shinkatei-koryaku-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57679,7 +57679,7 @@
    ]
   },
   "social:kyotest-jissen-moshi-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57726,7 +57726,7 @@
    ]
   },
   "social:kyotest-jissen-moshi-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57773,7 +57773,7 @@
    ]
   },
   "social:kyotest-jissen-moshi-chiri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57820,7 +57820,7 @@
    ]
   },
   "social:kyotest-jissen-moshi-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57867,7 +57867,7 @@
    ]
   },
   "social:yozemi-jissen-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57914,7 +57914,7 @@
    ]
   },
   "social:yozemi-jissen-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -57961,7 +57961,7 @@
    ]
   },
   "social:yozemi-jissen-chiri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58008,7 +58008,7 @@
    ]
   },
   "social:yozemi-jissen-kokyoseikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58062,7 +58062,7 @@
    ]
   },
   "social:kawai-kakomon-review-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58108,7 +58108,7 @@
    ]
   },
   "social:todai-nyushi-shokai-nihonshi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58154,7 +58154,7 @@
    ]
   },
   "social:todai-nyushi-shokai-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58200,7 +58200,7 @@
    ]
   },
   "social:todai-nyushi-shokai-chiri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58245,7 +58245,7 @@
    ]
   },
   "social:zenkoku-nyushi-seikai-sekaishi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58292,7 +58292,7 @@
    ]
   },
   "social:zenkoku-nyushi-seikai-chiri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58339,7 +58339,7 @@
    ]
   },
   "joho:info-hitotsuzutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58436,7 +58436,7 @@
    ]
   },
   "joho:info-tensu-omoshiroi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58533,7 +58533,7 @@
    ]
   },
   "joho:info-ichimon-itto": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58586,7 +58586,7 @@
    ]
   },
   "joho:info-tensu-omoshiroi-ichimon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -58792,7 +58792,7 @@
    ]
   },
   "joho:info-1satsu-ichimon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59048,7 +59048,7 @@
    ]
   },
   "joho:info-mark-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59142,7 +59142,7 @@
    ]
   },
   "joho:info-jissen-taisaku-obunsha": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59487,7 +59487,7 @@
    ]
   },
   "joho:info-point60": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59534,7 +59534,7 @@
    ]
   },
   "joho:info-pattern-drill": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59753,7 +59753,7 @@
    ]
   },
   "shoron:shoron-koredake": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59801,7 +59801,7 @@
    ]
   },
   "shoron:shoron-koredake-chokikiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59838,7 +59838,7 @@
    ]
   },
   "shoron:shoron-koredake-kakikata-chokikiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59886,7 +59886,7 @@
    ]
   },
   "shoron:shoron-koredake-kakikata-chokikiso2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59934,7 +59934,7 @@
    ]
   },
   "shoron:shoron-buttsuke": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -59971,7 +59971,7 @@
    ]
   },
   "shoron:shoron-okite55": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60019,7 +60019,7 @@
    ]
   },
   "shoron:shoron-zerokara-1kagetsu-rulebook": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60118,7 +60118,7 @@
    ]
   },
   "shoron:shoron-11method-kiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60166,7 +60166,7 @@
    ]
   },
   "shoron:shoron-naniga-kaketara": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60262,7 +60262,7 @@
    ]
   },
   "shoron:shoron-koredake-mohan-chokikiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60310,7 +60310,7 @@
    ]
   },
   "shoron:shoron-koredake-qa": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60404,7 +60404,7 @@
    ]
   },
   "shoron:shoron-yoshioka-naruhodo10": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60451,7 +60451,7 @@
    ]
   },
   "shoron:shoron-gentensarenai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60498,7 +60498,7 @@
    ]
   },
   "shoron:shoron-saitensha-kakikata": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60595,7 +60595,7 @@
    ]
   },
   "shoron:shoron-okite-pro": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60643,7 +60643,7 @@
    ]
   },
   "shoron:shoron-netahon-jinbun-kyoiku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60696,7 +60696,7 @@
    ]
   },
   "shoron:shoron-netahon-shakai-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60749,7 +60749,7 @@
    ]
   },
   "shoron:shoron-netahon-shizen-kagaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60802,7 +60802,7 @@
    ]
   },
   "shoron:shoron-netahon-ishiyaku-kango": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60861,7 +60861,7 @@
    "fields": {}
   },
   "shoron:shoron-gendai-wo-shiru-plus": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60891,7 +60891,7 @@
    ]
   },
   "shoron:shoron-kakikata-kotsu-shakai16": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60939,7 +60939,7 @@
    ]
   },
   "shoron:shoron-kakikata-kotsu-jinbun20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -60987,7 +60987,7 @@
    ]
   },
   "shoron:shoron-kakikata-kotsu-ikei20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61035,7 +61035,7 @@
    ]
   },
   "shoron:shoron-kakikata-kotsu-rikei15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61083,7 +61083,7 @@
    ]
   },
   "shoron:shoron-kaku-neta-kango15": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61131,7 +61131,7 @@
    ]
   },
   "shoron:shoron-hyoronbun-keyword100": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61229,7 +61229,7 @@
    ]
   },
   "shoron:shoron-koredake-ho-sei-chokikiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61315,7 +61315,7 @@
    }
   },
   "shoron:shoron-koredake-jinbun-joho-kyoiku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61361,7 +61361,7 @@
    ]
   },
   "shoron:shoron-koredake-jinbun-fukabori": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61409,7 +61409,7 @@
    ]
   },
   "shoron:shoron-koredake-kyoiku-fukabori": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61464,7 +61464,7 @@
    ]
   },
   "shoron:shoron-koredake-keizai-keiei-chokikiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61512,7 +61512,7 @@
    ]
   },
   "shoron:shoron-koredake-kakikata-keizai-keiei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61567,7 +61567,7 @@
    ]
   },
   "shoron:shoron-koredake-keizai-fukabori": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61622,7 +61622,7 @@
    ]
   },
   "shoron:shoron-koredake-kokusai-media-chokikiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61670,7 +61670,7 @@
    ]
   },
   "shoron:shoron-koredake-mohan-jinbun-joho-kyoiku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61718,7 +61718,7 @@
    ]
   },
   "shoron:shoron-koredake-mohan-keizai-keiei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61820,7 +61820,7 @@
    ]
   },
   "shoron:shoron-koike-7jikan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61867,7 +61867,7 @@
    ]
   },
   "shoron:shoron-10pun-drill": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -61970,7 +61970,7 @@
    ]
   },
   "shoron:shoron-sense-janai-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62008,7 +62008,7 @@
    ]
   },
   "shoron:shoron-marumaru-nyushi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62055,7 +62055,7 @@
    ]
   },
   "shoron:shoron-marumaru-hinshutsu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62158,7 +62158,7 @@
    ]
   },
   "shoron:shoron-koredake-keio-waseda": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62356,7 +62356,7 @@
    ]
   },
   "shoron:shoron-sekaiichi-keio": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62457,7 +62457,7 @@
    ]
   },
   "shoron:shoron-igakubu-jissen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62512,7 +62512,7 @@
    ]
   },
   "shoron:shoron-ikei-saihinshutsu20": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62559,7 +62559,7 @@
    ]
   },
   "shoron:shoron-sekaiichi-igakubu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62606,7 +62606,7 @@
    ]
   },
   "shoron:shoron-igakubu-shuchu-kogi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62653,7 +62653,7 @@
    ]
   },
   "shoron:shoron-igakubu-nankan-jissen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62699,7 +62699,7 @@
    ]
   },
   "shoron:shoron-igakubu-seimei-rinri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62790,7 +62790,7 @@
    ]
   },
   "shoron:shoron-ikei-17theme-suntan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62835,7 +62835,7 @@
    ]
   },
   "shoron:shoron-koredake-kakikata-igaku-iryo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62932,7 +62932,7 @@
    ]
   },
   "shoron:shoron-koredake-kango-chokikiso": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -62980,7 +62980,7 @@
    ]
   },
   "shoron:shoron-koredake-kango-fukabori": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63028,7 +63028,7 @@
    ]
   },
   "shoron:shoron-koredake-mohan-igaku-kango": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63076,7 +63076,7 @@
    ]
   },
   "shoron:shoron-marumaru-iryo-kango-fukushi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63123,7 +63123,7 @@
    ]
   },
   "shoron:shoron-kango-iryo-kaitei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63169,7 +63169,7 @@
    ]
   },
   "shoron:shoron-kango-iryo-saikyo-dokugaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63217,7 +63217,7 @@
    ]
   },
   "shoron:shoron-jinbun-shakai-saikyo-dokugaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63265,7 +63265,7 @@
    ]
   },
   "shoron:shoron-kango-gakubu-kawai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63320,7 +63320,7 @@
    ]
   },
   "shoron:shoron-igakubu-kawai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63526,7 +63526,7 @@
    ]
   },
   "shoron:shoron-sogogata-shiboriyu": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63572,7 +63572,7 @@
    ]
   },
   "shoron:shoron-marumaru-suisen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63674,7 +63674,7 @@
    ]
   },
   "shoron:shoron-keisetsu-jidai-5kanen": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63728,7 +63728,7 @@
    ]
   },
   "shoron:shoron-shin-shoronbun-note-2027": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63825,7 +63825,7 @@
    ]
   },
   "shoron:shoron-ai-shindan-ishiyaku": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63871,7 +63871,7 @@
    ]
   },
   "shoron:shoron-ai-shindan-kango-iryo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63917,7 +63917,7 @@
    ]
   },
   "shoron:shoron-kangogakubu-bunrei-2": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -63964,7 +63964,7 @@
    ]
   },
   "shoron:shoron-kangogakubu-bunrei-3": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64011,7 +64011,7 @@
    ]
   },
   "english:scramble-basic-4th": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64060,7 +64060,7 @@
    ]
   },
   "english:seki-kyotest-kakushin-input55": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64107,7 +64107,7 @@
    ]
   },
   "english:frame-reading-nyumon": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64153,7 +64153,7 @@
    ]
   },
   "english:frame-reading-oyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64206,7 +64206,7 @@
    ]
   },
   "english:crack10": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64261,7 +64261,7 @@
    ]
   },
   "english:logic42": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64307,7 +64307,7 @@
    ]
   },
   "english:eibunpo-goho-shortcuts": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64360,7 +64360,7 @@
    ]
   },
   "english:oversight": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64415,7 +64415,7 @@
    ]
   },
   "english:takeoka-eibunpo-drill-basic": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64463,7 +64463,7 @@
    ]
   },
   "english:takeoka-eibunpo-drill-advanced": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64511,7 +64511,7 @@
    ]
   },
   "english:chokkyu-kaiho-eisakubun-jikkyo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64557,7 +64557,7 @@
    ]
   },
   "japanese:basic-lecture-gendaibun": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64612,7 +64612,7 @@
    ]
   },
   "japanese:gendaibun-joshiki-sukima": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64659,7 +64659,7 @@
    ]
   },
   "japanese:okamoto-4jikan-kanbun-dokkai": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64706,7 +64706,7 @@
    ]
   },
   "japanese:access-kyotest-hyoron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64752,7 +64752,7 @@
    ]
   },
   "japanese:zero-kakusei-koten-bunpo": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64799,7 +64799,7 @@
    ]
   },
   "japanese:shin-kobutan": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64855,7 +64855,7 @@
    ]
   },
   "math:saisoku-keisan-1a2bc": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64897,7 +64897,7 @@
    ]
   },
   "math:saisoku-keisan-3c": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64946,7 +64946,7 @@
    ]
   },
   "math:bunyabetsu-futoshiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -64994,7 +64994,7 @@
    ]
   },
   "math:morimoto-rikei-150": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65035,7 +65035,7 @@
    ]
   },
   "math:bunkei-teppan100": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65083,7 +65083,7 @@
    ]
   },
   "math:meimon50-rikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65130,7 +65130,7 @@
    ]
   },
   "math:shin-sugaku-core-select": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65178,7 +65178,7 @@
    ]
   },
   "math:gungun-sugaku-1a-basic": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65219,7 +65219,7 @@
    ]
   },
   "math:gungun-rikei-sugaku-advanced": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65267,7 +65267,7 @@
    ]
   },
   "math:ichimonittou-2bc": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65315,7 +65315,7 @@
    ]
   },
   "science:setsuda-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65362,7 +65362,7 @@
    ]
   },
   "science:setsuda-muki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65409,7 +65409,7 @@
    ]
   },
   "science:setsuda-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65456,7 +65456,7 @@
    ]
   },
   "science:tamechika-miyaburu-rikigaku-hadou": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65504,7 +65504,7 @@
    ]
   },
   "science:tamechika-miyaburu-denjiki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65552,7 +65552,7 @@
    ]
   },
   "science:ryomon-kaze-kagaku-riron": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65599,7 +65599,7 @@
    ]
   },
   "science:ryomon-kaze-kagaku-muki-yuki": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65646,7 +65646,7 @@
    ]
   },
   "science:teppan100-butsuri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65694,7 +65694,7 @@
    ]
   },
   "science:level0-seibutsu-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65741,7 +65741,7 @@
    ]
   },
   "social:kato-sekaishi-1": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65788,7 +65788,7 @@
    ]
   },
   "social:kanaya-nihonshi-themashi": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65835,7 +65835,7 @@
    ]
   },
   "social:kageyama-sekaiichi-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65883,7 +65883,7 @@
    ]
   },
   "social:hatakeyama-kyotest-seikei": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
@@ -65930,7 +65930,7 @@
    ]
   },
   "social:hatakeyama-kyotest-rinri": {
-   "status": "partial",
+   "status": "verified",
    "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
