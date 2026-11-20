@@ -35,14 +35,13 @@
 
 | 読み込み先 | 何のため | 誰のもの |
 |---|---|---|
-| `fonts.googleapis.com` / `fonts.gstatic.com` | 本文と見出しのフォント | Google |
 | `www.googletagmanager.com` | アクセス解析（GA4） | Google |
 | `pagead2.googlesyndication.com` | 広告配信（AdSense） | Google |
 | `images-fe.ssl-images-amazon.com` / `images-na.ssl-images-amazon.com` | 書影 | Amazon |
 | `ndlsearch.ndl.go.jp` / `cover.openbd.jp` | 書影（Amazon で取れないとき） | 国立国会図書館 / openBD |
 
-いずれも読み込めなくてもサイトは動く。フォントは代替書体に、書影は書名と出版社を
-出す代替表示に落ちる。広告と解析は無くても機能に影響しない
+いずれも読み込めなくてもサイトは動く。書影は書名と出版社を出す代替表示に落ちる。
+（Google Fonts は 2026-11-20 にやめた。本文は端末の標準書体で描くので、書体を外から読み込まない）広告と解析は無くても機能に影響しない
 （`e2e/a11y.spec.mjs` と `e2e/privacy.spec.mjs` で確かめている）。
 
 ## 将来 CDN へ移した場合の推奨
@@ -53,8 +52,8 @@
 ```
 Content-Security-Policy: default-src 'self';
   script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com;
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src 'self' https://fonts.gstatic.com;
+  style-src 'self' 'unsafe-inline';
+  font-src 'self';
   img-src 'self' data: https://images-fe.ssl-images-amazon.com https://images-na.ssl-images-amazon.com https://ndlsearch.ndl.go.jp https://cover.openbd.jp https://pagead2.googlesyndication.com;
   connect-src 'self' https://www.google-analytics.com https://analytics.google.com;
   frame-src https://googleads.g.doubleclick.net;

@@ -413,7 +413,8 @@ node build/gen-ogp.mjs
 
 ### フォント
 
-ラスタライズに使う書体は Zen Kaku Gothic New と Shippori Mincho B1（サイト本文と同じ）。
+ラスタライズに使う書体は Zen Kaku Gothic New と Shippori Mincho B1。
+（サイト本文は 2026-11-20 から Web フォントを使わず、端末の標準ゴシックで描いている。OGP 画像だけがこの書体を使う）
 **`loadSystemFonts` に任せない。**環境によって字形も行送りも変わり、同じデータから違う画像が出て
 `--check` が手元と CI で食い違う。初回だけ Google Fonts から取って `build/.cache/fonts/` に置き、
 以後はそれを使う。**フォントファイルはリポジトリに入れない**（ライセンス表記と容量のため。
