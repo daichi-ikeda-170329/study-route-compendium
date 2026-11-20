@@ -83,17 +83,17 @@
   },
   "curriculum": {
    "label": "新課程対応が要確認の教材",
-   "total": 52,
+   "total": 50,
    "unverified": 13,
-   "partial": 35,
-   "verified": 4
+   "partial": 34,
+   "verified": 3
   },
   "other": {
    "label": "その他",
-   "total": 809,
+   "total": 811,
    "unverified": 103,
-   "partial": 582,
-   "verified": 124
+   "partial": 583,
+   "verified": 125
   }
  },
  "duplicateIsbn": [],
@@ -103,7 +103,7 @@
   "year": 89
  },
  "staleChecks": 0,
- "textMarkRemaining": 152,
+ "textMarkRemaining": 134,
  "extras": {
   "english": {
    "toc": 66,
