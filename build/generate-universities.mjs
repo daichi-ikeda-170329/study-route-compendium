@@ -351,12 +351,24 @@ function examHtml(ex, dir, name, subJa) {
   if (!ex || !ex.subjects) return '';
   const items = Object.entries(ex.subjects).filter(([k]) => EXAM_SECTION[k] === dir);
   if (!items.length) return '';
-  return items.map(([, s]) => `      <div class="uexam">
+  /* 文系・理系の数学が同じ資料（出題の意図・問題集）に載っていると、意図と出典が 2 回並ぶ。
+     2 つ目以降は同じ文を繰り返さず「上と同じ」と書く（同じ文の重複は検査で落ちる） */
+  const seenIntent = new Set(), seenSrc = new Set();
+  return items.map(([, s]) => {
+    const srcKey = s.sources.map(x => x.url).join(' ');
+    /* 文の単位で見る（「各分野の理解…を問う。理科系と共通の分野から3題。」のように、前の科目の意図を含む文がある） */
+    const sens = (s.intent || '').split(/(?<=。)/).filter(x => x.trim());
+    const intent = sens.filter(x => !seenIntent.has(x)).join('');
+    const sameSrc = seenSrc.has(srcKey);
+    for (const x of sens) seenIntent.add(x);
+    seenSrc.add(srcKey);
+    return { ...s, intent, sameSrc };
+  }).map(s => `      <div class="uexam">
         <h3 class="usec__h3">${esc(name)}の${esc(subJa)} ${s.year}年度の出題（${esc(s.exam)}${s.time ? `・${esc(s.time)}` : ''}）</h3>
         <ol class="uexam__parts">
 ${s.parts.map(x => `          <li>${esc(x)}</li>`).join('\n')}
         </ol>
-${s.trend ? `        <p><b>複数年度で共通していた点</b>${esc(s.trend)}</p>\n` : ''}${s.intent ? `        <p><b>大学が公表した出題の意図</b>${esc(s.intent)}</p>\n` : ''}${s.advice ? `        <p><b>この構成への備え（編集部の推定）</b>${esc(s.advice)}</p>\n` : ''}        <p class="usource">出典: ${s.sources.map(x => `<a rel="nofollow noopener noreferrer" target="_blank" href="${esc(x.url)}">${esc(x.label)}</a>`).join('・')}（${esc(ex.checked)} 確認。大学が公表した問題・資料による。問題文は載せていません）</p>
+${s.trend ? `        <p><b>複数年度で共通していた点</b>${esc(s.trend)}</p>\n` : ''}${s.intent ? `        <p><b>大学が公表した出題の意図</b>${esc(s.intent)}</p>\n` : ''}${s.advice ? `        <p><b>この構成への備え（編集部の推定）</b>${esc(s.advice)}</p>\n` : ''}        <p class="usource">${s.sameSrc ? '出典は上と同じ資料です。' : `出典（${esc(subJa)}）: ${s.sources.map(x => `<a rel="nofollow noopener noreferrer" target="_blank" href="${esc(x.url)}">${esc(x.label)}</a>`).join('・')}（${esc(ex.checked)} 確認。大学が公表した問題・資料による。問題文は載せていません）`}</p>
       </div>
 `).join('');
 }
