@@ -2,45 +2,45 @@
  "generatedAt": "2026-11-20",
  "total": 1432,
  "byStatus": {
-  "verified": 214,
-  "partial": 993,
-  "unverified": 221,
+  "verified": 178,
+  "partial": 1117,
+  "unverified": 133,
   "notApplicable": 4
  },
  "bySubject": {
   "english": {
    "total": 263,
-   "verified": 69,
-   "partial": 155,
-   "unverified": 38,
+   "verified": 68,
+   "partial": 169,
+   "unverified": 25,
    "notApplicable": 1
   },
   "japanese": {
    "total": 198,
-   "verified": 47,
-   "partial": 117,
-   "unverified": 33,
+   "verified": 36,
+   "partial": 152,
+   "unverified": 9,
    "notApplicable": 1
   },
   "math": {
    "total": 172,
-   "verified": 20,
-   "partial": 97,
-   "unverified": 54,
+   "verified": 19,
+   "partial": 114,
+   "unverified": 38,
    "notApplicable": 1
   },
   "science": {
    "total": 383,
-   "verified": 44,
-   "partial": 291,
-   "unverified": 47,
+   "verified": 29,
+   "partial": 329,
+   "unverified": 24,
    "notApplicable": 1
   },
   "social": {
    "total": 298,
-   "verified": 28,
-   "partial": 234,
-   "unverified": 36,
+   "verified": 20,
+   "partial": 254,
+   "unverified": 24,
    "notApplicable": 0
   },
   "joho": {
@@ -59,20 +59,20 @@
   }
  },
  "fieldGaps": {
-  "official": 581,
+  "official": 522,
   "author": 1086,
-  "problems": 1242,
-  "year": 450,
-  "pub": 281,
-  "isbn13": 223
+  "problems": 1185,
+  "year": 321,
+  "pub": 173,
+  "isbn13": 137
  },
  "byPriority": {
   "route": {
    "label": "ルートに採用している教材（3 分診断の結果に出るものを含む）",
    "total": 542,
-   "unverified": 50,
-   "partial": 415,
-   "verified": 73
+   "unverified": 15,
+   "partial": 477,
+   "verified": 46
   },
   "joho": {
    "label": "情報科（市販書が少なく、記載の確度が低い）",
@@ -84,74 +84,74 @@
   "curriculum": {
    "label": "新課程対応が要確認の教材",
    "total": 52,
-   "unverified": 22,
-   "partial": 19,
-   "verified": 11
+   "unverified": 13,
+   "partial": 35,
+   "verified": 4
   },
   "other": {
    "label": "その他",
    "total": 809,
-   "unverified": 147,
-   "partial": 536,
-   "verified": 126
+   "unverified": 103,
+   "partial": 582,
+   "verified": 124
   }
  },
  "duplicateIsbn": [],
  "mismatchCounts": {
-  "official": 309,
-  "pub": 29,
-  "year": 109
+  "official": 297,
+  "pub": 19,
+  "year": 89
  },
  "staleChecks": 0,
  "textMarkRemaining": 152,
  "extras": {
   "english": {
-   "toc": 44,
-   "howto": 77,
-   "finish": 77,
-   "editions": 68,
-   "pages": 82,
-   "media": 42
+   "toc": 66,
+   "howto": 111,
+   "finish": 111,
+   "editions": 91,
+   "pages": 107,
+   "media": 53
   },
   "japanese": {
-   "toc": 46,
-   "howto": 80,
-   "finish": 80,
-   "editions": 82,
-   "pages": 86,
-   "media": 17
+   "toc": 63,
+   "howto": 119,
+   "finish": 119,
+   "editions": 103,
+   "pages": 132,
+   "media": 24
   },
   "math": {
-   "toc": 12,
-   "howto": 36,
-   "finish": 36,
-   "editions": 34,
-   "pages": 44,
-   "media": 5
+   "toc": 23,
+   "howto": 51,
+   "finish": 51,
+   "editions": 47,
+   "pages": 51,
+   "media": 8
   },
   "science": {
-   "toc": 99,
-   "howto": 234,
-   "finish": 234,
-   "editions": 169,
-   "pages": 257,
-   "media": 52
+   "toc": 109,
+   "howto": 257,
+   "finish": 257,
+   "editions": 194,
+   "pages": 284,
+   "media": 57
   },
   "social": {
-   "toc": 66,
-   "howto": 167,
-   "finish": 167,
-   "editions": 148,
-   "pages": 181,
-   "media": 29
+   "toc": 74,
+   "howto": 186,
+   "finish": 186,
+   "editions": 162,
+   "pages": 204,
+   "media": 33
   },
   "joho": {
-   "toc": 0,
-   "howto": 0,
-   "finish": 0,
-   "editions": 0,
-   "pages": 0,
-   "media": 0
+   "toc": 6,
+   "howto": 9,
+   "finish": 9,
+   "editions": 1,
+   "pages": 12,
+   "media": 2
   },
   "shoron": {
    "toc": 0,
