@@ -67,7 +67,7 @@ import { isPlaceholder, placeholderSearchUrl } from './lib/record-type.mjs';
 import { recordDate, saveDates } from './lib/updated.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { displayName } from './lib/booktitle.mjs';
-import { matchFeatures, recommendBooks, availableTracks } from './lib/uni-picks.mjs';
+import { pickBooks } from './lib/uni-book-picks.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -94,10 +94,6 @@ function tierLabel(tier) {
   return g === tier.name ? esc(g) : `${esc(g)}<small>${esc(tier.name)}</small>`;
 }
 
-/** 1 科目あたりに出すおすすめ参考書の上限（トラックを分けないとき） */
-const MAX_BOOKS_PER_SUBJECT = 6;
-/** トラック（文系・理系、物理・化学…）ごとに分けて出すときの 1 トラックあたりの上限 */
-const MAX_BOOKS_PER_TRACK = 4;
 
 /* ============================================================
    データの読み込み
@@ -186,66 +182,6 @@ function resolveUniversities() {
 /* ============================================================
    その大学におすすめの参考書
    ============================================================ */
-
-/**
- * 志望レベルのルートに載っている本の中から、**その大学の出題に噛み合うもの**を選ぶ。
- *
- * 選び方の中身は build/lib/uni-picks.mjs にある。ここでは
- *   1. その大学で選べる科目だけにトラックを絞り（理科の地学が不可、社会の倫理が不可など）
- *   2. 出題説明から特徴語を取り出し
- *   3. 特徴・`BOOKS[].unis` のタグ・目標偏差値でスコアを付けて上位を取る
- * という順で呼ぶ。
- *
- * **ルート上の枠（志望校の過去問）は入れない。** 特定の商品ではないうえ、
- * このページには大学名の入った過去問の節を別に置いてある。
- */
-function pickBooks(d, sub, u, tierId, isMed) {
-  const allTracks = trackKeys(d.routes[tierId]);
-
-  const { keep, limited } = availableTracks(sub.dir, u, allTracks);
-  const features = matchFeatures(sub.dir, uniText(u));
-  const groups = groupTracks(d.routes[tierId], keep);
-
-  /* 本編が同じトラックしか無いなら 1 つのリスト。
-     違うトラックが 2 つ以上あるなら、トラック（のグループ）ごとに分けて出す。
-     2026-09-10 まで 1 つのリストに混ぜていたため、文系プラチカと理系プラチカが並び、
-     読者がどちらを取るべきか分からなかった */
-  if (groups.length < 2) {
-    const books = recommendBooks({
-      d, uni: u, tierId, tracks: keep, features, isMed, max: MAX_BOOKS_PER_SUBJECT,
-    });
-    return { lists: [{ keys: keep, label: '', limited: false, books }], tracks: keep, allTracks, limited, features };
-  }
-
-  // 「学部・入試方式による」トラックは末尾に回す
-  const isLimited = (g) => g.keys.every(k => limited.includes(k));
-  const ordered = [...groups.filter(g => !isLimited(g)), ...groups.filter(isLimited)];
-  const shown = new Map();   // 本の id → 最初に出したリストの項目
-  const lists = ordered.map(g => {
-    const label = g.keys.map(k => trackLabel(d, k)).join('・');
-    // 他のトラックで出した本を飛ばしても 4 冊埋まるよう、多めに取ってから詰める
-    const all = recommendBooks({
-      d, uni: u, tierId, tracks: g.keys, features, isMed, max: MAX_BOOKS_PER_TRACK * 3,
-    });
-    const books = [];
-    for (const b of all) {
-      if (books.length >= MAX_BOOKS_PER_TRACK) break;
-      const first = shown.get(b.book.id);
-      // 複数のトラックに載る本は最初のトラックにだけ出し、「〜でも使う」と添える
-      if (first) { first.also.push(label); continue; }
-      const item = { ...b, also: [] };
-      books.push(item);
-      shown.set(b.book.id, item);
-    }
-    return { keys: g.keys, label, limited: isLimited(g), books };
-  });
-  return { lists, tracks: keep, allTracks, limited, features };
-}
-
-/** 特徴語を探す対象。**データにある文字列だけ**を連結する（推測を混ぜない） */
-function uniText(u) {
-  return [u.no, u.time, u.fix, u.med, u.bun, ...(u.fx || [])].filter(Boolean).join(' ');
-}
 
 /** その志望レベルのルートが収録している総冊数（重複を除く） */
 function tierBookCount(d, tierId) {

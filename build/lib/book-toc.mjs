@@ -33,7 +33,8 @@ export function addSectionNav(html) {
   let n = 0;
   const out = html.replace(H2, (m, text) => {
     n++;
-    found.push({ id: `s-${n}`, label: SHORT.get(text.trim()) || text.trim() });
+    // 書名入りの見出し（「〇〇をすすめている大学」）は書名を落として短くする
+    found.push({ id: `s-${n}`, label: SHORT.get(text.trim()) || (/をすすめている大学$/.test(text.trim()) ? 'すすめる大学' : text.trim()) });
     return `<h2 class="sec" id="s-${n}">${text}</h2>`;
   });
   if (found.length < 4) return out;

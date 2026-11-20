@@ -19,6 +19,7 @@ import { authorsOf, searchName, withAuthor, displayName } from './lib/booktitle.
 import { coverSrcs } from './lib/cover.mjs';
 import { bookCards, bookCard } from './lib/cards.mjs';
 import { compareNote } from './lib/compare-note.mjs';
+import { bookUniversityIndex } from './lib/uni-book-picks.mjs';
 /* 関連書カードには「この本との差」だけを出す。相手の概要文（1 文目）を再掲すると、
    1 冊の概要が 6〜8 ページに複製され、書籍ページ本文の約 2 割を占めていた（2026-11-20 実測）。
    概要はリンク先の本のページで読める。差分を出せない相手（評価準備中）は形式だけを出す */
@@ -391,6 +392,17 @@ ${howto.map(h => `        <li><b>${esc(h.phase)}</b>${esc(h.do)}</li>`).join('\n
     </section>` : '';
 
   const routeSection = routePositionSection(book, ctx, bn);
+  /* この本を大学別ページですすめている大学（大学別ページと同じ選び方の逆引き。build/lib/uni-book-picks.mjs）。
+     書籍 → 大学の導線。志望レベルの高い順に最大 12 校、残りは数だけ出す */
+  const recUnis = (UNI_INDEX.get(`${sub.dir}:${book.id}`) || []).slice().sort((a, b) => a.tierNo - b.tierNo || a.name.localeCompare(b.name, 'ja'));
+  const uniSection = recUnis.length ? `<section class="block">
+      <h2 class="sec">${esc(bn)}をすすめている大学</h2>
+      <p class="sec-lead">大学別ページで、出題の特徴と志望レベルから${esc(bn)}を挙げている大学です（${recUnis.length} 校）。</p>
+      <ul class="bk-unis">
+${recUnis.slice(0, 12).map(u => `        <li><a href="/univ/${u.slug}/">${esc(u.name)}</a><span>${esc(u.tier)}</span></li>`).join('\n')}
+      </ul>${recUnis.length > 12 ? `
+      <p class="spec__note">ほか ${recUnis.length - 12} 校。<a href="/univ/">志望校から探す</a></p>` : ''}
+    </section>` : '';
   // この本を取り上げた解説記事（記事 → 書籍の逆引き。定型の説明文は置かず、記事名だけを並べる）
   const arts = isProvisional(book) ? [] : articlesForBook(sub.dir, book.id);
   const articleSection = arts.length ? `<section class="block">
@@ -516,10 +528,10 @@ ${(book.cons || []).map(c => `          <li>${esc(c)}</li>`).join('\n')}
       </div>
     </div>`}
 
-    ${paceSection}${paceSection ? '\n\n    ' : ''}${book.unis && book.unis.length ? `<div class="note">
+    ${paceSection}${paceSection ? '\n\n    ' : ''}${uniSection || (book.unis && book.unis.length ? `<div class="note">
       <h3>この本が視野に入る志望校</h3>
       <p>${book.unis.map(u => esc(u)).join(' ／ ')}（<a href="/${sub.dir}/">志望校から探す</a>）</p>
-    </div>` : ''}
+    </div>` : '')}
 
     ${routeSection}${routeSection ? '\n\n    ' : ''}${prevSection}${prevSection ? '\n\n    ' : ''}${alts.length ? `<section class="block">
       <h2 class="sec">同じ役割・同じレベルの参考書</h2>
@@ -596,6 +608,8 @@ ${jsonLd(ld)}
    ============================================================ */
 const data = {};
 const counts = {};
+/** 書籍 → すすめている大学（大学別ページの逆引き） */
+const UNI_INDEX = bookUniversityIndex(ROOT);
 for (const s of SUBJECTS) {
   data[s.dir] = loadSubjectData(ROOT, s.dir);
   counts[s.dir] = data[s.dir].books.length;
