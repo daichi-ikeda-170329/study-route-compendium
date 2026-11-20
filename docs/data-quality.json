@@ -2,69 +2,69 @@
  "generatedAt": "2026-11-20",
  "total": 1432,
  "byStatus": {
-  "verified": 178,
-  "partial": 1116,
-  "unverified": 134,
+  "verified": 143,
+  "partial": 1194,
+  "unverified": 91,
   "notApplicable": 4
  },
  "bySubject": {
   "english": {
    "total": 263,
-   "verified": 68,
-   "partial": 168,
-   "unverified": 26,
+   "verified": 62,
+   "partial": 181,
+   "unverified": 19,
    "notApplicable": 1
   },
   "japanese": {
    "total": 198,
-   "verified": 36,
-   "partial": 152,
-   "unverified": 9,
+   "verified": 27,
+   "partial": 163,
+   "unverified": 7,
    "notApplicable": 1
   },
   "math": {
    "total": 172,
-   "verified": 19,
-   "partial": 114,
-   "unverified": 38,
+   "verified": 13,
+   "partial": 133,
+   "unverified": 25,
    "notApplicable": 1
   },
   "science": {
    "total": 383,
-   "verified": 29,
-   "partial": 329,
-   "unverified": 24,
+   "verified": 21,
+   "partial": 344,
+   "unverified": 17,
    "notApplicable": 1
   },
   "social": {
    "total": 298,
-   "verified": 20,
-   "partial": 254,
-   "unverified": 24,
+   "verified": 15,
+   "partial": 272,
+   "unverified": 11,
    "notApplicable": 0
   },
   "joho": {
    "total": 29,
-   "verified": 4,
-   "partial": 23,
+   "verified": 1,
+   "partial": 26,
    "unverified": 2,
    "notApplicable": 0
   },
   "shoron": {
    "total": 89,
-   "verified": 2,
-   "partial": 76,
-   "unverified": 11,
+   "verified": 4,
+   "partial": 75,
+   "unverified": 10,
    "notApplicable": 0
   }
  },
  "fieldGaps": {
-  "official": 522,
+  "official": 460,
   "author": 1086,
-  "problems": 1185,
-  "year": 323,
-  "pub": 174,
-  "isbn13": 138
+  "problems": 1130,
+  "year": 220,
+  "pub": 110,
+  "isbn13": 95
  },
  "byPriority": {
   "route": {
@@ -78,88 +78,88 @@
    "label": "情報科（市販書が少なく、記載の確度が低い）",
    "total": 29,
    "unverified": 2,
-   "partial": 23,
-   "verified": 4
+   "partial": 26,
+   "verified": 1
   },
   "curriculum": {
    "label": "新課程対応が要確認の教材",
    "total": 50,
-   "unverified": 13,
-   "partial": 34,
-   "verified": 3
+   "unverified": 12,
+   "partial": 36,
+   "verified": 2
   },
   "other": {
    "label": "その他",
    "total": 811,
-   "unverified": 103,
-   "partial": 583,
-   "verified": 125
+   "unverified": 61,
+   "partial": 656,
+   "verified": 94
   }
  },
  "duplicateIsbn": [],
  "mismatchCounts": {
-  "official": 297,
-  "pub": 19,
-  "year": 89
+  "official": 267,
+  "pub": 16,
+  "year": 77
  },
  "staleChecks": 0,
  "textMarkRemaining": 134,
  "extras": {
   "english": {
-   "toc": 66,
-   "howto": 110,
-   "finish": 110,
-   "editions": 90,
-   "pages": 105,
-   "media": 53
+   "toc": 88,
+   "howto": 161,
+   "finish": 161,
+   "editions": 141,
+   "pages": 163,
+   "media": 79
   },
   "japanese": {
-   "toc": 63,
-   "howto": 119,
-   "finish": 119,
-   "editions": 103,
-   "pages": 132,
-   "media": 24
+   "toc": 69,
+   "howto": 136,
+   "finish": 136,
+   "editions": 120,
+   "pages": 153,
+   "media": 32
   },
   "math": {
-   "toc": 22,
-   "howto": 50,
-   "finish": 50,
-   "editions": 46,
-   "pages": 50,
+   "toc": 33,
+   "howto": 74,
+   "finish": 74,
+   "editions": 70,
+   "pages": 82,
    "media": 8
   },
   "science": {
-   "toc": 109,
-   "howto": 257,
-   "finish": 257,
-   "editions": 194,
-   "pages": 284,
-   "media": 57
+   "toc": 122,
+   "howto": 281,
+   "finish": 281,
+   "editions": 215,
+   "pages": 301,
+   "media": 62
   },
   "social": {
-   "toc": 74,
-   "howto": 186,
-   "finish": 186,
-   "editions": 162,
-   "pages": 204,
-   "media": 33
+   "toc": 78,
+   "howto": 210,
+   "finish": 210,
+   "editions": 186,
+   "pages": 230,
+   "media": 34
   },
   "joho": {
-   "toc": 6,
-   "howto": 9,
-   "finish": 9,
-   "editions": 1,
-   "pages": 12,
-   "media": 2
+   "toc": 13,
+   "howto": 22,
+   "finish": 22,
+   "editions": 16,
+   "pages": 27,
+   "media": 7
   },
   "shoron": {
-   "toc": 0,
-   "howto": 0,
-   "finish": 0,
-   "editions": 0,
-   "pages": 0,
-   "media": 0
+   "toc": 6,
+   "howto": 10,
+   "finish": 10,
+   "editions": 8,
+   "pages": 12,
+   "media": 2
   }
  },
  "universitySources": {
