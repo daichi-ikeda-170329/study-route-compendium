@@ -68,6 +68,7 @@ import { recordDate, saveDates } from './lib/updated.mjs';
 import { coverBox } from './lib/cover.mjs';
 import { displayName } from './lib/booktitle.mjs';
 import { pickBooks } from './lib/uni-book-picks.mjs';
+import { loadUniversityExams, EXAM_SECTION } from './lib/university-exams.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -102,6 +103,8 @@ function tierLabel(tier) {
 const ledger = JSON.parse(fs.readFileSync(path.join(ROOT, 'build', 'data', 'university-slugs.json'), 'utf8'));
 /** 出典（年度・確認日・公式 URL・学部×方式）。登録の無い大学は undefined */
 const SOURCES = loadUniversitySources();
+/** 大学が公表した入試問題の出題構成（build/data/university-exams.json）。登録の無い大学は undefined */
+const EXAMS = loadUniversityExams();
 
 /**
  * 学部別ページを作る学部（仕様書 4.5）。slug を持ち、固有テキストが 300 字以上の学部だけ。
@@ -340,6 +343,24 @@ function kyoteNote(u) {
    1 校ぶんのページ
    ============================================================ */
 
+/**
+ * 大学が公表した入試問題による「実際の出題」の節。登録が無い科目は何も出さない（推測で埋めない）。
+ * 構成・時間・出題の意図は事実（出典つき）、対策は編集部の推定として分けて書く。
+ */
+function examHtml(ex, dir, name, subJa) {
+  if (!ex || !ex.subjects) return '';
+  const items = Object.entries(ex.subjects).filter(([k]) => EXAM_SECTION[k] === dir);
+  if (!items.length) return '';
+  return items.map(([, s]) => `      <div class="uexam">
+        <h3 class="usec__h3">${esc(name)}の${esc(subJa)} ${s.year}年度の出題（${esc(s.exam)}${s.time ? `・${esc(s.time)}` : ''}）</h3>
+        <ol class="uexam__parts">
+${s.parts.map(x => `          <li>${esc(x)}</li>`).join('\n')}
+        </ol>
+${s.trend ? `        <p><b>複数年度で共通していた点</b>${esc(s.trend)}</p>\n` : ''}${s.intent ? `        <p><b>大学が公表した出題の意図</b>${esc(s.intent)}</p>\n` : ''}${s.advice ? `        <p><b>この構成への備え（編集部の推定）</b>${esc(s.advice)}</p>\n` : ''}        <p class="usource">出典: ${s.sources.map(x => `<a rel="nofollow noopener noreferrer" target="_blank" href="${esc(x.url)}">${esc(x.label)}</a>`).join('・')}（${esc(ex.checked)} 確認。大学が公表した問題・資料による。問題文は載せていません）</p>
+      </div>
+`).join('');
+}
+
 function renderUniversity(uni, all, config) {
   const { slug, name, perSubject } = uni;
   const url = `${ORIGIN}/univ/${slug}/`;
@@ -396,7 +417,7 @@ ${faculties.map(f => `            <tr><th scope="row">${esc(f.name)}</th><td>${e
       const b = d.books.find(x => x.id === id);
       return b ? `<a href="/${p.sub.dir}/books/${b.id}/">${esc(displayName(b, p.sub.dir))}</a>` : '';
     };
-    const focusHtml = focusRows.length ? `      <h3 class="usec__h3">${esc(name)}の出題形式に合わせた重点対策</h3>
+    const focusHtml = focusRows.length ? `      <h3 class="usec__h3">${esc(name)}向けに標準ルートへ足す重点対策</h3>
       <ul class="ufocus">
 ${focusRows.map(({ key, f }) => {
     const b = d.books.find(x => x.id === f.id);
@@ -447,7 +468,7 @@ ${alts.length ? `            <span class="ubook__note">代わりに使える本�
       <dl class="ufacts">
 ${facts.map(f => `        <div><dt>${esc(f.dt)}</dt><dd>${f.html ?? esc(f.dd)}</dd></div>`).join('\n')}
       </dl>
-${features.length ? `      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
+${examHtml(EXAMS[slug], p.sub.dir, name, p.sub.ja)}${features.length ? `      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
       <ul class="upoints">
 ${features.map(f => `        <li><b>${esc(f.key)}</b><span>${esc(f.tip)}</span></li>`).join('\n')}
       </ul>
@@ -492,8 +513,14 @@ ${befores.map(x => `      <p class="usec__before">${beforeSentence(d, x.g, x.b)}
   const hs = perSubject.map(p => p.u.h).filter(h => typeof h === 'number');
 
   const title = clip(`${name}の参考書ルート｜全科目の出題傾向と対策 - ルート大全`, 60);
-  const desc = clip(`${name}（${tier.sub}）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、`
-    + `その出題に合わせて選んだおすすめの参考書をまとめています。${med ? '医学部医学科の条件も別に載せています。' : ''}`, 120);
+  /* 大学が公表した問題で出題構成を確かめた大学は、その年度と科目を説明文の頭に出す（検索の「〇〇大学 英語 傾向」に答える） */
+  const ex = EXAMS[slug];
+  const exSubs = ex ? [...new Set(Object.keys(ex.subjects).map(k => ({ english: '英語', math: '数学', math2: '数学', japanese: '国語' })[k]))] : [];
+  const exYear = ex ? Math.max(...Object.values(ex.subjects).map(s => s.year)) : 0;
+  const desc = clip(exSubs.length
+    ? `${name}の入試対策。${exYear}年度の${exSubs.join('・')}の大問構成（大学公表の問題による）、学部別の科目・配点、出題に合わせた参考書ルート。`
+    : `${name}（${tier.sub}）の入試対策。英語・国語・数学・理科・社会それぞれの出題形式・試験時間・目標偏差値と、`
+      + `その出題に合わせて選んだおすすめの参考書をまとめています。${med ? '医学部医学科の条件も別に載せています。' : ''}`, 120);
 
   const crumbItems = [
     { name: 'ルート大全', url: '/', absUrl: `${ORIGIN}/` },
@@ -550,6 +577,7 @@ ${head({ title, desc, url, ogImage: `${ORIGIN}/assets/ogp/univ/${slug}.png` })}
 .ufacts dd{font-size:13.5px;color:var(--ink);margin-top:6px;line-height:1.85}
 .ufacts dd a{color:var(--indigo);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .usec__h3{font-family:var(--serif);font-weight:800;font-size:14.5px;letter-spacing:.03em;margin-top:24px}
+.uexam{margin-top:18px;border-top:1px solid var(--line);padding-top:4px}.uexam__parts{margin:10px 0 0 1.4em;font-size:13.5px;line-height:1.85}.uexam__parts li{padding:2px 0}.uexam p{font-size:13px;line-height:1.85;margin-top:8px;max-width:46em}.uexam p b{display:block;font-size:12px;color:var(--muted);font-weight:700}
 .usec__note{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px;max-width:44em}
 .upoints{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
 .upoints li{background:var(--surface);padding:13px 16px}

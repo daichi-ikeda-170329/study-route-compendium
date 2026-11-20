@@ -50,7 +50,7 @@ test('ルートに載っていない重点対策の本は「重点:形式」を�
 test('大学別ページの英語節に fx の重点対策の枠が出る', () => {
   const html = fs.readFileSync(path.join(ROOT, 'univ/waseda/index.html'), 'utf8');
   const en = html.slice(html.indexOf('id="sub-english"'), html.indexOf('id="sub-japanese"'));
-  assert.match(en, /早稲田大学の出題形式に合わせた重点対策/);
+  assert.match(en, /早稲田大学向けに標準ルートへ足す重点対策/);
   for (const k of ['超長文', '正誤', '語彙']) assert.match(en, new RegExp(`重点:${k}<`), `重点:${k} が無い`);
 });
 

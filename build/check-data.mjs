@@ -11,6 +11,7 @@ import { loadSubjectData } from './lib/load-subject-data.mjs';
 import { isPlaceholder, recordType } from './lib/record-type.mjs';
 import { validateSubjectData } from './lib/validate-subject-data.mjs';
 import { SOURCES_FILE, validateUniversitySources } from './lib/university-sources.mjs';
+import { EXAMS_FILE, validateUniversityExams } from './lib/university-exams.mjs';
 import fs from 'node:fs';
 import { verificationOf, verifiedFieldIsWellFormed, loadVerification, STATUSES } from './lib/verification.mjs';
 import path from 'node:path';
@@ -107,6 +108,10 @@ for (const [isbn, keys] of isbnSeen) {
     let raw = null;
     try { raw = JSON.parse(fs.readFileSync(SOURCES_FILE, 'utf8')); } catch (e) { bad(`university-sources.json を読めない: ${e.message}`); }
     if (raw) for (const p of validateUniversitySources(raw, slugs)) bad(p);
+    if (fs.existsSync(EXAMS_FILE)) {
+      try { for (const p of validateUniversityExams(JSON.parse(fs.readFileSync(EXAMS_FILE, 'utf8')), slugs)) bad(p); }
+      catch (e) { bad(`university-exams.json を読めない: ${e.message}`); }
+    }
     // 学部の重点対策（faculties[].focus）は、その科目の focus.json にあるキーだけ
     for (const [slug, u] of Object.entries((raw && raw.universities) || {})) {
       for (const f of u.faculties || []) {
