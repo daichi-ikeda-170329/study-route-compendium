@@ -1622,14 +1622,14 @@
   },
   "english:hijii-bunpo-sol": {
    "status": "partial",
-   "checkedAt": "2026-11-20",
+   "checkedAt": "2026-09-04",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784761230739",
-     "checkedAt": "2026-11-20"
+     "sourceKind": "bibliography",
+     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784761230739",
+     "checkedAt": "2026-09-04"
     },
     "official": {
      "status": "unverified",
@@ -1643,31 +1643,17 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784761230739",
-     "checkedAt": "2026-11-20"
+     "sourceKind": "bibliography",
+     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784761230739",
+     "checkedAt": "2026-09-04"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784761230739",
-     "checkedAt": "2026-11-20"
+     "sourceKind": "bibliography",
+     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784761230739",
+     "checkedAt": "2026-09-04"
     }
-   },
-   "sources": [
-    {
-     "url": "https://www.hanmoto.com/bd/isbn/9784761230739",
-     "kind": "database",
-     "checkedAt": "2026-11-20",
-     "items": [
-      "pages",
-      "structure",
-      "pub",
-      "year",
-      "isbn13"
-     ]
-    }
-   ]
+   }
   },
   "english:nextstage": {
    "status": "partial",
@@ -5788,43 +5774,10 @@
    ]
   },
   "english:tanki-kyote-e": {
-   "status": "partial",
-   "checkedAt": "2026-11-20",
+   "status": "unverified",
+   "checkedAt": null,
    "physicalReview": false,
-   "fields": {
-    "pub": {
-     "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796123792",
-     "checkedAt": "2026-11-20"
-    },
-    "year": {
-     "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796123792",
-     "checkedAt": "2026-11-20"
-    },
-    "isbn13": {
-     "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796123792",
-     "checkedAt": "2026-11-20"
-    }
-   },
-   "sources": [
-    {
-     "url": "https://www.hanmoto.com/bd/isbn/9784796123792",
-     "kind": "database",
-     "checkedAt": "2026-11-20",
-     "items": [
-      "pages",
-      "editions",
-      "pub",
-      "year",
-      "isbn13"
-     ]
-    }
-   ]
+   "fields": {}
   },
   "english:kimeru-r": {
    "status": "partial",
@@ -22222,14 +22175,14 @@
   },
   "math:superquick": {
    "status": "partial",
-   "checkedAt": "2026-11-20",
+   "checkedAt": "2026-09-04",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I034137433",
-     "checkedAt": "2026-11-20"
+     "sourceKind": "bibliography",
+     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784410153891",
+     "checkedAt": "2026-09-04"
     },
     "official": {
      "status": "verified",
@@ -22239,40 +22192,14 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I034137433",
-     "checkedAt": "2026-11-20"
+     "sourceKind": "bibliography",
+     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784410153891",
+     "checkedAt": "2026-09-04"
     },
     "year": {
-     "status": "verified",
-     "sourceKind": "database",
-     "sourceUrl": "https://ndlsearch.ndl.go.jp/books/R100000002-I034137433",
-     "checkedAt": "2026-11-20"
+     "status": "unverified"
     }
-   },
-   "sources": [
-    {
-     "url": "https://www.hanmoto.com/bd/isbn/9784410153891",
-     "kind": "database",
-     "checkedAt": "2026-11-20",
-     "items": [
-      "pages",
-      "toc",
-      "structure"
-     ]
-    },
-    {
-     "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I034137433",
-     "kind": "database",
-     "checkedAt": "2026-11-20",
-     "items": [
-      "editions",
-      "pub",
-      "year",
-      "isbn13"
-     ]
-    }
-   ]
+   }
   },
   "math:matsuda-type100": {
    "status": "unverified",

@@ -3,16 +3,16 @@
  "total": 1432,
  "byStatus": {
   "verified": 178,
-  "partial": 1117,
-  "unverified": 133,
+  "partial": 1116,
+  "unverified": 134,
   "notApplicable": 4
  },
  "bySubject": {
   "english": {
    "total": 263,
    "verified": 68,
-   "partial": 169,
-   "unverified": 25,
+   "partial": 168,
+   "unverified": 26,
    "notApplicable": 1
   },
   "japanese": {
@@ -62,16 +62,16 @@
   "official": 522,
   "author": 1086,
   "problems": 1185,
-  "year": 321,
-  "pub": 173,
-  "isbn13": 137
+  "year": 323,
+  "pub": 174,
+  "isbn13": 138
  },
  "byPriority": {
   "route": {
    "label": "ルートに採用している教材（3 分診断の結果に出るものを含む）",
    "total": 542,
-   "unverified": 15,
-   "partial": 477,
+   "unverified": 16,
+   "partial": 476,
    "verified": 46
   },
   "joho": {
@@ -107,10 +107,10 @@
  "extras": {
   "english": {
    "toc": 66,
-   "howto": 111,
-   "finish": 111,
-   "editions": 91,
-   "pages": 107,
+   "howto": 110,
+   "finish": 110,
+   "editions": 90,
+   "pages": 105,
    "media": 53
   },
   "japanese": {
@@ -122,11 +122,11 @@
    "media": 24
   },
   "math": {
-   "toc": 23,
-   "howto": 51,
-   "finish": 51,
-   "editions": 47,
-   "pages": 51,
+   "toc": 22,
+   "howto": 50,
+   "finish": 50,
+   "editions": 46,
+   "pages": 50,
    "media": 8
   },
   "science": {
