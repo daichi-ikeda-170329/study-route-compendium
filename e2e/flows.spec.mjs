@@ -189,9 +189,9 @@ test('JavaScript が無くても書籍ページの説明とリンクが読める
   await page.goto('/english/books/nextstage/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('.spec')).toBeVisible();
-  // 確認状況（.verif）は 2026-09-05 に外した。同じ「JS 無しでも本文が読める」を、
-  // その位置に残った難易度の 1 行（build/lib/scale.mjs の degreeLine）で見る
-  await expect(page.locator('.scale__line')).toBeVisible();
+  // 確認状況（.verif）は 2026-09-05 に、難易度の帯の 1 行（.scale__line）は 2026-11-20 に外した
+  // （基本情報と同じ値の繰り返しだった）。「JS 無しでも本文が読める」は書籍の説明文で見る
+  await expect(page.locator('.bk-desc')).toBeVisible();
   // 購入リンクは難易度の直下（.buy--hero）と最下部の 2 か所にある（2026-09-29 から）
   await expect(page.locator('main a.az')).toHaveCount(2);
   await expect(page.locator('.buy--hero a.az')).toBeVisible();

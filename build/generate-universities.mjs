@@ -441,8 +441,7 @@ ${faculties.map(f => `            <tr><th scope="row">${esc(f.name)}</th><td>${e
 
   const sections = perSubject.map(p => {
     const d = data[p.sub.dir];
-    const { lists, tracks, limited, features } = pickBooks(d, p.sub, p.u, p.u.t, !!med);
-    const nBooks = lists.reduce((a, l) => a + l.books.length, 0);
+    const { lists: picked, tracks, limited, features } = pickBooks(d, p.sub, p.u, p.u.t, !!med);
     const total = tierBookCount(d, p.u.t);
     const routeUrl = `/${p.sub.dir}/routes/${p.u.t}/`;
     const fx = Array.isArray(p.u.fx) ? p.u.fx : [];
@@ -453,12 +452,15 @@ ${faculties.map(f => `            <tr><th scope="row">${esc(f.name)}</th><td>${e
        本編が違うトラックで同じ本から始まるなら 1 回だけ */
     /* 出題形式別の重点対策（focus.json）。大学の fx に書いてある形式だけを出す */
     const focusRows = fx.map(k => ({ key: k, f: (d.focus || {})[k] })).filter(x => x.f);
+    /* 重点対策の枠に出した本は、下の「おすすめの参考書」で繰り返さない（同じ本が 1 ページに 2 度並んでいた。2026-11-20） */
+    const focusIds = new Set(focusRows.map(x => x.f.id));
+    const lists = picked.map(l => ({ ...l, books: l.books.filter(b => !focusIds.has(b.book.id)) })).filter(l => l.books.length);
+    const nBooks = lists.reduce((a, l) => a + l.books.length, 0);
     const bookLink = (id) => {
       const b = d.books.find(x => x.id === id);
       return b ? `<a href="/${p.sub.dir}/books/${b.id}/">${esc(displayName(b, p.sub.dir))}</a>` : '';
     };
     const focusHtml = focusRows.length ? `      <h3 class="usec__h3">${esc(name)}の出題形式に合わせた重点対策</h3>
-      <p class="usec__note">ルートの本編とは別に、${esc(name)}の${esc(p.sub.ja)}で出る形式に対して追加する枠です。</p>
       <ul class="ufocus">
 ${focusRows.map(({ key, f }) => {
     const b = d.books.find(x => x.id === f.id);
@@ -505,18 +507,16 @@ ${alts.length ? `            <span class="ubook__note">代わりに使える本�
     facts.push({ dt: '目標の目安', dd: `偏差値 ${p.u.h} 前後${fx.length ? `／${fx.join('・')}` : ''}` });
 
     return `    <section class="block usec" id="sub-${p.sub.dir}" style="--sc:${p.sub.color}">
-      <div class="eyebrow">${esc(p.sub.en)}</div>
       <h2 class="sec">${esc(name)}の${esc(p.sub.ja)}</h2>
       <dl class="ufacts">
 ${facts.map(f => `        <div><dt>${esc(f.dt)}</dt><dd>${f.html ?? esc(f.dd)}</dd></div>`).join('\n')}
       </dl>
 ${features.length ? `      <h3 class="usec__h3">ここで問われる力と、その対策</h3>
-      <p class="usec__note">${esc(name)}の${esc(p.sub.ja)}の説明に出てくる出題の要素を取り出したものです。</p>
       <ul class="upoints">
 ${features.map(f => `        <li><b>${esc(f.key)}</b><span>${esc(f.tip)}</span></li>`).join('\n')}
       </ul>
 ` : ''}${focusHtml}${nBooks ? `      <h3 class="usec__h3">${esc(name)}におすすめの参考書</h3>
-      <p class="usec__note">${esc(p.tier.name)}の${esc(p.sub.ja)}ルートに入っている本${focusRows.length ? 'と出題形式別の重点対策の本' : ''}のうち、上に挙げた出題の特徴と噛み合うものを${nBooks}冊選びました。${lists.length > 1 ? `${esc(lists.map(l => l.label).join('・'))}に分けて出しています。` : ''}進める順番ではないので、順番は${esc(p.sub.ja)}のルートを見てください。</p>
+      <p class="usec__note">${esc(p.tier.name)}の${esc(p.sub.ja)}ルートに入っている本のうち、上に挙げた出題の特徴と噛み合うものを${nBooks}冊選びました${focusRows.length ? '（重点対策の本は上に掲載）' : ''}。${lists.length > 1 ? `${esc(lists.map(l => l.label).join('・'))}に分けて出しています。` : ''}進める順番ではないので、順番は${esc(p.sub.ja)}のルートを見てください。</p>
 ${lists.map(l => `${l.label ? `      <h4 class="ubooks__h">${esc(l.label)}${l.limited ? '<span> — 学部・入試方式による</span>' : ''}</h4>
 ` : ''}      <ul class="ubooks">
 ${l.books.map(b => {
@@ -684,9 +684,8 @@ ${portalHeader()}
   ${crumbs(crumbItems)}
 
   <div class="block" style="margin-top:26px">
-    <div class="eyebrow">University</div>
     <h1 class="sec" style="font-size:29px">${esc(name)}の参考書ルート</h1>
-    <p class="sec-lead">${esc(name)}（${esc(kind)}／${esc(tier.sub)}）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何がどう問われるかと、その出題に噛み合う参考書をまとめたページです。${med ? '医学部医学科は他学部と条件が変わるので、別に節を設けています。' : ''}学部・入試方式によって使う科目と配点は変わるので、必ず募集要項と併せて確認してください。</p>
+    <p class="sec-lead">${esc(name)}（${esc(kind)}／${esc(tier.sub)}）を目指すときに、英語・国語・数学・理科・社会でそれぞれ何がどう問われるかと、その出題に噛み合う参考書をまとめたページです。${med ? '医学部医学科は他学部と条件が変わるので、別に節を設けています。' : ''}</p>
     <p class="page-updated">最終更新: <time datetime="${updated}">${updated}</time></p>
     ${sourceLine}
     <dl class="uhead">
@@ -706,9 +705,8 @@ ${med ? '      <a href="#med">医学部医学科</a>\n' : ''}${perSubject.map(p 
   </div>
 
   <section class="block" id="exam">
-    <div class="eyebrow">Exam format</div>
     <h2 class="sec">${esc(name)}の入試はどう組み立てられているか</h2>
-    <p class="sec-lead">科目別の対策に入る前に、${esc(name)}の入試がどういう形で行われるかを押さえておきます。ここが分かっていないと、同じ大学の別方式の過去問を解いて手応えを取り違えます。</p>
+    <p class="sec-lead">科目別の対策に入る前に、${esc(name)}の入試がどういう形で行われるかを押さえておきます。</p>
 ${facultyTable}
 ${(FACULTY_PAGES.get(slug) || []).length ? `      <p class="ufac-go">学部別に見る: ${FACULTY_PAGES.get(slug).map(g => `<a href="${facultyPath(slug, g.slug)}">${esc(g.name)}</a>`).join('、')}</p>
 ` : ''}    <div class="unote">
@@ -721,7 +719,6 @@ ${stageRows.map(r => `        <div><dt>個別試験（二次）の${esc(r.name)}
   </section>
 
 ${med ? `  <section class="block" id="med">
-    <div class="eyebrow">Medical</div>
     <h2 class="sec">${esc(name)}の医学部医学科について</h2>
     <p class="sec-lead">医学部医学科は、同じ大学の他学部と同じ問題を使う場合でも、合格に必要な得点率が大きく上がります。理科の科目指定が別に決められていたり、面接・小論文が課されたりするのも医学科の特徴です。私立の医科大学では、医学部だけの独自問題を作っている大学もあります。</p>
     <div class="unote">
@@ -736,9 +733,8 @@ ${med.notes.map(n => `        <div><dt>${esc(n.dt)}</dt><dd>${esc(n.dd)}</dd></d
   </section>
 
 ` : ''}  <section class="block">
-    <div class="eyebrow">Target level</div>
     <h2 class="sec">科目ごとの目標</h2>
-    <p class="sec-lead">${esc(name)}で科目ごとに必要になる到達度の目安です。同じ大学でも学部・方式で配点が変わるため、数字は「どの科目に時間を厚く配るか」を決めるための相対的な目安として使ってください。算出のしかたは<a href="/methodology/">データの作り方</a>に書いています。</p>
+    <p class="sec-lead">${esc(name)}で科目ごとに必要になる到達度の目安です。学部・方式で配点が変わるので、科目間の相対的な目安です（<a href="/methodology/">データの作り方</a>）。</p>
     <table class="uhensa">
       <tr><th scope="col">科目</th><th scope="col">目標偏差値</th><th scope="col">志望レベル</th></tr>
 ${perSubject.map(p => `      <tr><th scope="row">${esc(p.sub.ja)}</th><td class="mono">${esc(String(p.u.h))}</td><td class="utier">${tierLabel(p.tier)}</td></tr>`).join('\n')}
@@ -746,13 +742,12 @@ ${perSubject.map(p => `      <tr><th scope="row">${esc(p.sub.ja)}</th><td class=
   </section>
 
   <div class="block unote unote--read">
-    <p><b>科目ごとの節の読み方。</b>「ここで問われる力と、その対策」は、各科目の出題説明に出てくる要素のうち当てはまる項目だけを出しているので、書かれていない形式が出ないという意味ではありません。「おすすめの参考書」の並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。</p>
+    <p>各科目の「ここで問われる力」は出題説明に出てくる要素だけを出しています（書かれていない形式が出ないという意味ではありません）。「おすすめの参考書」の並び順は、その大学の出題の特徴に当てはまった数と、ルート上の位置で決めています。</p>
   </div>
 
 ${sections}
 
   <section class="block">
-    <div class="eyebrow">Past exams</div>
     <h2 class="sec">${esc(name)}の過去問</h2>
     <div class="ubuy">
       <p>ルートの最後は過去問です。${esc(name)}は学部・入試方式によって収録内容の違う冊子が出ているため、当サイトでは特定の 1 冊を指定していません。志望学部と年度を確かめてから選んでください。</p>
@@ -764,9 +759,8 @@ ${rkUrl ? `        <a href="${esc(rkUrl)}" target="_blank" rel="nofollow sponsor
   </section>
 
   ${siblings.length ? `<section class="block">
-    <div class="eyebrow">Same level</div>
     <h2 class="sec">同じ志望レベルの大学</h2>
-    <p class="sec-lead">${esc(tier.name)}として扱っている他の大学です。併願先を決めるとき、必要な参考書がどれだけ重なるかの目安になります。</p>
+    <p class="sec-lead">${esc(tier.name)}として扱っている他の大学です。</p>
     <div class="usibs">
 ${siblings.map(s => `      <a href="/univ/${s.slug}/">${esc(s.name)}</a>`).join('\n')}
     </div>
@@ -774,7 +768,7 @@ ${siblings.map(s => `      <a href="/univ/${s.slug}/">${esc(s.name)}</a>`).join(
 
   <div class="cta">
     <h2>現在地から逆算したいときは</h2>
-    <p>ここに出しているのは${esc(name)}を目標にした標準的な並びです。いま解ける問題のレベルや残り時間に合わせて調整したい場合は、各科目の 3 分診断を使ってください。</p>
+    <p>ここに出しているのは${esc(name)}を目標にした標準的な並びです。今の実力から組み直すなら、各科目の 3 分診断を使ってください。</p>
     <div class="cta__btns">
       <a class="p" href="/univ/">他の大学も見る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="g" href="/">全科目のトップへ</a>
