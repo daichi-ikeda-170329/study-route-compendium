@@ -2,17 +2,17 @@
  "generatedAt": "2026-11-20",
  "total": 1432,
  "byStatus": {
-  "verified": 1116,
-  "partial": 267,
-  "unverified": 45,
+  "verified": 1119,
+  "partial": 266,
+  "unverified": 43,
   "notApplicable": 4
  },
  "bySubject": {
   "english": {
    "total": 263,
-   "verified": 215,
+   "verified": 216,
    "partial": 41,
-   "unverified": 6,
+   "unverified": 5,
    "notApplicable": 1
   },
   "japanese": {
@@ -24,8 +24,8 @@
   },
   "math": {
    "total": 172,
-   "verified": 86,
-   "partial": 69,
+   "verified": 87,
+   "partial": 68,
    "unverified": 16,
    "notApplicable": 1
   },
@@ -38,9 +38,9 @@
   },
   "social": {
    "total": 298,
-   "verified": 229,
+   "verified": 230,
    "partial": 61,
-   "unverified": 8,
+   "unverified": 7,
    "notApplicable": 0
   },
   "joho": {
@@ -60,19 +60,19 @@
  },
  "fieldGaps": {
   "author": 1086,
-  "problems": 1100,
-  "year": 97,
+  "problems": 1079,
+  "year": 92,
   "official": 407,
-  "pub": 63,
-  "isbn13": 49
+  "pub": 61,
+  "isbn13": 47
  },
  "byPriority": {
   "route": {
    "label": "ルートに採用している教材（3 分診断の結果に出るものを含む）",
    "total": 542,
-   "unverified": 16,
+   "unverified": 15,
    "partial": 105,
-   "verified": 417
+   "verified": 418
   },
   "joho": {
    "label": "情報科（市販書が少なく、記載の確度が低い）",
@@ -91,59 +91,59 @@
   "other": {
    "label": "その他",
    "total": 811,
-   "unverified": 21,
-   "partial": 141,
-   "verified": 649
+   "unverified": 20,
+   "partial": 140,
+   "verified": 651
   }
  },
  "duplicateIsbn": [],
  "mismatchCounts": {
   "official": 231,
   "pub": 14,
-  "year": 15
+  "year": 14
  },
  "staleChecks": 0,
  "textMarkRemaining": 130,
  "extras": {
   "english": {
-   "toc": 110,
-   "howto": 195,
-   "finish": 195,
-   "editions": 177,
+   "toc": 125,
+   "howto": 209,
+   "finish": 209,
+   "editions": 181,
    "pages": 210,
-   "media": 86
+   "media": 91
   },
   "japanese": {
-   "toc": 73,
-   "howto": 144,
-   "finish": 144,
-   "editions": 128,
+   "toc": 79,
+   "howto": 150,
+   "finish": 150,
+   "editions": 134,
    "pages": 161,
    "media": 35
   },
   "math": {
-   "toc": 37,
-   "howto": 81,
-   "finish": 81,
-   "editions": 75,
+   "toc": 84,
+   "howto": 131,
+   "finish": 131,
+   "editions": 77,
    "pages": 90,
-   "media": 8
+   "media": 17
   },
   "science": {
-   "toc": 124,
-   "howto": 292,
-   "finish": 292,
+   "toc": 126,
+   "howto": 294,
+   "finish": 294,
    "editions": 222,
    "pages": 313,
    "media": 64
   },
   "social": {
-   "toc": 79,
-   "howto": 211,
-   "finish": 211,
+   "toc": 100,
+   "howto": 231,
+   "finish": 231,
    "editions": 188,
    "pages": 232,
-   "media": 34
+   "media": 42
   },
   "joho": {
    "toc": 13,

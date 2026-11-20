@@ -578,7 +578,7 @@
   },
   "english:sparta": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -608,8 +608,40 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784761230821",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784761230838",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E8%8B%B1%E5%8D%98%E8%AA%9E%20SPARTA",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784761230821",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784761230838",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "problems"
+     ]
+    }
+   ]
   },
   "english:hijii-tango": {
    "status": "verified",
@@ -661,14 +693,14 @@
   },
   "english:database": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784342264894",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784342264894",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -682,17 +714,46 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784342264894",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784342264894",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784342264894",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784342264894",
+     "checkedAt": "2026-11-20"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784342264955",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784342264955",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "structure",
+      "problems"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784342264894",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "english:rankjun2300": {
    "status": "verified",
@@ -744,7 +805,7 @@
   },
   "english:yumetan": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -771,7 +832,33 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784757442368",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784757442382",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%A4%A2%E3%82%92%E3%81%8B%E3%81%AA%E3%81%88%E3%82%8B%E8%8B%B1%E5%8D%98%E8%AA%9E%20%E3%83%A6%E3%83%A1%E3%82%BF%E3%83%B3",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "editions"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784757442368",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "english:duo30": {
    "status": "verified",
@@ -1316,14 +1403,14 @@
   },
   "english:hinshutsu-polaris": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784046023902",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784046023902",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -1337,17 +1424,45 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784046023902",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784046023902",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784046023902",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784046023902",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E8%8B%B1%E8%AA%9E%E9%A0%BB%E5%87%BA%E5%95%8F%E9%A1%8C%E3%83%9D%E3%83%A9%E3%83%AA%E3%82%B9",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784046076663",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784046023902",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "english:oiwa": {
    "status": "partial",
@@ -1567,7 +1682,7 @@
   },
   "english:toshin-bunpo-lv": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -1598,7 +1713,26 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859399",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E8%8B%B1%E6%96%87%E6%B3%95%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E5%95%8F%E9%A1%8C%E9%9B%86%203%E8%A8%82%E7%89%88",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "editions"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I033541501",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "english:hijii-zero-next": {
    "status": "partial",
@@ -1987,14 +2121,14 @@
   },
   "english:final-polaris": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784046043726",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784046043726",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -2008,28 +2142,56 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784046043726",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784046043726",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784046043726",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784046043726",
+     "checkedAt": "2026-11-20"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784046043726",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E8%8B%B1%E6%96%87%E6%B3%95%E3%83%95%E3%82%A1%E3%82%A4%E3%83%8A%E3%83%AB%E6%BC%94%E7%BF%92%E3%83%9D%E3%83%A9%E3%83%AA%E3%82%B9",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784046043726",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure",
+      "pub",
+      "year",
+      "isbn13",
+      "problems"
+     ]
+    }
+   ]
   },
   "english:hijii-bunpo-sol": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784761230739",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784761230739",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -2043,17 +2205,38 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784761230739",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784761230739",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784761230739",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784761230739",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E8%8B%B1%E6%96%87%E6%B3%95%E5%95%8F%E9%A1%8CSolution",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784761230739",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure",
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "english:nextstage": {
    "status": "verified",
@@ -3884,7 +4067,7 @@
   },
   "english:solution-theme": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -3914,8 +4097,40 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784761230494",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784761230524",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E8%8B%B1%E8%AA%9E%E9%95%B7%E6%96%87%E5%95%8F%E9%A1%8C%E3%82%BD%E3%83%AA%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%20%E6%9C%80%E6%96%B0%E3%83%86%E3%83%BC%E3%83%9E%E7%B7%A8",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784761230494",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784761230524",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "problems"
+     ]
+    }
+   ]
   },
   "english:rules1": {
    "status": "verified",
@@ -4395,14 +4610,14 @@
   },
   "english:hyper-training": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784342207877",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784342207877",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -4416,17 +4631,53 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784342207877",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784342207877",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784342207877",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784342207877",
+     "checkedAt": "2026-11-20"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784342207884",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E3%83%8F%E3%82%A4%E3%83%91%E3%83%BC%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%20%E8%8B%B1%E8%AA%9E%E9%95%B7%E6%96%87",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784342207877",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure",
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784342207884",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "problems"
+     ]
+    }
+   ]
   },
   "english:yatte300": {
    "status": "verified",
@@ -4621,7 +4872,7 @@
   },
   "english:toshin-chobun-lv": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -4652,11 +4903,38 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859214",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859269",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859214",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E8%8B%B1%E8%AA%9E%E9%95%B7%E6%96%87%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E5%95%8F%E9%A1%8C%E9%9B%86",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "editions"
+     ]
+    }
+   ]
   },
   "english:zenlevel-chobun": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -4682,8 +4960,35 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010353394",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010353400",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010353394",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "editions",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010353400",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "problems"
+     ]
+    }
+   ]
   },
   "english:rise": {
    "status": "unverified",
@@ -5718,14 +6023,14 @@
   },
   "english:eisaku-bible": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784865315905",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784865315905",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "verified",
@@ -5735,17 +6040,38 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784865315905",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784865315905",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784865315905",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784865315905",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784865315912",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784865315905",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "english:yokubari": {
    "status": "verified",
@@ -6430,9 +6756,27 @@
   },
   "english:lr-level": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E8%8B%B1%E8%AA%9EL%26R%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E5%95%8F%E9%A1%8C%E9%9B%86",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I031281358",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "english:lis-platinum": {
    "status": "partial",
@@ -6692,10 +7036,57 @@
    ]
   },
   "english:tanki-kyote-e": {
-   "status": "unverified",
-   "checkedAt": null,
+   "status": "verified",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {
+    "pub": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796123792",
+     "checkedAt": "2026-11-20"
+    },
+    "year": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796123792",
+     "checkedAt": "2026-11-20"
+    },
+    "isbn13": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796123792",
+     "checkedAt": "2026-11-20"
+    }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E7%9F%AD%E6%9C%9F%E6%94%BB%E7%95%A5%20%E5%A4%A7%E5%AD%A6%E5%85%A5%E5%AD%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%20%E8%8B%B1%E8%AA%9E",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796123808",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796123792",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "english:kimeru-r": {
    "status": "verified",
@@ -6988,14 +7379,14 @@
   },
   "english:aohon-e": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796165020",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796165020",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -7009,17 +7400,46 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796165020",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796165020",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796165020",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796165020",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.sundaibunko.jp/contents/book/22477",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.sundaibunko.jp/contents/book/22480",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796165020",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "english:akahon": {
    "status": "notApplicable",
@@ -13137,7 +13557,7 @@
   },
   "japanese:level-g": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -13168,11 +13588,30 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890858880",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859788",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E6%96%B0%E3%83%BB%E7%8F%BE%E4%BB%A3%E6%96%87%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E5%95%8F%E9%A1%8C%E9%9B%86",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "editions"
+     ]
+    }
+   ]
   },
   "japanese:zenlevel-g": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -13198,8 +13637,27 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010353509",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010353509",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010353509",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "editions",
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "japanese:kiso-seikou-g": {
    "status": "verified",
@@ -15963,7 +16421,7 @@
   },
   "japanese:mochizuki": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -15990,7 +16448,26 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784875687726",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E6%9C%9B%E6%9C%88%E5%85%89%20%E5%8F%A4%E5%85%B8%E6%96%87%E6%B3%95%E8%AC%9B%E7%BE%A9%E3%81%AE%E5%AE%9F%E6%B3%81%E4%B8%AD%E7%B6%99",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "editions"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875687726",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "japanese:okamoto-bunpo": {
    "status": "verified",
@@ -16951,7 +17428,7 @@
   },
   "japanese:level-k": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -16982,11 +17459,37 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890858835",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859436",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%8F%A4%E6%96%87%E3%83%AC%E3%83%99%E3%83%AB%E5%88%A5%E5%95%8F%E9%A1%8C%E9%9B%86",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "editions"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890858835",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "japanese:zenlevel-k": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -17012,8 +17515,34 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010353561",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010353592",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010353561",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "editions",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010353592",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "problems"
+     ]
+    }
+   ]
   },
   "japanese:kiso-seikou-k": {
    "status": "verified",
@@ -18506,7 +19035,7 @@
   },
   "japanese:zenlevel-kan": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -18532,8 +19061,34 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010353608",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010353615",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010353608",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "editions",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010353615",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "problems"
+     ]
+    }
+   ]
   },
   "japanese:jissen-hyojun-kanbun": {
    "status": "verified",
@@ -21010,7 +21565,7 @@
   },
   "math:yasashiko": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21041,11 +21596,29 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784053054692",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053055958",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053054692",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:nyumon": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21076,11 +21649,29 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010349151",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010349168",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010349151",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:hajihaji": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21111,11 +21702,22 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784866154237",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.mathema.jp/wp-content/uploads/2025/12/2025年学参_目録.pdf",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:hitotsu": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21146,7 +21748,26 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784053054371",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/api/opensearch?title=高校数学をひとつひとつ&publisher=学研プラス&from=2020",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053054371",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:okita": {
    "status": "partial",
@@ -21185,7 +21806,7 @@
   },
   "math:hajitoke": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21215,8 +21836,26 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784866152271",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.mathema.jp/wp-content/uploads/2025/12/2025年学参_目録.pdf",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.mathema.jp/wp-content/uploads/2025/12/2025年学参_目録.pdf",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:shikkari": {
    "status": "verified",
@@ -21411,7 +22050,7 @@
   },
   "math:calcul": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21442,11 +22081,29 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796113649",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/api/opensearch?title=カルキュール数学&publisher=駿台文庫&from=2015",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796113649",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:shiro": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21476,11 +22133,30 @@
      },
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=チャート式 基礎と演習 数学",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784410102073",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:ki": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21507,11 +22183,30 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784410107177",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E5%BC%8F%E8%A7%A3%E6%B3%95%E3%81%A8%E6%BC%94%E7%BF%92%E6%95%B0%E5%AD%A6",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784410107177",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:ao": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21541,11 +22236,30 @@
      },
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/api/opensearch?title=基礎からの数学&publisher=数研出版&from=2021",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784410105784",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:aka": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21576,7 +22290,26 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784410101748",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E5%BC%8F%20%E5%8A%A0%E8%97%A4%E6%96%87%E5%85%83%20%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88%E7%A0%94%E7%A9%B6%E6%89%80",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "editions"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784410101748",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:fg": {
    "status": "unverified",
@@ -21586,7 +22319,7 @@
   },
   "math:legend": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21617,11 +22350,29 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784487687114",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=NEW%20ACTION%20LEGEND%20%E6%95%B0%E5%AD%A6",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784487687114",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:rikai": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21651,11 +22402,29 @@
      },
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784578242116",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784578242109",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:kisomon": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21685,8 +22454,26 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010349182",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010349182",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010349182",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:yonstep": {
    "status": "unverified",
@@ -21696,7 +22483,7 @@
   },
   "math:hyomon": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21726,12 +22513,30 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010349212",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010349212",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010349212",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:taio11": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21762,11 +22567,22 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784887422636",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784887422735",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:choice": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -21796,8 +22612,26 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784777227280",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-2728-0",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-2728-0",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:ryomon300": {
    "status": "verified",
@@ -22710,20 +23544,31 @@
   },
   "math:shoaku": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=入試数学の掌握",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:igakubu": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784777231508",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784777231508",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -22737,17 +23582,53 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784777231508",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-3150-8",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784777231508",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-3150-8",
+     "checkedAt": "2026-11-20"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-3150-8",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%8C%BB%E5%AD%A6%E9%83%A8%E6%94%BB%E7%95%A5%E3%81%AE%E6%95%B0%E5%AD%A6",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-3150-8",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure",
+      "pub",
+      "year",
+      "problems"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784777231508",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "isbn13"
+     ]
+    }
+   ]
   },
   "math:gekkan-daisu": {
    "status": "unverified",
@@ -22792,7 +23673,7 @@
   },
   "math:omoshiroi-kyote": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -22823,7 +23704,18 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784046062345",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784046062352",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:tanki-kyote": {
    "status": "verified",
@@ -22921,7 +23813,7 @@
   },
   "math:kuro-hon": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -22952,11 +23844,29 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784777230877",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-3088-4",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-3087-7",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:midori-hon": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -22976,12 +23886,37 @@
     },
     "year": {
      "status": "unverified"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784865317282",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784865317299",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784865317282",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:kyote-akahon": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -23005,7 +23940,17 @@
     "year": {
      "status": "unverified"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784325273387",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:master-seisu": {
    "status": "verified",
@@ -23259,7 +24204,7 @@
   },
   "math:bunyabetsu-seisu": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -23285,12 +24230,37 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010352632",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010352632",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/api/opensearch?title=標準問題精講&publisher=旺文社&from=2022",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010352632",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:tarinai-seisu": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -23318,7 +24288,25 @@
     "year": {
      "status": "unverified"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=教科書だけでは足りない大学入試攻略",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784777228829",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:iiic-kiso": {
    "status": "partial",
@@ -23627,7 +24615,7 @@
   },
   "math:genki": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -23661,7 +24649,18 @@
      },
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.mathema.jp/wp-content/uploads/2025/12/2025年学参_目録.pdf",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:sugaku-no-torisetsu": {
    "status": "unverified",
@@ -23671,7 +24670,7 @@
   },
   "math:koko-korede-wakaru-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -23695,7 +24694,25 @@
     "year": {
      "status": "unverified"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E9%AB%98%E6%A0%A1%E3%81%93%E3%82%8C%E3%81%A7%E3%82%8F%E3%81%8B%E3%82%8B%E6%95%B0%E5%AD%A6",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784578242369",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:genkini-nobiru-sugaku-1a": {
    "status": "verified",
@@ -23788,15 +24805,37 @@
   },
   "math:clear-sugaku": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/api/opensearch?title=クリアー数学&publisher=数研出版&from=2021",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:3trial-sugaku": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://www.chart.co.jp/goods/sugaku_list/s002.html",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:repeat-sugaku": {
    "status": "unverified",
@@ -23806,9 +24845,20 @@
   },
   "math:3round-sugaku": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://www.chart.co.jp/goods/sugaku_list/s002.html",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:master-key-sugaku": {
    "status": "partial",
@@ -24444,7 +25494,7 @@
   },
   "math:mark-shiki-kiso-mondaishu-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -24475,18 +25525,36 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784777227181",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-2738-9",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.kawai-publishing.jp/book/?isbn=978-4-7772-2718-1",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:kyotsu-test-shinkatei-koryaku-mondaishu-sugaku": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784325254478",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784325254478",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "verified",
@@ -24496,28 +25564,49 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784325254478",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784325254478",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784325254478",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784325254478",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784325254485",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784325254478",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure",
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "math:toshin-kyotsu-test-jissen-mondaishu-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859580",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784890859580",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -24531,9 +25620,9 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859580",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784890859580",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
@@ -24541,11 +25630,32 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859580",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=東進共通テスト実戦問題集 数学",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859580",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure",
+      "pub",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "math:yozemi-kyotsu-test-jissen-mondaishu-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -24578,12 +25688,29 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784863469334",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784863469334",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784863469334",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:obunsha-honban-moshi-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -24613,8 +25740,34 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010354193",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010354193",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010354209",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010354193",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:bunyabetsu-hyojun-mondai-seiko-vector": {
    "status": "verified",
@@ -25313,14 +26466,14 @@
   },
   "math:todai-nyushi-shokai-25nen-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796124126",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796124126",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -25334,9 +26487,9 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796124126",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796124126",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
@@ -25344,18 +26497,39 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796124126",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=東大入試詳解25年 数学",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "editions"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796124126",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure",
+      "pub",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "math:kyodai-nyushi-shokai-25nen-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796124232",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796124232",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -25369,21 +26543,50 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796124232",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796124232",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796124232",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796124232",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.sundaibunko.jp/contents/book/21534",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.sundaibunko.jp/contents/book/21536",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796124232",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "math:zenkoku-daigaku-nyushi-mondai-seikai-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -25414,7 +26617,17 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010367650",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010367650",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:todai-bunkei-sugaku-keito-to-bunseki": {
    "status": "verified",
@@ -25503,14 +26716,14 @@
   },
   "math:nyushi-no-kiseki-todai-kyodai": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784887422919",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784887422919",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -25524,18 +26737,42 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784887422919",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784887422919",
+     "checkedAt": "2026-11-20"
     },
     "year": {
-     "status": "unverified"
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784887422919",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784887422926",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784887422919",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "math:yasashiko-mondai": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -25566,11 +26803,21 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784053062925",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053062925",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:masema-gokaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -25601,11 +26848,22 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784866152332",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.mathema.jp/wp-content/uploads/2025/12/2025年学参_目録.pdf",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:masema-up": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -25635,8 +26893,26 @@
      "sourceKind": "bibliography",
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784866152349",
      "checkedAt": "2026-09-04"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "publisher",
+     "sourceUrl": "https://www.mathema.jp/wp-content/uploads/2025/12/2025年学参_目録.pdf",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.mathema.jp/wp-content/uploads/2025/12/2025年学参_目録.pdf",
+     "kind": "publisher",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:ichikara": {
    "status": "partial",
@@ -25734,7 +27010,7 @@
   },
   "math:levelup": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -25758,18 +27034,37 @@
     "year": {
      "status": "unverified"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%20%E3%83%AC%E3%83%99%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97%E5%95%8F%E9%A1%8C%E9%9B%86%20%E6%95%B0%E5%AD%A6",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053061751",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "math:zenlevel": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010353752",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010353752",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -25783,17 +27078,38 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010353752",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010353752",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010353752",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010353752",
+     "checkedAt": "2026-11-20"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784010353752",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010353752",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure",
+      "pub",
+      "year",
+      "isbn13",
+      "problems"
+     ]
+    }
+   ]
   },
   "math:naf": {
    "status": "partial",
@@ -26147,7 +27463,7 @@
   },
   "math:shida": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -26174,7 +27490,25 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784046068835",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=志田晶 面白いほどわかる本 数学",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784046068835",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:hosono": {
    "status": "partial",
@@ -26309,7 +27643,7 @@
   },
   "math:haiscore": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -26336,11 +27670,29 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784865315714",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/api/opensearch?title=ハイスコア!共通テスト攻略&publisher=Z会&from=2020",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784865315721",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:aohon": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -26371,7 +27723,33 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796165044",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/api/opensearch?title=共通テスト実戦問題集&publisher=駿台文庫&from=2026",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/books/R100000137-I9784796165044",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796165051",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:kako-review": {
    "status": "verified",
@@ -26714,14 +28092,14 @@
   },
   "math:superquick": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784410153891",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784410153891",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "verified",
@@ -26731,14 +28109,41 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784410153891",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784410153891",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "unverified"
+    },
+    "problems": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784410153907",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784410153907",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure",
+      "problems"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784410153891",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "math:matsuda-type100": {
    "status": "unverified",
@@ -26900,7 +28305,7 @@
   },
   "math:saijuyo-bun": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -26931,11 +28336,21 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859443",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859443",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:saijuyo-ri": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -26966,7 +28381,17 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859450",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859450",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:saijuyo-3c": {
    "status": "partial",
@@ -27018,15 +28443,15 @@
    ]
   },
   "math:chokiso70": {
-   "status": "partial",
-   "checkedAt": "2026-09-04",
+   "status": "verified",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859948",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784890859948",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "verified",
@@ -27036,18 +28461,42 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890859948",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784890859948",
+     "checkedAt": "2026-11-20"
     },
     "year": {
-     "status": "unverified"
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784890859948",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/api/opensearch?title=超基礎&publisher=ナガセ&from=2023",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859948",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure",
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "math:ichimonittou": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -27075,11 +28524,29 @@
     "year": {
      "status": "unverified"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784868270126",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784868270119",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:ukaru-sugaku": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -27107,11 +28574,29 @@
     "year": {
      "status": "unverified"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=入試につながる合格る数学",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784578240976",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:shuchu-kougi": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -27142,7 +28627,25 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784010352908",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=共通テスト 集中講義 旺文社 数学",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784010352908",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "math:nyushi-mondaishu": {
    "status": "partial",
@@ -44039,14 +45542,14 @@
   },
   "science:todai-nyushi-shokai-butsuri": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796124164",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796124164",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "unverified",
@@ -44060,20 +45563,29 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796124164",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796124164",
+     "checkedAt": "2026-11-20"
     },
     "year": {
-     "status": "unverified",
-     "mismatch": {
-      "kind": "year",
-      "ours": 2024,
-      "theirs": 2023
-     },
-     "checkedAt": "2026-09-04"
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796124164",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796124164",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "science:kyodai-nyushi-shokai-butsuri-25": {
    "status": "verified",
@@ -44287,14 +45799,14 @@
   },
   "science:shin-rikei-kagaku": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796116664",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796116664",
+     "checkedAt": "2026-11-20"
     },
     "official": {
      "status": "verified",
@@ -44304,17 +45816,38 @@
     },
     "pub": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796116664",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796116664",
+     "checkedAt": "2026-11-20"
     },
     "year": {
      "status": "verified",
-     "sourceKind": "bibliography",
-     "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784796116664",
-     "checkedAt": "2026-09-04"
+     "sourceKind": "database",
+     "sourceUrl": "https://www.hanmoto.com/bd/isbn/9784796116664",
+     "checkedAt": "2026-11-20"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796116671",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784796116664",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "science:toshin-jissen-kagakukiso": {
    "status": "verified",
@@ -45161,7 +46694,7 @@
   },
   "social:kanaya-nagare-1": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -45185,11 +46718,22 @@
     "year": {
      "status": "unverified"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859740",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:kanaya-nagare-2": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -45213,11 +46757,22 @@
     "year": {
      "status": "unverified"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859757",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:kanaya-nagare-3": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -45251,7 +46806,18 @@
      },
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784890859764",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:kanaya-bunkashi": {
    "status": "verified",
@@ -45349,7 +46915,7 @@
   },
   "social:jikkyo-nihonshi-1": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -45376,11 +46942,30 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784875688327",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688358",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688327",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:jikkyo-nihonshi-2": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -45410,11 +46995,23 @@
      },
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688334",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:jikkyo-nihonshi-3": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -45441,11 +47038,23 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784875688341",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688341",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:jikkyo-nihonshi-4": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -45472,7 +47081,19 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784875688358",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688358",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:kakikomi-kyokasho-nihonshi": {
    "status": "verified",
@@ -48416,7 +50037,7 @@
   },
   "social:panorama-sekaishi-kodai": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -48450,11 +50071,29 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784053042590",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053042590 および https://www.hanmoto.com/bd/isbn/9784053043658",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053042590",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "social:panorama-sekaishi-kingendai": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -48491,11 +50130,29 @@
      },
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053042590 および https://www.hanmoto.com/bd/isbn/9784053043658",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784053043658",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "social:jikkyo-sekaishi-1": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -48529,11 +50186,23 @@
      },
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688365",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:jikkyo-sekaishi-2": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -48560,11 +50229,23 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784875688372",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688372",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:jikkyo-sekaishi-3": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -48591,11 +50272,23 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784875688389",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688389",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:jikkyo-sekaishi-4": {
    "status": "verified",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -48622,47 +50315,132 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784875688396",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784875688396",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "media",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:navi-sekaishi-1": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634030657",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:navi-sekaishi-2": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634030664",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:navi-sekaishi-3": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634030671",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:navi-sekaishi-4": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634030688",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:aramaki-mitorizu-1": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784890854974",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
+     ]
+    }
+   ]
   },
   "social:aramaki-mitorizu-2": {
    "status": "unverified",
-   "checkedAt": null,
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784890854974",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784890854981",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "social:aramaki-mitorizu-3": {
    "status": "partial",
-   "checkedAt": "2026-09-04",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
    "fields": {
     "isbn13": {
@@ -48693,7 +50471,25 @@
      "sourceUrl": "https://api.openbd.jp/v1/get?isbn=9784890855193",
      "checkedAt": "2026-09-04"
     }
-   }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784890854974",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784890855193",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "structure"
+     ]
+    }
+   ]
   },
   "social:jidai-nagare-sekaishi": {
    "status": "verified",
@@ -57223,10 +59019,49 @@
    ]
   },
   "social:nihonshi-guidebook-jouge": {
-   "status": "unverified",
-   "checkedAt": null,
+   "status": "verified",
+   "checkedAt": "2026-11-20",
    "physicalReview": false,
-   "fields": {}
+   "fields": {
+    "pub": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634020177",
+     "checkedAt": "2026-11-20"
+    },
+    "year": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634020177",
+     "checkedAt": "2026-11-20"
+    },
+    "isbn13": {
+     "status": "verified",
+     "sourceKind": "database",
+     "sourceUrl": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634020177",
+     "checkedAt": "2026-11-20"
+    }
+   },
+   "sources": [
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634020184",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc"
+     ]
+    },
+    {
+     "url": "https://ndlsearch.ndl.go.jp/search?cs=bib&keyword=9784634020177",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "pub",
+      "year",
+      "isbn13"
+     ]
+    }
+   ]
   },
   "social:sekaishi-nendai-onephrase": {
    "status": "verified",
@@ -65972,6 +67807,23 @@
       "pub",
       "year",
       "isbn13"
+     ]
+    }
+   ]
+  },
+  "science:tetsuryokukai-toryumon-hado": {
+   "status": "unverified",
+   "checkedAt": "2026-11-20",
+   "physicalReview": false,
+   "fields": {},
+   "sources": [
+    {
+     "url": "https://www.hanmoto.com/bd/isbn/9784046080202",
+     "kind": "database",
+     "checkedAt": "2026-11-20",
+     "items": [
+      "toc",
+      "structure"
      ]
     }
    ]
