@@ -128,8 +128,9 @@ test('書籍ページ本文の共通率が、AdSense に却下された当時（
     for (const s of sentences(f)) { all += s.length; if (freq.get(s) <= 2) own += s.length; }
   }
   const ratio = own / all;
-  /* 2026-09-21 の実測は 25.2%（却下当時は 21.9%）。20% を割ったら、
-     どこかに定型文を足している。build/lib/compare-note.mjs の経緯を読むこと */
-  assert.ok(ratio >= 0.20,
-    `固有率が ${(ratio * 100).toFixed(1)}% に落ちている（却下当時 21.9%／対応後 25.2%）。全ページに同じ文を足していないか確かめる`);
+  /* 2026-09-21 の実測は 25.2%（却下当時は 21.9%）。2026-11-20 に英字の小見出し・定型の注記・
+     関連書カードへの概要文の再掲を外して 38% 台にした。33% を割ったら、どこかに定型文を
+     足している。build/lib/compare-note.mjs と build/generate-books.mjs の cardNote の経緯を読むこと */
+  assert.ok(ratio >= 0.33,
+    `固有率が ${(ratio * 100).toFixed(1)}% に落ちている（却下当時 21.9%／2026-11-20 38%）。全ページに同じ文を足していないか確かめる`);
 });

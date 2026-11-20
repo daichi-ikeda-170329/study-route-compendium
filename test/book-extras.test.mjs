@@ -26,9 +26,10 @@ test('化学 上級問題精講の検索タイトルと出版社の確認元が�
   const book = loadSubjectData(ROOT, 'science').books.find(b => b.id === 'jokyu-seiko');
   const src = fs.readFileSync(path.join(ROOT, 'science/books/jokyu-seiko/index.html'), 'utf8');
   assert.ok(src.includes(`<title>${book.pageTitle} - 理科ルート大全</title>`));
-  assert.match(src, /書誌情報の確認元:[\s\S]*?https:\/\/www\.obunsha\.co\.jp\/product\/detail\/035534/);
+  assert.match(src, /書誌情報・構成の確認元:[\s\S]*?https:\/\/www\.obunsha\.co\.jp\/product\/detail\/035534/);
   assert.match(src, /2026-10-23 確認/);
-  assert.match(src, /難易度や使用感の根拠ではありません/);
+  // 出典は書誌の根拠であって、推定値の根拠ではないことを同じ節で示す
+  assert.match(src, /難易度・到達目安・想定学習時間は編集部の推定です/);
 });
 
 test('toc に文字列を入れると形の検証で落ちる', () => {

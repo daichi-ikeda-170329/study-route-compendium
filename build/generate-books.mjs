@@ -18,16 +18,20 @@ import { articlesForBook } from './lib/article-refs.mjs';
 import { authorsOf, searchName, withAuthor, displayName } from './lib/booktitle.mjs';
 import { coverSrcs } from './lib/cover.mjs';
 import { bookCards, bookCard } from './lib/cards.mjs';
-import { cardNote } from './lib/compare-note.mjs';
+import { compareNote } from './lib/compare-note.mjs';
+/* 関連書カードには「この本との差」だけを出す。相手の概要文（1 文目）を再掲すると、
+   1 冊の概要が 6〜8 ページに複製され、書籍ページ本文の約 2 割を占めていた（2026-11-20 実測）。
+   概要はリンク先の本のページで読める。差分を出せない相手（評価準備中）は形式だけを出す */
+const cardNote = (book, other) => compareNote(book, other) || other.style || '';
 import { pacePlan } from './lib/pace.mjs';
 import { adUnit } from './lib/ads.mjs';
 import { isProvisional, PROVISIONAL_LABEL } from './lib/newbooks.mjs';
 import { pickAlternatives, pickNext, pickPrev } from './lib/book-links.mjs';
 import { seriesOf, hensachiPlain } from './lib/series.mjs';
-import { degreeLine, bandOf } from './lib/scale.mjs';
+import { bandOf } from './lib/scale.mjs';
 import { DATE_PLACEHOLDER, pageContentDate, saveDates } from './lib/updated.mjs';
 import { isPlaceholder, PLACEHOLDER_NOTE, PLACEHOLDER_LABEL } from './lib/record-type.mjs';
-import { verificationOf } from './lib/verification.mjs';
+import { verificationOf, contentSourcesOf, sourceLabel } from './lib/verification.mjs';
 import { bookIndexable, NOINDEX_META } from './lib/indexing.mjs';
 import { routePositions, adoptedPeers, tierUniversities } from './lib/route-position.mjs';
 import { amazonUrl, rakutenUrl } from './lib/purchase.mjs';
@@ -149,7 +153,6 @@ ${pos.side.map(e => `      <li>${routeLink(e.tier)}の${esc(e.trackNames)}では
   }
 
   return `<section class="block">
-      <div class="eyebrow">Route position</div>
       <h2 class="sec">志望校別ルートでの位置</h2>
       <p class="sec-lead">${lead}</p>
       ${body}
@@ -260,10 +263,15 @@ function renderBook(book, ctx) {
   /* 事実として確かめた項目と、編集部が推定した項目を分けて出す。
      verified と「現物を確認した」を同じ意味にしない（build/lib/verification.mjs） */
   const ver = verificationOf(sub.dir, book);
-  const publisherSources = [...new Map(Object.values(ver.fields)
-    .filter(v => v.status === 'verified' && v.sourceKind === 'publisher'
-      && /^https:\/\//.test(v.sourceUrl || '') && v.checkedAt)
-    .map(v => [v.sourceUrl, v])).values()];
+  /* 出版社の公式ページと、構成・ページ数などを確かめた書誌データベースの両方を出典として出す。
+     openBD の一括照合（全冊共通の API の URL）は 1 冊ごとの出典にならないので出さない */
+  const publisherSources = [...new Map([
+    ...Object.values(ver.fields)
+      .filter(v => v.status === 'verified' && v.sourceKind === 'publisher'
+        && /^https:\/\//.test(v.sourceUrl || '') && v.checkedAt)
+      .map(v => ({ sourceUrl: v.sourceUrl, checkedAt: v.checkedAt, kind: 'publisher' })),
+    ...contentSourcesOf(sub.dir, book),
+  ].map(v => [v.sourceUrl, v])).values()];
   /* 固有の価値がまだ無いページは検索結果に載せない。既に流入のある URL を
      一律に noindex にはしない（build/lib/indexing.mjs） */
   const idx = bookIndexable(book);
@@ -354,24 +362,21 @@ ${book.seriesGuide.map(entry => {
     </section>` : '';
   const extraBody = [
     seriesGuide,
-    toc ? `<section class="block prose">
-      <div class="eyebrow">Contents</div>
-      <h2 class="sec">構成</h2>
+    toc || book.structure ? `<section class="block prose">
+      <h2 class="sec">構成</h2>${book.structure ? `
+      <p>${esc(book.structure)}</p>` : ''}${toc ? `
       <ol class="bk-toc">
 ${toc.map(t => `        <li>${esc(t)}</li>`).join('\n')}
-      </ol>
-      <p class="spec__note">目次の大きな単位です（出版社の公表している書誌情報による）。</p>
+      </ol>` : ''}
     </section>` : '',
     howto ? `<section class="block prose">
-      <div class="eyebrow">How to use</div>
       <h2 class="sec">使い方の手順</h2>
       <ol class="bk-howto">
 ${howto.map(h => `        <li><b>${esc(h.phase)}</b>${esc(h.do)}</li>`).join('\n')}
       </ol>
-      <p class="spec__note">編集部がすすめる進め方です。1 周目で完璧を求めず、周回で仕上げる前提で書いています。</p>
+      <p class="spec__note">編集部の推定です。</p>
     </section>` : '',
     book.finish ? `<section class="block prose">
-      <div class="eyebrow">Finish line</div>
       <h2 class="sec">終わりの基準</h2>
       <p>${esc(book.finish)}</p>
     </section>` : '',
@@ -381,10 +386,8 @@ ${howto.map(h => `        <li><b>${esc(h.phase)}</b>${esc(h.do)}</li>`).join('\n
      総時間として読めない本（「随時参照」「通年並行」など）には出さない（build/lib/pace.mjs） */
   const pace = prov ? null : pacePlan(book);
   const paceSection = pace ? `<section class="block prose">
-      <div class="eyebrow">Pace</div>
       <h2 class="sec">1 周にかかる期間の目安</h2>
       <p>${esc(pace.sentence)}</p>
-      <p class="spec__note">上の想定学習時間を日数に割った目安です。既習範囲と理解度で前後します。</p>
     </section>` : '';
 
   const routeSection = routePositionSection(book, ctx, bn);
@@ -397,9 +400,8 @@ ${arts.map(x => `        <li><a href="${x.href}">${esc(x.title)}</a></li>`).join
       </ul>
     </section>` : '';
   const prevSection = prevs.length ? `<section class="block">
-      <div class="eyebrow">Before this book</div>
       <h2 class="sec">この本の前に置く本</h2>
-      <p class="sec-lead">${esc(sub.full)}の志望校別ルートで、${esc(bn)}の直前に置いている本です。ここに挙げた本を終えてから取りかかると、段差なく進めます。</p>
+      <p class="sec-lead">${esc(sub.full)}の志望校別ルートで、${esc(bn)}の直前に置いている本です。</p>
       <ul class="bk-prev">
 ${prevs.map(p => {
     const pn = displayName(p.book, sub.dir);
@@ -409,12 +411,10 @@ ${prevs.map(p => {
     </section>` : '';
 
   const editionSection = editions ? `<section class="block">
-      <div class="eyebrow">Editions</div>
       <h2 class="sec">改訂の履歴</h2>
       <ul class="bk-ed">
 ${editions.map(e => `        <li><b>${e.year} 年</b>${esc(e.note)}</li>`).join('\n')}
       </ul>
-      <p class="spec__note">国立国会図書館・CiNii Books・出版社などの書誌で確かめられた版だけを載せています。版によって収録内容が変わるので、購入するときは版を確認してください。</p>
     </section>` : '';
 
   const nextLead = next.kind === 'same'
@@ -472,38 +472,33 @@ ${placeholder ? '' : `        <div class="buy buy--hero" data-rt-placement="book
     </div>
 
     <section class="block">
-      <div class="eyebrow">Specs</div>
       <h2 class="sec">基本情報</h2>
       <div class="spec">
         <dl>
 ${spec}
         </dl>
       </div>
-      <p class="spec__note">書誌情報は出版社などの公開データ、難易度・到達目安・想定学習時間は編集部の推定値です（<a href="/methodology/">算出方法</a>）。</p>${publisherSources.length ? `
-      <p class="spec__note">書誌情報の確認元: ${publisherSources.map(v => `<a href="${esc(v.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(book.pub)}の公式書籍情報</a>（${esc(v.checkedAt)} 確認）`).join('・')}。書名・出版社・刊行年・ISBN などの出典であり、難易度や使用感の根拠ではありません。</p>` : ''}
+      <p class="spec__note">難易度・到達目安・想定学習時間は編集部の推定です（<a href="/methodology/">算出方法</a>）。</p>${publisherSources.length ? `
+      <p class="spec__note">書誌情報・構成の確認元: ${publisherSources.map(v => `<a href="${esc(v.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(sourceLabel(v, book.pub))}</a>（${esc(v.checkedAt)} 確認）`).join('・')}。</p>` : ''}
     </section>
 
 ${/* 学習の記録は基本情報の直後に置く（購入ボタンの後ろだと、ページの下まで読まないと見つからない。仕様書 2.5） */ ''}    <section class="block">
-      <div class="eyebrow">Progress</div>
       <h2 class="sec">この参考書の状態を記録する</h2>
-      <p>「未着手・学習中・完了・保留」を<b>この端末の中だけ</b>に記録できます。アカウントは要らず、サーバーへも送りません。<a href="/progress/">学習の記録</a>でまとめて見られます。</p>
+      <p>この端末だけに保存します（<a href="/progress/">学習の記録</a>）。</p>
       <div data-rt-progress data-subject-id="${esc(sub.dir)}" data-book-id="${esc(book.id)}" data-book-name="${esc(bn)}"></div>
-      <noscript><p class="buy__note">この記録には JavaScript が要ります。</p></noscript>
+      <noscript><p class="buy__note">JavaScript が必要です。</p></noscript>
     </section>
 
     ${prov ? `<section class="block prose">
-      <div class="eyebrow">Status</div>
       <h2 class="sec">この本の評価について</h2>
       <p>${esc(bn)}は${esc(st.label)}に位置づけられる${esc(fieldName)}の参考書です。${book.year ? `${book.year} 年の刊行で、` : ''}掲載したばかりのため、難易度・到達目安・強み・注意点・向いている人はまだ書いていません。</p>
       <p>このサイトの難易度は 10 段階で、収録している ${sub.full}の参考書すべてを同じ物差しで並べています。現物を確認しないまま数字を置くと、その物差し自体が狂います。${esc(bn)}についても、確認が済んでから追記します。</p>
       <p>いま分かっているのは、下の基本情報に載せた書誌情報と、${esc(st.label)}という役割だけです。志望校から逆算した参考書ルートは、評価が済んだ本だけで組んでいます。${sub.full}の<a href="/${sub.dir}/" style="color:var(--indigo);font-weight:700">ルート画面</a>をご覧ください。</p>
     </section>${adUnit('inArticle')}` : `<section class="block prose">
-      <div class="eyebrow">Who is it for</div>
       <h2 class="sec">どんな人に向いているか</h2>
       <p><b>${esc(book.bestFor)}</b>に向いた一冊です。</p>
       ${position ? `<p>${esc(position)}</p>` : ''}
       ${series ? `<p>${esc(series.note)}</p>` : ''}
-      ${degreeLine(book.diff)}
     </section>${adUnit('inArticle')}
 
     ${extraBody}${extraBody ? '\n\n    ' : ''}<div class="pc-grid">
@@ -523,14 +518,12 @@ ${(book.cons || []).map(c => `          <li>${esc(c)}</li>`).join('\n')}
 
     ${paceSection}${paceSection ? '\n\n    ' : ''}${book.unis && book.unis.length ? `<div class="note">
       <h3>この本が視野に入る志望校</h3>
-      <p>${book.unis.map(u => esc(u)).join(' ／ ')}<br>
-      同じ大学でも学部・方式で必要な到達点は変わります。${sub.full}の<a href="/${sub.dir}/" style="color:var(--indigo);font-weight:700">ルート画面</a>に志望校名を入れると、出題形式に合わせた並びが出ます。</p>
+      <p>${book.unis.map(u => esc(u)).join(' ／ ')}（<a href="/${sub.dir}/">志望校から探す</a>）</p>
     </div>` : ''}
 
     ${routeSection}${routeSection ? '\n\n    ' : ''}${prevSection}${prevSection ? '\n\n    ' : ''}${alts.length ? `<section class="block">
-      <div class="eyebrow">Alternatives</div>
       <h2 class="sec">同じ役割・同じレベルの参考書</h2>
-      <p class="sec-lead">${esc(bn)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。この中から 1 冊を選び切れば足ります。</p>
+      <p class="sec-lead">${esc(bn)}と同じ「${esc(st.label)}」の枠で、難易度が近い参考書です。</p>
       <div class="bcards">
 ${alts.map(a => `      <div class="bcmp">
 ${bookCard(a, sub, stages, { note: cardNote(book, a) })}
@@ -540,14 +533,12 @@ ${bookCard(a, sub, stages, { note: cardNote(book, a) })}
     </section>` : ''}
 
     ${next.list.length ? `<section class="block">
-      <div class="eyebrow">Next step</div>
       <h2 class="sec">この本のあとに進む参考書</h2>
       <p class="sec-lead">${esc(nextLead)}</p>
 ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
     </section>` : ''}
 
     ${articleSection}${articleSection ? '\n\n    ' : ''}${editionSection}${editionSection ? '\n\n' : ''}    <section class="block">
-      <div class="eyebrow">Where to buy</div>
       <h2 class="sec">購入する</h2>
       <div class="buy" data-rt-placement="book_footer">
         <a class="az" href="${esc(az)}" target="_blank" rel="${relAz}" data-rt-buy="amazon" data-rt-bid="${book.id}" data-rt-sub="${sub.dir}">
@@ -563,12 +554,11 @@ ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
       ${/* 広告であることの開示は残し、説明は /ads/（フッターから辿れる）に寄せて 1 文に畳んだ。
             以前の 150 字がそのまま 1,390 ページに並び、本文の 6.9% を占めていた。
             **「広告リンクです」は 1 つの文字列のまま残す**（開示の検査が
-            test/affiliate-disclosure.test.mjs にあり、タグで分断すると通らない） */ ''}<p class="buy__note">${aff ? `${affStores}へのリンクは広告リンクです（紹介料が発生することがありますが、掲載順や評価は変わりません）。` : ''}価格・在庫・版は販売サイトの表示をご確認ください。</p>
+            test/affiliate-disclosure.test.mjs にあり、タグで分断すると通らない） */ ''}<p class="buy__note">${aff ? `${affStores}へのリンクは広告リンクです（<a href="/ads/">広告について</a>）。` : ''}</p>
     </section>
 
     <div class="cta">
       <h2>${esc(bn)}は、あなたのルートの何冊目か</h2>
-      <p>${esc(sub.full)}では、志望校と現在地から ${counts[sub.dir]} 冊の中を通る道を組み立てられます。</p>
       <div class="cta__btns">
         <a class="p" href="/${sub.dir}/">${esc(sub.ja)}のルートを作る<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="g" href="/">全科目を見る</a>

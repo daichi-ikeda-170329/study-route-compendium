@@ -36,6 +36,8 @@ const TYPES = {
   fb: 'object',
   // 書籍ページの本文を厚くするための任意項目（仕様書 3.1）。無い本は従来どおりの表示
   pages: 'number', media: 'array', toc: 'array', howto: 'array', finish: 'string', editions: 'array', seriesGuide: 'array',
+  // 出版社・書誌データベースが公表している構成の要約（言い換え）。出典は verification.json の sources
+  structure: 'string',
 };
 
 /** media に書いてよい値（書籍ページの基本情報「付属」） */
@@ -70,6 +72,9 @@ function checkBookExtras(b, bad) {
     }
   }
   if (b.finish === '') bad(`${key}.finish: 空文字。無いなら項目ごと持たない`);
+  if (typeof b.structure === 'string' && (!b.structure.trim() || b.structure.length > 400)) {
+    bad(`${key}.structure: 1〜400 文字にする（出版社の紹介文を長く写さない）`);
+  }
   if (Array.isArray(b.editions)) {
     for (const e of b.editions) {
       if (!e || !Number.isInteger(e.year) || e.year < 1900 || e.year > 2100) bad(`${key}.editions: year が西暦の整数でない項目がある`);

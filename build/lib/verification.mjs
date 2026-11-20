@@ -147,6 +147,28 @@ export function verifiedFieldIsWellFormed(v) {
 }
 
 /** 画面に出す状態のラベル。色だけで状態を伝えないよう、必ず文字で出す */
+/**
+ * 構成・ページ数・目次などを確かめた出典（台帳の records[key].sources）。
+ * 事実項目（FACT_FIELDS）の出典とは別に持つ。`{url, kind, checkedAt, items}` の配列で、
+ * url と checkedAt が揃ったものだけを返す（揃わないものは出典として出さない）。
+ */
+export function contentSourcesOf(dir, book) {
+  const rec = loadVerification().records[recordKey(dir, book.id)] || {};
+  return (rec.sources || [])
+    .filter(s => /^https:\/\//.test(s.url || '') && s.checkedAt)
+    .map(s => ({ sourceUrl: s.url, checkedAt: s.checkedAt, kind: s.kind || 'database' }));
+}
+
+/** 出典の表示名。出版社の公式ページは出版社名、書誌データベースはサービス名で出す */
+export function sourceLabel(src, pub) {
+  const host = (() => { try { return new URL(src.sourceUrl).hostname; } catch { return ''; } })();
+  if (/hanmoto\.com$/.test(host)) return '版元ドットコム';
+  if (/ndl\.go\.jp$/.test(host)) return '国立国会図書館サーチ';
+  if (/ci\.nii\.ac\.jp$/.test(host)) return 'CiNii Books';
+  if (/openbd\.jp$/.test(host)) return 'openBD';
+  return src.kind === 'publisher' ? `${pub}の公式書籍情報` : host;
+}
+
 export const STATUS_LABEL = {
   verified: '確認済み',
   partial: '一部情報を確認中',
