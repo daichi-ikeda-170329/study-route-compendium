@@ -22,3 +22,6 @@ private/
 assets/ogp/
 assets/ogp-*.png
 assets/ogp.png
+
+# 調査用に一時的に落とした Python のパッケージ（リポジトリに入れない）
+*.whl
