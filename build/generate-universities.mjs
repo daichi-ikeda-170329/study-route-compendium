@@ -432,7 +432,7 @@ function renderUniversity(uni, all, config) {
           <caption>${esc(name)}の学部と入試方式（${src.year}年度。大学公式の公表資料から、確かめられた学部・方式だけを載せています。${esc(src.checked)} 確認）</caption>
           <thead><tr><th scope="col">学部</th><th scope="col">方式</th><th scope="col">科目</th><th scope="col">備考</th></tr></thead>
           <tbody>
-${faculties.map(f => `            <tr><th scope="row">${esc(f.name)}</th><td>${esc(f.method)}</td><td>${esc(f.subjects)}</td><td>${esc(f.note || '')}</td></tr>`).join('\n')}
+${faculties.map(f => `            <tr><th scope="row">${esc(f.name)}</th><td>${esc(f.method)}</td><td>${esc(f.subjects)}</td><td>${esc(f.note || '')}${f.source && f.source !== src.url ? `${f.note ? ' ' : ''}<a rel="nofollow noopener noreferrer" target="_blank" href="${esc(f.source)}">要項</a>` : ''}</td></tr>`).join('\n')}
           </tbody>
         </table>
       </div>` : '';
@@ -526,16 +526,18 @@ ${l.books.map(b => {
        トラック名を書くと、他のトラックの読者が読み飛ばす */
     const tl = (!l.label && tracks.length > 1 && b.tracks.length && b.tracks.length < tracks.length)
       ? b.tracks.map(t => trackLabel(d, t, 'short')).join('・') : '';
-    const why = [b.role, ...b.reasons.slice(0, 3)].filter(Boolean).join('／');
+    /* 大学ごとに違う理由（その大学の出題の特徴への対応・名指しの収録）だけを出す。役割名・志望レベルの
+       タグ・ルート上の狙い（note）は同じ志望レベルの全大学で同じ文になり、本文の過半を占めていた
+       （2026-11-20 実測。カードが大学ページ本文の 53%、うち固有 3%）。それらは書籍ページとルートページにある */
+    const why = b.reasons.filter(r => !/の対策として収録$/.test(r)).slice(0, 3).join('／');
     const also = b.also && b.also.length ? `（${b.also.join('・')}でも使う）` : '';
     return `        <li class="ubook">
           <a class="ubook__cov" href="/${p.sub.dir}/books/${b.book.id}/" tabindex="-1" aria-hidden="true">${coverBox(b.book, { color: st.color || p.sub.color, dir: p.sub.dir })}</a>
           <div class="ubook__body">
             <span class="ubook__tag">${[tl, st.label || ''].filter(Boolean).map(esc).join('／')}</span>
             <a class="ubook__name" href="/${p.sub.dir}/books/${b.book.id}/">${esc(displayName(b.book, p.sub.dir))}</a>${also ? `<span class="ubook__also">${esc(also)}</span>` : ''}
-            <span class="ubook__meta">${esc(b.book.pub || '')}／難易度 ${b.book.diff}${b.book.hensachi ? `／${esc(b.book.hensachi)}` : ''}</span>
+            <span class="ubook__meta">${esc(b.book.pub || '')}／難易度 ${b.book.diff}</span>
 ${why ? `            <span class="ubook__why">${esc(why)}</span>` : ''}
-${b.note ? `            <span class="ubook__note">${esc(b.note)}</span>` : ''}
           </div>
         </li>`;
   }).join('\n')}
