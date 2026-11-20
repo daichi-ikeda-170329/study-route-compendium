@@ -105,7 +105,7 @@
     var c = (doc || global.document).createElement('canvas');
     c.width = W; c.height = H;
     var ctx = c.getContext('2d');
-    var family = '"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif';
+    var family = '"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",Meiryo,"Noto Sans JP",sans-serif';
     try {
       var f = global.getComputedStyle(global.document.body).fontFamily;
       if (f) family = f + ',sans-serif';

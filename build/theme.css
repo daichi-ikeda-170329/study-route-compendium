@@ -10,7 +10,7 @@
   --gold:#7E5E14; --gold-soft:#F8F2E2;
   --ok:#1D7348; --ok-soft:#E8F4EE;
   --mark:#FFE24A; --buy:#FFD21F; --buy-h:#FFC400; --rk:#BF0000; --link:#0B57B8;
-  --jp:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  --jp:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",Meiryo,"Noto Sans JP","Noto Sans CJK JP",sans-serif;
   --serif:var(--jp); --mono:var(--jp);
   --sh-s:none; --sh-m:none; --sh-l:0 12px 32px rgba(0,0,0,.16);
   --r-s:3px; --r-m:4px; --r-l:6px;

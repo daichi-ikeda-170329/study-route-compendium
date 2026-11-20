@@ -62,11 +62,9 @@ const COMMIT = arg('commit', process.env.GITHUB_SHA || null);
  * （googletagmanager / google-analytics / googlesyndication / doubleclick /
  *   adsbygoogle / pagead）。
  *
- * **Google Fonts（fonts.googleapis.com / fonts.gstatic.com）は含めない。**
- * ここで見たいのは「解析と広告を外したら何が残るか」であって、
- * 書体はサイトの見た目そのものなので外す対象ではない。
- * 実際、以前 `*gstatic.com*` を入れていたときは書体の取得が止まったまま
- * ページが落ち着かず、LCP が 24 秒になって計測が壊れていた。
+ * Google Fonts は 2026-11-20 に読み込みをやめた（端末の標準書体だけで描く）ので、
+ * ここに入れる必要はない。以前、Google Fonts を読んでいたころに `*gstatic.com*` を入れていたときは
+ * 書体の取得が止まったままページが落ち着かず、LCP が 24 秒になって計測が壊れていた。
  */
 const THIRD_PARTY_PATTERNS = [
   '*googletagmanager.com*', '*google-analytics.com*', '*analytics.google.com*',

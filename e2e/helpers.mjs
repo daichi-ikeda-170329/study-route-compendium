@@ -151,10 +151,6 @@ const THIRD_PARTY_NOISE = [
   /\[Report Only\].*frame-ancestors/i,
   /report-only Content Security Policy.*frame-ancestors/i,
   /googlesyndication|doubleclick|googletagmanager|google-analytics|pagead|adsbygoogle/i,
-  /* Firefox は書体の取得失敗を JavaScript エラーとしてコンソールへ出す。
-     取得元は Google Fonts で、こちらでは直せない（自前で配信していない）。
-     **fonts.gstatic.com のものだけに絞る**ので、自サイトの読み込み失敗は隠れない */
-  /downloadable font:.*fonts\.gstatic\.com/i,
   /Failed to load resource.*(googlesyndication|doubleclick|pagead|google-analytics)/i,
 ];
 
