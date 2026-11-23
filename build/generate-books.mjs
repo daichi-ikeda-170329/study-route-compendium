@@ -578,7 +578,7 @@ ${bookCards(next.list, sub, stages, '', b => cardNote(book, b))}
     </div>${adUnit('bottom')}
   </article>
 </main>
-${/* 共有の帯は <main> の外に置く（更新日は <main> の文字で決めるので、帯の文言を直しても 1,432 冊の日付が動かない） */ ''}
+${/* 共有の帯は <main> の外に置く（更新日は <main> の文字で決めるので、帯の文言を直しても全冊の日付が動かない） */ ''}
 <aside class="wrap wrap--read bk-share" aria-label="このページを共有">
     ${shareBar({ url: `${ORIGIN}/${sub.dir}/books/${book.id}/`, head: 'この参考書を共有する', text: `【ルート大全】${bn}のレベルと使い方` })}
 </aside>

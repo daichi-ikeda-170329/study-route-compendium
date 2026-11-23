@@ -199,7 +199,7 @@ test('科目トップの JavaScript が描画をブロックしていない', ()
 });
 
 test('生成ページの JavaScript も描画をブロックしていない', () => {
-  // 1,390 冊の書籍ページと一覧ページ。effect はこちらのほうが大きい
+  // 全冊の書籍ページと一覧ページ。effect はこちらのほうが大きい
   const samples = [];
   for (const s of SUBJECTS) {
     const dir = path.join(ROOT, s.dir, 'books');

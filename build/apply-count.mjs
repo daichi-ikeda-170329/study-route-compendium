@@ -61,6 +61,7 @@ function truth() {
      書くので、実データから出る値として数えておく。年が変われば冊数も変わるため、
      count-ignore.json に固定値で登録すると翌年に必ず落ちる */
   const yearCount = new Map();
+  const yearCountBy = {};   // dir -> Map(刊行年 -> 評価済みの冊数)。/new/ の科目別見出し「社会 ◯◯◯冊」に使う
 
   for (const s of SUBJECTS) {
     const d = loadSubjectData(ROOT, s.dir);
@@ -81,7 +82,11 @@ function truth() {
       if (b.cover) covers++;
       if (!isProvisional(b)) evaluated++;
       // /new/ が並べるのは評価の済んだ本だけなので、数え方をそちらに合わせる
-      if (b.year && !isProvisional(b)) yearCount.set(Number(b.year), (yearCount.get(Number(b.year)) || 0) + 1);
+      if (b.year && !isProvisional(b)) {
+        yearCount.set(Number(b.year), (yearCount.get(Number(b.year)) || 0) + 1);
+        const m = (yearCountBy[s.dir] ||= new Map());
+        m.set(Number(b.year), (m.get(Number(b.year)) || 0) + 1);
+      }
       // rank.mjs の hensachiRange() と同じ判定。偏差値を数値で書いていない本を数える
       const nums = (String(b.hensachi || '').match(/\d{2}/g) || []).map(Number).filter(n => n >= 25 && n <= 85);
       if (!nums.length) nonHensachi++;
@@ -105,6 +110,7 @@ function truth() {
     covers, nonHensachi, shorthand, withAuthor: withAuthorCount,
     authors, authorless: total - authors,
     latestYear, latestYearBooks: latestYear ? yearCount.get(latestYear) : 0,
+    latestYearBooksBy: Object.fromEntries(SUBJECTS.map(s => [s.dir, latestYear ? (yearCountBy[s.dir]?.get(latestYear) || 0) : 0])),
   };
 }
 
@@ -227,9 +233,9 @@ function applyAnchors(t, write) {
  */
 function subjectTopRules(total, picks, unis) {
   const rules = [
-    // 「英語参考書252冊」「英語の参考書252冊」「英語の参考書一覧 252冊」
+    // 「英語参考書◯◯◯冊」「英語の参考書◯◯◯冊」「英語の参考書一覧 ◯◯◯冊」
     { re: /(参考書(?:一覧)?[ 　]?)(\d+)冊/g, value: total, min: 1, why: '収録冊数' },
-    // 科目トップの本文リード「定番から最新刊まで162冊を…」（数学だけが持つ）
+    // 科目トップの本文リード「定番から最新刊まで◯◯◯冊を…」（数学だけが持つ）
     { re: /(最新刊まで)(\d+)冊/g, value: total, min: 0, why: '収録冊数（リード）' },
     // ヒーローの統計カード。JS が起動後に上書きするが、クローラーと JS 無効の
     // 環境が見るのは HTML に書かれたこの値。2026-09 時点で 5 科目が古い数字のまま
@@ -357,6 +363,7 @@ function sweep(t) {
   for (const s of SUBJECTS) {
     ok.add(t.subjects[s.dir]);
     ok.add(t.evaluatedBy[s.dir]);
+    ok.add(t.latestYearBooksBy[s.dir]);   // /new/ の科目別見出し「社会 ◯◯◯冊」（その年の刊行で評価済みの本）
     if (t.picks[s.dir] !== null) {
       ok.add(t.picks[s.dir]);
       ok.add(t.subjects[s.dir] - t.picks[s.dir]);   // おすすめページの「残りの◯◯◯冊」

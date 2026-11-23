@@ -66,7 +66,7 @@ test('ポータルと科目トップに書かれた合計冊数が元データ�
   const targets = ['index.html', ...SUBJECTS.map(s => `${s.dir}/index.html`)];
   for (const rel of targets) {
     const src = fs.readFileSync(path.join(ROOT, rel), 'utf8');
-    // 「参考書・問題集1,390冊」「参考書1390冊」など、合計を名乗る表記のゆれを両方見る
+    // 「参考書・問題集X,XXX冊」「参考書XXXX冊」など、合計を名乗る表記のゆれを両方見る
     const nums = [...src.matchAll(/参考書(?:・問題集)?\s*([\d,]{3,6})\s*冊/g)].map(m => m[1].replace(/,/g, ''));
     for (const n of nums) {
       // 科目ページは自科目の冊数も同じ言い回しで書く。合計・自科目のどちらかであればよい

@@ -323,7 +323,7 @@ function bookNames() {
 }
 
 function checkText() {
-  // 書名は毎回同じなので 1 度だけ組み立てる（1,390 冊 × 全書名の置換になるため）
+  // 書名は毎回同じなので 1 度だけ組み立てる（全冊 × 全書名の置換になるため）
   const names = bookNames();
   /** 文章から書名・シリーズ名を取り除く。長いものから消す */
   const stripNames = t => names.reduce((acc, n) => acc.split(n).join(' '), t);

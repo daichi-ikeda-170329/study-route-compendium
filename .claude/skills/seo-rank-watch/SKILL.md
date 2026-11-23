@@ -129,7 +129,7 @@ npm run check:site
 node build/check-links.mjs --internal
 ```
 
-`npm run check:links`（引数なし）は**流さない。**1,390 冊ぶんの外部リンクを
+`npm run check:links`（引数なし）は**流さない。**全冊ぶんの外部リンクを
 Amazon・楽天へ問い合わせる週次 CI 用のジョブで、記事 1 本の編集には重すぎる
 （`build/check-links.mjs` の冒頭を参照）。記事の編集で見るべきは内部リンクだけ。
 
