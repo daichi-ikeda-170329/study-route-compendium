@@ -2,51 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://route-taizen.com/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/about/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/contact/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/methodology/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/privacy/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/disclaimer/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/ads/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/changelog/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/new/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/osusume/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/guides/</loc>
@@ -54,7 +54,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/guides/bunpo-comparison/</loc>
@@ -66,7 +66,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/guides/eigo-jikan-haibun/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/guides/eisaku-comparison/</loc>
@@ -106,39 +106,47 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/chikoku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/kyote/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/kyutei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/march/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/med/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/nikkoma/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/shiritsui/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/sokei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/routes/top/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/1month-plus-moshi-listening/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/1month-plus-moshi-reading/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/akahon/</loc>
@@ -146,15 +154,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/aohon-e/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/basic-lecture-doga-eibunpo-dokkai/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/breakthrough-sogo-eigo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/canpass-e/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/chiba-daigaku-no-eigo-15kanen/</loc>
@@ -162,23 +174,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/cho-polaris0/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/cho-polaris1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/cho-polaris2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/cho-polaris3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/chobun-platinum/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/chuo-daigaku-no-eigo-10th/</loc>
@@ -190,19 +202,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/classic-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/daizemi-kyotsu-test-jissen-mondaishu-eigo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/database/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/discourse/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/distinction-2000/</loc>
@@ -222,51 +234,55 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibun-hyojun-mondai-seiko/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/eibun-kaishaku-1satsume-drill/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibun-kaishaku-kyoshitsu-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibun-kaishaku-kyoshitsu-nyumon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibun-wayaku-enshu-chukyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibun-wayaku-enshu-jokyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibun-wayaku-enshu-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibun-wayaku-enshu-nyumon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibunpo-final-polaris-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibunpo-final-polaris-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eibunpo-gohou-random-select-600/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eigo-chobun-mondai-seiko-shinso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eigo-kobun-shokai-shinsoban/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eigo-listening-hyper-training-perfect/</loc>
@@ -282,7 +298,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eiken-2kyu-derujun-pastan-shinso-5th/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/eisaku-bible/</loc>
@@ -318,7 +334,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/evergreen/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/extreme/</loc>
@@ -326,19 +342,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/final-polaris/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/fukamete-input/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/fukamete-output/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/gensoku125/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/genten/</loc>
@@ -346,23 +362,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/gijutsu100/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/gijutsu100k/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/gijutsu60/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/gijutsu70/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/gokaku-hosoku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/gungun-eigo-chobun-advanced/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/gungun-eigo-chobun-basic/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/gungun-eigo-chobun-entry/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/gungun-eigo-chobun-standard/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/haitore-jiyu/</loc>
@@ -378,15 +410,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/high-score-kyotsu-test-koryaku-listening/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/high-score-kyotsu-test-koryaku-reading/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-bunpo-sol/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-dokkai-eibunpo-kobun-seiha/</loc>
@@ -394,7 +426,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-dokkai-hisshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-dokkai-nankan/</loc>
@@ -402,7 +434,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-eibun-kusho-hoju-mondai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-sakubun/</loc>
@@ -410,7 +442,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-sugu-jiyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-tadashiku/</loc>
@@ -422,19 +454,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-zero/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-zero-chobun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-zero-lis/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hijii-zero-next/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hikkei-hyogen/</loc>
@@ -442,7 +474,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hinshutsu-polaris/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hinshutsu1000/</loc>
@@ -462,39 +494,47 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/hyper-training/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/ichikara-kitaeru-eigo-chobun-300/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/ichikara-kitaeru-eigo-chobun-500/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/ichikara-kitaeru-eigo-chobun-700/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/ichikara-kitaeru-eigo-chobun-basic/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/ichimon-ittou-eibunpo-gohou/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/ichiokunin-no-eibunpo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/igakubu-eigo/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/english/books/jitsuryoku-hantei-bunpo-final-hyojun/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/english/books/jukou-ge/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/jukou-jo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kaishaku-kyoshitsu/</loc>
@@ -506,7 +546,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kaishaku-polaris2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kaitai-jukugo/</loc>
@@ -514,7 +554,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kako-review-e/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kansai-daigaku-no-eigo-11th/</loc>
@@ -525,12 +565,16 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/english/books/karafuru-eibunpo-drill/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/english/books/keio-eigo/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kihon-kokoda/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kihon300sen/</loc>
@@ -538,11 +582,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kijutsu-tr/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kikutan-advanced-6000/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kikutan-basic-4000/</loc>
@@ -558,7 +602,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kimeru-r/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kimutatsu-basic/</loc>
@@ -566,7 +610,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kimutatsu-shidai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kimutatsu-todai/</loc>
@@ -586,7 +630,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kiso10dr/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kobe15/</loc>
@@ -594,15 +638,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kobun-haaku-no-platica/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/koko-eibunpo-pattern-drill-chokiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kurohon-e/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyodai-nyushi-shokai-25nen-eigo-3rd/</loc>
@@ -614,39 +658,79 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyote-akahon-e/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotest-jissen-taisaku-listening/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotest-jissen-taisaku-reading/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotest-korezake-r-kisokatame/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotest-korezake-r-speed/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotest-listening-jikkyo/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotest-reading-shuchu-koza/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyotsu-test-jissen-moshi-eigo-listening/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyotsu-test-jissen-moshi-eigo-reading/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyotsu-test-listening-level-0/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyotsu-test-listening-level-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyotsu-test-listening-level-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyotsu-test-listening-level-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotsu-test-reading-level-0/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotsu-test-reading-level-1/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotsu-test-reading-level-2/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/kyotsu-test-reading-level-3/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyotsu-test-shinkatei-koryaku-listening/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyotsu-test-shinkatei-koryaku-reading/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/kyudai15/</loc>
@@ -661,6 +745,14 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/english/books/levelup-eibunpo-1/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/levelup-eibunpo-2/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/english/books/linga/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
@@ -670,7 +762,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/lis-1satsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/lis-platinum/</loc>
@@ -678,15 +770,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/lis-shuchu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/lr-level/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/maitoshi-deru-hinshutsu-eigo-chobun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/manten-kotsu/</loc>
@@ -694,7 +786,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/mark-shiki-kiso-mondaishu-eigo-bunpo-goho-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/mazuha-kyotest-listening/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/mazuha-kyotest-reading/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/meidai15/</loc>
@@ -705,24 +805,28 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/english/books/muto-10nichi-sokudoku/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/english/books/narikawa-naze/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/nextstage/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/nyumon-eibun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/oiwa/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/oiwa-ichiban-hajime-eigo-chobun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/oya-eisakubun-jikkyo/</loc>
@@ -734,15 +838,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/polaris-b0/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/polaris-b1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/polaris-b2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/polaris-b3/</loc>
@@ -754,15 +858,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/powerstage/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/r-1month/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/rankjun2300/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/reikai-wabun-eiyaku-kyohon-bunpo/</loc>
@@ -774,15 +878,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/rise/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/rise-kobun-kaishaku-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/rise-kobun-kaishaku-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/ritsumeikan-daigaku-no-eigo-11th/</loc>
@@ -790,27 +894,35 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/rules1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/rules2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/rules3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/rules4/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/ryomon500/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sainankan-eisaku/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/saisoku-eigo-chobun-1/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/saisoku-eigo-chobun-2/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/saizensen2500/</loc>
@@ -818,11 +930,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/scramble/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sekaiichi-dokkai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sekaiichi-eisaku/</loc>
@@ -838,7 +950,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sekaiichi-wakariyasui-eibunpo-color/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sekaiichi-waseda/</loc>
@@ -846,11 +958,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/seki-kyote/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/shin-eigo-no-kobun-150/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/shin-kihon-eibun-700sen-shinso/</loc>
@@ -858,7 +970,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/shin-taizen/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/shiritsui-eigo/</loc>
@@ -886,11 +998,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sokudoku-tr/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sokusen3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sokutan-hisshu/</loc>
@@ -906,27 +1018,27 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/solution-theme/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/solution0/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/solution1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/solution2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/solution3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sparta/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/sparta-2-advanced/</loc>
@@ -938,11 +1050,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/spectre/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/stock3000/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/stock4500/</loc>
@@ -950,11 +1062,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/strategy/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/supremacy/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/takeoka-lis/</loc>
@@ -966,7 +1078,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/takeoka-r/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/tangoou/</loc>
@@ -974,11 +1086,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/tanki-kyote-e/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/target1000/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/target1200/</loc>
@@ -986,7 +1098,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/target1400/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/target1900/</loc>
@@ -1002,7 +1114,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/theme10-tr/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/todai-eigo-sokogi/</loc>
@@ -1038,35 +1150,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/tokigi-eibun-dokkai-senryakuteki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/tokyo-kagakudai-rikogaku-no-eigo-20kanen/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/english/books/tomita-chobun-rule144/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/english/books/tonogi-hitome/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/tonogi-jikkyo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/toshin-bunpo-lv/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/toshin-chobun-lv/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/toshin-kyotsu-test-jissen-listening-3rd/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/toshin-kyotsu-test-jissen-reading-3rd/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/toshizu/</loc>
@@ -1077,24 +1193,28 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/english/books/uchuichi-koko-eibunpo/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/english/books/ultimate600/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/upgrade/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/vintage/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/visual-eibun-kaishaku-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/visual-eibun-kaishaku-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/waseda-eigo/</loc>
@@ -1102,27 +1222,27 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/yamaguchi-eibunpo-jikkyo-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/yamaguchi-eibunpo-jikkyo-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/yatte1000/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/yatte300/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/yatte500/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/yatte700/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/yokubari/</loc>
@@ -1134,7 +1254,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/yumetan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/zenkoku-daigaku-nyushi-mondai-seikai-eigo-kokukoritsu/</loc>
@@ -1146,7 +1266,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/english/books/zenlevel-chobun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/english/books/zenlevel-eibunpo/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/english/guides/basics/01/</loc>
@@ -1202,15 +1326,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/osusume/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/guides/</loc>
@@ -1218,7 +1342,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/guides/access-vs-rules/</loc>
@@ -1242,43 +1366,43 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/guides/kobun-tango-ranking/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/chikoku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/hitotsubashi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/kyote/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/kyutei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/march/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/nikkoma/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/sokei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/routes/top/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/access-hatten/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/access-kansei/</loc>
@@ -1286,27 +1410,35 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/access-kihon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/adachi-mieru-gendai/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/akahon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/aohon-kokugo/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/japanese/books/bungakushi-saijuyo-speedcheck/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/japanese/books/bunpo-10drill/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/bunpo-30theme/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/canpass-g/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/canpass-koten/</loc>
@@ -1314,7 +1446,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/chikuma-hyoron-nyumon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/chikuma-hyoron-sen/</loc>
@@ -1322,7 +1454,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/chuken-shidai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/codex-gendai-seisen/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/daizemi-kyotsu-jissen-kokugo/</loc>
@@ -1330,11 +1466,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/daizemi-todai-pre-kokugo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/deguchi-gendaibun-koshiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/dojo/</loc>
@@ -1342,27 +1478,35 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/dojo-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/dokkai-fukameru-tango/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/dokkai-gendai-keyword700/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/dokkai-tango-training/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/formula600/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/funaguchi-kijutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/funaguchi-zero/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/gendai-nagare-dokkai-training/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/gendaibun-kaiho-shingijutsu/</loc>
@@ -1370,51 +1514,59 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/gendaibun-training-hisshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/gendaibun-training-nyumon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/genji-joshiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/gentan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/group30/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/handai-kokugo-15kanen-4/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/hayaoboe/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/hayaoboe-kanbun-dokkai-training/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/highscore-kyotsu-gendaibun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/highscore-kyotsu-kobun-kanbun/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/japanese/books/hikkei-kobun-tango345/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/japanese/books/hinshutsu-juyogo700/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/hissei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/hitotsubashi-kokugo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/hyojun-seikou-g/</loc>
@@ -1422,11 +1574,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/ikiru-kanji/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/ikiru-keyword/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/jissen-hyojun-kanbun/</loc>
@@ -1434,35 +1586,35 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/jitsuyobun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/jokyu-kanji-goi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/jokyu-zero/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/jokyu1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/jokyu2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/jump-up-note-kotenbunpo-enshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/jumpup-kanbun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kaihatsu-koza/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kaishaku-hoho/</loc>
@@ -1474,59 +1626,71 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kaitou-koza/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kako-review-kokugo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kakuto/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kanbun-10drill/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kanbun-gorogo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kanbun-kyote-shuchu/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/japanese/books/kanbun-point-master/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/kanbun-saijuyo-speedcheck/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/japanese/books/kanji-core2800/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kanji-goi2400/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kanji-ichimon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kanji-master1800/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kanki-kanbun-dokkai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/keyword-dokkai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kimeru-gendai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kimeru-kokan/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/kimeru-kyotest-gendai-mondai/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kindai-bungo/</loc>
@@ -1534,19 +1698,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kiso-kogi-nakano/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kiso-seikou-g/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kiso-seikou-k/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kobedai-kokugo-15kanen-4/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kobun-dokkai-gorogo/</loc>
@@ -1554,11 +1718,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kobun-gorogo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/kobun-joshiki-saijuyo-speedcheck/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kobun-jotatsu45/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kobun-jotatsu56/</loc>
@@ -1566,19 +1734,31 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/koike-muteki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/koko-kanbun-kuho-pattern-drill/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/koko-koten-bunpo-pattern-drill/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/koshiba-gendaibun-1satsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/koten-bunpo-speed-input/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kotoba-chikara/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kuke-keyword/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kuro-hon-kokugo/</loc>
@@ -1586,23 +1766,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kyodai-gendai25/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kyodai-koten25/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kyodai-nyushi-shokai-25-gendaibun-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kyodai-nyushi-shokai-25-koten-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kyote-akahon-kokugo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kyote-kanbun-kotsu/</loc>
@@ -1614,51 +1794,59 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kyote-kobun-kotsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/kyote-shinkatei-gendai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/level-g/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/level-k/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/madonna-joshiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/madonna-kaiho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/madonna-kobun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/madonna-tango/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/mark-kiso-g/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/mark-kiso-k/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/mark-kiso-kan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/mazuha-kyotest-gendai-1/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/mazuha-kyotest-kobun/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/meijidai-kokugo-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/midori-hon-kokugo/</loc>
@@ -1666,15 +1854,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/miwa-kanbun-rule/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/miwa-kyoshitsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/mochizuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/mochizuki-kobun-tango333/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/motoi-kobun-dokkai/</loc>
@@ -1685,8 +1877,12 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/japanese/books/nishihara-gendai-hajimekara/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/japanese/books/nitoryu634/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/obunsha-honban-moshi-kokugo/</loc>
@@ -1694,11 +1890,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/okamoto-3h-kanbun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/okamoto-bunpo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/okamoto-dokkai/</loc>
@@ -1706,19 +1902,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/okamoto-kanbun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/okamoto-ryomon-tokkun-kanbun-kuho/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/okamoto-stream-kobunpo-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/okamoto-stream-kobunpo-oyo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/omoshiroi-gendai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/omoshiroi-kokan/</loc>
@@ -1726,15 +1926,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/platinum-rule/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/polaris-g1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/polaris-g2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/polaris-g3/</loc>
@@ -1742,7 +1942,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/polaris-k1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/polaris-k2/</loc>
@@ -1754,11 +1954,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/rules1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/rules2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/rules3/</loc>
@@ -1766,19 +1966,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/rules4/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/saikyo-kobun50/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/japanese/books/schema-gendai/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/japanese/books/seidoku-kihon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/seidoku-toppa/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/seisen-g/</loc>
@@ -1793,24 +1997,32 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/japanese/books/sekaiichi-kyodai-kokugo/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/japanese/books/sekaiichi-todai-kokugo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/shin-gorogo-kobun-tango/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/shin-tamura-gendaibun-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/shin-tamura-gendaibun-2/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/japanese/books/shinsen-kobun-tango400/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/japanese/books/shuchu-gendai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/shutoken-nankan/</loc>
@@ -1818,67 +2030,67 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/smart-step-g/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/sokudoku-joshiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/sokudoku-kobun-tango/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/sou-4jikan-gendaibun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/sou-ryomon-tokkun-1-basic/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/sou-ryomon-tokkun-2-standard/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/stepup-trial/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/stepup10/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/stepup30/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/system-basic/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/system-bible/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tadoku-training/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tamura-yasashiku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tango315/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tango330/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tanki-kyote-gendai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tanki-kyote-kanbun/</loc>
@@ -1886,39 +2098,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tanki-kyote-kobun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/terashi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tetsuryoku-koten/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/todai-gendai-premium/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/todai-gendai25/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/todai-koten25/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/todai-nyushi-shokai-25-gendaibun-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/todai-nyushi-shokai-25-koten-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tokuten-g/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tokuten-k/</loc>
@@ -1930,7 +2142,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tomii-bunpo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tomii-dokkai/</loc>
@@ -1938,7 +2150,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/toshin-kyote-gendai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/toshin-kyotsu-jissen-kanbun/</loc>
@@ -1946,51 +2158,55 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/toshin-kyotsu-jissen-kobun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/tsuchiya-kobun-tango-222/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/japanese/books/tsuji-logical-kobun-dokkai/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/waseda-kokugo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yagyu-cross-lecture-dokkai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yagyu-cross-lecture-kaiho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yagyu-koko-hajimeru-drill/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yagyu-koko-tsunageru-drill/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yama/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yasashiku-bunpo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yasawa3h-dokkai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yasawa6h/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yazawa-ryomon-tokkun-1-basic/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yazawa-ryomon-tokkun-2-standard/</loc>
@@ -1998,7 +2214,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yomitoki-tango/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yumei-shidai/</loc>
@@ -2006,39 +2222,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/yurugoyaku-tango/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/zenlevel-g/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/zenlevel-k/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/zenlevel-kan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/zero-kakusei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/zero-kakusei-final/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/zero-kakusei-next/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/zkai-kanji-goi2700/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/ztr-kijutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/japanese/books/ztr-shidai/</loc>
@@ -2094,15 +2310,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/osusume/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/guides/</loc>
@@ -2110,11 +2326,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/guides/ao-vs-fg/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/guides/bunkei-sugaku/</loc>
@@ -2142,39 +2358,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/chikoku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/kyote/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/kyutei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/march/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/med/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/nikkoma/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/shiritsui/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/sokei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/routes/top/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/3round-sugaku/</loc>
@@ -2194,7 +2410,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/ao/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/aohon/</loc>
@@ -2222,7 +2438,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/bunyabetsu-hoteishiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/bunyabetsu-hyojun-mondai-seiko-bibunhoteishiki/</loc>
@@ -2346,7 +2562,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/hatto-kakuritsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/hissu101/</loc>
@@ -2366,7 +2582,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/hosono/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/hyomon/</loc>
@@ -2386,7 +2602,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/iiic-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/jissen-sugaku-juyo-mondaishu-bunkei/</loc>
@@ -2422,7 +2638,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/ki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/kimeru/</loc>
@@ -2430,7 +2646,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/kiso-gokui/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/kisomon/</loc>
@@ -2474,7 +2690,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/kyudai15/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/legend/</loc>
@@ -2498,7 +2714,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/master-baai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/master-key-sugaku/</loc>
@@ -2506,7 +2722,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/master-seisu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/matsuda-160/</loc>
@@ -2518,7 +2734,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/matsuda-pattern/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/matsuda-todai/</loc>
@@ -2622,11 +2838,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/sakata/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/sasaki-seisu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/sekaiichi-handai/</loc>
@@ -2642,7 +2858,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/shida/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/math/books/shida-bibun-sekibun/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/shikkari/</loc>
@@ -2662,7 +2882,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/shinzui-v/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/shiritsu-idai/</loc>
@@ -2670,7 +2890,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/shiro/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/shoaku/</loc>
@@ -2722,11 +2942,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/tankyu-kakuritsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/tarinai-seisu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/tetsu-kiso/</loc>
@@ -2782,7 +3002,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/ukaru-kakuritsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/math/books/ukaru-keisan/</loc>
@@ -2874,15 +3094,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/osusume/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/guides/</loc>
@@ -2890,7 +3110,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/guides/butsuri-route/</loc>
@@ -2902,7 +3122,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/guides/juyo-vs-shinenshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/guides/kagaku-mondaishu-ranking/</loc>
@@ -2926,39 +3146,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/chikoku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/kyote/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/kyutei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/march/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/med/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/nikkoma/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/sokei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/routes/top/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/access-note-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/akahon/</loc>
@@ -2970,19 +3190,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/aoki-hajitei-chigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/aono-kagakukiso-issatsu/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/b-lead-alpha/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/b-nyushi-kakushin/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/b-zen-level-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/b-zen-level-2/</loc>
@@ -2990,11 +3214,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/b-zen-level-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/b-zen-level-4/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/bestfit-chigaku-kiso-ne/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/bisekibutsuri/</loc>
@@ -3006,11 +3234,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/bluebacks-chigaku-kyokasho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/butsuri-kyoshitsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/butsuri-no-shitsumon91/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/canpass-seibutsu/</loc>
@@ -3018,23 +3250,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/chart-shin-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/chart-shinkagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/chigaku-yougoshu-keyword/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/chishiki-no-shoten/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/chokuzen-30days-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/choufrequent-theme99/</loc>
@@ -3042,19 +3274,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/essence-netsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/essence-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/excel-butsuri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/excel-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/excel-seibutsu/</loc>
@@ -3063,6 +3295,10 @@
   <url>
     <loc>https://route-taizen.com/science/books/fukuma-muki/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/futami-hayawakari-kagaku/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/genten-hasso/</loc>
@@ -3085,8 +3321,28 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/science/books/golden-route-butsuri-hyojun/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/golden-route-butsuri-kiso/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/golden-route-kagaku-hyojun/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/golden-route-kagaku-kiso/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/science/books/golden-route-kiso/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/goroawase-seibutsu-kiso/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/graph-data-yomikata/</loc>
@@ -3094,11 +3350,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hamashima-jikkyo1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hamashima-jikkyo2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/handai-20/</loc>
@@ -3110,67 +3366,67 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hashimoto-daigensoku-denjiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hashimoto-daigensoku-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hashimoto-denjiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hashimoto-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hashimoto-netsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hashimoto-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hashizume-mukiyuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hashizume-riron/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hayawakari-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hayawakari-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hiden-butsuri-high/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hiden-denjiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hiden-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hiden-output/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hiden-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/highscore-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/highscore-kagakukiso/</loc>
@@ -3178,11 +3434,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/highscore-seibutsu-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hisshu-seiri-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hitoride-chigaku/</loc>
@@ -3190,15 +3446,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hitotsu-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hitotsu-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hitotsu-tokikata/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/hokudai-15/</loc>
@@ -3222,19 +3478,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/ichimon-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/ichimon-ittou/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/ichimonitto-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/ichimonitto-kagakukiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/iden-keisan-kakumei/</loc>
@@ -3257,8 +3513,12 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/science/books/ito-jikan-kyotest-kiso/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/science/books/jikkyo-chukei-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/jokyu-mondai-seiko/</loc>
@@ -3270,15 +3530,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/juyo-koshiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/juyo-mondai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/juyo-mondaishu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/juyo-mondaishu-seibutsu/</loc>
@@ -3286,23 +3546,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/k-lead-alpha/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/k-newstage-zuhyo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/k-nyushi-kakushin/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/k-square-zusetsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/k-zen-level-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/k-zen-level-2/</loc>
@@ -3310,7 +3570,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/k-zen-level-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/k-zen-level-4/</loc>
@@ -3330,15 +3590,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kaiho-frame-denjiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kaiho-frame-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kamata-mondai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kamata-riron/</loc>
@@ -3354,11 +3614,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kameda-rironmuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kameda-yuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kango-mondaishu/</loc>
@@ -3386,7 +3646,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kawai-sogo-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kawai-sogo-kagaku/</loc>
@@ -3406,11 +3666,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/keirin-kyokasho-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/keisan-hisshu120/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kihon-tettei-48/</loc>
@@ -3430,7 +3690,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kimeru-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kimeru-kagaku/</loc>
@@ -3446,23 +3706,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kimeru-kyotest-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kimeru-kyotest-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kishi-kagakukiso-hajime/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kishi-riron-hajime/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kiso-ichimon-itto/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kiso-mondai-seiko/</loc>
@@ -3470,15 +3730,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kiso-seiko/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/koredake-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/korekakedake-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kosei-hyojun/</loc>
@@ -3490,11 +3750,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kosei-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kosei-nyumon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kosei-shikoryoku/</loc>
@@ -3502,7 +3762,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kuwashikute-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyodai-25/</loc>
@@ -3546,51 +3806,51 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyokasho-guide-keirin-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-jissen-sundai-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-jissen-sundai-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-jissen-toshin-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-jissen-toshin-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-jissen-yozemi-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-jissen-zkai-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-jissen-zkai-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-kakomon-kenkyu-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-kakomon-review-kawai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-sogo-kawai-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyotest-sogo-kawai-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/kyudai-15/</loc>
@@ -3602,7 +3862,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/lead-alpha-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/lead-alpha-kiso/</loc>
@@ -3614,23 +3874,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/lead-light-butsuri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/lead-light-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/lead-light-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/lead-light-kagakukiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/lead-light-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/lead-light-note-kiso/</loc>
@@ -3642,15 +3902,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/level-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/level-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/level-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/level-4/</loc>
@@ -3658,15 +3918,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/level-betsu-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/level-betsu-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/level-betsu-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/level-betsu-4/</loc>
@@ -3674,7 +3934,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/manten-no-kotsu-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/mark-kiso-butsuri/</loc>
@@ -3682,7 +3942,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/mark-kiso-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/mark-kiso-kagakukiso/</loc>
@@ -3698,11 +3958,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/mark-kiso-seibutsu-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/mark-kiso-yuki/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/master-mondaishu-muki/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/master-mondaishu-riron/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/master-mondaishu-yuki/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/meidai-butsuri-15/</loc>
@@ -3726,11 +3998,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/motto-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/motto-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/mouichido-chigaku/</loc>
@@ -3750,11 +4022,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/new-global/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/newglobal-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/newglobal-seibutsu/</loc>
@@ -3762,7 +4034,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/newstage-chigaku-zuhyo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/nyumon-mondai-seiko/</loc>
@@ -3770,7 +4042,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/nyumon-seiko/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/nyushi-butsuri-plus/</loc>
@@ -3778,7 +4050,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/nyushi-chishiki-kanzen-seiri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/obuchi-6jikan-kiso/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/obunsha-honban-moshi-butsuri/</loc>
@@ -3794,27 +4070,27 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/okano-mukiyuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/okano-riron/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omiya-muki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omiya-riron/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omiya-yuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omori-41ko-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omori-iden/</loc>
@@ -3834,7 +4110,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omori-kogi-note-126/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omori-nyushi-kogi/</loc>
@@ -3846,11 +4122,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omori-saikyo-kogi-126/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omoshiro-ichimonitto-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omoshiro-kyote-kagaku/</loc>
@@ -3866,11 +4142,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omoshiroi-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omoshiroi-kyotest-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/omoshiroi-kyotest-seibutsu/</loc>
@@ -3878,7 +4154,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/orito-chanto/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/orito-dokushu/</loc>
@@ -3886,31 +4162,35 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/photoscience/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/photoscience-butsuri-zuroku/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/photoscience-chigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/photoscience-zuroku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rakumasu-butsuri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rakumasu-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rankjun-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rankjun-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rankjun-seibutsu/</loc>
@@ -3918,15 +4198,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rikai-shiyasui-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rikai-shiyasui-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rikei-hyojun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/rikei-hyojun-butsuri/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/rikei-hyojun-seibutsu/</loc>
@@ -3938,23 +4222,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/ryomon-butsuri-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/ryomon-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/ryomon-kaze/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/s-newstage-zuhyo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/s-square-zusetsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/s-zen-level-1/</loc>
@@ -3962,7 +4246,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/s-zen-level-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/s-zen-level-3/</loc>
@@ -3973,36 +4257,60 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/science/books/saijuyo-point50-kiso/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/sakata-6jikan-kagakukiso/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/science/books/sakata-akira-kagakukiso/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sakata-akira-mukiyuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sakata-akira-riron/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sakata-butsuri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sakata-kaoru-muki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sakata-kaoru-riron/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sakata-kaoru-yuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/sakata-yuki-polaris-1/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/sakata-yuki-polaris-2/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/sanpei-bestmethod-butsuri/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/sanpei-bestselect-butsuri/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/scienceview-sogo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/seibutsu-atarashi-kangaeru-100sen/</loc>
@@ -4022,7 +4330,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/seibutsu-yogoshu-sundai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/seisen-mondaishu-kyogakusha/</loc>
@@ -4038,15 +4346,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/seminar-butsuri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/seminar-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/seminar-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/seminar-seibutsu/</loc>
@@ -4054,7 +4362,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sensor-butsuri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sensor-chigaku/</loc>
@@ -4062,19 +4370,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sensor-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sensor-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sensor-sogo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sensor-sogo-seibutsu/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/shimamura-jikan-kyotest-chigaku-kiso/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/shin-butsuri-enshu/</loc>
@@ -4090,19 +4402,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/shinenshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/shinhyojun-enshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/shinkenkyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/shinkihon-enshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/shinrikei-100sen/</loc>
@@ -4110,15 +4422,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/shuchu-kogi-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/shuchu-kogi-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sigma-kihon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sigma-kihon-seibutsu/</loc>
@@ -4126,15 +4438,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/speed-check-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/speed-check-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/square-zusetsu-chigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sundai-jissen-butsuri/</loc>
@@ -4142,7 +4454,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sundai-jissen-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/sundai-jissen-kagaku/</loc>
@@ -4158,11 +4470,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/suzukawa-theme200/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/suzukawa-theme75/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/suzuki-hadou/</loc>
@@ -4170,7 +4482,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/suzuki-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tabe-100mon/</loc>
@@ -4182,31 +4494,31 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tabe-77ko/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tabe-ichimon-itto/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tabe-kiso-hajimete/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/taikei-butsuri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tamechika-all-in-one/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tamechika-hadou/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tamechika-note-hyojun/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tamechika-note-jokyu/</loc>
@@ -4214,11 +4526,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tamechika-note-kihon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tamechika-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tanki-butsuri/</loc>
@@ -4226,11 +4538,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tanki-chigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tanki-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tanki-kagaku/</loc>
@@ -4246,11 +4558,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tanki-koryaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tanki-koryaku-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/terui-card-muki/</loc>
@@ -4266,7 +4578,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/terui-mondaishu-riron-keisan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tetsuryokukai-butsuri-kohryaku-hint/</loc>
@@ -4298,7 +4610,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/todai-shokai-25/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/todai-shokai-seibutsu-25/</loc>
@@ -4318,7 +4630,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/toshin-jissen-chigaku-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/toshin-jissen-kagaku/</loc>
@@ -4333,48 +4645,56 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/science/books/tottemo-yasashii-butsuri-kiso/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/science/books/tottemo-yasashii-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/tottemo-yasashii-kagakukiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/uchu-denjiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/uchu-ichi-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/uchu-kagaku-hanno-shiki/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/uchu-muki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/uchu-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/uchu-riron/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/uchu-yuki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/urushibara-99/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/urushibara-denjiki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/urushibara-hadou/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/urushibara-kaiho-kenkyu/</loc>
@@ -4386,11 +4706,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/urushibara-rikigaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/wasureta-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/yamakawa-omoshiroi/</loc>
@@ -4398,15 +4718,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/yamakawa-omoshiroi-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/yogo-kanzen-seiha/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/yokuwakaru-kiso-seibutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/yozemi-jissen-butsuri/</loc>
@@ -4418,11 +4738,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/yuki-kozo-hisshu50/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/yuki-kozo-yoten/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/zenkoku-nyushi-seikai/</loc>
@@ -4435,6 +4755,10 @@
   <url>
     <loc>https://route-taizen.com/science/books/zenkoku-seikai/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/science/books/zero-kagaku-keisan-2/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/science/books/zkai-jissen-butsuri/</loc>
@@ -4490,15 +4814,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/osusume/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/guides/</loc>
@@ -4506,7 +4830,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/guides/chiri-route/</loc>
@@ -4514,7 +4838,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/guides/ichimonitto-ranking/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/guides/nihonshi-route/</loc>
@@ -4534,35 +4858,35 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/chikoku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/hitotsubashi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/kyote/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/kyutei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/march/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/nikkoma/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/sokei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/routes/top/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/45kajo-ronjutsu-sekaishi/</loc>
@@ -4573,24 +4897,32 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/social/books/advantage-kyotest-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/advantage-kyotest-sekaishi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/social/books/akahon-kt-kokyoseikei/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/aobon-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/aramaki-mitorizu-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/aramaki-mitorizu-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/aramaki-mitorizu-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-100dai/</loc>
@@ -4602,19 +4934,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-aohon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-complete/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-databook/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-geo-zuhyo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-hajimeru/</loc>
@@ -4622,7 +4954,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-henomichi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-hitotsubashi-akahon/</loc>
@@ -4630,7 +4962,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-jitsuryoku-yosei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-kakomon-kenkyu/</loc>
@@ -4638,15 +4970,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-kimeru/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-kosatsu80/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-kurohon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-mark-kiso/</loc>
@@ -4654,15 +4986,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-murase-chishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-murase-keito/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-nakamura-jikan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-nattoku-ronjutsu/</loc>
@@ -4670,7 +5002,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-nihon-kokusei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-ninomiya-tankyu/</loc>
@@ -4678,11 +5010,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-omoshiro/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-omoshiro-ichimonto/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-review/</loc>
@@ -4694,31 +5026,31 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-segawa-chishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-segawa-keito/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-shin-hyojun-kogi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-shinsho-atlas/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-shiryo-kenkyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-shokai-gendai-chizu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-shuchu-kogi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-speedmaster/</loc>
@@ -4726,15 +5058,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-tangen-training/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-target1400/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-teikoku-sougou/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-teikoku-tankyu/</loc>
@@ -4746,11 +5078,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-tokyosho-sougou/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-toshin-ichimonto/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-toukei-yomikata/</loc>
@@ -4758,43 +5090,55 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-toukei-youran/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-uno-chishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-uno-keito/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-yamakawa-note/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-yamakawa-yogo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-yamaoka-kyoshitsu1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-yogo-kanzen-g/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-zukai-chizu-shiryo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chiri-zukai-yogo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/chokuzen30-chiri/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/chokuzen30-kokyoseikei/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/chosoku-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/collab-mondaishu-hyojun/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/collab-mondaishu-jokyu/</loc>
@@ -4802,7 +5146,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/collab-mondaishu-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/dankaishiki-ronjutsu/</loc>
@@ -4813,32 +5157,64 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/social/books/gakken-ichimonitto-rekishi-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/gakken-ichimonitto-rekishi-sekaishi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/social/books/ganso-nendai-anki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/ganso-nendai-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/globalwide-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/group-dekigoto-620/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/group-dekigoto-710/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/hajimeru-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/hatakeyama-jikan-kokyoseikei/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/hatakeyama-kansei-kogi-kokyoseikei/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/hatakeyama-kansei-mondai-kokyoseikei/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/hatakeyama-sokai-kogi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/hatakeyama-sokai-mondai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/hirao-7days-kokyo/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/historia-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/historia-sekaishi/</loc>
@@ -4862,43 +5238,43 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/hyojun-seiko-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/ichidoyondara-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/ichidoyondara-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/ichikara-sekaishi-hisshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jidai-nagare-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jidai-nagare-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-nihonshi-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-nihonshi-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-nihonshi-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-nihonshi-4/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-nihonshi-theme/</loc>
@@ -4906,27 +5282,31 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-sekaishi-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-sekaishi-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-sekaishi-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-sekaishi-4/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jikkyo-shuppan-nihonshi-kyokasho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/jikkyo-zoomup-kokyo/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jissen-koryaku-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jitsuryoku-100dai-sekaishi/</loc>
@@ -4934,11 +5314,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jitsuryoku-80-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/jitsuryoku-nihonshi-100/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kageyama-kt-kokyo/</loc>
@@ -4946,11 +5326,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kageyama-kt-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kageyama-omoshiro-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/kageyama-sokko-ichimon-kokyoseikei/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kaite-fukameru-ronjutsu/</loc>
@@ -4958,11 +5342,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kakikomi-kyokasho-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kakikomi-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kakomon-review-kokyoseikei/</loc>
@@ -4970,23 +5354,27 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kanaya-bunkashi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kanaya-nagare-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kanaya-nagare-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kanaya-nagare-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kanaya-nendai-anki/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/kanaya-rekishi-sogo/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kangaeru-nihonshi-ronjutsu/</loc>
@@ -4998,7 +5386,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kanzen-master-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kawai-kakomon-review-nihonshi/</loc>
@@ -5006,7 +5394,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kawai-kurobon-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/kawai-mark-kiso-sekaishi/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/keisan-ronjutsu-seikei/</loc>
@@ -5014,11 +5406,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kijutsu-ronjutsu-level1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kijutsu-ronjutsu-level2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kijutsu-ronjutsu-level3/</loc>
@@ -5026,63 +5418,63 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kimeru-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kimeru-kyotest-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kimeru-kyotest-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kiso-mondai-seiko-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kiso-mondai-seiko-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/koko-nihonshi-kyokasho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/koretadake-chiri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/koretadake-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/koretadake-nihonshi-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/koretadake-nihonshi-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/koretadake-nihonshi-enshu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/koretadake-sekaishi-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/koretadake-sekaishi-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kouryaku-nihonshi-theme/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kurobon-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyodai-nihonshi-20/</loc>
@@ -5102,39 +5494,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyokasho-seikei-tosho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyokasho-yasashii-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyokasho-yasashii-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-bunkashi-kyogakusha/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-heno-michi-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-jissen-moshi-chiri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-jissen-moshi-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-jissen-moshi-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-jissen-moshi-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-kakomon-kenkyu-nihonshi/</loc>
@@ -5150,11 +5542,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-michi-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-michi-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-review-sekaishi/</loc>
@@ -5166,11 +5558,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/kyotest-training-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/live-kokyo-teikoku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/manga-chiri-omoshiro/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/manga-seikei-omoshiro/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/markshiki-kiso-seikei/</loc>
@@ -5178,11 +5578,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/master-mondaishu-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/mayowazu-tokeru-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/meiji-seikei-akahon/</loc>
@@ -5193,44 +5593,104 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/social/books/mogi-sekaishi-note/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/mogi-sekaishi-omoshiroi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/movista-ito-sekaishi-1/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/movista-ito-sekaishi-2/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/movista-sato-rekishi-sogo/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/movista-ueno-nihonshi-1/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/movista-ueno-nihonshi-2/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/nagare-note-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/nagare-zu-shosetsu-sekaishi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/social/books/navi-sekaishi-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/navi-sekaishi-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/navi-sekaishi-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/navi-sekaishi-4/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/nenpyo-kouryaku-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/nihonshi-guidebook-jouge/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/obunsha-sagatsuku-chiri/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/obunsha-visual-chizu-toukei/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/omoshiro-ichimon-kokyoseikei/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/omoshiro-toreru-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/omoshiroi-ichimonitto-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/omoshiroi-ichimonitto-sekaishi/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/omoshiroi-kyotest-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/omoshiroi-kyotest-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/panorama-sekaishi-kingendai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/panorama-sekaishi-kodai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/rinri-akahon/</loc>
@@ -5373,12 +5833,20 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/social/books/sagatsuku-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/sagatsuku-sekaishi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/social/books/saishin-nihonshi-zuhyo/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/saitan-route-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/sekaishi-kenkyu/</loc>
@@ -5386,39 +5854,47 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/sekaishi-multi-training/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/sekaishi-nendai-onephrase/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shidai-koryaku-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shimizu-kokyo-teinei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shimizu-yogo-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/shinhyojun-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/shinhyojun-sekaishi/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shinkatei-koryaku-chiri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shinkatei-koryaku-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shinkatei-koryaku-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shinkatei-koryaku-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shinsho-nihonshi-hamajima/</loc>
@@ -5430,11 +5906,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shosetsu-nihonshi-kyokasho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shosetsu-nihonshi-note/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shosetsu-nihonshi-shiryoshu/</loc>
@@ -5446,27 +5922,35 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shosetsu-sekaishi-note/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shuchu-kogi-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shuchu-kogi-kyotest-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/shuchu-kogi-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/shunsuke-9jikan-kokyoseikei/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/speed-anki-inout-rekishi-sogo/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/speedmaster-38/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/speedmaster-bunkashi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/speedmaster-kokyo/</loc>
@@ -5474,15 +5958,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/speedmaster-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/speedmaster-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/speedmaster-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/startup-nihonshi-ronjutsu/</loc>
@@ -5490,27 +5974,31 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/taipa-text-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/tanki-koryaku-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/tapestry-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/target1400-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/target4000-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/tate-sekaishi-tankyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/teikoku-chiri-data-file/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/text-teikoku-shinsho-sekaishi/</loc>
@@ -5522,7 +6010,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/text-yamakawa-shin-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/text-yamakawa-shosetsu-sekaishi/</loc>
@@ -5554,27 +6042,31 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/tokyoshoseki-nihonshi-kyokasho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/toshin-ichimon-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/toshin-ichimonitto-kanzen/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/toshin-ichimonitto-kihon/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/toshin-ichimonitto-kyotest/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/toshin-ichimonitto-rekishi-sogo/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/toshin-ichimonto-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/toshin-mondaishu-sekaishi/</loc>
@@ -5582,7 +6074,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/toshin-shiryo-ichimonitto/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/ueno-8jikan-chiri-chishi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/ueno-8jikan-chiri-keito/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/wakaru-tokeru-kakeru-ronjutsu/</loc>
@@ -5605,20 +6105,24 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/social/books/yamakawa-ichimon-chiri/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/social/books/yamakawa-ichimon-kokyo/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yamakawa-ichimon-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yamakawa-ichimonitto-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yamakawa-ichimonto-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yamakawa-navi-kokyoseikei/</loc>
@@ -5629,48 +6133,64 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/social/books/yamakawa-select-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/yamakawa-select-sekaishi/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/social/books/yamakawa-yogo-kokyo/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yamakawa-yogo-seikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yamakawa-yogoshu-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/yamakawa-yokuderu-ichimon-kokyoseikei/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yamakawa-zuroku-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/yogo-2level-nihonshi/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yoko-sekaishi-tankyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yokuwakaru-nihonshi-tankyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yougoshu-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yozemi-jissen-chiri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yozemi-jissen-kokyoseikei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yozemi-jissen-nihonshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/yozemi-jissen-sekaishi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenkoku-nyushi-seikai-chiri/</loc>
@@ -5690,11 +6210,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenlevel-nihonshi-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/social/books/zenlevel-nihonshi-2/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenlevel-nihonshi-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenlevel-nihonshi-4/</loc>
@@ -5702,19 +6226,19 @@
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenlevel-nihonshi-5/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenlevel-sekaishi-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenlevel-sekaishi-2/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenlevel-sekaishi-3/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/social/books/zenlevel-sekaishi-4/</loc>
@@ -5794,11 +6318,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/joho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-1satsu-ichimon/</loc>
@@ -5806,27 +6330,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-1satsu-mondaishu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-1satsu-wakaru/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-bunkei-yougoshu/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/joho/books/info-enshu-kakomon-impress/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/joho/books/info-fujiwara-program-data/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/joho/books/info-fujiwara-zero-kara/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/joho/books/info-hitotsuzutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-honban-moshi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-hyojun-mondaishu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-ichimon-itto/</loc>
@@ -5838,27 +6374,27 @@
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-jissen-kouryaku-jikkyo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-jissen-mondaishu-sundai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-jissen-mondaishu-toshin/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-jissen-moshi-zkai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-jissen-taisaku-obunsha/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-kaiwagata-text/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-kakomon-kaisetsu-okajima/</loc>
@@ -5873,40 +6409,52 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/joho/books/info-kimeru-kyotsu-test/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/joho/books/info-mark-kiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-mogi-tokyohorei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-pattern-drill/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-point60/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-programming-renshucho/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-sekaiichi-yasashii/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/joho/books/info-sogo-mondaishu-kawai/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-taisaku-keirinkan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-tanki-kouryaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/joho/books/info-teiban-100dai/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-tensu-omoshiroi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/joho/books/info-tensu-omoshiroi-ichimon/</loc>
@@ -5918,15 +6466,23 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-10pun-drill/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-11method-iryo-kango/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-11method-jinbun-kyoiku-shakai/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-11method-kiso/</loc>
@@ -5938,7 +6494,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-7kakan-gokaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-ai-shindan-ishiyaku/</loc>
@@ -5950,31 +6506,39 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-buttsuke/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-deguchi-ronri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-gakken-shiboriyu-mensetsu-kaitei/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-gendai-keyword-file/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-gendai-wo-shiru-plus/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-gentensarenai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-higuchi-training/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-hitotsuhitotsu-kaitei/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-hyoronbun-keyword100/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-igakubu-jissen/</loc>
@@ -5986,15 +6550,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-igakubu-nankan-jissen/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-igakubu-nanmon-mensetsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-igakubu-seimei-rinri/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-igakubu-shuchu-kogi/</loc>
@@ -6002,11 +6566,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-ikei-17theme-suntan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-ikei-saihinshutsu20/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-imamichi-otosarenai/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-iryokei-zettai/</loc>
@@ -6014,7 +6582,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-jiji-neta-kyoiku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-jinbun-shakai-saikyo-dokugaku/</loc>
@@ -6046,7 +6614,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-kango-iryo-kaitei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-kango-iryo-saikyo-dokugaku/</loc>
@@ -6062,11 +6630,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-keio-7step/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-keio-bible/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-keio-kakomon-736/</loc>
@@ -6078,7 +6646,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koike-7jikan/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake/</loc>
@@ -6086,31 +6654,31 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-chokikiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-ho-fukabori/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-ho-sei-chokikiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-ho-sei-kei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-iryo-kango/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-jinbun-fukabori/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-jinbun-joho-kyoiku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-kakikata-chokikiso/</loc>
@@ -6126,43 +6694,55 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-kakikata-keizai-keiei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-kakikata-oyo/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-kango-chokikiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-kango-fukabori/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-koredake-kanzen-fukabori/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-koredake-kanzen-igaku-kango-chokikiso/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-koredake-kanzen-kyoiku-chokikiso/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-keio-waseda/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-keizai-fukabori/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-keizai-keiei-chokikiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-kokusai-media-chokikiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-kyoiku-fukabori/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-mohan-chokikiso/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-mohan-igaku-kango/</loc>
@@ -6170,51 +6750,59 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-mohan-jinbun-joho-kyoiku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-mohan-keizai-keiei/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-koredake-qa/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-marumaru-hinshutsu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-marumaru-iryo-kango-fukushi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-marumaru-nyushi/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-marumaru-suisen/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-naniga-kaketara/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-netahon-ishiyaku-kango/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-netahon-jinbun-kyoiku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-netahon-shakai-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-netahon-shizen-kagaku/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-obunsha-sogo-global-gaikokugo/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-obunsha-sogo-shakai-kanko-media/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-okite-pro/</loc>
@@ -6229,16 +6817,28 @@
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-rulebook-shiboriyu/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/shoron/books/shoron-saitensha-kakikata/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-saitensha-kango-iryo/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-saitensha-koko-wo-miru/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-saitensha-neta-ishiyaku-kango/</loc>
     <lastmod>2026-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-sbc-sogo-suisen-atarashii/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-sekaiichi-igakubu/</loc>
@@ -6246,11 +6846,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-sekaiichi-keio/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-sense-janai-1/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-shin-shoronbun-note-2027/</loc>
@@ -6258,23 +6858,35 @@
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-smart-step/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-sogo-kakomon-keizai/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-sogogata-shiboriyu/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-work-oboeru-6tei/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-yagyu-bannou/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-yagyu-platinum-rule/</loc>
     <lastmod>2026-11-20</lastmod>
   </url>
   <url>
+    <loc>https://route-taizen.com/shoron/books/shoron-yomudake-kiso-powerup/</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://route-taizen.com/shoron/books/shoron-yoshioka-naruhodo10/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/shoron/books/shoron-zerokara-1kagetsu-rulebook/</loc>
@@ -6942,7 +7554,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/guides/hajime-no-issatsu/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/guides/how-many-books/</loc>
@@ -6962,15 +7574,15 @@
   </url>
   <url>
     <loc>https://route-taizen.com/guides/nagaku-yomareru/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/guides/nanido-bunpu/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/guides/nokori-jikan-select/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/guides/ranking/</loc>
@@ -6982,11 +7594,11 @@
   </url>
   <url>
     <loc>https://route-taizen.com/guides/route-hours/</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/guides/shuppansha-map/</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/guides/shuukai-sekkei/</loc>
@@ -6998,7 +7610,7 @@
   </url>
   <url>
     <loc>https://route-taizen.com/guides/tanjikan-ranking/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://route-taizen.com/guides/tsumazuki-awards/</loc>

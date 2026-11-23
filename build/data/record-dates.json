@@ -38,8 +38,8 @@
    "d": "2026-09-09"
   },
   "article/_/route-hours": {
-   "h": "5722212a4981",
-   "d": "2026-10-14"
+   "h": "a3edac0ff259",
+   "d": "2026-11-23"
   },
   "article/_/shuppansha-map": {
    "h": "8c65d1dbf3c9",
@@ -213,45 +213,57 @@
    "h": "5b1d0e8f0a66",
    "d": "2026-11-11"
   },
+  "english/1month-plus-moshi-listening": {
+   "h": "4c5c927b5cda",
+   "d": "2026-11-23"
+  },
+  "english/1month-plus-moshi-reading": {
+   "h": "7ba822741e48",
+   "d": "2026-11-23"
+  },
   "english/akahon": {
    "h": "bd66e9f32421",
    "d": "2026-11-20"
   },
   "english/aohon-e": {
-   "h": "816a93794509",
-   "d": "2026-11-20"
+   "h": "557548632140",
+   "d": "2026-11-23"
+  },
+  "english/basic-lecture-doga-eibunpo-dokkai": {
+   "h": "e12f1996206a",
+   "d": "2026-11-23"
   },
   "english/breakthrough-sogo-eigo": {
-   "h": "d2f959d0230d",
-   "d": "2026-11-20"
+   "h": "d3e547e57bd1",
+   "d": "2026-11-23"
   },
   "english/canpass-e": {
-   "h": "d0c1e5536af8",
-   "d": "2026-11-20"
+   "h": "b46ad4fa5943",
+   "d": "2026-11-23"
   },
   "english/chiba-daigaku-no-eigo-15kanen": {
    "h": "dcf56ab52624",
    "d": "2026-11-20"
   },
   "english/cho-polaris0": {
-   "h": "a8de01347a66",
-   "d": "2026-11-20"
+   "h": "7e7b5af031fc",
+   "d": "2026-11-23"
   },
   "english/cho-polaris1": {
-   "h": "db08c2497294",
-   "d": "2026-11-20"
+   "h": "3609b5875720",
+   "d": "2026-11-23"
   },
   "english/cho-polaris2": {
-   "h": "2efe6ca69251",
-   "d": "2026-11-20"
+   "h": "c34c37eead35",
+   "d": "2026-11-23"
   },
   "english/cho-polaris3": {
-   "h": "809833780be6",
-   "d": "2026-11-20"
+   "h": "0215b0edd22e",
+   "d": "2026-11-23"
   },
   "english/chobun-platinum": {
-   "h": "c22237549598",
-   "d": "2026-11-20"
+   "h": "385d6dbfe3c1",
+   "d": "2026-11-23"
   },
   "english/chokkyu-kaiho-eisakubun-jikkyo": {
    "h": "353a3664ece8",
@@ -266,24 +278,24 @@
    "d": "2026-11-20"
   },
   "english/classic-kiso": {
-   "h": "d6d918b39a2e",
-   "d": "2026-11-20"
+   "h": "5ccf4f53a6e0",
+   "d": "2026-11-23"
   },
   "english/crack10": {
    "h": "10fe470dfc4e",
    "d": "2026-11-20"
   },
   "english/daizemi-kyotsu-test-jissen-mondaishu-eigo": {
-   "h": "2909acef4fe4",
-   "d": "2026-11-20"
+   "h": "adbc87341e99",
+   "d": "2026-11-23"
   },
   "english/database": {
-   "h": "d50237a94ac3",
-   "d": "2026-11-20"
+   "h": "f779c70fee0e",
+   "d": "2026-11-23"
   },
   "english/discourse": {
-   "h": "e3fa03a7aa0a",
-   "d": "2026-11-20"
+   "h": "737241891027",
+   "d": "2026-11-23"
   },
   "english/distinction-2000": {
    "h": "c5cbdcbed606",
@@ -301,57 +313,69 @@
    "h": "aacaf4e0cdaa",
    "d": "2026-11-20"
   },
+  "english/earthrise-sogo-eigo": {
+   "h": "eb76eabd4035",
+   "d": "2026-11-23"
+  },
   "english/eibun-hyojun-mondai-seiko": {
-   "h": "884658ab13f1",
-   "d": "2026-11-20"
+   "h": "6015289c8158",
+   "d": "2026-11-23"
+  },
+  "english/eibun-kaishaku-1satsume-drill": {
+   "h": "ae48379051d5",
+   "d": "2026-11-23"
   },
   "english/eibun-kaishaku-kyoshitsu-kiso": {
-   "h": "9cdd09146cfc",
-   "d": "2026-11-20"
+   "h": "47d38915dbd7",
+   "d": "2026-11-23"
   },
   "english/eibun-kaishaku-kyoshitsu-nyumon": {
-   "h": "da11760b6cda",
-   "d": "2026-11-20"
+   "h": "2ad8457cb841",
+   "d": "2026-11-23"
   },
   "english/eibun-wayaku-enshu-chukyu": {
-   "h": "4643b5551ac4",
-   "d": "2026-11-20"
+   "h": "b2261e209d71",
+   "d": "2026-11-23"
   },
   "english/eibun-wayaku-enshu-jokyu": {
-   "h": "8d005113e807",
-   "d": "2026-11-20"
+   "h": "be6538e61a78",
+   "d": "2026-11-23"
   },
   "english/eibun-wayaku-enshu-kiso": {
-   "h": "b90d55d8f1e0",
-   "d": "2026-11-20"
+   "h": "dea89a92126d",
+   "d": "2026-11-23"
   },
   "english/eibun-wayaku-enshu-nyumon": {
-   "h": "6bf581c6c79f",
-   "d": "2026-11-20"
+   "h": "56de740a11fd",
+   "d": "2026-11-23"
   },
   "english/eibunpo-final-polaris-2": {
-   "h": "4bf6ff833b2e",
-   "d": "2026-11-20"
+   "h": "276b974d7913",
+   "d": "2026-11-23"
   },
   "english/eibunpo-final-polaris-3": {
-   "h": "6319fccb7ada",
-   "d": "2026-11-20"
+   "h": "dcfe783dc4f2",
+   "d": "2026-11-23"
   },
   "english/eibunpo-goho-shortcuts": {
    "h": "440e599a306c",
    "d": "2026-11-20"
   },
   "english/eibunpo-gohou-random-select-600": {
-   "h": "058eb3420f44",
-   "d": "2026-11-20"
+   "h": "284d1ea3e99c",
+   "d": "2026-11-23"
+  },
+  "english/eibunpo-no-teoria": {
+   "h": "b0d58e15a56f",
+   "d": "2026-11-23"
   },
   "english/eigo-chobun-mondai-seiko-shinso": {
-   "h": "a3c80d705ad5",
-   "d": "2026-11-20"
+   "h": "dd9382e87e6e",
+   "d": "2026-11-23"
   },
   "english/eigo-kobun-shokai-shinsoban": {
-   "h": "4f607d3c4ffc",
-   "d": "2026-11-20"
+   "h": "96c2595facd6",
+   "d": "2026-11-23"
   },
   "english/eigo-listening-hyper-training-perfect": {
    "h": "464563976062",
@@ -366,8 +390,8 @@
    "d": "2026-11-20"
   },
   "english/eiken-2kyu-derujun-pastan-shinso-5th": {
-   "h": "f7203bf6eabc",
-   "d": "2026-11-20"
+   "h": "db568d3520dc",
+   "d": "2026-11-23"
   },
   "english/eisaku-bible": {
    "h": "392f7129a8a9",
@@ -393,6 +417,10 @@
    "h": "be8f91612b4f",
    "d": "2026-11-20"
   },
+  "english/empower-all-in-one": {
+   "h": "f26c7a6a29a8",
+   "d": "2026-11-23"
+  },
   "english/essentials-max": {
    "h": "d7b5e363f271",
    "d": "2026-11-20"
@@ -402,16 +430,16 @@
    "d": "2026-11-20"
   },
   "english/evergreen": {
-   "h": "ae50e463cf55",
-   "d": "2026-11-20"
+   "h": "0ff97d83c4bf",
+   "d": "2026-11-23"
   },
   "english/extreme": {
    "h": "39c9ed77e2c8",
    "d": "2026-11-20"
   },
   "english/final-polaris": {
-   "h": "d6d503668d3e",
-   "d": "2026-11-20"
+   "h": "08ae9ec8d42a",
+   "d": "2026-11-23"
   },
   "english/frame-reading-nyumon": {
    "h": "8b5e680c68a9",
@@ -422,40 +450,56 @@
    "d": "2026-11-20"
   },
   "english/fukamete-input": {
-   "h": "233539e20284",
-   "d": "2026-11-20"
+   "h": "ed25dcac33a4",
+   "d": "2026-11-23"
   },
   "english/fukamete-output": {
-   "h": "98312f8db56f",
-   "d": "2026-11-20"
+   "h": "c47f750fe21d",
+   "d": "2026-11-23"
   },
   "english/gensoku125": {
-   "h": "172078ea4d8c",
-   "d": "2026-11-20"
+   "h": "eb31f1826609",
+   "d": "2026-11-23"
   },
   "english/genten": {
    "h": "3887da0d2565",
    "d": "2026-11-20"
   },
   "english/gijutsu100": {
-   "h": "2484b30dd90c",
-   "d": "2026-11-20"
+   "h": "195f94ac9dd1",
+   "d": "2026-11-23"
   },
   "english/gijutsu100k": {
-   "h": "7805be815d4b",
-   "d": "2026-11-20"
+   "h": "64bcbad64595",
+   "d": "2026-11-23"
   },
   "english/gijutsu60": {
-   "h": "dbf7200cfba4",
-   "d": "2026-11-20"
+   "h": "881ac595a3ab",
+   "d": "2026-11-23"
   },
   "english/gijutsu70": {
-   "h": "cebea47af639",
-   "d": "2026-11-20"
+   "h": "9106aad424d6",
+   "d": "2026-11-23"
   },
   "english/gokaku-hosoku": {
-   "h": "c0f49076346a",
-   "d": "2026-11-20"
+   "h": "af23e61ad9d9",
+   "d": "2026-11-23"
+  },
+  "english/gungun-eigo-chobun-advanced": {
+   "h": "4c09801eee6b",
+   "d": "2026-11-23"
+  },
+  "english/gungun-eigo-chobun-basic": {
+   "h": "809c36a42de4",
+   "d": "2026-11-23"
+  },
+  "english/gungun-eigo-chobun-entry": {
+   "h": "3ffdc568ab9d",
+   "d": "2026-11-23"
+  },
+  "english/gungun-eigo-chobun-standard": {
+   "h": "b57f28cdfce6",
+   "d": "2026-11-23"
   },
   "english/haitore-jiyu": {
    "h": "fea29390e624",
@@ -470,40 +514,40 @@
    "d": "2026-11-20"
   },
   "english/high-score-kyotsu-test-koryaku-listening": {
-   "h": "6c922d3ded98",
-   "d": "2026-11-20"
+   "h": "e3ecd12aa562",
+   "d": "2026-11-23"
   },
   "english/high-score-kyotsu-test-koryaku-reading": {
-   "h": "b7cd841254ca",
-   "d": "2026-11-20"
+   "h": "f057e41fae2e",
+   "d": "2026-11-23"
   },
   "english/hijii-bunpo-sol": {
-   "h": "14ab9950bfff",
-   "d": "2026-11-20"
+   "h": "817e03fc68e2",
+   "d": "2026-11-23"
   },
   "english/hijii-dokkai-eibunpo-kobun-seiha": {
    "h": "514b34f9e595",
    "d": "2026-11-20"
   },
   "english/hijii-dokkai-hisshu": {
-   "h": "d36605b32105",
-   "d": "2026-11-20"
+   "h": "9046a7f0aec0",
+   "d": "2026-11-23"
   },
   "english/hijii-dokkai-nankan": {
    "h": "397c7bdf0e1a",
    "d": "2026-11-20"
   },
   "english/hijii-eibun-kusho-hoju-mondai": {
-   "h": "69bdd9d1bcb0",
-   "d": "2026-11-20"
+   "h": "58c1434581b3",
+   "d": "2026-11-23"
   },
   "english/hijii-sakubun": {
    "h": "1d45337536a6",
    "d": "2026-11-20"
   },
   "english/hijii-sugu-jiyu": {
-   "h": "74af7d1a1002",
-   "d": "2026-11-20"
+   "h": "a3b24412bbd8",
+   "d": "2026-11-23"
   },
   "english/hijii-tadashiku": {
    "h": "a5182f78621c",
@@ -514,28 +558,28 @@
    "d": "2026-11-20"
   },
   "english/hijii-zero": {
-   "h": "8c9c470c9f11",
-   "d": "2026-11-20"
+   "h": "6c4e68c61120",
+   "d": "2026-11-23"
   },
   "english/hijii-zero-chobun": {
-   "h": "0b14607e4186",
-   "d": "2026-11-20"
+   "h": "3ebdc9888bbc",
+   "d": "2026-11-23"
   },
   "english/hijii-zero-lis": {
-   "h": "956f78bdf4bb",
-   "d": "2026-11-20"
+   "h": "8c8da4e03f1c",
+   "d": "2026-11-23"
   },
   "english/hijii-zero-next": {
-   "h": "ed7169fcb7f6",
-   "d": "2026-11-20"
+   "h": "5d9adc2bbbb8",
+   "d": "2026-11-23"
   },
   "english/hikkei-hyogen": {
    "h": "9ec75c5adff1",
    "d": "2026-11-20"
   },
   "english/hinshutsu-polaris": {
-   "h": "9d5638e9f1a7",
-   "d": "2026-11-20"
+   "h": "127879e265ee",
+   "d": "2026-11-23"
   },
   "english/hinshutsu1000": {
    "h": "af551bbc1747",
@@ -554,40 +598,52 @@
    "d": "2026-11-20"
   },
   "english/hyper-training": {
-   "h": "85fa4584a2af",
-   "d": "2026-11-20"
+   "h": "93a6b8ee059d",
+   "d": "2026-11-23"
   },
   "english/ichikara-kitaeru-eigo-chobun-300": {
-   "h": "0ebd8777033b",
-   "d": "2026-11-20"
+   "h": "6fd50d38c088",
+   "d": "2026-11-23"
   },
   "english/ichikara-kitaeru-eigo-chobun-500": {
-   "h": "435a7a6f2e0d",
-   "d": "2026-11-20"
+   "h": "8b225a41ad17",
+   "d": "2026-11-23"
   },
   "english/ichikara-kitaeru-eigo-chobun-700": {
-   "h": "6ab9017f144c",
-   "d": "2026-11-20"
+   "h": "d638793ce287",
+   "d": "2026-11-23"
   },
   "english/ichikara-kitaeru-eigo-chobun-basic": {
-   "h": "ef87b971955a",
-   "d": "2026-11-20"
+   "h": "326a587a6101",
+   "d": "2026-11-23"
+  },
+  "english/ichimon-ittou-eibunpo-gohou": {
+   "h": "fe634f626a27",
+   "d": "2026-11-23"
   },
   "english/ichiokunin-no-eibunpo": {
-   "h": "fb1e3639f020",
-   "d": "2026-11-20"
+   "h": "0fe3b7b6f3d6",
+   "d": "2026-11-23"
   },
   "english/igakubu-eigo": {
    "h": "b0bc60dc94e7",
    "d": "2026-11-20"
   },
+  "english/jiji-eigo-frontier": {
+   "h": "c1f550d510f7",
+   "d": "2026-11-23"
+  },
+  "english/jitsuryoku-hantei-bunpo-final-hyojun": {
+   "h": "9e71262aa295",
+   "d": "2026-11-23"
+  },
   "english/jukou-ge": {
-   "h": "78299195c1e9",
-   "d": "2026-11-20"
+   "h": "d3407aaeca81",
+   "d": "2026-11-23"
   },
   "english/jukou-jo": {
-   "h": "3e069e510052",
-   "d": "2026-11-20"
+   "h": "95ee6e0021cc",
+   "d": "2026-11-23"
   },
   "english/kaishaku-kyoshitsu": {
    "h": "65134528c603",
@@ -598,16 +654,16 @@
    "d": "2026-11-20"
   },
   "english/kaishaku-polaris2": {
-   "h": "619f79d5a644",
-   "d": "2026-11-20"
+   "h": "a5789c5851d3",
+   "d": "2026-11-23"
   },
   "english/kaitai-jukugo": {
    "h": "b9e36025f449",
    "d": "2026-11-20"
   },
   "english/kako-review-e": {
-   "h": "9ea5e9ae01fb",
-   "d": "2026-11-20"
+   "h": "c2ea8dc71fe8",
+   "d": "2026-11-23"
   },
   "english/kansai-daigaku-no-eigo-11th": {
    "h": "a9612e3e4fd1",
@@ -617,25 +673,29 @@
    "h": "b29ec749c1f4",
    "d": "2026-11-20"
   },
+  "english/karafuru-eibunpo-drill": {
+   "h": "5bcecf5a617f",
+   "d": "2026-11-23"
+  },
   "english/keio-eigo": {
    "h": "94b5671b3389",
    "d": "2026-11-20"
   },
   "english/kihon-kokoda": {
-   "h": "7bbc3ffcd188",
-   "d": "2026-11-20"
+   "h": "638e3ae24475",
+   "d": "2026-11-23"
   },
   "english/kihon300sen": {
    "h": "2ae7919d5444",
    "d": "2026-11-20"
   },
   "english/kijutsu-tr": {
-   "h": "6e238140b44d",
-   "d": "2026-11-20"
+   "h": "f612b180233d",
+   "d": "2026-11-23"
   },
   "english/kikutan-advanced-6000": {
-   "h": "d7e405252d32",
-   "d": "2026-11-20"
+   "h": "9fe4f8c2a557",
+   "d": "2026-11-23"
   },
   "english/kikutan-basic-4000": {
    "h": "d9c1bfb01579",
@@ -650,16 +710,16 @@
    "d": "2026-11-20"
   },
   "english/kimeru-r": {
-   "h": "a4c0e978c92c",
-   "d": "2026-11-20"
+   "h": "02e8909ee12c",
+   "d": "2026-11-23"
   },
   "english/kimutatsu-basic": {
    "h": "38493961ca08",
    "d": "2026-11-20"
   },
   "english/kimutatsu-shidai": {
-   "h": "a982e51f5c8a",
-   "d": "2026-11-20"
+   "h": "f2a228c23466",
+   "d": "2026-11-23"
   },
   "english/kimutatsu-todai": {
    "h": "153c854f8be3",
@@ -678,24 +738,28 @@
    "d": "2026-11-20"
   },
   "english/kiso10dr": {
-   "h": "177637d887f7",
-   "d": "2026-11-20"
+   "h": "67432e6f322a",
+   "d": "2026-11-23"
+  },
+  "english/kiyokawa-hinshutsu-eitango-master": {
+   "h": "26c0a4d41b17",
+   "d": "2026-11-23"
   },
   "english/kobe15": {
    "h": "dde1393d1e32",
    "d": "2026-11-20"
   },
   "english/kobun-haaku-no-platica": {
-   "h": "707779dfb0ed",
-   "d": "2026-11-20"
+   "h": "d7455382055d",
+   "d": "2026-11-23"
   },
   "english/koko-eibunpo-pattern-drill-chokiso": {
-   "h": "14c95b243e57",
-   "d": "2026-11-20"
+   "h": "597558ebe3d2",
+   "d": "2026-11-23"
   },
   "english/kurohon-e": {
-   "h": "ce5bbd000b97",
-   "d": "2026-11-20"
+   "h": "252fb6567dc2",
+   "d": "2026-11-23"
   },
   "english/kyodai-nyushi-shokai-25nen-eigo-3rd": {
    "h": "c38b172bd54f",
@@ -706,40 +770,80 @@
    "d": "2026-11-20"
   },
   "english/kyote-akahon-e": {
-   "h": "191675f92a47",
-   "d": "2026-11-20"
+   "h": "5b8fcbf2a049",
+   "d": "2026-11-23"
+  },
+  "english/kyotest-jissen-taisaku-listening": {
+   "h": "aa6123187007",
+   "d": "2026-11-23"
+  },
+  "english/kyotest-jissen-taisaku-reading": {
+   "h": "a28211f42b8c",
+   "d": "2026-11-23"
+  },
+  "english/kyotest-korezake-r-kisokatame": {
+   "h": "856f720c3d1c",
+   "d": "2026-11-23"
+  },
+  "english/kyotest-korezake-r-speed": {
+   "h": "80396c62069a",
+   "d": "2026-11-23"
+  },
+  "english/kyotest-listening-jikkyo": {
+   "h": "2896c48b7e10",
+   "d": "2026-11-23"
+  },
+  "english/kyotest-reading-shuchu-koza": {
+   "h": "7eaf100db2e0",
+   "d": "2026-11-23"
   },
   "english/kyotsu-test-jissen-moshi-eigo-listening": {
-   "h": "bf7e556c7759",
-   "d": "2026-11-20"
+   "h": "51788eb947ef",
+   "d": "2026-11-23"
   },
   "english/kyotsu-test-jissen-moshi-eigo-reading": {
-   "h": "5913df03b5f2",
-   "d": "2026-11-20"
+   "h": "c5faf40c3162",
+   "d": "2026-11-23"
   },
   "english/kyotsu-test-listening-level-0": {
-   "h": "950c5ef35801",
-   "d": "2026-11-20"
+   "h": "290e17bd98fd",
+   "d": "2026-11-23"
   },
   "english/kyotsu-test-listening-level-1": {
-   "h": "0337c4c86c5d",
-   "d": "2026-11-20"
+   "h": "a7dbb3395c09",
+   "d": "2026-11-23"
   },
   "english/kyotsu-test-listening-level-2": {
-   "h": "4fa90cdfd988",
-   "d": "2026-11-20"
+   "h": "d67fe7a24800",
+   "d": "2026-11-23"
   },
   "english/kyotsu-test-listening-level-3": {
-   "h": "b89a1686178b",
-   "d": "2026-11-20"
+   "h": "0e869f51f1d5",
+   "d": "2026-11-23"
+  },
+  "english/kyotsu-test-reading-level-0": {
+   "h": "926ad1088b00",
+   "d": "2026-11-23"
+  },
+  "english/kyotsu-test-reading-level-1": {
+   "h": "a952cc9e9c47",
+   "d": "2026-11-23"
+  },
+  "english/kyotsu-test-reading-level-2": {
+   "h": "162681a70999",
+   "d": "2026-11-23"
+  },
+  "english/kyotsu-test-reading-level-3": {
+   "h": "6d3101e68a44",
+   "d": "2026-11-23"
   },
   "english/kyotsu-test-shinkatei-koryaku-listening": {
-   "h": "449cca7b694e",
-   "d": "2026-11-20"
+   "h": "b814198faefb",
+   "d": "2026-11-23"
   },
   "english/kyotsu-test-shinkatei-koryaku-reading": {
-   "h": "238e19171d75",
-   "d": "2026-11-20"
+   "h": "1920f10e41a4",
+   "d": "2026-11-23"
   },
   "english/kyudai15": {
    "h": "728491dbf606",
@@ -753,6 +857,14 @@
    "h": "7cf03ec4f824",
    "d": "2026-11-20"
   },
+  "english/levelup-eibunpo-1": {
+   "h": "db38b3a9ab4a",
+   "d": "2026-11-23"
+  },
+  "english/levelup-eibunpo-2": {
+   "h": "97838569cd0d",
+   "d": "2026-11-23"
+  },
   "english/linga": {
    "h": "1064ba07406f",
    "d": "2026-11-20"
@@ -762,36 +874,44 @@
    "d": "2026-11-20"
   },
   "english/lis-1satsu": {
-   "h": "18299530e406",
-   "d": "2026-11-20"
+   "h": "820ebcbc0bbf",
+   "d": "2026-11-23"
   },
   "english/lis-platinum": {
    "h": "66527963cdd7",
    "d": "2026-11-20"
   },
   "english/lis-shuchu": {
-   "h": "27fc6004bfc3",
-   "d": "2026-11-20"
+   "h": "1979dbe05536",
+   "d": "2026-11-23"
   },
   "english/logic42": {
    "h": "0095fc17d73d",
    "d": "2026-11-20"
   },
   "english/lr-level": {
-   "h": "59fb82be71ff",
-   "d": "2026-11-20"
+   "h": "6189bf9e0401",
+   "d": "2026-11-23"
   },
   "english/maitoshi-deru-hinshutsu-eigo-chobun": {
-   "h": "348425b390ab",
-   "d": "2026-11-20"
+   "h": "af16cc0560c2",
+   "d": "2026-11-23"
   },
   "english/manten-kotsu": {
    "h": "1ae6f47b17e3",
    "d": "2026-11-20"
   },
   "english/mark-shiki-kiso-mondaishu-eigo-bunpo-goho-kiso": {
-   "h": "ba7a72a5e0dc",
-   "d": "2026-11-20"
+   "h": "78d0a1a919eb",
+   "d": "2026-11-23"
+  },
+  "english/mazuha-kyotest-listening": {
+   "h": "1b2b0ec6ef2f",
+   "d": "2026-11-23"
+  },
+  "english/mazuha-kyotest-reading": {
+   "h": "ab5aaf76554f",
+   "d": "2026-11-23"
   },
   "english/meidai15": {
    "h": "442fa780fa93",
@@ -801,25 +921,33 @@
    "h": "c9d6bc431c8d",
    "d": "2026-11-20"
   },
+  "english/muto-10nichi-sokudoku": {
+   "h": "395831a27940",
+   "d": "2026-11-23"
+  },
   "english/narikawa-naze": {
-   "h": "d5525f4639ed",
-   "d": "2026-11-20"
+   "h": "84edece8aeff",
+   "d": "2026-11-23"
   },
   "english/nextstage": {
-   "h": "17ce3cb09f92",
-   "d": "2026-11-20"
+   "h": "d2682dbc746d",
+   "d": "2026-11-23"
   },
   "english/nyumon-eibun": {
-   "h": "ad275d1b9e6b",
-   "d": "2026-11-20"
+   "h": "43afb968e893",
+   "d": "2026-11-23"
+  },
+  "english/obunsha-5fun-eigo-chobun": {
+   "h": "0d56ddb894a4",
+   "d": "2026-11-23"
   },
   "english/oiwa": {
-   "h": "4673c6fdc086",
-   "d": "2026-11-20"
+   "h": "7c477b437ce4",
+   "d": "2026-11-23"
   },
   "english/oiwa-ichiban-hajime-eigo-chobun": {
-   "h": "15463a06cb04",
-   "d": "2026-11-20"
+   "h": "12ae4add7f63",
+   "d": "2026-11-23"
   },
   "english/oversight": {
    "h": "ff6e740f7b5c",
@@ -834,16 +962,16 @@
    "d": "2026-11-20"
   },
   "english/polaris-b0": {
-   "h": "8eea01ed6cb0",
-   "d": "2026-11-20"
+   "h": "baaeb1a9659d",
+   "d": "2026-11-23"
   },
   "english/polaris-b1": {
-   "h": "0204a53e43d5",
-   "d": "2026-11-20"
+   "h": "2781e6545dab",
+   "d": "2026-11-23"
   },
   "english/polaris-b2": {
-   "h": "68b499f6b0ab",
-   "d": "2026-11-20"
+   "h": "ccd37ac9f71b",
+   "d": "2026-11-23"
   },
   "english/polaris-b3": {
    "h": "0204a4f1c46b",
@@ -854,16 +982,16 @@
    "d": "2026-11-20"
   },
   "english/powerstage": {
-   "h": "82c4900e6383",
-   "d": "2026-11-20"
+   "h": "eb34f48ecbce",
+   "d": "2026-11-23"
   },
   "english/r-1month": {
-   "h": "3c424462c62e",
-   "d": "2026-11-20"
+   "h": "5b769a62fe69",
+   "d": "2026-11-23"
   },
   "english/rankjun2300": {
-   "h": "3471171417a5",
-   "d": "2026-11-20"
+   "h": "b32621cd921f",
+   "d": "2026-11-23"
   },
   "english/reikai-wabun-eiyaku-kyohon-bunpo": {
    "h": "bae122248b6c",
@@ -874,60 +1002,68 @@
    "d": "2026-11-20"
   },
   "english/rise": {
-   "h": "e14797d94f77",
-   "d": "2026-11-20"
+   "h": "50d606eef9fc",
+   "d": "2026-11-23"
   },
   "english/rise-kobun-kaishaku-1": {
-   "h": "5ec4d71fad2e",
-   "d": "2026-11-20"
+   "h": "7f564e0202a1",
+   "d": "2026-11-23"
   },
   "english/rise-kobun-kaishaku-2": {
-   "h": "0c46e1e375f7",
-   "d": "2026-11-20"
+   "h": "576ebba9968d",
+   "d": "2026-11-23"
   },
   "english/ritsumeikan-daigaku-no-eigo-11th": {
    "h": "f960c5533438",
    "d": "2026-11-20"
   },
   "english/rules1": {
-   "h": "ec50bb02be4d",
-   "d": "2026-11-20"
+   "h": "30d0bacab995",
+   "d": "2026-11-23"
   },
   "english/rules2": {
-   "h": "dc037ae464b6",
-   "d": "2026-11-20"
+   "h": "00bafa745930",
+   "d": "2026-11-23"
   },
   "english/rules3": {
-   "h": "b3162f1150db",
-   "d": "2026-11-20"
+   "h": "e5588ee2490b",
+   "d": "2026-11-23"
   },
   "english/rules4": {
-   "h": "8aec7182da4b",
-   "d": "2026-11-20"
+   "h": "81d10bb67a2e",
+   "d": "2026-11-23"
   },
   "english/ryomon500": {
-   "h": "deb865501ce4",
-   "d": "2026-11-20"
+   "h": "cfbe865b6936",
+   "d": "2026-11-23"
   },
   "english/sainankan-eisaku": {
    "h": "a31610b4a25f",
    "d": "2026-11-20"
+  },
+  "english/saisoku-eigo-chobun-1": {
+   "h": "ad3b74a7da63",
+   "d": "2026-11-23"
+  },
+  "english/saisoku-eigo-chobun-2": {
+   "h": "5f07afae0685",
+   "d": "2026-11-23"
   },
   "english/saizensen2500": {
    "h": "f4ffff7ab587",
    "d": "2026-11-20"
   },
   "english/scramble": {
-   "h": "a63c438fa7c9",
-   "d": "2026-11-20"
+   "h": "030c289e6959",
+   "d": "2026-11-23"
   },
   "english/scramble-basic-4th": {
    "h": "1f7e01aa42db",
    "d": "2026-11-20"
   },
   "english/sekaiichi-dokkai": {
-   "h": "cd926a9f5e42",
-   "d": "2026-11-20"
+   "h": "1ea084a8a3ce",
+   "d": "2026-11-23"
   },
   "english/sekaiichi-eisaku": {
    "h": "7b7f7256666d",
@@ -942,32 +1078,32 @@
    "d": "2026-11-20"
   },
   "english/sekaiichi-wakariyasui-eibunpo-color": {
-   "h": "793b04819d3d",
-   "d": "2026-11-20"
+   "h": "8fc93fb393f3",
+   "d": "2026-11-23"
   },
   "english/sekaiichi-waseda": {
    "h": "1e6aab3efbee",
    "d": "2026-11-20"
   },
   "english/seki-kyote": {
-   "h": "3f471ceafb29",
-   "d": "2026-11-20"
+   "h": "5223f2f5765c",
+   "d": "2026-11-23"
   },
   "english/seki-kyotest-kakushin-input55": {
    "h": "08c5874c9842",
    "d": "2026-11-20"
   },
   "english/shin-eigo-no-kobun-150": {
-   "h": "48591e8a879c",
-   "d": "2026-11-20"
+   "h": "83656924a81f",
+   "d": "2026-11-23"
   },
   "english/shin-kihon-eibun-700sen-shinso": {
    "h": "d62f90bbb8f1",
    "d": "2026-11-20"
   },
   "english/shin-taizen": {
-   "h": "8023815e7b00",
-   "d": "2026-11-20"
+   "h": "9791eb81817c",
+   "d": "2026-11-23"
   },
   "english/shiritsui-eigo": {
    "h": "e0d61cab8697",
@@ -994,12 +1130,12 @@
    "d": "2026-11-20"
   },
   "english/sokudoku-tr": {
-   "h": "a51659e415d6",
-   "d": "2026-11-20"
+   "h": "a442a715f40c",
+   "d": "2026-11-23"
   },
   "english/sokusen3": {
-   "h": "90e5d6429840",
-   "d": "2026-11-20"
+   "h": "991ab09be79e",
+   "d": "2026-11-23"
   },
   "english/sokutan-hisshu": {
    "h": "4d72f6f7b438",
@@ -1014,28 +1150,28 @@
    "d": "2026-11-20"
   },
   "english/solution-theme": {
-   "h": "6a7e899e9368",
-   "d": "2026-11-20"
+   "h": "34d3ded043d2",
+   "d": "2026-11-23"
   },
   "english/solution0": {
-   "h": "ee56bee4fd2c",
-   "d": "2026-11-20"
+   "h": "686f61ef9092",
+   "d": "2026-11-23"
   },
   "english/solution1": {
-   "h": "ffbad6ec4c08",
-   "d": "2026-11-20"
+   "h": "7644c4cb7938",
+   "d": "2026-11-23"
   },
   "english/solution2": {
-   "h": "074d6c47c7d1",
-   "d": "2026-11-20"
+   "h": "8162b884a294",
+   "d": "2026-11-23"
   },
   "english/solution3": {
-   "h": "e9ae83b90146",
-   "d": "2026-11-20"
+   "h": "d07bd033ae2b",
+   "d": "2026-11-23"
   },
   "english/sparta": {
-   "h": "771e7a6ec8e9",
-   "d": "2026-11-20"
+   "h": "1c745ba0e1c0",
+   "d": "2026-11-23"
   },
   "english/sparta-2-advanced": {
    "h": "1fe3706b00a1",
@@ -1046,24 +1182,24 @@
    "d": "2026-11-20"
   },
   "english/spectre": {
-   "h": "f8dbb69e7abf",
-   "d": "2026-11-20"
+   "h": "8f9cca1d62d4",
+   "d": "2026-11-23"
   },
   "english/stock3000": {
-   "h": "add10cf7394d",
-   "d": "2026-11-20"
+   "h": "a86b3a69fcb7",
+   "d": "2026-11-23"
   },
   "english/stock4500": {
    "h": "9cfdf77afec6",
    "d": "2026-11-20"
   },
   "english/strategy": {
-   "h": "4065d6ce2467",
-   "d": "2026-11-20"
+   "h": "ccc7cb6cb4e1",
+   "d": "2026-11-23"
   },
   "english/supremacy": {
-   "h": "21751a76a1eb",
-   "d": "2026-11-20"
+   "h": "49491fc130cc",
+   "d": "2026-11-23"
   },
   "english/takeoka-eibunpo-drill-advanced": {
    "h": "2dfef6318af7",
@@ -1082,28 +1218,28 @@
    "d": "2026-11-20"
   },
   "english/takeoka-r": {
-   "h": "74ad3404699a",
-   "d": "2026-11-20"
+   "h": "c56e3d6110f9",
+   "d": "2026-11-23"
   },
   "english/tangoou": {
    "h": "6fe380bc3ffd",
    "d": "2026-11-20"
   },
   "english/tanki-kyote-e": {
-   "h": "b9b5faddbfb4",
-   "d": "2026-11-20"
+   "h": "81b228dc1e2e",
+   "d": "2026-11-23"
   },
   "english/target1000": {
-   "h": "96b38116a96f",
-   "d": "2026-11-20"
+   "h": "6355d52385fb",
+   "d": "2026-11-23"
   },
   "english/target1200": {
    "h": "e9e0606a68c6",
    "d": "2026-11-20"
   },
   "english/target1400": {
-   "h": "8f2551b1e9dc",
-   "d": "2026-11-20"
+   "h": "e0ea17627036",
+   "d": "2026-11-23"
   },
   "english/target1900": {
    "h": "68e9ae317c92",
@@ -1118,8 +1254,8 @@
    "d": "2026-11-20"
   },
   "english/theme10-tr": {
-   "h": "64dc46161be2",
-   "d": "2026-11-20"
+   "h": "bed5da892183",
+   "d": "2026-11-23"
   },
   "english/todai-eigo-sokogi": {
    "h": "44c34e443751",
@@ -1154,36 +1290,44 @@
    "d": "2026-11-20"
   },
   "english/tokigi-eibun-dokkai-senryakuteki": {
-   "h": "95faa5dfa3f3",
-   "d": "2026-11-20"
+   "h": "d001a739b1b6",
+   "d": "2026-11-23"
   },
   "english/tokyo-kagakudai-rikogaku-no-eigo-20kanen": {
    "h": "a83adb2cd721",
    "d": "2026-11-20"
   },
+  "english/tomita-bunsho-dokkai": {
+   "h": "1c87be1e6dc3",
+   "d": "2026-11-23"
+  },
+  "english/tomita-chobun-rule144": {
+   "h": "46a2a035014c",
+   "d": "2026-11-23"
+  },
   "english/tonogi-hitome": {
-   "h": "c9537fb61327",
-   "d": "2026-11-20"
+   "h": "656a28cb7704",
+   "d": "2026-11-23"
   },
   "english/tonogi-jikkyo": {
-   "h": "2cf06f41d523",
-   "d": "2026-11-20"
+   "h": "69580dab1b18",
+   "d": "2026-11-23"
   },
   "english/toshin-bunpo-lv": {
-   "h": "8b50674410e6",
-   "d": "2026-11-20"
+   "h": "e95d46d69c5a",
+   "d": "2026-11-23"
   },
   "english/toshin-chobun-lv": {
-   "h": "488fc7587223",
-   "d": "2026-11-20"
+   "h": "c0ecab461268",
+   "d": "2026-11-23"
   },
   "english/toshin-kyotsu-test-jissen-listening-3rd": {
-   "h": "87137e8431f3",
-   "d": "2026-11-20"
+   "h": "187bcb672ded",
+   "d": "2026-11-23"
   },
   "english/toshin-kyotsu-test-jissen-reading-3rd": {
-   "h": "8a210d0ffb02",
-   "d": "2026-11-20"
+   "h": "b01e61f13c3d",
+   "d": "2026-11-23"
   },
   "english/toshizu": {
    "h": "064b05c9f48e",
@@ -1193,53 +1337,57 @@
    "h": "d9203eabdb8d",
    "d": "2026-11-20"
   },
+  "english/uchuichi-koko-eibunpo": {
+   "h": "360772229960",
+   "d": "2026-11-23"
+  },
   "english/ultimate600": {
-   "h": "f5d929e36d7c",
-   "d": "2026-11-20"
+   "h": "4b5c280cbdc2",
+   "d": "2026-11-23"
   },
   "english/upgrade": {
-   "h": "8ef53e5f537b",
-   "d": "2026-11-20"
+   "h": "8b0d35883302",
+   "d": "2026-11-23"
   },
   "english/vintage": {
-   "h": "4a1cbd4447a0",
-   "d": "2026-11-20"
+   "h": "6d7b0f05197e",
+   "d": "2026-11-23"
   },
   "english/visual-eibun-kaishaku-1": {
-   "h": "b8791f773b86",
-   "d": "2026-11-20"
+   "h": "9e474417e467",
+   "d": "2026-11-23"
   },
   "english/visual-eibun-kaishaku-2": {
-   "h": "695cf3eede57",
-   "d": "2026-11-20"
+   "h": "5269674f6b00",
+   "d": "2026-11-23"
   },
   "english/waseda-eigo": {
    "h": "a62929384be0",
    "d": "2026-11-20"
   },
   "english/yamaguchi-eibunpo-jikkyo-1": {
-   "h": "49c30845f222",
-   "d": "2026-11-20"
+   "h": "fbd0b79fd9f1",
+   "d": "2026-11-23"
   },
   "english/yamaguchi-eibunpo-jikkyo-2": {
-   "h": "2e9dc7f5eda1",
-   "d": "2026-11-20"
+   "h": "cfc2db6b25ca",
+   "d": "2026-11-23"
   },
   "english/yatte1000": {
-   "h": "ad50db440c42",
-   "d": "2026-11-20"
+   "h": "8dab50f4b2a7",
+   "d": "2026-11-23"
   },
   "english/yatte300": {
-   "h": "1e5196d5b419",
-   "d": "2026-11-20"
+   "h": "b9d41362cf2b",
+   "d": "2026-11-23"
   },
   "english/yatte500": {
-   "h": "c59253148845",
-   "d": "2026-11-20"
+   "h": "fa842b6a48d5",
+   "d": "2026-11-23"
   },
   "english/yatte700": {
-   "h": "7fa872109f34",
-   "d": "2026-11-20"
+   "h": "5497d2f57cdd",
+   "d": "2026-11-23"
   },
   "english/yokubari": {
    "h": "ef6f21a28859",
@@ -1250,8 +1398,8 @@
    "d": "2026-11-20"
   },
   "english/yumetan": {
-   "h": "220d4f26670e",
-   "d": "2026-11-20"
+   "h": "8ebdf565d4d2",
+   "d": "2026-11-23"
   },
   "english/zenkoku-daigaku-nyushi-mondai-seikai-eigo-kokukoritsu": {
    "h": "ed4841fbe278",
@@ -1262,16 +1410,20 @@
    "d": "2026-11-20"
   },
   "english/zenlevel-chobun": {
-   "h": "b0cac5a4bdfc",
-   "d": "2026-11-20"
+   "h": "0d268055758c",
+   "d": "2026-11-23"
+  },
+  "english/zenlevel-eibunpo": {
+   "h": "fc8263ebddd1",
+   "d": "2026-11-23"
   },
   "file:build/content/articles.mjs": {
    "h": "d739a3c9a406",
    "d": "2026-09-09"
   },
   "file:build/content/legal.mjs": {
-   "h": "448ddd4db652",
-   "d": "2026-11-04"
+   "h": "1ac95bf34586",
+   "d": "2026-11-23"
   },
   "file:english/guides/basics/01/index.html": {
    "h": "fba49e1fa53c",
@@ -1334,8 +1486,8 @@
    "d": "2026-09-08"
   },
   "file:english/guides/eigo-jikan-haibun/index.html": {
-   "h": "a5c2c007031a",
-   "d": "2026-10-23"
+   "h": "90a81fed9c9f",
+   "d": "2026-11-23"
   },
   "file:english/guides/eisaku-comparison/index.html": {
    "h": "bb8b4c48055b",
@@ -1394,8 +1546,8 @@
    "d": "2026-10-28"
   },
   "file:guides/hajime-no-issatsu/index.html": {
-   "h": "00c463ad55f0",
-   "d": "2026-10-23"
+   "h": "d7f4343f985a",
+   "d": "2026-11-23"
   },
   "file:guides/how-many-books/index.html": {
    "h": "02069b45f653",
@@ -1418,16 +1570,16 @@
    "d": "2026-09-09"
   },
   "file:guides/nagaku-yomareru/index.html": {
-   "h": "2e1f5186dd00",
-   "d": "2026-11-20"
+   "h": "b5d6f5637885",
+   "d": "2026-11-23"
   },
   "file:guides/nanido-bunpu/index.html": {
-   "h": "8c2ee61e7d96",
-   "d": "2026-10-23"
+   "h": "abc192dd40b1",
+   "d": "2026-11-23"
   },
   "file:guides/nokori-jikan-select/index.html": {
-   "h": "12a70a4fc309",
-   "d": "2026-10-23"
+   "h": "f1d8fb4419de",
+   "d": "2026-11-23"
   },
   "file:guides/ranking/index.html": {
    "h": "7dc6ab5c75a6",
@@ -1442,8 +1594,8 @@
    "d": "2026-10-23"
   },
   "file:guides/shuppansha-map/index.html": {
-   "h": "17464848ed7b",
-   "d": "2026-11-20"
+   "h": "0ecd1f63fc66",
+   "d": "2026-11-23"
   },
   "file:guides/shuukai-sekkei/index.html": {
    "h": "cda30f73b2e0",
@@ -1454,8 +1606,8 @@
    "d": "2026-10-23"
   },
   "file:guides/tanjikan-ranking/index.html": {
-   "h": "f7a0c17e96dd",
-   "d": "2026-10-23"
+   "h": "4a9ca319cf23",
+   "d": "2026-11-23"
   },
   "file:guides/tsumazuki-awards/index.html": {
    "h": "3c4c70073163",
@@ -1538,8 +1690,8 @@
    "d": "2026-09-08"
   },
   "file:japanese/guides/kobun-tango-ranking/index.html": {
-   "h": "40507837f639",
-   "d": "2026-10-28"
+   "h": "5b001ee6a895",
+   "d": "2026-11-23"
   },
   "file:japanese/index.html": {
    "h": "3ff257bb45df",
@@ -1550,8 +1702,8 @@
    "d": "2026-09-04"
   },
   "file:math/guides/ao-vs-fg/index.html": {
-   "h": "47220e17d3a8",
-   "d": "2026-10-28"
+   "h": "3c3434fe405a",
+   "d": "2026-11-23"
   },
   "file:math/guides/basics/01/index.html": {
    "h": "70bd6cf3c899",
@@ -1686,8 +1838,8 @@
    "d": "2026-10-23"
   },
   "file:science/guides/juyo-vs-shinenshu/index.html": {
-   "h": "c34d06c2cbc2",
-   "d": "2026-11-20"
+   "h": "9e3df97878e7",
+   "d": "2026-11-23"
   },
   "file:science/guides/kagaku-mondaishu-ranking/index.html": {
    "h": "9473f3623e8d",
@@ -1778,8 +1930,8 @@
    "d": "2026-09-09"
   },
   "file:social/guides/ichimonitto-ranking/index.html": {
-   "h": "836424f755c5",
-   "d": "2026-10-23"
+   "h": "02467097dc6a",
+   "d": "2026-11-23"
   },
   "file:social/guides/index.html": {
    "h": "9dbffa9f3ccc",
@@ -2050,24 +2202,36 @@
    "d": "2026-09-10"
   },
   "japanese/access-hatten": {
-   "h": "fc27a59e114f",
-   "d": "2026-11-20"
+   "h": "c31ebed27833",
+   "d": "2026-11-23"
   },
   "japanese/access-kansei": {
    "h": "34d032dbba6c",
    "d": "2026-11-20"
   },
   "japanese/access-kihon": {
-   "h": "e36f913148ca",
-   "d": "2026-11-20"
+   "h": "6e5991eed039",
+   "d": "2026-11-23"
   },
   "japanese/access-kyotest-hyoron": {
    "h": "aced3501ce9b",
    "d": "2026-11-20"
   },
+  "japanese/access-kyotest-shosetsu": {
+   "h": "733fe08e775f",
+   "d": "2026-11-23"
+  },
+  "japanese/adachi-mieru-gendai": {
+   "h": "399cae429b3d",
+   "d": "2026-11-23"
+  },
   "japanese/akahon": {
-   "h": "8e07e7e5529f",
-   "d": "2026-11-20"
+   "h": "257ed7ebc0f6",
+   "d": "2026-11-23"
+  },
+  "japanese/alc-1kagetsu-kyotest-kokugo": {
+   "h": "1a477c928de1",
+   "d": "2026-11-23"
   },
   "japanese/aohon-kokugo": {
    "h": "4a62f727d73b",
@@ -2077,73 +2241,109 @@
    "h": "9d3dd08ddb2c",
    "d": "2026-11-20"
   },
+  "japanese/bungakushi-saijuyo-speedcheck": {
+   "h": "2a6d967f81da",
+   "d": "2026-11-23"
+  },
   "japanese/bunpo-10drill": {
-   "h": "3543edb60368",
-   "d": "2026-11-20"
+   "h": "707e92a3b095",
+   "d": "2026-11-23"
+  },
+  "japanese/bunpo-10drill-jissen": {
+   "h": "baf59e44750b",
+   "d": "2026-11-23"
   },
   "japanese/bunpo-30theme": {
-   "h": "7a05ba6c8acc",
-   "d": "2026-11-20"
+   "h": "b665486000c7",
+   "d": "2026-11-23"
   },
   "japanese/canpass-g": {
-   "h": "6de5784f61dd",
-   "d": "2026-11-20"
+   "h": "5725e675a493",
+   "d": "2026-11-23"
   },
   "japanese/canpass-koten": {
    "h": "93014f8d176d",
    "d": "2026-11-20"
   },
   "japanese/chikuma-hyoron-nyumon": {
-   "h": "86dd238efa14",
-   "d": "2026-11-20"
+   "h": "01fade230b8d",
+   "d": "2026-11-23"
   },
   "japanese/chikuma-hyoron-sen": {
    "h": "9b859137a893",
    "d": "2026-11-20"
   },
+  "japanese/chobun-kobun-joshiki-waka": {
+   "h": "c9f5f436f313",
+   "d": "2026-11-23"
+  },
   "japanese/chuken-shidai": {
-   "h": "17f45167eee4",
-   "d": "2026-11-20"
+   "h": "2e54094e9a80",
+   "d": "2026-11-23"
+  },
+  "japanese/codex-gendai-seisen": {
+   "h": "37dd9a141431",
+   "d": "2026-11-23"
   },
   "japanese/daizemi-kyotsu-jissen-kokugo": {
    "h": "a804441e7760",
    "d": "2026-11-20"
   },
   "japanese/daizemi-todai-pre-kokugo": {
-   "h": "7eab41d0192b",
-   "d": "2026-11-20"
+   "h": "bc22bdc7e7e7",
+   "d": "2026-11-23"
   },
   "japanese/deguchi-gendaibun-koshiki": {
-   "h": "0c393e800fbd",
-   "d": "2026-11-20"
+   "h": "487239b36da2",
+   "d": "2026-11-23"
   },
   "japanese/dojo": {
    "h": "c178fd740125",
    "d": "2026-11-20"
   },
   "japanese/dojo-kiso": {
-   "h": "b20bb6c918b1",
-   "d": "2026-11-20"
+   "h": "bd8885cb6ed9",
+   "d": "2026-11-23"
   },
   "japanese/dokkai-fukameru-tango": {
-   "h": "1f57c661cd60",
-   "d": "2026-11-20"
+   "h": "2c1bab0c0823",
+   "d": "2026-11-23"
+  },
+  "japanese/dokkai-gendai-keyword700": {
+   "h": "3b3cb8530125",
+   "d": "2026-11-23"
   },
   "japanese/dokkai-tango-training": {
-   "h": "f6f90e805e78",
-   "d": "2026-11-20"
+   "h": "43d8f12907de",
+   "d": "2026-11-23"
   },
   "japanese/formula600": {
-   "h": "5023d76d3c61",
-   "d": "2026-11-20"
+   "h": "244f5735e67c",
+   "d": "2026-11-23"
   },
   "japanese/funaguchi-kijutsu": {
-   "h": "fdb943a5e2a8",
-   "d": "2026-11-20"
+   "h": "9f679e0475b1",
+   "d": "2026-11-23"
   },
   "japanese/funaguchi-zero": {
-   "h": "2d217669ee78",
-   "d": "2026-11-20"
+   "h": "8378ebba9559",
+   "d": "2026-11-23"
+  },
+  "japanese/gendai-hyojun-drill-suntai": {
+   "h": "fd2ed53ff070",
+   "d": "2026-11-23"
+  },
+  "japanese/gendai-hyoron-theme-kogi": {
+   "h": "5bd2b4cf0ee2",
+   "d": "2026-11-23"
+  },
+  "japanese/gendai-kiso-drill-suntai": {
+   "h": "980a161e543c",
+   "d": "2026-11-23"
+  },
+  "japanese/gendai-nagare-dokkai-training": {
+   "h": "48c4060ddd53",
+   "d": "2026-11-23"
   },
   "japanese/gendaibun-joshiki-sukima": {
    "h": "a8fc438734fc",
@@ -2154,100 +2354,112 @@
    "d": "2026-11-20"
   },
   "japanese/gendaibun-training-hisshu": {
-   "h": "96f89e88b3bf",
-   "d": "2026-11-20"
+   "h": "fa64b7135db5",
+   "d": "2026-11-23"
   },
   "japanese/gendaibun-training-nyumon": {
-   "h": "77f026a31325",
-   "d": "2026-11-20"
+   "h": "10ea06c03b2b",
+   "d": "2026-11-23"
   },
   "japanese/genji-joshiki": {
-   "h": "bef370f832d5",
-   "d": "2026-11-20"
+   "h": "6c1dc588ffbb",
+   "d": "2026-11-23"
   },
   "japanese/gentan": {
-   "h": "fd28c57eeba7",
-   "d": "2026-11-20"
+   "h": "376e2008e7a8",
+   "d": "2026-11-23"
   },
   "japanese/group30": {
-   "h": "2605a3f9f0c2",
-   "d": "2026-11-20"
+   "h": "5cf32ddeb206",
+   "d": "2026-11-23"
   },
   "japanese/handai-kokugo-15kanen-4": {
-   "h": "57eede8df83a",
-   "d": "2026-11-20"
+   "h": "dd3852fc4f83",
+   "d": "2026-11-23"
   },
   "japanese/hayaoboe": {
-   "h": "80ed77138ee6",
-   "d": "2026-11-20"
+   "h": "a6d1d10c52bc",
+   "d": "2026-11-23"
+  },
+  "japanese/hayaoboe-kanbun-dokkai-training": {
+   "h": "1360e215c733",
+   "d": "2026-11-23"
   },
   "japanese/highscore-kyotsu-gendaibun": {
-   "h": "444c05186bfb",
-   "d": "2026-11-20"
+   "h": "c3c836cfc8b7",
+   "d": "2026-11-23"
   },
   "japanese/highscore-kyotsu-kobun-kanbun": {
    "h": "efd5e76cf542",
    "d": "2026-11-20"
   },
+  "japanese/hikkei-kobun-tango345": {
+   "h": "0704cdb8c54f",
+   "d": "2026-11-23"
+  },
+  "japanese/hinshutsu-bungakushi": {
+   "h": "1f407822469d",
+   "d": "2026-11-23"
+  },
   "japanese/hinshutsu-juyogo700": {
-   "h": "a97e2db5a888",
-   "d": "2026-11-20"
+   "h": "a4627b7bbafd",
+   "d": "2026-11-23"
   },
   "japanese/hissei": {
-   "h": "88e543935efb",
-   "d": "2026-11-20"
+   "h": "e8bf8e74dc30",
+   "d": "2026-11-23"
   },
   "japanese/hitotsubashi-kokugo": {
-   "h": "825c12b11c00",
-   "d": "2026-11-20"
+   "h": "975f67d885eb",
+   "d": "2026-11-23"
   },
   "japanese/hyojun-seikou-g": {
    "h": "5c6f0d3a5e9d",
    "d": "2026-11-20"
   },
   "japanese/ikiru-kanji": {
-   "h": "f2a7d6431b8e",
-   "d": "2026-11-20"
+   "h": "398333c0ce03",
+   "d": "2026-11-23"
   },
   "japanese/ikiru-keyword": {
-   "h": "686a6aeecd59",
-   "d": "2026-11-20"
+   "h": "db1b03538dfd",
+   "d": "2026-11-23"
   },
   "japanese/jissen-hyojun-kanbun": {
    "h": "3dc3d4971086",
    "d": "2026-11-20"
   },
   "japanese/jitsuyobun": {
-   "h": "8cb4d646612f",
-   "d": "2026-11-20"
+   "h": "22c711bf8cd8",
+   "d": "2026-11-23"
   },
   "japanese/jokyu-kanji-goi": {
-   "h": "41a54c91715e",
-   "d": "2026-11-20"
+   "h": "7df409561634",
+   "d": "2026-11-23"
   },
   "japanese/jokyu-zero": {
-   "h": "c5e3e3c09708",
-   "d": "2026-11-20"
+   "h": "e19259d2ec3c",
+   "d": "2026-11-23"
   },
   "japanese/jokyu1": {
-   "h": "9eb5f688125d",
-   "d": "2026-11-20"
+   "h": "74961c2ea245",
+   "d": "2026-11-23"
   },
   "japanese/jokyu2": {
-   "h": "54f9feeb2e22",
-   "d": "2026-11-20"
+   "h": "377809217ab3",
+   "d": "2026-11-23"
   },
   "japanese/jump-up-note-kotenbunpo-enshu": {
-   "h": "b63594870421",
-   "d": "2026-11-20"
+   "h": "01d35cb969c9",
+   "d": "2026-11-23"
   },
   "japanese/jumpup-kanbun": {
-   "h": "116139e9f282",
-   "d": "2026-11-20"
+   "h": "d315a1ea12a5",
+   "d": "2026-11-23"
   },
   "japanese/kaihatsu-koza": {
-   "h": "e558a7204071",
-   "d": "2026-11-20"
+   "h": "e109e7318f31",
+   "d": "2026-11-23"
   },
   "japanese/kaishaku-hoho": {
    "h": "180e40cc06a7",
@@ -2258,136 +2470,168 @@
    "d": "2026-11-20"
   },
   "japanese/kaitou-koza": {
-   "h": "15b779e1d53a",
-   "d": "2026-11-20"
+   "h": "c4ba566cb6a8",
+   "d": "2026-11-23"
   },
   "japanese/kako-review-kokugo": {
-   "h": "6e826f24c662",
-   "d": "2026-11-20"
+   "h": "a75ae643d972",
+   "d": "2026-11-23"
   },
   "japanese/kakuto": {
-   "h": "9b6d46daa915",
-   "d": "2026-11-20"
+   "h": "f4f0229d27ca",
+   "d": "2026-11-23"
   },
   "japanese/kanbun-10drill": {
-   "h": "399bd6dfef3c",
-   "d": "2026-11-20"
+   "h": "c64752785664",
+   "d": "2026-11-23"
   },
   "japanese/kanbun-gorogo": {
-   "h": "d4b63c1210da",
-   "d": "2026-11-20"
+   "h": "d52343be866e",
+   "d": "2026-11-23"
+  },
+  "japanese/kanbun-keyword-kogi-sanseido": {
+   "h": "0efb8b361655",
+   "d": "2026-11-23"
   },
   "japanese/kanbun-kyote-shuchu": {
    "h": "aed0b7e13a61",
    "d": "2026-11-20"
   },
+  "japanese/kanbun-point-master": {
+   "h": "6214013c2f6b",
+   "d": "2026-11-23"
+  },
+  "japanese/kanbun-saijuyo-speedcheck": {
+   "h": "e838f839091b",
+   "d": "2026-11-23"
+  },
   "japanese/kanji-core2800": {
-   "h": "a06d3a21b74e",
-   "d": "2026-11-20"
+   "h": "fbf26e4f50ce",
+   "d": "2026-11-23"
   },
   "japanese/kanji-goi2400": {
-   "h": "c62da7e98f1d",
-   "d": "2026-11-20"
+   "h": "df2af9fc9427",
+   "d": "2026-11-23"
   },
   "japanese/kanji-ichimon": {
-   "h": "ab1272dfd6a3",
-   "d": "2026-11-20"
+   "h": "516ea1b31a85",
+   "d": "2026-11-23"
   },
   "japanese/kanji-master1800": {
-   "h": "cf6e9713cd0d",
-   "d": "2026-11-20"
+   "h": "2dbe6beb9de9",
+   "d": "2026-11-23"
   },
   "japanese/kanki-kanbun-dokkai": {
-   "h": "d8e787aeca39",
-   "d": "2026-11-20"
+   "h": "4a6c8d52faec",
+   "d": "2026-11-23"
   },
   "japanese/keyword-dokkai": {
-   "h": "8cb4998cf338",
-   "d": "2026-11-20"
+   "h": "a03af069e335",
+   "d": "2026-11-23"
   },
   "japanese/kimeru-gendai": {
-   "h": "121410ba2141",
-   "d": "2026-11-20"
+   "h": "c98c944e3c61",
+   "d": "2026-11-23"
   },
   "japanese/kimeru-kokan": {
    "h": "6d2553c91189",
    "d": "2026-11-20"
+  },
+  "japanese/kimeru-kyotest-gendai-mondai": {
+   "h": "c723bc4669a4",
+   "d": "2026-11-23"
   },
   "japanese/kindai-bungo": {
    "h": "a5b99960fa53",
    "d": "2026-11-20"
   },
   "japanese/kiso-kogi-nakano": {
-   "h": "7bbe551bab41",
-   "d": "2026-11-20"
+   "h": "a65300b12d1d",
+   "d": "2026-11-23"
   },
   "japanese/kiso-seikou-g": {
-   "h": "f3a18177ff69",
-   "d": "2026-11-20"
+   "h": "26d0317d211e",
+   "d": "2026-11-23"
   },
   "japanese/kiso-seikou-k": {
-   "h": "df6c7f5a0597",
-   "d": "2026-11-20"
+   "h": "bb39ddcc17dd",
+   "d": "2026-11-23"
   },
   "japanese/kobedai-kokugo-15kanen-4": {
-   "h": "b2d501507496",
-   "d": "2026-11-20"
+   "h": "ce98a5f8f024",
+   "d": "2026-11-23"
   },
   "japanese/kobun-dokkai-gorogo": {
    "h": "88acd1e48a29",
    "d": "2026-11-20"
   },
   "japanese/kobun-gorogo": {
-   "h": "027022dfca8a",
-   "d": "2026-11-20"
+   "h": "fad761abef37",
+   "d": "2026-11-23"
+  },
+  "japanese/kobun-joshiki-saijuyo-speedcheck": {
+   "h": "c7cb6c782853",
+   "d": "2026-11-23"
   },
   "japanese/kobun-jotatsu45": {
-   "h": "a0704ac3b77e",
-   "d": "2026-11-20"
+   "h": "576128c12694",
+   "d": "2026-11-23"
   },
   "japanese/kobun-jotatsu56": {
    "h": "2b175afe18d6",
    "d": "2026-11-20"
   },
   "japanese/koike-muteki": {
-   "h": "3f70f8fd6f5c",
-   "d": "2026-11-20"
+   "h": "3767264adcd0",
+   "d": "2026-11-23"
+  },
+  "japanese/koko-kanbun-kuho-pattern-drill": {
+   "h": "9215374d998c",
+   "d": "2026-11-23"
+  },
+  "japanese/koko-koten-bunpo-pattern-drill": {
+   "h": "20fc4512c908",
+   "d": "2026-11-23"
   },
   "japanese/koshiba-gendaibun-1satsu": {
-   "h": "a3416f643a81",
-   "d": "2026-11-20"
+   "h": "f467d5b01f11",
+   "d": "2026-11-23"
+  },
+  "japanese/koten-bunpo-speed-input": {
+   "h": "a5040ff5eb2b",
+   "d": "2026-11-23"
   },
   "japanese/kotoba-chikara": {
-   "h": "d4938e6da80c",
-   "d": "2026-11-20"
+   "h": "73ee43090191",
+   "d": "2026-11-23"
   },
   "japanese/kuke-keyword": {
-   "h": "6700dc1d0ba6",
-   "d": "2026-11-20"
+   "h": "cfcd5c392666",
+   "d": "2026-11-23"
   },
   "japanese/kuro-hon-kokugo": {
    "h": "5113fb498b20",
    "d": "2026-11-20"
   },
   "japanese/kyodai-gendai25": {
-   "h": "1399739afd04",
-   "d": "2026-11-20"
+   "h": "e7cc112a82b2",
+   "d": "2026-11-23"
   },
   "japanese/kyodai-koten25": {
-   "h": "623fe3dafc14",
-   "d": "2026-11-20"
+   "h": "3c9838a5b73f",
+   "d": "2026-11-23"
   },
   "japanese/kyodai-nyushi-shokai-25-gendaibun-3": {
-   "h": "7d99479172b6",
-   "d": "2026-11-20"
+   "h": "95045b11540b",
+   "d": "2026-11-23"
   },
   "japanese/kyodai-nyushi-shokai-25-koten-3": {
-   "h": "51819b9fc44d",
-   "d": "2026-11-20"
+   "h": "fafe2b57c006",
+   "d": "2026-11-23"
   },
   "japanese/kyote-akahon-kokugo": {
-   "h": "71a43f634810",
-   "d": "2026-11-20"
+   "h": "dc03c3a87c73",
+   "d": "2026-11-23"
   },
   "japanese/kyote-kanbun-kotsu": {
    "h": "4797521de982",
@@ -2398,68 +2642,80 @@
    "d": "2026-11-20"
   },
   "japanese/kyote-kobun-kotsu": {
-   "h": "4d9e0cddfb9e",
-   "d": "2026-11-20"
+   "h": "29eb94c9f1dc",
+   "d": "2026-11-23"
   },
   "japanese/kyote-shinkatei-gendai": {
-   "h": "c5c262105e36",
-   "d": "2026-11-20"
+   "h": "924f0d324f42",
+   "d": "2026-11-23"
   },
   "japanese/level-g": {
-   "h": "9d6125f17455",
-   "d": "2026-11-20"
+   "h": "297b17cc44b0",
+   "d": "2026-11-23"
   },
   "japanese/level-k": {
-   "h": "f1ce860dcc5f",
-   "d": "2026-11-20"
+   "h": "554670fcdb18",
+   "d": "2026-11-23"
   },
   "japanese/madonna-joshiki": {
-   "h": "e788a58d0f55",
-   "d": "2026-11-20"
+   "h": "da7b611c19e4",
+   "d": "2026-11-23"
   },
   "japanese/madonna-kaiho": {
-   "h": "29fd8d64e4f4",
-   "d": "2026-11-20"
+   "h": "1917e930a4f4",
+   "d": "2026-11-23"
   },
   "japanese/madonna-kobun": {
-   "h": "bb94f3fd19eb",
-   "d": "2026-11-20"
+   "h": "9bb44650c228",
+   "d": "2026-11-23"
   },
   "japanese/madonna-tango": {
-   "h": "35a3662c707f",
-   "d": "2026-11-20"
+   "h": "043f1ac83a3e",
+   "d": "2026-11-23"
   },
   "japanese/mark-kiso-g": {
-   "h": "78c16a324738",
-   "d": "2026-11-20"
+   "h": "ba208eb6282b",
+   "d": "2026-11-23"
   },
   "japanese/mark-kiso-k": {
-   "h": "0a47fe628fe7",
-   "d": "2026-11-20"
+   "h": "6aa562e9a862",
+   "d": "2026-11-23"
   },
   "japanese/mark-kiso-kan": {
-   "h": "d65007390908",
-   "d": "2026-11-20"
+   "h": "cb3a8123faac",
+   "d": "2026-11-23"
+  },
+  "japanese/mazuha-kyotest-gendai-1": {
+   "h": "3c631b9793d4",
+   "d": "2026-11-23"
+  },
+  "japanese/mazuha-kyotest-kobun": {
+   "h": "719ead67f9b9",
+   "d": "2026-11-23"
   },
   "japanese/meijidai-kokugo-3": {
-   "h": "66a95d579d39",
-   "d": "2026-11-20"
+   "h": "9aada50e4bbb",
+   "d": "2026-11-23"
   },
   "japanese/midori-hon-kokugo": {
    "h": "a9d6e8e9630d",
    "d": "2026-11-20"
   },
   "japanese/miwa-kanbun-rule": {
-   "h": "f761c794874d",
-   "d": "2026-11-20"
+   "h": "87cf85817983",
+   "d": "2026-11-23"
   },
   "japanese/miwa-kyoshitsu": {
-   "h": "79051126af4e",
-   "d": "2026-11-20"
+   "h": "2f240a88b36d",
+   "d": "2026-11-23"
   },
   "japanese/mochizuki": {
-   "h": "8619579a2a2e",
-   "d": "2026-11-20"
+   "h": "b7bf731614f1",
+   "d": "2026-11-23"
+  },
+  "japanese/mochizuki-kobun-tango333": {
+   "h": "dd953aed500b",
+   "d": "2026-11-23"
   },
   "japanese/motoi-kobun-dokkai": {
    "h": "c8d637fd582b",
@@ -2469,69 +2725,77 @@
    "h": "993ffd2f91fa",
    "d": "2026-11-20"
   },
+  "japanese/nishihara-gendai-hajimekara": {
+   "h": "73d911e5c298",
+   "d": "2026-11-23"
+  },
   "japanese/nitoryu634": {
-   "h": "706a8bbf4acd",
-   "d": "2026-11-20"
+   "h": "2718bb176b35",
+   "d": "2026-11-23"
   },
   "japanese/obunsha-honban-moshi-kokugo": {
    "h": "decb0d466d7b",
    "d": "2026-11-20"
   },
   "japanese/okamoto-3h-kanbun": {
-   "h": "9fb01002cf22",
-   "d": "2026-11-20"
+   "h": "cccbbd88e263",
+   "d": "2026-11-23"
   },
   "japanese/okamoto-4jikan-kanbun-dokkai": {
    "h": "f71de9f7b76c",
    "d": "2026-11-20"
   },
   "japanese/okamoto-bunpo": {
-   "h": "c7903d59e7f2",
-   "d": "2026-11-20"
+   "h": "662a85544b08",
+   "d": "2026-11-23"
   },
   "japanese/okamoto-dokkai": {
    "h": "33a8477f85e8",
    "d": "2026-11-20"
   },
   "japanese/okamoto-kanbun": {
-   "h": "9aa9f05d88f7",
-   "d": "2026-11-20"
+   "h": "4031a6145522",
+   "d": "2026-11-23"
+  },
+  "japanese/okamoto-ryomon-tokkun-kanbun-kuho": {
+   "h": "29a9e10d597b",
+   "d": "2026-11-23"
   },
   "japanese/okamoto-stream-kobunpo-kiso": {
-   "h": "145dc59fe8ba",
-   "d": "2026-11-20"
+   "h": "323394480a37",
+   "d": "2026-11-23"
   },
   "japanese/okamoto-stream-kobunpo-oyo": {
-   "h": "b085d9dc6fe0",
-   "d": "2026-11-20"
+   "h": "74b18cb64781",
+   "d": "2026-11-23"
   },
   "japanese/omoshiroi-gendai": {
-   "h": "3e922d1d25db",
-   "d": "2026-11-20"
+   "h": "4f4ed616f66f",
+   "d": "2026-11-23"
   },
   "japanese/omoshiroi-kokan": {
    "h": "713d76aa5431",
    "d": "2026-11-20"
   },
   "japanese/platinum-rule": {
-   "h": "3bda3e8f0efa",
-   "d": "2026-11-20"
+   "h": "4b54e187ac57",
+   "d": "2026-11-23"
   },
   "japanese/polaris-g1": {
-   "h": "e7f67e770f08",
-   "d": "2026-11-20"
+   "h": "cbb3a05f34ba",
+   "d": "2026-11-23"
   },
   "japanese/polaris-g2": {
-   "h": "4f3b9da81952",
-   "d": "2026-11-20"
+   "h": "789ef5c81762",
+   "d": "2026-11-23"
   },
   "japanese/polaris-g3": {
    "h": "0d120fe8bfb3",
    "d": "2026-11-20"
   },
   "japanese/polaris-k1": {
-   "h": "0d71078c4095",
-   "d": "2026-11-20"
+   "h": "87bcff58604f",
+   "d": "2026-11-23"
   },
   "japanese/polaris-k2": {
    "h": "cea8e4400feb",
@@ -2542,32 +2806,36 @@
    "d": "2026-11-20"
   },
   "japanese/rules1": {
-   "h": "6f85e9bb0973",
-   "d": "2026-11-20"
+   "h": "0ba7ad20e6dd",
+   "d": "2026-11-23"
   },
   "japanese/rules2": {
-   "h": "ac6a2716142a",
-   "d": "2026-11-20"
+   "h": "736bdca9177f",
+   "d": "2026-11-23"
   },
   "japanese/rules3": {
    "h": "ce1505dfc8fb",
    "d": "2026-11-20"
   },
   "japanese/rules4": {
-   "h": "675fa41d2e47",
-   "d": "2026-11-20"
+   "h": "44300ed13c7f",
+   "d": "2026-11-23"
   },
   "japanese/saikyo-kobun50": {
    "h": "aef35fe020fc",
    "d": "2026-11-20"
   },
+  "japanese/schema-gendai": {
+   "h": "de2abdbe1379",
+   "d": "2026-11-23"
+  },
   "japanese/seidoku-kihon": {
-   "h": "6ff04f3cea3a",
-   "d": "2026-11-20"
+   "h": "c44d3635b103",
+   "d": "2026-11-23"
   },
   "japanese/seidoku-toppa": {
-   "h": "dfce8f7c6075",
-   "d": "2026-11-20"
+   "h": "493d8d30f6ea",
+   "d": "2026-11-23"
   },
   "japanese/seisen-g": {
    "h": "e138811377fd",
@@ -2581,137 +2849,149 @@
    "h": "fb085a56305b",
    "d": "2026-11-20"
   },
+  "japanese/sekaiichi-kyodai-kokugo": {
+   "h": "387e47d1be4c",
+   "d": "2026-11-23"
+  },
   "japanese/sekaiichi-todai-kokugo": {
-   "h": "904bdbcf8ac6",
-   "d": "2026-11-20"
+   "h": "ccb073ac1ee8",
+   "d": "2026-11-23"
   },
   "japanese/shin-gorogo-kobun-tango": {
-   "h": "d2ef805b1240",
-   "d": "2026-11-20"
+   "h": "4bbc28589007",
+   "d": "2026-11-23"
   },
   "japanese/shin-kobutan": {
    "h": "c174002a8c13",
    "d": "2026-11-20"
   },
   "japanese/shin-tamura-gendaibun-1": {
-   "h": "2368184139f1",
-   "d": "2026-11-20"
+   "h": "aadd88aeaed6",
+   "d": "2026-11-23"
   },
   "japanese/shin-tamura-gendaibun-2": {
    "h": "a3d1750d6269",
    "d": "2026-11-20"
   },
+  "japanese/shinsen-kobun-tango400": {
+   "h": "faa4a6b26e66",
+   "d": "2026-11-23"
+  },
   "japanese/shuchu-gendai": {
-   "h": "77c00c7d5d33",
-   "d": "2026-11-20"
+   "h": "ad39177254b6",
+   "d": "2026-11-23"
   },
   "japanese/shutoken-nankan": {
    "h": "28eceda6edf5",
    "d": "2026-11-20"
   },
   "japanese/smart-step-g": {
-   "h": "e96c53939c9e",
-   "d": "2026-11-20"
+   "h": "8a950af6f863",
+   "d": "2026-11-23"
   },
   "japanese/sokudoku-joshiki": {
-   "h": "d0ac39cde4ce",
-   "d": "2026-11-20"
+   "h": "06f29cf0984d",
+   "d": "2026-11-23"
   },
   "japanese/sokudoku-kobun-tango": {
-   "h": "7a725f6c1273",
-   "d": "2026-11-20"
+   "h": "27e4c2dd1f0c",
+   "d": "2026-11-23"
+  },
+  "japanese/sokusen-zemi-lite-gendai": {
+   "h": "3a07a1cc8080",
+   "d": "2026-11-23"
   },
   "japanese/sou-4jikan-gendaibun": {
-   "h": "82f942c6a42d",
-   "d": "2026-11-20"
+   "h": "520fb9b843ee",
+   "d": "2026-11-23"
   },
   "japanese/sou-ryomon-tokkun-1-basic": {
-   "h": "3cfddb2224ec",
-   "d": "2026-11-20"
+   "h": "8d5a3ee31d6e",
+   "d": "2026-11-23"
   },
   "japanese/sou-ryomon-tokkun-2-standard": {
-   "h": "25dc2370c09a",
-   "d": "2026-11-20"
+   "h": "7c380426a25a",
+   "d": "2026-11-23"
   },
   "japanese/stepup-trial": {
-   "h": "7bde3bca6471",
-   "d": "2026-11-20"
+   "h": "a48302c43d30",
+   "d": "2026-11-23"
   },
   "japanese/stepup10": {
-   "h": "f2f71f372a98",
-   "d": "2026-11-20"
+   "h": "d642722264c1",
+   "d": "2026-11-23"
   },
   "japanese/stepup30": {
-   "h": "16a637ebdd5a",
-   "d": "2026-11-20"
+   "h": "ed573b3d6d9c",
+   "d": "2026-11-23"
   },
   "japanese/system-basic": {
-   "h": "246d79775605",
-   "d": "2026-11-20"
+   "h": "e3233956ad91",
+   "d": "2026-11-23"
   },
   "japanese/system-bible": {
-   "h": "072b3b5f3cbc",
-   "d": "2026-11-20"
+   "h": "ea0b3cfda10a",
+   "d": "2026-11-23"
   },
   "japanese/tadoku-training": {
-   "h": "b195f1951230",
-   "d": "2026-11-20"
+   "h": "40f12df6e1d3",
+   "d": "2026-11-23"
   },
   "japanese/tamura-yasashiku": {
-   "h": "327c2a7989bf",
-   "d": "2026-11-20"
+   "h": "83b056af8c4e",
+   "d": "2026-11-23"
   },
   "japanese/tango315": {
-   "h": "e0ada7466c86",
-   "d": "2026-11-20"
+   "h": "3c9d15a5d6f9",
+   "d": "2026-11-23"
   },
   "japanese/tango330": {
-   "h": "9c819acca29f",
-   "d": "2026-11-20"
+   "h": "587c9e5bf0e8",
+   "d": "2026-11-23"
   },
   "japanese/tanki-kyote-gendai": {
-   "h": "33323c4c602a",
-   "d": "2026-11-20"
+   "h": "d94dd7254536",
+   "d": "2026-11-23"
   },
   "japanese/tanki-kyote-kanbun": {
    "h": "bab412624c9d",
    "d": "2026-11-20"
   },
   "japanese/tanki-kyote-kobun": {
-   "h": "5b34c7529932",
-   "d": "2026-11-20"
+   "h": "8f823f97e349",
+   "d": "2026-11-23"
   },
   "japanese/terashi": {
-   "h": "33985dae6aff",
-   "d": "2026-11-20"
+   "h": "6468dc8e527c",
+   "d": "2026-11-23"
   },
   "japanese/tetsuryoku-koten": {
-   "h": "9565148224e4",
-   "d": "2026-11-20"
+   "h": "bbd3a37aaa29",
+   "d": "2026-11-23"
   },
   "japanese/todai-gendai-premium": {
-   "h": "2cbe1ae35356",
-   "d": "2026-11-20"
+   "h": "c40de05283e1",
+   "d": "2026-11-23"
   },
   "japanese/todai-gendai25": {
-   "h": "c210a0e4f6ca",
-   "d": "2026-11-20"
+   "h": "c05042c302d7",
+   "d": "2026-11-23"
   },
   "japanese/todai-koten25": {
-   "h": "a14093b529af",
-   "d": "2026-11-20"
+   "h": "842e2a3e8612",
+   "d": "2026-11-23"
   },
   "japanese/todai-nyushi-shokai-25-gendaibun-3": {
-   "h": "dc01696fc676",
-   "d": "2026-11-20"
+   "h": "5a918cd8439a",
+   "d": "2026-11-23"
   },
   "japanese/todai-nyushi-shokai-25-koten-3": {
-   "h": "2ecc8512188e",
-   "d": "2026-11-20"
+   "h": "473b03ad005a",
+   "d": "2026-11-23"
   },
   "japanese/tokuten-g": {
-   "h": "5cccd1bae0f5",
-   "d": "2026-11-20"
+   "h": "52d16b8942b3",
+   "d": "2026-11-23"
   },
   "japanese/tokuten-k": {
    "h": "d9199600394c",
@@ -2722,120 +3002,124 @@
    "d": "2026-11-20"
   },
   "japanese/tomii-bunpo": {
-   "h": "4ae9f092c6d6",
-   "d": "2026-11-20"
+   "h": "14de4c1ab950",
+   "d": "2026-11-23"
   },
   "japanese/tomii-dokkai": {
    "h": "401e9c4da7c7",
    "d": "2026-11-20"
   },
   "japanese/toshin-kyote-gendai": {
-   "h": "3d76f6f20c91",
-   "d": "2026-11-20"
+   "h": "f0f5f3ce1b40",
+   "d": "2026-11-23"
   },
   "japanese/toshin-kyotsu-jissen-kanbun": {
    "h": "ae5f6b049d63",
    "d": "2026-11-20"
   },
   "japanese/toshin-kyotsu-jissen-kobun": {
-   "h": "8ebf8615de55",
-   "d": "2026-11-20"
+   "h": "59c858b3a293",
+   "d": "2026-11-23"
   },
   "japanese/tsuchiya-kobun-tango-222": {
-   "h": "a376331a64ac",
-   "d": "2026-11-20"
+   "h": "34e43570f8d3",
+   "d": "2026-11-23"
+  },
+  "japanese/tsuji-logical-kobun-dokkai": {
+   "h": "44b4d9a5c2f8",
+   "d": "2026-11-23"
   },
   "japanese/waseda-kokugo": {
-   "h": "1b3a9e762c97",
-   "d": "2026-11-20"
+   "h": "6ac195895a46",
+   "d": "2026-11-23"
   },
   "japanese/yagyu-cross-lecture-dokkai": {
-   "h": "3e2d52f5e742",
-   "d": "2026-11-20"
+   "h": "eed3b3fd2fc9",
+   "d": "2026-11-23"
   },
   "japanese/yagyu-cross-lecture-kaiho": {
-   "h": "a2ebe1b1e0fc",
-   "d": "2026-11-20"
+   "h": "bee896bc2e9d",
+   "d": "2026-11-23"
   },
   "japanese/yagyu-koko-hajimeru-drill": {
-   "h": "9ab4dd7da64c",
-   "d": "2026-11-20"
+   "h": "101fd40baf67",
+   "d": "2026-11-23"
   },
   "japanese/yagyu-koko-tsunageru-drill": {
-   "h": "cc649e96a69b",
-   "d": "2026-11-20"
+   "h": "ce8ec3787f71",
+   "d": "2026-11-23"
   },
   "japanese/yama": {
-   "h": "8d95ddb1d124",
-   "d": "2026-11-20"
+   "h": "c72bd190ecd0",
+   "d": "2026-11-23"
   },
   "japanese/yasashiku-bunpo": {
-   "h": "cbabd4dea0fe",
-   "d": "2026-11-20"
+   "h": "89aa2ab18a3f",
+   "d": "2026-11-23"
   },
   "japanese/yasawa3h-dokkai": {
-   "h": "66acd6664aec",
-   "d": "2026-11-20"
+   "h": "9a7b3733db04",
+   "d": "2026-11-23"
   },
   "japanese/yasawa6h": {
-   "h": "90951c684d7b",
-   "d": "2026-11-20"
+   "h": "3248f4dc8d05",
+   "d": "2026-11-23"
   },
   "japanese/yazawa-ryomon-tokkun-1-basic": {
-   "h": "96de79beed3f",
-   "d": "2026-11-20"
+   "h": "868263383436",
+   "d": "2026-11-23"
   },
   "japanese/yazawa-ryomon-tokkun-2-standard": {
    "h": "86cd61ade9d3",
    "d": "2026-11-20"
   },
   "japanese/yomitoki-tango": {
-   "h": "102f464d4633",
-   "d": "2026-11-20"
+   "h": "c29974099eac",
+   "d": "2026-11-23"
   },
   "japanese/yumei-shidai": {
    "h": "450e40a6e918",
    "d": "2026-11-20"
   },
   "japanese/yurugoyaku-tango": {
-   "h": "46e9d309fc54",
-   "d": "2026-11-20"
+   "h": "0f2d18435e09",
+   "d": "2026-11-23"
   },
   "japanese/zenlevel-g": {
-   "h": "9ce4f33e4aef",
-   "d": "2026-11-20"
+   "h": "b28ca36aa157",
+   "d": "2026-11-23"
   },
   "japanese/zenlevel-k": {
-   "h": "dad569e58406",
-   "d": "2026-11-20"
+   "h": "ace31186254d",
+   "d": "2026-11-23"
   },
   "japanese/zenlevel-kan": {
-   "h": "f1bd0c5f8d54",
-   "d": "2026-11-20"
+   "h": "3e449637e0c0",
+   "d": "2026-11-23"
   },
   "japanese/zero-kakusei": {
-   "h": "157ca2f055a4",
-   "d": "2026-11-20"
+   "h": "97785c26ea51",
+   "d": "2026-11-23"
   },
   "japanese/zero-kakusei-final": {
-   "h": "eed6de90332b",
-   "d": "2026-11-20"
+   "h": "b35cd01f44e2",
+   "d": "2026-11-23"
   },
   "japanese/zero-kakusei-koten-bunpo": {
    "h": "a864de8e0d3d",
    "d": "2026-11-20"
   },
   "japanese/zero-kakusei-next": {
-   "h": "d60b378415af",
-   "d": "2026-11-20"
+   "h": "ff88ff54dd8d",
+   "d": "2026-11-23"
   },
   "japanese/zkai-kanji-goi2700": {
-   "h": "1aa51fd02964",
-   "d": "2026-11-20"
+   "h": "e1f41b0ed730",
+   "d": "2026-11-23"
   },
   "japanese/ztr-kijutsu": {
-   "h": "5d50f253f56d",
-   "d": "2026-11-20"
+   "h": "1730e0648a2b",
+   "d": "2026-11-23"
   },
   "japanese/ztr-shidai": {
    "h": "a482a1258d7e",
@@ -2846,28 +3130,40 @@
    "d": "2026-11-20"
   },
   "joho/info-1satsu-mondaishu": {
-   "h": "d6f263b4222c",
-   "d": "2026-11-20"
+   "h": "6e67ad7a94b1",
+   "d": "2026-11-23"
   },
   "joho/info-1satsu-wakaru": {
-   "h": "dc0957339fed",
-   "d": "2026-11-20"
+   "h": "74637bf4cd1e",
+   "d": "2026-11-23"
   },
   "joho/info-bunkei-yougoshu": {
    "h": "35c7e0877c6d",
    "d": "2026-11-20"
   },
+  "joho/info-enshu-kakomon-impress": {
+   "h": "ecbbac546e13",
+   "d": "2026-11-23"
+  },
+  "joho/info-fujiwara-program-data": {
+   "h": "fa766cd2c853",
+   "d": "2026-11-23"
+  },
+  "joho/info-fujiwara-zero-kara": {
+   "h": "2bfa53d7b076",
+   "d": "2026-11-23"
+  },
   "joho/info-hitotsuzutsu": {
-   "h": "77e7ee9864d7",
-   "d": "2026-11-20"
+   "h": "878832ed90d6",
+   "d": "2026-11-23"
   },
   "joho/info-honban-moshi": {
-   "h": "16cdc66e852b",
-   "d": "2026-11-20"
+   "h": "fe621458791d",
+   "d": "2026-11-23"
   },
   "joho/info-hyojun-mondaishu": {
-   "h": "ebccd1589d9f",
-   "d": "2026-11-20"
+   "h": "7711564f8fe8",
+   "d": "2026-11-23"
   },
   "joho/info-ichimon-itto": {
    "h": "a3377c5d5258",
@@ -2878,28 +3174,28 @@
    "d": "2026-11-20"
   },
   "joho/info-jissen-kouryaku-jikkyo": {
-   "h": "5a1c8818ba5f",
-   "d": "2026-11-20"
+   "h": "6e02af178208",
+   "d": "2026-11-23"
   },
   "joho/info-jissen-mondaishu-sundai": {
-   "h": "2c67e72be070",
-   "d": "2026-11-20"
+   "h": "5087029fd508",
+   "d": "2026-11-23"
   },
   "joho/info-jissen-mondaishu-toshin": {
-   "h": "a11b4690f342",
-   "d": "2026-11-20"
+   "h": "a5d4b604578f",
+   "d": "2026-11-23"
   },
   "joho/info-jissen-moshi-zkai": {
-   "h": "ec8507703dca",
-   "d": "2026-11-20"
+   "h": "e708574e15f0",
+   "d": "2026-11-23"
   },
   "joho/info-jissen-taisaku-obunsha": {
-   "h": "c2364fbbceb7",
-   "d": "2026-11-20"
+   "h": "897b9d3f3c8b",
+   "d": "2026-11-23"
   },
   "joho/info-kaiwagata-text": {
-   "h": "9ff71a685154",
-   "d": "2026-11-20"
+   "h": "a4e1ebea74f3",
+   "d": "2026-11-23"
   },
   "joho/info-kakomon-kaisetsu-okajima": {
    "h": "099c9ce82ea5",
@@ -2913,41 +3209,53 @@
    "h": "3f3eaf006c05",
    "d": "2026-11-20"
   },
+  "joho/info-kimeru-kyotsu-test": {
+   "h": "c9f237dc8a70",
+   "d": "2026-11-23"
+  },
   "joho/info-mark-kiso": {
-   "h": "7af1d493e824",
-   "d": "2026-11-20"
+   "h": "78610eabc64f",
+   "d": "2026-11-23"
   },
   "joho/info-mogi-tokyohorei": {
-   "h": "26dd5dc32c22",
-   "d": "2026-11-20"
+   "h": "9a09434eefad",
+   "d": "2026-11-23"
   },
   "joho/info-pattern-drill": {
-   "h": "37a846361d09",
-   "d": "2026-11-20"
+   "h": "775767636609",
+   "d": "2026-11-23"
   },
   "joho/info-point60": {
-   "h": "abe8991ed927",
-   "d": "2026-11-20"
+   "h": "91f92d2d527b",
+   "d": "2026-11-23"
   },
   "joho/info-programming-renshucho": {
-   "h": "d39bb3fe90f4",
-   "d": "2026-11-20"
+   "h": "8edb77cd8818",
+   "d": "2026-11-23"
   },
   "joho/info-sekaiichi-yasashii": {
-   "h": "9eb7f726f98f",
-   "d": "2026-11-20"
+   "h": "7e26f1d49bd5",
+   "d": "2026-11-23"
+  },
+  "joho/info-sogo-mondaishu-kawai": {
+   "h": "0f38a20bcc08",
+   "d": "2026-11-23"
   },
   "joho/info-taisaku-keirinkan": {
-   "h": "0cca458fd25f",
-   "d": "2026-11-20"
+   "h": "6ac3d1087c93",
+   "d": "2026-11-23"
   },
   "joho/info-tanki-kouryaku": {
-   "h": "3b23c827ce36",
-   "d": "2026-11-20"
+   "h": "41777e4211b6",
+   "d": "2026-11-23"
+  },
+  "joho/info-teiban-100dai": {
+   "h": "5628b46147a6",
+   "d": "2026-11-23"
   },
   "joho/info-tensu-omoshiroi": {
-   "h": "51e2e9acd483",
-   "d": "2026-11-20"
+   "h": "e1b205f7e3d6",
+   "d": "2026-11-23"
   },
   "joho/info-tensu-omoshiroi-ichimon": {
    "h": "e5c8eec8fda1",
@@ -2974,8 +3282,8 @@
    "d": "2026-11-20"
   },
   "math/ao": {
-   "h": "04b4efdc0675",
-   "d": "2026-11-20"
+   "h": "70dbddffe9a6",
+   "d": "2026-11-23"
   },
   "math/aohon": {
    "h": "7506274b98a1",
@@ -3001,6 +3309,10 @@
    "h": "282bf2f16265",
    "d": "2026-11-20"
   },
+  "math/bunneido-pattern-drill-sugaku": {
+   "h": "aeaf720ed3e0",
+   "d": "2026-11-23"
+  },
   "math/bunyabetsu-baai": {
    "h": "eb50c17f625f",
    "d": "2026-11-20"
@@ -3010,8 +3322,8 @@
    "d": "2026-11-20"
   },
   "math/bunyabetsu-hoteishiki": {
-   "h": "2656e0d708b8",
-   "d": "2026-11-20"
+   "h": "d060a36553c8",
+   "d": "2026-11-23"
   },
   "math/bunyabetsu-hyojun-mondai-seiko-bibunhoteishiki": {
    "h": "adf9d691ed3b",
@@ -3081,6 +3393,10 @@
    "h": "b9455ae802be",
    "d": "2026-11-20"
   },
+  "math/erle-shigoku-yumei-240": {
+   "h": "687f5110edc3",
+   "d": "2026-11-23"
+  },
   "math/fg": {
    "h": "0a13207ab571",
    "d": "2026-11-20"
@@ -3105,6 +3421,10 @@
    "h": "1945e3beb320",
    "d": "2026-11-20"
   },
+  "math/gungun-bunkei-sugaku-advanced": {
+   "h": "a78d81cd0d8f",
+   "d": "2026-11-23"
+  },
   "math/gungun-rikei-sugaku-advanced": {
    "h": "b98a0f217557",
    "d": "2026-11-20"
@@ -3112,6 +3432,10 @@
   "math/gungun-sugaku-1a-basic": {
    "h": "440201fca1d4",
    "d": "2026-11-20"
+  },
+  "math/gungun-sugaku-2b-basic": {
+   "h": "5b364699b27f",
+   "d": "2026-11-23"
   },
   "math/haikan": {
    "h": "209e147205a5",
@@ -3142,8 +3466,8 @@
    "d": "2026-11-20"
   },
   "math/hatto-kakuritsu": {
-   "h": "ac1f9920d618",
-   "d": "2026-11-20"
+   "h": "f54effd689af",
+   "d": "2026-11-23"
   },
   "math/hissu101": {
    "h": "57b757c9a612",
@@ -3162,8 +3486,8 @@
    "d": "2026-11-20"
   },
   "math/hosono": {
-   "h": "a05b3c1d4783",
-   "d": "2026-11-20"
+   "h": "8c5ba28bd6b1",
+   "d": "2026-11-23"
   },
   "math/hyomon": {
    "h": "6626d2d4ec4a",
@@ -3186,8 +3510,12 @@
    "d": "2026-11-20"
   },
   "math/iiic-kiso": {
-   "h": "e05166571107",
-   "d": "2026-11-20"
+   "h": "edb9145e5c2f",
+   "d": "2026-11-23"
+  },
+  "math/jikkyo-kyotest-juyo-mondai-sugaku": {
+   "h": "51dd37c8186a",
+   "d": "2026-11-23"
   },
   "math/jissen-sugaku-juyo-mondaishu-bunkei": {
    "h": "369b5cf47d3b",
@@ -3221,17 +3549,21 @@
    "h": "42f2ece582ec",
    "d": "2026-11-20"
   },
+  "math/kawai-nyushi-kouryaku-sugaku": {
+   "h": "91e8a53f5be1",
+   "d": "2026-11-23"
+  },
   "math/ki": {
-   "h": "5f5ec9b42514",
-   "d": "2026-11-20"
+   "h": "01756de8c00f",
+   "d": "2026-11-23"
   },
   "math/kimeru": {
    "h": "e295cf054457",
    "d": "2026-11-20"
   },
   "math/kiso-gokui": {
-   "h": "cbe22c30eef2",
-   "d": "2026-11-20"
+   "h": "0b1bee4c227e",
+   "d": "2026-11-23"
   },
   "math/kisomon": {
    "h": "86bea1a6248a",
@@ -3257,6 +3589,10 @@
    "h": "51e75f3b06fa",
    "d": "2026-11-20"
   },
+  "math/kyodai-sugaku-51nen-kiseki": {
+   "h": "03ee2982c367",
+   "d": "2026-11-23"
+  },
   "math/kyodai25": {
    "h": "1c9335be06b5",
    "d": "2026-11-20"
@@ -3264,6 +3600,10 @@
   "math/kyote-akahon": {
    "h": "32822b378aab",
    "d": "2026-11-20"
+  },
+  "math/kyotest-hissho-manual": {
+   "h": "4fd97ff40570",
+   "d": "2026-11-23"
   },
   "math/kyotsu-test-shinkatei-koryaku-mondaishu-sugaku": {
    "h": "d51031ec99a4",
@@ -3274,8 +3614,8 @@
    "d": "2026-11-20"
   },
   "math/kyudai15": {
-   "h": "043d57d9633a",
-   "d": "2026-11-20"
+   "h": "090b76dc03c2",
+   "d": "2026-11-23"
   },
   "math/legend": {
    "h": "f54a6d1636ba",
@@ -3298,16 +3638,16 @@
    "d": "2026-11-20"
   },
   "math/master-baai": {
-   "h": "7d0e9bf5f4d6",
-   "d": "2026-11-20"
+   "h": "4a23062ed7a6",
+   "d": "2026-11-23"
   },
   "math/master-key-sugaku": {
    "h": "366084dae2e5",
    "d": "2026-11-20"
   },
   "math/master-seisu": {
-   "h": "5d76cc842e69",
-   "d": "2026-11-20"
+   "h": "e757656f4bdc",
+   "d": "2026-11-23"
   },
   "math/matsuda-160": {
    "h": "ffaa1b3eb81f",
@@ -3318,8 +3658,8 @@
    "d": "2026-11-20"
   },
   "math/matsuda-pattern": {
-   "h": "9575f802830a",
-   "d": "2026-11-20"
+   "h": "80c3662c6885",
+   "d": "2026-11-23"
   },
   "math/matsuda-todai": {
    "h": "04479a31e97a",
@@ -3376,6 +3716,10 @@
   "math/obunsha-honban-moshi-sugaku": {
    "h": "c0c021c9d81f",
    "d": "2026-11-20"
+  },
+  "math/obunsha-kyotest-ryomon": {
+   "h": "ce5211f8bac4",
+   "d": "2026-11-23"
   },
   "math/okita": {
    "h": "6ed10fbc660e",
@@ -3438,12 +3782,12 @@
    "d": "2026-11-20"
   },
   "math/sakata": {
-   "h": "5d7e97b42b36",
-   "d": "2026-11-20"
+   "h": "9b5af396120d",
+   "d": "2026-11-23"
   },
   "math/sasaki-seisu": {
-   "h": "0ce5065553de",
-   "d": "2026-11-20"
+   "h": "bd00514c400e",
+   "d": "2026-11-23"
   },
   "math/sekaiichi-handai": {
    "h": "a58f7d7859f3",
@@ -3458,8 +3802,12 @@
    "d": "2026-11-20"
   },
   "math/shida": {
-   "h": "e8faef6ce8fe",
-   "d": "2026-11-20"
+   "h": "d5958c55ca7c",
+   "d": "2026-11-23"
+  },
+  "math/shida-bibun-sekibun": {
+   "h": "1d92e091a98a",
+   "d": "2026-11-23"
   },
   "math/shikkari": {
    "h": "314904f2858e",
@@ -3482,16 +3830,16 @@
    "d": "2026-11-20"
   },
   "math/shinzui-v": {
-   "h": "a160f6b989c6",
-   "d": "2026-11-20"
+   "h": "1e68b10a0b5d",
+   "d": "2026-11-23"
   },
   "math/shiritsu-idai": {
    "h": "8cde5ca0cd98",
    "d": "2026-11-20"
   },
   "math/shiro": {
-   "h": "2185997b74b8",
-   "d": "2026-11-20"
+   "h": "3703774ff496",
+   "d": "2026-11-23"
   },
   "math/shoaku": {
    "h": "476aa5fc8b49",
@@ -3521,6 +3869,18 @@
    "h": "751c01f922e2",
    "d": "2026-11-20"
   },
+  "math/suken-10nichi-kiwameru": {
+   "h": "bbae651e6364",
+   "d": "2026-11-23"
+  },
+  "math/sundai-kihon-mondai-enshu-1a2bc": {
+   "h": "11d928e57ddf",
+   "d": "2026-11-23"
+  },
+  "math/sundai-kihon-mondai-enshu-3c": {
+   "h": "3a57aed9e223",
+   "d": "2026-11-23"
+  },
   "math/superquick": {
    "h": "b96796e1aec3",
    "d": "2026-11-20"
@@ -3542,12 +3902,12 @@
    "d": "2026-11-20"
   },
   "math/tankyu-kakuritsu": {
-   "h": "445a13ba05c2",
-   "d": "2026-11-20"
+   "h": "90bca9120a1f",
+   "d": "2026-11-23"
   },
   "math/tarinai-seisu": {
-   "h": "95198c72fa20",
-   "d": "2026-11-20"
+   "h": "73913d512d28",
+   "d": "2026-11-23"
   },
   "math/tetsu-kiso": {
    "h": "6df7ad7b0d66",
@@ -3602,8 +3962,8 @@
    "d": "2026-11-20"
   },
   "math/ukaru-kakuritsu": {
-   "h": "2e26d600e995",
-   "d": "2026-11-20"
+   "h": "9a9dec76eb13",
+   "d": "2026-11-23"
   },
   "math/ukaru-keisan": {
    "h": "d1dabd8ecbb6",
@@ -3646,16 +4006,16 @@
    "d": "2026-11-20"
   },
   "page:new": {
-   "h": "d02b9017ead0",
-   "d": "2026-11-20"
+   "h": "81a4635c428b",
+   "d": "2026-11-23"
   },
   "report:data-quality": {
-   "h": "3f8117df7828",
-   "d": "2026-11-20"
+   "h": "85d717a7a4d0",
+   "d": "2026-11-23"
   },
   "science/access-note-kagaku": {
-   "h": "f4b90d1c1284",
-   "d": "2026-11-20"
+   "h": "72e20afad9a0",
+   "d": "2026-11-23"
   },
   "science/akahon": {
    "h": "1231327c3719",
@@ -3666,32 +4026,40 @@
    "d": "2026-11-20"
   },
   "science/aoki-hajitei-chigaku": {
-   "h": "ab608b887dce",
-   "d": "2026-11-20"
+   "h": "feb337463a00",
+   "d": "2026-11-23"
+  },
+  "science/aono-kagakukiso-issatsu": {
+   "h": "99322a152764",
+   "d": "2026-11-23"
   },
   "science/b-lead-alpha": {
-   "h": "31ce9be58c02",
-   "d": "2026-11-20"
+   "h": "6f281f6bbf53",
+   "d": "2026-11-23"
   },
   "science/b-nyushi-kakushin": {
-   "h": "1b1d33b44721",
-   "d": "2026-11-20"
+   "h": "164d81d2c22c",
+   "d": "2026-11-23"
   },
   "science/b-zen-level-1": {
-   "h": "6ebe1f40e95e",
-   "d": "2026-11-20"
+   "h": "1ccca1d3591f",
+   "d": "2026-11-23"
   },
   "science/b-zen-level-2": {
    "h": "086ead6fca1d",
    "d": "2026-11-20"
   },
   "science/b-zen-level-3": {
-   "h": "f6922738c137",
-   "d": "2026-11-20"
+   "h": "c9f623246b27",
+   "d": "2026-11-23"
   },
   "science/b-zen-level-4": {
    "h": "a7daf16a63e6",
    "d": "2026-11-20"
+  },
+  "science/bestfit-chigaku-kiso-ne": {
+   "h": "25b737a651b2",
+   "d": "2026-11-23"
   },
   "science/bisekibutsuri": {
    "h": "e2ae1861f87d",
@@ -3702,56 +4070,64 @@
    "d": "2026-11-20"
   },
   "science/bluebacks-chigaku-kyokasho": {
-   "h": "b364f9357ba3",
-   "d": "2026-11-20"
+   "h": "8fb60304053d",
+   "d": "2026-11-23"
   },
   "science/butsuri-kyoshitsu": {
-   "h": "48614c9a330a",
-   "d": "2026-11-20"
+   "h": "5b186b854089",
+   "d": "2026-11-23"
+  },
+  "science/butsuri-no-shitsumon91": {
+   "h": "34a06d4c0563",
+   "d": "2026-11-23"
   },
   "science/canpass-seibutsu": {
    "h": "010634ca8614",
    "d": "2026-11-20"
   },
   "science/chart-shin-seibutsu": {
-   "h": "172e4beb5b08",
-   "d": "2026-11-20"
+   "h": "01877d2b180c",
+   "d": "2026-11-23"
   },
   "science/chart-shinkagaku": {
-   "h": "f4db7e58efda",
-   "d": "2026-11-20"
+   "h": "a3f62e3729d3",
+   "d": "2026-11-23"
   },
   "science/chigaku-yougoshu-keyword": {
-   "h": "6b923b0794a1",
-   "d": "2026-11-20"
+   "h": "8e7364b38245",
+   "d": "2026-11-23"
   },
   "science/chishiki-no-shoten": {
-   "h": "336068cc579e",
-   "d": "2026-11-20"
+   "h": "37c05a6a9ea4",
+   "d": "2026-11-23"
   },
   "science/chokuzen-30days-kiso": {
-   "h": "61458cb2052d",
-   "d": "2026-11-20"
+   "h": "c9626f8da3ef",
+   "d": "2026-11-23"
   },
   "science/choufrequent-theme99": {
    "h": "7dbe383f9769",
    "d": "2026-11-20"
   },
+  "science/doshutsu-butsuri-kiso-6": {
+   "h": "30f6d110c28a",
+   "d": "2026-11-23"
+  },
   "science/essence-netsu": {
-   "h": "889c08a5aa8d",
-   "d": "2026-11-20"
+   "h": "46ed2f2abe89",
+   "d": "2026-11-23"
   },
   "science/essence-rikigaku": {
-   "h": "598ab52e2a6a",
-   "d": "2026-11-20"
+   "h": "09c9734e3b6a",
+   "d": "2026-11-23"
   },
   "science/excel-butsuri": {
-   "h": "fdcef1ceb4f3",
-   "d": "2026-11-20"
+   "h": "540cab548187",
+   "d": "2026-11-23"
   },
   "science/excel-kagaku": {
-   "h": "8182afbef92e",
-   "d": "2026-11-20"
+   "h": "9e56af2c162e",
+   "d": "2026-11-23"
   },
   "science/excel-seibutsu": {
    "h": "ce38f9799bbb",
@@ -3760,6 +4136,10 @@
   "science/fukuma-muki": {
    "h": "b29231797279",
    "d": "2026-11-20"
+  },
+  "science/futami-hayawakari-kagaku": {
+   "h": "6110bb25fca6",
+   "d": "2026-11-23"
   },
   "science/genten-hasso": {
    "h": "ccc7e061a8a6",
@@ -3781,21 +4161,41 @@
    "h": "a8d5f6122bb5",
    "d": "2026-11-20"
   },
+  "science/golden-route-butsuri-hyojun": {
+   "h": "6696bfbf29e6",
+   "d": "2026-11-23"
+  },
+  "science/golden-route-butsuri-kiso": {
+   "h": "bd3d6484974a",
+   "d": "2026-11-23"
+  },
+  "science/golden-route-kagaku-hyojun": {
+   "h": "da5e2e21c142",
+   "d": "2026-11-23"
+  },
+  "science/golden-route-kagaku-kiso": {
+   "h": "869263ef7236",
+   "d": "2026-11-23"
+  },
   "science/golden-route-kiso": {
    "h": "5365b73b67a6",
    "d": "2026-11-20"
+  },
+  "science/goroawase-seibutsu-kiso": {
+   "h": "f985418f7e94",
+   "d": "2026-11-23"
   },
   "science/graph-data-yomikata": {
    "h": "d474943ca390",
    "d": "2026-11-20"
   },
   "science/hamashima-jikkyo1": {
-   "h": "b45298d8734f",
-   "d": "2026-11-20"
+   "h": "51fa3f14b51d",
+   "d": "2026-11-23"
   },
   "science/hamashima-jikkyo2": {
-   "h": "0aef4ababa4f",
-   "d": "2026-11-20"
+   "h": "6b34110ac6c1",
+   "d": "2026-11-23"
   },
   "science/handai-20": {
    "h": "631d891b415d",
@@ -3806,96 +4206,96 @@
    "d": "2026-11-20"
   },
   "science/hashimoto-daigensoku-denjiki": {
-   "h": "dfd49b32256f",
-   "d": "2026-11-20"
+   "h": "67ebaba0d03a",
+   "d": "2026-11-23"
   },
   "science/hashimoto-daigensoku-rikigaku": {
-   "h": "f242a841dda2",
-   "d": "2026-11-20"
+   "h": "978ad079ad5e",
+   "d": "2026-11-23"
   },
   "science/hashimoto-denjiki": {
-   "h": "87687264d2f2",
-   "d": "2026-11-20"
+   "h": "7b96aa6afcc9",
+   "d": "2026-11-23"
   },
   "science/hashimoto-kiso": {
-   "h": "6474fa429411",
-   "d": "2026-11-20"
+   "h": "4454f6a88e2d",
+   "d": "2026-11-23"
   },
   "science/hashimoto-netsu": {
-   "h": "f151de765e43",
-   "d": "2026-11-20"
+   "h": "ae926efdb9ff",
+   "d": "2026-11-23"
   },
   "science/hashimoto-rikigaku": {
-   "h": "c7fce5360d9f",
-   "d": "2026-11-20"
+   "h": "e6b909d65b8f",
+   "d": "2026-11-23"
   },
   "science/hashizume-mukiyuki": {
-   "h": "8fdd46779c80",
-   "d": "2026-11-20"
+   "h": "5b0b5dfc6b8d",
+   "d": "2026-11-23"
   },
   "science/hashizume-riron": {
-   "h": "aa3fea4823ec",
-   "d": "2026-11-20"
+   "h": "d9afefc60f0b",
+   "d": "2026-11-23"
   },
   "science/hayawakari-chigaku-kiso": {
-   "h": "e6f1a6e97f59",
-   "d": "2026-11-20"
+   "h": "b237eff54643",
+   "d": "2026-11-23"
   },
   "science/hayawakari-kagaku": {
-   "h": "20c42258deee",
-   "d": "2026-11-20"
+   "h": "e2ba38c4d929",
+   "d": "2026-11-23"
   },
   "science/hiden-butsuri-high": {
-   "h": "e076929cc908",
-   "d": "2026-11-20"
+   "h": "4c312c04ceee",
+   "d": "2026-11-23"
   },
   "science/hiden-denjiki": {
-   "h": "230ce01fc47b",
-   "d": "2026-11-20"
+   "h": "3f97bb07fc77",
+   "d": "2026-11-23"
   },
   "science/hiden-kiso": {
-   "h": "a27f114edacc",
-   "d": "2026-11-20"
+   "h": "9a447acd19f3",
+   "d": "2026-11-23"
   },
   "science/hiden-output": {
-   "h": "3b38df66f5b9",
-   "d": "2026-11-20"
+   "h": "8290c63d5846",
+   "d": "2026-11-23"
   },
   "science/hiden-rikigaku": {
-   "h": "f838eaa6d01f",
-   "d": "2026-11-20"
+   "h": "77eec9a5b7b1",
+   "d": "2026-11-23"
   },
   "science/highscore-chigaku-kiso": {
-   "h": "2fc878a32e5c",
-   "d": "2026-11-20"
+   "h": "0fcb3ee7a5c6",
+   "d": "2026-11-23"
   },
   "science/highscore-kagakukiso": {
    "h": "252d6c35ece9",
    "d": "2026-11-20"
   },
   "science/highscore-seibutsu-kiso": {
-   "h": "91bdad1c7aa7",
-   "d": "2026-11-20"
+   "h": "97f2e51f5215",
+   "d": "2026-11-23"
   },
   "science/hisshu-seiri-chigaku-kiso": {
-   "h": "c329e19c02e3",
-   "d": "2026-11-20"
+   "h": "d5f76fe26cd5",
+   "d": "2026-11-23"
   },
   "science/hitoride-chigaku": {
    "h": "66bf6bb770c7",
    "d": "2026-11-20"
   },
   "science/hitotsu-kagaku": {
-   "h": "390e6457be30",
-   "d": "2026-11-20"
+   "h": "a430d545ac27",
+   "d": "2026-11-23"
   },
   "science/hitotsu-kiso": {
-   "h": "81ed1f609093",
-   "d": "2026-11-20"
+   "h": "9bdd0f6723f0",
+   "d": "2026-11-23"
   },
   "science/hitotsu-tokikata": {
-   "h": "c7bbd3e91df5",
-   "d": "2026-11-20"
+   "h": "b33300fa3209",
+   "d": "2026-11-23"
   },
   "science/hokudai-15": {
    "h": "7fbc3a1972c8",
@@ -3918,20 +4318,20 @@
    "d": "2026-11-20"
   },
   "science/ichimon-chigaku-kiso": {
-   "h": "bf916c90a7d8",
-   "d": "2026-11-20"
+   "h": "81f8df1c5ae4",
+   "d": "2026-11-23"
   },
   "science/ichimon-ittou": {
-   "h": "327e1c5b440a",
-   "d": "2026-11-20"
+   "h": "bd5906673d7d",
+   "d": "2026-11-23"
   },
   "science/ichimonitto-kagaku": {
-   "h": "c6bc08e7e3c8",
-   "d": "2026-11-20"
+   "h": "23589a42997f",
+   "d": "2026-11-23"
   },
   "science/ichimonitto-kagakukiso": {
-   "h": "a92287cc8b8e",
-   "d": "2026-11-20"
+   "h": "a62e43ebd953",
+   "d": "2026-11-23"
   },
   "science/iden-keisan-kakumei": {
    "h": "76217ca14a60",
@@ -3953,9 +4353,13 @@
    "h": "432658ffcea9",
    "d": "2026-11-20"
   },
+  "science/ito-jikan-kyotest-kiso": {
+   "h": "7815b2e3e9b6",
+   "d": "2026-11-23"
+  },
   "science/jikkyo-chukei-chigaku-kiso": {
-   "h": "94ea114b41a1",
-   "d": "2026-11-20"
+   "h": "c949882fccb8",
+   "d": "2026-11-23"
   },
   "science/jokyu-mondai-seiko": {
    "h": "730d024ac7e6",
@@ -3966,48 +4370,48 @@
    "d": "2026-11-20"
   },
   "science/juyo-koshiki": {
-   "h": "942879d2763b",
-   "d": "2026-11-20"
+   "h": "20335e389f3b",
+   "d": "2026-11-23"
   },
   "science/juyo-mondai": {
-   "h": "57b01a478dd0",
-   "d": "2026-11-20"
+   "h": "a81cc0c73b61",
+   "d": "2026-11-23"
   },
   "science/juyo-mondaishu": {
-   "h": "384ad05ba8b7",
-   "d": "2026-11-20"
+   "h": "fb230e5030ac",
+   "d": "2026-11-23"
   },
   "science/juyo-mondaishu-seibutsu": {
    "h": "a67718392398",
    "d": "2026-11-20"
   },
   "science/k-lead-alpha": {
-   "h": "4f6e4f691c87",
-   "d": "2026-11-20"
+   "h": "be872c025bc8",
+   "d": "2026-11-23"
   },
   "science/k-newstage-zuhyo": {
-   "h": "dd5d086425d2",
-   "d": "2026-11-20"
+   "h": "343238125218",
+   "d": "2026-11-23"
   },
   "science/k-nyushi-kakushin": {
-   "h": "7f871bfce6b7",
-   "d": "2026-11-20"
+   "h": "7465bebf70c7",
+   "d": "2026-11-23"
   },
   "science/k-square-zusetsu": {
-   "h": "dd1026e4b79f",
-   "d": "2026-11-20"
+   "h": "d972459fe54c",
+   "d": "2026-11-23"
   },
   "science/k-zen-level-1": {
-   "h": "d48688125aa5",
-   "d": "2026-11-20"
+   "h": "e55677d1abed",
+   "d": "2026-11-23"
   },
   "science/k-zen-level-2": {
    "h": "98315fad6ca9",
    "d": "2026-11-20"
   },
   "science/k-zen-level-3": {
-   "h": "cded431627f8",
-   "d": "2026-11-20"
+   "h": "6cfc5ccf2292",
+   "d": "2026-11-23"
   },
   "science/k-zen-level-4": {
    "h": "f223b2d8a4ea",
@@ -4026,16 +4430,16 @@
    "d": "2026-11-20"
   },
   "science/kaiho-frame-denjiki": {
-   "h": "e781110fc14e",
-   "d": "2026-11-20"
+   "h": "ac6819a2258c",
+   "d": "2026-11-23"
   },
   "science/kaiho-frame-rikigaku": {
-   "h": "94cd02c2b411",
-   "d": "2026-11-20"
+   "h": "1c163f16daf7",
+   "d": "2026-11-23"
   },
   "science/kamata-mondai": {
-   "h": "8d530a8c4d9a",
-   "d": "2026-11-20"
+   "h": "904a1fc84410",
+   "d": "2026-11-23"
   },
   "science/kamata-riron": {
    "h": "24ed1a2d893e",
@@ -4050,12 +4454,12 @@
    "d": "2026-11-20"
   },
   "science/kameda-rironmuki": {
-   "h": "a1cbe6ea09ac",
-   "d": "2026-11-20"
+   "h": "4f65fa593e56",
+   "d": "2026-11-23"
   },
   "science/kameda-yuki": {
-   "h": "679d456dec5e",
-   "d": "2026-11-20"
+   "h": "90e82ebcfd0d",
+   "d": "2026-11-23"
   },
   "science/kango-mondaishu": {
    "h": "a6ea44d7384a",
@@ -4082,8 +4486,8 @@
    "d": "2026-11-20"
   },
   "science/kawai-sogo-chigaku-kiso": {
-   "h": "7e540a055867",
-   "d": "2026-11-20"
+   "h": "9b2d332eb7ae",
+   "d": "2026-11-23"
   },
   "science/kawai-sogo-kagaku": {
    "h": "0b5de05e5519",
@@ -4102,12 +4506,12 @@
    "d": "2026-11-20"
   },
   "science/keirin-kyokasho-chigaku-kiso": {
-   "h": "a9cafc523a4c",
-   "d": "2026-11-20"
+   "h": "69741fb8b6cc",
+   "d": "2026-11-23"
   },
   "science/keisan-hisshu120": {
-   "h": "979e55b81a9f",
-   "d": "2026-11-20"
+   "h": "4dda5c2dff6f",
+   "d": "2026-11-23"
   },
   "science/kihon-tettei-48": {
    "h": "2d75795664bc",
@@ -4126,8 +4530,8 @@
    "d": "2026-11-20"
   },
   "science/kimeru-chigaku-kiso": {
-   "h": "fb35e75ba342",
-   "d": "2026-11-20"
+   "h": "aa8dc022a30b",
+   "d": "2026-11-23"
   },
   "science/kimeru-kagaku": {
    "h": "7d8ac9a0a829",
@@ -4142,40 +4546,40 @@
    "d": "2026-11-20"
   },
   "science/kimeru-kyotest-kiso": {
-   "h": "e5ab7b558650",
-   "d": "2026-11-20"
+   "h": "3a09d5352770",
+   "d": "2026-11-23"
   },
   "science/kimeru-kyotest-seibutsu": {
-   "h": "ba7545a7cd4a",
-   "d": "2026-11-20"
+   "h": "6379eb9cb6b3",
+   "d": "2026-11-23"
   },
   "science/kishi-kagakukiso-hajime": {
-   "h": "d085cf67d4ee",
-   "d": "2026-11-20"
+   "h": "d312c1970c74",
+   "d": "2026-11-23"
   },
   "science/kishi-riron-hajime": {
-   "h": "097ddc052a6d",
-   "d": "2026-11-20"
+   "h": "cd21eef9807e",
+   "d": "2026-11-23"
   },
   "science/kiso-ichimon-itto": {
-   "h": "ab769fcc4489",
-   "d": "2026-11-20"
+   "h": "9a3970ea6511",
+   "d": "2026-11-23"
   },
   "science/kiso-mondai-seiko": {
    "h": "9967b39f1cd0",
    "d": "2026-11-20"
   },
   "science/kiso-seiko": {
-   "h": "005b8a2a84eb",
-   "d": "2026-11-20"
+   "h": "041202c0f574",
+   "d": "2026-11-23"
   },
   "science/koredake-chigaku-kiso": {
-   "h": "6c9d5b90476d",
-   "d": "2026-11-20"
+   "h": "b4dae750f55c",
+   "d": "2026-11-23"
   },
   "science/korekakedake-kiso": {
-   "h": "39bc06fbce37",
-   "d": "2026-11-20"
+   "h": "9aac3e37ad49",
+   "d": "2026-11-23"
   },
   "science/kosei-hyojun": {
    "h": "9e1a462dff9b",
@@ -4186,20 +4590,20 @@
    "d": "2026-11-20"
   },
   "science/kosei-kiso": {
-   "h": "15f6c6619938",
-   "d": "2026-11-20"
+   "h": "6e01e7b8c645",
+   "d": "2026-11-23"
   },
   "science/kosei-nyumon": {
-   "h": "3da2204f0aa6",
-   "d": "2026-11-20"
+   "h": "4b095d2156c2",
+   "d": "2026-11-23"
   },
   "science/kosei-shikoryoku": {
    "h": "c1efd3a43d48",
    "d": "2026-11-20"
   },
   "science/kuwashikute-chigaku-kiso": {
-   "h": "2fc4ddc11abe",
-   "d": "2026-11-20"
+   "h": "68a373eab39f",
+   "d": "2026-11-23"
   },
   "science/kyodai-25": {
    "h": "ab6f95ab2d20",
@@ -4242,52 +4646,52 @@
    "d": "2026-11-20"
   },
   "science/kyokasho-guide-keirin-chigaku-kiso": {
-   "h": "1fd3d6dc4188",
-   "d": "2026-11-20"
+   "h": "1de9bd6e57b7",
+   "d": "2026-11-23"
   },
   "science/kyotest-jissen-sundai-kiso": {
-   "h": "ca76c1808a00",
-   "d": "2026-11-20"
+   "h": "06d21fa39eb7",
+   "d": "2026-11-23"
   },
   "science/kyotest-jissen-sundai-seibutsu": {
-   "h": "41067556e5a3",
-   "d": "2026-11-20"
+   "h": "e92a27211a71",
+   "d": "2026-11-23"
   },
   "science/kyotest-jissen-toshin-kiso": {
-   "h": "475fbee74296",
-   "d": "2026-11-20"
+   "h": "d92b36cc80ef",
+   "d": "2026-11-23"
   },
   "science/kyotest-jissen-toshin-seibutsu": {
-   "h": "81acaddb4ed2",
-   "d": "2026-11-20"
+   "h": "981c63c233d7",
+   "d": "2026-11-23"
   },
   "science/kyotest-jissen-yozemi-seibutsu": {
-   "h": "487b524288bf",
-   "d": "2026-11-20"
+   "h": "5ade2fcc17d2",
+   "d": "2026-11-23"
   },
   "science/kyotest-jissen-zkai-kiso": {
-   "h": "b34f385455e3",
-   "d": "2026-11-20"
+   "h": "55b8337ac9ec",
+   "d": "2026-11-23"
   },
   "science/kyotest-jissen-zkai-seibutsu": {
-   "h": "e269fbb1a042",
-   "d": "2026-11-20"
+   "h": "48c202e6162c",
+   "d": "2026-11-23"
   },
   "science/kyotest-kakomon-kenkyu-seibutsu": {
-   "h": "ac18b1c1e658",
-   "d": "2026-11-20"
+   "h": "35ec9b490be6",
+   "d": "2026-11-23"
   },
   "science/kyotest-kakomon-review-kawai": {
-   "h": "9eabdfda8510",
-   "d": "2026-11-20"
+   "h": "eb84d7f81d5e",
+   "d": "2026-11-23"
   },
   "science/kyotest-sogo-kawai-kiso": {
-   "h": "6f16b14c758d",
-   "d": "2026-11-20"
+   "h": "41b61dc83b9b",
+   "d": "2026-11-23"
   },
   "science/kyotest-sogo-kawai-seibutsu": {
-   "h": "d9283135a050",
-   "d": "2026-11-20"
+   "h": "8816e086f4a2",
+   "d": "2026-11-23"
   },
   "science/kyudai-15": {
    "h": "4b30d1031073",
@@ -4298,8 +4702,8 @@
    "d": "2026-11-20"
   },
   "science/lead-alpha-chigaku-kiso": {
-   "h": "10575c2bb56f",
-   "d": "2026-11-20"
+   "h": "4db8c3c402f6",
+   "d": "2026-11-23"
   },
   "science/lead-alpha-kiso": {
    "h": "370f999634fd",
@@ -4310,24 +4714,24 @@
    "d": "2026-11-20"
   },
   "science/lead-light-butsuri": {
-   "h": "e3fb2fa7fc84",
-   "d": "2026-11-20"
+   "h": "696e6b00b29d",
+   "d": "2026-11-23"
   },
   "science/lead-light-chigaku-kiso": {
-   "h": "43143178ac45",
-   "d": "2026-11-20"
+   "h": "e929b1814052",
+   "d": "2026-11-23"
   },
   "science/lead-light-kagaku": {
-   "h": "0feada7937e5",
-   "d": "2026-11-20"
+   "h": "a2f14e76039b",
+   "d": "2026-11-23"
   },
   "science/lead-light-kagakukiso": {
-   "h": "6481da586e39",
-   "d": "2026-11-20"
+   "h": "3c55f02ff237",
+   "d": "2026-11-23"
   },
   "science/lead-light-kiso": {
-   "h": "ac8ec8a2a867",
-   "d": "2026-11-20"
+   "h": "d96cc8579cdd",
+   "d": "2026-11-23"
   },
   "science/lead-light-note-kiso": {
    "h": "7035e9165377",
@@ -4338,32 +4742,32 @@
    "d": "2026-11-20"
   },
   "science/level-1": {
-   "h": "c9f135c9a4e2",
-   "d": "2026-11-20"
+   "h": "c9e95b001f09",
+   "d": "2026-11-23"
   },
   "science/level-2": {
-   "h": "2ea5b0e40141",
-   "d": "2026-11-20"
+   "h": "2ead059b1b1f",
+   "d": "2026-11-23"
   },
   "science/level-3": {
-   "h": "cb76375936ea",
-   "d": "2026-11-20"
+   "h": "43715761c1a2",
+   "d": "2026-11-23"
   },
   "science/level-4": {
    "h": "1d78a63cba92",
    "d": "2026-11-20"
   },
   "science/level-betsu-1": {
-   "h": "3bc719be5a7d",
-   "d": "2026-11-20"
+   "h": "58165de08194",
+   "d": "2026-11-23"
   },
   "science/level-betsu-2": {
-   "h": "c920f9d018ad",
-   "d": "2026-11-20"
+   "h": "81c3611a6df6",
+   "d": "2026-11-23"
   },
   "science/level-betsu-3": {
-   "h": "49f950482b6f",
-   "d": "2026-11-20"
+   "h": "98e75c8849c9",
+   "d": "2026-11-23"
   },
   "science/level-betsu-4": {
    "h": "83d36522f2a2",
@@ -4374,16 +4778,16 @@
    "d": "2026-11-20"
   },
   "science/manten-no-kotsu-kiso": {
-   "h": "32e62c52261d",
-   "d": "2026-11-20"
+   "h": "86562472da0c",
+   "d": "2026-11-23"
   },
   "science/mark-kiso-butsuri": {
    "h": "9ce09b0e830d",
    "d": "2026-11-20"
   },
   "science/mark-kiso-chigaku-kiso": {
-   "h": "c198ec9a9c89",
-   "d": "2026-11-20"
+   "h": "567dd35979e8",
+   "d": "2026-11-23"
   },
   "science/mark-kiso-kagakukiso": {
    "h": "3c705e5fbb3f",
@@ -4398,12 +4802,24 @@
    "d": "2026-11-20"
   },
   "science/mark-kiso-seibutsu-kiso": {
-   "h": "62168c5d0007",
-   "d": "2026-11-20"
+   "h": "3d063353e2d9",
+   "d": "2026-11-23"
   },
   "science/mark-kiso-yuki": {
    "h": "542c7a8521fe",
    "d": "2026-11-20"
+  },
+  "science/master-mondaishu-muki": {
+   "h": "2a6bd0998fac",
+   "d": "2026-11-23"
+  },
+  "science/master-mondaishu-riron": {
+   "h": "3e812ae60659",
+   "d": "2026-11-23"
+  },
+  "science/master-mondaishu-yuki": {
+   "h": "9c4fa529acce",
+   "d": "2026-11-23"
   },
   "science/meidai-butsuri-15": {
    "h": "46cb1bce4830",
@@ -4426,12 +4842,12 @@
    "d": "2026-11-20"
   },
   "science/motto-1": {
-   "h": "e3d37b2b0b81",
-   "d": "2026-11-20"
+   "h": "e3ae4113775b",
+   "d": "2026-11-23"
   },
   "science/motto-2": {
-   "h": "9d533e2b5c71",
-   "d": "2026-11-20"
+   "h": "b6eae6dbe7b6",
+   "d": "2026-11-23"
   },
   "science/mouichido-chigaku": {
    "h": "f5722131012e",
@@ -4450,36 +4866,40 @@
    "d": "2026-11-20"
   },
   "science/new-global": {
-   "h": "1ca6a70446b6",
-   "d": "2026-11-20"
+   "h": "e36c32395e25",
+   "d": "2026-11-23"
   },
   "science/newglobal-kagaku": {
-   "h": "944998e389ef",
-   "d": "2026-11-20"
+   "h": "27ac7cc2909d",
+   "d": "2026-11-23"
   },
   "science/newglobal-seibutsu": {
    "h": "4ed8f781b993",
    "d": "2026-11-20"
   },
   "science/newstage-chigaku-zuhyo": {
-   "h": "601ae739b306",
-   "d": "2026-11-20"
+   "h": "b8a03159091a",
+   "d": "2026-11-23"
   },
   "science/nyumon-mondai-seiko": {
    "h": "a8e4cae727e1",
    "d": "2026-11-20"
   },
   "science/nyumon-seiko": {
-   "h": "0710e235e53f",
-   "d": "2026-11-20"
+   "h": "5b430eeed68c",
+   "d": "2026-11-23"
   },
   "science/nyushi-butsuri-plus": {
    "h": "ddc99a4cd618",
    "d": "2026-11-20"
   },
   "science/nyushi-chishiki-kanzen-seiri": {
-   "h": "1d2d4ce5501e",
-   "d": "2026-11-20"
+   "h": "0cc52784a562",
+   "d": "2026-11-23"
+  },
+  "science/obuchi-6jikan-kiso": {
+   "h": "4c24a3256252",
+   "d": "2026-11-23"
   },
   "science/obunsha-honban-moshi-butsuri": {
    "h": "c0eedbb42251",
@@ -4494,28 +4914,28 @@
    "d": "2026-11-20"
   },
   "science/okano-mukiyuki": {
-   "h": "05349da7d7bc",
-   "d": "2026-11-20"
+   "h": "4fdd01aef560",
+   "d": "2026-11-23"
   },
   "science/okano-riron": {
-   "h": "506411f3fad2",
-   "d": "2026-11-20"
+   "h": "8ee23ca263b3",
+   "d": "2026-11-23"
   },
   "science/omiya-muki": {
-   "h": "994919b7a6df",
-   "d": "2026-11-20"
+   "h": "2fcb94b4d932",
+   "d": "2026-11-23"
   },
   "science/omiya-riron": {
-   "h": "836112e61106",
-   "d": "2026-11-20"
+   "h": "59f1ea12d706",
+   "d": "2026-11-23"
   },
   "science/omiya-yuki": {
-   "h": "ae132448931e",
-   "d": "2026-11-20"
+   "h": "a8ed43360437",
+   "d": "2026-11-23"
   },
   "science/omori-41ko-kiso": {
-   "h": "7f3e213dbbfb",
-   "d": "2026-11-20"
+   "h": "d8501e5466fb",
+   "d": "2026-11-23"
   },
   "science/omori-iden": {
    "h": "ec7b9d1d7d81",
@@ -4534,8 +4954,8 @@
    "d": "2026-11-20"
   },
   "science/omori-kogi-note-126": {
-   "h": "a87558084083",
-   "d": "2026-11-20"
+   "h": "aaf094742a78",
+   "d": "2026-11-23"
   },
   "science/omori-nyushi-kogi": {
    "h": "fcff6cc11c9b",
@@ -4546,12 +4966,12 @@
    "d": "2026-11-20"
   },
   "science/omori-saikyo-kogi-126": {
-   "h": "ae4743138e33",
-   "d": "2026-11-20"
+   "h": "593aa87c6bb7",
+   "d": "2026-11-23"
   },
   "science/omoshiro-ichimonitto-kagaku": {
-   "h": "06c60bc409f3",
-   "d": "2026-11-20"
+   "h": "024fee3f15eb",
+   "d": "2026-11-23"
   },
   "science/omoshiro-kyote-kagaku": {
    "h": "70c2078cb6b5",
@@ -4566,68 +4986,76 @@
    "d": "2026-11-20"
   },
   "science/omoshiroi-chigaku-kiso": {
-   "h": "4ea825f9df94",
-   "d": "2026-11-20"
+   "h": "18a2b887e6ca",
+   "d": "2026-11-23"
   },
   "science/omoshiroi-kyotest-kiso": {
-   "h": "f5ddca3a3583",
-   "d": "2026-11-20"
+   "h": "81a48a92820a",
+   "d": "2026-11-23"
   },
   "science/omoshiroi-kyotest-seibutsu": {
    "h": "c80fc3d41976",
    "d": "2026-11-20"
   },
   "science/orito-chanto": {
-   "h": "3ae3aef82fb5",
-   "d": "2026-11-20"
+   "h": "a2f9671dc1d5",
+   "d": "2026-11-23"
   },
   "science/orito-dokushu": {
    "h": "22b14244d9dc",
    "d": "2026-11-20"
   },
   "science/photoscience": {
-   "h": "d16f36b1ab8a",
-   "d": "2026-11-20"
+   "h": "b1b88985a8f0",
+   "d": "2026-11-23"
+  },
+  "science/photoscience-butsuri-zuroku": {
+   "h": "5319ebbdb830",
+   "d": "2026-11-23"
   },
   "science/photoscience-chigaku": {
-   "h": "7a0f856ce878",
-   "d": "2026-11-20"
+   "h": "49ec02c584f5",
+   "d": "2026-11-23"
   },
   "science/photoscience-zuroku": {
-   "h": "399928676410",
-   "d": "2026-11-20"
+   "h": "4221429624db",
+   "d": "2026-11-23"
   },
   "science/rakumasu-butsuri": {
-   "h": "e5361f2dbe67",
-   "d": "2026-11-20"
+   "h": "986fa01ed0e8",
+   "d": "2026-11-23"
   },
   "science/rakumasu-kagaku": {
-   "h": "525ca56e063a",
-   "d": "2026-11-20"
+   "h": "71edb5b28cdd",
+   "d": "2026-11-23"
   },
   "science/rankjun-kagaku": {
-   "h": "cda84c5c3c15",
-   "d": "2026-11-20"
+   "h": "3134277cd84b",
+   "d": "2026-11-23"
   },
   "science/rankjun-kiso": {
-   "h": "32afac25a433",
-   "d": "2026-11-20"
+   "h": "7717208d9b34",
+   "d": "2026-11-23"
   },
   "science/rankjun-seibutsu": {
    "h": "26d0d8d7b517",
    "d": "2026-11-20"
   },
   "science/rikai-shiyasui-kiso": {
-   "h": "eced24339735",
-   "d": "2026-11-20"
+   "h": "759fdb7b418c",
+   "d": "2026-11-23"
   },
   "science/rikai-shiyasui-seibutsu": {
-   "h": "367ea3f44dea",
-   "d": "2026-11-20"
+   "h": "64e9aef12a3c",
+   "d": "2026-11-23"
   },
   "science/rikei-hyojun": {
-   "h": "124ca9612770",
-   "d": "2026-11-20"
+   "h": "067728bf25bd",
+   "d": "2026-11-23"
+  },
+  "science/rikei-hyojun-butsuri": {
+   "h": "e20eba6886fa",
+   "d": "2026-11-23"
   },
   "science/rikei-hyojun-seibutsu": {
    "h": "f3750f6481b0",
@@ -4638,16 +5066,16 @@
    "d": "2026-11-20"
   },
   "science/ryomon-butsuri-kiso": {
-   "h": "48cf96429493",
-   "d": "2026-11-20"
+   "h": "5ba7bc7730ea",
+   "d": "2026-11-23"
   },
   "science/ryomon-kagaku": {
-   "h": "ba00b1de477a",
-   "d": "2026-11-20"
+   "h": "e66936837774",
+   "d": "2026-11-23"
   },
   "science/ryomon-kaze": {
-   "h": "4f1c0809e1ef",
-   "d": "2026-11-20"
+   "h": "8b788e160ee6",
+   "d": "2026-11-23"
   },
   "science/ryomon-kaze-kagaku-muki-yuki": {
    "h": "8e2a7375350c",
@@ -4658,20 +5086,20 @@
    "d": "2026-11-20"
   },
   "science/s-newstage-zuhyo": {
-   "h": "da479a03a10c",
-   "d": "2026-11-20"
+   "h": "bc9e270fe7e2",
+   "d": "2026-11-23"
   },
   "science/s-square-zusetsu": {
-   "h": "25ec69bf60b8",
-   "d": "2026-11-20"
+   "h": "8f48d0d68441",
+   "d": "2026-11-23"
   },
   "science/s-zen-level-1": {
    "h": "03f386044750",
    "d": "2026-11-20"
   },
   "science/s-zen-level-2": {
-   "h": "ea1656ec3362",
-   "d": "2026-11-20"
+   "h": "1860f6d91c41",
+   "d": "2026-11-23"
   },
   "science/s-zen-level-3": {
    "h": "2d6179b3fdad",
@@ -4681,37 +5109,61 @@
    "h": "9b6cda5b0fd0",
    "d": "2026-11-20"
   },
+  "science/saijuyo-point50-kiso": {
+   "h": "34c36a96c666",
+   "d": "2026-11-23"
+  },
+  "science/sakata-6jikan-kagakukiso": {
+   "h": "73eb400c3186",
+   "d": "2026-11-23"
+  },
   "science/sakata-akira-kagakukiso": {
    "h": "071dac35f002",
    "d": "2026-11-20"
   },
   "science/sakata-akira-mukiyuki": {
-   "h": "cb0883062e0e",
-   "d": "2026-11-20"
+   "h": "bb5d585b597a",
+   "d": "2026-11-23"
   },
   "science/sakata-akira-riron": {
-   "h": "cd312bd85f02",
-   "d": "2026-11-20"
+   "h": "98b3197f8332",
+   "d": "2026-11-23"
   },
   "science/sakata-butsuri": {
-   "h": "f79e94f3a665",
-   "d": "2026-11-20"
+   "h": "517a05ac8f2b",
+   "d": "2026-11-23"
   },
   "science/sakata-kaoru-muki": {
-   "h": "0df940c801c1",
-   "d": "2026-11-20"
+   "h": "59b4f8de6182",
+   "d": "2026-11-23"
   },
   "science/sakata-kaoru-riron": {
-   "h": "ffbf284743e4",
-   "d": "2026-11-20"
+   "h": "923d3911fc9e",
+   "d": "2026-11-23"
   },
   "science/sakata-kaoru-yuki": {
-   "h": "73912f5a4b61",
-   "d": "2026-11-20"
+   "h": "1b674cee615a",
+   "d": "2026-11-23"
+  },
+  "science/sakata-yuki-polaris-1": {
+   "h": "432529cae741",
+   "d": "2026-11-23"
+  },
+  "science/sakata-yuki-polaris-2": {
+   "h": "a130ce96a9e1",
+   "d": "2026-11-23"
+  },
+  "science/sanpei-bestmethod-butsuri": {
+   "h": "52826ecb1c22",
+   "d": "2026-11-23"
+  },
+  "science/sanpei-bestselect-butsuri": {
+   "h": "3b7e1aab541a",
+   "d": "2026-11-23"
   },
   "science/scienceview-sogo": {
-   "h": "5e3687af7213",
-   "d": "2026-11-20"
+   "h": "a1f6b0215491",
+   "d": "2026-11-23"
   },
   "science/seibutsu-atarashi-kangaeru-100sen": {
    "h": "e2f08ba476fd",
@@ -4730,8 +5182,8 @@
    "d": "2026-11-20"
   },
   "science/seibutsu-yogoshu-sundai": {
-   "h": "7eba81688fc2",
-   "d": "2026-11-20"
+   "h": "6b8b7f62ebc2",
+   "d": "2026-11-23"
   },
   "science/seisen-mondaishu-kyogakusha": {
    "h": "b5dc0f5f393e",
@@ -4746,40 +5198,40 @@
    "d": "2026-11-20"
   },
   "science/seminar-butsuri": {
-   "h": "5d91cef391ef",
-   "d": "2026-11-20"
+   "h": "f49c77a76922",
+   "d": "2026-11-23"
   },
   "science/seminar-chigaku-kiso": {
-   "h": "57a58a421a59",
-   "d": "2026-11-20"
+   "h": "1e351c17be89",
+   "d": "2026-11-23"
   },
   "science/seminar-kagaku": {
-   "h": "4579a12198c0",
-   "d": "2026-11-20"
+   "h": "6575149e368a",
+   "d": "2026-11-23"
   },
   "science/seminar-seibutsu": {
    "h": "9832f124308f",
    "d": "2026-11-20"
   },
   "science/sensor-butsuri": {
-   "h": "59abb85284f0",
-   "d": "2026-11-20"
+   "h": "18099641e859",
+   "d": "2026-11-23"
   },
   "science/sensor-chigaku": {
    "h": "bd8110c4e839",
    "d": "2026-11-20"
   },
   "science/sensor-chigaku-kiso": {
-   "h": "9ac246693f41",
-   "d": "2026-11-20"
+   "h": "27874f94bfca",
+   "d": "2026-11-23"
   },
   "science/sensor-kagaku": {
-   "h": "59e70582fcc9",
-   "d": "2026-11-20"
+   "h": "b2ca702ee48f",
+   "d": "2026-11-23"
   },
   "science/sensor-sogo": {
-   "h": "4a2bffb62797",
-   "d": "2026-11-20"
+   "h": "24f3a7517177",
+   "d": "2026-11-23"
   },
   "science/sensor-sogo-seibutsu": {
    "h": "513d442760ea",
@@ -4797,6 +5249,10 @@
    "h": "f78ce3f86ad9",
    "d": "2026-11-20"
   },
+  "science/shimamura-jikan-kyotest-chigaku-kiso": {
+   "h": "bcdc01b80d28",
+   "d": "2026-11-23"
+  },
   "science/shin-butsuri-enshu": {
    "h": "f2a9c2b17ad6",
    "d": "2026-11-20"
@@ -4810,60 +5266,60 @@
    "d": "2026-11-20"
   },
   "science/shinenshu": {
-   "h": "cafe2b4184a1",
-   "d": "2026-11-20"
+   "h": "691ccef71618",
+   "d": "2026-11-23"
   },
   "science/shinhyojun-enshu": {
-   "h": "55e3722f0b2a",
-   "d": "2026-11-20"
+   "h": "0f9b08452e72",
+   "d": "2026-11-23"
   },
   "science/shinkenkyu": {
-   "h": "a2f39e3eb13b",
-   "d": "2026-11-20"
+   "h": "93c26e7af616",
+   "d": "2026-11-23"
   },
   "science/shinkihon-enshu": {
-   "h": "2dfabc9040d3",
-   "d": "2026-11-20"
+   "h": "e16908548d34",
+   "d": "2026-11-23"
   },
   "science/shinrikei-100sen": {
    "h": "314d7a8c2289",
    "d": "2026-11-20"
   },
   "science/shuchu-kogi-chigaku-kiso": {
-   "h": "320f8888db2a",
-   "d": "2026-11-20"
+   "h": "93edeac15690",
+   "d": "2026-11-23"
   },
   "science/shuchu-kogi-kiso": {
-   "h": "fc7c650c303a",
-   "d": "2026-11-20"
+   "h": "135ae396ca23",
+   "d": "2026-11-23"
   },
   "science/sigma-kihon": {
-   "h": "b247fee19e1a",
-   "d": "2026-11-20"
+   "h": "ff42729d0497",
+   "d": "2026-11-23"
   },
   "science/sigma-kihon-seibutsu": {
    "h": "46fa4680d79c",
    "d": "2026-11-20"
   },
   "science/speed-check-kiso": {
-   "h": "008353517f7f",
-   "d": "2026-11-20"
+   "h": "1d47addbb912",
+   "d": "2026-11-23"
   },
   "science/speed-check-seibutsu": {
-   "h": "119f9d82b022",
-   "d": "2026-11-20"
+   "h": "ce836b8cf033",
+   "d": "2026-11-23"
   },
   "science/square-zusetsu-chigaku": {
-   "h": "0036f878298e",
-   "d": "2026-11-20"
+   "h": "66a2acd95c3b",
+   "d": "2026-11-23"
   },
   "science/sundai-jissen-butsuri": {
    "h": "63c4f29fdcf4",
    "d": "2026-11-20"
   },
   "science/sundai-jissen-chigaku-kiso": {
-   "h": "f52b2af9e245",
-   "d": "2026-11-20"
+   "h": "1d55452bd270",
+   "d": "2026-11-23"
   },
   "science/sundai-jissen-kagaku": {
    "h": "eb0566678868",
@@ -4878,20 +5334,20 @@
    "d": "2026-11-20"
   },
   "science/suzukawa-theme200": {
-   "h": "32de3076f35b",
-   "d": "2026-11-20"
+   "h": "dac7f776173e",
+   "d": "2026-11-23"
   },
   "science/suzukawa-theme75": {
-   "h": "42e71f517128",
-   "d": "2026-11-20"
+   "h": "a01a1c96ae2f",
+   "d": "2026-11-23"
   },
   "science/suzuki-hadou": {
    "h": "abed4c6c7b20",
    "d": "2026-11-20"
   },
   "science/suzuki-rikigaku": {
-   "h": "106aee236fa6",
-   "d": "2026-11-20"
+   "h": "e35359c7d7de",
+   "d": "2026-11-23"
   },
   "science/tabe-100mon": {
    "h": "d1e1c272f195",
@@ -4902,28 +5358,28 @@
    "d": "2026-11-20"
   },
   "science/tabe-77ko": {
-   "h": "66a82d325dea",
-   "d": "2026-11-20"
+   "h": "70916701e260",
+   "d": "2026-11-23"
   },
   "science/tabe-ichimon-itto": {
-   "h": "60897380f81f",
-   "d": "2026-11-20"
+   "h": "c7a31582a7ca",
+   "d": "2026-11-23"
   },
   "science/tabe-kiso-hajimete": {
-   "h": "03b32d33ff8a",
-   "d": "2026-11-20"
+   "h": "c2e07d254b3e",
+   "d": "2026-11-23"
   },
   "science/taikei-butsuri": {
-   "h": "dc34d0b23ad4",
-   "d": "2026-11-20"
+   "h": "a4ae13d1cc44",
+   "d": "2026-11-23"
   },
   "science/tamechika-all-in-one": {
-   "h": "d10cd1af99da",
-   "d": "2026-11-20"
+   "h": "a916cb0794fb",
+   "d": "2026-11-23"
   },
   "science/tamechika-hadou": {
-   "h": "40a5d098b026",
-   "d": "2026-11-20"
+   "h": "fc18cfcc9d62",
+   "d": "2026-11-23"
   },
   "science/tamechika-miyaburu-denjiki": {
    "h": "d9fcec67d4af",
@@ -4934,32 +5390,32 @@
    "d": "2026-11-20"
   },
   "science/tamechika-note-hyojun": {
-   "h": "4bc5ff43fa94",
-   "d": "2026-11-20"
+   "h": "290ed00e5a13",
+   "d": "2026-11-23"
   },
   "science/tamechika-note-jokyu": {
    "h": "9c3d9640a804",
    "d": "2026-11-20"
   },
   "science/tamechika-note-kihon": {
-   "h": "22d3ed0f9329",
-   "d": "2026-11-20"
+   "h": "595eb648b863",
+   "d": "2026-11-23"
   },
   "science/tamechika-rikigaku": {
-   "h": "e03621f0d1b7",
-   "d": "2026-11-20"
+   "h": "a1f6b91b57b4",
+   "d": "2026-11-23"
   },
   "science/tanki-butsuri": {
    "h": "2741fd67aa76",
    "d": "2026-11-20"
   },
   "science/tanki-chigaku": {
-   "h": "df3dde544af6",
-   "d": "2026-11-20"
+   "h": "3e11b36208e7",
+   "d": "2026-11-23"
   },
   "science/tanki-chigaku-kiso": {
-   "h": "bbfa484bcad6",
-   "d": "2026-11-20"
+   "h": "a36d586afb4b",
+   "d": "2026-11-23"
   },
   "science/tanki-kagaku": {
    "h": "363f9ddffa93",
@@ -4974,12 +5430,12 @@
    "d": "2026-11-20"
   },
   "science/tanki-koryaku-kiso": {
-   "h": "391b1eb755bb",
-   "d": "2026-11-20"
+   "h": "6fd19ecc2907",
+   "d": "2026-11-23"
   },
   "science/tanki-koryaku-seibutsu": {
-   "h": "d807c3315bb0",
-   "d": "2026-11-20"
+   "h": "5ceb87b07d9d",
+   "d": "2026-11-23"
   },
   "science/teppan100-butsuri": {
    "h": "b81e51e694fe",
@@ -4998,8 +5454,8 @@
    "d": "2026-11-20"
   },
   "science/terui-mondaishu-riron-keisan": {
-   "h": "ceaeb755f128",
-   "d": "2026-11-20"
+   "h": "03da3d6e203e",
+   "d": "2026-11-23"
   },
   "science/tetsuryokukai-butsuri-kohryaku-hint": {
    "h": "eb6370002ffb",
@@ -5016,6 +5472,10 @@
   "science/tetsuryokukai-toryumon-hado": {
    "h": "4b6830acfe1e",
    "d": "2026-11-20"
+  },
+  "science/tetsuryokukai-toryumon-rikigaku": {
+   "h": "2cae765f0a12",
+   "d": "2026-11-23"
   },
   "science/todai-25": {
    "h": "591b410c30d7",
@@ -5034,8 +5494,8 @@
    "d": "2026-11-20"
   },
   "science/todai-shokai-25": {
-   "h": "bdff436ffb50",
-   "d": "2026-11-20"
+   "h": "25ccd6bbb1c2",
+   "d": "2026-11-23"
   },
   "science/todai-shokai-seibutsu-25": {
    "h": "d1709143e0af",
@@ -5054,8 +5514,8 @@
    "d": "2026-11-20"
   },
   "science/toshin-jissen-chigaku-kiso": {
-   "h": "7aa5509353d0",
-   "d": "2026-11-20"
+   "h": "88eeee1e8931",
+   "d": "2026-11-23"
   },
   "science/toshin-jissen-kagaku": {
    "h": "f48bb7d49298",
@@ -5069,49 +5529,57 @@
    "h": "d179f9fdc5a4",
    "d": "2026-11-20"
   },
+  "science/tottemo-yasashii-butsuri-kiso": {
+   "h": "e55e4eca42c0",
+   "d": "2026-11-23"
+  },
   "science/tottemo-yasashii-kagaku": {
-   "h": "dd873c72377c",
-   "d": "2026-11-20"
+   "h": "551127d28694",
+   "d": "2026-11-23"
   },
   "science/tottemo-yasashii-kagakukiso": {
-   "h": "390a94e735dd",
-   "d": "2026-11-20"
+   "h": "6466a7d1db70",
+   "d": "2026-11-23"
   },
   "science/uchu-denjiki": {
-   "h": "3185af7038f2",
-   "d": "2026-11-20"
+   "h": "16d8e1e6ddd8",
+   "d": "2026-11-23"
   },
   "science/uchu-ichi-kiso": {
-   "h": "3814b21a1367",
-   "d": "2026-11-20"
+   "h": "a3c41a31040d",
+   "d": "2026-11-23"
+  },
+  "science/uchu-kagaku-hanno-shiki": {
+   "h": "eaf5a6014465",
+   "d": "2026-11-23"
   },
   "science/uchu-muki": {
-   "h": "4fba9350ef5b",
-   "d": "2026-11-20"
+   "h": "114beff04bcc",
+   "d": "2026-11-23"
   },
   "science/uchu-rikigaku": {
-   "h": "803dcc749080",
-   "d": "2026-11-20"
+   "h": "5b9a17d30d0c",
+   "d": "2026-11-23"
   },
   "science/uchu-riron": {
-   "h": "d7b1beba08ce",
-   "d": "2026-11-20"
+   "h": "c8cda44660ad",
+   "d": "2026-11-23"
   },
   "science/uchu-yuki": {
-   "h": "718212ee6bc4",
-   "d": "2026-11-20"
+   "h": "64d2955647f1",
+   "d": "2026-11-23"
   },
   "science/urushibara-99": {
-   "h": "c4ebbc8e2df8",
-   "d": "2026-11-20"
+   "h": "eccfcb5e5cdc",
+   "d": "2026-11-23"
   },
   "science/urushibara-denjiki": {
-   "h": "2fb542e5e200",
-   "d": "2026-11-20"
+   "h": "5c03b3fc87e8",
+   "d": "2026-11-23"
   },
   "science/urushibara-hadou": {
-   "h": "f017268e4bbb",
-   "d": "2026-11-20"
+   "h": "fd79c925bfc5",
+   "d": "2026-11-23"
   },
   "science/urushibara-kaiho-kenkyu": {
    "h": "32c6ef04b331",
@@ -5122,28 +5590,28 @@
    "d": "2026-11-20"
   },
   "science/urushibara-rikigaku": {
-   "h": "ee5715f3d08b",
-   "d": "2026-11-20"
+   "h": "89d832cddaae",
+   "d": "2026-11-23"
   },
   "science/wasureta-seibutsu": {
-   "h": "3964c6df1ab9",
-   "d": "2026-11-20"
+   "h": "4174b7e42bfa",
+   "d": "2026-11-23"
   },
   "science/yamakawa-omoshiroi": {
    "h": "30996f3f7907",
    "d": "2026-11-20"
   },
   "science/yamakawa-omoshiroi-kiso": {
-   "h": "90aaf15c49c7",
-   "d": "2026-11-20"
+   "h": "26f34d8570dc",
+   "d": "2026-11-23"
   },
   "science/yogo-kanzen-seiha": {
-   "h": "7844e9c82bd0",
-   "d": "2026-11-20"
+   "h": "eea86d351186",
+   "d": "2026-11-23"
   },
   "science/yokuwakaru-kiso-seibutsu": {
-   "h": "9cd11f5a1351",
-   "d": "2026-11-20"
+   "h": "e4888119cf0f",
+   "d": "2026-11-23"
   },
   "science/yozemi-jissen-butsuri": {
    "h": "65489470f956",
@@ -5154,12 +5622,12 @@
    "d": "2026-11-20"
   },
   "science/yuki-kozo-hisshu50": {
-   "h": "2ff8d4e44d37",
-   "d": "2026-11-20"
+   "h": "0f6f0d55c557",
+   "d": "2026-11-23"
   },
   "science/yuki-kozo-yoten": {
-   "h": "0621bc43a735",
-   "d": "2026-11-20"
+   "h": "ef6a2a4f9eec",
+   "d": "2026-11-23"
   },
   "science/zenkoku-nyushi-seikai": {
    "h": "763526bd799f",
@@ -5172,6 +5640,10 @@
   "science/zenkoku-seikai": {
    "h": "111b79b38144",
    "d": "2026-11-20"
+  },
+  "science/zero-kagaku-keisan-2": {
+   "h": "28230858bc41",
+   "d": "2026-11-23"
   },
   "science/zkai-jissen-butsuri": {
    "h": "25213e7fd0c9",
@@ -5186,8 +5658,16 @@
    "d": "2026-11-20"
   },
   "shoron/shoron-10pun-drill": {
-   "h": "b2f18c2a5890",
-   "d": "2026-11-20"
+   "h": "9c4238efc7ea",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-11method-iryo-kango": {
+   "h": "46ea17f52b9b",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-11method-jinbun-kyoiku-shakai": {
+   "h": "5527d8e3310f",
+   "d": "2026-11-23"
   },
   "shoron/shoron-11method-kiso": {
    "h": "1452eaf8ba10",
@@ -5198,8 +5678,8 @@
    "d": "2026-11-20"
   },
   "shoron/shoron-7kakan-gokaku": {
-   "h": "a07bda3377f1",
-   "d": "2026-11-20"
+   "h": "66640a269c50",
+   "d": "2026-11-23"
   },
   "shoron/shoron-ai-shindan-ishiyaku": {
    "h": "80c2dd19d96b",
@@ -5210,32 +5690,40 @@
    "d": "2026-11-20"
   },
   "shoron/shoron-buttsuke": {
-   "h": "cb432f72edce",
-   "d": "2026-11-20"
+   "h": "4af932da78c2",
+   "d": "2026-11-23"
   },
   "shoron/shoron-deguchi-ronri": {
-   "h": "5643053aa336",
-   "d": "2026-11-20"
+   "h": "3b1dc1b265a8",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-gakken-shiboriyu-mensetsu-kaitei": {
+   "h": "8a372ce50262",
+   "d": "2026-11-23"
   },
   "shoron/shoron-gendai-keyword-file": {
-   "h": "8c634c6cfe0d",
-   "d": "2026-11-20"
+   "h": "7ab84e1220cf",
+   "d": "2026-11-23"
   },
   "shoron/shoron-gendai-wo-shiru-plus": {
-   "h": "0337a0dbdd58",
-   "d": "2026-11-20"
+   "h": "5420bc0c954b",
+   "d": "2026-11-23"
   },
   "shoron/shoron-gentensarenai": {
-   "h": "97f320cf1beb",
-   "d": "2026-11-20"
+   "h": "be648502c2c9",
+   "d": "2026-11-23"
   },
   "shoron/shoron-higuchi-training": {
-   "h": "06bf62a068d2",
-   "d": "2026-11-20"
+   "h": "1bc121c730be",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-hitotsuhitotsu-kaitei": {
+   "h": "e4419bbd917b",
+   "d": "2026-11-23"
   },
   "shoron/shoron-hyoronbun-keyword100": {
-   "h": "2b457e62d9a0",
-   "d": "2026-11-20"
+   "h": "73cfdb3b9364",
+   "d": "2026-11-23"
   },
   "shoron/shoron-igakubu-jissen": {
    "h": "94e50bbde489",
@@ -5246,36 +5734,44 @@
    "d": "2026-11-20"
   },
   "shoron/shoron-igakubu-nankan-jissen": {
-   "h": "5a9bd286b446",
-   "d": "2026-11-20"
+   "h": "431d0c60f5f1",
+   "d": "2026-11-23"
   },
   "shoron/shoron-igakubu-nanmon-mensetsu": {
-   "h": "917395df50c9",
-   "d": "2026-11-20"
+   "h": "68b8b7f94f55",
+   "d": "2026-11-23"
   },
   "shoron/shoron-igakubu-seimei-rinri": {
-   "h": "a9188fd5a5f3",
-   "d": "2026-11-20"
+   "h": "dcf881d7452d",
+   "d": "2026-11-23"
   },
   "shoron/shoron-igakubu-shuchu-kogi": {
    "h": "024ef26b6eea",
    "d": "2026-11-20"
   },
   "shoron/shoron-ikei-17theme-suntan": {
-   "h": "82e1c101a0a5",
-   "d": "2026-11-20"
+   "h": "7c5c45a2c0a1",
+   "d": "2026-11-23"
   },
   "shoron/shoron-ikei-saihinshutsu20": {
    "h": "ac5401316e6a",
    "d": "2026-11-20"
+  },
+  "shoron/shoron-imamichi-otosarenai": {
+   "h": "6e9c9b68a9b9",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-imamichi-saisoku": {
+   "h": "fb731357ce67",
+   "d": "2026-11-23"
   },
   "shoron/shoron-iryokei-zettai": {
    "h": "c78dcb2f1782",
    "d": "2026-11-20"
   },
   "shoron/shoron-jiji-neta-kyoiku": {
-   "h": "5059d8d78ed3",
-   "d": "2026-11-20"
+   "h": "c51fd13d4891",
+   "d": "2026-11-23"
   },
   "shoron/shoron-jinbun-shakai-saikyo-dokugaku": {
    "h": "87eaaf5f6c5e",
@@ -5306,8 +5802,8 @@
    "d": "2026-11-20"
   },
   "shoron/shoron-kango-iryo-kaitei": {
-   "h": "c0f8ef2c9fdc",
-   "d": "2026-11-20"
+   "h": "4ae1bf8e0cc2",
+   "d": "2026-11-23"
   },
   "shoron/shoron-kango-iryo-saikyo-dokugaku": {
    "h": "9a57a90d7beb",
@@ -5322,12 +5818,12 @@
    "d": "2026-11-20"
   },
   "shoron/shoron-keio-7step": {
-   "h": "65b1a62258de",
-   "d": "2026-11-20"
+   "h": "82ccc4991e99",
+   "d": "2026-11-23"
   },
   "shoron/shoron-keio-bible": {
-   "h": "f218e1cde2d1",
-   "d": "2026-11-20"
+   "h": "4ce99932b521",
+   "d": "2026-11-23"
   },
   "shoron/shoron-keio-kakomon-736": {
    "h": "213fa129930b",
@@ -5338,40 +5834,40 @@
    "d": "2026-11-20"
   },
   "shoron/shoron-koike-7jikan": {
-   "h": "1ac20eecc113",
-   "d": "2026-11-20"
+   "h": "0b67fd07af88",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake": {
    "h": "d9b2d373e004",
    "d": "2026-11-20"
   },
   "shoron/shoron-koredake-chokikiso": {
-   "h": "79c411bdcd02",
-   "d": "2026-11-20"
+   "h": "a5e4b972dc52",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-ho-fukabori": {
-   "h": "bac940de8789",
-   "d": "2026-11-20"
+   "h": "edb064d72adb",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-ho-sei-chokikiso": {
-   "h": "e8761f6eba5c",
-   "d": "2026-11-20"
+   "h": "f9da158c77b4",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-ho-sei-kei": {
-   "h": "323bbe59b2fe",
-   "d": "2026-11-20"
+   "h": "13505e62eb3f",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-iryo-kango": {
-   "h": "643d9fd5bf6d",
-   "d": "2026-11-20"
+   "h": "6eb8253fa867",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-jinbun-fukabori": {
-   "h": "f8907322c57b",
-   "d": "2026-11-20"
+   "h": "6a02c19b5f0f",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-jinbun-joho-kyoiku": {
-   "h": "2adf5ac7edce",
-   "d": "2026-11-20"
+   "h": "b2f51d44f97a",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-kakikata-chokikiso": {
    "h": "66283fae8b2c",
@@ -5386,96 +5882,116 @@
    "d": "2026-11-20"
   },
   "shoron/shoron-koredake-kakikata-keizai-keiei": {
-   "h": "99fa2b713852",
-   "d": "2026-11-20"
+   "h": "176b18d97cd9",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-kakikata-oyo": {
-   "h": "9aad169ca762",
-   "d": "2026-11-20"
+   "h": "3ed6d54e7ecf",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-kango-chokikiso": {
-   "h": "c4348b861cf1",
-   "d": "2026-11-20"
+   "h": "1b7c898cece2",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-kango-fukabori": {
    "h": "d759b5e30ebe",
    "d": "2026-11-20"
   },
+  "shoron/shoron-koredake-kanzen-fukabori": {
+   "h": "ddb03df8a05e",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-koredake-kanzen-igaku-kango-chokikiso": {
+   "h": "f81985645ee5",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-koredake-kanzen-kyoiku-chokikiso": {
+   "h": "095fafffc7d7",
+   "d": "2026-11-23"
+  },
   "shoron/shoron-koredake-keio-waseda": {
-   "h": "94fc011c0125",
-   "d": "2026-11-20"
+   "h": "8d9015d0a9d7",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-keizai-fukabori": {
-   "h": "6552c19b4673",
-   "d": "2026-11-20"
+   "h": "0648405f452d",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-keizai-keiei-chokikiso": {
-   "h": "9f9eb720e615",
-   "d": "2026-11-20"
+   "h": "afcd58f38309",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-kokusai-media-chokikiso": {
-   "h": "f78e6e59ba00",
-   "d": "2026-11-20"
+   "h": "f1492a7786a7",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-kyoiku-fukabori": {
-   "h": "91c0acc5f70c",
-   "d": "2026-11-20"
+   "h": "d9b738bbed2f",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-mohan-chokikiso": {
-   "h": "5ce0685bd267",
-   "d": "2026-11-20"
+   "h": "47b1091bdec5",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-mohan-igaku-kango": {
    "h": "f87f440317dc",
    "d": "2026-11-20"
   },
   "shoron/shoron-koredake-mohan-jinbun-joho-kyoiku": {
-   "h": "f8806a2378ee",
-   "d": "2026-11-20"
+   "h": "8bcb6e8694d3",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-mohan-keizai-keiei": {
-   "h": "da6b5e2f2a71",
-   "d": "2026-11-20"
+   "h": "b93e10c63456",
+   "d": "2026-11-23"
   },
   "shoron/shoron-koredake-qa": {
-   "h": "14e2f55dee0f",
-   "d": "2026-11-20"
+   "h": "cdde33a06b09",
+   "d": "2026-11-23"
   },
   "shoron/shoron-marumaru-hinshutsu": {
-   "h": "e1885f7ddac8",
-   "d": "2026-11-20"
+   "h": "fec67ea7f30a",
+   "d": "2026-11-23"
   },
   "shoron/shoron-marumaru-iryo-kango-fukushi": {
-   "h": "0c7c9331a47c",
-   "d": "2026-11-20"
+   "h": "aefab91abbad",
+   "d": "2026-11-23"
   },
   "shoron/shoron-marumaru-nyushi": {
-   "h": "439ef54d2ea2",
-   "d": "2026-11-20"
+   "h": "b6ce5678e7aa",
+   "d": "2026-11-23"
   },
   "shoron/shoron-marumaru-suisen": {
-   "h": "3a830cfab6ae",
-   "d": "2026-11-20"
+   "h": "18ea2cb53c06",
+   "d": "2026-11-23"
   },
   "shoron/shoron-naniga-kaketara": {
-   "h": "786347cb7bed",
-   "d": "2026-11-20"
+   "h": "d89f24defea6",
+   "d": "2026-11-23"
   },
   "shoron/shoron-netahon-ishiyaku-kango": {
-   "h": "f5a9f3796d4a",
-   "d": "2026-11-20"
+   "h": "d28f2549c2a9",
+   "d": "2026-11-23"
   },
   "shoron/shoron-netahon-jinbun-kyoiku": {
-   "h": "3007290e2a51",
-   "d": "2026-11-20"
+   "h": "ec79534601e5",
+   "d": "2026-11-23"
   },
   "shoron/shoron-netahon-shakai-kagaku": {
-   "h": "2453983e2f23",
-   "d": "2026-11-20"
+   "h": "997da363cccf",
+   "d": "2026-11-23"
   },
   "shoron/shoron-netahon-shizen-kagaku": {
-   "h": "1252ce0a8c15",
-   "d": "2026-11-20"
+   "h": "9d162d6afa04",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-obunsha-sogo-global-gaikokugo": {
+   "h": "0d12d872304f",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-obunsha-sogo-shakai-kanko-media": {
+   "h": "aa2fb6ed2de6",
+   "d": "2026-11-23"
   },
   "shoron/shoron-okite-pro": {
    "h": "d6f08c70b909",
@@ -5489,53 +6005,77 @@
    "h": "81c4812ae410",
    "d": "2026-11-20"
   },
+  "shoron/shoron-rulebook-shiboriyu": {
+   "h": "dc3f8c1f51c0",
+   "d": "2026-11-23"
+  },
   "shoron/shoron-saitensha-kakikata": {
-   "h": "8a277a3d5fbf",
-   "d": "2026-11-20"
+   "h": "ca0e55a2d759",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-saitensha-kango-iryo": {
+   "h": "d5df89709183",
+   "d": "2026-11-23"
   },
   "shoron/shoron-saitensha-koko-wo-miru": {
-   "h": "b3b3c349db88",
-   "d": "2026-11-20"
+   "h": "46c2b06ab8d6",
+   "d": "2026-11-23"
   },
   "shoron/shoron-saitensha-neta-ishiyaku-kango": {
    "h": "bdbf93e4754e",
    "d": "2026-11-20"
+  },
+  "shoron/shoron-sbc-sogo-suisen-atarashii": {
+   "h": "c769ea5e0ddc",
+   "d": "2026-11-23"
   },
   "shoron/shoron-sekaiichi-igakubu": {
    "h": "6e6d2264cc60",
    "d": "2026-11-20"
   },
   "shoron/shoron-sekaiichi-keio": {
-   "h": "f3570d54eaf5",
-   "d": "2026-11-20"
+   "h": "bacd563e3b0d",
+   "d": "2026-11-23"
   },
   "shoron/shoron-sense-janai-1": {
-   "h": "79e68e34229d",
-   "d": "2026-11-20"
+   "h": "7da6b1dae7ff",
+   "d": "2026-11-23"
   },
   "shoron/shoron-shin-shoronbun-note-2027": {
    "h": "b7fa894dc59e",
    "d": "2026-11-20"
   },
   "shoron/shoron-smart-step": {
-   "h": "d95855cefc82",
-   "d": "2026-11-20"
+   "h": "194a56af2e42",
+   "d": "2026-11-23"
   },
   "shoron/shoron-sogo-kakomon-keizai": {
-   "h": "e423a0000ba4",
-   "d": "2026-11-20"
+   "h": "b94d3dab7c62",
+   "d": "2026-11-23"
   },
   "shoron/shoron-sogogata-shiboriyu": {
-   "h": "05bacf213dc7",
-   "d": "2026-11-20"
+   "h": "8cacd2271d43",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-work-oboeru-6tei": {
+   "h": "68090caf1dea",
+   "d": "2026-11-23"
+  },
+  "shoron/shoron-yagyu-bannou": {
+   "h": "643f7a15a8e8",
+   "d": "2026-11-23"
   },
   "shoron/shoron-yagyu-platinum-rule": {
    "h": "827403ef9859",
    "d": "2026-11-20"
   },
+  "shoron/shoron-yomudake-kiso-powerup": {
+   "h": "e0e690e605c4",
+   "d": "2026-11-23"
+  },
   "shoron/shoron-yoshioka-naruhodo10": {
-   "h": "bda39ab293f0",
-   "d": "2026-11-20"
+   "h": "8cc4232997cd",
+   "d": "2026-11-23"
   },
   "shoron/shoron-zerokara-1kagetsu-rulebook": {
    "h": "0ac20c914bd7",
@@ -5549,25 +6089,33 @@
    "h": "2d02d27f1129",
    "d": "2026-11-20"
   },
+  "social/advantage-kyotest-nihonshi": {
+   "h": "2899cecb4631",
+   "d": "2026-11-23"
+  },
+  "social/advantage-kyotest-sekaishi": {
+   "h": "7a21b7f9e1c4",
+   "d": "2026-11-23"
+  },
   "social/akahon-kt-kokyoseikei": {
    "h": "3ccb03ee0c3d",
    "d": "2026-11-20"
   },
   "social/aobon-kokyoseikei": {
-   "h": "2eb5d83f02df",
-   "d": "2026-11-20"
+   "h": "02a4b116929a",
+   "d": "2026-11-23"
   },
   "social/aramaki-mitorizu-1": {
-   "h": "f51cbe785355",
-   "d": "2026-11-20"
+   "h": "cf556046bd04",
+   "d": "2026-11-23"
   },
   "social/aramaki-mitorizu-2": {
-   "h": "a74210a9a94c",
-   "d": "2026-11-20"
+   "h": "9247e266af7d",
+   "d": "2026-11-23"
   },
   "social/aramaki-mitorizu-3": {
-   "h": "3550dcebb3f3",
-   "d": "2026-11-20"
+   "h": "9260a5bc0ec0",
+   "d": "2026-11-23"
   },
   "social/chiri-100dai": {
    "h": "cc3ea6a3100e",
@@ -5578,88 +6126,88 @@
    "d": "2026-11-20"
   },
   "social/chiri-aohon": {
-   "h": "92eca28d911b",
-   "d": "2026-11-20"
+   "h": "980bcfd802c4",
+   "d": "2026-11-23"
   },
   "social/chiri-complete": {
-   "h": "026329f1f8a6",
-   "d": "2026-11-20"
+   "h": "36d5157e6249",
+   "d": "2026-11-23"
   },
   "social/chiri-databook": {
-   "h": "cf61d5daa674",
-   "d": "2026-11-20"
+   "h": "aafe5d260ef7",
+   "d": "2026-11-23"
   },
   "social/chiri-geo-zuhyo": {
-   "h": "799bfe564a8e",
-   "d": "2026-11-20"
+   "h": "2d3a8dabc4a2",
+   "d": "2026-11-23"
   },
   "social/chiri-hajimeru": {
    "h": "322736210d8b",
    "d": "2026-11-20"
   },
   "social/chiri-henomichi": {
-   "h": "47f50c9927fc",
-   "d": "2026-11-20"
+   "h": "5e2a28d4dac9",
+   "d": "2026-11-23"
   },
   "social/chiri-hitotsubashi-akahon": {
    "h": "db388a41bab0",
    "d": "2026-11-20"
   },
   "social/chiri-jitsuryoku-yosei": {
-   "h": "897089f0b8dd",
-   "d": "2026-11-20"
+   "h": "5e9807141961",
+   "d": "2026-11-23"
   },
   "social/chiri-kakomon-kenkyu": {
    "h": "a1248528884d",
    "d": "2026-11-20"
   },
   "social/chiri-kimeru": {
-   "h": "a27ce1f3a6de",
-   "d": "2026-11-20"
+   "h": "85980d72ec8a",
+   "d": "2026-11-23"
   },
   "social/chiri-kosatsu80": {
-   "h": "5b336763f6d2",
-   "d": "2026-11-20"
+   "h": "dded3cc0b182",
+   "d": "2026-11-23"
   },
   "social/chiri-kurohon": {
-   "h": "ffa71e7962b6",
-   "d": "2026-11-20"
+   "h": "0fee9e908593",
+   "d": "2026-11-23"
   },
   "social/chiri-mark-kiso": {
    "h": "68c1157ab599",
    "d": "2026-11-20"
   },
   "social/chiri-murase-chishi": {
-   "h": "6f6280d7daa5",
-   "d": "2026-11-20"
+   "h": "7357dfe09cd7",
+   "d": "2026-11-23"
   },
   "social/chiri-murase-keito": {
-   "h": "2988f5dfc6ac",
-   "d": "2026-11-20"
+   "h": "36b6674fc9d3",
+   "d": "2026-11-23"
   },
   "social/chiri-nakamura-jikan": {
-   "h": "d1e53dab72dc",
-   "d": "2026-11-20"
+   "h": "9a55ae276a2f",
+   "d": "2026-11-23"
   },
   "social/chiri-nattoku-ronjutsu": {
    "h": "a66f67ed9262",
    "d": "2026-11-20"
   },
   "social/chiri-nihon-kokusei": {
-   "h": "f70bdf382398",
-   "d": "2026-11-20"
+   "h": "5f6d39d314df",
+   "d": "2026-11-23"
   },
   "social/chiri-ninomiya-tankyu": {
    "h": "b31749ca2247",
    "d": "2026-11-20"
   },
   "social/chiri-omoshiro": {
-   "h": "5f16f06c3742",
-   "d": "2026-11-20"
+   "h": "5dbb0e5d5778",
+   "d": "2026-11-23"
   },
   "social/chiri-omoshiro-ichimonto": {
-   "h": "53f26734c8ee",
-   "d": "2026-11-20"
+   "h": "ecb6cc42e831",
+   "d": "2026-11-23"
   },
   "social/chiri-review": {
    "h": "07381b79e154",
@@ -5670,48 +6218,48 @@
    "d": "2026-11-20"
   },
   "social/chiri-segawa-chishi": {
-   "h": "59f3d3005a75",
-   "d": "2026-11-20"
+   "h": "13f62ce1f143",
+   "d": "2026-11-23"
   },
   "social/chiri-segawa-keito": {
-   "h": "e2385bb897ee",
-   "d": "2026-11-20"
+   "h": "3a463e7e032e",
+   "d": "2026-11-23"
   },
   "social/chiri-shin-hyojun-kogi": {
-   "h": "65bc9192b08d",
-   "d": "2026-11-20"
+   "h": "03e47bafc413",
+   "d": "2026-11-23"
   },
   "social/chiri-shinsho-atlas": {
-   "h": "04223294f1f0",
-   "d": "2026-11-20"
+   "h": "5486f8ab1dde",
+   "d": "2026-11-23"
   },
   "social/chiri-shiryo-kenkyu": {
-   "h": "97777cd2da45",
-   "d": "2026-11-20"
+   "h": "23227dc69dcf",
+   "d": "2026-11-23"
   },
   "social/chiri-shokai-gendai-chizu": {
-   "h": "e1ec07185543",
-   "d": "2026-11-20"
+   "h": "d3628ba3294d",
+   "d": "2026-11-23"
   },
   "social/chiri-shuchu-kogi": {
-   "h": "1d9a135c3bb3",
-   "d": "2026-11-20"
+   "h": "c1e2bdcb867f",
+   "d": "2026-11-23"
   },
   "social/chiri-speedmaster": {
    "h": "44aac8921901",
    "d": "2026-11-20"
   },
   "social/chiri-tangen-training": {
-   "h": "3dc5301cd311",
-   "d": "2026-11-20"
+   "h": "3513b5401e18",
+   "d": "2026-11-23"
   },
   "social/chiri-target1400": {
-   "h": "f65b44020100",
-   "d": "2026-11-20"
+   "h": "1c099f128e94",
+   "d": "2026-11-23"
   },
   "social/chiri-teikoku-sougou": {
-   "h": "571679ca07e0",
-   "d": "2026-11-20"
+   "h": "09b3cd1d9cc2",
+   "d": "2026-11-23"
   },
   "social/chiri-teikoku-tankyu": {
    "h": "9347d152ee48",
@@ -5722,64 +6270,76 @@
    "d": "2026-11-20"
   },
   "social/chiri-tokyosho-sougou": {
-   "h": "f879dd5dec07",
-   "d": "2026-11-20"
+   "h": "68cf3cf7b047",
+   "d": "2026-11-23"
   },
   "social/chiri-toshin-ichimonto": {
-   "h": "1bc85d57c05c",
-   "d": "2026-11-20"
+   "h": "e384de1a0392",
+   "d": "2026-11-23"
   },
   "social/chiri-toukei-yomikata": {
    "h": "07a5df7ed50c",
    "d": "2026-11-20"
   },
   "social/chiri-toukei-youran": {
-   "h": "eb5acf76ba55",
-   "d": "2026-11-20"
+   "h": "d7b76e8df091",
+   "d": "2026-11-23"
   },
   "social/chiri-uno-chishi": {
-   "h": "e5e9d499503f",
-   "d": "2026-11-20"
+   "h": "9b632b467a2c",
+   "d": "2026-11-23"
   },
   "social/chiri-uno-keito": {
-   "h": "47b5f92ec25e",
-   "d": "2026-11-20"
+   "h": "7ad7f5676c73",
+   "d": "2026-11-23"
   },
   "social/chiri-yamakawa-note": {
-   "h": "e38b1a9ebe01",
-   "d": "2026-11-20"
+   "h": "9b9880a161e9",
+   "d": "2026-11-23"
   },
   "social/chiri-yamakawa-yogo": {
-   "h": "3eae1d08b2bf",
-   "d": "2026-11-20"
+   "h": "bdf177348864",
+   "d": "2026-11-23"
   },
   "social/chiri-yamaoka-kyoshitsu1": {
-   "h": "f616a9786060",
-   "d": "2026-11-20"
+   "h": "295de3f3ff73",
+   "d": "2026-11-23"
   },
   "social/chiri-yogo-kanzen-g": {
-   "h": "f93936858eb1",
-   "d": "2026-11-20"
+   "h": "d6eb68f4a234",
+   "d": "2026-11-23"
   },
   "social/chiri-zukai-chizu-shiryo": {
-   "h": "5a7f34ee04c3",
-   "d": "2026-11-20"
+   "h": "b97557ffbf63",
+   "d": "2026-11-23"
   },
   "social/chiri-zukai-yogo": {
-   "h": "1ce91fb81e02",
-   "d": "2026-11-20"
+   "h": "54afe7ae80e4",
+   "d": "2026-11-23"
+  },
+  "social/chokuzen30-chiri": {
+   "h": "a6ba5cd01586",
+   "d": "2026-11-23"
+  },
+  "social/chokuzen30-kokyoseikei": {
+   "h": "ff80d9f6bce6",
+   "d": "2026-11-23"
   },
   "social/chosoku-nihonshi": {
-   "h": "8eda77293d42",
-   "d": "2026-11-20"
+   "h": "7d981ba57096",
+   "d": "2026-11-23"
+  },
+  "social/collab-mondaishu-hyojun": {
+   "h": "75eeae602749",
+   "d": "2026-11-23"
   },
   "social/collab-mondaishu-jokyu": {
    "h": "ca75059b0a4c",
    "d": "2026-11-20"
   },
   "social/collab-mondaishu-kiso": {
-   "h": "16f6914da9a0",
-   "d": "2026-11-20"
+   "h": "d21ec37d09d1",
+   "d": "2026-11-23"
   },
   "social/dankaishiki-ronjutsu": {
    "h": "b9a9fd19666c",
@@ -5789,21 +6349,49 @@
    "h": "9bd831ec109f",
    "d": "2026-11-20"
   },
+  "social/gakken-ichimonitto-rekishi-nihonshi": {
+   "h": "329fe64d7458",
+   "d": "2026-11-23"
+  },
+  "social/gakken-ichimonitto-rekishi-sekaishi": {
+   "h": "6fbdd70d075d",
+   "d": "2026-11-23"
+  },
   "social/ganso-nendai-anki": {
-   "h": "9ff7c644b1eb",
-   "d": "2026-11-20"
+   "h": "a67aa4dbbbab",
+   "d": "2026-11-23"
   },
   "social/ganso-nendai-sekaishi": {
-   "h": "06dbdc11e117",
-   "d": "2026-11-20"
+   "h": "ee0d25ef6009",
+   "d": "2026-11-23"
   },
   "social/globalwide-sekaishi": {
-   "h": "a0d8a4f637a6",
-   "d": "2026-11-20"
+   "h": "489dec665030",
+   "d": "2026-11-23"
+  },
+  "social/group-dekigoto-620": {
+   "h": "10d6945fb5ea",
+   "d": "2026-11-23"
+  },
+  "social/group-dekigoto-710": {
+   "h": "e9f7ccf226a6",
+   "d": "2026-11-23"
   },
   "social/hajimeru-sekaishi": {
-   "h": "8607e209c29d",
-   "d": "2026-11-20"
+   "h": "1760a4cd94d8",
+   "d": "2026-11-23"
+  },
+  "social/hatakeyama-jikan-kokyoseikei": {
+   "h": "ab20d2709d3f",
+   "d": "2026-11-23"
+  },
+  "social/hatakeyama-kansei-kogi-kokyoseikei": {
+   "h": "450d035e3f17",
+   "d": "2026-11-23"
+  },
+  "social/hatakeyama-kansei-mondai-kokyoseikei": {
+   "h": "d27dae337dbd",
+   "d": "2026-11-23"
   },
   "social/hatakeyama-kyotest-rinri": {
    "h": "d81b9652f2b7",
@@ -5814,16 +6402,20 @@
    "d": "2026-11-20"
   },
   "social/hatakeyama-sokai-kogi": {
-   "h": "8f086a088588",
-   "d": "2026-11-20"
+   "h": "e665c81a113f",
+   "d": "2026-11-23"
   },
   "social/hatakeyama-sokai-mondai": {
-   "h": "c671da0664d7",
-   "d": "2026-11-20"
+   "h": "44c6cf2a44bb",
+   "d": "2026-11-23"
+  },
+  "social/hirao-7days-kokyo": {
+   "h": "d5f7076722b6",
+   "d": "2026-11-23"
   },
   "social/historia-nihonshi": {
-   "h": "abc08cd2789d",
-   "d": "2026-11-20"
+   "h": "c8c29397ca63",
+   "d": "2026-11-23"
   },
   "social/historia-sekaishi": {
    "h": "031ca387e3d5",
@@ -5846,140 +6438,152 @@
    "d": "2026-11-20"
   },
   "social/hyojun-seiko-seikei": {
-   "h": "2fefbb251767",
-   "d": "2026-11-20"
+   "h": "0dfabcb4deb6",
+   "d": "2026-11-23"
   },
   "social/ichidoyondara-nihonshi": {
-   "h": "e377d9cbae1c",
-   "d": "2026-11-20"
+   "h": "4872b827bc7f",
+   "d": "2026-11-23"
   },
   "social/ichidoyondara-sekaishi": {
-   "h": "3018315547a9",
-   "d": "2026-11-20"
+   "h": "dd5e27f6d508",
+   "d": "2026-11-23"
   },
   "social/ichikara-sekaishi-hisshu": {
-   "h": "695103e9ce2c",
-   "d": "2026-11-20"
+   "h": "565783666a7a",
+   "d": "2026-11-23"
   },
   "social/jidai-nagare-nihonshi": {
-   "h": "d1a864977c14",
-   "d": "2026-11-20"
+   "h": "c08c9fed0698",
+   "d": "2026-11-23"
   },
   "social/jidai-nagare-sekaishi": {
-   "h": "29d766373c92",
-   "d": "2026-11-20"
+   "h": "68815af2045c",
+   "d": "2026-11-23"
   },
   "social/jikkyo-nihonshi-1": {
-   "h": "b087666e0834",
-   "d": "2026-11-20"
+   "h": "acb76f804291",
+   "d": "2026-11-23"
   },
   "social/jikkyo-nihonshi-2": {
-   "h": "972c28692238",
-   "d": "2026-11-20"
+   "h": "7ba4e6fe0988",
+   "d": "2026-11-23"
   },
   "social/jikkyo-nihonshi-3": {
-   "h": "7e002bf87af2",
-   "d": "2026-11-20"
+   "h": "a45c0d14faa0",
+   "d": "2026-11-23"
   },
   "social/jikkyo-nihonshi-4": {
-   "h": "cb4bd037ef2f",
-   "d": "2026-11-20"
+   "h": "98da9e95c434",
+   "d": "2026-11-23"
   },
   "social/jikkyo-nihonshi-theme": {
    "h": "ccc398a57a60",
    "d": "2026-11-20"
   },
   "social/jikkyo-sekaishi-1": {
-   "h": "0bfcf30acb39",
-   "d": "2026-11-20"
+   "h": "850e790a8ab2",
+   "d": "2026-11-23"
   },
   "social/jikkyo-sekaishi-2": {
-   "h": "23f828697e85",
-   "d": "2026-11-20"
+   "h": "84278f4f0295",
+   "d": "2026-11-23"
   },
   "social/jikkyo-sekaishi-3": {
-   "h": "8a7ab29b1109",
-   "d": "2026-11-20"
+   "h": "3750ee0589b6",
+   "d": "2026-11-23"
   },
   "social/jikkyo-sekaishi-4": {
-   "h": "e97c292d712f",
-   "d": "2026-11-20"
+   "h": "6584c4e89613",
+   "d": "2026-11-23"
   },
   "social/jikkyo-shuppan-nihonshi-kyokasho": {
-   "h": "167024b03633",
-   "d": "2026-11-20"
+   "h": "a9970398c720",
+   "d": "2026-11-23"
+  },
+  "social/jikkyo-zoomup-kokyo": {
+   "h": "3b79b4a03907",
+   "d": "2026-11-23"
   },
   "social/jissen-koryaku-kokyoseikei": {
-   "h": "66a8923d210c",
-   "d": "2026-11-20"
+   "h": "5ad576298775",
+   "d": "2026-11-23"
   },
   "social/jitsuryoku-100dai-sekaishi": {
    "h": "7b76eaf9dfad",
    "d": "2026-11-20"
   },
   "social/jitsuryoku-80-seikei": {
-   "h": "b08074946f62",
-   "d": "2026-11-20"
+   "h": "935a72df2a00",
+   "d": "2026-11-23"
   },
   "social/jitsuryoku-nihonshi-100": {
-   "h": "dcbc01bc2122",
-   "d": "2026-11-20"
+   "h": "4e1522462fa3",
+   "d": "2026-11-23"
   },
   "social/kageyama-kt-kokyo": {
    "h": "52dd4d325494",
    "d": "2026-11-20"
   },
   "social/kageyama-kt-seikei": {
-   "h": "02e7aee51501",
-   "d": "2026-11-20"
+   "h": "2c5ca0639956",
+   "d": "2026-11-23"
   },
   "social/kageyama-omoshiro-seikei": {
-   "h": "ad672e137b8d",
-   "d": "2026-11-20"
+   "h": "4780d41c09ef",
+   "d": "2026-11-23"
   },
   "social/kageyama-sekaiichi-seikei": {
    "h": "5069a4e0d022",
    "d": "2026-11-20"
+  },
+  "social/kageyama-sokko-ichimon-kokyoseikei": {
+   "h": "b76b29116ead",
+   "d": "2026-11-23"
   },
   "social/kaite-fukameru-ronjutsu": {
    "h": "80bdafc8c77c",
    "d": "2026-11-20"
   },
   "social/kakikomi-kyokasho-nihonshi": {
-   "h": "b67e65839002",
-   "d": "2026-11-20"
+   "h": "7cc131b2a139",
+   "d": "2026-11-23"
   },
   "social/kakikomi-sekaishi": {
-   "h": "5c108f3d9d55",
-   "d": "2026-11-20"
+   "h": "dc7e00f72dcf",
+   "d": "2026-11-23"
   },
   "social/kakomon-review-kokyoseikei": {
    "h": "9a18a91186d3",
    "d": "2026-11-20"
   },
   "social/kanaya-bunkashi": {
-   "h": "3aa9fbf0f7e7",
-   "d": "2026-11-20"
+   "h": "6f49312c90f1",
+   "d": "2026-11-23"
   },
   "social/kanaya-nagare-1": {
-   "h": "17ad33bdc080",
-   "d": "2026-11-20"
+   "h": "cf2f8ac7cc92",
+   "d": "2026-11-23"
   },
   "social/kanaya-nagare-2": {
-   "h": "01140b80037c",
-   "d": "2026-11-20"
+   "h": "11118fa0e590",
+   "d": "2026-11-23"
   },
   "social/kanaya-nagare-3": {
-   "h": "be87fbe4010a",
-   "d": "2026-11-20"
+   "h": "6d3edc5c2ce4",
+   "d": "2026-11-23"
   },
   "social/kanaya-nendai-anki": {
-   "h": "4dcb9d3d7724",
-   "d": "2026-11-20"
+   "h": "7247c5d4186b",
+   "d": "2026-11-23"
   },
   "social/kanaya-nihonshi-themashi": {
    "h": "9ad35879b9cc",
    "d": "2026-11-20"
+  },
+  "social/kanaya-rekishi-sogo": {
+   "h": "c5a2b0099f26",
+   "d": "2026-11-23"
   },
   "social/kangaeru-nihonshi-ronjutsu": {
    "h": "a5d3af7de27e",
@@ -5990,8 +6594,8 @@
    "d": "2026-11-20"
   },
   "social/kanzen-master-seikei": {
-   "h": "d32a7026ce78",
-   "d": "2026-11-20"
+   "h": "e9da2722c99c",
+   "d": "2026-11-23"
   },
   "social/kato-sekaishi-1": {
    "h": "899353b4b25f",
@@ -6002,84 +6606,88 @@
    "d": "2026-11-20"
   },
   "social/kawai-kurobon-sekaishi": {
-   "h": "4bcd7d9fe915",
-   "d": "2026-11-20"
+   "h": "582469a1fced",
+   "d": "2026-11-23"
+  },
+  "social/kawai-mark-kiso-sekaishi": {
+   "h": "a210a7b1160c",
+   "d": "2026-11-23"
   },
   "social/keisan-ronjutsu-seikei": {
    "h": "4fad7dd12dcd",
    "d": "2026-11-20"
   },
   "social/kijutsu-ronjutsu-level1": {
-   "h": "86e84f6003da",
-   "d": "2026-11-20"
+   "h": "392816ddb0fc",
+   "d": "2026-11-23"
   },
   "social/kijutsu-ronjutsu-level2": {
-   "h": "9d891f87bc00",
-   "d": "2026-11-20"
+   "h": "44c059f97f3f",
+   "d": "2026-11-23"
   },
   "social/kijutsu-ronjutsu-level3": {
    "h": "e78f0b180523",
    "d": "2026-11-20"
   },
   "social/kimeru-kokyoseikei": {
-   "h": "a06d49e93fb1",
-   "d": "2026-11-20"
+   "h": "9fb59b52b323",
+   "d": "2026-11-23"
   },
   "social/kimeru-kyotest-nihonshi": {
-   "h": "0e5cac8a8c74",
-   "d": "2026-11-20"
+   "h": "b568b308a4d0",
+   "d": "2026-11-23"
   },
   "social/kimeru-kyotest-sekaishi": {
-   "h": "89651485d898",
-   "d": "2026-11-20"
+   "h": "d8c0eaeda003",
+   "d": "2026-11-23"
   },
   "social/kiso-mondai-seiko-nihonshi": {
-   "h": "28539064bc5f",
-   "d": "2026-11-20"
+   "h": "608ff07ac725",
+   "d": "2026-11-23"
   },
   "social/kiso-mondai-seiko-sekaishi": {
-   "h": "b03d1a842e4f",
-   "d": "2026-11-20"
+   "h": "1e7a9b6aa2dd",
+   "d": "2026-11-23"
   },
   "social/koko-nihonshi-kyokasho": {
-   "h": "2db89e3ef403",
-   "d": "2026-11-20"
+   "h": "820565685b56",
+   "d": "2026-11-23"
   },
   "social/koretadake-chiri": {
-   "h": "963bde7b397e",
-   "d": "2026-11-20"
+   "h": "4956f44deaa3",
+   "d": "2026-11-23"
   },
   "social/koretadake-kokyoseikei": {
-   "h": "3471a21f03d8",
-   "d": "2026-11-20"
+   "h": "b5bb1e79a267",
+   "d": "2026-11-23"
   },
   "social/koretadake-nihonshi-1": {
-   "h": "91b24c484786",
-   "d": "2026-11-20"
+   "h": "b1f623245ccc",
+   "d": "2026-11-23"
   },
   "social/koretadake-nihonshi-2": {
-   "h": "a7c7fdb4351e",
-   "d": "2026-11-20"
+   "h": "d2f496e94c7b",
+   "d": "2026-11-23"
   },
   "social/koretadake-nihonshi-enshu": {
-   "h": "108fe278bb0b",
-   "d": "2026-11-20"
+   "h": "77e8c886d301",
+   "d": "2026-11-23"
   },
   "social/koretadake-sekaishi-1": {
-   "h": "a3e46ebaefa9",
-   "d": "2026-11-20"
+   "h": "d411be9988b1",
+   "d": "2026-11-23"
   },
   "social/koretadake-sekaishi-2": {
-   "h": "51df852b47a8",
-   "d": "2026-11-20"
+   "h": "082fe700ee9c",
+   "d": "2026-11-23"
   },
   "social/kouryaku-nihonshi-theme": {
-   "h": "82c7a8d46975",
-   "d": "2026-11-20"
+   "h": "17158b44e552",
+   "d": "2026-11-23"
   },
   "social/kurobon-kokyoseikei": {
-   "h": "42ba0c910f24",
-   "d": "2026-11-20"
+   "h": "6fbef2a71f8c",
+   "d": "2026-11-23"
   },
   "social/kyodai-nihonshi-20": {
    "h": "97d1a57f6ca7",
@@ -6098,40 +6706,40 @@
    "d": "2026-11-20"
   },
   "social/kyokasho-seikei-tosho": {
-   "h": "04e97310200e",
-   "d": "2026-11-20"
+   "h": "e8aa57da24f6",
+   "d": "2026-11-23"
   },
   "social/kyokasho-yasashii-nihonshi": {
-   "h": "34a224b9ba1f",
-   "d": "2026-11-20"
+   "h": "ffe5671b0067",
+   "d": "2026-11-23"
   },
   "social/kyokasho-yasashii-sekaishi": {
-   "h": "feb8dbeb5bbf",
-   "d": "2026-11-20"
+   "h": "9abcd60d7a61",
+   "d": "2026-11-23"
   },
   "social/kyotest-bunkashi-kyogakusha": {
-   "h": "9daa878610f4",
-   "d": "2026-11-20"
+   "h": "bacb26df635c",
+   "d": "2026-11-23"
   },
   "social/kyotest-heno-michi-nihonshi": {
-   "h": "f9928aa97671",
-   "d": "2026-11-20"
+   "h": "da83c1eb6e1c",
+   "d": "2026-11-23"
   },
   "social/kyotest-jissen-moshi-chiri": {
-   "h": "674be83378e8",
-   "d": "2026-11-20"
+   "h": "e95aebd2740c",
+   "d": "2026-11-23"
   },
   "social/kyotest-jissen-moshi-kokyoseikei": {
-   "h": "69e6ac6fad6c",
-   "d": "2026-11-20"
+   "h": "ba1612d77e65",
+   "d": "2026-11-23"
   },
   "social/kyotest-jissen-moshi-nihonshi": {
-   "h": "182c87704211",
-   "d": "2026-11-20"
+   "h": "79cb063f8d15",
+   "d": "2026-11-23"
   },
   "social/kyotest-jissen-moshi-sekaishi": {
-   "h": "a07d7a067fd7",
-   "d": "2026-11-20"
+   "h": "6025063ef334",
+   "d": "2026-11-23"
   },
   "social/kyotest-kakomon-kenkyu-nihonshi": {
    "h": "345bc2fd2e98",
@@ -6146,12 +6754,12 @@
    "d": "2026-11-20"
   },
   "social/kyotest-michi-kokyoseikei": {
-   "h": "19066eae0f5f",
-   "d": "2026-11-20"
+   "h": "71fa9f040d2d",
+   "d": "2026-11-23"
   },
   "social/kyotest-michi-sekaishi": {
-   "h": "72ffea9b9954",
-   "d": "2026-11-20"
+   "h": "42be382ec781",
+   "d": "2026-11-23"
   },
   "social/kyotest-review-sekaishi": {
    "h": "b4c2f56e1896",
@@ -6162,24 +6770,32 @@
    "d": "2026-11-20"
   },
   "social/kyotest-training-sekaishi": {
-   "h": "4914147e4ced",
-   "d": "2026-11-20"
+   "h": "0133b74f7503",
+   "d": "2026-11-23"
   },
   "social/live-kokyo-teikoku": {
-   "h": "bf93d461e226",
-   "d": "2026-11-20"
+   "h": "ad406f0dbde3",
+   "d": "2026-11-23"
+  },
+  "social/manga-chiri-omoshiro": {
+   "h": "74ab942a2fca",
+   "d": "2026-11-23"
+  },
+  "social/manga-seikei-omoshiro": {
+   "h": "f779ad1b0668",
+   "d": "2026-11-23"
   },
   "social/markshiki-kiso-seikei": {
    "h": "711029ba36e8",
    "d": "2026-11-20"
   },
   "social/master-mondaishu-sekaishi": {
-   "h": "f6e3690aa2e0",
-   "d": "2026-11-20"
+   "h": "14e608b4565b",
+   "d": "2026-11-23"
   },
   "social/mayowazu-tokeru-sekaishi": {
-   "h": "acee26901aa6",
-   "d": "2026-11-20"
+   "h": "aa8ffde5ffd5",
+   "d": "2026-11-23"
   },
   "social/meiji-seikei-akahon": {
    "h": "4343c92c2f24",
@@ -6189,45 +6805,105 @@
    "h": "9851e8532bce",
    "d": "2026-11-20"
   },
+  "social/mogi-sekaishi-note": {
+   "h": "51798680d88b",
+   "d": "2026-11-23"
+  },
+  "social/mogi-sekaishi-omoshiroi": {
+   "h": "e962f95dc330",
+   "d": "2026-11-23"
+  },
+  "social/movista-ito-sekaishi-1": {
+   "h": "e69a5eb8cb10",
+   "d": "2026-11-23"
+  },
+  "social/movista-ito-sekaishi-2": {
+   "h": "41303f840a02",
+   "d": "2026-11-23"
+  },
+  "social/movista-sato-rekishi-sogo": {
+   "h": "108531e85563",
+   "d": "2026-11-23"
+  },
+  "social/movista-ueno-nihonshi-1": {
+   "h": "1a06e99b51b8",
+   "d": "2026-11-23"
+  },
+  "social/movista-ueno-nihonshi-2": {
+   "h": "7fddc4b56faf",
+   "d": "2026-11-23"
+  },
+  "social/nagare-note-nihonshi": {
+   "h": "5c1aa17d7ae1",
+   "d": "2026-11-23"
+  },
+  "social/nagare-zu-shosetsu-sekaishi": {
+   "h": "27dc5fe4face",
+   "d": "2026-11-23"
+  },
   "social/navi-sekaishi-1": {
-   "h": "cb70e6ff06da",
-   "d": "2026-11-20"
+   "h": "71b7a823eba6",
+   "d": "2026-11-23"
   },
   "social/navi-sekaishi-2": {
-   "h": "1022778f10a6",
-   "d": "2026-11-20"
+   "h": "4b00c131ef04",
+   "d": "2026-11-23"
   },
   "social/navi-sekaishi-3": {
-   "h": "0384ba5fd1cf",
-   "d": "2026-11-20"
+   "h": "ffedc0414add",
+   "d": "2026-11-23"
   },
   "social/navi-sekaishi-4": {
-   "h": "ba69c2fdaaac",
-   "d": "2026-11-20"
+   "h": "e934d1cf9ffc",
+   "d": "2026-11-23"
+  },
+  "social/nenpyo-kouryaku-nihonshi": {
+   "h": "caa791618155",
+   "d": "2026-11-23"
   },
   "social/nihonshi-guidebook-jouge": {
-   "h": "25e1da44387d",
-   "d": "2026-11-20"
+   "h": "317ef1a5a4f7",
+   "d": "2026-11-23"
+  },
+  "social/obunsha-sagatsuku-chiri": {
+   "h": "1f518d46b763",
+   "d": "2026-11-23"
+  },
+  "social/obunsha-visual-chizu-toukei": {
+   "h": "117630805fe1",
+   "d": "2026-11-23"
+  },
+  "social/omoshiro-ichimon-kokyoseikei": {
+   "h": "34294a698b3d",
+   "d": "2026-11-23"
   },
   "social/omoshiro-toreru-kokyoseikei": {
-   "h": "5331fc025be4",
-   "d": "2026-11-20"
+   "h": "667fedfa2c56",
+   "d": "2026-11-23"
+  },
+  "social/omoshiroi-ichimonitto-nihonshi": {
+   "h": "f09cd1efe57d",
+   "d": "2026-11-23"
+  },
+  "social/omoshiroi-ichimonitto-sekaishi": {
+   "h": "1730140fb1de",
+   "d": "2026-11-23"
   },
   "social/omoshiroi-kyotest-nihonshi": {
-   "h": "cfceffd63c3c",
-   "d": "2026-11-20"
+   "h": "6e298e0e1706",
+   "d": "2026-11-23"
   },
   "social/omoshiroi-kyotest-sekaishi": {
-   "h": "60f35ac3413f",
-   "d": "2026-11-20"
+   "h": "577112856ba0",
+   "d": "2026-11-23"
   },
   "social/panorama-sekaishi-kingendai": {
-   "h": "03d30ac5d021",
-   "d": "2026-11-20"
+   "h": "074e3fc9b772",
+   "d": "2026-11-23"
   },
   "social/panorama-sekaishi-kodai": {
-   "h": "39060b9d29de",
-   "d": "2026-11-20"
+   "h": "2bb0cf930de6",
+   "d": "2026-11-23"
   },
   "social/rinri-akahon": {
    "h": "ea4e66b2ff8c",
@@ -6369,69 +7045,89 @@
    "h": "4e5c2d7e186f",
    "d": "2026-11-20"
   },
+  "social/sagatsuku-nihonshi": {
+   "h": "da1838ef04d8",
+   "d": "2026-11-23"
+  },
+  "social/sagatsuku-sekaishi": {
+   "h": "e5864e108095",
+   "d": "2026-11-23"
+  },
   "social/saishin-nihonshi-zuhyo": {
    "h": "e1d4de2c4930",
    "d": "2026-11-20"
   },
   "social/saitan-route-kokyoseikei": {
-   "h": "b913abda0ab5",
-   "d": "2026-11-20"
+   "h": "820a66f72fff",
+   "d": "2026-11-23"
   },
   "social/sekaishi-kenkyu": {
    "h": "c79f79c536c0",
    "d": "2026-11-20"
   },
   "social/sekaishi-multi-training": {
-   "h": "ff37ddbbf03f",
-   "d": "2026-11-20"
+   "h": "6ac45e49b62f",
+   "d": "2026-11-23"
   },
   "social/sekaishi-nendai-onephrase": {
-   "h": "0dcab3f875e2",
-   "d": "2026-11-20"
+   "h": "d6ab2a7ec422",
+   "d": "2026-11-23"
   },
   "social/shidai-koryaku-seikei": {
-   "h": "18820b58f258",
-   "d": "2026-11-20"
+   "h": "6ba1f791bac3",
+   "d": "2026-11-23"
   },
   "social/shimizu-kokyo-teinei": {
-   "h": "85fd562d8cfd",
-   "d": "2026-11-20"
+   "h": "2a0e80dd3ca8",
+   "d": "2026-11-23"
   },
   "social/shimizu-yogo-kokyoseikei": {
-   "h": "b0066c3c0b37",
-   "d": "2026-11-20"
+   "h": "30124d3140a5",
+   "d": "2026-11-23"
+  },
+  "social/shinhyojun-nihonshi": {
+   "h": "96310549235a",
+   "d": "2026-11-23"
+  },
+  "social/shinhyojun-sekaishi": {
+   "h": "5adf48784e8e",
+   "d": "2026-11-23"
   },
   "social/shinkatei-koryaku-chiri": {
-   "h": "ee434b92d4ef",
-   "d": "2026-11-20"
+   "h": "dba4404576e7",
+   "d": "2026-11-23"
   },
   "social/shinkatei-koryaku-kokyoseikei": {
-   "h": "f58d8b23b0d4",
-   "d": "2026-11-20"
+   "h": "0cd86b638f6a",
+   "d": "2026-11-23"
   },
   "social/shinkatei-koryaku-nihonshi": {
-   "h": "c2ec0bbb58e5",
-   "d": "2026-11-20"
+   "h": "9ec1bb1791a6",
+   "d": "2026-11-23"
   },
   "social/shinkatei-koryaku-sekaishi": {
-   "h": "319487b7d9e4",
-   "d": "2026-11-20"
+   "h": "6db94aeeb78a",
+   "d": "2026-11-23"
   },
   "social/shinsho-nihonshi-hamajima": {
    "h": "4625283c2153",
    "d": "2026-11-20"
+  },
+  "social/shiryo-yomitoku-nihonshi": {
+   "h": "cd06741ee3f4",
+   "d": "2026-11-23"
   },
   "social/shosetsu-nihonshi-kenkyu": {
    "h": "7670e5d1d01d",
    "d": "2026-11-20"
   },
   "social/shosetsu-nihonshi-kyokasho": {
-   "h": "49322c4b784e",
-   "d": "2026-11-20"
+   "h": "2643542a59f4",
+   "d": "2026-11-23"
   },
   "social/shosetsu-nihonshi-note": {
-   "h": "ac4768e119ea",
-   "d": "2026-11-20"
+   "h": "3bede2acbac0",
+   "d": "2026-11-23"
   },
   "social/shosetsu-nihonshi-shiryoshu": {
    "h": "5be1d727dde9",
@@ -6442,72 +7138,84 @@
    "d": "2026-11-20"
   },
   "social/shosetsu-sekaishi-note": {
-   "h": "b702243d4d60",
-   "d": "2026-11-20"
+   "h": "7b6da6208714",
+   "d": "2026-11-23"
   },
   "social/shuchu-kogi-kokyoseikei": {
-   "h": "6ad0eb82a4a6",
-   "d": "2026-11-20"
+   "h": "78f656b5e5ef",
+   "d": "2026-11-23"
   },
   "social/shuchu-kogi-kyotest-sekaishi": {
-   "h": "5ebeaa112490",
-   "d": "2026-11-20"
+   "h": "e3e3c243657d",
+   "d": "2026-11-23"
   },
   "social/shuchu-kogi-nihonshi": {
-   "h": "0f74a9c9d40e",
-   "d": "2026-11-20"
+   "h": "4ba541090b1c",
+   "d": "2026-11-23"
+  },
+  "social/shunsuke-9jikan-kokyoseikei": {
+   "h": "12ff68161b2d",
+   "d": "2026-11-23"
+  },
+  "social/speed-anki-inout-rekishi-sogo": {
+   "h": "c751b5f2d92c",
+   "d": "2026-11-23"
   },
   "social/speedmaster-38": {
-   "h": "de622cbf92b2",
-   "d": "2026-11-20"
+   "h": "6e0e36101dd3",
+   "d": "2026-11-23"
   },
   "social/speedmaster-bunkashi": {
-   "h": "6be811f0ab3f",
-   "d": "2026-11-20"
+   "h": "bb2369812227",
+   "d": "2026-11-23"
   },
   "social/speedmaster-kokyo": {
    "h": "a3d6ab34b1b6",
    "d": "2026-11-20"
   },
   "social/speedmaster-nihonshi": {
-   "h": "0dc727ee91a1",
-   "d": "2026-11-20"
+   "h": "c77b462a54d4",
+   "d": "2026-11-23"
   },
   "social/speedmaster-seikei": {
-   "h": "eaa69d1d93ac",
-   "d": "2026-11-20"
+   "h": "369f331c3635",
+   "d": "2026-11-23"
   },
   "social/speedmaster-sekaishi": {
-   "h": "5b25536a5393",
-   "d": "2026-11-20"
+   "h": "c4aec533dcdc",
+   "d": "2026-11-23"
   },
   "social/startup-nihonshi-ronjutsu": {
    "h": "65bf9335ae15",
    "d": "2026-11-20"
   },
   "social/taipa-text-kokyoseikei": {
-   "h": "fe3c7a39fb2a",
-   "d": "2026-11-20"
+   "h": "590fdd83d30d",
+   "d": "2026-11-23"
   },
   "social/tanki-koryaku-seikei": {
-   "h": "22c11013155d",
-   "d": "2026-11-20"
+   "h": "9765ad35ea59",
+   "d": "2026-11-23"
   },
   "social/tapestry-sekaishi": {
-   "h": "09353c64753d",
-   "d": "2026-11-20"
+   "h": "f24d55267a47",
+   "d": "2026-11-23"
   },
   "social/target1400-kokyoseikei": {
-   "h": "c2d19b2cb8c6",
-   "d": "2026-11-20"
+   "h": "ab2d9d03304d",
+   "d": "2026-11-23"
   },
   "social/target4000-nihonshi": {
-   "h": "b26fde10f3a6",
-   "d": "2026-11-20"
+   "h": "5e19b886ed79",
+   "d": "2026-11-23"
   },
   "social/tate-sekaishi-tankyu": {
-   "h": "bd37b0998d17",
-   "d": "2026-11-20"
+   "h": "bb07e37e3b6e",
+   "d": "2026-11-23"
+  },
+  "social/teikoku-chiri-data-file": {
+   "h": "0485369ab223",
+   "d": "2026-11-23"
   },
   "social/text-teikoku-shinsho-sekaishi": {
    "h": "e7a003f3d178",
@@ -6518,8 +7226,8 @@
    "d": "2026-11-20"
   },
   "social/text-yamakawa-shin-sekaishi": {
-   "h": "116ad8f6374e",
-   "d": "2026-11-20"
+   "h": "fb2ab27aa9fd",
+   "d": "2026-11-23"
   },
   "social/text-yamakawa-shosetsu-sekaishi": {
    "h": "f6341fc18e13",
@@ -6550,36 +7258,48 @@
    "d": "2026-11-20"
   },
   "social/tokyoshoseki-nihonshi-kyokasho": {
-   "h": "768c349834ba",
-   "d": "2026-11-20"
+   "h": "450642bb1a41",
+   "d": "2026-11-23"
   },
   "social/toshin-ichimon-seikei": {
-   "h": "975522cde082",
-   "d": "2026-11-20"
+   "h": "8470518a1158",
+   "d": "2026-11-23"
   },
   "social/toshin-ichimonitto-kanzen": {
-   "h": "26b4e2df97d9",
-   "d": "2026-11-20"
+   "h": "ec01236861eb",
+   "d": "2026-11-23"
   },
   "social/toshin-ichimonitto-kihon": {
-   "h": "3be03ac248bb",
-   "d": "2026-11-20"
+   "h": "16ed41922aa0",
+   "d": "2026-11-23"
   },
   "social/toshin-ichimonitto-kyotest": {
-   "h": "b5583a725f46",
-   "d": "2026-11-20"
+   "h": "7b2326f50b49",
+   "d": "2026-11-23"
+  },
+  "social/toshin-ichimonitto-rekishi-sogo": {
+   "h": "f2d8ca4db6c7",
+   "d": "2026-11-23"
   },
   "social/toshin-ichimonto-sekaishi": {
-   "h": "d8ffad5cdce0",
-   "d": "2026-11-20"
+   "h": "31a966babd31",
+   "d": "2026-11-23"
   },
   "social/toshin-mondaishu-sekaishi": {
    "h": "02b420641564",
    "d": "2026-11-20"
   },
   "social/toshin-shiryo-ichimonitto": {
-   "h": "84d33c79dd55",
-   "d": "2026-11-20"
+   "h": "60fbdd720b27",
+   "d": "2026-11-23"
+  },
+  "social/ueno-8jikan-chiri-chishi": {
+   "h": "d66e861993d8",
+   "d": "2026-11-23"
+  },
+  "social/ueno-8jikan-chiri-keito": {
+   "h": "3c72c30cef73",
+   "d": "2026-11-23"
   },
   "social/wakaru-tokeru-kakeru-ronjutsu": {
    "h": "d9bda7b48a90",
@@ -6601,21 +7321,25 @@
    "h": "2c85a9dcd7f7",
    "d": "2026-11-20"
   },
+  "social/yamakawa-ichimon-chiri": {
+   "h": "71f157dae2fa",
+   "d": "2026-11-23"
+  },
   "social/yamakawa-ichimon-kokyo": {
    "h": "00cb78074517",
    "d": "2026-11-20"
   },
   "social/yamakawa-ichimon-seikei": {
-   "h": "299481835396",
-   "d": "2026-11-20"
+   "h": "e4c91eb1287a",
+   "d": "2026-11-23"
   },
   "social/yamakawa-ichimonitto-nihonshi": {
-   "h": "bf4a581ba976",
-   "d": "2026-11-20"
+   "h": "c4059b45e8df",
+   "d": "2026-11-23"
   },
   "social/yamakawa-ichimonto-sekaishi": {
-   "h": "58af39b5266d",
-   "d": "2026-11-20"
+   "h": "c830476515e1",
+   "d": "2026-11-23"
   },
   "social/yamakawa-navi-kokyoseikei": {
    "h": "947e1d40aaf4",
@@ -6625,49 +7349,65 @@
    "h": "2cb6bd5b8ded",
    "d": "2026-11-20"
   },
+  "social/yamakawa-select-nihonshi": {
+   "h": "2c69be086134",
+   "d": "2026-11-23"
+  },
+  "social/yamakawa-select-sekaishi": {
+   "h": "d799ee0a084d",
+   "d": "2026-11-23"
+  },
   "social/yamakawa-yogo-kokyo": {
    "h": "972be1cb529a",
    "d": "2026-11-20"
   },
   "social/yamakawa-yogo-seikei": {
-   "h": "7272587819e9",
-   "d": "2026-11-20"
+   "h": "e5b1641f388f",
+   "d": "2026-11-23"
   },
   "social/yamakawa-yogoshu-sekaishi": {
-   "h": "08dfa7870948",
-   "d": "2026-11-20"
+   "h": "5a56da73db33",
+   "d": "2026-11-23"
+  },
+  "social/yamakawa-yokuderu-ichimon-kokyoseikei": {
+   "h": "13b6a749c65e",
+   "d": "2026-11-23"
   },
   "social/yamakawa-zuroku-sekaishi": {
-   "h": "5ded74156721",
-   "d": "2026-11-20"
+   "h": "67cfd656fd34",
+   "d": "2026-11-23"
+  },
+  "social/yogo-2level-nihonshi": {
+   "h": "86bbbe668028",
+   "d": "2026-11-23"
   },
   "social/yoko-sekaishi-tankyu": {
-   "h": "34de88b3c8d3",
-   "d": "2026-11-20"
+   "h": "d0c489cb5bec",
+   "d": "2026-11-23"
   },
   "social/yokuwakaru-nihonshi-tankyu": {
-   "h": "4ef685ee8c11",
-   "d": "2026-11-20"
+   "h": "acb8fbe06891",
+   "d": "2026-11-23"
   },
   "social/yougoshu-nihonshi": {
-   "h": "e3025ee1b8be",
-   "d": "2026-11-20"
+   "h": "8ae91ceaaf2c",
+   "d": "2026-11-23"
   },
   "social/yozemi-jissen-chiri": {
-   "h": "d5f2b80a35b7",
-   "d": "2026-11-20"
+   "h": "f134bc0eb2cc",
+   "d": "2026-11-23"
   },
   "social/yozemi-jissen-kokyoseikei": {
-   "h": "4e8b2699251a",
-   "d": "2026-11-20"
+   "h": "5b4c555356ff",
+   "d": "2026-11-23"
   },
   "social/yozemi-jissen-nihonshi": {
-   "h": "f5dc8406056d",
-   "d": "2026-11-20"
+   "h": "147da36f7dda",
+   "d": "2026-11-23"
   },
   "social/yozemi-jissen-sekaishi": {
-   "h": "d22cbd0b1950",
-   "d": "2026-11-20"
+   "h": "2df33bb70210",
+   "d": "2026-11-23"
   },
   "social/zenkoku-nyushi-seikai-chiri": {
    "h": "bd29e4f180e5",
@@ -6686,32 +7426,36 @@
    "d": "2026-11-20"
   },
   "social/zenlevel-nihonshi-1": {
-   "h": "a863a1662f1f",
-   "d": "2026-11-20"
+   "h": "8ecfaf026b8c",
+   "d": "2026-11-23"
+  },
+  "social/zenlevel-nihonshi-2": {
+   "h": "222f24758535",
+   "d": "2026-11-23"
   },
   "social/zenlevel-nihonshi-3": {
-   "h": "82a18a580f6e",
-   "d": "2026-11-20"
+   "h": "2c6478d87f7e",
+   "d": "2026-11-23"
   },
   "social/zenlevel-nihonshi-4": {
    "h": "ef0fb5469d61",
    "d": "2026-11-20"
   },
   "social/zenlevel-nihonshi-5": {
-   "h": "89e0595ae15a",
-   "d": "2026-11-20"
+   "h": "539b94d76e47",
+   "d": "2026-11-23"
   },
   "social/zenlevel-sekaishi-1": {
-   "h": "43ec7b7a2756",
-   "d": "2026-11-20"
+   "h": "1fe6add43f6b",
+   "d": "2026-11-23"
   },
   "social/zenlevel-sekaishi-2": {
-   "h": "feb306a0284f",
-   "d": "2026-11-20"
+   "h": "82f748bc1420",
+   "d": "2026-11-23"
   },
   "social/zenlevel-sekaishi-3": {
-   "h": "7093a8af7d18",
-   "d": "2026-11-20"
+   "h": "f674a8264876",
+   "d": "2026-11-23"
   },
   "social/zenlevel-sekaishi-4": {
    "h": "b2fb72582600",
@@ -6734,60 +7478,60 @@
    "d": "2026-11-20"
   },
   "subject/english": {
-   "h": "c26288cc29b5",
-   "d": "2026-11-20"
+   "h": "6e1b48d13fc1",
+   "d": "2026-11-23"
   },
   "subject/japanese": {
-   "h": "58a0022def76",
-   "d": "2026-11-20"
+   "h": "a8f9af2d8982",
+   "d": "2026-11-23"
   },
   "subject/joho": {
-   "h": "896473957c74",
-   "d": "2026-11-20"
+   "h": "b7ba0bd3b5d6",
+   "d": "2026-11-23"
   },
   "subject/math": {
-   "h": "b80911246386",
-   "d": "2026-11-20"
+   "h": "548399b7375b",
+   "d": "2026-11-23"
   },
   "subject/science": {
-   "h": "79be79ee73d9",
-   "d": "2026-11-20"
+   "h": "1bdaa7b9bd07",
+   "d": "2026-11-23"
   },
   "subject/shoron": {
-   "h": "76cb4c598ce5",
-   "d": "2026-11-20"
+   "h": "7db59c8e8a82",
+   "d": "2026-11-23"
   },
   "subject/social": {
-   "h": "f2c5bedd274f",
-   "d": "2026-11-20"
+   "h": "d8c8f8d7fc46",
+   "d": "2026-11-23"
   },
   "top/english": {
-   "h": "bbc2e8822bdd",
-   "d": "2026-11-20"
+   "h": "a4d2af4ced73",
+   "d": "2026-11-23"
   },
   "top/japanese": {
-   "h": "d9d7c3bb32e5",
-   "d": "2026-11-20"
+   "h": "dfb7fbfa5a0a",
+   "d": "2026-11-23"
   },
   "top/joho": {
-   "h": "019ba94a6883",
-   "d": "2026-11-20"
+   "h": "41903f229af9",
+   "d": "2026-11-23"
   },
   "top/math": {
-   "h": "46d7de29aa98",
-   "d": "2026-11-20"
+   "h": "5e732a84e638",
+   "d": "2026-11-23"
   },
   "top/science": {
-   "h": "794fcde220c3",
-   "d": "2026-11-20"
+   "h": "f17fa05420f5",
+   "d": "2026-11-23"
   },
   "top/shoron": {
-   "h": "e381dc2b627d",
-   "d": "2026-11-20"
+   "h": "4a5dd5525554",
+   "d": "2026-11-23"
   },
   "top/social": {
-   "h": "ced5ab60ad64",
-   "d": "2026-11-20"
+   "h": "25bc9f97e5c3",
+   "d": "2026-11-23"
   },
   "univ/aichi": {
    "h": "0fb15ccec9ba",

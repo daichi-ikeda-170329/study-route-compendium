@@ -3166,8 +3166,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4325241299",
-    "isbn13": "9784325241294",
+    "isbn10": "4325279156",
+    "isbn13": "9784325279150",
     "asin": null
    },
    "explicitHost": null,
@@ -6516,6 +6516,956 @@
     "checkedAt": null
    }
   },
+  "english:uchuichi-koko-eibunpo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062144",
+    "isbn13": "9784053062147",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:levelup-eibunpo-1": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053049040",
+    "isbn13": "9784053049049",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:levelup-eibunpo-2": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053049059",
+    "isbn13": "9784053049056",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:zenlevel-eibunpo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010352035",
+    "isbn13": "9784010352038",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:ichimon-ittou-eibunpo-gohou": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4890858822",
+    "isbn13": "9784890858828",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:jitsuryoku-hantei-bunpo-final-hyojun": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4342770121",
+    "isbn13": "9784342770128",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:basic-lecture-doga-eibunpo-dokkai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010351284",
+    "isbn13": "9784010351284",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kiyokawa-hinshutsu-eitango-master": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "477723147X",
+    "isbn13": "9784777231478",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:karafuru-eibunpo-drill": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053063930",
+    "isbn13": "9784053063939",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:empower-all-in-one": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4342213362",
+    "isbn13": "9784342213366",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:eibunpo-no-teoria": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4865316485",
+    "isbn13": "9784865316483",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:earthrise-sogo-eigo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4410110926",
+    "isbn13": "9784410110924",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:eibun-kaishaku-1satsume-drill": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046076194",
+    "isbn13": "9784046076199",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:mazuha-kyotest-reading": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777228835",
+    "isbn13": "9784777228836",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:mazuha-kyotest-listening": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777228843",
+    "isbn13": "9784777228843",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotest-korezake-r-kisokatame": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "457824265X",
+    "isbn13": "9784578242659",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotest-korezake-r-speed": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578242668",
+    "isbn13": "9784578242666",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:1month-plus-moshi-reading": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4757444273",
+    "isbn13": "9784757444270",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:1month-plus-moshi-listening": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4757444281",
+    "isbn13": "9784757444287",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotsu-test-reading-level-0": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4890859705",
+    "isbn13": "9784890859702",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotsu-test-reading-level-1": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4890859713",
+    "isbn13": "9784890859719",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotsu-test-reading-level-2": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4890859799",
+    "isbn13": "9784890859795",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotsu-test-reading-level-3": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4890859802",
+    "isbn13": "9784890859801",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotest-reading-shuchu-koza": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010353910",
+    "isbn13": "9784010353912",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotest-jissen-taisaku-reading": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010319577",
+    "isbn13": "9784010319574",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotest-jissen-taisaku-listening": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010319585",
+    "isbn13": "9784010319581",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:kyotest-listening-jikkyo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4875688466",
+    "isbn13": "9784875688464",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:gungun-eigo-chobun-entry": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "432527278X",
+    "isbn13": "9784325272786",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:gungun-eigo-chobun-basic": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4325248013",
+    "isbn13": "9784325248019",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:gungun-eigo-chobun-standard": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4325248021",
+    "isbn13": "9784325248026",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:gungun-eigo-chobun-advanced": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "432524803X",
+    "isbn13": "9784325248033",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:saisoku-eigo-chobun-1": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046067993",
+    "isbn13": "9784046067999",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:saisoku-eigo-chobun-2": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046068000",
+    "isbn13": "9784046068002",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:muto-10nichi-sokudoku": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046061634",
+    "isbn13": "9784046061638",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:tomita-chobun-rule144": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4479190538",
+    "isbn13": "9784479190530",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:tomita-bunsho-dokkai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4479190570",
+    "isbn13": "9784479190578",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:jiji-eigo-frontier": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4789019543",
+    "isbn13": "9784789019545",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "english:obunsha-5fun-eigo-chobun": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355328",
+    "isbn13": "9784010355329",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
   "japanese:tamura-yasashiku": {
    "providers": [
     "amazon",
@@ -9647,8 +10597,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4053040299",
-    "isbn13": "9784053040299",
+    "isbn10": "4053060834",
+    "isbn13": "9784053060839",
     "asin": null
    },
    "explicitHost": null,
@@ -9823,8 +10773,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4907422415",
-    "isbn13": "9784907422417",
+    "isbn10": "4911467088",
+    "isbn13": "9784911467084",
     "asin": null
    },
    "explicitHost": null,
@@ -10048,8 +10998,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "477722337X",
-    "isbn13": "9784777223374",
+    "isbn10": "4777231593",
+    "isbn13": "9784777231591",
     "asin": null
    },
    "explicitHost": null,
@@ -10848,8 +11798,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4796124144",
-    "isbn13": "9784796124140",
+    "isbn10": "4796124403",
+    "isbn13": "9784796124409",
     "asin": null
    },
    "explicitHost": null,
@@ -10873,8 +11823,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4796124152",
-    "isbn13": "9784796124157",
+    "isbn10": "4796124411",
+    "isbn13": "9784796124416",
     "asin": null
    },
    "explicitHost": null,
@@ -11430,6 +12380,831 @@
     "checkedAt": null
    }
   },
+  "japanese:access-kyotest-shosetsu": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777231577",
+    "isbn13": "9784777231577",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:kanbun-point-master": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777231607",
+    "isbn13": "9784777231607",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:schema-gendai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053064147",
+    "isbn13": "9784053064141",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:hinshutsu-bungakushi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777231534",
+    "isbn13": "9784777231539",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:koko-koten-bunpo-pattern-drill": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578243869",
+    "isbn13": "9784578243861",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:koko-kanbun-kuho-pattern-drill": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578243877",
+    "isbn13": "9784578243878",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:bungakushi-saijuyo-speedcheck": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578244652",
+    "isbn13": "9784578244653",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:kobun-joshiki-saijuyo-speedcheck": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578244644",
+    "isbn13": "9784578244646",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:gendai-hyoron-theme-kogi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4385227373",
+    "isbn13": "9784385227375",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:sokusen-zemi-lite-gendai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "434230211X",
+    "isbn13": "9784342302114",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:bunpo-10drill-jissen": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4796115242",
+    "isbn13": "9784796115247",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:nishihara-gendai-hajimekara": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4868270036",
+    "isbn13": "9784868270034",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:gendai-kiso-drill-suntai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4796114645",
+    "isbn13": "9784796114646",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:gendai-hyojun-drill-suntai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4796114653",
+    "isbn13": "9784796114653",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:chobun-kobun-joshiki-waka": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777231453",
+    "isbn13": "9784777231454",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:hikkei-kobun-tango345": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4865316523",
+    "isbn13": "9784865316520",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:kimeru-kyotest-gendai-mondai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062381",
+    "isbn13": "9784053062383",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:alc-1kagetsu-kyotest-kokugo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4757444230",
+    "isbn13": "9784757444232",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:tsuji-logical-kobun-dokkai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046068272",
+    "isbn13": "9784046068279",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:shinsen-kobun-tango400": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4890859926",
+    "isbn13": "9784890859924",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:kanbun-keyword-kogi-sanseido": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4385227365",
+    "isbn13": "9784385227368",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:mochizuki-kobun-tango333": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010354887",
+    "isbn13": "9784010354889",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:okamoto-ryomon-tokkun-kanbun-kuho": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053061334",
+    "isbn13": "9784053061331",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:codex-gendai-seisen": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053061814",
+    "isbn13": "9784053061812",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:mazuha-kyotest-kobun": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777228894",
+    "isbn13": "9784777228898",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:mazuha-kyotest-gendai-1": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777228878",
+    "isbn13": "9784777228874",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:adachi-mieru-gendai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046069783",
+    "isbn13": "9784046069788",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:gendai-nagare-dokkai-training": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355034",
+    "isbn13": "9784010355039",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:koten-bunpo-speed-input": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355042",
+    "isbn13": "9784010355046",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:dokkai-gendai-keyword700": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010323469",
+    "isbn13": "9784010323465",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:sekaiichi-kyodai-kokugo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046072377",
+    "isbn13": "9784046072375",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:hayaoboe-kanbun-dokkai-training": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053060850",
+    "isbn13": "9784053060853",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "japanese:kanbun-saijuyo-speedcheck": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578244563",
+    "isbn13": "9784578244561",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
   "math:yasashiko": {
    "providers": [
     "amazon",
@@ -11721,8 +13496,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4410102079",
-    "isbn13": "9784410102073",
+    "isbn10": "4410102087",
+    "isbn13": "9784410102080",
     "asin": null
    },
    "explicitHost": null,
@@ -11746,8 +13521,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4410107178",
-    "isbn13": "9784410107177",
+    "isbn10": "4410107186",
+    "isbn13": "9784410107184",
     "asin": null
    },
    "explicitHost": null,
@@ -11771,8 +13546,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4410105787",
-    "isbn13": "9784410105784",
+    "isbn10": "4410105795",
+    "isbn13": "9784410105791",
     "asin": null
    },
    "explicitHost": null,
@@ -15085,8 +16860,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4046067608",
-    "isbn13": "9784046067609",
+    "isbn10": "4046079673",
+    "isbn13": "9784046079671",
     "asin": null
    },
    "explicitHost": null,
@@ -15691,6 +17466,331 @@
    "keys": {
     "isbn10": null,
     "isbn13": "9784868270126",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:shida-bibun-sekibun": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046068868",
+    "isbn13": "9784046068866",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:obunsha-kyotest-ryomon": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355069",
+    "isbn13": "9784010355060",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:kawai-nyushi-kouryaku-sugaku": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777231178",
+    "isbn13": "9784777231171",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:kyotest-hissho-manual": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4887423055",
+    "isbn13": "9784887423053",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:kyodai-sugaku-51nen-kiseki": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4887423047",
+    "isbn13": "9784887423046",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:sundai-kihon-mondai-enshu-3c": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4796113541",
+    "isbn13": "9784796113540",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:sundai-kihon-mondai-enshu-1a2bc": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4796113525",
+    "isbn13": "9784796113526",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:gungun-sugaku-2b-basic": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4325279075",
+    "isbn13": "9784325279075",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:gungun-bunkei-sugaku-advanced": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4325279121",
+    "isbn13": "9784325279129",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:jikkyo-kyotest-juyo-mondai-sugaku": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4407368039",
+    "isbn13": "9784407368031",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:suken-10nichi-kiwameru": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4410153935",
+    "isbn13": "9784410153938",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:erle-shigoku-yumei-240": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "475393599X",
+    "isbn13": "9784753935994",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "math:bunneido-pattern-drill-sugaku": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578243508",
+    "isbn13": "9784578243502",
     "asin": null
    },
    "explicitHost": null,
@@ -17214,8 +19314,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4410143166",
-    "isbn13": "9784410143168",
+    "isbn10": "4410143174",
+    "isbn13": "9784410143175",
     "asin": null
    },
    "explicitHost": null,
@@ -19801,8 +21901,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4410143360",
-    "isbn13": "9784410143366",
+    "isbn10": "4410143379",
+    "isbn13": "9784410143373",
     "asin": null
    },
    "explicitHost": null,
@@ -19901,8 +22001,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4385261016",
-    "isbn13": "9784385261010",
+    "isbn10": "4385261008",
+    "isbn13": "9784385261003",
     "asin": null
    },
    "explicitHost": null,
@@ -20051,8 +22151,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4385260958",
-    "isbn13": "9784385260952",
+    "isbn10": "4385261342",
+    "isbn13": "9784385261348",
     "asin": null
    },
    "explicitHost": null,
@@ -21026,8 +23126,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4796124179",
-    "isbn13": "9784796124171",
+    "isbn10": "4796124446",
+    "isbn13": "9784796124447",
     "asin": null
    },
    "explicitHost": null,
@@ -25245,6 +27345,706 @@
     "checkedAt": null
    }
   },
+  "science:rikei-hyojun-butsuri": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4796116389",
+    "isbn13": "9784796116381",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:tetsuryokukai-toryumon-rikigaku": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046078367",
+    "isbn13": "9784046078360",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:sanpei-bestselect-butsuri": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578243044",
+    "isbn13": "9784578243045",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:sanpei-bestmethod-butsuri": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578243087",
+    "isbn13": "9784578243083",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:doshutsu-butsuri-kiso-6": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4434383779",
+    "isbn13": "9784434383779",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:photoscience-butsuri-zuroku": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4410265148",
+    "isbn13": "9784410265143",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:tottemo-yasashii-butsuri-kiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010349360",
+    "isbn13": "9784010349366",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:butsuri-no-shitsumon91": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010348739",
+    "isbn13": "9784010348734",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:golden-route-butsuri-kiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "404604473X",
+    "isbn13": "9784046044730",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:golden-route-butsuri-hyojun": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046044756",
+    "isbn13": "9784046044754",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:zero-kagaku-keisan-2": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046070374",
+    "isbn13": "9784046070371",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:futami-hayawakari-kagaku": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053064112",
+    "isbn13": "9784053064110",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:sakata-6jikan-kagakukiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062136",
+    "isbn13": "9784053062130",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:master-mondaishu-riron": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010354666",
+    "isbn13": "9784010354667",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:master-mondaishu-muki": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010354674",
+    "isbn13": "9784010354674",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:master-mondaishu-yuki": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010354682",
+    "isbn13": "9784010354681",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:aono-kagakukiso-issatsu": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4761230681",
+    "isbn13": "9784761230685",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:uchu-kagaku-hanno-shiki": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053056756",
+    "isbn13": "9784053056757",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:sakata-yuki-polaris-1": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046061898",
+    "isbn13": "9784046061898",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:sakata-yuki-polaris-2": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046061901",
+    "isbn13": "9784046061904",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:golden-route-kagaku-kiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046044721",
+    "isbn13": "9784046044723",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:golden-route-kagaku-hyojun": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046044764",
+    "isbn13": "9784046044761",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:ito-jikan-kyotest-kiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010354739",
+    "isbn13": "9784010354735",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:shimamura-jikan-kyotest-chigaku-kiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010354747",
+    "isbn13": "9784010354742",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:saijuyo-point50-kiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578243109",
+    "isbn13": "9784578243106",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:bestfit-chigaku-kiso-ne": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4407367687",
+    "isbn13": "9784407367683",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:obuchi-6jikan-kiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053061849",
+    "isbn13": "9784053061843",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "science:goroawase-seibutsu-kiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053064090",
+    "isbn13": "9784053064097",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
   "social:koko-nihonshi-kyokasho": {
    "providers": [
     "gakusan",
@@ -25253,13 +28053,14 @@
     "amazon",
     "amazon",
     "amazon",
+    "gakusan",
     "googlebooks",
     "openbd",
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4634701227",
-    "isbn13": "9784634701229",
+    "isbn10": "4634701251",
+    "isbn13": "9784634701250",
     "asin": null
    },
    "explicitHost": "www.gakusan.com",
@@ -25278,13 +28079,14 @@
     "amazon",
     "amazon",
     "amazon",
+    "gakusan",
     "googlebooks",
     "openbd",
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4634701219",
-    "isbn13": "9784634701212",
+    "isbn10": "4634701243",
+    "isbn13": "9784634701243",
     "asin": null
    },
    "explicitHost": "www.gakusan.com",
@@ -27083,13 +29885,14 @@
     "amazon",
     "amazon",
     "amazon",
+    "gakusan",
     "googlebooks",
     "openbd",
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4634701332",
-    "isbn13": "9784634701335",
+    "isbn10": "4634701375",
+    "isbn13": "9784634701373",
     "asin": null
    },
    "explicitHost": "www.gakusan.com",
@@ -27638,8 +30441,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4010347376",
-    "isbn13": "9784010347379",
+    "isbn10": "4010355026",
+    "isbn13": "9784010355022",
     "asin": null
    },
    "explicitHost": null,
@@ -32687,6 +35490,1281 @@
     "checkedAt": null
    }
   },
+  "social:yamakawa-select-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4634012170",
+    "isbn13": "9784634012172",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:yamakawa-select-sekaishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4634032295",
+    "isbn13": "9784634032293",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:zenlevel-nihonshi-2": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010353643",
+    "isbn13": "9784010353646",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:shinhyojun-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010351373",
+    "isbn13": "9784010351376",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:shinhyojun-sekaishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010351381",
+    "isbn13": "9784010351383",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:sagatsuku-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355468",
+    "isbn13": "9784010355466",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:sagatsuku-sekaishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355476",
+    "isbn13": "9784010355473",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:advantage-kyotest-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578241998",
+    "isbn13": "9784578241997",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:advantage-kyotest-sekaishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578242005",
+    "isbn13": "9784578242000",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:omoshiroi-ichimonitto-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4043301286",
+    "isbn13": "9784043301287",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:omoshiroi-ichimonitto-sekaishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4043301294",
+    "isbn13": "9784043301294",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:collab-mondaishu-hyojun": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4875688482",
+    "isbn13": "9784875688488",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:kanaya-rekishi-sogo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4890859829",
+    "isbn13": "9784890859825",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:toshin-ichimonitto-rekishi-sogo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4868270001",
+    "isbn13": "9784868270003",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:gakken-ichimonitto-rekishi-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062187",
+    "isbn13": "9784053062185",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:gakken-ichimonitto-rekishi-sekaishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062195",
+    "isbn13": "9784053062192",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:speed-anki-inout-rekishi-sogo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062780",
+    "isbn13": "9784053062789",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:group-dekigoto-620": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010353945",
+    "isbn13": "9784010353943",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:group-dekigoto-710": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010353953",
+    "isbn13": "9784010353950",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:nenpyo-kouryaku-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053060702",
+    "isbn13": "9784053060709",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:yogo-2level-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355018",
+    "isbn13": "9784010355015",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:nagare-note-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "463402246X",
+    "isbn13": "9784634022461",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:nagare-zu-shosetsu-sekaishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4634041146",
+    "isbn13": "9784634041141",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:shiryo-yomitoku-nihonshi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4634022478",
+    "isbn13": "9784634022478",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:kawai-mark-kiso-sekaishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4777230317",
+    "isbn13": "9784777230310",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:mogi-sekaishi-omoshiroi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046069570",
+    "isbn13": "9784046069573",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:mogi-sekaishi-note": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4043302290",
+    "isbn13": "9784043302291",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:movista-sato-rekishi-sogo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062683",
+    "isbn13": "9784053062680",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:movista-ueno-nihonshi-1": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053059682",
+    "isbn13": "9784053059680",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:movista-ueno-nihonshi-2": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053059674",
+    "isbn13": "9784053059673",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:movista-ito-sekaishi-1": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053060443",
+    "isbn13": "9784053060440",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:movista-ito-sekaishi-2": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053060451",
+    "isbn13": "9784053060457",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:obunsha-sagatsuku-chiri": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355484",
+    "isbn13": "9784010355480",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:obunsha-visual-chizu-toukei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "401035545X",
+    "isbn13": "9784010355459",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:shunsuke-9jikan-kokyoseikei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053063914",
+    "isbn13": "9784053063915",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:yamakawa-yokuderu-ichimon-kokyoseikei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4634050366",
+    "isbn13": "9784634050365",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:yamakawa-ichimon-chiri": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4634054418",
+    "isbn13": "9784634054417",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:ueno-8jikan-chiri-keito": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062128",
+    "isbn13": "9784053062123",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:ueno-8jikan-chiri-chishi": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062179",
+    "isbn13": "9784053062178",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:kageyama-sokko-ichimon-kokyoseikei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053065151",
+    "isbn13": "9784053065155",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:hatakeyama-jikan-kokyoseikei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010354704",
+    "isbn13": "9784010354704",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:hatakeyama-kansei-kogi-kokyoseikei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4863469284",
+    "isbn13": "9784863469280",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:hatakeyama-kansei-mondai-kokyoseikei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4863469306",
+    "isbn13": "9784863469303",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:chokuzen30-kokyoseikei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046075937",
+    "isbn13": "9784046075932",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:chokuzen30-chiri": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046075961",
+    "isbn13": "9784046075963",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:omoshiro-ichimon-kokyoseikei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046074507",
+    "isbn13": "9784046074508",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:manga-chiri-omoshiro": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046075635",
+    "isbn13": "9784046075635",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:manga-seikei-omoshiro": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046075651",
+    "isbn13": "9784046075659",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:hirao-7days-kokyo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046077050",
+    "isbn13": "9784046077059",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:teikoku-chiri-data-file": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4807168053",
+    "isbn13": "9784807168057",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "social:jikkyo-zoomup-kokyo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "440736792X",
+    "isbn13": "9784407367928",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
   "joho:info-hitotsuzutsu": {
    "providers": [
     "amazon",
@@ -33414,6 +37492,156 @@
     "checkedAt": null
    }
   },
+  "joho:info-fujiwara-zero-kara": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046055634",
+    "isbn13": "9784046055637",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "joho:info-teiban-100dai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046065133",
+    "isbn13": "9784046065131",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "joho:info-fujiwara-program-data": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046076631",
+    "isbn13": "9784046076632",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "joho:info-sogo-mondaishu-kawai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "477723102X",
+    "isbn13": "9784777231027",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "joho:info-enshu-kakomon-impress": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4295024074",
+    "isbn13": "9784295024071",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "joho:info-kimeru-kyotsu-test": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053058031",
+    "isbn13": "9784053058034",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
   "shoron:shoron-koredake": {
    "providers": [
     "amazon",
@@ -33452,8 +37680,8 @@
     "gakusan"
    ],
    "keys": {
-    "isbn10": "4492043853",
-    "isbn13": "9784492043851",
+    "isbn10": "4492048200",
+    "isbn13": "9784492048207",
     "asin": null
    },
    "explicitHost": null,
@@ -35631,6 +39859,431 @@
    "keys": {
     "isbn10": "4753935469",
     "isbn13": "9784753935468",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-hitotsuhitotsu-kaitei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053064511",
+    "isbn13": "9784053064516",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-obunsha-sogo-shakai-kanko-media": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355433",
+    "isbn13": "9784010355435",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-obunsha-sogo-global-gaikokugo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010355441",
+    "isbn13": "9784010355442",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-koredake-kanzen-kyoiku-chokikiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4492048502",
+    "isbn13": "9784492048504",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-koredake-kanzen-igaku-kango-chokikiso": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4492048510",
+    "isbn13": "9784492048511",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-koredake-kanzen-fukabori": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4492048219",
+    "isbn13": "9784492048214",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-sbc-sogo-suisen-atarashii": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4815644020",
+    "isbn13": "9784815644024",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-work-oboeru-6tei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4342302780",
+    "isbn13": "9784342302787",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-yagyu-bannou": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046065621",
+    "isbn13": "9784046065629",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-11method-iryo-kango": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010349824",
+    "isbn13": "9784010349823",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-11method-jinbun-kyoiku-shakai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4010350024",
+    "isbn13": "9784010350027",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-imamichi-saisoku": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4578242226",
+    "isbn13": "9784578242222",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-gakken-shiboriyu-mensetsu-kaitei": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053062586",
+    "isbn13": "9784053062581",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-imamichi-otosarenai": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4478119430",
+    "isbn13": "9784478119433",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-rulebook-shiboriyu": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4046067624",
+    "isbn13": "9784046067623",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-saitensha-kango-iryo": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4761274379",
+    "isbn13": "9784761274375",
+    "asin": null
+   },
+   "explicitHost": null,
+   "nocover": false,
+   "availability": {
+    "status": "unchecked",
+    "httpStatus": null,
+    "checkedAt": null
+   }
+  },
+  "shoron:shoron-yomudake-kiso-powerup": {
+   "providers": [
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "amazon",
+    "gakusan",
+    "googlebooks",
+    "openbd",
+    "gakusan"
+   ],
+   "keys": {
+    "isbn10": "4053051630",
+    "isbn13": "9784053051639",
     "asin": null
    },
    "explicitHost": null,
