@@ -93,6 +93,21 @@ export function PAGES(ctx) {
             { p: '参考書の追加・修正は随時行っています。各ページの最終更新日は、そのページのデータが実際に変わった日を自動で表示しています。サイト全体の更新履歴は[更新履歴](/changelog/)にあります。' },
           ],
         },
+        {
+          // 大学入学後の学習サイト（route-taizen.com のサブドメイン）への入口。受験生向けの導線には置かず、このページの末尾だけに置く
+          h2: '関連サイト（大学に入ってからの学習）',
+          body: [
+            { p: 'ルート大全は大学受験の参考書のサイトです。大学に入ってから統計やデータサイエンスを学ぶ人、大学院への進学を考える人に向けた関連サイトがあります。いずれも大学受験の対策に使うものではありません。' },
+            {
+              ul: [
+                '[Data Science Career Map](https://career-map.route-taizen.com/) — 大学院進学・就職・研究の進路と、それぞれで学ぶことの一覧（無料）',
+                '[統計検定2級 合格ナビ](https://toukei2.route-taizen.com/about) — 大学で学ぶ統計の基礎を、検定の形式の問題で確かめるアプリ（一部無料）',
+                '[キャリア学習](https://career.route-taizen.com/about) — データサイエンス・機械学習を、ブラウザで SQL と Python を動かして学ぶアプリ（一部無料）',
+                '大学院の入試のガイド（無料）— [一橋 SDS](https://hitotsubashi-ds.route-taizen.com/)・[滋賀大 DS](https://shigadai-ds.route-taizen.com/)・[京大 保険数学](https://kyodai-actuary.route-taizen.com/)・[阪大 数理科学](https://handai-sugaku.route-taizen.com/)・[神戸大 経済数理データ科学](https://kobedai-econds.route-taizen.com/)',
+              ],
+            },
+          ],
+        },
       ],
     },
 
